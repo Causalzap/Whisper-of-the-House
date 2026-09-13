@@ -10,16 +10,24 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/the-crust`;
 
 const metadataTitle =
-  "The Crust Guide – Progression, Hope-2 & 1.0 Priorities";
+  "The Crust Guide Hub: Walkthrough, Progression & Priorities";
 
 const metadataDescription =
-  "Use this The Crust 1.0 guide for early progression, Hope-2 choices, Rover exploration, Living Quarters, contracts, achievements, and far-side priorities.";
+  "The Crust 1.0 guide hub for walkthrough, progression, Hope-2, Rover exploration, colonists, contracts, FES labs, achievements, and later priorities.";
 
 const articleDescription =
-  "A complete The Crust Version 1.0 progression guide covering early base recovery, production priorities, the Hope-2 decision, Rover exploration, Living Quarters, contracts and trading, progression bottlenecks, the far-side expedition, achievements, and how to prioritize competing objectives as the campaign expands.";
+  "The Crust Version 1.0 guide hub covering the campaign framework, walkthrough and progression routes, Hope-2, Rover exploration, colonists, contracts, FES research, progression blockers, achievements, and later-game guide topics.";
 
 const heroImage =
   `${siteUrl}/images/the-crust/the-crust-hub.webp`;
+
+const fesLabsImage =
+  `${siteUrl}/images/the-crust/the-crust-fes-labs-approved.webp`;
+
+const imageUrls = [
+  heroImage,
+  fesLabsImage,
+];
 
 const toc = [
   {
@@ -27,52 +35,56 @@ const toc = [
     label: "Where to start",
   },
   {
-    id: "stable-base",
-    label: "When the base is stable",
+    id: "what-is-blocking-you",
+    label: "Find your progression blocker",
   },
   {
     id: "hope-2",
-    label: "Hope-2 decision",
+    label: "Hope-2",
   },
   {
-    id: "inside-and-outside-base",
-    label: "Rover & off-base progression",
+    id: "surface-progression",
+    label: "Rover & surface progression",
   },
   {
     id: "habitation",
-    label: "Living Quarters",
+    label: "Colonists & habitation",
   },
   {
-    id: "money-and-contracts",
-    label: "Contracts & trading",
+    id: "contracts-and-money",
+    label: "Contracts & money",
   },
   {
-    id: "diagnose-progress",
-    label: "Fix progression blockers",
+    id: "research-partnerships",
+    label: "FES research partnerships",
   },
   {
-    id: "far-side-expedition",
-    label: "Far-side expedition",
+    id: "midgame-priority",
+    label: "Midgame priorities",
   },
   {
-    id: "story-information",
-    label: "Later story decisions",
+    id: "story-investigation",
+    label: "Story investigation",
   },
   {
-    id: "achievement-progress",
-    label: "Achievement progression",
+    id: "later-searches",
+    label: "Later guide topics",
   },
   {
-    id: "priority-rule",
-    label: "What to prioritize",
+    id: "achievements",
+    label: "Achievements",
   },
   {
-    id: "later-game",
-    label: "Later-game progression",
+    id: "next-step",
+    label: "What to do next",
   },
 ];
 
 const relatedLinks = [
+  {
+    href: "/the-crust/walkthrough",
+    label: "The Crust 1.0 Walkthrough",
+  },
   {
     href: "/the-crust/beginners-guide",
     label: "The Crust Beginner Guide",
@@ -114,9 +126,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        width: 1600,
-        height: 900,
-        alt: "The Crust lunar base and Moon operations in Version 1.0",
+        width: 600,
+        height: 300,
+        alt: "The Crust lunar base and surface operations in Version 1.0",
       },
     ],
   },
@@ -128,53 +140,102 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: metadataTitle,
-    description: articleDescription,
-    image: [heroImage],
-    url: pageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-    dateModified: "2026-09-11",
-    author: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    breadcrumb: {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "The Crust Guide Hub",
+          item: pageUrl,
+        },
+      ],
     },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "The Crust",
-        item: pageUrl,
+      headline:
+        "The Crust Guide Hub: Walkthrough, Progression and Priorities",
+      description: articleDescription,
+      image: imageUrls,
+      inLanguage: "en",
+      dateModified: "2026-09-13",
+      articleSection: "Game Guides",
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "The Crust",
+        },
+        {
+          "@type": "Thing",
+          name: "The Crust walkthrough",
+        },
+        {
+          "@type": "Thing",
+          name: "The Crust progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Hope-2",
+        },
+        {
+          "@type": "Thing",
+          name: "Rover exploration",
+        },
+        {
+          "@type": "Thing",
+          name: "Living Quarters",
+        },
+        {
+          "@type": "Thing",
+          name: "FES laboratories",
+        },
+        {
+          "@type": "Thing",
+          name: "The Crust contracts",
+        },
+      ],
+      author: {
+        "@id": `${siteUrl}#organization`,
       },
-    ],
-  },
-];
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -190,13 +251,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Crust Guide – Progression, Hope-2 & 1.0 Priorities"
-          description="Recover the damaged base, decide what deserves resources next, and follow The Crust from early production through Hope-2, Rover exploration, habitation, trade, and the far-side expedition."
+          title="The Crust Guide Hub: Walkthrough, Progression & Priorities"
+          description="Start with the problem blocking your colony, then move into the right walkthrough or focused guide for Hope-2, Rover exploration, colonists, contracts, research, and later progression."
           gameTitle="The Crust"
           gameHref="/the-crust"
-          breadcrumbBaseHref="/the-crust"
-          breadcrumbBaseLabel="The Crust"
-          updatedAt="September 11, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="September 13, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

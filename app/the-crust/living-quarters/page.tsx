@@ -7,19 +7,27 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import TheCrustLivingQuartersContent from "@/data/the-crust/living-quarters.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-crust/living-quarters`;
+const hubUrl = `${siteUrl}/the-crust`;
+const pageUrl = `${hubUrl}/living-quarters`;
 
 const metadataTitle =
-  "The Crust Living Quarters Guide – Power, Oxygen & Colonists";
+  "The Crust Living Quarters Guide: Power, Oxygen & Colonists";
 
 const metadataDescription =
-  "Build working Living Quarters in The Crust with power, ice, water, oxygen, beds, food, a Science Lab, and Medical Block.";
+  "Build Living Quarters in The Crust with power, ventilation, water, oxygen, 8 beds, food, and colonist support, plus fixes when the objective gets stuck.";
 
 const articleDescription =
-  "A complete The Crust Living Quarters guide for Version 1.0, covering room planning, Electronic Board power, ice extraction, water, oxygen, beds, Hydroponic Farm, Kitchen, Fundamental Science Lab, Medical Block, and troubleshooting when the objective will not complete.";
+  "A The Crust Version 1.0 Living Quarters guide covering room planning, the Electronic Board, ventilation, ice and water production, oxygen, eight beds, Hydroponic Farm and Kitchen requirements, the ready-for-colonists state, post-arrival science and medical support, CPU limits, and common progression blockers.";
 
-const heroImage =
-  `${siteUrl}/images/the-crust/the-crust-living-quarters-ready.webp`;
+const imageUrls = [
+  `${siteUrl}/images/the-crust/the-crust-living-quarters-ready.webp`,
+  `${siteUrl}/images/the-crust/the-crust-living-quarters-room-planner.webp`,
+  `${siteUrl}/images/the-crust/the-crust-living-quarters-electronic-board.webp`,
+  `${siteUrl}/images/the-crust/the-crust-living-quarters-ice-melter.webp`,
+  `${siteUrl}/images/the-crust/the-crust-living-quarters-beds-farm-kitchen.webp`,
+];
+
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -31,32 +39,40 @@ const toc = [
     label: "Connect the Electronic Board",
   },
   {
+    id: "ventilation",
+    label: "Ventilation & heat",
+  },
+  {
     id: "find-ice",
-    label: "Find ice & make water",
+    label: "Ice & water",
   },
   {
     id: "oxygen",
-    label: "Build the Electrolysis Plant",
+    label: "Make oxygen",
   },
   {
     id: "beds-food-kitchen",
-    label: "Beds, Farm & Kitchen",
-  },
-  {
-    id: "science-lab-medical-block",
-    label: "Science Lab & Medical Block",
-  },
-  {
-    id: "living-quarters-stuck",
-    label: "Living Quarters stuck",
+    label: "8 beds, Farm & Kitchen",
   },
   {
     id: "ready-for-colonists",
     label: "Ready for colonists",
   },
+  {
+    id: "after-colonists-arrive",
+    label: "After colonists arrive",
+  },
+  {
+    id: "living-quarters-stuck",
+    label: "Living Quarters stuck",
+  },
 ];
 
 const relatedLinks = [
+  {
+    href: "/the-crust/walkthrough",
+    label: "The Crust 1.0 Walkthrough",
+  },
   {
     href: "/the-crust/beginners-guide",
     label: "The Crust Beginner Guide",
@@ -66,12 +82,12 @@ const relatedLinks = [
     label: "Hope-2 Choice Guide",
   },
   {
-    href: "/the-crust/cargo-terminal",
-    label: "Cargo Terminal & Rover LPS Guide",
+    href: "/the-crust/contracts-guide",
+    label: "Contracts & Online Market Guide",
   },
   {
-    href: "/the-crust/achievements",
-    label: "The Crust Achievements Guide",
+    href: "/the-crust/cargo-terminal",
+    label: "Cargo Terminal & Cargo Dock Guide",
   },
 ];
 
@@ -90,8 +106,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        width: 1600,
-        height: 900,
+        width: 600,
+        height: 300,
         alt: "Completed Living Quarters ready for colonists in The Crust",
       },
     ],
@@ -104,59 +120,104 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: metadataTitle,
-    description: articleDescription,
-    image: [heroImage],
-    url: pageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-    dateModified: "2026-09-11",
-    author: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    breadcrumb: {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "The Crust",
+          item: hubUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Living Quarters Guide",
+          item: pageUrl,
+        },
+      ],
     },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "The Crust",
-        item: `${siteUrl}/the-crust`,
+      headline:
+        "The Crust Living Quarters Guide: Power, Oxygen and Colonists",
+      description: articleDescription,
+      image: imageUrls,
+      inLanguage: "en",
+      dateModified: "2026-09-13",
+      articleSection: "Game Guides",
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "The Crust",
+        },
+        {
+          "@type": "Thing",
+          name: "Living Quarters",
+        },
+        {
+          "@type": "Thing",
+          name: "Electronic Board",
+        },
+        {
+          "@type": "Thing",
+          name: "Ventilation",
+        },
+        {
+          "@type": "Thing",
+          name: "Electrolysis Plant",
+        },
+        {
+          "@type": "Thing",
+          name: "Hydroponic Farm",
+        },
+        {
+          "@type": "Thing",
+          name: "Colonists",
+        },
+      ],
+      author: {
+        "@id": `${siteUrl}#organization`,
       },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Living Quarters",
-        item: pageUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
       },
-    ],
-  },
-];
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -172,13 +233,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Crust Living Quarters Guide – Power, Oxygen & Colonists"
-          description="Set up Living Quarters in the right order: plan enough underground space, connect the Electronic Board, turn ice into water and oxygen, then finish beds, food, science, and medical support before colonists arrive."
+          title="The Crust Living Quarters Guide: Power, Oxygen & Colonists"
+          description="Build a working habitation block from the room and Electronic Board through ventilation, water, oxygen, beds and food, then diagnose why colonists or later support systems are not progressing."
           gameTitle="The Crust"
           gameHref="/the-crust"
           breadcrumbBaseHref="/the-crust"
           breadcrumbBaseLabel="The Crust"
-          updatedAt="September 11, 2026"
+          updatedAt="September 13, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -12,10 +12,8 @@ const pageUrl = `${hubUrl}/captains-tier-list`;
 
 const imageUrls = [
   `${siteUrl}/images/wanderburg/wanderburg-racer-ruth-captain.webp`,
-  `${siteUrl}/images/wanderburg/wanderburg-tankbert-captain.webp`,
   `${siteUrl}/images/wanderburg/wanderburg-tankbert-high-hp-run.webp`,
   `${siteUrl}/images/wanderburg/wanderburg-dieter-the-drunk-captain.webp`,
-  `${siteUrl}/images/wanderburg/wanderburg-patchy-captain.webp`,
 ];
 
 export const metadata: Metadata = {
@@ -30,14 +28,14 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Wanderburg Captains Tier List: Racer Ruth, Tankbert & More",
     description:
-      "See which Wanderburg Captains are worth your Silver, how their bonuses and drawbacks change real runs, and when specialists outperform the general tier list.",
+      "See which Wanderburg Captains are worth your Silver, how their bonuses and drawbacks change real runs, and when specialist picks become stronger.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Wanderburg Racer Ruth Captain showing increased boost speed and reduced normal driving speed.",
+        alt: "Wanderburg Racer Ruth Captain with increased boost speed and reduced normal driving speed.",
       },
     ],
   },
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Captains Tier List",
     description:
-      "Racer Ruth and Tankbert lead the current Wanderburg Captain rankings, with specialist picks for Cannons, summons, Auto Attacks and speedruns.",
+      "Racer Ruth and Tankbert lead the Wanderburg Captain rankings, with specialist picks for Cannons, summons, Auto Attacks and faster clears.",
     images: [imageUrls[0]],
   },
 };
@@ -85,13 +83,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Wanderburg Captains Tier List: Racer Ruth, Tankbert, Dieter, Patchy and Every Captain Ranked",
+        "Wanderburg Captains Tier List: Best Captains for Progression",
       description:
-        "A Wanderburg Captain tier list for normal progression and full-run survival, covering Racer Ruth and Tankbert in S Tier, Dieter the Drunk and Patchy in A Tier, specialist Captains for summons, Cannons, Auto Attacks and speedruns, Captain prices, major bonuses and drawbacks, and which Captain to buy first.",
+        "A Wanderburg Captain tier list for normal progression and full-run survival, with Racer Ruth and Tankbert in S Tier, Dieter the Drunk and Patchy in A Tier, specialist picks for summons, Cannons and Auto Attacks, and advice on which Captain to buy first.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -196,12 +194,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Wanderburg Captains Tier List: Who Is Worth Your Silver?"
-          description="Compare every Wanderburg Captain by real progression value, understand the downside attached to each bonus, and choose the Captain that fixes the reason your current runs are ending."
+          description="Compare Wanderburg Captains by progression value, survival and build fit, then choose the one that actually solves the problem ending your current runs."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "tier-list",
@@ -258,12 +256,12 @@ export default function Page() {
               label: "Wanderburg Progression & Unlocks",
             },
             {
-              href: "/wanderburg/bosses",
-              label: "Wanderburg Boss Guide",
-            },
-            {
               href: "/wanderburg/how-to-unlock-spiderburg",
               label: "How to Unlock Spiderburg",
+            },
+            {
+              href: "/wanderburg/bosses",
+              label: "Wanderburg Boss Guide",
             },
             {
               href: "/wanderburg/achievements",

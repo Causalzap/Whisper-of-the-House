@@ -20,7 +20,7 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "Wanderburg Boss Guide: All Four Bosses & Dark Tower",
   description:
-    "Beat all four Wanderburg bosses with better preparation, sustained damage, Nitro use, between-fight upgrades, and counters for Dark Tower's Fire Tornado.",
+    "Beat all four Wanderburg bosses with clean preparation, sustained damage, smart Nitro use, between-fight upgrades, and Dark Tower Fire Tornado counters.",
   alternates: {
     canonical: pageUrl,
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Wanderburg Boss Guide: Four-Boss Clears & Dark Tower",
     description:
-      "Prepare each boss spawn, diagnose late-run failures, survive bosses three and four, and counter Dark Tower's Fire Tornado and inward pull.",
+      "Prepare each boss spawn, fix late-run damage or movement problems, save Nitro for Dark Tower, and finish the full four-boss Wanderburg run.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Boss Guide: All Four Fights",
     description:
-      "Prepare each boss fight, fix late-run failures, save Nitro for Dark Tower, and survive the full four-boss Wanderburg clear.",
+      "Prepare each fight, maintain damage while moving, save Nitro for Dark Tower, and finish the full Wanderburg boss sequence.",
     images: [imageUrls[3]],
   },
 };
@@ -86,11 +86,11 @@ const jsonLd = {
       headline:
         "Wanderburg Boss Guide: How to Survive All Four Boss Fights and Beat Dark Tower",
       description:
-        "A Wanderburg boss guide covering the full four-boss run, pre-boss preparation, early boss mistakes, third-boss sustained damage, Dark Tower's Fire Tornado and inward pull, between-boss upgrade decisions, late-run failure diagnosis, and what happens after the fourth boss.",
+        "A Wanderburg boss guide covering the full four-boss run, pre-fight preparation, early boss mistakes, sustained damage for boss three, Dark Tower's Fire Tornado and inward pull, Nitro management, between-boss upgrades, and late-run failure diagnosis.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -118,15 +118,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Boss preparation",
-        },
-        {
-          "@type": "Thing",
           name: "Nitro",
         },
         {
           "@type": "Thing",
+          name: "Boss preparation",
+        },
+        {
+          "@type": "Thing",
           name: "Between-boss upgrades",
+        },
+        {
+          "@type": "Thing",
+          name: "Sustained damage",
         },
       ],
       isPartOf: {
@@ -163,12 +167,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Wanderburg Boss Guide: How to Survive All Four Fights"
-          description="Prepare each boss spawn, read what the previous fight exposed, keep enough Nitro for late-run escapes, and counter Dark Tower's Fire Tornado without rebuilding the same failed run."
+          description="Prepare each boss cleanly, keep damage working while the castle moves, use each fight to fix the next upgrade choice, and save enough Nitro for Dark Tower."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "four-boss-run",
@@ -196,7 +200,7 @@ export default function Page() {
             },
             {
               id: "boss-builds",
-              label: "Build and Captain problems",
+              label: "What the failure means",
             },
             {
               id: "boss-four-wall",

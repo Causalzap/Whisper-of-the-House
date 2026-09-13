@@ -11,14 +11,12 @@ const pageUrl = `${siteUrl}/wanderburg`;
 
 const imageUrls = [
   `${siteUrl}/images/wanderburg/wanderburg-overworld-full-map.webp`,
-  `${siteUrl}/images/wanderburg/wanderburg-archer-ballista-turret-build.webp`,
-  `${siteUrl}/images/wanderburg/wanderburg-spiderburg-gameplay.webp`,
 ];
 
 export const metadata: Metadata = {
   title: "Wanderburg Guide: Progression, Builds, Captains & Unlocks",
   description:
-    "Start Wanderburg with a clear route through progression, builds, Captains, vehicles, Silver, bosses, module unlocks, Overtime, and achievements.",
+    "Use this Wanderburg guide to find what is blocking progress, choose the right build or route, and reach the guide for your next unlock, boss, or vehicle.",
   alternates: {
     canonical: pageUrl,
   },
@@ -27,7 +25,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Wanderburg Guide: What to Do, Unlock and Build Next",
     description:
-      "Learn what to do first in Wanderburg, how permanent progression works, why runs stall, and when to change your build, Captain, vehicle, or route.",
+      "Find what is blocking your next Wanderburg run, understand how permanent progression fits together, and jump to the right guide for builds, bosses, Captains, vehicles or achievements.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -42,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Guide: What to Do Next",
     description:
-      "Understand Wanderburg progression, builds, Captains, vehicles, bosses, Silver, module unlocks, and what to fix when a run stops progressing.",
+      "Diagnose stalled progression, choose the right route, and find the Wanderburg guide that solves your current build, boss, Captain or vehicle problem.",
     images: [imageUrls[0]],
   },
 };
@@ -78,11 +76,11 @@ const jsonLd = {
       headline:
         "Wanderburg Guide: Progression, Builds, Captains, Vehicles and What to Do Next",
       description:
-        "A Wanderburg guide explaining what to do first, how the overworld, permanent loadout, current-run build and vehicle chassis interact, how to diagnose stalled progression, when boss failures are really build problems, how Captains and vehicles fit into the account, when Silver and Overtime are useful, and what changes as the permanent account becomes stronger.",
+        "A Wanderburg guide for understanding the overworld, permanent loadout, current build and vehicle layers, diagnosing stalled progression, choosing the right guide for builds, bosses, Captains and vehicles, and deciding what to do after the first win.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -114,19 +112,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Silver",
-        },
-        {
-          "@type": "Thing",
-          name: "Module unlocks",
-        },
-        {
-          "@type": "Thing",
-          name: "Overtime",
+          name: "Wanderburg module unlocks",
         },
         {
           "@type": "Thing",
           name: "Wanderburg achievements",
+        },
+        {
+          "@type": "Thing",
+          name: "Wanderburg endgame progression",
         },
       ],
       isPartOf: {
@@ -163,28 +157,32 @@ export default function Page() {
 
         <GuideArticlePage
           title="Wanderburg Guide: What to Do, Unlock and Build Next"
-          description="Use each run to move the permanent account forward, identify whether the next blocker is progression, build strength, movement, or vehicle compatibility, and choose the next objective deliberately."
+          description="Work out whether the next blocker is the map, permanent loadout, current build, movement or vehicle layout, then use the guide that solves that problem."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "what-to-do-first",
               label: "What to do first",
             },
             {
-              id: "how-wanderburg-progression-works",
-              label: "How progression works",
+              id: "what-is-blocking-you",
+              label: "What is blocking progress?",
             },
             {
-              id: "build-or-progression",
-              label: "Build or progression problem?",
+              id: "wanderburg-guides",
+              label: "Choose the right guide",
+            },
+            {
+              id: "how-wanderburg-progression-works",
+              label: "How progression fits together",
             },
             {
               id: "bosses",
-              label: "Boss progression",
+              label: "Stuck on later bosses",
             },
             {
               id: "captains",
@@ -192,27 +190,27 @@ export default function Page() {
             },
             {
               id: "vehicles",
-              label: "Vehicle progression",
-            },
-            {
-              id: "silver-overtime",
-              label: "Silver and Overtime",
+              label: "New vehicle or old build?",
             },
             {
               id: "module-unlocks",
-              label: "Module unlocks",
+              label: "Why Modules repeat",
             },
             {
               id: "achievements",
-              label: "Achievements",
+              label: "Achievement cleanup",
             },
             {
-              id: "what-changes-later",
-              label: "What changes later",
+              id: "after-first-win",
+              label: "After the first win",
+            },
+            {
+              id: "later-lands",
+              label: "Later Lands",
             },
             {
               id: "next-run",
-              label: "What to do next",
+              label: "Plan the next run",
             },
           ]}
           relatedLinks={[
@@ -221,12 +219,12 @@ export default function Page() {
               label: "Wanderburg Progression & Unlocks",
             },
             {
-              href: "/wanderburg/bosses",
-              label: "Wanderburg Boss Guide",
-            },
-            {
               href: "/wanderburg/best-builds",
               label: "Wanderburg Best Builds",
+            },
+            {
+              href: "/wanderburg/bosses",
+              label: "Wanderburg Boss Guide",
             },
             {
               href: "/wanderburg/captains-tier-list",

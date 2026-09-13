@@ -21,7 +21,7 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "How to Unlock Spiderburg in Wanderburg",
   description:
-    "Beat all four Golden Dunes bosses to unlock Spiderburg, then fix the two-Top-Module loadout requirement if the vehicle still cannot start.",
+    "Beat all four Golden Dunes bosses to unlock Spiderburg, then fix the two-Top-Module requirement if the vehicle still cannot start a run.",
   alternates: {
     canonical: pageUrl,
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Unlock Spiderburg in Wanderburg",
     description:
-      "Clear Golden Dunes, fix Spiderburg's two-Top-Module requirement, and understand its slot layout before the first run.",
+      "Clear Golden Dunes, fix Spiderburg's two-Top-Module requirement, and understand the chassis before your first run.",
     images: [imageUrls[1]],
   },
 };
@@ -85,13 +85,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Unlock Spiderburg in Wanderburg and Fix the Two-Top-Module Loadout Requirement",
+        "How to Unlock Spiderburg in Wanderburg and Fix the Two-Top-Module Requirement",
       description:
-        "A Wanderburg Spiderburg guide covering the full Golden Dunes boss unlock requirement, the post-unlock loadout blocker, Spiderburg's two Top slots, Front and Back positions, missing Side slot, compatible Top Modules, chassis handling, leg stomp damage, terrain immunity, double-Top scaling, and what to check when Spiderburg is unlocked but cannot start a run.",
+        "A Wanderburg Spiderburg guide covering the Golden Dunes four-boss unlock, the two-Top-Module loadout blocker, module slots, compatible Top options, chassis handling, terrain immunity, double-Top scaling, and what to check when Spiderburg is unlocked but cannot start.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -111,19 +111,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Top Modules",
-        },
-        {
-          "@type": "Thing",
           name: "Spiderburg loadout",
         },
         {
           "@type": "Thing",
-          name: "Wanderburg vehicles",
+          name: "Top Modules",
         },
         {
           "@type": "Thing",
-          name: "Vehicle module slots",
+          name: "Spiderburg module slots",
+        },
+        {
+          "@type": "Thing",
+          name: "Wanderburg vehicles",
         },
       ],
       isPartOf: {
@@ -160,12 +160,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="How to Unlock Spiderburg — and Why It May Still Be Unusable"
-          description="Clear the Golden Dunes boss gate, fix the second Top Module requirement after the unlock, and decide whether Spiderburg's new slot layout actually improves your permanent setup."
+          description="Clear the Golden Dunes boss gate, fix the second Top Module requirement after the unlock, and decide whether Spiderburg's slot layout actually fits your permanent setup."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "unlock-spiderburg",
@@ -173,7 +173,7 @@ export default function Page() {
             },
             {
               id: "unlock-popup",
-              label: "After the unlock message",
+              label: "After the unlock",
             },
             {
               id: "two-top-modules",
@@ -181,7 +181,7 @@ export default function Page() {
             },
             {
               id: "what-to-buy",
-              label: "What to buy first",
+              label: "What to buy",
             },
             {
               id: "spiderburg-chassis",
@@ -201,7 +201,7 @@ export default function Page() {
             },
             {
               id: "after-spiderburg",
-              label: "What to do next",
+              label: "First Spiderburg run",
             },
           ]}
           relatedLinks={[

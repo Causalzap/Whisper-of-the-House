@@ -7,19 +7,25 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import TheCrustContractsGuideContent from "@/data/the-crust/contracts-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-crust/contracts-guide`;
+const hubUrl = `${siteUrl}/the-crust`;
+const pageUrl = `${hubUrl}/contracts-guide`;
 
 const metadataTitle =
-  "The Crust Contracts Guide – Market, Shipping & Destinations";
+  "The Crust Contracts Guide: Urgent Contracts & Market";
 
 const metadataDescription =
-  "Use contracts and the Online Market in The Crust, configure shipments correctly, avoid wrong destinations, and decide when a contract is worth taking.";
+  "Use normal and urgent contracts in The Crust, build reputation, configure shipments, fix wrong destinations, and decide when to buy or sell resources.";
 
 const articleDescription =
-  "A complete The Crust Version 1.0 contracts and market guide covering the Landing Platform, Online Market, buying and selling resources, Active Contracts, Send Resources, capsule configuration, landing destinations, failed deliveries, and when contracts are worth prioritizing.";
+  "A The Crust Version 1.0 contracts guide covering normal and urgent contracts, reputation, contract limits, deadlines, the Landing Platform, Online Market, buying and selling, shipment configuration, landing destinations, delivery throughput, Cargo Drones, and Flight Control Center automation.";
 
-const heroImage =
-  `${siteUrl}/images/the-crust/the-crust-contract-send-resources.webp`;
+const imageUrls = [
+  `${siteUrl}/images/the-crust/the-crust-contract-send-resources.webp`,
+  `${siteUrl}/images/the-crust/the-crust-contract-logistics-configuration.webp`,
+  `${siteUrl}/images/the-crust/the-crust-online-market-supply-demand.webp`,
+];
+
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -31,20 +37,32 @@ const toc = [
     label: "Unlock trading",
   },
   {
+    id: "urgent-contracts",
+    label: "Urgent Contracts",
+  },
+  {
+    id: "reputation",
+    label: "Reputation & contract limits",
+  },
+  {
     id: "online-market",
-    label: "Use the Online Market",
+    label: "Online Market",
   },
   {
     id: "market-vs-contract",
-    label: "Market vs contract",
+    label: "Market vs contracts",
   },
   {
     id: "contract-not-completing",
     label: "Contract not completing",
   },
   {
+    id: "delivery-throughput",
+    label: "Delivery speed & automation",
+  },
+  {
     id: "when-to-accept",
-    label: "When to accept contracts",
+    label: "When to accept a contract",
   },
   {
     id: "buy-resources",
@@ -52,22 +70,26 @@ const toc = [
   },
   {
     id: "contract-rhythm",
-    label: "Contract priority rhythm",
+    label: "Contract priorities",
   },
 ];
 
 const relatedLinks = [
   {
+    href: "/the-crust/walkthrough",
+    label: "The Crust 1.0 Walkthrough",
+  },
+  {
     href: "/the-crust/beginners-guide",
     label: "The Crust Beginner Guide",
   },
   {
-    href: "/the-crust/hope-2-choice",
-    label: "Hope-2 Choice Guide",
+    href: "/the-crust/cargo-terminal",
+    label: "Cargo Terminal & Cargo Dock Guide",
   },
   {
-    href: "/the-crust/cargo-terminal",
-    label: "Cargo Terminal & Rover LPS Guide",
+    href: "/the-crust/living-quarters",
+    label: "Living Quarters Guide",
   },
   {
     href: "/the-crust/achievements",
@@ -90,8 +112,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        width: 1600,
-        height: 900,
+        width: 600,
+        height: 300,
         alt: "Contract logistics screen for sending resources in The Crust",
       },
     ],
@@ -104,59 +126,108 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: metadataTitle,
-    description: articleDescription,
-    image: [heroImage],
-    url: pageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-    dateModified: "2026-09-11",
-    author: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    breadcrumb: {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "The Crust",
+          item: hubUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Contracts Guide",
+          item: pageUrl,
+        },
+      ],
     },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "The Crust",
-        item: `${siteUrl}/the-crust`,
+      headline:
+        "The Crust Contracts Guide: Urgent Contracts, Market and Shipping",
+      description: articleDescription,
+      image: imageUrls,
+      inLanguage: "en",
+      dateModified: "2026-09-13",
+      articleSection: "Game Guides",
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "The Crust",
+        },
+        {
+          "@type": "Thing",
+          name: "Contracts",
+        },
+        {
+          "@type": "Thing",
+          name: "Urgent Contracts",
+        },
+        {
+          "@type": "Thing",
+          name: "Reputation",
+        },
+        {
+          "@type": "Thing",
+          name: "Online Market",
+        },
+        {
+          "@type": "Thing",
+          name: "Landing Platform",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo Drones",
+        },
+        {
+          "@type": "Thing",
+          name: "Flight Control Center",
+        },
+      ],
+      author: {
+        "@id": `${siteUrl}#organization`,
       },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Contracts Guide",
-        item: pageUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
       },
-    ],
-  },
-];
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -172,13 +243,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Crust Contracts Guide – Market, Shipping & Destinations"
-          description="Unlock trading, use the Online Market without starving your factory, configure contract shipments correctly, and fix the common wrong-destination problem before producing another batch."
+          title="The Crust Contracts Guide: Urgent Contracts, Market & Shipping"
+          description="Choose contracts your factory can actually deliver, use urgent jobs to build reputation, configure shipments correctly, and keep the Online Market from draining resources needed elsewhere."
           gameTitle="The Crust"
           gameHref="/the-crust"
           breadcrumbBaseHref="/the-crust"
           breadcrumbBaseLabel="The Crust"
-          updatedAt="September 11, 2026"
+          updatedAt="September 13, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

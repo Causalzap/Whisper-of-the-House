@@ -20,16 +20,16 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "Wanderburg Achievements Guide: All 26 & Completion Order",
   description:
-    "Complete all 26 Wanderburg achievements with an efficient order for Lands, vehicles, distance, consumed units, bosses, Spiderburg, and Tankenburg.",
+    "Complete all 26 Wanderburg achievements with the current distance, vehicle, unit and boss requirements plus an efficient progression-first route.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Wanderburg Achievements Guide: All 26 & What to Farm Last",
+    title: "Wanderburg Achievements Guide: All 26 & Completion Order",
     description:
-      "See all 26 Wanderburg achievements, finish progression first, then clean up distance, vehicle kills, consumed units, and boss totals efficiently.",
+      "Finish Wanderburg progression first, then clean up the remaining distance, vehicle, unit and boss achievements without wasting early runs.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Achievements Guide: All 26",
     description:
-      "Finish Wanderburg's progression achievements first, then clean up distance, vehicles, units, and bosses in the right order.",
+      "See all 26 Wanderburg achievements, the current cumulative requirements and the progression-first completion order.",
     images: [imageUrls[0]],
   },
 };
@@ -84,13 +84,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Wanderburg Achievements Guide: All 26 Achievements and the Best Completion Order",
+        "Wanderburg Achievements Guide: All 26 Achievements and Completion Order",
       description:
-        "A Wanderburg achievement guide covering all 26 Early Access achievements, six progression milestones, four cumulative achievement chains for distance, vehicles, consumed units and bosses, the All Lands won requirement, efficient cleanup order, Overtime use for achievement progress, and the final 500-boss grind.",
+        "A Wanderburg achievement guide covering all 26 achievements, progression milestones, current cumulative requirements for distance, vehicles, consumed units and bosses, All Lands won!, Overtime cleanup and an efficient completion order.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -102,11 +102,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Wanderburg achievement guide",
-        },
-        {
-          "@type": "Thing",
-          name: "All 26 achievements",
+          name: "All 26 Wanderburg achievements",
         },
         {
           "@type": "Thing",
@@ -126,7 +122,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "10,000 kilometers travelled",
+          name: "1,000 kilometers travelled",
         },
         {
           "@type": "Thing",
@@ -134,11 +130,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "100,000 units consumed",
+          name: "25,000 units consumed",
         },
         {
           "@type": "Thing",
-          name: "500 bosses destroyed",
+          name: "100 bosses destroyed",
         },
       ],
       isPartOf: {
@@ -174,13 +170,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Wanderburg Achievements: Fastest Route to All 26"
-          description="Finish progression while the long counters rise naturally, then clean up distance, vehicles, consumed units, and bosses without wasting early runs."
+          title="Wanderburg Achievements: All 26 & Completion Order"
+          description="Finish the map while the cumulative counters rise naturally, then clean up distance, vehicles, consumed units and bosses with the current requirements."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "achievement-roadmap",
@@ -200,11 +196,11 @@ export default function Page() {
             },
             {
               id: "cumulative-achievements",
-              label: "Cumulative achievements",
+              label: "What to farm",
             },
             {
               id: "overtime-for-achievements",
-              label: "Overtime for achievements",
+              label: "Overtime cleanup",
             },
             {
               id: "completion-order",

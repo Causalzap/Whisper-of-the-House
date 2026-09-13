@@ -13,14 +13,15 @@ const pageUrl = `${hubUrl}/progression-unlocks`;
 const imageUrls = [
   `${siteUrl}/images/wanderburg/wanderburg-green-plains-biome-quests.webp`,
   `${siteUrl}/images/wanderburg/wanderburg-overworld-meadows-golden-dunes.webp`,
-  `${siteUrl}/images/wanderburg/wanderburg-overtime-silver-reward.webp`,
   `${siteUrl}/images/wanderburg/wanderburg-module-unlock-quests.webp`,
+  `${siteUrl}/images/wanderburg/wanderburg-overtime-silver-reward.webp`,
+  `${siteUrl}/images/wanderburg/wanderburg-spiderburg-dark-forest-unlocked.webp`,
 ];
 
 export const metadata: Metadata = {
   title: "Wanderburg Progression Guide: Biomes, Silver & Unlocks",
   description:
-    "Clear Green Plains, choose Golden Dunes or Meadows, spend Silver wisely, unlock permanent modules, and fix common Wanderburg progression stalls.",
+    "Clear Wanderburg biome gates, spend Silver wisely, unlock modules and rerolls, reach Spiderburg, and fix common progression stalls.",
   alternates: {
     canonical: pageUrl,
   },
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Wanderburg Progression, Silver & Module Unlocks",
     description:
-      "Follow biome boss gates, spend Silver on permanent upgrades, use Overtime well, unlock new modules, and work out what should change on your next Wanderburg run.",
+      "Follow biome boss gates, spend Silver on useful permanent upgrades, unlock modules and rerolls, and decide what should change before the next run.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Progression & Unlocks Guide",
     description:
-      "Clear biome gates, spend Silver correctly, unlock permanent modules, and choose the next Wanderburg objective.",
+      "Clear biome gates, spend Silver well, unlock permanent modules and rerolls, and choose the next Wanderburg objective.",
     images: [imageUrls[0]],
   },
 };
@@ -84,13 +85,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Wanderburg Progression and Unlocks Guide: Biomes, Silver, Overtime and Permanent Module Milestones",
+        "Wanderburg Progression and Unlocks Guide: Biomes, Silver, Modules and Rerolls",
       description:
-        "A Wanderburg progression guide covering the four-boss Green Plains gate, Golden Dunes and Meadows routes, permanent Silver spending, Overtime rewards, module unlock objectives, repeated module choices, Spiderburg progression, later Lands, and how to distinguish a genuine progression blocker from a build or loadout problem.",
+        "A Wanderburg progression guide covering the Green Plains boss gate, Golden Dunes and Meadows routes, Silver spending, permanent module unlocks, Module and Artifact rerolls, Overtime, Spiderburg progression, later Lands, and common progression blockers.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -99,6 +100,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Wanderburg progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Wanderburg unlocks",
         },
         {
           "@type": "Thing",
@@ -127,6 +132,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Module unlocks",
+        },
+        {
+          "@type": "Thing",
+          name: "Module rerolls",
+        },
+        {
+          "@type": "Thing",
+          name: "Artifact rerolls",
         },
         {
           "@type": "Thing",
@@ -191,12 +204,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Wanderburg Progression & Unlocks: Where to Go Next"
-          description="Clear the next biome gate, spend Silver on permanent bottlenecks, target useful module milestones, and work out what should actually change before your next run."
+          description="Follow the next biome gate, spend Silver on permanent bottlenecks, unlock useful modules and rerolls, and diagnose what is actually stopping progression."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "how-progression-works",
@@ -215,8 +228,8 @@ export default function Page() {
               label: "How to spend Silver",
             },
             {
-              id: "overtime",
-              label: "When Overtime is worth it",
+              id: "rerolls",
+              label: "Module & Artifact rerolls",
             },
             {
               id: "permanent-module-unlocks",
@@ -225,6 +238,10 @@ export default function Page() {
             {
               id: "same-modules",
               label: "Why modules repeat",
+            },
+            {
+              id: "overtime",
+              label: "When Overtime is worth it",
             },
             {
               id: "spiderburg",

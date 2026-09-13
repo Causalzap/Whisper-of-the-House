@@ -22,7 +22,8 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "Wanderburg Best Builds: Archer, Mines, Ram & Cannons",
   description:
-    "Build around Archer Tower, mines, Ram, summons or Cannons, choose upgrades that scale together, and learn when Movement matters more than Defense.",
+    "Build around Archer, Mage, mines, Ram, summons or Cannons, choose upgrades that scale together, and learn when Movement matters more than Defense.",
+
   alternates: {
     canonical: pageUrl,
   },
@@ -31,7 +32,8 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Wanderburg Best Builds & Upgrade Priorities",
     description:
-      "Compare proven Arrow, Mine and Mortar, Ram, Summoner and Cannon builds, learn when to pivot, and keep large castles mobile enough to survive.",
+      "Compare proven Arrow, Mine and Mortar, Mage, Ram, Summoner and Cannon builds, learn when to pivot, and keep large castles mobile enough to survive.",
+
     siteName: "Whisper of the House",
     images: [
       {
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Wanderburg Best Builds & Upgrade Priorities",
     description:
-      "Use proven Wanderburg builds for early progression and late runs, with upgrade priorities for arrows, mines, Ram, summons and Cannons.",
+      "Use proven Wanderburg builds for early progression and late runs, with upgrade priorities for arrows, mines, Mage, Ram, summons and Cannons.",
     images: [imageUrls[0]],
   },
 };
@@ -86,13 +88,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Wanderburg Best Builds Guide: Archer, Mine and Mortar, Ram, Summoner, Cannon, Movement and Upgrade Priorities",
+      "Wanderburg Best Builds Guide: Archer, Mage, Mine and Mortar, Ram, Summoner, Cannon and Upgrade Priorities",
       description:
-        "A Wanderburg build guide covering the Archer Tower, Side Ballista and Turret Layer core, the early Mine Layer and Top Mortar setup, Movement versus Defense, Ram speed scaling, Summoner and Cannon builds, upgrade priorities, build pivots, vehicle compatibility, and which setups are most reliable for progression.",
+        "A Wanderburg build guide covering the Archer Tower, Side Ballista and Turret Layer core, Mine Layer and Top Mortar, late-game Mage builds, Ram speed scaling, Summoner and Cannon setups, Movement, upgrade priorities, build pivots and vehicle compatibility.",
+      
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-09",
-      dateModified: "2026-09-09",
+      dateModified: "2026-09-13",
       about: [
         {
           "@type": "VideoGame",
@@ -121,6 +124,18 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Top Mortar",
+        },
+        {
+          "@type": "Thing",
+          name: "Mage build",
+        },
+        {
+          "@type": "Thing",
+          name: "Electric Mage",
+        },
+        {
+          "@type": "Thing",
+          name: "Force Mage",
         },
         {
           "@type": "Thing",
@@ -181,12 +196,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Wanderburg Best Builds & Upgrade Priorities"
-          description="Build around a damage engine that already works, keep the castle mobile as it grows, and choose the right Arrow, Mine, Ram, Summon or Cannon setup for your permanent account."
+          description="Build around a damage engine that already works, keep the castle mobile as it grows, and choose the right Arrow, Mine, Mage, Ram, Summon or Cannon setup."
           gameTitle="Wanderburg"
           gameHref="/wanderburg"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 9, 2026"
+          updatedAt="September 13, 2026"
           toc={[
             {
               id: "best-build",
@@ -234,7 +249,7 @@ export default function Page() {
             },
             {
               id: "builds-not-to-force",
-              label: "Builds not to force",
+              label: "Mage & Fire builds",
             },
             {
               id: "which-build",

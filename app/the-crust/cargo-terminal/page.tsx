@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -8,19 +7,26 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import TheCrustCargoTerminalContent from "@/data/the-crust/cargo-terminal.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-crust/cargo-terminal`;
+const hubUrl = `${siteUrl}/the-crust`;
+const pageUrl = `${hubUrl}/cargo-terminal`;
 
 const metadataTitle =
-  "The Crust Cargo Terminal Guide – Rover LPS & Location";
+  "The Crust Cargo Terminal Guide: Rover LPS & Cargo Dock";
 
 const metadataDescription =
-  "Find the Cargo Terminal in The Crust with the Rover LPS, use the outer and inner scan correctly, investigate the site, and reach the Expedition Center step.";
+  "Find the Cargo Terminal with the Rover LPS, fix missing-location problems, investigate it, and understand the later Cargo Dock, MDR, and Cargo Truck route.";
 
 const articleDescription =
-  "A The Crust Version 1.0 Cargo Terminal guide covering the approximate coordinates, Rover Lunar Proximity Scanner, outer and inner LPS ranges, hidden-object search, Cargo Terminal investigation, Rover battery limits, and the Expedition Center progression that follows.";
+  "A The Crust Version 1.0 guide to finding and investigating the Cargo Terminal with the Rover Lunar Proximity Scanner, fixing common search and battery problems, distinguishing the Cargo Terminal from the Cargo Dock, and setting up later MDR and Cargo Truck logistics.";
 
-const heroImage =
-  `${siteUrl}/images/the-crust/the-crust-cargo-terminal-rover-lps.webp`;
+const imageUrls = [
+  `${siteUrl}/images/the-crust/the-crust-cargo-terminal-rover-lps.webp`,
+  `${siteUrl}/images/the-crust/the-crust-cargo-terminal-coordinates.webp`,
+  `${siteUrl}/images/the-crust/the-crust-rover-no-power-night.webp`,
+  `${siteUrl}/images/the-crust/the-crust-cargo-terminal-found.webp`,
+];
+
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -36,6 +42,10 @@ const toc = [
     label: "Cargo Terminal not showing",
   },
   {
+    id: "rover-power",
+    label: "Rover battery & power",
+  },
+  {
     id: "investigate-cargo-terminal",
     label: "Investigate the terminal",
   },
@@ -44,27 +54,39 @@ const toc = [
     label: "What to do next",
   },
   {
-    id: "rover-power",
-    label: "Rover battery & power",
+    id: "terminal-vs-dock",
+    label: "Cargo Terminal vs Cargo Dock",
+  },
+  {
+    id: "cargo-dock-mdr",
+    label: "Cargo Dock & MDR route",
+  },
+  {
+    id: "cargo-terminal-stuck",
+    label: "Diagnose the blocker",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/the-crust/hope-2-choice",
-    label: "Hope-2 Choice Guide",
+    href: "/the-crust/walkthrough",
+    label: "The Crust 1.0 Walkthrough",
   },
   {
     href: "/the-crust/beginners-guide",
     label: "The Crust Beginner Guide",
   },
   {
-    href: "/the-crust/living-quarters",
-    label: "Living Quarters Guide",
+    href: "/the-crust/hope-2-choice",
+    label: "Hope-2 Choice Guide",
   },
   {
     href: "/the-crust/contracts-guide",
     label: "Contracts & Online Market Guide",
+  },
+  {
+    href: "/the-crust/living-quarters",
+    label: "Living Quarters Guide",
   },
 ];
 
@@ -83,8 +105,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        width: 1600,
-        height: 900,
+        width: 600,
+        height: 300,
         alt: "Rover using the LPS to locate the Cargo Terminal in The Crust",
       },
     ],
@@ -97,59 +119,104 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: metadataTitle,
-    description: articleDescription,
-    image: [heroImage],
-    url: pageUrl,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-    dateModified: "2026-09-11",
-    author: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
-    },
-    breadcrumb: {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "The Crust",
+          item: hubUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Cargo Terminal Guide",
+          item: pageUrl,
+        },
+      ],
     },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "The Crust",
-        item: `${siteUrl}/the-crust`,
+      headline:
+        "The Crust Cargo Terminal Guide: Rover LPS and Cargo Dock",
+      description: articleDescription,
+      image: imageUrls,
+      inLanguage: "en",
+      dateModified: "2026-09-13",
+      articleSection: "Game Guides",
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "The Crust",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo Terminal",
+        },
+        {
+          "@type": "Thing",
+          name: "Lunar Proximity Scanner",
+        },
+        {
+          "@type": "Thing",
+          name: "Rover",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo Dock",
+        },
+        {
+          "@type": "Thing",
+          name: "Mobile Drilling Rig",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo Truck",
+        },
+      ],
+      author: {
+        "@id": `${siteUrl}#organization`,
       },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Cargo Terminal",
-        item: pageUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
       },
-    ],
-  },
-];
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -165,13 +232,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Crust Cargo Terminal Guide – Rover LPS & Location"
-          description="Use the Rover LPS to turn the Cargo Terminal's approximate coordinates into an exact location, finish the investigation, and move cleanly into the Expedition Center step."
+          title="The Crust Cargo Terminal Guide: Rover LPS & Cargo Dock"
+          description="Find the hidden Cargo Terminal with the Rover LPS, finish its investigation, then separate that story location from the Cargo Dock and MDR logistics you use later."
           gameTitle="The Crust"
           gameHref="/the-crust"
           breadcrumbBaseHref="/the-crust"
           breadcrumbBaseLabel="The Crust"
-          updatedAt="September 11, 2026"
+          updatedAt="September 13, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
