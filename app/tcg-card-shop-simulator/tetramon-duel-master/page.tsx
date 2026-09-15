@@ -254,8 +254,8 @@ export default function Page() {
           description="Build your first 50-card deck, understand the four Elemental Areas, evolve Tetramon correctly, use Guardian cards, and start fighting customers in 1.0."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
-          breadcrumbBaseHref="/tcg-card-shop-simulator"
-          breadcrumbBaseLabel="TCG Card Shop Simulator"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

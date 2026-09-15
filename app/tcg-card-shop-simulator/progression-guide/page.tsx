@@ -251,8 +251,8 @@ export default function Page() {
           description="Work out what deserves your next purchase, when the shop actually needs more space or staff, when level 7 opens Tetramon deck building, and how to reach the late Ascension unlocks without forcing every new system at once."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
-          breadcrumbBaseHref="/tcg-card-shop-simulator"
-          breadcrumbBaseLabel="TCG Card Shop Simulator"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

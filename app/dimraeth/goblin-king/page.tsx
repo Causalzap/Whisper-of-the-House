@@ -4,84 +4,84 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethGoblinKingContent from "@/data/dimraeth/goblin-king.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/goblin-king`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Goblin King Guide: Hoard King's Fall & Strategy";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Unlock and beat the Goblin King in Dimraeth, finish Hoard King's Fall, manage his attack windows and adds, then continue the Wildwood story.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Goblin King guide covering Hoard King's Fall and Tamsin's explosive, boss preparation, parry and dodge decisions, safe damage windows, additional goblin pressure, healing diagnosis, the return to Corin after the fight, and how the encounter later fits into Deed and Bounty progression.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-king-collect-explosives.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-king-parry-window.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-king-defeated.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "unlock-goblin-king",
+    label: "Unlock the Goblin King",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "before-fight",
+    label: "Before the fight",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "fight",
+    label: "Attack & parry timing",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "damage-window",
+    label: "Damage windows",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "extra-goblins",
+    label: "Handle extra goblins",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "healing",
+    label: "Diagnose failed attempts",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "after-goblin-king",
+    label: "What to do after",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
-  },
-  {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "repeat-fight",
+    label: "Goblin King rematch",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/goblin-hideout",
+    label: "Goblin Hideout Route",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/wildwood-walkthrough",
+    label: "Dimraeth Wildwood Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
+  },
+  {
+    href: "/dimraeth/forest-king",
+    label: "Dimraeth Forest King Guide",
   },
 ];
 
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Hoard King's Fall objective before the Goblin King fight in Dimraeth",
       },
     ],
   },
@@ -130,13 +130,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Goblin King Guide",
           item: pageUrl,
         },
       ],
@@ -149,7 +149,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Goblin King Guide: Hoard King's Fall and Boss Strategy",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +158,35 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Goblin King",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Hoard King's Fall",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Tamsin's explosive",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Wildwood",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Corin",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Deeds",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
-        },
-        {
-          "@type": "Thing",
-          name: "Pack Opening",
-        },
-        {
-          "@type": "Thing",
-          name: "Play Table Income",
+          name: "Bounties",
         },
       ],
       author: {
@@ -239,17 +231,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Goblin King: How to Unlock & Beat the Boss"
+          description="Reach the Goblin King through Hoard King's Fall, learn when to attack instead of trade, control the extra pressure in the arena, and know exactly where the story goes after the kill."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethGoblinKingContent />
         </GuideArticlePage>
       </main>
 

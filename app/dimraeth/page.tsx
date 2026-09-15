@@ -4,84 +4,110 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethHubContent from "@/data/dimraeth/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const pageUrl = `${siteUrl}/dimraeth`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Guide Hub: Walkthrough, Builds, Pets & Deeds";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Find the right Dimraeth guide for story progression, Wildwood routes, bosses, builds, pets, Sanctum, co-op, Deeds, Bounties, and what to do next.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A Dimraeth Early Access guide hub for choosing the right next step, including the main story walkthrough, Wildwood routes, Goblin King and Forest King, Shadow and Brawler builds, pets and companions, Sanctum progression, co-op world rules, Deeds and Bounties, plus emerging questions around races, classes, maps, achievements, and bosses.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-path-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-king-defeated.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-story-end.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-attribute-training-memory-intelligence.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-fangra-cub-companion.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-deeds-unlocked-deed-board.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "where-to-start",
+    label: "Where to start",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "main-progression",
+    label: "Main story progression",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "wildwood",
+    label: "Wildwood routes",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "bosses",
+    label: "Goblin King & Forest King",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "builds",
+    label: "Builds",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "pets",
+    label: "Pets & companions",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "sanctum",
+    label: "Sanctum",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "coop",
+    label: "Co-op progression",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "deeds",
+    label: "Deeds & Bounties",
+  },
+  {
+    id: "classes-races",
+    label: "Classes & races",
+  },
+  {
+    id: "map-locations",
+    label: "Map & locations",
+  },
+  {
+    id: "achievements",
+    label: "Achievements & missables",
+  },
+  {
+    id: "all-bosses",
+    label: "Bosses",
+  },
+  {
+    id: "after-story",
+    label: "After the story",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/wildwood-walkthrough",
+    label: "Dimraeth Wildwood Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets",
+  },
+  {
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
   },
 ];
 
@@ -102,7 +128,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Forest Path during Dimraeth Early Access progression",
       },
     ],
   },
@@ -130,13 +156,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
-          item: hubUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "Money Guide",
+          name: "Dimraeth",
           item: pageUrl,
         },
       ],
@@ -149,7 +169,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Guide Hub: Walkthrough, Builds, Pets, Co-op and Deeds",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +178,47 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Dimraeth Walkthrough",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Wildwood",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Goblin King",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Aelwynor the Wildroot Father",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Dimraeth Builds",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Pets and Companions",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Sanctum",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Co-op Progression",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Deeds",
+        },
+        {
+          "@type": "Thing",
+          name: "Bounties",
         },
       ],
       author: {
@@ -239,17 +263,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Guide Hub: What to Do Next"
+          description="Use the current blocker to choose the right route: story progression, Wildwood navigation, boss fights, build upgrades, companions, Sanctum work, co-op, or post-story Deeds."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethHubContent />
         </GuideArticlePage>
       </main>
 

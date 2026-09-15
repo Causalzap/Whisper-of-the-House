@@ -4,84 +4,88 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethCoopProgressionContent from "@/data/dimraeth/co-op-progression.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/co-op-progression`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Co-op Progression: Characters, Worlds & Hosting";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Learn how Dimraeth co-op progression works: what follows your character, what stays with the host world, 8-player hosting, support builds, and Deeds.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth co-op progression guide covering character versus world saves, portable levels, equipment, inventory and spells, world-bound story progress, recruited allies and Sanctum buildings, eight-player hosting, host availability, bringing established characters into new worlds, support spells, and higher-Deed multiplayer.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-coop-server-settings.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-combat-medic-heal-spell.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-coop-barrier-support-spell.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "character-vs-world",
+    label: "Character vs world progress",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "hosting",
+    label: "Choose a main host",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "what-carries-over",
+    label: "What carries over",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "what-stays-in-world",
+    label: "What stays in the world",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "joining-new-world",
+    label: "Join an early world",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "host-offline",
+    label: "When the host is offline",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "support-builds",
+    label: "Co-op support builds",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "deeds-coop",
+    label: "Co-op for higher Deeds",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "solo-and-coop",
+    label: "Solo and co-op together",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/sanctum",
+    label: "Dimraeth Sanctum Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets Guide",
+  },
+  {
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
 ];
 
@@ -102,7 +106,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Dimraeth multiplayer world settings for an eight-player co-op game",
       },
     ],
   },
@@ -130,13 +134,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Co-op Progression",
           item: pageUrl,
         },
       ],
@@ -149,7 +153,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Co-op Progression: Characters, Worlds and Hosting",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +162,43 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Co-op",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Multiplayer",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Character Progression",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "World Progression",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Multiplayer Hosting",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Sanctum",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Combat Medic",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Barrier",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Deeds",
         },
       ],
       author: {
@@ -239,17 +243,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Co-op Progression: What Carries Over Between Worlds?"
+          description="Your character and the host world do not share the same progression. Know what travels with you, what stays behind, how hosting works, and when co-op starts making higher Deeds easier."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethCoopProgressionContent />
         </GuideArticlePage>
       </main>
 

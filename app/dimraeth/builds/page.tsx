@@ -4,84 +4,90 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethBuildsContent from "@/data/dimraeth/builds.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/builds`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Builds Guide: Shadow DoT & Bleed Brawler";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Build a stronger Dimraeth character with tested Shadow DoT and Bleed Brawler routes, attribute priorities, gear sets, status loops, and skill swaps.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth builds guide covering attribute investment, Memory and Intelligence for Shadow magic, Poison and Decay loops, Aether Shade and Convergence gear sets, Concentration recovery, Minotaur Brawler Bleed progression, Frenzied Slashes, status spenders, pet synergy, and when to replace temporary skills or equipment.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-attribute-training-memory-intelligence.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-shadow-contagion-poison.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-aether-shade-convergence-build.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-brawler-16-bleed-stacks.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-frenzied-slashes-pure-bleed.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "build-first",
+    label: "Choose a combat loop",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "attributes",
+    label: "Attribute priorities",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "shadow-dot",
+    label: "Shadow DoT build",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "gear-sets",
+    label: "Gear sets",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "brawler-transition",
+    label: "Bleed Brawler",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "status-spenders",
+    label: "Status spenders",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "when-to-switch",
+    label: "When to change the build",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "pets",
+    label: "Pet synergy",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "loot-decisions",
+    label: "What gear to keep",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/sanctum",
+    label: "Dimraeth Sanctum Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/goblin-king",
+    label: "Dimraeth Goblin King Guide",
+  },
+  {
+    href: "/dimraeth/forest-king",
+    label: "Dimraeth Forest King Guide",
   },
 ];
 
@@ -102,7 +108,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Dimraeth attribute training for a Shadow magic build",
       },
     ],
   },
@@ -130,13 +136,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Builds Guide",
           item: pageUrl,
         },
       ],
@@ -149,7 +155,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Builds Guide: Shadow DoT, Bleed Brawler and Attributes",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +164,55 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Builds",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Attributes",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Shadow",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Brawler",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Memory",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Intelligence",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Poison",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Decay",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Bleed",
+        },
+        {
+          "@type": "Thing",
+          name: "Aether Shade",
+        },
+        {
+          "@type": "Thing",
+          name: "Convergence",
+        },
+        {
+          "@type": "Thing",
+          name: "Frenzied Slashes",
         },
       ],
       author: {
@@ -239,17 +257,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Builds: Shadow DoT, Bleed Brawler & Attributes"
+          description="Build around one combat loop instead of chasing every new drop. These tested Shadow and Brawler routes show how attributes, status effects, gear sets, and skill swaps fit together."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethBuildsContent />
         </GuideArticlePage>
       </main>
 

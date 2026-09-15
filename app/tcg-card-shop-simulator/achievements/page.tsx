@@ -255,8 +255,8 @@ export default function Page() {
           description="Track all 50 achievements, keep the easy counters moving naturally, and plan the grinds that can waste the most time: manual checkouts, profit days, grading, 25,000 packs, Ascension, and 50 Tetramon wins."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
-          breadcrumbBaseHref="/tcg-card-shop-simulator"
-          breadcrumbBaseLabel="TCG Card Shop Simulator"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

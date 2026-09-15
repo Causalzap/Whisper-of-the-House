@@ -4,84 +4,95 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethPetsContent from "@/data/dimraeth/pets.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/pets`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Pets Guide: Unlocks, Best Pets, Levels & Courier";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Unlock Dimraeth pets through Myrll, compare Fangra Cub, Moon Cat, Carrion Parrot and Ember Hound, and learn levels, Pet Pen, inventory and Courier.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth pets and companions guide covering how Myrll unlocks the companion system, the Alpha Wolf route to Fangra Cub, Moon Cat Concentration support, Carrion Parrot Bleed synergy, Ember Hound Fire damage, companion levels, the observed Level 4 max indicator, pet inventory, Courier chest transfers, and the Pet Pen.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-fangra-cub-companion.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-moon-cat-astral-purr.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-carrion-parrot-bleed.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-ember-hound-fire-pet.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-pet-courier-chest-list.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-pet-pen.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "unlock-pets",
+    label: "How to unlock pets",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "fangra-cub",
+    label: "Fangra Cub",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "choose-pet",
+    label: "How to choose a pet",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "moon-cat",
+    label: "Moon Cat",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "carrion-parrot",
+    label: "Carrion Parrot",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "ember-hound",
+    label: "Ember Hound",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "pet-levels",
+    label: "Pet levels",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "pet-inventory",
+    label: "Inventory & Courier",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "pet-pen",
+    label: "Pet Pen",
+  },
+  {
+    id: "which-pet",
+    label: "Which pet to use",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/sanctum",
+    label: "Dimraeth Sanctum Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
+  },
+  {
+    href: "/dimraeth/co-op-progression",
+    label: "Dimraeth Co-op Progression",
   },
 ];
 
@@ -102,7 +113,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Fangra Cub companion in Dimraeth",
       },
     ],
   },
@@ -130,13 +141,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Pets Guide",
           item: pageUrl,
         },
       ],
@@ -149,7 +160,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Pets Guide: Unlocks, Companion Abilities, Levels and Courier",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +169,43 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Pets",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Companions",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Myrll",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Fangra Cub",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Moon Cat",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Carrion Parrot",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Ember Hound",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Pet Pen",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Courier",
         },
       ],
       author: {
@@ -239,17 +250,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Pets: How to Unlock Them & Which Companion to Use"
+          description="Unlock companions through Myrll, compare Fangra Cub, Moon Cat, Carrion Parrot and Ember Hound, then use levels, inventory and Courier to get more from the pet system."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethPetsContent />
         </GuideArticlePage>
       </main>
 

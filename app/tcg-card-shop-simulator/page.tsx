@@ -227,8 +227,8 @@ export default function Page() {
           description="Figure out what your shop actually needs next, then jump straight to the right guide for progression, money, Tetramon, grading, packs, or 100% completion."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
-          breadcrumbBaseHref="/tcg-card-shop-simulator"
-          breadcrumbBaseLabel="TCG Card Shop Simulator"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

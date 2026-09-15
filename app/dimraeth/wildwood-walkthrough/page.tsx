@@ -4,84 +4,93 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethWildwoodWalkthroughContent from "@/data/dimraeth/wildwood-walkthrough.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/wildwood-walkthrough`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Wildwood Walkthrough: Northern Crossing & Forest King";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Follow the Dimraeth Wildwood route from Northern Crossing and Goblin Hideout through the Throne Path, Forest Path, and Forest King without wasting time.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Wildwood progression walkthrough covering the Lost Child and Northern Crossing route, the Goblin Hideout and Goblin King transition, Opening the Throne Path requirements, Crown of Thorns, Forest Path readiness, and how to reach the Forest King without confusing optional Wildwood activity with required story progression.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-path-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-lost-child-forest-entrance.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-opening-throne-path-requirements.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-confront-forest-king.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "wildwood-route",
+    label: "Wildwood route",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "lost-child",
+    label: "Lost Child & Northern Crossing",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "wildwood-quest-log",
+    label: "Required vs optional quests",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "goblin-hideout",
+    label: "Goblin Hideout",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "goblin-king",
+    label: "After the Goblin King",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "opening-throne-path",
+    label: "Open the Throne Path",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "crown-of-thorns",
+    label: "Crown of Thorns",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "before-forest-path",
+    label: "Before the Forest Path",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "forest-path",
+    label: "Forest Path",
+  },
+  {
+    id: "forest-king",
+    label: "Reach the Forest King",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/goblin-hideout",
+    label: "Goblin Hideout Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/goblin-king",
+    label: "Goblin King Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/forest-king",
+    label: "Forest King Guide",
+  },
+  {
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
 ];
 
@@ -102,7 +111,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Entering the Forest Path during Dimraeth Wildwood progression",
       },
     ],
   },
@@ -130,13 +139,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Wildwood Walkthrough",
           item: pageUrl,
         },
       ],
@@ -149,7 +158,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Wildwood Walkthrough: Northern Crossing to Forest King",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +167,43 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Wildwood",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Northern Crossing",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Goblin Hideout",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Goblin King",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Opening the Throne Path",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Crown of Thorns",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Forest Path",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Forest King",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Aelwynor the Wildroot Father",
         },
       ],
       author: {
@@ -239,17 +248,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Wildwood Walkthrough: Northern Crossing to Forest King"
+          description="Get through Wildwood without clearing everything on the map: find the Northern Crossing, follow the goblin route, open the Throne Path, and know when the Forest King route is finally ready."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethWildwoodWalkthroughContent />
         </GuideArticlePage>
       </main>
 

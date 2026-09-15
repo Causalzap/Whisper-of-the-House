@@ -4,84 +4,89 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethWalkthroughContent from "@/data/dimraeth/walkthrough.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Walkthrough: Main Story Route & Where to Go Next";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Follow Dimraeth's Early Access story from Earlwood through Wildwood, Goblin King, Forest Path, and Forest King with clear next-step decisions.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Early Access walkthrough focused on the main story route and where to go next, from Earlwood and Northern Crossing through the Goblin Hideout, Hoard King's Fall, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, and Aelwynor the Wildroot Father, with guidance on when to stay on the story, return to the Sanctum, or move into Deeds and Bounties.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-path-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-lost-child-forest-entrance.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-king-defeated.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-story-end.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "main-progression",
+    label: "Main story route",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "when-to-leave-route",
+    label: "When to leave the route",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "earlwood-to-wildwood",
+    label: "Earlwood to Wildwood",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "goblin-story",
+    label: "Goblin storyline",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "goblin-king",
+    label: "Goblin King",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "blocked-forest",
+    label: "Blocked forest route",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "crown-of-thorns",
+    label: "Crown of Thorns",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "forest-king",
+    label: "Forest King",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "after-story",
+    label: "What to do after the story",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/wildwood-walkthrough",
+    label: "Dimraeth Wildwood Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/goblin-hideout",
+    label: "Goblin Hideout Route",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/goblin-king",
+    label: "Goblin King Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/forest-king",
+    label: "Forest King Guide",
+  },
+  {
+    href: "/dimraeth/deeds-bounties",
+    label: "Deeds & Bounties Guide",
   },
 ];
 
@@ -102,7 +107,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Forest Path progression during the Dimraeth Early Access main story",
       },
     ],
   },
@@ -130,13 +135,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Walkthrough",
           item: pageUrl,
         },
       ],
@@ -149,7 +154,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Walkthrough: Main Story Route and Where to Go Next",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +163,51 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Earlwood",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Wildwood",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Northern Crossing",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Goblin Hideout",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Hoard King's Fall",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Goblin King",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Opening the Throne Path",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
+          name: "Crown of Thorns",
         },
         {
           "@type": "Thing",
-          name: "Play Table Income",
+          name: "Forest Path",
+        },
+        {
+          "@type": "Thing",
+          name: "Forest King",
+        },
+        {
+          "@type": "Thing",
+          name: "Aelwynor the Wildroot Father",
         },
       ],
       author: {
@@ -239,17 +252,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Walkthrough: Main Story Route & Where to Go Next"
+          description="Follow the current story from Earlwood into Wildwood, recognize which objectives actually move the campaign forward, and know when the main route ends after the Forest King."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethWalkthroughContent />
         </GuideArticlePage>
       </main>
 

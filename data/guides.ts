@@ -131,6 +131,374 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Dimraeth",
+    game: "Dimraeth",
+    href: "/dimraeth",
+    slug: "dimraeth",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "Action RPG, Builds & Co-op Progression",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Early Access + story walkthrough + Wildwood + bosses + builds + pets + Sanctum + co-op + Deeds",
+  
+    description:
+      "Use the Dimraeth guide hub to find the next story objective, solve Wildwood route blockers, beat the Goblin King and Forest King, build stronger characters, choose useful pets, develop the Sanctum, understand co-op progression, and move into Deeds after the current story ends.",
+  
+    coverage: [
+      "Main Early Access progression from Earlwood into Wildwood through Northern Crossing, the goblin storyline, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, and Aelwynor the Wildroot Father",
+      "Wildwood navigation through Lost Child, Northern Crossing, Goblin Hideout, Wildwood Center, the Wildwood Caverns wrong turn, Farmstead landmarks, throne requirements, and the final Forest Path push",
+      "Goblin King and Forest King boss progression with unlock conditions, preparation, attack windows, adds, Poison pressure, failed-attempt diagnosis, post-fight handoffs, and the current story endpoint",
+      "Character builds through Shadow Poison and Decay, Minotaur Brawler Bleed, attributes, Concentration, spellbooks, temporary skill transitions, equipment sets, status loops, and upgrade decisions",
+      "Pets and companions through Myrll, Fangra Cub, Moon Cat, Carrion Parrot, Ember Hound, pet levels, build synergy, inventory, Courier, and Pet Pen",
+      "Sanctum progression through storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, Home Uplift, and practical return-to-base decisions",
+      "Co-op progression through portable character progress, world-bound story and Sanctum progress, eight-player hosting, support spells, host choice, established characters joining other worlds, and higher-Deed group play",
+      "Deeds and Bounties through Deed Levels 1–10, repeat bosses, targeted material farming, reward differences, efficient difficulty ceilings, purple drops, solo pressure, and post-story progression",
+    ],
+  
+    image:
+      "/images/dimraeth/dimraeth-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 49,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Dimraeth Guide Hub: Walkthrough, Builds, Pets & Deeds",
+        href: "/dimraeth",
+        type: "Guide Hub",
+        description:
+          "Start with the problem blocking progress, then move to the main story, Wildwood routes, bosses, builds, pets, Sanctum, co-op, or post-story Deeds.",
+        image:
+          "/images/dimraeth/dimraeth-forest-path-start.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Early Access story, Earlwood, Wildwood, Goblin King, Forest King, builds, pets, Sanctum, eight-player co-op, Deeds, Bounties, classes, races, and what to do next",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Walkthrough: Main Story Route & Where to Go Next",
+        href: "/dimraeth/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the Early Access story from Earlwood through Wildwood, Goblin King, Forest Path and Forest King, with clear decisions about which objectives actually move the campaign forward.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-forest-path-start.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 330,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Earlwood, Wildwood, Northern Crossing, Goblin Hideout, Hoard King's Fall, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, Forest King, and post-story progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Wildwood Walkthrough: Northern Crossing & Forest King",
+        href: "/dimraeth/wildwood-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the Wildwood route from Lost Child and Northern Crossing through the goblin storyline, throne requirements, Forest Path, and the approach to the Forest King.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-opening-throne-path-requirements.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 331,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Lost Child, Northern Crossing, Goblin Hideout, Goblin King transition, Clear the Way, Keys of Bark and Stone, Light the Wayfinder Line, Crown of Thorns, and Forest Path",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Goblin Hideout Location: Wildwood Center Route",
+        href: "/dimraeth/goblin-hideout",
+        type: "Puzzle Help",
+        description:
+          "Find the Goblin Hideout from Wildwood Center, avoid the Wildwood Caverns wrong turn, use the Farmstead as a landmark, and reach the Clear the Raid objective.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-find-goblin-hideout-quest.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 332,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Find the Goblin Hideout, Wildwood Center, Wildwood Caverns wrong turn, Farmstead landmark, northward route, and Clear the Raid confirmation",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Goblin King Guide: Hoard King's Fall & Strategy",
+        href: "/dimraeth/goblin-king",
+        type: "Bosses",
+        description:
+          "Reach and beat the Goblin King through Hoard King's Fall, prepare for the fight, manage attack windows and extra goblins, then continue the Wildwood story.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-goblin-king-ground-aoe.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 333,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Hoard King's Fall, Tamsin's explosive, boss preparation, attack windows, parries, extra goblins, Bleed pressure, healing diagnosis, Corin handoff, and repeat fights",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Forest King Guide: Aelwynor Boss Strategy",
+        href: "/dimraeth/forest-king",
+        type: "Bosses",
+        description:
+          "Beat Aelwynor the Wildroot Father with better Poison management, add control, safer defensive timing and clean damage windows, then see what opens after the current story ends.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-forest-king-boss-start.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 334,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Aelwynor the Wildroot Father, Forest King, Poison Cure, ground hazards, Fey add, parry timing, bad-open resets, 18 Bleed stacks, Forest Heart, Forest King Tine, and story endpoint",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Builds Guide: Shadow DoT & Bleed Brawler",
+        href: "/dimraeth/builds",
+        type: "Builds",
+        description:
+          "Build around tested Shadow DoT and Minotaur Brawler Bleed routes with better attribute spending, status loops, Concentration recovery, gear sets, and skill transitions.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-attribute-training-memory-intelligence.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 335,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Shadow Poison and Decay, Memory, Intelligence, Concentration, Contagion, Aether Shade, Convergence, Minotaur Brawler Bleed, Frenzied Slashes, status spenders, and gear transitions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Pets Guide: Unlocks, Best Pets, Levels & Courier",
+        href: "/dimraeth/pets",
+        type: "Systems",
+        description:
+          "Unlock companions through Myrll, compare Fangra Cub, Moon Cat, Carrion Parrot and Ember Hound, and use pet levels, inventory, Courier and Pet Pen.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-fangra-cub-companion.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 336,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Myrll, Alpha Wolf, Fangra Cub, Moon Cat, Carrion Parrot, Ember Hound, companion abilities, pet levels, inventory, Courier, Sanctum chest transfers, and Pet Pen",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Sanctum Guide: Facilities, Followers & Home Uplift",
+        href: "/dimraeth/sanctum",
+        type: "Systems",
+        description:
+          "Build a useful Sanctum with storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, and better Home Uplift priorities.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-sanctum-facility-center.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 337,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, Home Uplift, pre-boss resets, and useful return-to-base decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Co-op Progression: Characters, Worlds & Hosting",
+        href: "/dimraeth/co-op-progression",
+        type: "Systems",
+        description:
+          "Understand what follows your character between worlds, what stays with the host world, how eight-player hosting works, and when support builds or co-op Deeds become useful.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-coop-server-settings.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 338,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Eight-player co-op, character progression, world progression, host worlds, portable equipment and spells, Sanctum ownership, Barrier, Combat Medic, established characters, and higher Deeds",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Deeds & Bounties Guide: Levels, Rewards & Farming",
+        href: "/dimraeth/deeds-bounties",
+        type: "Systems",
+        description:
+          "Use Deed Levels 1–10 for targeted boss farming, compare rewards, find the highest efficient difficulty, and decide when better gear or more players will save time.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-deed-level-repeat-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 339,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Deed Board, Deed Levels 1–10, Alpha Wolf Bounty, boss materials, Potential Loot, difficulty jumps, efficient farming ceiling, purple gear, solo versus co-op, and post-story progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+    ],
+  },
+  {
     title: "TCG Card Shop Simulator",
     game: "TCG Card Shop Simulator",
     href: "/tcg-card-shop-simulator",

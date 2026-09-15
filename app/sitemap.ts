@@ -768,7 +768,7 @@ const paths = [
   '/crimson-desert/abyss-artifacts-guide',
   '/crimson-desert/side-quests-guide',
 
-  '/project-pitt',
+'/project-pitt',
 '/project-pitt/progression-guide',
 '/project-pitt/automation-layouts',
 '/project-pitt/duck-automation',
@@ -912,7 +912,17 @@ const paths = [
   '/tcg-card-shop-simulator/tetramon-duel-master',
   '/tcg-card-shop-simulator/achievements',
 
-
+  '/dimraeth',
+  '/dimraeth/walkthrough',
+  '/dimraeth/wildwood-walkthrough',
+  '/dimraeth/goblin-hideout',
+  '/dimraeth/goblin-king',
+  '/dimraeth/forest-king',
+  '/dimraeth/builds',
+  '/dimraeth/pets',
+  '/dimraeth/sanctum',
+  '/dimraeth/co-op-progression',
+  '/dimraeth/deeds-bounties',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -920,12 +930,24 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/dimraeth': '2026-09-15',
+  '/dimraeth/walkthrough': '2026-09-15',
+  '/dimraeth/wildwood-walkthrough': '2026-09-15',
+  '/dimraeth/goblin-hideout': '2026-09-15',
+  '/dimraeth/goblin-king': '2026-09-15',
+  '/dimraeth/forest-king': '2026-09-15',
+  '/dimraeth/builds': '2026-09-15',
+  '/dimraeth/pets': '2026-09-15',
+  '/dimraeth/sanctum': '2026-09-15',
+  '/dimraeth/co-op-progression': '2026-09-15',
+  '/dimraeth/deeds-bounties': '2026-09-15',
+  
   '/tcg-card-shop-simulator': '2026-09-15',
   '/tcg-card-shop-simulator/progression-guide': '2026-09-15',
   '/tcg-card-shop-simulator/money-guide': '2026-09-15',
   '/tcg-card-shop-simulator/tetramon-duel-master': '2026-09-15',
   '/tcg-card-shop-simulator/achievements': '2026-09-15',
-  
+
   '/slay-the-spire-2': '2026-09-12',
   '/slay-the-spire-2/beginner-guide': '2026-09-12',
   '/slay-the-spire-2/ascension-guide': '2026-09-12',

@@ -4,84 +4,81 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethGoblinHideoutContent from "@/data/dimraeth/goblin-hideout.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/goblin-hideout`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Goblin Hideout Location: Wildwood Center Route";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Find the Goblin Hideout in Dimraeth from Wildwood Center, avoid the Wildwood Caverns wrong turn, use the Farmstead, and reach Clear the Raid.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A route-focused Dimraeth guide to Find the Goblin Hideout in Wildwood, using Wildwood Center and the Farmstead as navigation landmarks, avoiding the misleading Wildwood Caverns branch, and confirming the correct location when the objective changes to Clear the Raid.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-find-goblin-hideout-quest.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-hideout-wildwood-center.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-wildwood-caverns-wrong-turn.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-goblin-hideout-clear-the-raid.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "find-goblin-hideout",
+    label: "Find the Goblin Hideout",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "wildwood-center",
+    label: "Start at Wildwood Center",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "wildwood-caverns",
+    label: "Avoid Wildwood Caverns",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "farmstead-general",
+    label: "Use the Farmstead",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "route-from-farmstead",
+    label: "Route north from Farmstead",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "clear-the-raid",
+    label: "Clear the Raid confirmation",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "raid-trouble",
+    label: "If the raid is the problem",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
-  },
-  {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "after-hideout",
+    label: "What to do next",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/wildwood-walkthrough",
+    label: "Dimraeth Wildwood Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/goblin-king",
+    label: "Dimraeth Goblin King Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
 ];
 
@@ -102,7 +99,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Find the Goblin Hideout objective in Wildwood in Dimraeth",
       },
     ],
   },
@@ -130,13 +127,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Goblin Hideout",
           item: pageUrl,
         },
       ],
@@ -149,7 +146,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Goblin Hideout Location: Wildwood Center Route",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +155,31 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Goblin Hideout",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Wildwood",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Wildwood Center",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Wildwood Caverns",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Farmstead",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
-        },
-        {
-          "@type": "Thing",
-          name: "Product Licenses",
-        },
-        {
-          "@type": "Thing",
-          name: "Pack Opening",
-        },
-        {
-          "@type": "Thing",
-          name: "Play Table Income",
+          name: "Clear the Raid",
         },
       ],
       author: {
@@ -239,17 +224,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Goblin Hideout: How to Find the Right Route"
+          description="Use Wildwood Center as your anchor, avoid the convincing Wildwood Caverns wrong turn, then use the Farmstead route to reach the goblins and trigger Clear the Raid."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethGoblinHideoutContent />
         </GuideArticlePage>
       </main>
 

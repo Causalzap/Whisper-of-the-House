@@ -4,84 +4,98 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethForestKingContent from "@/data/dimraeth/forest-king.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/forest-king`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Forest King Guide: Aelwynor Boss Strategy";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Beat Aelwynor the Forest King in Dimraeth with Poison Cure, add control, safer parries, and clean damage windows, then see what unlocks after the fight.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Forest King guide covering Aelwynor the Wildroot Father, Poison Cure preparation, ground hazards, the Fey add, parry decisions, failed-attempt diagnosis, the tested 18-stack Bleed Brawler kill, Forest King rewards, and the current Early Access story endpoint.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-boss-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-poison-pods.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-fey-add.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-18-bleed.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-forest-king-story-end.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "before-forest-king",
+    label: "Before the Forest King",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "opening",
+    label: "Read the opening",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "poison",
+    label: "Poison Cure",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "ground-hazards",
+    label: "Ground hazards",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "fey-add",
+    label: "Kill the Fey add",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "parry",
+    label: "Parry decisions",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "bad-opener",
+    label: "When to reset",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "bleed-damage",
+    label: "Bleed damage",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "one-potion",
+    label: "One-potion situations",
+  },
+  {
+    id: "successful-attempt",
+    label: "Winning attempt",
+  },
+  {
+    id: "after-forest-king",
+    label: "Rewards & what comes next",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/wildwood-walkthrough",
+    label: "Dimraeth Wildwood Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/goblin-king",
+    label: "Dimraeth Goblin King Guide",
+  },
+  {
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
 ];
 
@@ -102,7 +116,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Aelwynor the Wildroot Father Forest King boss fight in Dimraeth",
       },
     ],
   },
@@ -130,13 +144,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Forest King Guide",
           item: pageUrl,
         },
       ],
@@ -149,7 +163,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Forest King Guide: How to Beat Aelwynor the Wildroot Father",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +172,35 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Forest King",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Aelwynor the Wildroot Father",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Crown of Thorns",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Poison Cure",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Bleed",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Forest King Tine",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
-        },
-        {
-          "@type": "Thing",
-          name: "Pack Opening",
-        },
-        {
-          "@type": "Thing",
-          name: "Play Table Income",
+          name: "Forest Heart",
         },
       ],
       author: {
@@ -239,17 +245,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Forest King: How to Beat Aelwynor"
+          description="Prepare for Poison, control the Fey and ground hazards, recognize when a run is still healthy, and finish Aelwynor without rebuilding a character that is already strong enough."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethForestKingContent />
         </GuideArticlePage>
       </main>
 

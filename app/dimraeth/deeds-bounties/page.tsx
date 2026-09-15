@@ -4,84 +4,85 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethDeedsBountiesContent from "@/data/dimraeth/deeds-bounties.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/deeds-bounties`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Deeds & Bounties Guide: Levels, Rewards & Farming";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Learn Dimraeth Deed Levels 1–10, boss farming, bounty rewards, when to raise difficulty, when to stay lower, and when co-op becomes worth using.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Deeds and Bounties guide covering the Deed Board, Deed Levels 1 through 10, targeted boss-material farming, Alpha Wolf Bounties, reward differences, efficient difficulty progression, skill-point and purple gear drops, solo versus co-op decisions, and how repeatable content changes after the Forest King.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-deeds-unlocked-deed-board.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-deed-level-repeat-boss.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-alpha-wolf-bounty-material-farm.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-deed-boss-purple-gear.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "deed-board",
+    label: "How the Deed Board works",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "choose-deed",
+    label: "Which Deed to farm",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "deed-levels",
+    label: "Deed Levels 1–10",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "efficient-farming",
+    label: "Find your efficient ceiling",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "boss-rewards",
+    label: "Boss rewards",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "loot-rarity",
+    label: "Purple gear & rarity",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "solo-coop",
+    label: "Solo vs co-op",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
-  },
-  {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "after-forest-king",
+    label: "After the Forest King",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/co-op-progression",
+    label: "Dimraeth Co-op Progression",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/forest-king",
+    label: "Dimraeth Forest King Guide",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
+  },
+  {
+    href: "/dimraeth/sanctum",
+    label: "Dimraeth Sanctum Guide",
   },
 ];
 
@@ -102,7 +103,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Deed Board with new repeatable Deeds available in Dimraeth",
       },
     ],
   },
@@ -130,13 +131,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Deeds & Bounties",
           item: pageUrl,
         },
       ],
@@ -149,7 +150,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Deeds and Bounties Guide: Levels, Rewards and Boss Farming",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +159,39 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Deeds",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Bounties",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Deed Board",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Deed Levels",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Alpha Wolf Bounty",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
+          name: "Alpha Teeth",
         },
         {
           "@type": "Thing",
-          name: "Product Licenses",
+          name: "Boss Farming",
         },
         {
           "@type": "Thing",
-          name: "Pack Opening",
-        },
-        {
-          "@type": "Thing",
-          name: "Play Table Income",
+          name: "Potential Loot",
         },
       ],
       author: {
@@ -239,17 +236,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Deeds & Bounties: When to Raise the Difficulty"
+          description="Use the Deed Board for upgrades you actually need, learn when a higher tier is still efficient, and know when better gear or extra players will save more time than another failed push."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethDeedsBountiesContent />
         </GuideArticlePage>
       </main>
 

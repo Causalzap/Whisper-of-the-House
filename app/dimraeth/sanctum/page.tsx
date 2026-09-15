@@ -4,84 +4,96 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorMoneyGuideContent from "@/data/tcg-card-shop-simulator/money-guide.mdx";
+import DimraethSanctumContent from "@/data/dimraeth/sanctum.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/money-guide`;
+const hubUrl = `${siteUrl}/dimraeth`;
+const pageUrl = `${hubUrl}/sanctum`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "Dimraeth Sanctum Guide: Facilities, Followers & Home Uplift";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Build a useful Dimraeth Sanctum with storage, Water Well, Facility Center, followers, passive resources, and smart Home Uplift priorities.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "A practical Dimraeth Sanctum guide covering what to build first, storage and inventory pressure, the Water Well, NPC recruitment, the Facility Center, follower-based production, passive resources, Home Uplift priorities, pre-boss resets, and multiplayer world investment.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-33-pack-customer-purchase.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-600-card-sale.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-facility-center.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-water-well.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-first-npc-recruit.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "early-money-loop",
-    label: "Early money loop",
+    id: "what-to-build-first",
+    label: "What to build first",
   },
   {
-    id: "pricing",
-    label: "How much above market?",
+    id: "storage",
+    label: "Storage & encumbrance",
   },
   {
-    id: "stock-turnover",
-    label: "Stock turnover",
+    id: "water-well",
+    label: "Water Well",
   },
   {
-    id: "licenses",
-    label: "License costs",
+    id: "recruit-npcs",
+    label: "Recruit NPCs",
   },
   {
-    id: "single-cards",
-    label: "High-value single cards",
+    id: "facility-center",
+    label: "Facility Center",
   },
   {
-    id: "opening-packs",
-    label: "Sell packs or open them?",
+    id: "followers",
+    label: "Assign followers",
   },
   {
-    id: "product-mix",
-    label: "Product mix",
+    id: "passive-resources",
+    label: "Passive resources",
   },
   {
-    id: "play-table-income",
-    label: "Play-table income",
+    id: "home-uplift",
+    label: "Home Uplift priority",
   },
   {
-    id: "money-stuck",
-    label: "Why cash stays low",
+    id: "when-to-return",
+    label: "When to return",
+  },
+  {
+    id: "pre-boss-reset",
+    label: "Before a major boss",
+  },
+  {
+    id: "multiplayer-sanctum",
+    label: "Sanctum in co-op",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets & Companions",
   },
   {
-    href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    href: "/dimraeth/co-op-progression",
+    label: "Dimraeth Co-op Progression",
+  },
+  {
+    href: "/dimraeth/deeds-bounties",
+    label: "Dimraeth Deeds & Bounties",
   },
 ];
 
@@ -102,7 +114,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Facility Center unlocked while developing the Sanctum in Dimraeth",
       },
     ],
   },
@@ -130,13 +142,13 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
           item: hubUrl,
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Money Guide",
+          name: "Sanctum Guide",
           item: pageUrl,
         },
       ],
@@ -149,7 +161,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "Dimraeth Sanctum Guide: What to Build First and When to Return",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -158,43 +170,31 @@ const jsonLd = {
       about: [
         {
           "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          name: "Dimraeth",
         },
         {
           "@type": "Thing",
-          name: "Money Making",
+          name: "Sanctum",
         },
         {
           "@type": "Thing",
-          name: "Product Pricing",
+          name: "Facility Center",
         },
         {
           "@type": "Thing",
-          name: "Market Price",
+          name: "Water Well",
         },
         {
           "@type": "Thing",
-          name: "Stock Turnover",
+          name: "Followers",
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Home Uplift",
         },
         {
           "@type": "Thing",
-          name: "Single Card Sales",
-        },
-        {
-          "@type": "Thing",
-          name: "Product Licenses",
-        },
-        {
-          "@type": "Thing",
-          name: "Pack Opening",
-        },
-        {
-          "@type": "Thing",
-          name: "Play Table Income",
+          name: "NPC Recruitment",
         },
       ],
       author: {
@@ -239,17 +239,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
-          gameTitle="TCG Card Shop Simulator"
-          gameHref="/tcg-card-shop-simulator"
+          title="Dimraeth Sanctum Guide: What to Build First & When to Return"
+          description="Build a Sanctum that actually saves time: prioritize storage, useful facilities and followers, know when Home Uplift can wait, and return only when the trip solves something."
+          gameTitle="Dimraeth"
+          gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorMoneyGuideContent />
+          <DimraethSanctumContent />
         </GuideArticlePage>
       </main>
 
