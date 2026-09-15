@@ -881,6 +881,7 @@ const paths = [
 '/halloween-the-game/achievements',
 '/halloween-the-game/escape-helper',
 '/halloween-the-game/prestige-guide',
+'/halloween-the-game/best-civilians',
 
   '/wanderburg',
   '/wanderburg/progression-unlocks',
@@ -998,6 +999,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/halloween-the-game/achievements': '2026-09-12',
   '/halloween-the-game/escape-helper': '2026-09-09',
   '/halloween-the-game/prestige-guide': '2026-09-12',
+  '/halloween-the-game/best-civilians': '2026-09-15',
 
   '/neverness-to-everness': '2026-09-02',
   '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',

@@ -10,10 +10,10 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/halloween-the-game`;
 
 const metadataTitle =
-  "Halloween: The Game Guide – Story, Multiplayer & Escape";
+  "Halloween: The Game Guide – Walkthrough, Multiplayer & More";
 
 const metadataDescription =
-  "Find Halloween: The Game guides for Story Mode, multiplayer escapes, challenges, achievements, progression, Prestige, Michael arrest, and endings.";
+  "Find Halloween: The Game guides for the full walkthrough, multiplayer, best Civilians, escapes, challenges, achievements, Prestige, Michael arrest, and endings.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp`;
@@ -38,6 +38,10 @@ const toc = [
   {
     id: "multiplayer",
     label: "Civilian multiplayer",
+  },
+  {
+    id: "best-civilians",
+    label: "Best Civilians",
   },
   {
     id: "escape-search",
@@ -71,20 +75,24 @@ const toc = [
     id: "multiplayer-maps",
     label: "Multiplayer maps",
   },
-  {
-    id: "best-civilians-perks",
-    label: "Civilians & perks",
-  },
 ];
 
 const relatedLinks = [
   {
-    href: "/halloween-the-game/escape-helper",
-    label: "Escape & Spawn Helper",
-  },
-  {
     href: "/halloween-the-game/walkthrough",
     label: "Complete Story Mode Walkthrough",
+  },
+  {
+    href: "/halloween-the-game/best-civilians",
+    label: "Best Civilians Tier List",
+  },
+  {
+    href: "/halloween-the-game/multiplayer-guide",
+    label: "Civilian Multiplayer Guide",
+  },
+  {
+    href: "/halloween-the-game/escape-helper",
+    label: "Escape & Spawn Helper",
   },
   {
     href: "/halloween-the-game/main-street-walkthrough",
@@ -99,20 +107,16 @@ const relatedLinks = [
     label: "All 50 Achievements Guide",
   },
   {
-    href: "/halloween-the-game/multiplayer-guide",
-    label: "Civilian Multiplayer Guide",
-  },
-  {
-    href: "/halloween-the-game/how-to-arrest-michael-myers",
-    label: "How to Arrest Michael Myers",
-  },
-  {
     href: "/halloween-the-game/progression-perks",
     label: "Progression & Perks Guide",
   },
   {
     href: "/halloween-the-game/prestige-guide",
     label: "Prestige Challenges & Rewards Guide",
+  },
+  {
+    href: "/halloween-the-game/how-to-arrest-michael-myers",
+    label: "How to Arrest Michael Myers",
   },
 ];
 
@@ -127,9 +131,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Guide – Story, Multiplayer & Escape",
+    title: "Halloween: The Game Guide – Walkthrough, Multiplayer & More",
     description:
-      "Choose the right route for Story Mode, chapter challenges, multiplayer escapes, achievements, progression, Prestige, Michael arrest, and endings.",
+      "Choose the right Halloween: The Game guide for Story Mode, multiplayer, best Civilians, escapes, challenges, achievements, progression, Prestige, Michael arrest, and endings.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -143,9 +147,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Guide – Story, Multiplayer & Escape",
+    title: "Halloween: The Game Guide – Walkthrough, Multiplayer & More",
     description:
-      "Find the right guide for Story Mode, multiplayer escapes, challenges, achievements, progression, Prestige, Michael arrest, and endings.",
+      "Find the right guide for Story Mode, multiplayer, best Civilians, escapes, challenges, achievements, Prestige, Michael arrest, and endings.",
     images: [heroImage],
   },
 };
@@ -163,7 +167,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
@@ -184,10 +188,10 @@ const jsonLd = {
       },
 
       headline:
-        "Halloween: The Game Guide — Story, Multiplayer, Escape Routes, Challenges and Achievements",
+        "Halloween: The Game Guide – Walkthrough, Multiplayer, Best Civilians, Escapes and More",
 
       description:
-        "A central Halloween: The Game guide for choosing what to do next across Story Mode walkthroughs, chapter challenges, Civilian multiplayer, escape routes, achievements, Michael Myers arrest and detainment, progression, perks, Prestige, collectibles, and alternate endings.",
+        "A central Halloween: The Game guide for choosing what to do next across Story Mode walkthroughs, chapter challenges, Civilian multiplayer, best Civilians, escape routes, achievements, Michael Myers arrest, progression, perks, Prestige, collectibles, and alternate endings.",
 
       url: pageUrl,
 
@@ -196,10 +200,9 @@ const jsonLd = {
       inLanguage: "en",
 
       datePublished: "2026-09-04",
-      dateModified: "2026-09-12",
+      dateModified: "2026-09-15",
 
-      articleSection:
-        "Halloween: The Game Guides",
+      articleSection: "Halloween: The Game Guides",
 
       about: [
         {
@@ -209,15 +212,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game Story Mode",
-        },
-        {
-          "@type": "Thing",
           name: "Halloween: The Game walkthrough",
         },
         {
           "@type": "Thing",
+          name: "Halloween: The Game Story Mode",
+        },
+        {
+          "@type": "Thing",
           name: "Halloween: The Game multiplayer",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Civilians",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game best Civilians",
         },
         {
           "@type": "Thing",
@@ -293,12 +304,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Halloween: The Game Guide – Pick the Right Route for Your Next Goal"
-          description="Choose the right path for Story Mode, a chapter challenge, Civilian multiplayer, an escape route, achievement cleanup, progression, Prestige, Michael arrest, or another ending."
+          description="Choose the right path for Story Mode, a chapter challenge, Civilian multiplayer, the best Civilian for your role, an escape route, achievement cleanup, progression, Prestige, Michael arrest, or another ending."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 12, 2026"
+          updatedAt="September 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
