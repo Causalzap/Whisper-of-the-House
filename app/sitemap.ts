@@ -906,6 +906,12 @@ const paths = [
   '/slay-the-spire-2/necrobinder-guide',
   '/slay-the-spire-2/multiplayer-guide',
 
+  '/tcg-card-shop-simulator',
+  '/tcg-card-shop-simulator/progression-guide',
+  '/tcg-card-shop-simulator/money-guide',
+  '/tcg-card-shop-simulator/tetramon-duel-master',
+  '/tcg-card-shop-simulator/achievements',
+
 
 ] as const;
 
@@ -914,6 +920,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/tcg-card-shop-simulator': '2026-09-15',
+  '/tcg-card-shop-simulator/progression-guide': '2026-09-15',
+  '/tcg-card-shop-simulator/money-guide': '2026-09-15',
+  '/tcg-card-shop-simulator/tetramon-duel-master': '2026-09-15',
+  '/tcg-card-shop-simulator/achievements': '2026-09-15',
+  
   '/slay-the-spire-2': '2026-09-12',
   '/slay-the-spire-2/beginner-guide': '2026-09-12',
   '/slay-the-spire-2/ascension-guide': '2026-09-12',

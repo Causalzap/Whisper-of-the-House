@@ -131,6 +131,190 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "TCG Card Shop Simulator",
+    game: "TCG Card Shop Simulator",
+    href: "/tcg-card-shop-simulator",
+    slug: "tcg-card-shop-simulator",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Card Shop Management & Tetramon",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Version 1.0 + progression + money + Tetramon Duel Master + 50 achievements",
+  
+    description:
+      "Use the TCG Card Shop Simulator guide hub to decide what the shop needs next, improve progression and cash flow, build a playable Tetramon deck, understand customer duels, and track all 50 achievements through the 1.0 endgame.",
+  
+    coverage: [
+      "Shop progression from the opening tasks through level-based unlocks, the Card Table objective, level 7 Workbench, expansion timing, employee decisions, grading and automation, and the late Ascension milestones",
+      "Money management through market-price markups, stock turnover, large customer purchases, license and first-stock costs, high-value single-card sales, pack opening decisions, product variety, and play-table income",
+      "Tetramon Duel Master through the level 7 Workbench, legal 50-card decks, four-copy limit, opening hand and mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, Guardian thresholds, customer duels, and tournaments",
+      "All 50 achievements with a persistent tracker, manual checkout planning, daily Profit versus Revenue, seller thresholds, pack and collection grinds, rare pulls, grading goals, Ascension, and 50 Tetramon customer wins",
+    ],
+  
+    image:
+      "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 48,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "TCG Card Shop Simulator Guide: Progression, Money & Tetramon",
+        href: "/tcg-card-shop-simulator",
+        type: "Guide Hub",
+        description:
+          "Start with the problem your shop is showing you, then move to progression, money, Tetramon, grading, packs, or achievement cleanup without treating every new unlock as equally urgent.",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-workbench-unlocks.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Version 1.0, shop progression, money, pricing, stock, level 7 Workbench, Tetramon Duel Master, grading, packs, collection, Ascension, and 50 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "TCG Card Shop Simulator Progression Guide: What to Unlock Next",
+        href: "/tcg-card-shop-simulator/progression-guide",
+        type: "Guide",
+        description:
+          "Choose what to unlock next, clear the Card Table objective, use shop levels as gates, open the level 7 Workbench route, time expansions and hires, and reach the late Ascension packs.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-level-up-unlocks.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 326,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Early shop priorities, Card Table objective, shop-level gates, level 7 Workbench, expansion timing, employees, grading, automation, level 70 Ascension, and level 85 pack progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "TCG Card Shop Simulator Money Guide: Pricing & Profit",
+        href: "/tcg-card-shop-simulator/money-guide",
+        type: "Systems",
+        description:
+          "Price products without killing turnover, keep fast sellers stocked, account for the real cost of licenses, decide when to open packs, and use valuable singles without starving the shop.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 327,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Market price +10% to +20% testing, 33-pack customer purchase, $198 checkout, license stock costs, $682 single-card sale, sell-versus-open packs, product mix, and play-table income",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "How to Play Tetramon Duel Master in TCG Card Shop Simulator",
+        href: "/tcg-card-shop-simulator/tetramon-duel-master",
+        type: "Guide",
+        description:
+          "Build a legal 50-card Tetramon deck, understand Fire, Earth, Water and Wind areas, use Play Effects and evolution correctly, manage Guardians, and challenge customers or tournament opponents.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-element-stats.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 328,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Level 7 Workbench, 50-card deck, four-copy limit, five-card opening hand, mulligan, four Elemental Areas, Play Effects, evolution, 500 Tamer Points, Guardians, customer duels, and tournaments",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "TCG Card Shop Simulator Achievements Guide & Tracker",
+        href: "/tcg-card-shop-simulator/achievements",
+        type: "Achievements",
+        description:
+          "Track all 50 achievements with a persistent checklist and plan manual checkouts, profit days, card sales, pack and collection grinds, grading, Ascension, and 50 Tetramon wins.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-day-1-daily-report.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 329,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "All 50 achievements, persistent tracker, 1,000 manual checkouts, $1K / $10K / $30K daily Profit, 25,000 packs, 4,000 cards, rare pulls, 500 Gem Mint cards, Ascension, and 50 Tetramon wins",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Slay the Spire 2",
     game: "Slay the Spire 2",
     href: "/slay-the-spire-2",
