@@ -926,6 +926,14 @@ const paths = [
   '/dimraeth/sanctum',
   '/dimraeth/co-op-progression',
   '/dimraeth/deeds-bounties',
+
+  '/runescape-dragonwilds',
+  '/runescape-dragonwilds/beginner-guide',
+  '/runescape-dragonwilds/dragon-slayer',
+  '/runescape-dragonwilds/scorned-wilderness',
+  '/runescape-dragonwilds/kuldra',
+  '/runescape-dragonwilds/achievements',
+  '/runescape-dragonwilds/crossplay-coop',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -933,6 +941,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/runescape-dragonwilds': '2026-09-16',
+  '/runescape-dragonwilds/beginner-guide': '2026-09-16',
+  '/runescape-dragonwilds/dragon-slayer': '2026-09-16',
+  '/runescape-dragonwilds/scorned-wilderness': '2026-09-16',
+  '/runescape-dragonwilds/kuldra': '2026-09-16',
+  '/runescape-dragonwilds/achievements': '2026-09-16',
+  '/runescape-dragonwilds/crossplay-coop': '2026-09-16',
+
   '/dimraeth': '2026-09-15',
   '/dimraeth/walkthrough': '2026-09-15',
   '/dimraeth/wildwood-walkthrough': '2026-09-15',

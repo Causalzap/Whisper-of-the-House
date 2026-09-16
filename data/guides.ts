@@ -131,6 +131,253 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "RuneScape: Dragonwilds",
+    game: "RuneScape: Dragonwilds",
+    href: "/runescape-dragonwilds",
+    slug: "runescape-dragonwilds",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "RPG, action, builds & combat",
+
+    label: "Survival RPG, Progression & Endgame",
+    eyebrow: "Version 1.0 Guide",
+    hubStatus:
+      "1.0 progression + Velgar + Scorned Wilderness + Kuldra + 50 achievements + crossplay",
+
+    description:
+      "Follow RuneScape: Dragonwilds from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with practical help for survival systems, achievements and multiplayer.",
+
+    coverage: [
+      "Main progression from Brynmoor and Ghornfell through Dragon Slayer and Velgar, Fellhollow and Imaru, Dowdun Reach and the Black Knight Titan, Umbral Sands and Fuzan, then Scorned Wilderness and Queen Kuldra",
+      "Early survival and character setup through Rest, cooked food, water, combat styles, Power Level, Special Meter, parries, neutral evades, Rune management, Lodestone travel costs, Storage Ledger and practical base layout",
+      "Dragon Slayer progression through the Challenge Horn, Dragon Tooth, Bloodwood Sap, Anti-poison preparation, Air damage, Velgar liftoff attacks, Velgar's head and the Anti-dragon Shield reward",
+      "Scorned Wilderness progression through the Dragon Gate, Commander Zilyana, extraction points, Anima attunement, Dragontail Vines, Fragments of Ghornfell, poison maze, Shattered Stronghold, Cataclysm Keep and the Air → Water → Earth → Fire puzzle",
+      "Queen Kuldra through Tier 7 and Rune gear decisions, Harmonic Resonator shots, elemental dragons, beam cover, three outdoor phases, the Heart phase, escape, Dragon Kite Shield, Dragon Slayer Cape and repeat Queen Slayer Packs",
+      "All 50 achievements with a persistent checklist, five regional Secondary Quest requirements, boss milestones, one-off spell and ability challenges, Agility Gold medals and 12 Level 99 skill achievements",
+      "Crossplay and co-op through hosted worlds, Invite Codes, four-player normal worlds, six-player Dedicated Servers, server configuration, world migration, connection troubleshooting and cross-save limits",
+    ],
+
+    image:
+      "/images/runescape-dragonwilds/runescape-dragonwilds-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 50,
+      footerFeatured: true,
+    },
+
+    pages: [
+      {
+        title:
+          "RuneScape: Dragonwilds Guide: Progression & Boss Order",
+        href: "/runescape-dragonwilds",
+        type: "Guide Hub",
+        description:
+          "Follow the route from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with clear gear-upgrade points along the way.",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-fellhollow-astral-path.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          spotlightMeta:
+            "Version 1.0 progression, Brynmoor, Ghornfell, Velgar, Fellhollow, Imaru, Dowdun Reach, Black Knight Titan, Umbral Sands, Fuzan, Scorned Wilderness and Queen Kuldra",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Beginner Guide: What to Do First",
+        href: "/runescape-dragonwilds/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Get the early survival loop working, understand Rest and Power Level, choose a combat style, manage Runes and Lodestone costs, and build a practical first base.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-beginner-rest-meter.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 342,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Rest, stamina, carry weight, food, water, crafting knowledge, combat styles, Power Level, Special Meter, parries, Lodestones, Runes, Storage Ledger and first-base priorities",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Dragon Slayer Guide: How to Beat Velgar",
+        href: "/runescape-dragonwilds/dragon-slayer",
+        type: "Bosses",
+        description:
+          "Craft the Challenge Horn, collect Dragon Tooth and Bloodwood Sap, prepare for poison, use strong damage against Velgar, survive liftoff attacks, and finish Dragon Slayer.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-velgar-air-magic.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 343,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Brynmoor and Ghornfell, Challenge Horn, Dragon Tooth, Bloodwood Sap, Anti-poison, Air damage, 51-damage criticals, liftoff attacks, Velgar's head and Dragon Slayer rewards",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Scorned Wilderness Walkthrough",
+        href: "/runescape-dragonwilds/scorned-wilderness",
+        type: "Walkthrough",
+        description:
+          "Enter through the Dragon Gate, prepare at Commander Zilyana, use extraction points, solve Anima puzzles, clear the stronghold sections, and reach Kuldra.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-scorned-wilderness-dragon-gate.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 344,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Dragon Gate, Commander Zilyana, extraction points, Anima, Dragontail Vines, Fragments of Ghornfell, poison maze, Shattered Stronghold, Cataclysm Keep, Runite and final elemental puzzle",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Kuldra Boss Guide: All Phases",
+        href: "/runescape-dragonwilds/kuldra",
+        type: "Bosses",
+        description:
+          "Beat Queen Kuldra through the Harmonic Resonator phases, survive the main beam, destroy the Heart, escape, collect the first-clear rewards, and prepare repeat runs.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-kuldra-hyper-beam.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 345,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Tier 7 versus Rune gear, Harmonic Resonator, three 9,999-damage shots, beam cover, Water and Fire Anima, Heart phase, Anti-poison, Dragon Kite Shield and Queen Slayer Packs",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Achievements Guide: All 50",
+        href: "/runescape-dragonwilds/achievements",
+        type: "Achievements",
+        description:
+          "Track all 50 achievements with a persistent checklist for boss kills, regional Secondary Quests, ability challenges, Agility Gold medals, and 12 Level 99 skills.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-achievements-regicide.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 346,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "All 50 achievements, persistent tracker, Brynmoor, Ghornfell, Fellhollow, Dowdun Reach, Umbral Sands, Regicide, ability challenges, Agility Gold medals and 12 Level 99 skills",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+
+      {
+        title:
+          "RuneScape: Dragonwilds Crossplay & Co-op Guide",
+        href: "/runescape-dragonwilds/crossplay-coop",
+        type: "Systems",
+        description:
+          "Enable crossplay, join friends with Invite Codes, compare hosted worlds with Dedicated Servers, move an existing world, and fix common multiplayer connection problems.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-enable-crossplay-world.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 347,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Crossplay, PC and console multiplayer, Invite Codes, four-player hosted worlds, six-player Dedicated Servers, cross-save, server configuration, world migration and troubleshooting",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Dimraeth",
     game: "Dimraeth",
     href: "/dimraeth",
