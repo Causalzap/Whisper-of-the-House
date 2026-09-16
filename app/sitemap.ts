@@ -912,6 +912,8 @@ const paths = [
   '/tcg-card-shop-simulator/money-guide',
   '/tcg-card-shop-simulator/tetramon-duel-master',
   '/tcg-card-shop-simulator/achievements',
+  '/tcg-card-shop-simulator/tier-list',
+  '/tcg-card-shop-simulator/deck-builder',
 
   '/dimraeth',
   '/dimraeth/walkthrough',
@@ -943,11 +945,13 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/dimraeth/co-op-progression': '2026-09-15',
   '/dimraeth/deeds-bounties': '2026-09-15',
   
-  '/tcg-card-shop-simulator': '2026-09-15',
-  '/tcg-card-shop-simulator/progression-guide': '2026-09-15',
+  '/tcg-card-shop-simulator': '2026-09-16',
+  '/tcg-card-shop-simulator/progression-guide': '2026-09-16',
   '/tcg-card-shop-simulator/money-guide': '2026-09-15',
-  '/tcg-card-shop-simulator/tetramon-duel-master': '2026-09-15',
+  '/tcg-card-shop-simulator/tetramon-duel-master': '2026-09-16',
   '/tcg-card-shop-simulator/achievements': '2026-09-15',
+  '/tcg-card-shop-simulator/tier-list': '2026-09-16',
+  '/tcg-card-shop-simulator/deck-builder': '2026-09-16',
 
   '/slay-the-spire-2': '2026-09-12',
   '/slay-the-spire-2/beginner-guide': '2026-09-12',

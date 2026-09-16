@@ -509,17 +509,24 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Strategy, simulation, puzzle & discovery",
   
     label: "Card Shop Management & Tetramon",
-    eyebrow: "Spotlight Hub",
+    eyebrow: "Spotlight Guide",
     hubStatus:
-      "Version 1.0 + progression + money + Tetramon Duel Master + 50 achievements",
+      "Version 1.0 + progression + money + Tetramon cards + deck building + duels + 50 achievements",
   
     description:
-      "Use the TCG Card Shop Simulator guide hub to decide what the shop needs next, improve progression and cash flow, build a playable Tetramon deck, understand customer duels, and track all 50 achievements through the 1.0 endgame.",
+      "Decide what the shop needs next, fix progression and cash problems, compare Tetramon cards, build a playable 50-card deck, learn customer duels and tournaments, and track all 50 achievements through the 1.0 endgame.",
   
     coverage: [
-      "Shop progression from the opening tasks through level-based unlocks, the Card Table objective, level 7 Workbench, expansion timing, employee decisions, grading and automation, and the late Ascension milestones",
+      "Shop progression from the opening tasks through level-based unlocks, the Card Table objective, level 7 Workbench, expansion timing, employee decisions, grading, automation, and the late Ascension milestones",
+  
       "Money management through market-price markups, stock turnover, large customer purchases, license and first-stock costs, high-value single-card sales, pack opening decisions, product variety, and play-table income",
-      "Tetramon Duel Master through the level 7 Workbench, legal 50-card decks, four-copy limit, opening hand and mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, Guardian thresholds, customer duels, and tournaments",
+  
+      "Tetramon card comparison across all 121 playable card identities, with individual scores built from Play Effect value, reliability, flexibility, synergy, evolution accessibility, and printed stat efficiency",
+  
+      "Tetramon deck building through the legal 50-card limit, four-copy rule, playable earlier stages, evolution support, opening-hand consistency, card scoring, collection limits, and checking why a legal deck still produces unusable hands",
+  
+      "Tetramon Duel Master match rules through the five-card opening hand, mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardian thresholds, customer duels, and tournaments",
+  
       "All 50 achievements with a persistent tracker, manual checkout planning, daily Profit versus Revenue, seller thresholds, pack and collection grinds, rare pulls, grading goals, Ascension, and 50 Tetramon customer wins",
     ],
   
@@ -543,7 +550,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator",
         type: "Guide Hub",
         description:
-          "Start with the problem your shop is showing you, then move to progression, money, Tetramon, grading, packs, or achievement cleanup without treating every new unlock as equally urgent.",
+          "Work out what is actually slowing the shop down, from unlocks, cash and stock to packs, grading, Tetramon cards, deck building, matches, and long completion goals.",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-workbench-unlocks.webp",
         imageFit: "cover",
@@ -552,7 +559,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "Version 1.0, shop progression, money, pricing, stock, level 7 Workbench, Tetramon Duel Master, grading, packs, collection, Ascension, and 50 achievements",
+            "Version 1.0, shop progression, money, pricing, stock, level 7 Workbench, Tetramon cards, deck building, Duel Master, grading, packs, Ascension, and 50 achievements",
         },
   
         archive: {
@@ -567,7 +574,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator/progression-guide",
         type: "Guide",
         description:
-          "Choose what to unlock next, clear the Card Table objective, use shop levels as gates, open the level 7 Workbench route, time expansions and hires, and reach the late Ascension packs.",
+          "Choose what to unlock next, clear the Card Table objective, use shop levels as gates, open the level 7 Workbench, time expansions and hires, and reach the late Ascension packs.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-level-up-unlocks.webp",
@@ -623,11 +630,71 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
+          "TCG Card Shop Simulator Tetramon Tier List",
+        href: "/tcg-card-shop-simulator/tier-list",
+        type: "Guide",
+        description:
+          "Compare all 121 playable Tetramon cards by individual score, Play Effect, reliability, evolution access, synergy, flexibility and stats, then filter by type, class, effect, or tier.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-element-stats.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 340,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "121 Tetramon cards, individual card scores, A / B / C tiers, Play Effect value, reliability, flexibility, synergy, evolution access, stat efficiency, type filters, class filters, and effect filters",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "TCG Card Shop Simulator Tetramon Deck Builder",
+        href: "/tcg-card-shop-simulator/deck-builder",
+        type: "Systems",
+        description:
+          "Build and check a 50-card Tetramon deck, stay within the four-copy limit, keep enough playable earlier stages, support evolution lines, and find why a legal deck still produces bad hands.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetran-split-evolution.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 341,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "50-card Tetramon decks, four-copy limit, playable starters, evolution support, deck score, card ownership, deck checking, opening-hand consistency, and fixing legal but unplayable lists",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
           "How to Play Tetramon Duel Master in TCG Card Shop Simulator",
         href: "/tcg-card-shop-simulator/tetramon-duel-master",
         type: "Guide",
         description:
-          "Build a legal 50-card Tetramon deck, understand Fire, Earth, Water and Wind areas, use Play Effects and evolution correctly, manage Guardians, and challenge customers or tournament opponents.",
+          "Learn the opening hand, four Elemental Areas, Play Effects, evolution timing, Guardian thresholds, customer duels, tournaments, and what to fix after a loss.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-element-stats.webp",
@@ -640,14 +707,14 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 328,
           spotlightFeature: true,
-          spotlightOrder: 3,
+          spotlightOrder: 5,
           spotlightMeta:
-            "Level 7 Workbench, 50-card deck, four-copy limit, five-card opening hand, mulligan, four Elemental Areas, Play Effects, evolution, 500 Tamer Points, Guardians, customer duels, and tournaments",
+            "Five-card opening hand, mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardians, customer duels, tournaments, and first-match troubleshooting",
         },
   
         archive: {
           showInCollections: true,
-          order: 4,
+          order: 6,
         },
       },
   
@@ -670,14 +737,14 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 329,
           spotlightFeature: true,
-          spotlightOrder: 4,
+          spotlightOrder: 6,
           spotlightMeta:
             "All 50 achievements, persistent tracker, 1,000 manual checkouts, $1K / $10K / $30K daily Profit, 25,000 packs, 4,000 cards, rare pulls, 500 Gem Mint cards, Ascension, and 50 Tetramon wins",
         },
   
         archive: {
           showInCollections: true,
-          order: 5,
+          order: 7,
         },
       },
     ],

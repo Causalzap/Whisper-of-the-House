@@ -6,24 +6,28 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import TcgCardShopSimulatorGuideContent from "@/data/tcg-card-shop-simulator/index.mdx";
 
-const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/tcg-card-shop-simulator`;
+const siteUrl =
+  "https://www.whisperofthehouse.com";
+
+const pageUrl =
+  `${siteUrl}/tcg-card-shop-simulator`;
 
 const metadataTitle =
   "TCG Card Shop Simulator Guide: Progression, Money & Tetramon";
 
 const metadataDescription =
-  "TCG Card Shop Simulator 1.0 guide hub for progression, money, Tetramon, grading, packs, achievements, and what to do next when your shop stalls.";
+  "TCG Card Shop Simulator 1.0 guide for progression, money, packs, grading, Tetramon cards, deck building, achievements, and fixing a stalled shop.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 guide hub covering early shop priorities, progression and unlock decisions, money and stock problems, packs and card collection, the level 7 Tetramon deck-building system, grading, achievements, and where to go next when a specific part of the shop becomes the bottleneck.";
+  "A practical TCG Card Shop Simulator 1.0 guide covering early shop priorities, progression decisions, cash and stock problems, packs and card collection, the level 7 Workbench, Tetramon cards and deck building, grading, achievements, and what to do when a specific part of the shop stops moving smoothly.";
 
 const imageUrls = [
   `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-workbench-pack-opener-unlocks.webp`,
   `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-shelf-1-0.webp`,
 ];
 
-const heroImage = imageUrls[0];
+const heroImage =
+  imageUrls[0];
 
 const toc = [
   {
@@ -32,7 +36,7 @@ const toc = [
   },
   {
     id: "shop-systems",
-    label: "When the shop changes",
+    label: "Shop systems",
   },
   {
     id: "packs-and-cards",
@@ -40,7 +44,7 @@ const toc = [
   },
   {
     id: "tetramon",
-    label: "Tetramon in 1.0",
+    label: "Tetramon at level 7",
   },
   {
     id: "grading",
@@ -58,152 +62,250 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/progression-guide",
-    label: "TCG Card Shop Simulator Progression Guide",
+    href:
+      "/tcg-card-shop-simulator/progression-guide",
+    label:
+      "TCG Card Shop Simulator Progression Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/money-guide",
-    label: "TCG Card Shop Simulator Money Guide",
+    href:
+      "/tcg-card-shop-simulator/money-guide",
+    label:
+      "TCG Card Shop Simulator Money Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href:
+      "/tcg-card-shop-simulator/tier-list",
+    label:
+      "Tetramon Card Tier List",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide & Tracker",
+    href:
+      "/tcg-card-shop-simulator/deck-builder",
+    label:
+      "Tetramon Deck Builder",
+  },
+  {
+    href:
+      "/tcg-card-shop-simulator/tetramon-duel-master",
+    label:
+      "Tetramon Duel Master Guide",
+  },
+  {
+    href:
+      "/tcg-card-shop-simulator/achievements",
+    label:
+      "TCG Card Shop Simulator Achievements Guide & Tracker",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
-  description: metadataDescription,
+  description:
+    metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      metadataDescription,
     url: pageUrl,
-    siteName: "Whisper of the House",
+    siteName:
+      "Whisper of the House",
     type: "article",
+
     images: [
       {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Workbench, pack opening equipment, storage, and other shop systems in TCG Card Shop Simulator",
+        alt:
+          "Workbench, pack opening equipment, storage, and other shop systems in TCG Card Shop Simulator",
       },
     ],
   },
+
   twitter: {
-    card: "summary_large_image",
+    card:
+      "summary_large_image",
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      metadataDescription,
     images: [heroImage],
   },
 };
 
 const jsonLd = {
-  "@context": "https://schema.org",
+  "@context":
+    "https://schema.org",
+
   "@graph": [
     {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
+      "@type":
+        "BreadcrumbList",
+      "@id":
+        `${pageUrl}#breadcrumb`,
+
       itemListElement: [
         {
-          "@type": "ListItem",
+          "@type":
+            "ListItem",
           position: 1,
           name: "Home",
           item: siteUrl,
         },
         {
-          "@type": "ListItem",
+          "@type":
+            "ListItem",
           position: 2,
-          name: "TCG Card Shop Simulator Guide",
+          name:
+            "TCG Card Shop Simulator",
           item: pageUrl,
         },
       ],
     },
+
     {
       "@type": "Article",
-      "@id": `${pageUrl}#article`,
+      "@id":
+        `${pageUrl}#article`,
+
       mainEntityOfPage: {
-        "@type": "WebPage",
+        "@type":
+          "WebPage",
         "@id": pageUrl,
       },
+
       headline:
-        "TCG Card Shop Simulator Guide: Progression, Money, Tetramon and More",
-      description: articleDescription,
+        "TCG Card Shop Simulator Guide: Progression, Money & Tetramon",
+
+      description:
+        articleDescription,
+
       image: imageUrls,
+
       inLanguage: "en",
-      dateModified: "2026-09-15",
-      articleSection: "Game Guides",
+
+      dateModified:
+        "2026-09-16",
+
+      articleSection:
+        "Game Guides",
+
       about: [
         {
-          "@type": "VideoGame",
-          name: "TCG Card Shop Simulator",
+          "@type":
+            "VideoGame",
+          name:
+            "TCG Card Shop Simulator",
         },
         {
-          "@type": "Thing",
-          name: "Shop Progression",
+          "@type":
+            "Thing",
+          name:
+            "Shop Progression",
         },
         {
-          "@type": "Thing",
-          name: "Money Making",
+          "@type":
+            "Thing",
+          name:
+            "Money Making",
         },
         {
-          "@type": "Thing",
-          name: "Product Pricing",
+          "@type":
+            "Thing",
+          name:
+            "Card Packs",
         },
         {
-          "@type": "Thing",
-          name: "Card Packs",
+          "@type":
+            "Thing",
+          name:
+            "Card Collection",
         },
         {
-          "@type": "Thing",
-          name: "Card Collection",
+          "@type":
+            "Thing",
+          name:
+            "Workbench",
         },
         {
-          "@type": "Thing",
-          name: "Workbench",
+          "@type":
+            "Thing",
+          name:
+            "Tetramon Cards",
         },
         {
-          "@type": "Thing",
-          name: "Tetramon Duel Master",
+          "@type":
+            "Thing",
+          name:
+            "Tetramon Deck Building",
         },
         {
-          "@type": "Thing",
-          name: "Card Grading",
+          "@type":
+            "Thing",
+          name:
+            "Tetramon Duel Master",
         },
         {
-          "@type": "Thing",
-          name: "Achievements",
+          "@type":
+            "Thing",
+          name:
+            "Card Grading",
+        },
+        {
+          "@type":
+            "Thing",
+          name:
+            "Achievements",
         },
       ],
+
       author: {
-        "@id": `${siteUrl}#organization`,
+        "@id":
+          `${siteUrl}#organization`,
       },
+
       publisher: {
-        "@id": `${siteUrl}#organization`,
+        "@id":
+          `${siteUrl}#organization`,
       },
+
       breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
+        "@id":
+          `${pageUrl}#breadcrumb`,
       },
+
       isPartOf: {
-        "@id": `${siteUrl}#website`,
+        "@id":
+          `${siteUrl}#website`,
       },
     },
+
     {
-      "@type": "Organization",
-      "@id": `${siteUrl}#organization`,
-      name: "Whisper of the House",
+      "@type":
+        "Organization",
+      "@id":
+        `${siteUrl}#organization`,
+
+      name:
+        "Whisper of the House",
+
       url: siteUrl,
     },
+
     {
-      "@type": "WebSite",
-      "@id": `${siteUrl}#website`,
-      name: "Whisper of the House",
+      "@type":
+        "WebSite",
+      "@id":
+        `${siteUrl}#website`,
+
+      name:
+        "Whisper of the House",
+
       url: siteUrl,
     },
   ],
@@ -218,20 +320,25 @@ export default function Page() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
+            __html:
+              JSON.stringify(
+                jsonLd
+              ),
           }}
         />
 
         <GuideArticlePage
           title="TCG Card Shop Simulator Guide: Progression, Money & Tetramon"
-          description="Figure out what your shop actually needs next, then jump straight to the right guide for progression, money, Tetramon, grading, packs, or 100% completion."
+          description="Work out what is actually slowing the shop down, from unlocks, cash and stock to packs, grading, Tetramon cards, deck building, matches, and long completion goals."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 16, 2026"
           toc={toc}
-          relatedLinks={relatedLinks}
+          relatedLinks={
+            relatedLinks
+          }
         >
           <TcgCardShopSimulatorGuideContent />
         </GuideArticlePage>

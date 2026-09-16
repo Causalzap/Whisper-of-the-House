@@ -1,0 +1,173 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+
+import FindMyDeck from "@/components/tcg-card-shop-simulator/FindMyDeck";
+import DeckBuilder from "@/components/tcg-card-shop-simulator/DeckBuilder";
+import DeckChecker from "@/components/tcg-card-shop-simulator/DeckChecker";
+
+<GuideQuickAnswer title="Quick Answer">
+Reach **shop level 7** to unlock the Workbench, then build a deck with exactly
+**50 cards** and no more than **4 copies of the same card name**. Put cards that
+can actually start your board into the list first, then add evolution cards only
+when their earlier stages are present. The builder below keeps the card limit,
+copy limit, and evolution support visible while you make changes.
+</GuideQuickAnswer>
+
+<h2 id="unlock-workbench">
+  Where do I build a Tetramon deck?
+</h2>
+
+Tetramon cards become more than collection pieces once the **Workbench unlocks at shop level 7**. That is the point where I stop looking at every duplicate as an automatic single-card sale, because the same card may now be part of a playable evolution line.
+
+If the Workbench is not available yet, there is nothing useful to force here. I keep progressing the shop until level 7 rather than opening large amounts of stock purely to prepare a deck I cannot use yet. The <Link href="/tcg-card-shop-simulator/progression-guide">progression guide</Link> covers the shop unlock path; once the Workbench is open, I move the deck-building decisions here.
+
+<figure className="my-8">
+  <Image
+    src="/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-workbench-deck-edit.webp"
+    alt="Tetramon Deck Edit screen available through the Workbench in TCG Card Shop Simulator"
+    width={600}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Workbench opens the actual Deck Edit step. Reaching 50 cards is only the
+    first check; those 50 still need playable starters and connected evolution
+    lines.
+  </figcaption>
+</figure>
+
+<h2 id="deck-rules">
+  How many cards do I need in a Tetramon deck?
+</h2>
+
+The deck-building limits are straightforward:
+
+**50 cards total, with up to 4 copies of any card with the same name.**
+
+The match then begins from a much smaller sample of that deck: the opening hand is **5 cards**, with one mulligan available. That is why a deck can pass the 50-card rule and still feel terrible to play. Filling the list with individually strong later evolutions does not help when the opening hand cannot put the first stage onto the board.
+
+<figure className="my-8">
+  <Image
+    src="/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-deck-rules.webp"
+    alt="Tetramon rule book showing the 50-card deck and four-copy limit in TCG Card Shop Simulator"
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The rule book sets the hard deck limits at 50 cards and four copies per card
+    name. It does not tell you how many starters or evolution pieces make those
+    50 cards consistent.
+  </figcaption>
+</figure>
+
+The builder below handles those hard limits automatically. More importantly, it also flags evolution cards whose earlier stages are missing or too thinly represented.
+
+<DeckBuilder />
+
+<h2 id="legal-but-unplayable">
+  Why can a 50-card deck still get stuck?
+</h2>
+
+A first attempt built by simply choosing 50 cards showed the difference immediately. The list was technically complete, but the opening turns were full of cards that could not be put down yet.
+
+The first attempted card was not playable. A starter finally went onto the field, but the opposing side filled its board much faster and dealt **459 damage while the first turn produced no attack at all**. The next hand state exposed the same problem again: several cards were sitting there, but they were not starters, so having them in hand did not create an action.
+
+<figure className="my-8">
+  <Image
+    src="/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-non-starter-hand.webp"
+    alt="Tetramon hand with cards that cannot be played because the required starter cards are missing"
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the failure state I want to catch before the match: cards are in
+    hand, but too few of them can establish or extend the board.
+  </figcaption>
+</figure>
+
+For a fresh deck, I build in this order:
+
+1. **Establish the playable base first.** I add cards that can begin the lines I actually want to use instead of starting with the flashiest final evolutions.
+2. **Add each evolution behind its prerequisite.** A later card earns its slot only when the earlier stage it needs is also represented.
+3. **Add the support plan.** Draw, cycling, disruption, shields, damage boosts, or other effects should reinforce what the deck is already trying to do.
+4. **Fill the remaining slots last.** Reaching 50 is the final constraint, not the first design goal.
+
+There is no useful fixed rule such as "every deck needs exactly X Basic cards." The right number depends on how many evolution lines I am asking the deck to assemble. I use the Basic count and Evolution Safety readout as warning signals rather than pretending there is a universal minimum.
+
+<h2 id="evolution-support">
+  Why does my evolution card say I cannot use it?
+</h2>
+
+An evolution card is not a standalone upgrade that can be dropped onto any Tetramon. It needs the correct earlier form already in place. This matters twice during deck building: the prerequisite has to exist somewhere in the 50-card list, and I still need enough access to that prerequisite for the higher stage to appear at a useful time.
+
+In the same first match, several attempted evolutions failed because the card on the board was not the required form. The deck eventually drew into a matching line, and the previously dead evolution cards finally became usable.
+
+<figure className="my-8">
+  <Image
+    src="/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-evolution-ready.webp"
+    alt="Tetramon evolution becoming available after the correct earlier stage is on the board"
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the correct chain was assembled, the evolution option finally became
+    usable instead of showing another dead higher-stage card.
+  </figcaption>
+</figure>
+
+That is why the builder distinguishes two different warnings. **Missing Stage** means the deck contains an evolution card without any copy of the required earlier form. **Thin Support** is less severe: the earlier form exists, but there are fewer copies supporting a larger number of higher-stage cards.
+
+The exact turn sequence—when a Basic card can evolve, what happens when another Basic enters an elemental area, and how attacks resolve—belongs in the <Link href="/tcg-card-shop-simulator/tetramon-duel-master">Tetramon Duel Master guide</Link>. For deck construction, the important check is simpler: every evolution I add should have a realistic path from the cards already in the list.
+
+<h2 id="card-score">
+  Should I just add the highest-scoring Tetramon cards?
+</h2>
+
+No single score can replace the deck around the card.
+
+I use the card rating as a way to narrow 121 choices, especially when two cards compete for a similar role. A high Effect Value, good stats, or strong flexibility can make a card attractive, but none of those fix a broken evolution package. Four strong later-stage cards can make the deck less reliable when the forms that enable them are missing.
+
+The <Link href="/tcg-card-shop-simulator/tier-list">Tetramon card tier list</Link> is useful when I want to compare individual cards and see why one scores higher than another. Back in the builder, the decision changes from **"how good is this card by itself?"** to **"does this card make this 50-card list work better?"**
+
+<h2 id="cards-i-dont-own">
+  What should I do when the deck needs cards I do not have?
+</h2>
+
+I do not empty the retail shelf just because one evolution line is incomplete. Sealed packs still have a predictable shop use, while opening them turns that value into an uncertain collection result.
+
+When stock is already comfortable, opening surplus packs to look for missing deck pieces makes much more sense. When the same packs are nearly gone from the shelf, I would rather keep the shop selling and return to the deck after the next restock. The <Link href="/tcg-card-shop-simulator/money-guide">money guide</Link> covers that inventory-versus-opening decision in detail.
+
+The same caution applies to duplicates. Before level 7, a spare card may look like easy display inventory. Once I am actively building a Tetramon deck, four copies of an important starter or support card can be more useful than turning every duplicate into cash immediately.
+
+<h2 id="find-a-deck">
+  I do not know what kind of Tetramon deck to build
+</h2>
+
+Starting from all 121 cards can be harder than fixing an existing list. In that situation, I pick the play style first—damage, draw and cycling, control, or a lower-setup plan—then use a matching archetype as a shell.
+
+The recommendations here are starting directions, not guaranteed complete competitive lists. I still bring the result back into the builder and check the actual cards I own, the evolution chain, and the final 50-card count.
+
+<FindMyDeck />
+
+<h2 id="check-existing-deck">
+  I already have a deck — what should I fix first?
+</h2>
+
+For a deck copied from another player or typed out elsewhere, rebuilding it card by card is unnecessary. I paste the list into the checker first.
+
+A red result is where I start: wrong deck size, too many copies of one card, an unrecognized card name, or an evolution stage with no prerequisite in the list. Yellow results are different. They point to consistency risks such as thin evolution support rather than claiming that the deck itself is illegal.
+
+<DeckChecker />
+
+<h2 id="before-first-match">
+  What should I check before playing the first match?
+</h2>
+
+My final pass is short. The deck needs to be **50/50**, no card name can exceed **4 copies**, and every evolution package should have its earlier stages represented. After that, I look at whether the opening portion of the deck has enough playable cards and whether the draw, interaction, and damage packages actually support the plan I chose.
+
+That check saves much more time than discovering the problem after sitting down at a table. A legal list gets me into the match; a connected list gives the cards in my hand something useful to do.
