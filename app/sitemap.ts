@@ -938,6 +938,8 @@ const paths = [
   '/runescape-dragonwilds/kuldra',
   '/runescape-dragonwilds/achievements',
   '/runescape-dragonwilds/crossplay-coop',
+  '/runescape-dragonwilds/fast-travel',
+ '/runescape-dragonwilds/starter-base'
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -952,6 +954,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/runescape-dragonwilds/kuldra': '2026-09-16',
   '/runescape-dragonwilds/achievements': '2026-09-16',
   '/runescape-dragonwilds/crossplay-coop': '2026-09-16',
+  '/runescape-dragonwilds/fast-travel': '2026-09-17',
+'/runescape-dragonwilds/starter-base': '2026-09-17',
 
   '/dimraeth': '2026-09-17',
 '/dimraeth/walkthrough': '2026-09-15',

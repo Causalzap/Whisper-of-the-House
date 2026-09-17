@@ -17,7 +17,7 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "RuneScape Dragonwilds Guide – Progression & Boss Order",
   description:
-    "Follow RuneScape Dragonwilds progression from Brynmoor and Ghornfell through Velgar, Imaru, Fuzan, Scorned Wilderness, and Queen Kuldra.",
+    "Follow RuneScape Dragonwilds from Brynmoor and Ghornfell through Velgar, Imaru, Fuzan, Scorned Wilderness, Queen Kuldra, and key gear upgrades.",
   alternates: {
     canonical: pageUrl,
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "RuneScape Dragonwilds Guide – Progression & Boss Order",
     description:
-      "Follow the main region and boss order, know when to upgrade gear, move through Fellhollow and Umbral Sands, and reach Queen Kuldra.",
+      "Follow the region and boss order, know when to upgrade gear, move through Fellhollow and Umbral Sands, and reach Queen Kuldra.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RuneScape Dragonwilds Guide – Progression & Boss Order",
     description:
-      "The main RuneScape Dragonwilds route from Brynmoor and Ghornfell to Velgar, Fellhollow, Fuzan, Scorned Wilderness, and Kuldra.",
+      "Follow the main route from Brynmoor and Ghornfell through Velgar, Fellhollow, Fuzan, Scorned Wilderness, and Queen Kuldra.",
     images: [imageUrls[0]],
   },
 };
@@ -75,11 +75,11 @@ const jsonLd = {
       headline:
         "RuneScape: Dragonwilds Guide: Progression & Boss Order",
       description:
-        "A RuneScape: Dragonwilds progression guide covering the route through Brynmoor, Ghornfell, Velgar, Fellhollow, Imaru, Dowdun Reach, the Black Knight Titan, Umbral Sands, Fuzan, Scorned Wilderness, and Queen Kuldra.",
+        "A RuneScape: Dragonwilds progression guide covering Brynmoor, Ghornfell, Velgar, Fellhollow, Imaru, Dowdun Reach, the Black Knight Titan, Umbral Sands, Fuzan, Scorned Wilderness, Queen Kuldra, and the major equipment steps between them.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-16",
-      dateModified: "2026-09-16",
+      dateModified: "2026-09-17",
       about: [
         {
           "@type": "VideoGame",
@@ -99,7 +99,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Velgar",
+        },
+        {
+          "@type": "Thing",
           name: "Fellhollow",
+        },
+        {
+          "@type": "Thing",
+          name: "Imaru",
         },
         {
           "@type": "Thing",
@@ -107,15 +115,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Black Knight Titan",
+        },
+        {
+          "@type": "Thing",
           name: "Umbral Sands",
         },
         {
           "@type": "Thing",
-          name: "Scorned Wilderness",
+          name: "Fuzan",
         },
         {
           "@type": "Thing",
-          name: "Velgar",
+          name: "Scorned Wilderness",
         },
         {
           "@type": "Thing",
@@ -198,6 +210,14 @@ const relatedLinks = [
     label: "RuneScape: Dragonwilds Beginner Guide",
   },
   {
+    href: "/runescape-dragonwilds/starter-base",
+    label: "Starter Base Location and Layout",
+  },
+  {
+    href: "/runescape-dragonwilds/fast-travel",
+    label: "Fast Travel, Lodestones and Vault Cores",
+  },
+  {
     href: "/runescape-dragonwilds/dragon-slayer",
     label: "Dragon Slayer and Velgar Walkthrough",
   },
@@ -232,12 +252,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="RuneScape: Dragonwilds Guide: Progression & Boss Order"
-          description="Follow the main route from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness, and Queen Kuldra, with practical gear-upgrade points along the way."
+          description="Follow the main route from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness, and Queen Kuldra, with practical gear-upgrade decisions along the way."
           gameTitle="RuneScape: Dragonwilds"
           gameHref="/runescape-dragonwilds"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 16, 2026"
+          updatedAt="September 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

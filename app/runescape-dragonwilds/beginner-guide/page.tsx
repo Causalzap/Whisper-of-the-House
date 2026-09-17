@@ -14,14 +14,13 @@ const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-beginner-rest-meter.webp`,
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-builds-melee-ranged-magic.webp`,
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-special-attack-meter.webp`,
-  `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-lodestone-law-rune-cost.webp`,
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-storage-ledger.webp`,
 ];
 
 export const metadata: Metadata = {
   title: "RuneScape Dragonwilds Beginner Guide – What to Do First",
   description:
-    "RuneScape Dragonwilds beginner tips for Rest, food, combat, Runes, Lodestones, Storage Ledger, crafting, base setup, and early progression.",
+    "RuneScape Dragonwilds beginner tips for Rest, food, water, combat, Power Level, Runes, crafting, Storage Ledger, and early progression.",
   alternates: {
     canonical: pageUrl,
   },
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "RuneScape Dragonwilds Beginner Guide – What to Do First",
     description:
-      "Learn what to prioritize first, how Rest works, which combat style to level, how Lodestone costs change, and how to build a practical early base.",
+      "Learn what to prioritize first, how Rest works, which combat style to level, how Power Level works, and how to prepare for longer trips.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RuneScape Dragonwilds Beginner Guide – What to Do First",
     description:
-      "Practical beginner help for Rest, combat, Runes, Lodestones, crafting, storage, and early base setup.",
+      "Practical beginner help for Rest, food, combat, Power Level, Runes, crafting, storage, and early progression.",
     images: [imageUrls[0]],
   },
 };
@@ -85,11 +84,11 @@ const jsonLd = {
       headline:
         "RuneScape: Dragonwilds Beginner Guide: What to Do First",
       description:
-        "Beginner help for RuneScape: Dragonwilds covering early priorities, Rest, food and water, crafting knowledge, combat styles, Power Level, special attacks, parries, Lodestones, Runes, storage, and base setup.",
+        "Beginner help for RuneScape: Dragonwilds covering early priorities, food and water, Rest, crafting recipes, combat styles, Power Level, special attacks, parries, Runes, the Storage Ledger, and preparation for longer exploration.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-16",
-      dateModified: "2026-09-16",
+      dateModified: "2026-09-17",
       about: [
         {
           "@type": "VideoGame",
@@ -109,7 +108,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "RuneScape Dragonwilds Lodestones",
+          name: "RuneScape Dragonwilds Power Level",
         },
         {
           "@type": "Thing",
@@ -177,20 +176,12 @@ const toc = [
     label: "Ranged and Magic",
   },
   {
-    id: "lodestones",
-    label: "Lodestone travel costs",
-  },
-  {
     id: "runes",
     label: "Rune management",
   },
   {
     id: "storage-ledger",
     label: "Storage Ledger",
-  },
-  {
-    id: "first-base-size",
-    label: "First base size",
   },
   {
     id: "ready-to-progress",
@@ -204,16 +195,20 @@ const relatedLinks = [
     label: "RuneScape: Dragonwilds Guide",
   },
   {
-    href: "/runescape-dragonwilds/crossplay-coop",
-    label: "Crossplay and Co-op Guide",
+    href: "/runescape-dragonwilds/fast-travel",
+    label: "Fast Travel, Lodestones and Vault Cores",
+  },
+  {
+    href: "/runescape-dragonwilds/starter-base",
+    label: "Starter Base Location and Layout",
   },
   {
     href: "/runescape-dragonwilds/dragon-slayer",
     label: "Dragon Slayer and Velgar Walkthrough",
   },
   {
-    href: "/runescape-dragonwilds/achievements",
-    label: "All 50 Achievements",
+    href: "/runescape-dragonwilds/crossplay-coop",
+    label: "Crossplay and Co-op Guide",
   },
 ];
 
@@ -230,12 +225,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="RuneScape: Dragonwilds Beginner Guide: What to Do First"
-          description="Get the early survival loop working, understand Rest and Power Level, choose a combat style, manage Runes and Lodestone costs, and build a compact base that makes longer trips easier."
+          description="Get the early survival loop working, understand Rest and Power Level, choose a combat style, manage Runes, organize storage, and know when your setup is ready for longer trips."
           gameTitle="RuneScape: Dragonwilds"
           gameHref="/runescape-dragonwilds"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 16, 2026"
+          updatedAt="September 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

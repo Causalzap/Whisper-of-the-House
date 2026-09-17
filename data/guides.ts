@@ -139,38 +139,48 @@ export const guideClusters: GuideCluster[] = [
     status: "active",
     accent: "emerald",
     archiveCategory: "RPG, action, builds & combat",
-
+  
     label: "Survival RPG, Progression & Endgame",
     eyebrow: "Version 1.0 Guide",
     hubStatus:
-      "1.0 progression + Velgar + Scorned Wilderness + Kuldra + 50 achievements + crossplay",
-
+      "1.0 progression + beginner + starter base + fast travel + Velgar + Scorned Wilderness + Kuldra + 50 achievements + crossplay",
+  
     description:
-      "Follow RuneScape: Dragonwilds from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with practical help for survival systems, achievements and multiplayer.",
-
+      "Follow RuneScape: Dragonwilds from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with practical help for early survival, base building, fast travel, achievements and multiplayer.",
+  
     coverage: [
       "Main progression from Brynmoor and Ghornfell through Dragon Slayer and Velgar, Fellhollow and Imaru, Dowdun Reach and the Black Knight Titan, Umbral Sands and Fuzan, then Scorned Wilderness and Queen Kuldra",
-      "Early survival and character setup through Rest, cooked food, water, combat styles, Power Level, Special Meter, parries, neutral evades, Rune management, Lodestone travel costs, Storage Ledger and practical base layout",
+  
+      "Early survival and character setup through Rest, cooked food, clean water, crafting knowledge, combat styles, Power Level, Special Meter, parries, neutral evades, Rune management, Storage Ledger and preparation for longer expeditions",
+  
+      "Starter base planning through the Temple Woods lake location, 3 × 5 core footprint, indoor and outdoor workstation placement, uncovered campfires, ground-level farming plots, 16-chest storage, Eye of Oculus roof building and expansion decisions",
+  
+      "Fast travel through Lodestone construction, Vault Core farming and carry weight, Law Rune costs, distance and inventory weight scaling, free burrow connections, Home Teleport, forward Lodestone placement and deciding when travel is cheaper than moving the base",
+  
       "Dragon Slayer progression through the Challenge Horn, Dragon Tooth, Bloodwood Sap, Anti-poison preparation, Air damage, Velgar liftoff attacks, Velgar's head and the Anti-dragon Shield reward",
+  
       "Scorned Wilderness progression through the Dragon Gate, Commander Zilyana, extraction points, Anima attunement, Dragontail Vines, Fragments of Ghornfell, poison maze, Shattered Stronghold, Cataclysm Keep and the Air → Water → Earth → Fire puzzle",
-      "Queen Kuldra through Tier 7 and Rune gear decisions, Harmonic Resonator shots, elemental dragons, beam cover, three outdoor phases, the Heart phase, escape, Dragon Kite Shield, Dragon Slayer Cape and repeat Queen Slayer Packs",
+  
+      "Queen Kuldra through Tier 7 and Rune gear decisions, Harmonic Resonator shots, elemental dragons, beam cover, the outdoor phases, Heart phase, escape, Dragon Kite Shield, Dragon Slayer Cape and repeat Queen Slayer Packs",
+  
       "All 50 achievements with a persistent checklist, five regional Secondary Quest requirements, boss milestones, one-off spell and ability challenges, Agility Gold medals and 12 Level 99 skill achievements",
+  
       "Crossplay and co-op through hosted worlds, Invite Codes, four-player normal worlds, six-player Dedicated Servers, server configuration, world migration, connection troubleshooting and cross-save limits",
     ],
-
+  
     image:
       "/images/runescape-dragonwilds/runescape-dragonwilds-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
-
+  
     home: {
       featuredHub: true,
       featuredHubSpotlight: true,
       featuredHubOrder: 50,
       footerFeatured: true,
     },
-
+  
     pages: [
       {
         title:
@@ -178,38 +188,38 @@ export const guideClusters: GuideCluster[] = [
         href: "/runescape-dragonwilds",
         type: "Guide Hub",
         description:
-          "Follow the route from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with clear gear-upgrade points along the way.",
+          "Follow the route from Brynmoor and Ghornfell through Velgar, Fellhollow, Dowdun Reach, Umbral Sands, Scorned Wilderness and Queen Kuldra, with clear gear-upgrade decisions along the way.",
         image:
           "/images/runescape-dragonwilds/runescape-dragonwilds-fellhollow-astral-path.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           spotlightMeta:
             "Version 1.0 progression, Brynmoor, Ghornfell, Velgar, Fellhollow, Imaru, Dowdun Reach, Black Knight Titan, Umbral Sands, Fuzan, Scorned Wilderness and Queen Kuldra",
         },
-
+  
         archive: {
           showInCollections: true,
           order: 1,
         },
       },
-
+  
       {
         title:
           "RuneScape: Dragonwilds Beginner Guide: What to Do First",
         href: "/runescape-dragonwilds/beginner-guide",
         type: "Beginner Guide",
         description:
-          "Get the early survival loop working, understand Rest and Power Level, choose a combat style, manage Runes and Lodestone costs, and build a practical first base.",
+          "Get the early survival loop working, manage Rest, food and water, understand crafting and Power Level, choose a combat style, use Runes wisely, and prepare for longer expeditions.",
         date: "Updated recently",
         image:
           "/images/runescape-dragonwilds/runescape-dragonwilds-beginner-rest-meter.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -217,15 +227,75 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 5,
           spotlightMeta:
-            "Rest, stamina, carry weight, food, water, crafting knowledge, combat styles, Power Level, Special Meter, parries, Lodestones, Runes, Storage Ledger and first-base priorities",
+            "Rest, stamina, carry weight, food, water, crafting knowledge, combat styles, Power Level, Special Meter, parries, Runes, Storage Ledger and early progression",
         },
-
+  
         archive: {
           showInCollections: true,
           order: 2,
         },
       },
-
+  
+      {
+        title:
+          "RuneScape: Dragonwilds Starter Base: Best Location & Layout",
+        href: "/runescape-dragonwilds/starter-base",
+        type: "Systems",
+        description:
+          "Choose a practical first long-term base location, organize indoor and outdoor workstations, plan farming and storage, and leave room to expand without rebuilding too early.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-starter-base-workstation-layout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 355,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Temple Woods lake location, 3 × 5 starter footprint, outdoor smelting, uncovered campfires, farming plots, 16-chest storage, workstation layout, Eye of Oculus, Lodestone space and expansion timing",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "RuneScape: Dragonwilds Fast Travel: Lodestones & Vault Cores",
+        href: "/runescape-dragonwilds/fast-travel",
+        type: "Systems",
+        description:
+          "Build Lodestones, farm Vault Cores, manage Law Rune costs, use free travel connections, and decide where another forward fast-travel point will actually save time.",
+        date: "Updated recently",
+        image:
+          "/images/runescape-dragonwilds/runescape-dragonwilds-lodestone-law-rune-cost.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 354,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Lodestones, 32 Stone, 20 Rune Essence, Vault Cores, 50 carry weight, Law Rune costs, inventory weight scaling, Runecrafting 50, burrow travel, Home Teleport and forward placement",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
       {
         title:
           "RuneScape: Dragonwilds Dragon Slayer Guide: How to Beat Velgar",
@@ -239,7 +309,7 @@ export const guideClusters: GuideCluster[] = [
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -249,13 +319,13 @@ export const guideClusters: GuideCluster[] = [
           spotlightMeta:
             "Brynmoor and Ghornfell, Challenge Horn, Dragon Tooth, Bloodwood Sap, Anti-poison, Air damage, 51-damage criticals, liftoff attacks, Velgar's head and Dragon Slayer rewards",
         },
-
+  
         archive: {
           showInCollections: true,
-          order: 3,
+          order: 5,
         },
       },
-
+  
       {
         title:
           "RuneScape: Dragonwilds Scorned Wilderness Walkthrough",
@@ -269,7 +339,7 @@ export const guideClusters: GuideCluster[] = [
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -279,13 +349,13 @@ export const guideClusters: GuideCluster[] = [
           spotlightMeta:
             "Dragon Gate, Commander Zilyana, extraction points, Anima, Dragontail Vines, Fragments of Ghornfell, poison maze, Shattered Stronghold, Cataclysm Keep, Runite and final elemental puzzle",
         },
-
+  
         archive: {
           showInCollections: true,
-          order: 4,
+          order: 6,
         },
       },
-
+  
       {
         title:
           "RuneScape: Dragonwilds Kuldra Boss Guide: All Phases",
@@ -299,7 +369,7 @@ export const guideClusters: GuideCluster[] = [
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -309,13 +379,13 @@ export const guideClusters: GuideCluster[] = [
           spotlightMeta:
             "Tier 7 versus Rune gear, Harmonic Resonator, three 9,999-damage shots, beam cover, Water and Fire Anima, Heart phase, Anti-poison, Dragon Kite Shield and Queen Slayer Packs",
         },
-
+  
         archive: {
           showInCollections: true,
-          order: 5,
+          order: 7,
         },
       },
-
+  
       {
         title:
           "RuneScape: Dragonwilds Achievements Guide: All 50",
@@ -329,7 +399,7 @@ export const guideClusters: GuideCluster[] = [
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -339,13 +409,13 @@ export const guideClusters: GuideCluster[] = [
           spotlightMeta:
             "All 50 achievements, persistent tracker, Brynmoor, Ghornfell, Fellhollow, Dowdun Reach, Umbral Sands, Regicide, ability challenges, Agility Gold medals and 12 Level 99 skills",
         },
-
+  
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 8,
         },
       },
-
+  
       {
         title:
           "RuneScape: Dragonwilds Crossplay & Co-op Guide",
@@ -359,7 +429,7 @@ export const guideClusters: GuideCluster[] = [
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-
+  
         home: {
           latest: true,
           latestFeatured: true,
@@ -369,10 +439,10 @@ export const guideClusters: GuideCluster[] = [
           spotlightMeta:
             "Crossplay, PC and console multiplayer, Invite Codes, four-player hosted worlds, six-player Dedicated Servers, cross-save, server configuration, world migration and troubleshooting",
         },
-
+  
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 9,
         },
       },
     ],
