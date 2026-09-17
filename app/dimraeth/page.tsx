@@ -10,21 +10,21 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/dimraeth`;
 
 const metadataTitle =
-  "Dimraeth Guide Hub: Walkthrough, Builds, Pets & Deeds";
+  "Dimraeth Guide: Walkthrough, Classes, Builds & Progression";
 
 const metadataDescription =
-  "Find the right Dimraeth guide for story progression, Wildwood routes, bosses, builds, pets, Sanctum, co-op, Deeds, Bounties, and what to do next.";
+  "Find Dimraeth walkthroughs, classes, Skill Tree help, builds, bosses, pets, Sanctum tips, co-op rules, achievements, Deeds, and what to do next.";
 
 const articleDescription =
-  "A Dimraeth Early Access guide hub for choosing the right next step, including the main story walkthrough, Wildwood routes, Goblin King and Forest King, Shadow and Brawler builds, pets and companions, Sanctum progression, co-op world rules, Deeds and Bounties, plus emerging questions around races, classes, maps, achievements, and bosses.";
+  "A practical Dimraeth guide for choosing what to do next, from Earlwood and Wildwood story progression to Goblin King and Aelwynor, classes and race combinations, Skill Points and respecs, builds, pets, Sanctum development, co-op progression, Deeds, Bounties, achievements, and post-story activities.";
 
 const imageUrls = [
   `${siteUrl}/images/dimraeth/dimraeth-forest-path-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-human-magician-elemental-ranger.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-skill-tree-overview.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-goblin-king-defeated.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-forest-king-story-end.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-attribute-training-memory-intelligence.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-fangra-cub-companion.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-deeds-unlocked-deed-board.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-workshop-stations.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -32,27 +32,35 @@ const heroImage = imageUrls[0];
 const toc = [
   {
     id: "where-to-start",
-    label: "Where to start",
+    label: "What to do next",
   },
   {
     id: "main-progression",
-    label: "Main story progression",
+    label: "Main story order",
   },
   {
     id: "wildwood",
-    label: "Wildwood routes",
+    label: "Stuck in Wildwood",
   },
   {
     id: "bosses",
-    label: "Goblin King & Forest King",
+    label: "Story bosses",
+  },
+  {
+    id: "classes",
+    label: "Classes & races",
+  },
+  {
+    id: "skill-tree",
+    label: "Skill Tree & Skill Points",
   },
   {
     id: "builds",
-    label: "Builds",
+    label: "When to fix your build",
   },
   {
     id: "pets",
-    label: "Pets & companions",
+    label: "Pets",
   },
   {
     id: "sanctum",
@@ -67,24 +75,20 @@ const toc = [
     label: "Deeds & Bounties",
   },
   {
-    id: "classes-races",
-    label: "Classes & races",
+    id: "achievements",
+    label: "Achievements",
   },
   {
     id: "map-locations",
     label: "Map & locations",
   },
   {
-    id: "achievements",
-    label: "Achievements & missables",
-  },
-  {
     id: "all-bosses",
-    label: "Bosses",
+    label: "Other bosses",
   },
   {
     id: "after-story",
-    label: "After the story",
+    label: "After Aelwynor",
   },
 ];
 
@@ -94,16 +98,20 @@ const relatedLinks = [
     label: "Dimraeth Walkthrough",
   },
   {
-    href: "/dimraeth/wildwood-walkthrough",
-    label: "Dimraeth Wildwood Walkthrough",
+    href: "/dimraeth/classes",
+    label: "Dimraeth Classes",
+  },
+  {
+    href: "/dimraeth/skill-tree",
+    label: "Dimraeth Skill Tree",
   },
   {
     href: "/dimraeth/builds",
     label: "Dimraeth Builds",
   },
   {
-    href: "/dimraeth/pets",
-    label: "Dimraeth Pets",
+    href: "/dimraeth/achievements",
+    label: "Dimraeth Achievements",
   },
   {
     href: "/dimraeth/deeds-bounties",
@@ -128,7 +136,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Forest Path during Dimraeth Early Access progression",
+        alt: "Forest Path during Dimraeth story progression",
       },
     ],
   },
@@ -169,11 +177,11 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Dimraeth Guide Hub: Walkthrough, Builds, Pets, Co-op and Deeds",
+        "Dimraeth Guide: Walkthrough, Classes, Builds and Progression",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-17",
       articleSection: "Game Guides",
       about: [
         {
@@ -182,11 +190,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Dimraeth Walkthrough",
+          name: "Walkthrough",
         },
         {
           "@type": "Thing",
           name: "Wildwood",
+        },
+        {
+          "@type": "Thing",
+          name: "Classes",
+        },
+        {
+          "@type": "Thing",
+          name: "Races",
+        },
+        {
+          "@type": "Thing",
+          name: "Skill Tree",
+        },
+        {
+          "@type": "Thing",
+          name: "Builds",
         },
         {
           "@type": "Thing",
@@ -198,11 +222,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Dimraeth Builds",
-        },
-        {
-          "@type": "Thing",
-          name: "Pets and Companions",
+          name: "Pets",
         },
         {
           "@type": "Thing",
@@ -210,7 +230,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Co-op Progression",
+          name: "Co-op",
+        },
+        {
+          "@type": "Thing",
+          name: "Achievements",
         },
         {
           "@type": "Thing",
@@ -263,13 +287,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Guide Hub: What to Do Next"
-          description="Use the current blocker to choose the right route: story progression, Wildwood navigation, boss fights, build upgrades, companions, Sanctum work, co-op, or post-story Deeds."
+          title="Dimraeth Guide: Walkthrough, Classes, Builds & What to Do Next"
+          description="Find the next step when you are stuck: follow the story through Wildwood, fix a weak build, choose a class, spend Skill Points, prepare the Sanctum, or move into Deeds and other post-story progress."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

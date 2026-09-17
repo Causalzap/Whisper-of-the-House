@@ -387,23 +387,26 @@ export const guideClusters: GuideCluster[] = [
     accent: "purple",
     archiveCategory: "RPG, action, builds & combat",
   
-    label: "Action RPG, Builds & Co-op Progression",
-    eyebrow: "Spotlight Hub",
+    label: "Action RPG, Progression, Builds & Co-op",
+    eyebrow: "Spotlight Guide",
     hubStatus:
-      "Early Access + story walkthrough + Wildwood + bosses + builds + pets + Sanctum + co-op + Deeds",
+      "Early Access + walkthrough + Wildwood + classes + Skill Tree + builds + bosses + pets + Sanctum + co-op + achievements + Deeds",
   
     description:
-      "Use the Dimraeth guide hub to find the next story objective, solve Wildwood route blockers, beat the Goblin King and Forest King, build stronger characters, choose useful pets, develop the Sanctum, understand co-op progression, and move into Deeds after the current story ends.",
+      "Follow Dimraeth from Earlwood through Wildwood and Aelwynor, choose a race and class, spend Skill Points, strengthen a build, unlock pets, develop the Sanctum, manage co-op worlds, track all 37 achievements, and continue through Deeds and Bounties after the current story.",
   
     coverage: [
       "Main Early Access progression from Earlwood into Wildwood through Northern Crossing, the goblin storyline, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, and Aelwynor the Wildroot Father",
       "Wildwood navigation through Lost Child, Northern Crossing, Goblin Hideout, Wildwood Center, the Wildwood Caverns wrong turn, Farmstead landmarks, throne requirements, and the final Forest Path push",
-      "Goblin King and Forest King boss progression with unlock conditions, preparation, attack windows, adds, Poison pressure, failed-attempt diagnosis, post-fight handoffs, and the current story endpoint",
-      "Character builds through Shadow Poison and Decay, Minotaur Brawler Bleed, attributes, Concentration, spellbooks, temporary skill transitions, equipment sets, status loops, and upgrade decisions",
-      "Pets and companions through Myrll, Fangra Cub, Moon Cat, Carrion Parrot, Ember Hound, pet levels, build synergy, inventory, Courier, and Pet Pen",
-      "Sanctum progression through storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, Home Uplift, and practical return-to-base decisions",
-      "Co-op progression through portable character progress, world-bound story and Sanctum progress, eight-player hosting, support spells, host choice, established characters joining other worlds, and higher-Deed group play",
-      "Deeds and Bounties through Deed Levels 1–10, repeat bosses, targeted material farming, reward differences, efficient difficulty ceilings, purple drops, solo pressure, and post-story progression",
+      "Goblin King and Forest King progression through Hoard King's Fall, Tamsin's explosive, attack windows, extra enemies, Poison pressure, defensive timing, failed-attempt diagnosis, rewards, and the current story endpoint",
+      "Classes and races through Human, Minotaur and Elf combinations with Magician, Brawler and Shadow, including confirmed archetypes, starting weapons, abilities, stats, and different early combat styles",
+      "Skill Tree progression through XP training, Skill Points, connected routes, race and class branches, active skills, modifiers, Search, route-cost planning, attribute requirements, and respec decisions",
+      "Character builds through Shadow Poison and Decay, Minotaur Brawler Bleed, attributes, Concentration, spellbooks, temporary skill transitions, equipment sets, status loops, pet synergy, and upgrade decisions",
+      "Pets and companions through Myrll, Fangra Cub, Moon Cat, Carrion Parrot, Ember Hound, pet levels, build synergy, inventory, Courier, Sanctum chest transfers, and Pet Pen",
+      "Sanctum progression through the first Pinewood Planks, Workbench, Pinewood Chest storage, Water Well, crafting stations, recruited NPCs, Facility Center, followers, passive production, and Home Uplift",
+      "Co-op progression through portable character levels, gear, inventory and spells, world-bound story and Sanctum progress, eight-player hosting, host availability, existing characters joining early worlds, shared Sanctum investment, and support spells",
+      "Deeds and Bounties through Deed Levels 1–10, repeat bosses, targeted material farming, reward differences, efficient difficulty ceilings, purple drops, solo pressure, mini-boss progression, and post-story activity",
+      "All 37 achievements with a persistent checklist covering story quests, Level 5–25 milestones, crafting and upgrades, 25 side quests, 9 pets, 5 Sanctum recruits, a Tier 3 Deed, 7 production buildings, and 10 different mini-bosses",
     ],
   
     image:
@@ -422,11 +425,11 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "Dimraeth Guide Hub: Walkthrough, Builds, Pets & Deeds",
+          "Dimraeth Guide: Walkthrough, Classes, Builds & What to Do Next",
         href: "/dimraeth",
-        type: "Guide Hub",
+        type: "Guide",
         description:
-          "Start with the problem blocking progress, then move to the main story, Wildwood routes, bosses, builds, pets, Sanctum, co-op, or post-story Deeds.",
+          "Find the next step when you are stuck, from Earlwood and Wildwood story progression to classes, Skill Points, builds, bosses, pets, Sanctum work, co-op, achievements, and post-story Deeds.",
         image:
           "/images/dimraeth/dimraeth-forest-path-start.webp",
         imageFit: "cover",
@@ -435,7 +438,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "Early Access story, Earlwood, Wildwood, Goblin King, Forest King, builds, pets, Sanctum, eight-player co-op, Deeds, Bounties, classes, races, and what to do next",
+            "Early Access story, Earlwood, Wildwood, Goblin King, Aelwynor, classes, Skill Tree, builds, pets, Sanctum, eight-player co-op, 37 achievements, Deeds, Bounties, and what to do next",
         },
   
         archive: {
@@ -450,7 +453,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/dimraeth/walkthrough",
         type: "Walkthrough",
         description:
-          "Follow the Early Access story from Earlwood through Wildwood, Goblin King, Forest Path and Forest King, with clear decisions about which objectives actually move the campaign forward.",
+          "Follow the Early Access story from Earlwood through Wildwood, Goblin King, Forest Path and Aelwynor, with clear decisions about which objectives actually move the campaign forward.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-forest-path-start.webp",
@@ -465,7 +468,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "Earlwood, Wildwood, Northern Crossing, Goblin Hideout, Hoard King's Fall, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, Forest King, and post-story progression",
+            "Earlwood, Wildwood, Northern Crossing, Goblin Hideout, Hoard King's Fall, Goblin King, Opening the Throne Path, Crown of Thorns, Forest Path, Aelwynor, and post-story progression",
         },
   
         archive: {
@@ -480,7 +483,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/dimraeth/wildwood-walkthrough",
         type: "Walkthrough",
         description:
-          "Follow the Wildwood route from Lost Child and Northern Crossing through the goblin storyline, throne requirements, Forest Path, and the approach to the Forest King.",
+          "Follow Wildwood from Lost Child and Northern Crossing through the goblin storyline, throne requirements, Forest Path, and the route toward Aelwynor.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-opening-throne-path-requirements.webp",
@@ -495,7 +498,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 2,
           spotlightMeta:
-            "Lost Child, Northern Crossing, Goblin Hideout, Goblin King transition, Clear the Way, Keys of Bark and Stone, Light the Wayfinder Line, Crown of Thorns, and Forest Path",
+            "Lost Child, Northern Crossing, Goblin Hideout, Goblin King transition, Clear the Way, Keys of Bark and Stone, Light the Wayfinder Line, Crown of Thorns, Forest Path, and Aelwynor",
         },
   
         archive: {
@@ -570,7 +573,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/dimraeth/forest-king",
         type: "Bosses",
         description:
-          "Beat Aelwynor the Wildroot Father with better Poison management, add control, safer defensive timing and clean damage windows, then see what opens after the current story ends.",
+          "Beat Aelwynor the Wildroot Father with better Poison management, add control, safer defensive timing and clean damage windows, then choose what to pursue after the current story ends.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-forest-king-boss-start.webp",
@@ -600,7 +603,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/dimraeth/builds",
         type: "Builds",
         description:
-          "Build around tested Shadow DoT and Minotaur Brawler Bleed routes with better attribute spending, status loops, Concentration recovery, gear sets, and skill transitions.",
+          "Build around Shadow DoT and Minotaur Brawler Bleed with better attribute spending, status loops, Concentration recovery, gear sets, pet synergy, and skill transitions.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-attribute-training-memory-intelligence.webp",
@@ -615,7 +618,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 6,
           spotlightMeta:
-            "Shadow Poison and Decay, Memory, Intelligence, Concentration, Contagion, Aether Shade, Convergence, Minotaur Brawler Bleed, Frenzied Slashes, status spenders, and gear transitions",
+            "Shadow Poison and Decay, Memory, Intelligence, Concentration, Contagion, Aether Shade, Convergence, Minotaur Brawler Bleed, Frenzied Slashes, status spenders, gear transitions, and pet synergy",
         },
   
         archive: {
@@ -656,14 +659,14 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Dimraeth Sanctum Guide: Facilities, Followers & Home Uplift",
+          "Dimraeth Sanctum Guide: Workbench, Storage & Pinewood Planks",
         href: "/dimraeth/sanctum",
         type: "Systems",
         description:
-          "Build a useful Sanctum with storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, and better Home Uplift priorities.",
+          "Get the first Pinewood Planks, build the Workbench and storage, then add the Water Well, crafting stations, useful facilities, followers, and passive production.",
         date: "Updated recently",
         image:
-          "/images/dimraeth/dimraeth-sanctum-facility-center.webp",
+          "/images/dimraeth/dimraeth-sanctum-workshop-stations.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -675,7 +678,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 8,
           spotlightMeta:
-            "Storage, Water Well, recruited NPCs, Facility Center, followers, passive resources, Home Uplift, pre-boss resets, and useful return-to-base decisions",
+            "First Pinewood Planks, Workbench, Pinewood Chest, storage, Water Well, Alchemy Table, Woodfire Stove, recruited NPCs, Facility Center, followers, passive production, and Home Uplift",
         },
   
         archive: {
@@ -686,11 +689,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Dimraeth Co-op Progression: Characters, Worlds & Hosting",
+          "Dimraeth Co-op: Progression, Hosting & What Carries Over",
         href: "/dimraeth/co-op-progression",
         type: "Systems",
         description:
-          "Understand what follows your character between worlds, what stays with the host world, how eight-player hosting works, and when support builds or co-op Deeds become useful.",
+          "See what follows your character between worlds, what stays with the host, how eight-player hosting works, what happens when the host leaves, and where to build the shared Sanctum.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-coop-server-settings.webp",
@@ -705,7 +708,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 9,
           spotlightMeta:
-            "Eight-player co-op, character progression, world progression, host worlds, portable equipment and spells, Sanctum ownership, Barrier, Combat Medic, established characters, and higher Deeds",
+            "Eight-player co-op, portable levels, equipment, inventory and spells, world-bound story progress, host worlds, host offline behavior, shared Sanctum investment, existing characters, Combat Medic, and Barrier",
         },
   
         archive: {
@@ -720,7 +723,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/dimraeth/deeds-bounties",
         type: "Systems",
         description:
-          "Use Deed Levels 1–10 for targeted boss farming, compare rewards, find the highest efficient difficulty, and decide when better gear or more players will save time.",
+          "Use Deed Levels 1–10 for targeted boss farming, compare rewards, find the highest efficient difficulty, and decide when stronger gear or more players will save time.",
         date: "Updated recently",
         image:
           "/images/dimraeth/dimraeth-deed-level-repeat-boss.webp",
@@ -735,12 +738,102 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 10,
           spotlightMeta:
-            "Deed Board, Deed Levels 1–10, Alpha Wolf Bounty, boss materials, Potential Loot, difficulty jumps, efficient farming ceiling, purple gear, solo versus co-op, and post-story progression",
+            "Deed Board, Deed Levels 1–10, Alpha Wolf Bounty, boss materials, Potential Loot, difficulty jumps, efficient farming ceiling, purple gear, mini-bosses, solo versus co-op, and post-story progression",
         },
   
         archive: {
           showInCollections: true,
           order: 11,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Classes: Best Starting Class, Races & Archetypes",
+        href: "/dimraeth/classes",
+        type: "Guide",
+        description:
+          "Compare Magician, Brawler and Shadow across Human, Minotaur and Elf, including confirmed archetypes, starting weapons, abilities, stats, and which combination fits different combat styles.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-human-magician-elemental-ranger.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 351,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "Magician, Brawler, Shadow, Human, Minotaur, Elf, Elemental Ranger, Wild Strider, Gloomstalker, Echo Weaver, Night's Whisper, Horned Vanguard, Earthshaker, starting weapons, stats, and abilities",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Skill Tree: Skill Points, Search & Respec",
+        href: "/dimraeth/skill-tree",
+        type: "Systems",
+        description:
+          "Turn XP into Skill Points, understand connected routes, use Search to find mechanics such as Bleed, count the real cost of a path, and respec when an early route stops working.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-skill-tree-overview.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 352,
+          spotlightFeature: true,
+          spotlightOrder: 12,
+          spotlightMeta:
+            "XP training, Skill Points, race and class branches, connected nodes, active skills, modifiers, Search, Bleed filtering, route costs, attributes, Skill Tree planning, and respec",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+  
+      {
+        title:
+          "Dimraeth Achievements: All 37 Requirements & Tracker",
+        href: "/dimraeth/achievements",
+        type: "Achievements",
+        description:
+          "Track all 37 achievements and finish quest, level, crafting, upgrade, pet, Sanctum, Deed, side-quest, boss, building, and mini-boss requirements.",
+        date: "Updated recently",
+        image:
+          "/images/dimraeth/dimraeth-sanctum-workshop-stations.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 353,
+          spotlightFeature: true,
+          spotlightOrder: 13,
+          spotlightMeta:
+            "All 37 achievements, persistent tracker, Level 5–25 milestones, story quests, first craft and upgrades, 25 side quests, 9 pets, 5 Sanctum NPCs, Tier 3 Deed, 7 production buildings, and 10 mini-bosses",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 14,
         },
       },
     ],

@@ -4,92 +4,92 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import DimraethCoopProgressionContent from "@/data/dimraeth/co-op-progression.mdx";
+import DimraethAchievementsContent from "@/data/dimraeth/achievements.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/dimraeth`;
-const pageUrl = `${hubUrl}/co-op-progression`;
+const pageUrl = `${hubUrl}/achievements`;
 
 const metadataTitle =
-  "Dimraeth Co-op: Progression, Hosting & What Carries Over";
+  "Dimraeth Achievements Guide: All 37 & Tracker";
 
 const metadataDescription =
-  "Learn what carries between Dimraeth co-op worlds, what stays with the host, how 8-player hosting works, what happens offline, and how to share progress.";
+  "Track all 37 Dimraeth achievements and see requirements for quests, levels, pets, Sanctum recruits, Deeds, bosses, buildings, and cleanup goals.";
 
 const articleDescription =
-  "A practical Dimraeth co-op guide explaining what follows your character between worlds, what remains tied to the hosted world, how eight-player sessions work, how host availability affects a shared campaign, whether an established character can join an early world, where to invest in the Sanctum, and when support tools or extra players become useful.";
+  "A complete Dimraeth achievements guide and progress tracker covering all 37 achievements, including quest and level milestones, Sanctum building and recruitment goals, pets, Deeds, mini-bosses, equipment upgrades, side quests, and an efficient cleanup route.";
 
 const imageUrls = [
-  `${siteUrl}/images/dimraeth/dimraeth-coop-server-settings.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-combat-medic-heal-spell.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-coop-barrier-support-spell.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-workshop-stations.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-carrion-parrot-unlock.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-earlwood-deed-board.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "how-multiplayer-works",
-    label: "How co-op progression works",
+    id: "achievement-tracker",
+    label: "37-achievement tracker",
   },
   {
-    id: "hosting",
-    label: "Who should host?",
+    id: "story-leveling",
+    label: "Quests and level milestones",
   },
   {
-    id: "what-carries-over",
-    label: "What carries over",
+    id: "sanctum-building",
+    label: "Sanctum achievements",
   },
   {
-    id: "what-stays-in-world",
-    label: "What stays with the world",
+    id: "upgrades",
+    label: "Upgrade achievements",
   },
   {
-    id: "existing-character",
-    label: "Use an existing character?",
+    id: "pets",
+    label: "Pet achievements",
   },
   {
-    id: "host-offline",
-    label: "When the host goes offline",
+    id: "deeds-bounties",
+    label: "Deeds and mini-bosses",
   },
   {
-    id: "sanctum-coop",
-    label: "Which Sanctum to build",
+    id: "side-quests",
+    label: "25 side quests",
   },
   {
-    id: "support-builds",
-    label: "Healing and support",
+    id: "bosses",
+    label: "Boss achievements",
   },
   {
-    id: "deeds-coop",
-    label: "Co-op for harder Deeds",
-  },
-  {
-    id: "solo-and-coop",
-    label: "Combine solo and co-op",
+    id: "cleanup-order",
+    label: "37 / 37 cleanup route",
   },
 ];
 
 const relatedLinks = [
   {
+    href: "/dimraeth/walkthrough",
+    label: "Dimraeth Walkthrough",
+  },
+  {
     href: "/dimraeth/sanctum",
     label: "Dimraeth Sanctum Guide",
   },
   {
-    href: "/dimraeth/builds",
-    label: "Dimraeth Builds Guide",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets Guide",
   },
   {
     href: "/dimraeth/deeds-bounties",
     label: "Dimraeth Deeds & Bounties",
   },
   {
-    href: "/dimraeth/walkthrough",
-    label: "Dimraeth Walkthrough",
+    href: "/dimraeth/goblin-king",
+    label: "Dimraeth Goblin King Guide",
   },
   {
-    href: "/dimraeth/classes",
-    label: "Dimraeth Classes Guide",
+    href: "/dimraeth/forest-king",
+    label: "Dimraeth Forest King Guide",
   },
 ];
 
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Dimraeth multiplayer server settings for an eight-player co-op world",
+        alt: "Dimraeth Sanctum Workbench and crafting progression",
       },
     ],
   },
@@ -144,7 +144,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Co-op Progression",
+          name: "Achievements",
           item: pageUrl,
         },
       ],
@@ -157,7 +157,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Dimraeth Co-op: What Carries Over Between Worlds and How Hosting Works",
+        "Dimraeth Achievements Guide: All 37 Achievements and Tracker",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -170,27 +170,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Co-op",
+          name: "Achievements",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer",
+          name: "Achievement Tracker",
         },
         {
           "@type": "Thing",
-          name: "Character Progression",
+          name: "Level 25",
         },
         {
           "@type": "Thing",
-          name: "World Progression",
+          name: "Side Quests",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer Hosting",
-        },
-        {
-          "@type": "Thing",
-          name: "Eight-Player Co-op",
+          name: "Pets",
         },
         {
           "@type": "Thing",
@@ -198,11 +194,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Support Spells",
+          name: "Tiered Deeds",
         },
         {
           "@type": "Thing",
-          name: "Deeds",
+          name: "Mini-Bosses",
         },
       ],
       author: {
@@ -214,6 +210,20 @@ const jsonLd = {
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${pageUrl}#tracker`,
+      name: "Dimraeth Achievement Tracker",
+      url: pageUrl,
+      applicationCategory: "GameApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      description:
+        "An interactive browser-based checklist for tracking all 37 Dimraeth achievements and filtering unfinished achievement goals.",
       isPartOf: {
         "@id": `${siteUrl}#website`,
       },
@@ -247,8 +257,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Co-op: What Carries Over & How Hosting Works"
-          description="Know what follows your character into another world, what stays with the host, whether you can bring an existing character, and how to keep one shared campaign from becoming several half-finished saves."
+          title="Dimraeth Achievements: All 37 Requirements & Tracker"
+          description="Track all 37 achievements, clear the automatic quest and level milestones first, then finish the longer pet, Sanctum, Deed, side-quest, upgrade, and mini-boss goals."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
@@ -257,7 +267,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <DimraethCoopProgressionContent />
+          <DimraethAchievementsContent />
         </GuideArticlePage>
       </main>
 

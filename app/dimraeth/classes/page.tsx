@@ -4,92 +4,85 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import DimraethCoopProgressionContent from "@/data/dimraeth/co-op-progression.mdx";
+import DimraethClassesContent from "@/data/dimraeth/classes.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/dimraeth`;
-const pageUrl = `${hubUrl}/co-op-progression`;
+const pageUrl = `${hubUrl}/classes`;
 
 const metadataTitle =
-  "Dimraeth Co-op: Progression, Hosting & What Carries Over";
+  "Dimraeth Classes Guide: Best Class, Races & Archetypes";
 
 const metadataDescription =
-  "Learn what carries between Dimraeth co-op worlds, what stays with the host, how 8-player hosting works, what happens offline, and how to share progress.";
+  "Compare Dimraeth classes, races, weapons, starting stats, and archetypes. See why Minotaur Brawler is a strong first pick and when to choose Human or Elf.";
 
 const articleDescription =
-  "A practical Dimraeth co-op guide explaining what follows your character between worlds, what remains tied to the hosted world, how eight-player sessions work, how host availability affects a shared campaign, whether an established character can join an early world, where to invest in the Sanctum, and when support tools or extra players become useful.";
+  "A practical Dimraeth classes guide explaining how Magician, Brawler, and Shadow change when paired with Human, Minotaur, or Elf, including confirmed archetypes, starting weapons and stats, Elemental Ranger, Earthshaker, Horned Vanguard, Night's Whisper, and which race-class combination fits different combat styles.";
 
 const imageUrls = [
-  `${siteUrl}/images/dimraeth/dimraeth-coop-server-settings.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-combat-medic-heal-spell.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-coop-barrier-support-spell.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-human-magician-elemental-ranger.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-minotaur-magician-earthshaker.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-minotaur-brawler-start.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-elf-shadow-starting-skills.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "how-multiplayer-works",
-    label: "How co-op progression works",
+    id: "current-classes",
+    label: "Classes and races",
   },
   {
-    id: "hosting",
-    label: "Who should host?",
+    id: "same-class-different-race",
+    label: "Same class, different race",
   },
   {
-    id: "what-carries-over",
-    label: "What carries over",
+    id: "best-starting-class",
+    label: "Best starting class",
   },
   {
-    id: "what-stays-in-world",
-    label: "What stays with the world",
+    id: "human",
+    label: "When to choose Human",
   },
   {
-    id: "existing-character",
-    label: "Use an existing character?",
+    id: "minotaur",
+    label: "When to choose Minotaur",
   },
   {
-    id: "host-offline",
-    label: "When the host goes offline",
+    id: "elf",
+    label: "When to choose Elf",
   },
   {
-    id: "sanctum-coop",
-    label: "Which Sanctum to build",
+    id: "class-differences",
+    label: "Which class to pair",
   },
   {
-    id: "support-builds",
-    label: "Healing and support",
+    id: "skill-tree-impact",
+    label: "Race and Skill Tree",
   },
   {
-    id: "deeds-coop",
-    label: "Co-op for harder Deeds",
-  },
-  {
-    id: "solo-and-coop",
-    label: "Combine solo and co-op",
+    id: "which-class",
+    label: "Which class should you choose?",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/dimraeth/sanctum",
-    label: "Dimraeth Sanctum Guide",
-  },
-  {
     href: "/dimraeth/builds",
     label: "Dimraeth Builds Guide",
   },
   {
-    href: "/dimraeth/deeds-bounties",
-    label: "Dimraeth Deeds & Bounties",
+    href: "/dimraeth/skill-tree",
+    label: "Dimraeth Skill Tree Guide",
   },
   {
     href: "/dimraeth/walkthrough",
     label: "Dimraeth Walkthrough",
   },
   {
-    href: "/dimraeth/classes",
-    label: "Dimraeth Classes Guide",
+    href: "/dimraeth/pets",
+    label: "Dimraeth Pets Guide",
   },
 ];
 
@@ -110,7 +103,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Dimraeth multiplayer server settings for an eight-player co-op world",
+        alt: "Dimraeth Human Magician Elemental Ranger character creation",
       },
     ],
   },
@@ -144,7 +137,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Co-op Progression",
+          name: "Classes Guide",
           item: pageUrl,
         },
       ],
@@ -157,7 +150,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Dimraeth Co-op: What Carries Over Between Worlds and How Hosting Works",
+        "Dimraeth Classes Guide: Best Starting Class, Races and Archetypes",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -170,39 +163,55 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Co-op",
+          name: "Classes",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer",
+          name: "Races",
         },
         {
           "@type": "Thing",
-          name: "Character Progression",
+          name: "Archetypes",
         },
         {
           "@type": "Thing",
-          name: "World Progression",
+          name: "Magician",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer Hosting",
+          name: "Brawler",
         },
         {
           "@type": "Thing",
-          name: "Eight-Player Co-op",
+          name: "Shadow",
         },
         {
           "@type": "Thing",
-          name: "Sanctum",
+          name: "Human",
         },
         {
           "@type": "Thing",
-          name: "Support Spells",
+          name: "Minotaur",
         },
         {
           "@type": "Thing",
-          name: "Deeds",
+          name: "Elf",
+        },
+        {
+          "@type": "Thing",
+          name: "Horned Vanguard",
+        },
+        {
+          "@type": "Thing",
+          name: "Elemental Ranger",
+        },
+        {
+          "@type": "Thing",
+          name: "Earthshaker",
+        },
+        {
+          "@type": "Thing",
+          name: "Night's Whisper",
         },
       ],
       author: {
@@ -247,8 +256,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Co-op: What Carries Over & How Hosting Works"
-          description="Know what follows your character into another world, what stays with the host, whether you can bring an existing character, and how to keep one shared campaign from becoming several half-finished saves."
+          title="Dimraeth Classes: Best Starting Class, Races & Archetypes"
+          description="Magician, Brawler, and Shadow can play very differently depending on race. Compare the confirmed archetypes, starting weapons and stats, and choose a Human, Minotaur, or Elf combination that fits how you want to fight."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
@@ -257,7 +266,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <DimraethCoopProgressionContent />
+          <DimraethClassesContent />
         </GuideArticlePage>
       </main>
 

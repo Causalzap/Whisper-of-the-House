@@ -4,92 +4,93 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import DimraethCoopProgressionContent from "@/data/dimraeth/co-op-progression.mdx";
+import DimraethSkillTreeContent from "@/data/dimraeth/skill-tree.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/dimraeth`;
-const pageUrl = `${hubUrl}/co-op-progression`;
+const pageUrl = `${hubUrl}/skill-tree`;
 
 const metadataTitle =
-  "Dimraeth Co-op: Progression, Hosting & What Carries Over";
+  "Dimraeth Skill Tree Guide: Skill Points, Search & Respec";
 
 const metadataDescription =
-  "Learn what carries between Dimraeth co-op worlds, what stays with the host, how 8-player hosting works, what happens offline, and how to share progress.";
+  "Learn how Dimraeth Skill Points work, how training gives levels, how to search the Skill Tree, plan node paths, avoid wasted points, and respec.";
 
 const articleDescription =
-  "A practical Dimraeth co-op guide explaining what follows your character between worlds, what remains tied to the hosted world, how eight-player sessions work, how host availability affects a shared campaign, whether an established character can join an early world, where to invest in the Sanctum, and when support tools or extra players become useful.";
+  "A practical Dimraeth Skill Tree guide explaining how XP training awards Skill Points, how race and class affect the tree, how connecting nodes and active skills work, how to search for mechanics such as Bleed, how to count route costs, coordinate attributes with unlocks, and use respec when an early path no longer fits the character.";
 
 const imageUrls = [
-  `${siteUrl}/images/dimraeth/dimraeth-coop-server-settings.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-combat-medic-heal-spell.webp`,
-  `${siteUrl}/images/dimraeth/dimraeth-coop-barrier-support-spell.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-skill-tree-overview.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-skill-tree-skills-modifiers.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-skill-tree-search.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-skill-tree-respec.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "how-multiplayer-works",
-    label: "How co-op progression works",
+    id: "how-skill-points-work",
+    label: "How to get Skill Points",
   },
   {
-    id: "hosting",
-    label: "Who should host?",
+    id: "tree-layout",
+    label: "Skill Tree layout",
   },
   {
-    id: "what-carries-over",
-    label: "What carries over",
+    id: "race-class-tree",
+    label: "Race and class effects",
   },
   {
-    id: "what-stays-in-world",
-    label: "What stays with the world",
+    id: "nodes",
+    label: "Skills and node types",
   },
   {
-    id: "existing-character",
-    label: "Use an existing character?",
+    id: "search",
+    label: "How to use Search",
   },
   {
-    id: "host-offline",
-    label: "When the host goes offline",
+    id: "route-cost",
+    label: "Count the full path",
   },
   {
-    id: "sanctum-coop",
-    label: "Which Sanctum to build",
+    id: "attributes",
+    label: "Attributes and unlocks",
   },
   {
-    id: "support-builds",
-    label: "Healing and support",
+    id: "build-route",
+    label: "Build route timing",
   },
   {
-    id: "deeds-coop",
-    label: "Co-op for harder Deeds",
+    id: "respec",
+    label: "How to respec",
   },
   {
-    id: "solo-and-coop",
-    label: "Combine solo and co-op",
+    id: "when-to-respec",
+    label: "When to respec",
+  },
+  {
+    id: "early-priority",
+    label: "First Skill Points",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/dimraeth/sanctum",
-    label: "Dimraeth Sanctum Guide",
+    href: "/dimraeth/classes",
+    label: "Dimraeth Classes Guide",
   },
   {
     href: "/dimraeth/builds",
     label: "Dimraeth Builds Guide",
   },
   {
-    href: "/dimraeth/deeds-bounties",
-    label: "Dimraeth Deeds & Bounties",
-  },
-  {
     href: "/dimraeth/walkthrough",
     label: "Dimraeth Walkthrough",
   },
   {
-    href: "/dimraeth/classes",
-    label: "Dimraeth Classes Guide",
+    href: "/dimraeth/sanctum",
+    label: "Dimraeth Sanctum Guide",
   },
 ];
 
@@ -110,7 +111,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Dimraeth multiplayer server settings for an eight-player co-op world",
+        alt: "Dimraeth full Skill Tree with connected race and class branches",
       },
     ],
   },
@@ -144,7 +145,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Co-op Progression",
+          name: "Skill Tree Guide",
           item: pageUrl,
         },
       ],
@@ -157,7 +158,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Dimraeth Co-op: What Carries Over Between Worlds and How Hosting Works",
+        "Dimraeth Skill Tree Guide: Skill Points, Search, Paths and Respec",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -170,39 +171,39 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Co-op",
+          name: "Skill Tree",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer",
+          name: "Skill Points",
         },
         {
           "@type": "Thing",
-          name: "Character Progression",
+          name: "Respec",
         },
         {
           "@type": "Thing",
-          name: "World Progression",
+          name: "Attributes",
         },
         {
           "@type": "Thing",
-          name: "Multiplayer Hosting",
+          name: "Training",
         },
         {
           "@type": "Thing",
-          name: "Eight-Player Co-op",
+          name: "Skill Tree Search",
         },
         {
           "@type": "Thing",
-          name: "Sanctum",
+          name: "Active Skills",
         },
         {
           "@type": "Thing",
-          name: "Support Spells",
+          name: "Skill Modifiers",
         },
         {
           "@type": "Thing",
-          name: "Deeds",
+          name: "Race and Class",
         },
       ],
       author: {
@@ -247,8 +248,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Co-op: What Carries Over & How Hosting Works"
-          description="Know what follows your character into another world, what stays with the host, whether you can bring an existing character, and how to keep one shared campaign from becoming several half-finished saves."
+          title="Dimraeth Skill Tree: How Skill Points, Search & Respec Work"
+          description="Turn XP into Skill Points, find the nodes you actually need, count the real cost of a route, and fix a bad path without restarting your character."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
@@ -257,7 +258,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <DimraethCoopProgressionContent />
+          <DimraethSkillTreeContent />
         </GuideArticlePage>
       </main>
 

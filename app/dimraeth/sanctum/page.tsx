@@ -11,18 +11,19 @@ const hubUrl = `${siteUrl}/dimraeth`;
 const pageUrl = `${hubUrl}/sanctum`;
 
 const metadataTitle =
-  "Dimraeth Sanctum Guide: Facilities, Followers & Home Uplift";
+  "Dimraeth Sanctum Guide: Workbench, Storage & Pinewood Planks";
 
 const metadataDescription =
-  "Build a useful Dimraeth Sanctum with storage, Water Well, Facility Center, followers, passive resources, and smart Home Uplift priorities.";
+  "Build your Dimraeth Sanctum in the right order: get Pinewood Planks, place the Workbench and storage, then add useful facilities and production.";
 
 const articleDescription =
-  "A practical Dimraeth Sanctum guide covering what to build first, storage and inventory pressure, the Water Well, NPC recruitment, the Facility Center, follower-based production, passive resources, Home Uplift priorities, pre-boss resets, and multiplayer world investment.";
+  "A practical Dimraeth Sanctum guide covering how to get the first Pinewood Planks, build the Workbench, add Pinewood Chest storage, use the Water Well and crafting stations, recruit NPCs, unlock the Facility Center, assign followers, produce recurring resources, handle Home Uplift, and decide when to return during progression.";
 
 const imageUrls = [
-  `${siteUrl}/images/dimraeth/dimraeth-sanctum-facility-center.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-workshop-stations.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-sanctum-water-well.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-sanctum-first-npc-recruit.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-sanctum-facility-center.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -33,12 +34,20 @@ const toc = [
     label: "What to build first",
   },
   {
+    id: "pinewood-planks",
+    label: "Pinewood Planks & Workbench",
+  },
+  {
     id: "storage",
-    label: "Storage & encumbrance",
+    label: "Pinewood Chest & storage",
   },
   {
     id: "water-well",
     label: "Water Well",
+  },
+  {
+    id: "crafting-stations",
+    label: "Crafting stations",
   },
   {
     id: "recruit-npcs",
@@ -54,19 +63,15 @@ const toc = [
   },
   {
     id: "passive-resources",
-    label: "Passive resources",
+    label: "Passive production",
   },
   {
     id: "home-uplift",
-    label: "Home Uplift priority",
+    label: "Does Home Uplift block progress?",
   },
   {
     id: "when-to-return",
     label: "When to return",
-  },
-  {
-    id: "pre-boss-reset",
-    label: "Before a major boss",
   },
   {
     id: "multiplayer-sanctum",
@@ -78,6 +83,10 @@ const relatedLinks = [
   {
     href: "/dimraeth/walkthrough",
     label: "Dimraeth Walkthrough",
+  },
+  {
+    href: "/dimraeth/achievements",
+    label: "Dimraeth Achievements",
   },
   {
     href: "/dimraeth/builds",
@@ -114,7 +123,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Facility Center unlocked while developing the Sanctum in Dimraeth",
+        alt: "Dimraeth Workbench requiring Pinewood Planks in the Sanctum",
       },
     ],
   },
@@ -161,11 +170,11 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Dimraeth Sanctum Guide: What to Build First and When to Return",
+        "Dimraeth Sanctum Guide: Workbench, Storage, Pinewood Planks and Facilities",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-17",
       articleSection: "Game Guides",
       about: [
         {
@@ -178,7 +187,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Facility Center",
+          name: "Workbench",
+        },
+        {
+          "@type": "Thing",
+          name: "Pinewood Planks",
+        },
+        {
+          "@type": "Thing",
+          name: "Pinewood Chest",
+        },
+        {
+          "@type": "Thing",
+          name: "Storage",
         },
         {
           "@type": "Thing",
@@ -186,15 +207,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Crafting Stations",
+        },
+        {
+          "@type": "Thing",
+          name: "Facility Center",
+        },
+        {
+          "@type": "Thing",
           name: "Followers",
         },
         {
           "@type": "Thing",
-          name: "Home Uplift",
+          name: "NPC Recruitment",
         },
         {
           "@type": "Thing",
-          name: "NPC Recruitment",
+          name: "Home Uplift",
         },
       ],
       author: {
@@ -239,13 +268,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Sanctum Guide: What to Build First & When to Return"
-          description="Build a Sanctum that actually saves time: prioritize storage, useful facilities and followers, know when Home Uplift can wait, and return only when the trip solves something."
+          title="Dimraeth Sanctum: What to Build First, Workbench & Storage"
+          description="Get the first Pinewood Planks, build the Workbench and storage without wasting early materials, then add the facilities, followers, and production that actually save time."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
