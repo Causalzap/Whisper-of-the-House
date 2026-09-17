@@ -13,7 +13,7 @@ const metadataTitle =
   "Halloween: The Game Guide – Walkthrough, Multiplayer & More";
 
 const metadataDescription =
-  "Find Halloween: The Game guides for the full walkthrough, multiplayer, best Civilians, escapes, challenges, achievements, Prestige, Michael arrest, and endings.";
+  "Find Halloween: The Game guides for the walkthrough, multiplayer, best Civilians, items, escapes, challenges, achievements, Prestige, Michael arrest, and endings.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp`;
@@ -42,6 +42,10 @@ const toc = [
   {
     id: "best-civilians",
     label: "Best Civilians",
+  },
+  {
+    id: "items",
+    label: "Items & inventory",
   },
   {
     id: "escape-search",
@@ -81,6 +85,10 @@ const relatedLinks = [
   {
     href: "/halloween-the-game/walkthrough",
     label: "Complete Story Mode Walkthrough",
+  },
+  {
+    href: "/halloween-the-game/items-guide",
+    label: "All Items & Uses Guide",
   },
   {
     href: "/halloween-the-game/best-civilians",
@@ -133,7 +141,8 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Halloween: The Game Guide – Walkthrough, Multiplayer & More",
     description:
-      "Choose the right Halloween: The Game guide for Story Mode, multiplayer, best Civilians, escapes, challenges, achievements, progression, Prestige, Michael arrest, and endings.",
+      "Choose the right Halloween: The Game guide for Story Mode, multiplayer, best Civilians, items, escapes, challenges, achievements, progression, Prestige, Michael arrest, and endings.",
+
     siteName: "Whisper of the House",
     images: [
       {
@@ -149,7 +158,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Halloween: The Game Guide – Walkthrough, Multiplayer & More",
     description:
-      "Find the right guide for Story Mode, multiplayer, best Civilians, escapes, challenges, achievements, Prestige, Michael arrest, and endings.",
+      "Find the right guide for Story Mode, multiplayer, best Civilians, items, escapes, challenges, achievements, Prestige, Michael arrest, and endings.",
+
     images: [heroImage],
   },
 };
@@ -191,7 +201,7 @@ const jsonLd = {
         "Halloween: The Game Guide – Walkthrough, Multiplayer, Best Civilians, Escapes and More",
 
       description:
-        "A central Halloween: The Game guide for choosing what to do next across Story Mode walkthroughs, chapter challenges, Civilian multiplayer, best Civilians, escape routes, achievements, Michael Myers arrest, progression, perks, Prestige, collectibles, and alternate endings.",
+        "A Halloween: The Game guide for choosing what to do next across Story Mode walkthroughs, chapter challenges, Civilian multiplayer, best Civilians, items and inventory, escape routes, achievements, Michael Myers arrest, progression, perks, Prestige, collectibles, and alternate endings.",
 
       url: pageUrl,
 
@@ -200,7 +210,7 @@ const jsonLd = {
       inLanguage: "en",
 
       datePublished: "2026-09-04",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-17",
 
       articleSection: "Halloween: The Game Guides",
 
@@ -229,6 +239,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Halloween: The Game best Civilians",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game items",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game inventory",
         },
         {
           "@type": "Thing",
@@ -309,7 +327,7 @@ export default function Page() {
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -882,6 +882,7 @@ const paths = [
 '/halloween-the-game/escape-helper',
 '/halloween-the-game/prestige-guide',
 '/halloween-the-game/best-civilians',
+'/halloween-the-game/items-guide',
 
   '/wanderburg',
   '/wanderburg/progression-unlocks',
@@ -1006,7 +1007,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   "/the-last-caretaker/memory-for-aaron-guide": "2026-09-07",
   "/the-last-caretaker/transposium-room-998-guide": "2026-09-07",
 
-  '/halloween-the-game': '2026-09-12',
+  '/halloween-the-game': '2026-09-17',
   '/halloween-the-game/walkthrough': '2026-09-11',
   '/halloween-the-game/endings': '2026-09-04',
   '/halloween-the-game/multiplayer-guide': '2026-09-04',
@@ -1020,6 +1021,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/halloween-the-game/escape-helper': '2026-09-09',
   '/halloween-the-game/prestige-guide': '2026-09-12',
   '/halloween-the-game/best-civilians': '2026-09-15',
+  '/halloween-the-game/items-guide': '2026-09-17',
 
   '/neverness-to-everness': '2026-09-02',
   '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',

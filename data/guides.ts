@@ -1718,21 +1718,36 @@ export const guideClusters: GuideCluster[] = [
     label: "Asymmetrical Horror & Michael Myers",
     eyebrow: "Guide Hub",
     hubStatus:
-      "Story Mode + chapter challenges + multiplayer + progression + Prestige + 50 achievements + 3 endings",
+      "Story Mode + challenges + multiplayer + best Civilians + items + escape helper + progression + Prestige + 50 achievements + 3 endings",
   
     description:
-      "Use the Halloween: The Game guide hub to choose your next goal: follow the full Story Mode walkthrough, clear Smith's Grove or chapter challenges, survive as a Civilian, detain Michael Myers, build progression and perks, complete a Prestige Challenge, finish all 50 achievements, or replay Chapter 5 for another ending.",
+      "Use the Halloween: The Game guide hub to choose your next goal: follow Story Mode, clear chapter challenges, pick a Civilian, decide which items to keep, finish the best available escape, detain Michael Myers, build progression and perks, complete Prestige, finish all 50 achievements, or replay Chapter 5 for another ending.",
   
     coverage: [
       "Complete Story Mode walkthrough through the Smith's Grove Prologue and five chapters, with required objectives, major route changes, progression blockers, and the point where optional challenge cleanup is better left for replay",
+  
       "Smith's Grove Prologue challenge cleanup across all six objectives, with Challenge 5 separated into its own no-alert route when patrol timing and restart decisions become the main problem",
+  
       "Main Street Chapter 2 challenge decisions around Eric, Tanya, Slab, Rachel and her friends, Dead-End Job, required body cleanup, Judith Myers' grave, and the final return to the car",
+  
       "The Babysitters Chapter 4 challenge sequence through Annie's car, Bob and Lynda stalking, Bloodthirsty, Bob's kitchen wall, the Sheet, Lynda's telephone kill, Wallace House staging, the film-plot condition, and Laurie",
-      "Civilian multiplayer decisions through opening objectives, phones, police, Residents, inventory, Sedan and Storm Cellar progress, route switching, rescue choices, and knowing when an available exit is worth taking",
+  
+      "Civilian multiplayer decisions through opening objectives, phones, police, Residents, team coordination, escape preparation, route switching, rescue choices, and knowing when an available exit is worth taking",
+  
+      "Best Civilian choices across all 12 characters, including general survival, repairs, Resident support, Michael pressure, movement, stats, and trait-driven role differences",
+  
+      "Civilian item decisions across the three small-item slots, including Ancient Amulet, grab-escape blades, Flare Gun, Repair Kit, Sedan parts, Bolt Cutters, Electric Fuse, healing, throwables, firearms, and melee weapons",
+  
+      "Escape and spawn decisions across Sedan, Storm Cellar, Escape Gate, and Police Wagon routes, using discovered barriers, team-held items, checked candidate areas, and the remaining work in the current match",
+  
       "Michael Myers detainment through police setup, spectator access, the CB radio, Loomis, Reinforcements, authority pressure, knockdown timing, the Arrest interaction, and the MICHAEL DETAINED! finish",
-      "Progression through Profile, Killer, Civilian, and Weapon XP, Perk Points, perk cards, upgrades, Civilian stats, starting items, challenge types, and deciding what to level or spend on next",
+  
+      "Progression through Profile, Killer, Civilian, and Weapon XP, Perk Points, perk cards, upgrades, Civilian stats, starting-item unlocks, challenge types, and deciding what to level or spend on next",
+  
       "Prestige progression after a track reaches its cap, including current level requirements, timed Prestige Challenges, Perk Point costs, confirmed Profile and Jennifer objectives, rewards, Private Match farming, and current tracking or availability problems",
+  
       "All 50 achievements with a persistent checklist and routes for Story Mode, recordings, Civilian objectives, Michael counters, Loomis, hidden achievements, Prestige, and final progression cleanup",
+  
       "All three confirmed Chapter 5 ending routes through the railroad, cornfield, and sewer, with alternate endings handled from Into the Shadows instead of replaying the full campaign",
     ],
   
@@ -1756,7 +1771,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/halloween-the-game",
         type: "Guide Hub",
         description:
-          "Start here to choose between the full Story Mode walkthrough, chapter challenges, Civilian multiplayer, escape decisions, Michael detainment, progression, Prestige, achievements, and endings.",
+          "Start with the full Story Mode walkthrough, chapter challenges, Civilian choices, items, multiplayer escapes, Michael detainment, progression, Prestige, achievements, or endings.",
         image:
           "/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp",
         imageFit: "cover",
@@ -1765,7 +1780,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "Story Mode walkthrough, Prologue challenges, Chapter 2 and 4 challenges, Civilian multiplayer, Michael detainment, progression, perks, Prestige, 50 achievements, and three Chapter 5 endings",
+            "Story Mode walkthrough, challenges, Civilian multiplayer, best Civilians, items, Escape & Spawn Helper, Michael detainment, progression, Prestige, 50 achievements, and three Chapter 5 endings",
         },
   
         archive: {
@@ -1870,7 +1885,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/halloween-the-game/multiplayer-guide",
         type: "Beginner Guide",
         description:
-          "Learn what to do first as a Civilian, call police, manage items and Residents, build Sedan or Storm Cellar escapes, switch routes, and know when an open exit is worth taking.",
+          "Learn what to do first as a Civilian, call police, work with Residents, react to useful pickups, build Sedan or Storm Cellar escapes, switch routes, and know when an open exit is worth taking.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-multiplayer-first-objectives.webp",
@@ -1885,7 +1900,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 4,
           spotlightMeta:
-            "First objectives, phones, police calls, Residents, inventory, Repair Kits, Sedan Keys, car escape, Storm Cellar, route switching, police windows, and open-exit decisions",
+            "First objectives, phones, police calls, Residents, route-changing pickups, Sedan and Storm Cellar escapes, team coordination, route switching, police windows, and open-exit decisions",
         },
   
         archive: {
@@ -1896,11 +1911,101 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
+          "Halloween: The Game Best Civilians – Tier List & Who to Pick",
+        href: "/halloween-the-game/best-civilians",
+        type: "Guide",
+        description:
+          "Compare all 12 Civilians and choose who to play for general survival, repairs, Residents, fighting Michael, mobility, escape progress, and team support.",
+        date: "Updated recently",
+        image:
+          "/images/halloween-the-game/halloween-the-game-best-civilians-tier-list.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 349,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "All 12 Civilians, Laurie Strode, Marcus Navarro, Alexis Purcell, Tanya Harrison, Rachel Calahan, Jennifer Aarons, stats, traits, repairs, Residents, Michael pressure, mobility, and support",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Halloween: The Game All Items & Uses – What to Keep",
+        href: "/halloween-the-game/items-guide",
+        type: "Guide",
+        description:
+          "Decide what to keep in three Civilian inventory slots, with uses for rare items, grab-escape blades, escape tools, healing, throwables, firearms, and melee weapons.",
+        date: "Updated recently",
+        image:
+          "/images/halloween-the-game/halloween-the-game-lawn-darts-stack.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 350,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Three inventory slots, Ancient Amulet, Brass Lantern, Pocket Knife, Ice Pick, Flare Gun Police Badge, Repair Kit, Sedan Key, Gas, Bolt Cutters, Electric Fuse, healing, throwables, firearms, and melee weapons",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Halloween: The Game Escape & Spawn Helper",
+        href: "/halloween-the-game/escape-helper",
+        type: "Systems",
+        description:
+          "Compare Sedan, Storm Cellar, Escape Gate, and Police Wagon routes from the current match state, team items, visible barriers, and already-checked spawn areas.",
+        date: "Updated recently",
+        image:
+          "/images/halloween-the-game/halloween-escape-helper-team-sedan-items.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 348,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Sedan, Storm Cellar, Escape Gate, Police Wagon, team-held items, Found / Carried / At exit / Used states, barriers, Gas candidates, checked spawn areas, Inspect First, and Stop searching",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
           "Halloween: The Game Progression & Perks Guide",
         href: "/halloween-the-game/progression-perks",
         type: "Systems",
         description:
-          "Understand Profile, Killer, Civilian and Weapon XP, Perk Points, card rolls and upgrades, Civilian stats, starting items, challenge types, and what to level or spend on next.",
+          "Understand Profile, Killer, Civilian and Weapon XP, Perk Points, card rolls and upgrades, Civilian stats, starting-item unlocks, challenge types, and what to level or spend on next.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-progression-four-levels.webp",
@@ -1912,14 +2017,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 295,
           spotlightFeature: true,
-          spotlightOrder: 5,
+          spotlightOrder: 8,
           spotlightMeta:
-            "Profile, Killer, Civilian and Weapon levels, Perk Points, card rolls, rarity, Equip / Upgrade / Scrap, Civilian stats, starting items, challenge types, and progression priorities",
+            "Profile, Killer, Civilian and Weapon levels, Perk Points, card rolls, rarity, Equip / Upgrade / Scrap, Civilian stats, starting-item unlocks, challenge types, and progression priorities",
         },
   
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 9,
         },
       },
   
@@ -1942,14 +2047,14 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 319,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 9,
           spotlightMeta:
             "Patch 1.0.2 Prestige, Profile 100, Michael 50, Civilian 25, Weapon 10, timed challenges, Jennifer Prestige, 3,000 Perk Points, Clown Myers, Private Match farming, and Prestige errors",
         },
   
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 10,
         },
       },
   
@@ -1971,14 +2076,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 296,
           spotlightFeature: true,
-          spotlightOrder: 7,
+          spotlightOrder: 10,
           spotlightMeta:
             "Police calls, spectator mode, CB radio, Loomis, Reinforcements Available, returned police officer, arrest meter, POLICE WAGON CALLED, knockdown, Arrest interaction, and MICHAEL DETAINED!",
         },
   
         archive: {
           showInCollections: true,
-          order: 8,
+          order: 11,
         },
       },
   
@@ -2000,14 +2105,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 297,
           spotlightFeature: true,
-          spotlightOrder: 8,
+          spotlightOrder: 11,
           spotlightMeta:
             "Six Chapter 2 challenges, hardware store, Eric stockroom shelf, Tanya cash register, Dead-End Job, Slab peeing state, Rachel environmental kill, three friends, body cleanup, Judith Myers' grave, and car",
         },
   
         archive: {
           showInCollections: true,
-          order: 9,
+          order: 12,
         },
       },
   
@@ -2029,14 +2134,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 298,
           spotlightFeature: true,
-          spotlightOrder: 9,
+          spotlightOrder: 12,
           spotlightMeta:
             "Six Chapter 4 challenges, Wallace House, Annie car kill, Bob and Lynda stalking, Bloodthirsty, Bob kitchen wall, Sheet disguise, Lynda telephone kill, staged bedroom, film-plot route, and Laurie",
         },
   
         archive: {
           showInCollections: true,
-          order: 10,
+          order: 13,
         },
       },
   
@@ -2058,14 +2163,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 299,
           spotlightFeature: true,
-          spotlightOrder: 10,
+          spotlightOrder: 13,
           spotlightMeta:
             "Railroad ending, one-minute train timer, Cornfield Ending, Sewer Ending, Escape Through the Sewer, final route commits, shared narration, and Chapter 5 replay order",
         },
   
         archive: {
           showInCollections: true,
-          order: 11,
+          order: 14,
         },
       },
   
@@ -2087,14 +2192,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 320,
           spotlightFeature: true,
-          spotlightOrder: 11,
+          spotlightOrder: 14,
           spotlightMeta:
             "All 50 achievements, persistent checklist, Story Mode, 14 recordings, Civilian escape goals, Michael counters, Loomis detainment, three hidden achievements, Prestige, and progression cleanup",
         },
   
         archive: {
           showInCollections: true,
-          order: 12,
+          order: 15,
         },
       },
     ],
