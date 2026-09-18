@@ -939,7 +939,9 @@ const paths = [
   '/runescape-dragonwilds/achievements',
   '/runescape-dragonwilds/crossplay-coop',
   '/runescape-dragonwilds/fast-travel',
- '/runescape-dragonwilds/starter-base'
+ '/runescape-dragonwilds/starter-base',
+
+   'hellraiser-revival',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -947,6 +949,8 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'hellraiser-revival' : '2026-09-18',
+  
   '/runescape-dragonwilds': '2026-09-16',
   '/runescape-dragonwilds/beginner-guide': '2026-09-16',
   '/runescape-dragonwilds/dragon-slayer': '2026-09-16',
