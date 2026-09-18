@@ -13,15 +13,16 @@ const metadataTitle =
   "Dimraeth Guide: Walkthrough, Classes, Builds & Progression";
 
 const metadataDescription =
-  "Find Dimraeth walkthroughs, classes, Skill Tree help, builds, bosses, pets, Sanctum tips, co-op rules, achievements, Deeds, and what to do next.";
+  "Find Dimraeth walkthroughs, classes, Skill Tree help, spells, builds, bosses, pets, co-op, Deeds, difficulty, achievements, and what to do next.";
 
 const articleDescription =
-  "A practical Dimraeth guide for choosing what to do next, from Earlwood and Wildwood story progression to Goblin King and Aelwynor, classes and race combinations, Skill Points and respecs, builds, pets, Sanctum development, co-op progression, Deeds, Bounties, achievements, and post-story activities.";
+  "A practical Dimraeth guide for deciding what to do next, from Earlwood and Wildwood story progression to Goblin King and Aelwynor, classes and races, world difficulty, Skill Points, Spellbooks, builds, pets, Sanctum development, co-op, Deeds, Bounties, achievements, and post-story activities.";
 
 const imageUrls = [
   `${siteUrl}/images/dimraeth/dimraeth-forest-path-start.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-human-magician-elemental-ranger.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-skill-tree-overview.webp`,
+  `${siteUrl}/images/dimraeth/dimraeth-alaric-first-spellbook.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-goblin-king-defeated.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-forest-king-story-end.webp`,
   `${siteUrl}/images/dimraeth/dimraeth-sanctum-workshop-stations.webp`,
@@ -51,8 +52,16 @@ const toc = [
     label: "Classes & races",
   },
   {
+    id: "difficulty",
+    label: "Difficulty",
+  },
+  {
     id: "skill-tree",
     label: "Skill Tree & Skill Points",
+  },
+  {
+    id: "spells",
+    label: "Spells & Spellbooks",
   },
   {
     id: "builds",
@@ -106,12 +115,12 @@ const relatedLinks = [
     label: "Dimraeth Skill Tree",
   },
   {
-    href: "/dimraeth/builds",
-    label: "Dimraeth Builds",
+    href: "/dimraeth/spells",
+    label: "Dimraeth Spells & Spellbooks",
   },
   {
-    href: "/dimraeth/achievements",
-    label: "Dimraeth Achievements",
+    href: "/dimraeth/builds",
+    label: "Dimraeth Builds",
   },
   {
     href: "/dimraeth/deeds-bounties",
@@ -181,7 +190,7 @@ const jsonLd = {
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-17",
+      dateModified: "2026-09-18",
       articleSection: "Game Guides",
       about: [
         {
@@ -206,7 +215,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Difficulty",
+        },
+        {
+          "@type": "Thing",
           name: "Skill Tree",
+        },
+        {
+          "@type": "Thing",
+          name: "Spells",
+        },
+        {
+          "@type": "Thing",
+          name: "Spellbooks",
         },
         {
           "@type": "Thing",
@@ -288,12 +309,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Dimraeth Guide: Walkthrough, Classes, Builds & What to Do Next"
-          description="Find the next step when you are stuck: follow the story through Wildwood, fix a weak build, choose a class, spend Skill Points, prepare the Sanctum, or move into Deeds and other post-story progress."
+          description="Find the next step when you are stuck: follow the story through Wildwood, choose a class, understand difficulty, spend Skill Points, unlock Spellbooks, fix a weak build, prepare the Sanctum, or move into Deeds and post-story progress."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 17, 2026"
+          updatedAt="September 18, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

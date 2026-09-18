@@ -930,6 +930,7 @@ const paths = [
   '/dimraeth/classes',
   '/dimraeth/skill-tree',
   '/dimraeth/achievements',
+  '/dimraeth/spells',
 
   '/runescape-dragonwilds',
   '/runescape-dragonwilds/beginner-guide',
@@ -950,7 +951,7 @@ type SitemapPath = (typeof paths)[number];
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'hellraiser-revival' : '2026-09-18',
-  
+
   '/runescape-dragonwilds': '2026-09-16',
   '/runescape-dragonwilds/beginner-guide': '2026-09-16',
   '/runescape-dragonwilds/dragon-slayer': '2026-09-16',
@@ -975,6 +976,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 '/dimraeth/classes': '2026-09-17',
 '/dimraeth/skill-tree': '2026-09-17',
 '/dimraeth/achievements': '2026-09-17',
+'/dimraeth/spells' :'2026-09-18',
   
   '/tcg-card-shop-simulator': '2026-09-16',
   '/tcg-card-shop-simulator/progression-guide': '2026-09-16',
