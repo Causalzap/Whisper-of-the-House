@@ -4,99 +4,80 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorProgressionContent from "@/data/tcg-card-shop-simulator/progression-guide.mdx";
+import TcgCardShopSimulatorBestDecksContent from "@/data/tcg-card-shop-simulator/best-decks.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/progression-guide`;
+const pageUrl = `${hubUrl}/best-decks`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Progression Guide: What to Unlock";
+  "Best Decks in TCG Card Shop Simulator";
 
 const metadataDescription =
-  "See what to unlock next, when to expand or hire, how the level 7 Workbench changes progression, and when Ascension opens at levels 18 and 32.";
+  "Try tested Tetramon decks built around Wolan burst, discard and Mentos, or Shield and Fire, with substitutions and tournament play tips.";
 
 const articleDescription =
-  "TCG Card Shop Simulator Version 1.0 progression from opening tasks and shop-level gates through the level 7 Workbench, expansion and staffing decisions, grading and automation, and Ascension licenses at levels 18 and 32.";
+  "Tested Tetramon deck builds for TCG Card Shop Simulator Version 1.0, including Wolan Evolution Burst, Discard and Recycle with Mentos, Shield and Fire, a Freeze alternative, missing-card substitutions, and tournament deck decisions.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-level-up-unlocks.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-shop-expansion-400.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-wolan-two-dragons-plus-28.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-mentos-discard-boost.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-shield-fire-board.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "progression-order",
-    label: "What to unlock next",
+    id: "best-deck-choice",
+    label: "Which deck should you build?",
   },
   {
-    id: "first-days",
-    label: "Opening shop priorities",
+    id: "wolan-evolution",
+    label: "Wolan Evolution Burst",
   },
   {
-    id: "card-table",
-    label: "Card Table objective",
+    id: "discard-recycle",
+    label: "Discard & Recycle",
   },
   {
-    id: "shop-level-unlocks",
-    label: "Shop level unlocks",
+    id: "shield-fire",
+    label: "Shield & Fire",
   },
   {
-    id: "workbench-level-7",
-    label: "Level 7 Workbench",
+    id: "freeze-counter",
+    label: "Freeze Counter",
   },
   {
-    id: "expansion-timing",
-    label: "When to expand",
+    id: "missing-cards",
+    label: "Missing-card replacements",
   },
   {
-    id: "when-to-hire",
-    label: "When to hire",
-  },
-  {
-    id: "mid-game",
-    label: "Mid-game priorities",
-  },
-  {
-    id: "grading-workbench-automation",
-    label: "Grading & automation",
-  },
-  {
-    id: "late-game",
-    label: "Ascension unlocks",
-  },
-  {
-    id: "progression-stuck",
-    label: "Why progression is stuck",
+    id: "tournament-deck",
+    label: "Best tournament deck",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/tcg-card-shop-simulator/money-guide",
-    label: "TCG Card Shop Simulator Money Guide",
-  },
-  {
-    href: "/tcg-card-shop-simulator/ascension-cards",
-    label: "Ascension Cards Guide",
-  },
-  {
-    href: "/tcg-card-shop-simulator/card-grading",
-    label: "Card Grading Guide",
+    href: "/tcg-card-shop-simulator/deck-builder",
+    label: "Tetramon Deck Builder",
   },
   {
     href: "/tcg-card-shop-simulator/tetramon-duel-master",
     label: "Tetramon Duel Master Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
+    href: "/tcg-card-shop-simulator/tier-list",
+    label: "Tetramon Tier List",
+  },
+  {
+    href: "/tcg-card-shop-simulator/ascension-cards",
+    label: "Ascension Cards Guide",
   },
   {
     href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide",
+    label: "TCG Card Shop Simulator Guide Hub",
   },
 ];
 
@@ -117,7 +98,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Shop level unlocks appearing during early progression in TCG Card Shop Simulator",
+        alt: "Wolan and two Dragons producing a plus 28 Fire boost in TCG Card Shop Simulator",
       },
     ],
   },
@@ -151,7 +132,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Progression Guide",
+          name: "Best Decks",
           item: pageUrl,
         },
       ],
@@ -164,7 +145,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Progression Guide: What to Unlock Next",
+        "Best Decks in TCG Card Shop Simulator",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -177,39 +158,39 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Shop Progression",
-        },
-        {
-          "@type": "Thing",
-          name: "Shop Level",
-        },
-        {
-          "@type": "Thing",
-          name: "Workbench",
-        },
-        {
-          "@type": "Thing",
           name: "Tetramon",
         },
         {
           "@type": "Thing",
-          name: "Shop Expansion",
+          name: "Tetramon Decks",
         },
         {
           "@type": "Thing",
-          name: "Employees",
+          name: "Wolan Evolution Burst",
         },
         {
           "@type": "Thing",
-          name: "Card Grading",
+          name: "Discard Deck",
         },
         {
           "@type": "Thing",
-          name: "Automation",
+          name: "Mentos",
         },
         {
           "@type": "Thing",
-          name: "Ascension Card Pack Licenses",
+          name: "Shield Deck",
+        },
+        {
+          "@type": "Thing",
+          name: "Fire Deck",
+        },
+        {
+          "@type": "Thing",
+          name: "Freeze Deck",
+        },
+        {
+          "@type": "Thing",
+          name: "Tetramon Tournament",
         },
       ],
       author: {
@@ -254,8 +235,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Progression Guide: What to Unlock Next"
-          description="Decide what deserves your next purchase, when more space or staff will actually help, how level 7 changes card progression, and when Ascension opens at levels 18 and 32."
+          title="Best Decks in TCG Card Shop Simulator"
+          description="Start with Wolan Evolution Burst for the most proven tournament setup, use Discard and Mentos for a combo-heavy deck, or add Shield support when fast openings are ending matches before your damage comes online."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
           breadcrumbBaseHref="/"
@@ -264,7 +245,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorProgressionContent />
+          <TcgCardShopSimulatorBestDecksContent />
         </GuideArticlePage>
       </main>
 

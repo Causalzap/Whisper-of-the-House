@@ -921,23 +921,29 @@ export const guideClusters: GuideCluster[] = [
     label: "Card Shop Management & Tetramon",
     eyebrow: "Spotlight Guide",
     hubStatus:
-      "Version 1.0 + progression + money + Tetramon cards + deck building + duels + 50 achievements",
+      "Version 1.0 + progression + money + Tetramon cards + deck building + best decks + duels + grading + Ascension + 50 achievements",
   
     description:
-      "Decide what the shop needs next, fix progression and cash problems, compare Tetramon cards, build a playable 50-card deck, learn customer duels and tournaments, and track all 50 achievements through the 1.0 endgame.",
+      "Run the shop without starving its cash flow, choose useful upgrades, manage packs and valuable cards, build stronger Tetramon decks, learn customer duels and tournaments, use grading and Ascension well, and track all 50 achievements.",
   
     coverage: [
-      "Shop progression from the opening tasks through level-based unlocks, the Card Table objective, level 7 Workbench, expansion timing, employee decisions, grading, automation, and the late Ascension milestones",
+      "Shop progression from the opening tasks through shop-level gates, the Card Table objective, level 7 Workbench, expansion timing, employee decisions, grading and automation, plus Ascension licenses at levels 18 and 32",
   
-      "Money management through market-price markups, stock turnover, large customer purchases, license and first-stock costs, high-value single-card sales, pack opening decisions, product variety, and play-table income",
+      "Money management through 10–20% pricing tests, stock turnover, product profitability, large customer purchases, customer-card flips, license and first-stock costs, expansion spending, high-value singles, grading, pack opening, product variety and play-table income",
   
-      "Tetramon card comparison across all 121 playable card identities, with individual scores built from Play Effect value, reliability, flexibility, synergy, evolution accessibility, and printed stat efficiency",
+      "Tetramon card comparison across all 121 playable card identities, using Play Effect value, reliability, flexibility, synergy, evolution accessibility and printed stats to compare individual cards",
   
-      "Tetramon deck building through the legal 50-card limit, four-copy rule, playable earlier stages, evolution support, opening-hand consistency, card scoring, collection limits, and checking why a legal deck still produces unusable hands",
+      "Tetramon deck building through the legal 50-card limit, four-copy rule, playable earlier stages, evolution support, collection limits, opening-hand consistency and diagnosing legal decks that still draw badly",
   
-      "Tetramon Duel Master match rules through the five-card opening hand, mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardian thresholds, customer duels, and tournaments",
+      "Tested Tetramon builds built around Wolan Evolution Burst, Discard and Recycle, Shield and Fire, and Freeze, including their core game plans, match fit, substitutions and common failure states",
   
-      "All 50 achievements with a persistent tracker, manual checkout planning, daily Profit versus Revenue, seller thresholds, pack and collection grinds, rare pulls, grading goals, Ascension, and 50 Tetramon customer wins",
+      "Tetramon Duel Master through the five-card opening hand, mulligan, Fire, Earth, Water and Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardians, customer duels and tournaments",
+  
+      "Card grading decisions through raw versus graded value, submission costs, turnaround time, batch submissions, Grade 9 and Grade 10 upside, regrading, downgrades and deciding when immediate cash is more useful",
+  
+      "Ascension progression through the level 18 32-count license, level 32 64-count license, stocking packs, opening versus selling, keeping playable copies, valuable pulls, grading choices and collection progress",
+  
+      "All 50 achievements with a persistent tracker for manual checkouts, daily Profit goals, card sales, pack and collection grinds, grading targets, Ascension pulls and 50 Tetramon customer wins",
     ],
   
     image:
@@ -960,16 +966,16 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator",
         type: "Guide Hub",
         description:
-          "Work out what is actually slowing the shop down, from unlocks, cash and stock to packs, grading, Tetramon cards, deck building, matches, and long completion goals.",
+          "Figure out what the shop needs next, protect cash and stock, decide when to open packs or grade cards, build playable Tetramon decks, and move into Ascension and long completion goals.",
         image:
-          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-workbench-unlocks.webp",
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-workbench-pack-opener-unlocks.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
   
         home: {
           spotlightMeta:
-            "Version 1.0, shop progression, money, pricing, stock, level 7 Workbench, Tetramon cards, deck building, Duel Master, grading, packs, Ascension, and 50 achievements",
+            "Version 1.0, shop progression, money, pricing, stock, level 7 Workbench, Tetramon cards, deck building, best decks, Duel Master, grading, Ascension and 50 achievements",
         },
   
         archive: {
@@ -984,7 +990,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator/progression-guide",
         type: "Guide",
         description:
-          "Choose what to unlock next, clear the Card Table objective, use shop levels as gates, open the level 7 Workbench, time expansions and hires, and reach the late Ascension packs.",
+          "Choose what to unlock next, clear early task gates, use the level 7 Workbench, time expansions and hires, and prepare for Ascension at shop levels 18 and 32.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-level-up-unlocks.webp",
@@ -999,7 +1005,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "Early shop priorities, Card Table objective, shop-level gates, level 7 Workbench, expansion timing, employees, grading, automation, level 70 Ascension, and level 85 pack progression",
+            "Early shop priorities, Card Table objective, shop-level gates, level 7 Workbench, expansion timing, employees, grading, automation, level 18 Ascension 32-count and level 32 Ascension 64-count",
         },
   
         archive: {
@@ -1010,11 +1016,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "TCG Card Shop Simulator Money Guide: Pricing & Profit",
+          "How to Make Money Fast in TCG Card Shop Simulator",
         href: "/tcg-card-shop-simulator/money-guide",
         type: "Systems",
         description:
-          "Price products without killing turnover, keep fast sellers stocked, account for the real cost of licenses, decide when to open packs, and use valuable singles without starving the shop.",
+          "Make money faster with better pricing, deeper stock, profitable products, customer-card flips, safer license spending, grading decisions and smarter expansion timing.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp",
@@ -1029,7 +1035,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 2,
           spotlightMeta:
-            "Market price +10% to +20% testing, 33-pack customer purchase, $198 checkout, license stock costs, $682 single-card sale, sell-versus-open packs, product mix, and play-table income",
+            "10–20% pricing tests, stock turnover, 33-pack $198 purchase, profitable product comparisons, customer-card flips, license costs, expansion cash, $682 single-card sale, grading, packs and play-table income",
         },
   
         archive: {
@@ -1044,7 +1050,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator/tier-list",
         type: "Guide",
         description:
-          "Compare all 121 playable Tetramon cards by individual score, Play Effect, reliability, evolution access, synergy, flexibility and stats, then filter by type, class, effect, or tier.",
+          "Compare all 121 playable Tetramon cards by Play Effect, reliability, evolution access, synergy, flexibility and stats, then filter the list by type, class, effect or tier.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-element-stats.webp",
@@ -1059,7 +1065,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 3,
           spotlightMeta:
-            "121 Tetramon cards, individual card scores, A / B / C tiers, Play Effect value, reliability, flexibility, synergy, evolution access, stat efficiency, type filters, class filters, and effect filters",
+            "121 Tetramon cards, individual card scores, A / B / C tiers, Play Effects, reliability, flexibility, synergy, evolution access, stat efficiency, type filters, class filters and effect filters",
         },
   
         archive: {
@@ -1074,7 +1080,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator/deck-builder",
         type: "Systems",
         description:
-          "Build and check a 50-card Tetramon deck, stay within the four-copy limit, keep enough playable earlier stages, support evolution lines, and find why a legal deck still produces bad hands.",
+          "Build and check a 50-card Tetramon deck, stay within the four-copy limit, support evolution lines, keep enough playable starters and diagnose bad opening hands.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetran-split-evolution.webp",
@@ -1089,7 +1095,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 4,
           spotlightMeta:
-            "50-card Tetramon decks, four-copy limit, playable starters, evolution support, deck score, card ownership, deck checking, opening-hand consistency, and fixing legal but unplayable lists",
+            "50-card Tetramon decks, four-copy limit, playable starters, evolution support, deck score, card ownership, deck checking, opening-hand consistency and fixing legal but unplayable lists",
         },
   
         archive: {
@@ -1100,11 +1106,41 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
+          "Best Decks in TCG Card Shop Simulator",
+        href: "/tcg-card-shop-simulator/best-decks",
+        type: "Builds",
+        description:
+          "Compare tested Tetramon builds using Wolan Evolution Burst, Discard and Recycle, Shield and Fire, and Freeze, with their game plans, weaknesses and card substitutions.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-wolan-two-dragons-plus-28.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 356,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Wolan Evolution Burst, two Dragons and +28 Fire, Mentos discard boosts, Angis recycle, Shield and Fire, Freeze counters, substitutions and tournament deck choices",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
           "How to Play Tetramon Duel Master in TCG Card Shop Simulator",
         href: "/tcg-card-shop-simulator/tetramon-duel-master",
         type: "Guide",
         description:
-          "Learn the opening hand, four Elemental Areas, Play Effects, evolution timing, Guardian thresholds, customer duels, tournaments, and what to fix after a loss.",
+          "Learn the opening hand, four Elemental Areas, Play Effects, evolution timing, Guardian thresholds, customer duels, tournaments and what to fix after a loss.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-tetramon-element-stats.webp",
@@ -1117,14 +1153,74 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 328,
           spotlightFeature: true,
-          spotlightOrder: 5,
+          spotlightOrder: 6,
           spotlightMeta:
-            "Five-card opening hand, mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardians, customer duels, tournaments, and first-match troubleshooting",
+            "Five-card opening hand, mulligan, Fire / Earth / Water / Wind areas, Play Effects, evolution timing, 500 Tamer Points, Guardians, customer duels, tournaments and match troubleshooting",
         },
   
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "What Cards Are Worth Grading in TCG Card Shop Simulator?",
+        href: "/tcg-card-shop-simulator/card-grading",
+        type: "Systems",
+        description:
+          "Decide which cards are worth grading, compare raw and graded value, choose turnaround speed, handle batch submissions and judge whether a regrade is worth the risk.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-grade-9-value-825.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 357,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Raw versus graded value, Grade 9 $825 example, service costs, turnaround time, batch grading, Grade 10 upside, regrading, unchanged grades, downgrades and immediate-cash decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "How to Get Ascension Cards in TCG Card Shop Simulator",
+        href: "/tcg-card-shop-simulator/ascension-cards",
+        type: "Systems",
+        description:
+          "Unlock Ascension stock at shop levels 18 and 32, buy the 32-count and 64-count licenses, stock packs, decide what to open, and keep useful or valuable cards.",
+        date: "Updated recently",
+        image:
+          "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-ascension-stock-order-32-64.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 358,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Shop level 18 32-count license, shop level 32 64-count license, $10,000 and $15,000 license costs, stocking packs, opening versus selling, playable copies, valuable pulls and grading choices",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
         },
       },
   
@@ -1134,7 +1230,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/tcg-card-shop-simulator/achievements",
         type: "Achievements",
         description:
-          "Track all 50 achievements with a persistent checklist and plan manual checkouts, profit days, card sales, pack and collection grinds, grading, Ascension, and 50 Tetramon wins.",
+          "Track all 50 achievements with a persistent checklist and plan manual checkouts, profit goals, card sales, pack and collection grinds, grading, Ascension and 50 Tetramon wins.",
         date: "Updated recently",
         image:
           "/images/tcg-card-shop-simulator/tcg-card-shop-simulator-day-1-daily-report.webp",
@@ -1147,14 +1243,14 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 329,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 9,
           spotlightMeta:
-            "All 50 achievements, persistent tracker, 1,000 manual checkouts, $1K / $10K / $30K daily Profit, 25,000 packs, 4,000 cards, rare pulls, 500 Gem Mint cards, Ascension, and 50 Tetramon wins",
+            "All 50 achievements, persistent tracker, 1,000 manual checkouts, $1K / $10K / $30K daily Profit, 25,000 packs, 4,000 cards, rare pulls, 500 Gem Mint cards, Ascension and 50 Tetramon wins",
         },
   
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 10,
         },
       },
     ],

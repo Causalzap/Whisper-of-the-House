@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
 const pageUrl = `${hubUrl}/money-guide`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Money Guide: Pricing & Profit";
+  "How to Make Money Fast in TCG Card Shop Simulator";
 
 const metadataDescription =
-  "Make more money in TCG Card Shop Simulator with better pricing, deeper stock, smarter pack opening, safer license timing, and high-value card sales.";
+  "Make money faster with better pricing, stock control, profitable products, card flips, pack decisions, grading, and smarter expansion timing.";
 
 const articleDescription =
-  "A practical TCG Card Shop Simulator Version 1.0 money guide covering early cash flow, market-price markups, stock turnover, license costs, single-card sales, when to open packs, product diversification, play-table income, and how to diagnose a shop that stays busy but low on cash.";
+  "TCG Card Shop Simulator Version 1.0 money strategies covering 10–20% pricing tests, stock turnover, profitable products, customer-card flips, license costs, expansion spending, high-value singles, grading, pack opening, product mix, play-table income, and cash-flow problems.";
 
 const imageUrls = [
   `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-price-market-plus-20.webp`,
@@ -30,27 +30,43 @@ const heroImage = imageUrls[0];
 const toc = [
   {
     id: "early-money-loop",
-    label: "Early money loop",
+    label: "How to make money fast",
   },
   {
     id: "pricing",
-    label: "How much above market?",
+    label: "Best product prices",
   },
   {
     id: "stock-turnover",
     label: "Stock turnover",
   },
   {
+    id: "best-money-makers",
+    label: "Best money makers",
+  },
+  {
+    id: "customer-card-flips",
+    label: "Customer card flips",
+  },
+  {
     id: "licenses",
     label: "License costs",
   },
   {
+    id: "expansion-cash",
+    label: "Expansion & cash",
+  },
+  {
     id: "single-cards",
-    label: "High-value single cards",
+    label: "High-value singles",
+  },
+  {
+    id: "grading",
+    label: "Grading for profit",
   },
   {
     id: "opening-packs",
-    label: "Sell packs or open them?",
+    label: "Open or sell packs?",
   },
   {
     id: "product-mix",
@@ -72,8 +88,12 @@ const relatedLinks = [
     label: "TCG Card Shop Simulator Progression Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
+    href: "/tcg-card-shop-simulator/card-grading",
+    label: "TCG Card Shop Simulator Card Grading Guide",
+  },
+  {
+    href: "/tcg-card-shop-simulator/ascension-cards",
+    label: "TCG Card Shop Simulator Ascension Cards Guide",
   },
   {
     href: "/tcg-card-shop-simulator/achievements",
@@ -81,7 +101,7 @@ const relatedLinks = [
   },
   {
     href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide Hub",
+    label: "TCG Card Shop Simulator Guide",
   },
 ];
 
@@ -102,7 +122,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "TCG Card Shop Simulator product pricing set above market price",
+        alt: "Product pricing set above market price in TCG Card Shop Simulator",
       },
     ],
   },
@@ -149,11 +169,11 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit",
+        "How to Make Money Fast in TCG Card Shop Simulator",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-19",
       articleSection: "Game Guides",
       about: [
         {
@@ -178,7 +198,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Card Pack Sales",
+          name: "Product Profit",
+        },
+        {
+          "@type": "Thing",
+          name: "Customer Card Trading",
         },
         {
           "@type": "Thing",
@@ -187,6 +211,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Product Licenses",
+        },
+        {
+          "@type": "Thing",
+          name: "Shop Expansion",
+        },
+        {
+          "@type": "Thing",
+          name: "Card Grading",
         },
         {
           "@type": "Thing",
@@ -239,13 +271,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Money Guide: Pricing, Stock and Profit"
-          description="Price products without killing turnover, keep fast sellers stocked, decide when packs should stay sealed, and use licenses and high-value cards without draining the shop."
+          title="How to Make Money Fast in TCG Card Shop Simulator"
+          description="Keep profitable stock moving, test prices around 10–20% above market, protect your restock cash, and use card flips, singles, grading, packs, and expansion without starving the shop."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 19, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -4,99 +4,88 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TcgCardShopSimulatorProgressionContent from "@/data/tcg-card-shop-simulator/progression-guide.mdx";
+import TcgCardShopSimulatorAscensionCardsContent from "@/data/tcg-card-shop-simulator/ascension-cards.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/tcg-card-shop-simulator`;
-const pageUrl = `${hubUrl}/progression-guide`;
+const pageUrl = `${hubUrl}/ascension-cards`;
 
 const metadataTitle =
-  "TCG Card Shop Simulator Progression Guide: What to Unlock";
+  "How to Get Ascension Cards in TCG Card Shop Simulator";
 
 const metadataDescription =
-  "See what to unlock next, when to expand or hire, how the level 7 Workbench changes progression, and when Ascension opens at levels 18 and 32.";
+  "Learn how to get Ascension Cards, unlock 32-count and 64-count stock, decide when to open packs, and choose which cards to keep, sell, or grade.";
 
 const articleDescription =
-  "TCG Card Shop Simulator Version 1.0 progression from opening tasks and shop-level gates through the level 7 Workbench, expansion and staffing decisions, grading and automation, and Ascension licenses at levels 18 and 32.";
+  "A TCG Card Shop Simulator Version 1.0 Ascension guide covering the level 18 32-count and level 32 64-count licenses, stocking Ascension Packs, opening versus selling them, keeping playable copies, using Ascension cards in Tetramon decks, handling valuable pulls, grading decisions, collection goals, and common unlock problems.";
 
 const imageUrls = [
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-level-up-unlocks.webp`,
-  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-shop-expansion-400.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-ascension-stock-order-32-64.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-ascension-pack-stock.webp`,
+  `${siteUrl}/images/tcg-card-shop-simulator/tcg-card-shop-simulator-ascension-high-value-pulls.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "progression-order",
-    label: "What to unlock next",
+    id: "how-to-get-ascension-cards",
+    label: "How to get Ascension Cards",
   },
   {
-    id: "first-days",
-    label: "Opening shop priorities",
+    id: "32-or-64",
+    label: "32-count vs 64-count",
   },
   {
-    id: "card-table",
-    label: "Card Table objective",
+    id: "stock-ascension",
+    label: "Stocking Ascension Packs",
   },
   {
-    id: "shop-level-unlocks",
-    label: "Shop level unlocks",
+    id: "open-or-sell",
+    label: "Open or sell packs?",
   },
   {
-    id: "workbench-level-7",
-    label: "Level 7 Workbench",
+    id: "keep-copies",
+    label: "How many cards to keep",
   },
   {
-    id: "expansion-timing",
-    label: "When to expand",
+    id: "ascension-and-decks",
+    label: "Ascension cards in decks",
   },
   {
-    id: "when-to-hire",
-    label: "When to hire",
+    id: "valuable-ascension",
+    label: "Expensive Ascension cards",
   },
   {
-    id: "mid-game",
-    label: "Mid-game priorities",
+    id: "ascension-collection",
+    label: "Collection goals",
   },
   {
-    id: "grading-workbench-automation",
-    label: "Grading & automation",
-  },
-  {
-    id: "late-game",
-    label: "Ascension unlocks",
-  },
-  {
-    id: "progression-stuck",
-    label: "Why progression is stuck",
+    id: "ascension-stuck",
+    label: "Why packs are unavailable",
   },
 ];
 
 const relatedLinks = [
   {
+    href: "/tcg-card-shop-simulator/progression-guide",
+    label: "TCG Card Shop Simulator Progression Guide",
+  },
+  {
+    href: "/tcg-card-shop-simulator/card-grading",
+    label: "TCG Card Shop Simulator Card Grading Guide",
+  },
+  {
+    href: "/tcg-card-shop-simulator/best-decks",
+    label: "Best Tetramon Decks",
+  },
+  {
     href: "/tcg-card-shop-simulator/money-guide",
     label: "TCG Card Shop Simulator Money Guide",
   },
   {
-    href: "/tcg-card-shop-simulator/ascension-cards",
-    label: "Ascension Cards Guide",
-  },
-  {
-    href: "/tcg-card-shop-simulator/card-grading",
-    label: "Card Grading Guide",
-  },
-  {
-    href: "/tcg-card-shop-simulator/tetramon-duel-master",
-    label: "Tetramon Duel Master Guide",
-  },
-  {
-    href: "/tcg-card-shop-simulator/achievements",
-    label: "TCG Card Shop Simulator Achievements Guide",
-  },
-  {
     href: "/tcg-card-shop-simulator",
-    label: "TCG Card Shop Simulator Guide",
+    label: "TCG Card Shop Simulator Guide Hub",
   },
 ];
 
@@ -117,7 +106,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 600,
         height: 300,
-        alt: "Shop level unlocks appearing during early progression in TCG Card Shop Simulator",
+        alt: "Ascension 32-count and 64-count licenses in TCG Card Shop Simulator",
       },
     ],
   },
@@ -151,7 +140,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Progression Guide",
+          name: "Ascension Cards",
           item: pageUrl,
         },
       ],
@@ -164,7 +153,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "TCG Card Shop Simulator Progression Guide: What to Unlock Next",
+        "How to Get Ascension Cards in TCG Card Shop Simulator",
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
@@ -177,39 +166,31 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Shop Progression",
+          name: "Ascension Cards",
         },
         {
           "@type": "Thing",
-          name: "Shop Level",
+          name: "Ascension Card Pack",
         },
         {
           "@type": "Thing",
-          name: "Workbench",
+          name: "Ascension 32-count License",
         },
         {
           "@type": "Thing",
-          name: "Tetramon",
+          name: "Ascension 64-count License",
         },
         {
           "@type": "Thing",
-          name: "Shop Expansion",
+          name: "Stock Order",
         },
         {
           "@type": "Thing",
-          name: "Employees",
+          name: "Tetramon Deck Building",
         },
         {
           "@type": "Thing",
           name: "Card Grading",
-        },
-        {
-          "@type": "Thing",
-          name: "Automation",
-        },
-        {
-          "@type": "Thing",
-          name: "Ascension Card Pack Licenses",
         },
       ],
       author: {
@@ -254,8 +235,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="TCG Card Shop Simulator Progression Guide: What to Unlock Next"
-          description="Decide what deserves your next purchase, when more space or staff will actually help, how level 7 changes card progression, and when Ascension opens at levels 18 and 32."
+          title="How to Get Ascension Cards in TCG Card Shop Simulator"
+          description="Unlock Ascension stock at shop levels 18 and 32, keep enough sellable inventory on the shelf, then decide which packs to open and which cards are better kept, sold, or graded."
           gameTitle="TCG Card Shop Simulator"
           gameHref="/tcg-card-shop-simulator"
           breadcrumbBaseHref="/"
@@ -264,7 +245,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <TcgCardShopSimulatorProgressionContent />
+          <TcgCardShopSimulatorAscensionCardsContent />
         </GuideArticlePage>
       </main>
 
