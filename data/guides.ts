@@ -131,6 +131,444 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "ENDLESS Legend 2",
+    game: "ENDLESS Legend 2",
+    href: "/endless-legend-2",
+    slug: "endless-legend-2",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "4X Strategy, Factions & Empire Management",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "Version 1.0 + all 8 factions + first 30 turns + Minor Factions + Approval + Tidefall + victory conditions + 59 achievements",
+  
+    description:
+      "Start an ENDLESS Legend 2 campaign, compare all eight factions, stabilize the first 30 turns, manage Minor Factions and Approval, prepare for Tidefall, choose a victory path, and track all 59 achievements.",
+  
+    coverage: [
+      "First 30 turns through capital placement, Industry and Influence priorities, scouting, the first Camp, Dust spending, research, army strength, Monsoon and the transition into midgame",
+  
+      "All eight playable factions through Kin of Sheredyn, Order of Zelevas, Last Lords, Necrophage, Severed Claws, Aspects, Tahuks and Sandshapers, with their main resources, pressures and campaign styles",
+  
+      "Kin of Sheredyn through capital layout, Fortification, Strength of Our Zeal, population, Chosen, Divine Monument, research and compact expansion",
+  
+      "Order of Zelevas through Loyalty to the Emperor, Dust recruitment, Keeps, free Cavalry, Chosen combat, Influence and territorial expansion",
+  
+      "Last Lords through Dust-powered population, Approval, Lord's Estates, paid army recovery, Marquis Galardi, Roundup, Primordial Lords and faction progression",
+  
+      "Severed Claws through Minor Faction Villages, outside population and units, the one-City economy, Ever Fighting, Exploiter and kill-based combat",
+  
+      "Sandshapers through first-City Ruin placement, Sand Food, Raise and Restore decisions, Wishes, Ancient Wisdom, teleportation, Stone Stance and Tidefall planning",
+  
+      "Minor Factions through Parlay, Bribe, Attack, Assimilation, Protectorates, population, units, village scaling and faction-specific interactions",
+  
+      "Approval and population management through vocation capacity, Destitute population, Shanties, production penalties, recovery and rebellion",
+  
+      "Monsoon and Tidefall through temporary bridges, Curiosities, weather effects, exposed land, scouting and faction-specific interactions",
+  
+      "Victory conditions through Worship, Impress, Master, Conquest, Score, objective maintenance, path switching and rival progress",
+  
+      "All 59 achievements with a persistent checklist covering victory routes, factions, Heroes, difficulty, unusual combat triggers and simultaneous Empire states",
+    ],
+  
+    image:
+      "/images/endless-legend-2/endless-legend-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 51,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "ENDLESS Legend 2 Guide – Factions, First 30 Turns, Tidefall & Victory",
+        href: "/endless-legend-2",
+        type: "Guide Hub",
+        description:
+          "Start with the first 30 turns, compare all eight factions, fix common Empire problems, prepare for Tidefall, choose a victory path, and continue into achievements and midgame decisions.",
+        image:
+          "/images/endless-legend-2/endless-legend-2-all-eight-factions.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "All 8 factions, first 30 turns, Approval, Minor Factions, Monsoon, Tidefall, victory conditions, 59 achievements and midgame decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Beginner Guide – First 30 Turns, Cities & Expansion",
+        href: "/endless-legend-2/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Choose the first City, balance Industry and Influence, scout efficiently, resolve the first Camp, spend Dust with purpose, strengthen the first army, and react to Monsoon and Tidefall.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-first-city-prepared-settlement.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 359,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First City, Prepared Settlement, Industry, Influence, scouting, Minor Factions, first Camp, Dust, research, army strength, Monsoon, Tidefall and turn 30",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Factions – All 8 Factions & How They Play",
+        href: "/endless-legend-2/factions",
+        type: "Guide",
+        description:
+          "Compare all eight factions by playstyle, core mechanics and main pressures, from Kin and Order to Last Lords, Necrophage, Aspects, Tahuks, Severed Claws and Sandshapers.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-all-eight-factions.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 360,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Kin of Sheredyn, Order of Zelevas, Last Lords, Necrophage, Severed Claws, Aspects, Tahuks, Sandshapers and Rogue Factions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Kin of Sheredyn Guide – Keeps, Chosen & Strength of Our Zeal",
+        href: "/endless-legend-2/kin-of-sheredyn",
+        type: "Guide",
+        description:
+          "Build the Kin around a strong capital, Fortification, Strength of Our Zeal, population roles, Chosen, Divine Monument, research and efficient territorial growth.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-kin-capital-keep-layout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 361,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Capital layout, level 3 districts, Keeps, Strength of Our Zeal, population, Chosen, Divine Monument, research and expansion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Order of Zelevas Guide – Loyalty, Dust Armies & Expansion",
+        href: "/endless-legend-2/order-of-zelevas",
+        type: "Guide",
+        description:
+          "Use battles, Influence and Territory to raise Loyalty, keep enough Dust for instant military recruitment, develop Keeps and Chosen, and expand without outrunning the army.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-order-faction-traits.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 362,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Loyalty to the Emperor, controlled Territories, Dust recruitment, Keeps, free Cavalry, Chosen, Influence, roads and expansion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Last Lords Guide – Dust, Population & Lord's Estates",
+        href: "/endless-legend-2/last-lords",
+        type: "Guide",
+        description:
+          "Use Dust for population and army recovery, build around Lord's Estates, manage Approval and faction quests, use Roundup carefully, and place Primordial Lords where they matter.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-last-lords-dust-economy.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 363,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Dust population, Approval, Lord's Estates, paid healing, Marquis Galardi, Roundup, Conscription, Primordial Lords and research",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Severed Claws Guide – Villages, Population & Combat",
+        href: "/endless-legend-2/severed-claws",
+        type: "Guide",
+        description:
+          "Use Minor Faction Villages for population and military units, manage the single-City economy, build around Ever Fighting and Exploiter, and chain attacks efficiently.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-severed-claws-faction-overview.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 364,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Minor Faction Villages, captured population, outside units, one-City expansion, Ever Fighting, Exploiter and kill-based extra attacks",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Sandshapers Guide – Opening, Ruins & Wishes",
+        href: "/endless-legend-2/sandshapers",
+        type: "Guide",
+        description:
+          "Build around Buried Ruins, Sand Food, Ancient Wisdom and selective Restorations, then use teleport routes, Tidefall scouting and position-heavy combat.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-sandshapers-first-city-ruin.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 365,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "First City, Buried Ruins, Raise Ruin, Sand Food, Wish of Awakening, Ancient Wisdom, Restoration, teleportation, Stone Stance and Tidefall",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Minor Factions Guide – Parlay, Assimilation & Protectorates",
+        href: "/endless-legend-2/minor-factions",
+        type: "Systems",
+        description:
+          "Compare Parlay, Bribe and Attack, understand Assimilation and Protectorates, choose useful population and units, and account for faction-specific village rules.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-minor-faction-village-options.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 366,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Parlay, Bribe, Attack, Assimilation, Protectorates, village scaling, population, units, slots, costs and faction exceptions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Approval Guide – How to Fix Shanties & Rebellions",
+        href: "/endless-legend-2/approval",
+        type: "Systems",
+        description:
+          "Diagnose falling Approval, Destitute population and Shanties, restore useful vocation capacity, stop production penalties, and prevent a City from reaching rebellion.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-approval-mutinous-penalty.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 367,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Approval, Destitute population, Shanties, vocation capacity, Food and Industry penalties, overexpansion, recovery and rebellion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Tidefall & Monsoon Guide – What Changes and What to Do",
+        href: "/endless-legend-2/tidefall",
+        type: "Systems",
+        description:
+          "Prepare for Monsoon, avoid temporary bridge losses, collect temporary opportunities, react to Tidefall, scout newly exposed land, and plan around faction-specific weather effects.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-monsoon-effects.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 368,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Monsoon effects, temporary bridges, Curiosities, Battle Spoils, Tidefall, newly exposed land, later Tidefalls and faction interactions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Victory Conditions – Worship, Impress, Master, Conquest & Score",
+        href: "/endless-legend-2/victory-conditions",
+        type: "Systems",
+        description:
+          "Compare Worship, Impress and Master, understand the final maintenance period, track rival progress, switch paths when needed, and account for Conquest and Score.",
+        date: "Updated recently",
+        image:
+          "/images/endless-legend-2/endless-legend-2-worship-victory-conditions.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 369,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "Worship, Impress, Master, Conquest, Score, objective requirements, Doomwraiths, Monuments, pacified Villages, path switching and 10-turn finish",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title:
+          "ENDLESS Legend 2 Achievements – All 59 Requirements & Checklist",
+        href: "/endless-legend-2/achievements",
+        type: "Achievements",
+        description:
+          "Track all 59 achievements and plan faction campaigns, Awakening victories, difficulty wins, Hero requirements, unusual combat triggers and exact Empire states.",
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 370,
+          spotlightFeature: true,
+          spotlightOrder: 12,
+          spotlightMeta:
+            "All 59 achievements, persistent checklist, Master, Worship, Impress, faction goals, Heroes, Endless difficulty, Mic Drop, combat triggers and cleanup",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+    ],
+  },
+  {
     title: "RuneScape: Dragonwilds",
     game: "RuneScape: Dragonwilds",
     href: "/runescape-dragonwilds",

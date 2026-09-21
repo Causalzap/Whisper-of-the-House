@@ -947,6 +947,20 @@ const paths = [
  '/runescape-dragonwilds/progression',
 
    'hellraiser-revival',
+
+   '/endless-legend-2',
+   '/endless-legend-2/beginner-guide',
+   '/endless-legend-2/factions',
+   '/endless-legend-2/kin-of-sheredyn',
+   '/endless-legend-2/order-of-zelevas',
+   '/endless-legend-2/last-lords',
+   '/endless-legend-2/severed-claws',
+   '/endless-legend-2/sandshapers',
+   '/endless-legend-2/minor-factions',
+   '/endless-legend-2/approval',
+   '/endless-legend-2/tidefall',
+   '/endless-legend-2/victory-conditions',
+   '/endless-legend-2/achievements',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -954,6 +968,20 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/endless-legend-2': '2026-09-21',
+  '/endless-legend-2/beginner-guide': '2026-09-21',
+  '/endless-legend-2/factions': '2026-09-21',
+  '/endless-legend-2/kin-of-sheredyn': '2026-09-21',
+  '/endless-legend-2/order-of-zelevas': '2026-09-21',
+  '/endless-legend-2/last-lords': '2026-09-21',
+  '/endless-legend-2/severed-claws': '2026-09-21',
+  '/endless-legend-2/sandshapers': '2026-09-21',
+  '/endless-legend-2/minor-factions': '2026-09-21',
+  '/endless-legend-2/approval': '2026-09-21',
+  '/endless-legend-2/tidefall': '2026-09-21',
+  '/endless-legend-2/victory-conditions': '2026-09-21',
+  '/endless-legend-2/achievements': '2026-09-21',
+
   'hellraiser-revival' : '2026-09-18',
 
   '/runescape-dragonwilds': '2026-09-18',
