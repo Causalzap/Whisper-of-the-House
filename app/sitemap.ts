@@ -984,15 +984,15 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   'hellraiser-revival' : '2026-09-18',
 
-  '/runescape-dragonwilds': '2026-09-18',
+  '/runescape-dragonwilds': '2026-09-22',
   '/runescape-dragonwilds/beginner-guide': '2026-09-16',
-  '/runescape-dragonwilds/dragon-slayer': '2026-09-16',
+  '/runescape-dragonwilds/dragon-slayer': '2026-09-22',
   '/runescape-dragonwilds/scorned-wilderness': '2026-09-16',
   '/runescape-dragonwilds/kuldra': '2026-09-16',
   '/runescape-dragonwilds/achievements': '2026-09-16',
-  '/runescape-dragonwilds/crossplay-coop': '2026-09-16',
+  '/runescape-dragonwilds/crossplay-coop': '2026-09-22',
   '/runescape-dragonwilds/fast-travel': '2026-09-17',
-  '/runescape-dragonwilds/starter-base': '2026-09-17',
+  '/runescape-dragonwilds/starter-base': '2026-09-22',
   '/runescape-dragonwilds/progression': '2026-09-18',
 
 

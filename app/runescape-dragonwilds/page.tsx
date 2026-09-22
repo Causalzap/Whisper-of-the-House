@@ -10,13 +10,13 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/runescape-dragonwilds`;
 
 const metadataTitle =
-  "RuneScape: Dragonwilds Guide – Beginner, Bosses & Endgame";
+  "RuneScape Dragonwilds Guide & Walkthrough – Progression & Bosses";
 
 const metadataDescription =
-  "Find RuneScape: Dragonwilds help for beginner survival, progression, bosses, fast travel, co-op, Scorned Wilderness, Queen Kuldra, and achievements.";
+  "Follow RuneScape Dragonwilds from beginner survival through Dragon Slayer, region progression, Scorned Wilderness, Queen Kuldra, co-op, and post-game goals.";
 
 const articleDescription =
-  "A practical RuneScape: Dragonwilds guide for deciding what to do next, from early survival and Dragon Slayer to fast travel, co-op, Scorned Wilderness, Queen Kuldra, achievements, and post-game goals.";
+  "Find where to go next in RuneScape: Dragonwilds, from early survival and base setup through Dragon Slayer, later regions, Scorned Wilderness, Queen Kuldra, co-op, achievements, and post-game goals.";
 
 const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-hub.webp`,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        alt: "RuneScape Dragonwilds guide to progression bosses and endgame",
+        alt: "RuneScape Dragonwilds progression guide from the opening regions to Queen Kuldra",
       },
     ],
   },
@@ -80,13 +80,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "RuneScape: Dragonwilds Guide – Beginner, Bosses and Endgame",
+        "RuneScape Dragonwilds Guide & Walkthrough – Progression & Bosses",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-16",
-      dateModified: "2026-09-18",
+      dateModified: "2026-09-22",
       articleSection: "Game Guides",
       about: [
         {
@@ -95,11 +95,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Beginner survival",
+          name: "RuneScape Dragonwilds progression",
         },
         {
           "@type": "Thing",
-          name: "Progression",
+          name: "RuneScape Dragonwilds walkthrough",
+        },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds beginner survival",
+        },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds base building",
         },
         {
           "@type": "Thing",
@@ -111,19 +119,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Fast Travel",
+          name: "Fellhollow",
         },
         {
           "@type": "Thing",
-          name: "Lodestones",
+          name: "Imaru",
         },
         {
           "@type": "Thing",
-          name: "Crossplay",
+          name: "Black Knight Titan",
         },
         {
           "@type": "Thing",
-          name: "Co-op",
+          name: "Fuzan",
         },
         {
           "@type": "Thing",
@@ -135,7 +143,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Achievements",
+          name: "RuneScape Dragonwilds crossplay",
+        },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds achievements",
         },
       ],
       author: {
@@ -162,6 +174,7 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      inLanguage: "en",
       publisher: {
         "@id": `${siteUrl}#organization`,
       },
@@ -180,27 +193,27 @@ const toc = [
   },
   {
     id: "dragon-slayer",
-    label: "Dragon Slayer & Velgar",
+    label: "Dragon Slayer",
   },
   {
-    id: "fast-travel",
-    label: "Fast travel & Lodestones",
+    id: "base-and-travel",
+    label: "Base and fast travel",
   },
   {
-    id: "scorned-wilderness",
-    label: "After Fuzan",
+    id: "after-fuzan",
+    label: "Where to go after Fuzan",
   },
   {
-    id: "kuldra",
+    id: "queen-kuldra",
     label: "Queen Kuldra",
   },
   {
     id: "combat",
-    label: "Combat style",
+    label: "Combat progression",
   },
   {
     id: "coop",
-    label: "Co-op setup",
+    label: "Crossplay and co-op",
   },
   {
     id: "returning-players",
@@ -212,22 +225,26 @@ const toc = [
   },
   {
     id: "after-kuldra",
-    label: "After Kuldra",
+    label: "After Queen Kuldra",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/runescape-dragonwilds/progression",
-    label: "Dragonwilds Progression Guide",
+    label: "RuneScape: Dragonwilds Progression Guide",
   },
   {
     href: "/runescape-dragonwilds/beginner-guide",
-    label: "Dragonwilds Beginner Guide",
+    label: "RuneScape: Dragonwilds Beginner Guide",
+  },
+  {
+    href: "/runescape-dragonwilds/starter-base",
+    label: "Best Base Locations & Starter Base Layout",
   },
   {
     href: "/runescape-dragonwilds/dragon-slayer",
-    label: "Dragon Slayer & Velgar",
+    label: "Dragon Slayer Quest Walkthrough",
   },
   {
     href: "/runescape-dragonwilds/fast-travel",
@@ -242,12 +259,12 @@ const relatedLinks = [
     label: "Queen Kuldra Boss Guide",
   },
   {
-    href: "/runescape-dragonwilds/achievements",
-    label: "All 50 Achievements",
+    href: "/runescape-dragonwilds/crossplay-coop",
+    label: "Crossplay & Co-op",
   },
   {
-    href: "/runescape-dragonwilds/crossplay-coop",
-    label: "Crossplay & Co-op Guide",
+    href: "/runescape-dragonwilds/achievements",
+    label: "All 50 Achievements",
   },
 ];
 
@@ -265,13 +282,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="RuneScape: Dragonwilds Guide – What to Do, Bosses & Endgame"
-          description={articleDescription}
+          title="RuneScape: Dragonwilds Guide & Walkthrough"
+          description="Find where to go next, what to prepare before each major region and boss, when to improve your base or travel network, and how the 1.0 route continues through Queen Kuldra."
           gameTitle="RuneScape: Dragonwilds"
           gameHref="/runescape-dragonwilds"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 18, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

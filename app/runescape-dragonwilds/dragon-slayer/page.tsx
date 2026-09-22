@@ -10,6 +10,15 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/runescape-dragonwilds`;
 const pageUrl = `${hubUrl}/dragon-slayer`;
 
+const metadataTitle =
+  "RuneScape Dragonwilds Dragon Slayer Quest Walkthrough";
+
+const metadataDescription =
+  "Complete Dragon Slayer in RuneScape Dragonwilds: find Cathan, craft the Challenge Horn, beat Velgar, and turn in his head for the quest rewards.";
+
+const articleDescription =
+  "Start Dragon Slayer, follow Cathan's trail, gather the Challenge Horn materials, prepare for Velgar, survive the fight, and return his head to the Wise Old Man.";
+
 const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-dragon-slayer-dragon-tooth.webp`,
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-challenge-horn.webp`,
@@ -18,33 +27,32 @@ const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-dragon-slayer-rewards.webp`,
 ];
 
+const heroImage = imageUrls[1];
+
 export const metadata: Metadata = {
-  title: "RuneScape Dragonwilds Dragon Slayer Guide – Beat Velgar",
-  description:
-    "Finish Dragon Slayer in RuneScape Dragonwilds: craft the Challenge Horn, prepare for poison, beat Velgar, and turn in Velgar's head.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "RuneScape Dragonwilds Dragon Slayer Guide – Beat Velgar",
-    description:
-      "Craft the Challenge Horn, prepare Anti-poison, use strong damage against Velgar, survive liftoff attacks, and finish Dragon Slayer.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[2],
-        alt: "Air magic being used against Velgar in RuneScape Dragonwilds",
+        url: heroImage,
+        alt: "Challenge Horn used during the Dragon Slayer quest in RuneScape Dragonwilds",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RuneScape Dragonwilds Dragon Slayer Guide – Beat Velgar",
-    description:
-      "Beat Velgar with Challenge Horn preparation, Anti-poison, Air damage, liftoff counters, and the correct quest turn-in.",
-    images: [imageUrls[2]],
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [heroImage],
   },
 };
 
@@ -70,7 +78,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Dragon Slayer",
+          name: "Dragon Slayer Quest",
           item: pageUrl,
         },
       ],
@@ -83,13 +91,12 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "RuneScape: Dragonwilds Dragon Slayer Guide: How to Beat Velgar",
-      description:
-        "A complete Dragon Slayer walkthrough covering the Challenge Horn, Dragon Tooth and Bloodwood Sap, Velgar preparation, poison resistance, Air damage, liftoff attacks, and the quest turn-in.",
+        "RuneScape: Dragonwilds Dragon Slayer Quest Walkthrough",
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-16",
-      dateModified: "2026-09-16",
+      dateModified: "2026-09-22",
       about: [
         {
           "@type": "VideoGame",
@@ -98,6 +105,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Dragon Slayer",
+        },
+        {
+          "@type": "Thing",
+          name: "Cathan",
         },
         {
           "@type": "Thing",
@@ -125,19 +136,29 @@ const jsonLd = {
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+      inLanguage: "en",
+      publisher: {
+        "@id": `${siteUrl}#organization`,
       },
     },
   ],
@@ -145,16 +166,40 @@ const jsonLd = {
 
 const toc = [
   {
+    id: "start-dragon-slayer",
+    label: "Start Dragon Slayer",
+  },
+  {
+    id: "deer-antler",
+    label: "Deer antler",
+  },
+  {
+    id: "cathan-journal",
+    label: "Cathan's Journal",
+  },
+  {
+    id: "blue-flame-door",
+    label: "Blue-flame door",
+  },
+  {
+    id: "cathan-ghost",
+    label: "Find Cathan",
+  },
+  {
     id: "challenge-horn-materials",
-    label: "Challenge Horn materials",
+    label: "Craft the Challenge Horn",
   },
   {
     id: "before-summoning-velgar",
-    label: "Before summoning Velgar",
+    label: "Prepare for Velgar",
+  },
+  {
+    id: "summon-velgar",
+    label: "Summon Velgar",
   },
   {
     id: "best-damage",
-    label: "Best damage against Velgar",
+    label: "Damage against Velgar",
   },
   {
     id: "poison-resistance",
@@ -162,11 +207,11 @@ const toc = [
   },
   {
     id: "liftoff",
-    label: "Velgar liftoff attacks",
+    label: "Velgar airborne attacks",
   },
   {
-    id: "successful-attempt",
-    label: "What changed on the kill",
+    id: "failed-attempts",
+    label: "Why attempts fail",
   },
   {
     id: "after-velgar",
@@ -180,16 +225,16 @@ const relatedLinks = [
     label: "RuneScape: Dragonwilds Guide",
   },
   {
-    href: "/runescape-dragonwilds/beginner-guide",
-    label: "RuneScape: Dragonwilds Beginner Guide",
+    href: "/runescape-dragonwilds/starter-base",
+    label: "Best Starter Base Location & Layout",
+  },
+  {
+    href: "/runescape-dragonwilds/progression",
+    label: "RuneScape: Dragonwilds Progression Guide",
   },
   {
     href: "/runescape-dragonwilds/achievements",
     label: "All 50 Achievements",
-  },
-  {
-    href: "/runescape-dragonwilds/scorned-wilderness",
-    label: "Scorned Wilderness Walkthrough",
   },
 ];
 
@@ -205,13 +250,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="RuneScape: Dragonwilds Dragon Slayer Guide: How to Beat Velgar"
-          description="Craft the Challenge Horn, prepare for Velgar's poison, use the damage that works best for your setup, survive the liftoff sequence, and turn in Velgar's head to finish Dragon Slayer."
+          title="RuneScape: Dragonwilds Dragon Slayer Quest Walkthrough"
+          description="Start Dragon Slayer, follow Cathan's trail, craft the Challenge Horn, prepare for Velgar, survive the fight, and return his head to the Wise Old Man."
           gameTitle="RuneScape: Dragonwilds"
           gameHref="/runescape-dragonwilds"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 16, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

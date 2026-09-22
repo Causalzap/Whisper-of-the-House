@@ -10,6 +10,15 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/runescape-dragonwilds`;
 const pageUrl = `${hubUrl}/starter-base`;
 
+const metadataTitle =
+  "RuneScape Dragonwilds Best Base Locations & Starter Base Layout";
+
+const metadataDescription =
+  "Find good RuneScape Dragonwilds base locations, choose a starter spot, plan storage and workstations, and know when to expand or move.";
+
+const articleDescription =
+  "Compare useful base locations, choose a strong starter spot, plan storage, farming and workstations, and decide when expanding is better than moving.";
+
 const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-starter-base-temple-woods-lake.webp`,
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-starter-base-outdoor-smelting.webp`,
@@ -18,33 +27,32 @@ const imageUrls = [
   `${siteUrl}/images/runescape-dragonwilds/runescape-dragonwilds-starter-base-workstation-layout.webp`,
 ];
 
+const heroImage = imageUrls[0];
+
 export const metadata: Metadata = {
-  title: "RuneScape Dragonwilds Starter Base – Best Location & Layout",
-  description:
-    "Build a practical Dragonwilds starter base with the right location, storage, farming, smelting, workstations, and room to expand.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "RuneScape Dragonwilds Starter Base – Best Location & Layout",
-    description:
-      "Choose a useful starter base location and organize storage, farming, smelting, crafting stations, outdoor space, and later expansion.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[4],
-        alt: "Completed starter base workstation layout in RuneScape Dragonwilds",
+        url: heroImage,
+        alt: "Starter base location beside the Temple Woods lake in RuneScape Dragonwilds",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RuneScape Dragonwilds Starter Base – Best Location & Layout",
-    description:
-      "Plan a long-term starter base with practical storage, farming, crafting, smelting, and expansion space.",
-    images: [imageUrls[4]],
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [heroImage],
   },
 };
 
@@ -70,7 +78,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Starter Base",
+          name: "Best Base Locations & Starter Base",
           item: pageUrl,
         },
       ],
@@ -83,17 +91,20 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "RuneScape Dragonwilds Starter Base: Best Location & Layout",
-      description:
-        "A practical RuneScape: Dragonwilds starter base guide covering location choice, base size, indoor and outdoor workstations, farming plots, storage, campfires, Eye of Oculus roof building, Lodestone space, and expansion decisions.",
+        "RuneScape Dragonwilds Best Base Locations & Starter Base Layout",
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-17",
-      dateModified: "2026-09-17",
+      dateModified: "2026-09-22",
       about: [
         {
           "@type": "VideoGame",
           name: "RuneScape: Dragonwilds",
+        },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds base locations",
         },
         {
           "@type": "Thing",
@@ -105,31 +116,53 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "RuneScape Dragonwilds base building",
+          name: "Bramblemead Valley",
         },
         {
           "@type": "Thing",
-          name: "RuneScape Dragonwilds farming",
+          name: "Fellhollow",
+        },
+        {
+          "@type": "Thing",
+          name: "Umbral Sands",
+        },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds base building",
         },
         {
           "@type": "Thing",
           name: "RuneScape Dragonwilds storage",
         },
+        {
+          "@type": "Thing",
+          name: "RuneScape Dragonwilds farming",
+        },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+      inLanguage: "en",
+      publisher: {
+        "@id": `${siteUrl}#organization`,
       },
     },
   ],
@@ -138,31 +171,39 @@ const jsonLd = {
 const toc = [
   {
     id: "when-to-build",
-    label: "When to build a real base",
+    label: "When to replace the first shelter",
   },
   {
-    id: "best-location",
+    id: "location-factors",
+    label: "What makes a good base location",
+  },
+  {
+    id: "best-starter-location",
     label: "Best starter base location",
   },
   {
+    id: "other-base-locations",
+    label: "Other good base locations",
+  },
+  {
     id: "base-size",
-    label: "How big should it be?",
+    label: "Starter base size",
+  },
+  {
+    id: "building-materials",
+    label: "Wood vs oak",
   },
   {
     id: "indoor-outdoor",
     label: "Indoor vs outdoor stations",
   },
   {
-    id: "campfires",
-    label: "Campfire placement",
-  },
-  {
-    id: "farming",
-    label: "Where to put farming plots",
-  },
-  {
     id: "storage",
-    label: "How much storage?",
+    label: "Storage layout",
+  },
+  {
+    id: "campfires-and-farming",
+    label: "Campfires and farming",
   },
   {
     id: "workstation-layout",
@@ -170,15 +211,15 @@ const toc = [
   },
   {
     id: "roof",
-    label: "Building the roof",
+    label: "Eye of Oculus and roofing",
   },
   {
     id: "lodestone-space",
-    label: "Where to leave Lodestone space",
+    label: "Lodestone placement",
   },
   {
     id: "when-to-expand",
-    label: "When to expand or rebuild",
+    label: "Expand or move",
   },
 ];
 
@@ -188,8 +229,8 @@ const relatedLinks = [
     label: "RuneScape: Dragonwilds Guide",
   },
   {
-    href: "/runescape-dragonwilds/beginner-guide",
-    label: "RuneScape: Dragonwilds Beginner Guide",
+    href: "/runescape-dragonwilds/progression",
+    label: "RuneScape: Dragonwilds Progression Guide",
   },
   {
     href: "/runescape-dragonwilds/fast-travel",
@@ -197,7 +238,7 @@ const relatedLinks = [
   },
   {
     href: "/runescape-dragonwilds/dragon-slayer",
-    label: "Dragon Slayer and Velgar Walkthrough",
+    label: "Dragon Slayer Quest Walkthrough",
   },
 ];
 
@@ -213,13 +254,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="RuneScape Dragonwilds Starter Base: Best Location & Layout"
-          description="Choose a practical first long-term base location, organize indoor and outdoor workstations, leave room for farming and storage, and expand only when the current layout stops working."
+          title="RuneScape Dragonwilds Best Base Locations & Starter Base Layout"
+          description="Choose a strong starter base location, compare later places to build, organize storage and workstations, and know when expanding is better than moving."
           gameTitle="RuneScape: Dragonwilds"
           gameHref="/runescape-dragonwilds"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 17, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
