@@ -167,7 +167,7 @@ const jsonLd = {
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-22",
       articleSection: "Game Guides",
       about: [
         {
@@ -251,7 +251,7 @@ export default function Page() {
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

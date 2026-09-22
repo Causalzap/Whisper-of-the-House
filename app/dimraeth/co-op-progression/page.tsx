@@ -14,10 +14,10 @@ const metadataTitle =
   "Dimraeth Co-op: Progression, Hosting & What Carries Over";
 
 const metadataDescription =
-  "Learn what carries between Dimraeth co-op worlds, what stays with the host, how 8-player hosting works, what happens offline, and how to share progress.";
+  "Learn what carries between Dimraeth co-op worlds, what stays with the host, how 8-player hosting works, chest access settings, and what happens offline.";
 
 const articleDescription =
-  "A practical Dimraeth co-op guide explaining what follows your character between worlds, what remains tied to the hosted world, how eight-player sessions work, how host availability affects a shared campaign, whether an established character can join an early world, where to invest in the Sanctum, and when support tools or extra players become useful.";
+  "A practical Dimraeth co-op guide covering character and world progression, eight-player hosting, chest privacy and build access, host availability, existing characters, Sanctum investment, support tools, and harder Deeds.";
 
 const imageUrls = [
   `${siteUrl}/images/dimraeth/dimraeth-coop-server-settings.webp`,
@@ -43,6 +43,10 @@ const toc = [
   {
     id: "what-stays-in-world",
     label: "What stays with the world",
+  },
+  {
+    id: "chest-permissions",
+    label: "Chest privacy and access",
   },
   {
     id: "existing-character",
@@ -161,7 +165,7 @@ const jsonLd = {
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-17",
+      dateModified: "2026-09-22",
       articleSection: "Game Guides",
       about: [
         {
@@ -191,6 +195,18 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Eight-Player Co-op",
+        },
+        {
+          "@type": "Thing",
+          name: "Chest Privacy",
+        },
+        {
+          "@type": "Thing",
+          name: "Storage Access",
+        },
+        {
+          "@type": "Thing",
+          name: "LockBuildtoOwner",
         },
         {
           "@type": "Thing",
@@ -248,12 +264,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Dimraeth Co-op: What Carries Over & How Hosting Works"
-          description="Know what follows your character into another world, what stays with the host, whether you can bring an existing character, and how to keep one shared campaign from becoming several half-finished saves."
+          description="Know what follows your character into another world, what stays with the host, how chest privacy and build access work, and how to keep one shared campaign from becoming several half-finished saves."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 17, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

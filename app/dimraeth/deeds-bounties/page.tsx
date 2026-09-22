@@ -14,10 +14,10 @@ const metadataTitle =
   "Dimraeth Deeds & Bounties Guide: Levels, Rewards & Farming";
 
 const metadataDescription =
-  "Learn Dimraeth Deed Levels 1–10, boss farming, bounty rewards, when to raise difficulty, when to stay lower, and when co-op becomes worth using.";
+  "Learn Deed Levels 1–10, boss farming, bounty rewards, how to find Woldroot after the Forest King, when to raise difficulty, and when co-op helps.";
 
 const articleDescription =
-  "A practical Dimraeth Deeds and Bounties guide covering the Deed Board, Deed Levels 1 through 10, targeted boss-material farming, Alpha Wolf Bounties, reward differences, efficient difficulty progression, skill-point and purple gear drops, solo versus co-op decisions, and how repeatable content changes after the Forest King.";
+  "A practical Dimraeth Deeds and Bounties guide covering the Deed Board, Deed Levels 1 through 10, targeted boss farming, bounty rewards, efficient difficulty progression, skill-point and purple gear drops, solo versus co-op play, and how players are finding Woldroot after the Forest King.";
 
 const imageUrls = [
   `${siteUrl}/images/dimraeth/dimraeth-deeds-unlocked-deed-board.webp`,
@@ -154,7 +154,7 @@ const jsonLd = {
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-15",
+      dateModified: "2026-09-22",
       articleSection: "Game Guides",
       about: [
         {
@@ -179,6 +179,10 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Boss Farming",
+        },
+        {
+          "@type": "Thing",
           name: "Alpha Wolf Bounty",
         },
         {
@@ -187,11 +191,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Boss Farming",
+          name: "Potential Loot",
         },
         {
           "@type": "Thing",
-          name: "Potential Loot",
+          name: "Woldroot the Path Guardian",
+        },
+        {
+          "@type": "Thing",
+          name: "Return to the Forest Throne",
+        },
+        {
+          "@type": "Thing",
+          name: "Aelwynor the Wildroot Father",
+        },
+        {
+          "@type": "Thing",
+          name: "Forest King",
         },
       ],
       author: {
@@ -236,13 +252,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Dimraeth Deeds & Bounties: When to Raise the Difficulty"
-          description="Use the Deed Board for upgrades you actually need, learn when a higher tier is still efficient, and know when better gear or extra players will save more time than another failed push."
+          title="Dimraeth Deeds & Bounties: Levels, Rewards & Boss Farming"
+          description="Use the Deed Board to repeat useful bosses, choose a Deed Level you can farm cleanly, know when to raise the difficulty, and find Woldroot again after the Forest King."
           gameTitle="Dimraeth"
           gameHref="/dimraeth"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="September 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
