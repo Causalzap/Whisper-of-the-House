@@ -167,7 +167,7 @@ export const guideClusters: GuideCluster[] = [
     ],
   
     image:
-      "/images/control-resonant/control-resonant-zone-overview-watchtower.webp",
+      "/images/control-resonant/control-resonant-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
