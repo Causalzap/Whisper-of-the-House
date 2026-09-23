@@ -961,6 +961,30 @@ const paths = [
    '/endless-legend-2/tidefall',
    '/endless-legend-2/victory-conditions',
    '/endless-legend-2/achievements',
+
+   '/control-resonant',
+   '/control-resonant/walkthrough', 
+   '/control-resonant/quests', 
+   '/control-resonant/resonants', 
+   '/control-resonant/search-for-jesse', 
+   '/control-resonant/map', 
+   '/control-resonant/central-checkpoint', 
+   '/control-resonant/evacuation-zone',
+   '/control-resonant/power-lines', 
+   '/control-resonant/into-the-sinkhole', 
+   '/control-resonant/west-incursion-zone', 
+   '/control-resonant/underpass', 
+   '/control-resonant/patterned-factory', 
+   '/control-resonant/dancer', 
+   '/control-resonant/the-park', 
+   '/control-resonant/physicist', 
+   '/control-resonant/co-director', 
+   '/control-resonant/hedron-link',
+   '/control-resonant/crossing-the-threshold',
+   '/control-resonant/last-taxi',
+   '/control-resonant/party-wont-stop',
+
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -968,6 +992,28 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/control-resonant': '2026-09-23',
+  '/control-resonant/walkthrough': '2026-09-23',
+  '/control-resonant/quests': '2026-09-23',
+  '/control-resonant/resonants': '2026-09-23',
+  '/control-resonant/search-for-jesse': '2026-09-23',
+  '/control-resonant/map': '2026-09-23',
+  '/control-resonant/central-checkpoint': '2026-09-23',
+  '/control-resonant/evacuation-zone': '2026-09-23',
+  '/control-resonant/power-lines': '2026-09-23',
+  '/control-resonant/into-the-sinkhole': '2026-09-23',
+  '/control-resonant/west-incursion-zone': '2026-09-23',
+  '/control-resonant/underpass': '2026-09-23',
+  '/control-resonant/patterned-factory': '2026-09-23',
+  '/control-resonant/dancer': '2026-09-23',
+  '/control-resonant/the-park': '2026-09-23',
+  '/control-resonant/physicist': '2026-09-23',
+  '/control-resonant/co-director': '2026-09-23',
+  '/control-resonant/hedron-link': '2026-09-23',
+  '/control-resonant/crossing-the-threshold': '2026-09-23',
+  '/control-resonant/last-taxi': '2026-09-23',
+  '/control-resonant/party-wont-stop': '2026-09-23',
+
   '/endless-legend-2': '2026-09-21',
   '/endless-legend-2/beginner-guide': '2026-09-21',
   '/endless-legend-2/factions': '2026-09-21',

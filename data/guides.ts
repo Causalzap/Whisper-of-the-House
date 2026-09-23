@@ -131,6 +131,671 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "CONTROL Resonant",
+    game: "CONTROL Resonant",
+    href: "/control-resonant",
+    slug: "control-resonant",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "Action Adventure, Progression & Resonants",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "Main story + quests + Jesse Faults + all 6 Resonants + Manhattan map + major missions + Side Stories",
+  
+    description:
+      "Find the next CONTROL Resonant objective, follow the main story through Manhattan, track overlapping quests and Jesse Faults, defeat all six Resonants, open the map, and solve the major mission and Side Story blockers.",
+  
+    coverage: [
+      "Main story progression from Orientation and Welcome to Manhattan through Evacuation Procedures, the CFD operation, Underpass, the Oldest House crisis, Hedron Links, Unknown and the final story sequence",
+  
+      "Quest progression across Contain the Crisis, Search for Jesse and regional Resonant objectives, including the points where an unfinished Fault or required Resonant can stop the next story mission",
+  
+      "All six Resonants through the Artist, Deserter, Dancer, Collective, Physicist and Co-Director, with locations, prerequisites, Combat Ability rewards and Resonant Cycle decisions",
+  
+      "Search for Jesse through the Incursion Fault, Subway Fault and Underpass Fault, including Shift, Reach, the Parking Garage route and the later memory sequence",
+  
+      "Manhattan navigation across Downtown, Central, Evacuation Zone, West Incursion Zone, The Park, Underpass and Unknown, with Map Kits, Sensors and routes that remain blocked until later progression",
+  
+      "Major mission routes through Central Checkpoint, Evacuation Procedures, Power Lines, Into the Sinkhole, Recursions and Iterations, Patterned Factory and the Hedron Link sequence",
+  
+      "Regional and boss routes through the Deserter, Dancer, Collective, Physicist and Co-Director, with the important handoffs between traversal, region progression and each Resonant encounter",
+  
+      "Side Stories including Crossing the Threshold, The Last Taxi and The Party Won't Stop, with Wilson and AVP-3, all seven anomalous taxis, taxi puzzle variations and the nine karaoke answers",
+    ],
+  
+    image:
+      "/images/control-resonant/control-resonant-zone-overview-watchtower.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 52,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "CONTROL Resonant Guide: Walkthrough, Quests, Map & Bosses",
+        href: "/control-resonant",
+        type: "Guide Hub",
+        description:
+          "Find the right route for your current objective, follow the main story, track Jesse's Faults and Resonants, and navigate Manhattan without wasting time on the wrong mission.",
+        image:
+          "/images/control-resonant/control-resonant-zone-overview-watchtower.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Main story, quests, Jesse Faults, all 6 Resonants, Manhattan map, Power Lines, Underpass, Hedron, major bosses and Side Stories",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Walkthrough: Main Story & Progression",
+        href: "/control-resonant/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the main story from Manhattan and Central through the CFD operation, Underpass, Jesse intersections, the Oldest House crisis, Unknown and the final sequence.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-zone-overview-watchtower.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 371,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Orientation, Central, Evacuation Procedures, CFD preparation, required Resonants, Underpass, Jesse Faults, Hedron, Unknown and final progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Quest List: Main Missions & Side Stories",
+        href: "/control-resonant/quests",
+        type: "Guide",
+        description:
+          "Track the main story, Search for Jesse, regional Resonants and Side Stories, and see which unfinished quest can block the next stage of progression.",
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 372,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Contain the Crisis, Search for Jesse, Resonant quests, Side Stories, Enemy of My Enemy, Underpass gates, Unknown and post-story cleanup",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Resonants Guide: All 6 Locations & Ability Rewards",
+        href: "/control-resonant/resonants",
+        type: "Bosses",
+        description:
+          "Find the Artist, Deserter, Dancer, Collective, Physicist and Co-Director, see what each Resonant rewards, and know which bosses are required for story progression.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-physicist-defeated.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 373,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Artist, Deserter, Dancer, Collective, Physicist, Co-Director, ability rewards, story requirements and Resonant Cycles",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "How to Find Jesse in CONTROL Resonant: All 3 Faults",
+        href: "/control-resonant/search-for-jesse",
+        type: "Walkthrough",
+        description:
+          "Complete the Incursion, Subway and Underpass Faults, get the Parking Garage key, unlock Shift and Reach, and finish Jesse's later memory sequence.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-incursion-fault-parking-garage.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 374,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Incursion Fault, Parking Garage key, Shift, Subway Fault, Reach, Underpass Fault, memory ritual and remaining Jesse progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Map Guide: All 7 Zones & Map Kits",
+        href: "/control-resonant/map",
+        type: "Systems",
+        description:
+          "Reveal all seven Manhattan zones by activating each Map Kit's three Sensors and returning to its Pylon, then understand when visible routes are still progression-locked.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-mapping-pylon-map-data.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 375,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Downtown, Central, Evacuation Zone, West Incursion, The Park, Underpass, Unknown, Map Kits, Pylons and three Sensors",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Central Checkpoint: Power Core Route",
+        href: "/control-resonant/central-checkpoint",
+        type: "Puzzle Help",
+        description:
+          "Relay the electrical charge through Downtown Power Cores, find Baker, reach the rooftop Core, and deliver the final charge to Central Checkpoint.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-central-checkpoint-servicing-diagram.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 376,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Electrical charge timer, Power Core relays, Baker, loading dock, rooftop route, final Checkpoint Core and disappearing-charge fixes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Evacuation Procedures: Hiss Orbs & Arish",
+        href: "/control-resonant/evacuation-zone",
+        type: "Walkthrough",
+        description:
+          "Destroy the three exterior Hiss Orbs, climb through Floors 12 and 15, find Arish, gain Level 2 clearance, and restore the Evac Building elevator.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-evacuation-arish-found.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 377,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Three Hiss Orbs, Evac Building, Floors 12 and 15, tremor source, Arish, Level 2 Keycard, blocked elevator and escape",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Power Lines Guide: All Station Puzzles",
+        href: "/control-resonant/power-lines",
+        type: "Walkthrough",
+        description:
+          "Complete Factory, East Park, Perimeter and Vanished Station, find every Calibration Unit, rescue Dr. Florez, and solve Platform A and Platform B.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-power-lines-vanished-station.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 378,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Factory, East Park, Perimeter, Vanished Station, Calibration Units, Tuning Devices, Dr. Florez, Platform A and Platform B Mold wiring",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Into the Sinkhole: Bedrock, Probe Relays & Escape",
+        href: "/control-resonant/into-the-sinkhole",
+        type: "Walkthrough",
+        description:
+          "Ride the diving bell to Bedrock, place and activate the Probe Relays, then escape the shifted Sinkhole by following the cable and Zoe's PA music.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-sinkhole-diving-bell-lost.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 379,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Diving bell, Hiss interruption, Bedrock, Probe Relays, lost extraction route, cable, Zoe's PA music and Sinkhole escape",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant West Incursion Zone: Shift & Theater Route",
+        href: "/control-resonant/west-incursion-zone",
+        type: "Walkthrough",
+        description:
+          "Follow the theater spotlights, complete the Incursion Fault for Shift, cross the altered-gravity gap, find the missing Rangers, and reach the Dancer.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-west-incursion-zone-entry.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 380,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "West Incursion entry, Theater spotlights, Parking Garage, Incursion Fault, Shift, long gap, missing Rangers and Dancer handoff",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Underpass Walkthrough: Research Team & Spire",
+        href: "/control-resonant/underpass",
+        type: "Walkthrough",
+        description:
+          "Follow the Underpass research-team route, restore the Power Core sequence, cross the chasm, handle time fluctuations, and reach The Spire.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-underpass-arrival.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 381,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "Research team, time fluctuations, four Power Cores, transmission route, chasm, Jesse overlap, The Spire and Underpass objective handoffs",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Deserter Guide: Patterned Factory & Boss Fight",
+        href: "/control-resonant/patterned-factory",
+        type: "Bosses",
+        description:
+          "Follow the Patterned Factory heat trail, clear the pipe blockages, defeat the Deserter, handle its magma-sac phase, and choose Ignite or Inferno.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-patterned-factory-heat-trail.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 382,
+          spotlightFeature: true,
+          spotlightOrder: 12,
+          spotlightMeta:
+            "Patterned Factory, heat trail, blocked pipes, cooling pool clue, Deserter attacks, four magma sacs, Ignite, Inferno and Central Resonant progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Dancer Guide: Boss Fight, Push or Ground Slam",
+        href: "/control-resonant/dancer",
+        type: "Bosses",
+        description:
+          "Reach the Theater, read the Dancer's attack cues and phase-two audience sequence, then choose between Push and Ground Slam.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-dancer-phase-two.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 383,
+          spotlightFeature: true,
+          spotlightOrder: 13,
+          spotlightMeta:
+            "Theater, Patterned Rangers, Dancer lunges and spins, phase two, blue-stage Falter window, Push, Ground Slam and West Incursion progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 14,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant The Park & Collective Guide",
+        href: "/control-resonant/the-park",
+        type: "Walkthrough",
+        description:
+          "Enter The Park, activate the Mold Gateway, find all four Mold samples, fix the Pizzeria route, defeat the Collective, and choose Spore Burst or Growth.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-the-park-mold-gateway.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 384,
+          spotlightFeature: true,
+          spotlightOrder: 14,
+          spotlightMeta:
+            "Park entrance, Mold Gateway, Minimart, Pizzeria, Gym, four Mold samples, Collective fight, Spore Burst and Growth",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 15,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Physicist Guide: All 3 Astral Keys & Boss",
+        href: "/control-resonant/physicist",
+        type: "Bosses",
+        description:
+          "Climb The Spire into the Astral Plane, find all three Astral Keys, open the three locked doors, defeat the Physicist, and choose Spike or Astral Rebuke.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-physicist-astral-plane.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 385,
+          spotlightFeature: true,
+          spotlightOrder: 15,
+          spotlightMeta:
+            "The Spire, Astral Plane, first, second and third Astral Keys, three locked doors, Physicist boss, Spike and Astral Rebuke",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 16,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Co-Director Guide: Command & Boss Fight",
+        href: "/control-resonant/co-director",
+        type: "Bosses",
+        description:
+          "Prepare for the Unknown Resonant, manage the Co-Director's Command meter and attack patterns, defeat the boss, and unlock Command.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-co-director-defeated.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 386,
+          spotlightFeature: true,
+          spotlightOrder: 16,
+          spotlightMeta:
+            "Unknown Resonant, Command meter, beam, spinning ring, bombs, ground slam, controlled Rangers, rockets, Command and post-fight reward",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 17,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Hedron Link Guide: Balloons & Probe Relays",
+        href: "/control-resonant/hedron-link",
+        type: "Walkthrough",
+        description:
+          "Rescue Pope, sever the Hedron Links, use research balloons and Probe Relays, cross the Pattern bridges, and continue toward the Hedron.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-hedron-final-objective.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 387,
+          spotlightFeature: true,
+          spotlightOrder: 17,
+          spotlightMeta:
+            "Pope, first Hedron Link, severing connections, research balloons, Probe Relays, Pattern bridges, Hiss reactions and late-story route",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 18,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Crossing the Threshold: Wilson & AVP-3 Choice",
+        href: "/control-resonant/crossing-the-threshold",
+        type: "Guide",
+        description:
+          "Investigate the Threshold expedition deaths, get the 0665 cabinet code, find Wilson, learn what AVP-3 is, and choose containment or return.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-crossing-threshold-wilson.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 388,
+          spotlightFeature: true,
+          spotlightOrder: 18,
+          spotlightMeta:
+            "Dig Site, Field Hospital, Loading Docks, Security Station, 0665 code, Wilson, AVP-3, containment choice and Threshold return",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 19,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Last Taxi: All 7 Locations & Puzzle Solutions",
+        href: "/control-resonant/last-taxi",
+        type: "Guide",
+        description:
+          "Find all seven anomalous taxis, answer Mila's phone, solve the light, blackout, Mold repair and shadow puzzle types, and finish the final call.",
+        date: "Updated recently",
+        image:
+          "/images/control-resonant/control-resonant-last-taxi-different-car-puzzle.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 389,
+          spotlightFeature: true,
+          spotlightOrder: 19,
+          spotlightMeta:
+            "Seven taxi locations, Mila, streetlight puzzles, vehicle lights, roof signs, flashing patterns, blackout, Mold repair, shadows and final phone call",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 20,
+        },
+      },
+  
+      {
+        title:
+          "CONTROL Resonant Party Won't Stop: All Karaoke Answers",
+        href: "/control-resonant/party-wont-stop",
+        type: "Puzzle Help",
+        description:
+          "Reach the West Incursion party apartment, enter all nine karaoke answers correctly, save every partygoer, and unlock Be What You Want to Be.",
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 390,
+          spotlightFeature: true,
+          spotlightOrder: 20,
+          spotlightMeta:
+            "Singing Reported?, rooftop entrance, nine karaoke choices, wrong-answer consequences, saving every partygoer, Varsity Jacket and Untapped Bar Blade",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 21,
+        },
+      },
+    ],
+  },
+  {
     title: "ENDLESS Legend 2",
     game: "ENDLESS Legend 2",
     href: "/endless-legend-2",
