@@ -996,7 +996,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/control-resonant': '2026-09-23',
   '/control-resonant/walkthrough': '2026-09-23',
   '/control-resonant/quests': '2026-09-23',
-  '/control-resonant/resonants': '2026-09-23',
+  '/control-resonant/resonants': '2026-09-24',
   '/control-resonant/search-for-jesse': '2026-09-23',
   '/control-resonant/map': '2026-09-23',
   '/control-resonant/central-checkpoint': '2026-09-23',

@@ -11,16 +11,19 @@ const hubUrl = `${siteUrl}/control-resonant`;
 const pageUrl = `${hubUrl}/resonants`;
 
 const metadataTitle =
-  "CONTROL Resonant Resonants Guide: All 6 Bosses & Rewards";
+  "CONTROL Resonant Bosses: All 6 Resonants, Locations & Rewards";
 
 const metadataDescription =
-  "Find all six Resonants, see their locations and ability rewards, learn which bosses are required for story progression, and understand Resonant Cycles.";
+  "Find all 6 Resonant bosses, their locations, access requirements, ability rewards, progression order, and when each boss is worth fighting.";
 
 const articleDescription =
-  "Track all six Resonants across Manhattan, see where each regional boss appears, compare their Combat Ability rewards, and check which Resonants are required before the story can progress.";
+  "Track all six Resonant bosses across Manhattan, see where each one appears, what unlocks its route, which Combat Ability it rewards, and which Resonants matter for story progression.";
 
 const imageUrls = [
+  `${siteUrl}/images/control-resonant/control-resonant-dancer-theater-stage.webp`,
   `${siteUrl}/images/control-resonant/control-resonant-physicist-defeated.webp`,
+  `${siteUrl}/images/control-resonant/control-resonant-co-director-defeated.webp`,
+  `${siteUrl}/images/control-resonant/control-resonant-co-director-unknown-resonant-completed.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -28,7 +31,15 @@ const heroImage = imageUrls[0];
 const toc = [
   {
     id: "all-resonants",
-    label: "All 6 Resonants",
+    label: "All 6 Resonant bosses",
+  },
+  {
+    id: "how-many-bosses",
+    label: "How many Resonants?",
+  },
+  {
+    id: "which-resonant-first",
+    label: "Which Resonant first?",
   },
   {
     id: "artist",
@@ -55,28 +66,16 @@ const toc = [
     label: "Co-Director",
   },
   {
+    id: "resonant-cycle",
+    label: "When to wait",
+  },
+  {
     id: "evacuation-zone",
     label: "Evacuation Zone Resonant?",
   },
   {
-    id: "which-resonant-first",
-    label: "Which Resonant first?",
-  },
-  {
-    id: "resonant-cycle",
-    label: "Resonant Cycles",
-  },
-  {
-    id: "ability-choice",
-    label: "Resonant ability choices",
-  },
-  {
-    id: "all-six",
-    label: "Do you need all 6?",
-  },
-  {
-    id: "resonant-progression-checks",
-    label: "Progression & reward checks",
+    id: "resonant-progression",
+    label: "Progression checks",
   },
 ];
 
@@ -155,7 +154,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "All Resonants",
+          name: "Bosses & Resonants",
           item: pageUrl,
         },
       ],
@@ -167,14 +166,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "CONTROL Resonant Resonants Guide: All 6 Bosses & Rewards",
+      headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-23",
-      dateModified: "2026-09-23",
+      dateModified: "2026-09-24",
       about: [
         {
           "@type": "VideoGame",
@@ -183,7 +181,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Resonants",
+          name: "Resonant Bosses",
         },
         {
           "@type": "Thing",
@@ -208,6 +206,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Co-Director",
+        },
+        {
+          "@type": "Thing",
+          name: "Hedron",
         },
         {
           "@type": "Thing",
@@ -258,13 +260,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="CONTROL Resonant Resonants Guide: All 6 Locations & Ability Rewards"
-          description="Find the Artist, Deserter, Dancer, Collective, Physicist and Co-Director, see what each Resonant rewards, and know which bosses are required for story progression."
+          title="CONTROL Resonant Bosses: All 6 Resonants, Locations & Rewards"
+          description="Find all six Resonant bosses, see where each one appears, what unlocks its route, which Combat Ability it rewards, and which bosses matter for story progression."
           gameTitle="CONTROL Resonant"
           gameHref="/control-resonant"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="September 24, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
