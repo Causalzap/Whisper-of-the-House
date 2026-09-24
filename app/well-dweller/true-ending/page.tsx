@@ -224,17 +224,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-            title="Well Dweller True Ending: Soar & 5 Spirit Fragments"
-            description="Continue after the Queen, unlock Soar, follow the five hidden Spirit Fragment routes, and return to Night Garden for Reunite the Flock."
-            gameTitle="Well Dweller"
-            gameHref="/well-dweller"
-            breadcrumbBaseHref="/"
-            breadcrumbBaseLabel="Home"
-            updatedAt="September 24, 2026"
-            toc={toc}
-            relatedLinks={relatedLinks}
-          >
-            <TrueEndingContent />
+          title="Well Dweller True Ending: Soar & 5 Spirit Fragments"
+          description="Continue after the Queen, unlock Soar, follow the five hidden Spirit Fragment routes, and return to Night Garden for Reunite the Flock."
+          gameTitle="Well Dweller"
+          gameHref="/well-dweller"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="September 24, 2026"
+          toc={toc}
+          relatedLinks={relatedLinks}
+        >
+          <TrueEndingContent />
         </GuideArticlePage>
       </main>
 

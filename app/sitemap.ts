@@ -984,7 +984,16 @@ const paths = [
    '/control-resonant/crossing-the-threshold',
    '/control-resonant/last-taxi',
    '/control-resonant/party-wont-stop',
-
+    
+   '/well-dweller',
+   '/well-dweller/walkthrough',
+   '/well-dweller/night-garden-hunters-cabin-walkthrough',
+   '/well-dweller/the-bog-walkthrough',
+   '/well-dweller/the-drains-walkthrough',
+   '/well-dweller/elevator-parts-locations',
+   '/well-dweller/golden-feathers-locations',
+   '/well-dweller/true-ending',
+   '/well-dweller/100-percent-completion',
 
 ] as const;
 
@@ -993,6 +1002,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/well-dweller': '2026-09-24',
+  '/well-dweller/walkthrough': '2026-09-24',
+  '/well-dweller/night-garden-hunters-cabin-walkthrough': '2026-09-24',
+  '/well-dweller/the-bog-walkthrough': '2026-09-24',
+  '/well-dweller/the-drains-walkthrough': '2026-09-24',
+  '/well-dweller/elevator-parts-locations': '2026-09-24',
+  '/well-dweller/golden-feathers-locations': '2026-09-24',
+  '/well-dweller/true-ending': '2026-09-24',
+  '/well-dweller/100-percent-completion': '2026-09-24',
+  
   '/control-resonant': '2026-09-23',
   '/control-resonant/walkthrough': '2026-09-23',
   '/control-resonant/quests': '2026-09-23',

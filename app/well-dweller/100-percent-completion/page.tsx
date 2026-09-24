@@ -4,57 +4,70 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import TrueEndingContent from "@/data/well-dweller/true-ending.mdx";
+import HundredPercentCompletionContent from "@/data/well-dweller/100-percent-completion.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/well-dweller`;
-const pageUrl = `${hubUrl}/true-ending`;
+const pageUrl = `${hubUrl}/100-percent-completion`;
 
 const metadataTitle =
-  "Well Dweller True Ending: Soar & 5 Spirit Fragments";
+  "Well Dweller 100% Completion Guide & 41 Achievements";
 
 const metadataDescription =
-  "Beat the Queen, unlock Soar, find all 5 Spirit Fragments, and return to Night Garden for Reunite the Flock in Well Dweller.";
+  "Track all 41 Well Dweller achievements, collect 32 Trinkets, reach 50 Trinket Slots, return 20 Spirits, finish pages, and max every Trinket.";
 
 const imageUrls = [
-  `${siteUrl}/images/well-dweller/well-dweller-soar-unlock.webp`,
-  `${siteUrl}/images/well-dweller/well-dweller-spirit-fragments-map.webp`,
-  `${siteUrl}/images/well-dweller/well-dweller-spirit-fragment.webp`,
-  `${siteUrl}/images/well-dweller/well-dweller-reunite-the-flock.webp`,
+  `${siteUrl}/images/well-dweller/well-dweller-map-cleanup-markers.webp`,
 ];
 
 const toc = [
   {
-    id: "after-the-queen",
-    label: "What to Do After the Queen",
+    id: "achievement-tracker",
+    label: "41-Achievement Tracker",
   },
   {
-    id: "soar",
-    label: "Unlock and Use Soar",
+    id: "completion-plan",
+    label: "Finish Progression First",
   },
   {
-    id: "five-locations",
-    label: "Find the Five Marked Locations",
+    id: "map-cleanup",
+    label: "Use Map Markers",
   },
   {
-    id: "spirit-fragments",
-    label: "How the Spirit Fragment Routes Work",
+    id: "story-progress",
+    label: "Story Achievements",
   },
   {
-    id: "fragment-not-there",
-    label: "Why a Fragment Looks Unreachable",
+    id: "trinkets",
+    label: "Collect 32 Trinkets",
   },
   {
-    id: "ordinary-spirits",
-    label: "Ordinary Spirits vs Spirit Fragments",
+    id: "trinket-slots",
+    label: "Reach 50 Trinket Slots",
   },
   {
-    id: "reunite-the-flock",
-    label: "Reunite the Flock",
+    id: "spirits",
+    label: "Return 20 Spirits",
   },
   {
-    id: "continue-after-ending",
-    label: "Keep Playing After the Ending",
+    id: "story-pages",
+    label: "Complete Story Pages",
+  },
+  {
+    id: "upgrade-all-trinkets",
+    label: "Max Every Trinket",
+  },
+  {
+    id: "postgame",
+    label: "Post-Queen Achievements",
+  },
+  {
+    id: "misc-achievements",
+    label: "Other Achievements",
+  },
+  {
+    id: "cleanup-order",
+    label: "Final Cleanup Order",
   },
 ];
 
@@ -72,8 +85,8 @@ const relatedLinks = [
     label: "All 7 Golden Feather Locations",
   },
   {
-    href: "/well-dweller/100-percent-completion",
-    label: "Well Dweller 100% Completion Checklist",
+    href: "/well-dweller/true-ending",
+    label: "Well Dweller True Ending",
   },
 ];
 
@@ -86,25 +99,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Well Dweller True Ending: Soar & Spirit Fragments",
+    title: "Well Dweller 100% Completion Guide",
     description:
-      "Continue after the Queen, unlock Soar, follow the five marked Spirit Fragment locations, and return to Night Garden for Reunite the Flock.",
+      "Use the 41-achievement tracker, Map Markers, collectible totals, page sets, upgrade requirements, and post-Queen objectives to finish Well Dweller.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[1],
+        url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Well Dweller map showing five marked Spirit Fragment locations after the Queen",
+        alt: "Well Dweller Map Markers station showing Trinkets, Trinket Slots, Spirits, Pages, and Tokens",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Well Dweller True Ending: Soar & 5 Spirit Fragments",
+    title: "Well Dweller 100% Completion Guide",
     description:
-      "Unlock Soar after the Queen, collect all five Spirit Fragments, and return to Night Garden for Reunite the Flock.",
-    images: [imageUrls[1]],
+      "Track all 41 achievements and finish Trinkets, Slots, Spirits, pages, upgrades, Map Markers, and post-Queen objectives.",
+    images: [imageUrls[0]],
   },
 };
 
@@ -130,7 +143,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "True Ending",
+          name: "100% Completion",
           item: pageUrl,
         },
       ],
@@ -143,9 +156,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Well Dweller True Ending: Soar, 5 Spirit Fragments, and Reunite the Flock",
+        "Well Dweller 100% Completion Guide: 41 Achievements, Collectibles, Spirits, Pages, and Upgrades",
       description:
-        "A Well Dweller post-Queen walkthrough explaining how to continue after the first credits, open the sealed castle room, unlock and use Soar, read the five marked locations on the kingdom map, complete the post-game Spirit Fragment routes, distinguish Spirit Fragments from ordinary Spirits, return to Night Garden for Reunite the Flock, and continue playing afterward.",
+        "A Well Dweller completion guide covering all 41 achievements, 32 Trinkets, 50 Trinket Slots, 20 ordinary Spirits, three complete story-page sets, Map Markers, fully upgraded Trinkets, post-Queen achievements, and the final cleanup order.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
@@ -160,35 +173,39 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Well Dweller true ending",
+          name: "Well Dweller 100 percent completion",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller post-Queen route",
+          name: "Well Dweller achievements",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller Soar",
+          name: "Well Dweller 41 achievements",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller Spirit Fragments",
+          name: "Well Dweller Trinkets",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller five marked locations",
+          name: "Well Dweller Trinket Slots",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller ordinary Spirits",
+          name: "Well Dweller Spirits",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller Reunite the Flock",
+          name: "Well Dweller story pages",
         },
         {
           "@type": "Thing",
-          name: "Well Dweller Together at Last",
+          name: "Well Dweller Map Markers",
+        },
+        {
+          "@type": "Thing",
+          name: "Well Dweller Fully Stocked",
         },
       ],
       isPartOf: {
@@ -224,17 +241,17 @@ export default function Page() {
         />
 
         <GuideArticlePage
-            title="Well Dweller True Ending: Soar & 5 Spirit Fragments"
-            description="Continue after the Queen, unlock Soar, follow the five hidden Spirit Fragment routes, and return to Night Garden for Reunite the Flock."
-            gameTitle="Well Dweller"
-            gameHref="/well-dweller"
-            breadcrumbBaseHref="/"
-            breadcrumbBaseLabel="Home"
-            updatedAt="September 24, 2026"
-            toc={toc}
-            relatedLinks={relatedLinks}
-          >
-            <TrueEndingContent />
+          title="Well Dweller 100% Completion Guide & 41 Achievements"
+          description="Track every achievement and finish the remaining Trinkets, Slots, Spirits, story pages, upgrades, Map Markers, and post-Queen objectives."
+          gameTitle="Well Dweller"
+          gameHref="/well-dweller"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="September 24, 2026"
+          toc={toc}
+          relatedLinks={relatedLinks}
+        >
+          <HundredPercentCompletionContent />
         </GuideArticlePage>
       </main>
 

@@ -131,6 +131,321 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Well Dweller",
+    game: "Well Dweller",
+    href: "/well-dweller",
+    slug: "well-dweller",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "Story, endings, horror & route locks",
+  
+    label: "Metroidvania, Progression & Exploration",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "Full progression + Night Garden + The Bog + The Drains + Elevator Parts + 7 Golden Feathers + post-Queen ending + 41 achievements",
+  
+    description:
+      "Follow Well Dweller from Night Garden and the Hunter's Cabin through The Bog, The Drains, family objectives, all seven Golden Feathers, Queen's Castle and the post-Queen route, then finish the remaining achievements and collectibles.",
+  
+    coverage: [
+      "Full progression from Night Garden and the Hunter's Cabin through The Bog, The Drains, Graven Valley, Dollmaker's House, Lookout Tower, The Docks, Queen's Castle and the post-Queen sequence",
+  
+      "Opening progression through Oil Vials, the Groundskeeper, Looter, Flaming Vessel, Hunter's Locket, Slingshot, the berries objective and the first Hunter escape",
+  
+      "The Bog through Ilda's camp, the early Queen's Castle gate, golden gates, the ground-dash obstacle, the Swarm, Climb, Tent Travel and the route into The Drains",
+  
+      "The Drains through Wind Ride, Willow, all three Elevator Parts, the repaired lift, Lady of the Drains and the Golden Feather reward",
+  
+      "All three Elevator Parts through the upper Drains routes, the blocked pit after the second part, the far-left lower route to the third part and the return to the broken elevator",
+  
+      "All seven Golden Feathers through Lady of the Drains, Shrine of the Seven Sons, Starsinger, Lutter, Squinton's birthday party, the Forest King and Webdrench Inn",
+  
+      "Queen's Castle and post-credits progression through the Queen, the hidden castle room, Soar, five Spirit Fragments, Night Garden and Reunite the Flock",
+  
+      "100% completion through all 41 achievements, 32 Trinkets, 50 Trinket Slots, 20 ordinary Spirits, story-page sets, Map Markers and fully upgraded Trinkets",
+    ],
+  
+    image:
+      "/images/well-dweller/well-dweller-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 53,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Well Dweller Guide: Walkthrough, Feathers, Ending & 100%",
+        href: "/well-dweller",
+        type: "Guide Hub",
+        description:
+          "Find your current progression stage, solve the major region blockers, collect all seven Golden Feathers, continue after the Queen, and finish the remaining completion requirements.",
+        image:
+          "/images/well-dweller/well-dweller-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Full progression, Night Garden, The Bog, The Drains, 3 Elevator Parts, 7 Golden Feathers, Queen's Castle, post-Queen ending and 41 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller Walkthrough: Full Progression & Where to Go Next",
+        href: "/well-dweller/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the main route from Night Garden through The Bog, The Drains, family objectives, Golden Feathers, Queen's Castle and the sequence after the Queen.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-seven-golden-feathers-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 391,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Night Garden, Hunter's Cabin, The Bog, The Drains, Graven Valley, Dollmaker's House, Lookout Tower, The Docks, 7 Golden Feathers, Queen's Castle and post-Queen progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller Night Garden & Hunter's Cabin Walkthrough",
+        href: "/well-dweller/night-garden-hunters-cabin-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Beat the Groundskeeper, get the Flaming Vessel and Slingshot, find the berries, return home, and escape the Hunter.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-hunter-first-encounter.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 392,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Oil Vials, Groundskeeper, Hunter's Cabin, Looter, Flaming Vessel, Hunter's Locket, Slingshot, berries and the Hunter escape",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller The Bog Walkthrough: Swarm, Climb & Tent Travel",
+        href: "/well-dweller/the-bog-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Meet Ilda, check the Queen's Castle gate, defeat the Swarm, unlock Climb and Tent Travel, and continue into The Drains.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-climb-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 393,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Ilda, map station, Queen's Castle 7-Feather gate, golden gates, ground dash, Swarm, Climb, Tent Travel and The Drains entrance",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller The Drains Walkthrough: Wind Ride & Lady",
+        href: "/well-dweller/the-drains-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Unlock Wind Ride, repair the elevator with all three parts, defeat Lady of the Drains, and collect the Golden Feather.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-lady-of-the-drains-lightning.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 394,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Wind Ride, Willow, frog memorials, 3 Elevator Parts, broken elevator, Lady of the Drains and Golden Feather",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller Elevator Parts: All 3 Locations",
+        href: "/well-dweller/elevator-parts-locations",
+        type: "Puzzle Help",
+        description:
+          "Find all three Elevator Parts in The Drains, avoid the blocked pit after the second part, and take the far-left lower route to the final component.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-drains-broken-elevator.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 395,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Wind Ride prerequisite, Elevator Parts 1–3, broken elevator, blocked pit, far-left lower route and repaired lift",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller Golden Feathers: All 7 Locations & Quests",
+        href: "/well-dweller/golden-feathers-locations",
+        type: "Collectibles",
+        description:
+          "Complete all seven Golden Feather objectives, identify which event is still missing at 6/7, and return to Queen's Castle once the counter reaches 7/7.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-seven-golden-feathers-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 396,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Lady of the Drains, Seven Sons, Starsinger, Lutter, Squinton, Forest King, Webdrench Inn, 6/7 troubleshooting and Queen's Castle",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller True Ending: Soar & 5 Spirit Fragments",
+        href: "/well-dweller/true-ending",
+        type: "Endings",
+        description:
+          "Continue after defeating the Queen, unlock Soar, find all five Spirit Fragments, return to Night Garden, and Reunite the Flock.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-soar-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 397,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Queen ending, post-credits castle, Lutter, hidden room, Queen's Coin, Soar, five Spirit Fragments, Night Garden and Reunite the Flock",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Well Dweller 100% Completion Guide & 41 Achievements",
+        href: "/well-dweller/100-percent-completion",
+        type: "Achievements",
+        description:
+          "Track all 41 achievements and finish the remaining Trinkets, Slots, Spirits, story pages, upgrades, Map Markers, and post-Queen objectives.",
+        date: "Updated recently",
+        image:
+          "/images/well-dweller/well-dweller-map-cleanup-markers.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 398,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "41 achievements, 32 Trinkets, 50 Trinket Slots, 20 Spirits, story pages, Map Markers, max upgrades and final cleanup",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+    ],
+  },
+  {
     title: "CONTROL Resonant",
     game: "CONTROL Resonant",
     href: "/control-resonant",
