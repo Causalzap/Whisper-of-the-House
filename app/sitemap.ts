@@ -995,6 +995,13 @@ const paths = [
    '/well-dweller/true-ending',
    '/well-dweller/100-percent-completion',
 
+    'wild-west-pioneers',
+    'wild-west-pioneers/best-settlement-layout',
+    'wild-west-pioneers/production-chains',
+    'wild-west-pioneers/progression-guide',
+    'wild-west-pioneers/scouts-expeditions',
+    'wild-west-pioneers/settler-needs',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1002,6 +1009,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'wild-west-pioneers': '2026-09-25',
+  'wild-west-pioneers/best-settlement-layout': '2026-09-25',
+  'wild-west-pioneers/production-chains': '2026-09-25',
+  'wild-west-pioneers/progression-guide': '2026-09-25',
+  'wild-west-pioneers/scouts-expeditions': '2026-09-25',
+  'wild-west-pioneers/settler-needs': '2026-09-25',
+
   '/well-dweller': '2026-09-24',
   '/well-dweller/walkthrough': '2026-09-24',
   '/well-dweller/night-garden-hunters-cabin-walkthrough': '2026-09-24',

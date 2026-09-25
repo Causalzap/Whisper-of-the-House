@@ -131,6 +131,227 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Wild West Pioneers",
+    game: "Wild West Pioneers",
+    href: "/wild-west-pioneers",
+    slug: "wild-west-pioneers",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "City Builder, Progression & Frontier Expansion",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "First settlement + production chains + Journey progression + settler Satisfaction + scouting + World Map + second settlement",
+  
+    description:
+      "Start a stable Wild West Pioneers settlement, fix food and production bottlenecks, choose useful Journey unlocks, manage settler Satisfaction and Whims, then move into scouting, World Map exploration and permanent expansion.",
+  
+    coverage: [
+      "First-settlement planning through resource overlays, Town Hall direction, Warehouse placement, Food Shop coverage, water access, roads, soil quality and restart decisions",
+  
+      "Production chains from early logs and mushrooms through the Kitchen, Food Shop, Warehouse logistics, planks, worker allocation and mid-game processing bottlenecks",
+  
+      "Journey progression through the first Town Hall official, Tents, Journey Points, five progression tiers, settlement-capacity gates, Scout Cabin and Settler Base milestones",
+  
+      "Settler needs through shelter, food, Satisfaction, household Whims, Whim range, service requests, housing upgrades and newcomer population growth",
+  
+      "Scouting through the first expedition, canned-food rations, World Map travel, interactive locations, recovered resources and returning workers",
+  
+      "Permanent expansion through the Settler Base, startup-resource transport, the Sandstorm settlement and the transition toward a multi-settlement economy",
+    ],
+  
+    image:
+      "/images/wild-west-pioneers/wild-west-pioneers-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 54,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Wild West Pioneers Guide & Walkthrough: Progression",
+        href: "/wild-west-pioneers",
+        type: "Guide Hub",
+        description:
+          "Find the system currently blocking your settlement, from opening layout and production through settler needs, Journey progression, scouting and the second settlement.",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-town-hall-main-road-direction.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "First settlement, production, Journey Points, Satisfaction, Whims, scouting, World Map exploration and second-settlement expansion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Wild West Pioneers Progression Guide: Journey Points & Unlocks",
+        href: "/wild-west-pioneers/progression-guide",
+        type: "Systems",
+        description:
+          "Choose what to unlock next, earn and spend Journey Points, read the five progression tiers, manage Town Hall officials, and reach Scout Cabin and Settler Base at the right time.",
+        date: "Updated recently",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-town-hall-official-choice.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 401,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Journey Points, Ideas, five tiers, Town Hall officials, three progression gates, Scout Cabin, Town Hall upgrades and Settler Base",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Wild West Pioneers Best Settlement Layout Guide",
+        href: "/wild-west-pioneers/best-settlement-layout",
+        type: "Systems",
+        description:
+          "Choose the first settlement site, rotate the Town Hall, place the Warehouse, keep housing inside Food Shop coverage, plan water and preserve good farming soil.",
+        date: "Updated recently",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-starting-resource-overlays.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 399,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Resource overlays, Town Hall direction, first Warehouse, Food Shop range, water, soil quality, roads and restart decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Wild West Pioneers Production Chains Guide: Food & Planks",
+        href: "/wild-west-pioneers/production-chains",
+        type: "Systems",
+        description:
+          "Keep logs and food moving, fix Warehouse and worker failures, start plank production at the right time, and diagnose stalled workshops before adding duplicates.",
+        date: "Updated recently",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-food-chain-kitchen.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 400,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Logs, mushrooms, Kitchen, Food Shop, Warehouse logistics, Sawmill, planks, workers, stalled processors and mid-game production",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Wild West Pioneers Settler Needs & Satisfaction Guide",
+        href: "/wild-west-pioneers/settler-needs",
+        type: "Systems",
+        description:
+          "Raise settler Satisfaction by covering basic needs, fulfilling household Whims, improving housing and services, and preparing the town for newcomer growth.",
+        date: "Updated recently",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-settler-satisfaction-basics.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 403,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Basic needs, Satisfaction, five Whims, fulfillment range, service requests, housing upgrades, 60 vs 80 Satisfaction and newcomers",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Wild West Pioneers Scouts, Expeditions & Second Settlement",
+        href: "/wild-west-pioneers/scouts-expeditions",
+        type: "Guide",
+        description:
+          "Prepare scouting expeditions, load canned-food rations, explore World Map locations, form a settler group, transport resources and establish the second settlement.",
+        date: "Updated recently",
+        image:
+          "/images/wild-west-pioneers/wild-west-pioneers-scout-world-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 402,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Five-pioneer scouting party, canned-food rations, World Map locations, Settler Base, transported resources, Sandstorm and settlement networks",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "Well Dweller",
     game: "Well Dweller",
     href: "/well-dweller",
