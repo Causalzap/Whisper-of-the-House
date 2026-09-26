@@ -1002,6 +1002,15 @@ const paths = [
     'wild-west-pioneers/scouts-expeditions',
     'wild-west-pioneers/settler-needs',
 
+    'transport-fever-3',
+    'transport-fever-3/beginner-guide',
+    'transport-fever-3/campaign-walkthrough',
+    'transport-fever-3/cargo-industry-guide',
+    'transport-fever-3/city-growth-guide',
+    'transport-fever-3/economy-money-guide',
+    'transport-fever-3/rail-signals-guide',
+    'transport-fever-3/traffic-road-guide',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1009,6 +1018,15 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'transport-fever-3': '2026-09-26',
+  'transport-fever-3/beginner-guide': '2026-09-26',
+  'transport-fever-3/campaign-walkthrough': '2026-09-26',
+  'transport-fever-3/cargo-industry-guide': '2026-09-26',
+  'transport-fever-3/city-growth-guide': '2026-09-26',
+  'transport-fever-3/economy-money-guide': '2026-09-26',
+  'transport-fever-3/rail-signals-guide': '2026-09-26',
+  'transport-fever-3/traffic-road-guide': '2026-09-26',
+
   'wild-west-pioneers': '2026-09-25',
   'wild-west-pioneers/best-settlement-layout': '2026-09-25',
   'wild-west-pioneers/production-chains': '2026-09-25',

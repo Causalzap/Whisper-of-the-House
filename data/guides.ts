@@ -131,6 +131,289 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Transport Fever 3",
+    game: "Transport Fever 3",
+    href: "/transport-fever-3",
+    slug: "transport-fever-3",
+    kind: "game",
+    status: "active",
+    accent: "blue",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Transport Tycoon, Cargo, Rail & City Growth",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "Beginner setup + money + cargo industries + rail signals + traffic + city growth + campaign Missions 1–4",
+  
+    description:
+      "Start a stable Transport Fever 3 company, manage loans and cargo chains, move proven routes onto rail, fix road congestion, grow towns, and complete the first four campaign missions.",
+  
+    coverage: [
+      "Opening progression through town Supplies, district coverage, passenger stops, depot placement, Line Manager metrics, the first cargo delivery and capacity decisions",
+  
+      "Company finances through starting loans, complete project cost, line profitability, recurring vehicle costs, subsidies, debt repayment, Company Rank and expansion timing",
+  
+      "Cargo and industry networks through production chains, industry terminals, vehicle compatibility, input ratios, worker transport bonuses, warehouses, distribution centers and loading or unloading failures",
+  
+      "Railway construction through proven road demand, station placement, double track, crossovers, signals, No Path failures, depot access, train consists, mixed-speed traffic, station bottlenecks and electrification",
+  
+      "Road traffic through bypasses, waypoints, road hierarchy, roundabouts, lane management, traffic lights, bus lanes, vehicle count, road maintenance, trams and underground passenger transport",
+  
+      "Town growth through passenger service, requested cargo, settlement levels, Headquarters growth bonuses, noise, pollution, reputation, landmarks and Marketing Campaigns",
+  
+      "Campaign Missions 1–4 through Saving Mardi Gras, Alpine Crossing, Desert Adventure and Biggest Festival Ever, including star requirements, optional objectives and mission-specific blockers",
+    ],
+  
+    image:
+      "/images/transport-fever-3/transport-fever-3-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 55,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Transport Fever 3 Guide: Beginner, Cargo, Rail & City Growth",
+        href: "/transport-fever-3",
+        type: "Guide Hub",
+        description:
+          "Start with one working town, identify whether money or transport flow is limiting expansion, move into rail when demand proves it, respond to town growth, and find the right fix for the current network.",
+        image:
+          "/images/transport-fever-3/transport-fever-3-double-track-station.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Beginner setup, money, cargo, rail signals, traffic, city growth and campaign Missions 1–4",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Beginner Guide: What to Build First",
+        href: "/transport-fever-3/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Read one town before spending, build the first passenger loop around real stop coverage, place the depot sensibly, read line performance and expand only when demand proves the need.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-town-supplies.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 404,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Town Supplies, districts, stop coverage, depot placement, Line Manager metrics, first cargo delivery and early capacity decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Money Guide: Loans, Profit, Debt & Expansion",
+        href: "/transport-fever-3/economy-money-guide",
+        type: "Systems",
+        description:
+          "Choose loans around complete projects, judge real line profit, control recurring vehicle costs, use subsidies carefully, repay debt and expand without draining operating cash.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-loan-options.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 405,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Loans, complete project cost, line profit, recurring costs, vehicle replacement, subsidies, debt, Company Rank and expansion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Cargo Guide: Industries, Rates & Warehouses",
+        href: "/transport-fever-3/cargo-industry-guide",
+        type: "Systems",
+        description:
+          "Trace broken cargo chains, use industry terminals correctly, match production ratios, connect workers, manage warehouses and transfers, and fix loading or unloading failures.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-first-cargo-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 406,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Industry terminals, cargo compatibility, production ratios, workers, warehouses, distribution centers, Force Unload and terminal congestion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Rail & Signals Guide: Fix No Path",
+        href: "/transport-fever-3/rail-signals-guide",
+        type: "Systems",
+        description:
+          "Build rail after road demand is proven, place useful stations and crossovers, control train movement with signals, and fix No Path, depot and station bottlenecks.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-double-track-station.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 407,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Road-to-rail decisions, station placement, double track, crossovers, signals, No Path, depots, consists, mixed-speed traffic and electrification",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Traffic Guide: Roads, Lanes & Congestion",
+        href: "/transport-fever-3/traffic-road-guide",
+        type: "Systems",
+        description:
+          "Move through-freight out of town centers, use waypoints and lane rules, fix junctions, protect buses, reduce unnecessary vehicles and trace traffic queues to their real cause.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-ring-road.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 408,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Bypasses, waypoints, road hierarchy, roundabouts, lane management, bus lanes, maintenance, trams, underground transit and congestion fixes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 City Growth Guide: Supplies & Reputation",
+        href: "/transport-fever-3/city-growth-guide",
+        type: "Systems",
+        description:
+          "Grow towns through passenger transport and requested cargo, then manage settlement levels, Headquarters bonuses, noise, pollution, reputation, landmarks and marketing.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-town-level-up.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 409,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Town panel, passenger growth, Supplies, town levels, Headquarters bonuses, noise, pollution, reputation, landmarks and Marketing Campaign",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Transport Fever 3 Campaign Walkthrough: Missions 1–4",
+        href: "/transport-fever-3/campaign-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure and Biggest Festival Ever with objective order, quantities, star conditions and special objectives.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-mardi-gras-alligators.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 410,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, star requirements, special objectives and mission blockers",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+    ],
+  },
+  {
     title: "Wild West Pioneers",
     game: "Wild West Pioneers",
     href: "/wild-west-pioneers",

@@ -1,0 +1,553 @@
+import Link from "next/link";
+import Image from "next/image";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Why Isn't Cargo Moving in Transport Fever 3?">
+
+  Start at the building that should consume the cargo and trace the chain
+  backward. Confirm that it wants the item, that cargo can reach a valid
+  terminal, and that the assigned vehicle can carry it. Once the route works,
+  size each incoming line around the amount the next industry actually consumes.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: September 26, 2026.
+</div>
+
+
+The difficult cargo problems in Transport Fever 3 usually begin after the first
+successful delivery.
+
+A crop farm sending vegetables straight into town has very little to hide. A
+furniture network can involve raw materials, intermediate industries, several
+transport rates, shared storage, transfer lines, finished goods, and local
+delivery. One broken link can make vehicles elsewhere in the chain look like
+the problem even when they are doing exactly what they were asked to do.
+
+Adding vehicles is therefore one of the last things I do when cargo stops
+moving.
+
+I first want to know **what the destination consumes, what is missing there, and
+where that missing cargo was last seen**. That usually narrows a large network
+to one terminal, one vehicle type, one production input, or one transfer.
+
+
+<h2
+  id="trace-chain-backward"
+  className="scroll-mt-24"
+>
+  Start With the Building That Should Receive the Cargo
+</h2>
+
+When a factory or town is not getting what it needs, begin at that destination
+rather than at the nearest producer.
+
+A town can request a finished good in only part of the settlement. A factory may
+require several inputs at the same time. One material can be overflowing while a
+second shortage prevents the entire building from using it.
+
+A simple vegetable chain is easy to read:
+
+**town demand → delivery stop → crop farm → suitable vehicle**
+
+Furniture is different:
+
+**furniture demand → furniture factory → planks + glass → upstream industries**
+
+If furniture production is low because glass is missing, buying more vehicles
+for the finished furniture line changes nothing. The useful question is where
+the glass stopped progressing toward the factory.
+
+That backward approach scales well as the network grows. Find the missing item,
+move one step upstream, and continue until you reach the first place where cargo
+should exist but does not.
+
+
+<h2
+  id="industry-terminals"
+  className="scroll-mt-24"
+>
+  Check the Industry's Own Terminals Before Building Another Station
+</h2>
+
+Some industries already provide the loading point you need.
+
+The Chiswick Crop Farm has **two Passenger and Cargo road terminals** available
+through the industry's Road Station options. Trucks can load directly there
+without another cargo station being built beside the farm.
+
+<figure className="my-8">
+  <Image
+    src="/images/transport-fever-3/transport-fever-3-first-cargo-route.webp"
+    alt="Transport Fever 3 Chiswick Crop Farm showing two built-in Passenger and Cargo road terminals"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Chiswick Crop Farm already provides two road terminals, allowing the vegetable line to load directly at the producer.
+  </figcaption>
+</figure>
+
+This check is worth making before every new industry connection. An extra
+terminal costs money and space, and it does not improve a route when the
+producer already has usable loading positions.
+
+The second terminal can also matter later. If several vehicles begin competing
+for one loading position, assigning an alternative terminal can give them
+another place to work without changing the production chain itself.
+
+The delivery end needs a valid destination as well. Cargo entering a town is not
+automatically useful to every building in that town. The stop still has to serve
+the area that consumes the good.
+
+If the issue is basic stop coverage rather than cargo flow, fix the
+<Link href="/transport-fever-3/beginner-guide">local stop placement</Link>
+before expanding the freight fleet.
+
+
+<h2
+  id="cargo-compatibility"
+  className="scroll-mt-24"
+>
+  Prove the Route With the Correct Vehicle Before Buying the Fleet
+</h2>
+
+A connected line can remain empty when the selected vehicle cannot carry the
+cargo assigned to it.
+
+Check compatibility before committing to a large purchase. This becomes easy to
+miss in multi-stage chains because the vehicle used for a raw material may not
+be suitable for the processed product that leaves the next industry.
+
+Rail freight follows the same rule: locomotive performance is irrelevant when
+the attached wagons cannot carry the item the line is meant to move.
+
+For a new connection, I prefer to send one vehicle or a small test fleet first.
+That first trip answers several questions at once:
+
+- does cargo appear at the loading terminal;
+- can the vehicle load it;
+- does the destination accept it;
+- and does the vehicle return empty or still carrying something it could not
+  unload?
+
+Once those answers are correct, adding capacity is straightforward. Buying ten
+vehicles before the first one completes the trip only makes configuration
+mistakes more expensive.
+
+
+<h2
+  id="production-ratios"
+  className="scroll-mt-24"
+>
+  Size Each Incoming Line Around the Industry Recipe
+</h2>
+
+Cargo starts moving long before the network is properly balanced.
+
+Furniture production gives a clear example. The factory used here consumes:
+
+**4 planks + 1 glass → 2 furniture**
+
+That 4:1 input ratio should be visible in the transport feeding it.
+
+With the glass route running at **37**, four times that amount gives a plank
+target of roughly **148**. After vehicles were adjusted, the plank route reached
+**146**, close enough to keep the two inputs arriving in useful proportion.
+
+<figure className="my-8">
+  <Image
+    src="/images/transport-fever-3/transport-fever-3-cargo-rate-matching.webp"
+    alt="Transport Fever 3 furniture chain with plank and glass transport rates matched to a four-to-one production ratio"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Furniture consumes four planks for every one glass, so equal-sized incoming fleets would oversupply one side of the recipe.
+  </figcaption>
+</figure>
+
+This is why a factory surrounded by cargo can still produce slowly.
+
+If glass is short while planks are already piling up, increasing the plank rate
+does not create more furniture. It creates more stored planks, more trucks, and
+more running cost while the same glass shortage remains.
+
+The same calculation continues upstream. One glass chain used a **2:1
+sand-to-glass** relationship. A sand flow around **160** therefore supported a
+glass flow around **80**.
+
+Do not treat those exact rates as permanent targets. Production can change,
+vehicles can improve, and industries can gain additional output. The useful
+method is the relationship:
+
+**read the recipe → see what the building is consuming → size the incoming
+lines around those proportions**
+
+Whenever production rises, check the lines again. A route that was correctly
+sized for the previous output can become the new bottleneck without anything
+else being wrong.
+
+
+<h2
+  id="worker-transport"
+  className="scroll-mt-24"
+>
+  Passenger Service Can Increase Production at Some Industries
+</h2>
+
+Cargo is not the only thing that can strengthen an industry.
+
+Some industries can receive workers from nearby settlements, and transporting
+those workers can improve production. That makes an industry passenger
+connection different from an ordinary town bus route: the passengers are part
+of the production setup.
+
+A crop farm later received passenger service while another production input was
+also being improved. With those conditions in place, its output increased and
+the cargo network suddenly had more material to move.
+
+The important consequence appears after the production change.
+
+A freight line that previously matched the industry's output may now be too
+small. Storage begins filling, cargo waits longer, and adding production no
+longer produces the expected downstream result because transport has become the
+new limit.
+
+Worker service therefore belongs in the same calculation as other production
+improvements:
+
+**increase production → recheck output → compare the existing cargo rate with the
+new amount available**
+
+Do not add workers and immediately duplicate every cargo vehicle. Let the
+production change become visible first, then increase only the lines that are
+actually falling behind.
+
+
+<h2
+  id="warehouses"
+  className="scroll-mt-24"
+>
+  Add a Warehouse When the Network Needs a Buffer Between Transport Stages
+</h2>
+
+A warehouse is most useful when cargo cannot or should not travel directly from
+producer to final consumer in one line.
+
+That can happen when a ship brings goods to shore before trucks distribute
+them, several producers feed one shared area, finished products need to wait for
+different town deliveries, or a factory line needs somewhere to leave its
+return cargo.
+
+The warehouse then becomes a buffer between transport stages.
+
+What it should not become is an automatic building placed beside every
+industry. A nearby farm supplying one town directly has no need for an extra
+transfer simply because storage is available.
+
+Every transfer introduces another place where the network can stop working.
+Cargo has to reach the storage area, remain available to the next line, and
+leave again toward a destination that can actually consume it.
+
+Use the warehouse when that extra step simplifies several routes or separates
+transport modes. Skip it when the direct connection is already simple and
+working.
+
+
+<h2
+  id="distribution-center"
+  className="scroll-mt-24"
+>
+  Use a Shared Distribution Center When Several Cargo Flows Need the Same Place
+</h2>
+
+The furniture network became easier to manage once planks, glass, and finished
+furniture could pass through one shared transfer area.
+
+The warehouse was configured for **planks, glass, and furniture**, with a
+universal cargo station beside it handling the vehicles moving those goods.
+
+<figure className="my-8">
+  <Image
+    src="/images/transport-fever-3/transport-fever-3-distribution-center-layout.webp"
+    alt="Transport Fever 3 distribution center storing planks glass and furniture beside a universal cargo station"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Planks and glass arrive at shared storage, a factory line takes the required inputs onward, and finished furniture returns before local distribution.
+  </figcaption>
+</figure>
+
+The useful part is the separation of jobs.
+
+One route can bring planks into storage. Another delivers glass. A factory line
+collects the required inputs, takes them to furniture production, and returns
+with finished furniture. Town delivery vehicles then work from that finished
+stock instead of driving all the way back through the production chain.
+
+That produces a readable sequence:
+
+**producer → shared storage → factory → shared storage → consumer**
+
+The same setup can also keep long-haul freight out of a busy town center.
+
+When several cargo flows already converge near the same settlement, let the
+long routes finish at the shared storage area and use a shorter delivery line
+for the final trip into town:
+
+**long-distance cargo → outside storage → short delivery line → town**
+
+This works best when several routes already need the same transfer point. Do not
+add an extra handoff to a simple direct route only to shorten the last few
+streets; every transfer creates another place where cargo can wait.
+
+It also gives each storage state a meaning.
+
+A warehouse full of planks but empty of glass tells you where to look. Plenty of
+both inputs with no furniture returning moves the problem downstream toward the
+factory or return line. Finished furniture sitting in storage proves that the
+production loop works and shifts attention toward the final delivery routes.
+
+
+<h2
+  id="confirm-transfer"
+  className="scroll-mt-24"
+>
+  Finished Goods Returning to Storage Prove More Than a Pile of Raw Materials
+</h2>
+
+A large stockpile can look reassuring even when half of the chain is broken.
+
+Raw planks arriving at a warehouse prove only that the plank route works.
+Glass arriving beside them proves that two inbound routes work. Neither proves
+that the factory is receiving the right amounts or that the finished product can
+make the return trip.
+
+In the furniture network, the important moment was furniture appearing back at
+the shared warehouse after the factory had received its inputs.
+
+<figure className="my-8">
+  <Image
+    src="/images/transport-fever-3/transport-fever-3-warehouse-transfer.webp"
+    alt="Transport Fever 3 finished furniture returning to the shared warehouse before town delivery"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Finished furniture returning to storage confirms that the input routes, factory delivery, production, and return leg are all functioning.
+  </figcaption>
+</figure>
+
+That is the point where the final town delivery can be judged on its own.
+
+Before finished goods appear, expanding the last-mile fleet is premature. There
+is nothing useful for that fleet to solve yet.
+
+
+<h2
+  id="cargo-not-unloading"
+  className="scroll-mt-24"
+>
+  Cargo Coming Back With the Vehicle Usually Means the Destination Cannot Use It
+</h2>
+
+Cargo loading correctly and then returning on the same vehicle is not the same
+failure as an empty producer.
+
+One example appeared at Lisburn Brewery. The brewery could hold **200 panes of
+glass**. Once that storage filled, incoming vehicles no longer had room to leave
+all of the glass they were carrying.
+
+The line settings include **Force unload all cargo on arrival**.
+
+<figure className="my-8">
+  <Image
+    src="/images/transport-fever-3/transport-fever-3-force-unload-cargo.webp"
+    alt="Transport Fever 3 line settings showing Force unload all cargo on arrival"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Force unload prevents leftovers from riding back with the vehicle, but it does not correct a line delivering more than the destination can use.
+  </figcaption>
+</figure>
+
+I would not turn that setting on before understanding why the storage is full.
+
+The brewery may simply be receiving glass faster than it consumes it. Another
+required production input may be missing, preventing the glass from being used.
+The cargo may also be expected to transfer onward without a working storage and
+outbound connection.
+
+In those situations, forced unloading changes the symptom rather than the
+balance of the chain.
+
+Use it when the route is intentionally one-way and returning cargo serves no
+purpose. If the destination is chronically overfilled, reduce the incoming
+rate or fix the production stage that should be consuming the material.
+
+
+<h2
+  id="production-too-slow"
+  className="scroll-mt-24"
+>
+  When an Industry Has Cargo but Output Still Looks Wrong, Compare the Whole Chain
+</h2>
+
+An industry can have visible inputs and still fail to produce at the rate the
+rest of the network expects.
+
+Four values tell the story better than the number of vehicles parked nearby:
+
+**input available → input consumed → output produced → output transported**
+
+A weaving chain showed how that imbalance moves from one stage to another.
+
+The weaving factory reached production around **136**, while one relevant
+transport line was brought to **126**. The fabric-to-clothes leg was also
+adjusted to **126**. Dyes were needed at roughly half that level, around **63**,
+which exposed the next shortage farther upstream in the chemicals and oil chain.
+
+The useful response was not to enlarge every line.
+
+Once one stage could move enough cargo, attention shifted backward to the next
+input that could not keep up. That is how a long chain stays readable: improve
+the first proven bottleneck, then watch whether the shortage moves somewhere
+else.
+
+If production itself increases because workers or another input were added,
+repeat the comparison from the industry outward. The output line may now need
+more capacity even though it was perfectly balanced a few years earlier.
+
+
+<h2
+  id="terminal-congestion"
+  className="scroll-mt-24"
+>
+  More Road Space Does Not Fix Trucks Waiting for One Loading Position
+</h2>
+
+Cargo networks can create queues that look like road congestion while the real
+limit is inside the terminal.
+
+When several lines converge on one loading or unloading position, trucks may
+stack up outside even though the road beyond the entrance is clear. Another lane
+outside the facility does little if every vehicle still waits for the same
+place.
+
+Watch the front of the queue.
+
+If vehicles are waiting to enter the same cargo platform, use available
+alternative terminals or separate heavily competing movements where the
+facility allows it. If the queue clears the terminal but then stalls at a road
+junction, the problem has moved outside the cargo system.
+
+Road routing, lane management, and through-freight belong in the
+<Link href="/transport-fever-3/traffic-road-guide">traffic and road setup</Link>.
+Inside the cargo network, the question is whether loading positions and
+assignments can process the vehicles already arriving.
+
+
+<h2
+  id="long-haul-cargo"
+  className="scroll-mt-24"
+>
+  Trucks Can Prove a Cargo Chain Before the Long Leg Moves to Rail
+</h2>
+
+Trucks are flexible and cheap enough to test a new production chain without
+committing to a railway.
+
+That makes them useful even when the final network may eventually use trains.
+
+As production grows, however, a long freight leg can begin requiring enough
+vehicles that the mode itself deserves reconsideration. At that point I stop
+trying to solve the question inside the production chain.
+
+Keep short collection and delivery work on the road where it still makes sense.
+If the long-distance leg is now carrying sustained high volume and the truck
+fleet is interfering with the wider network, the
+<Link href="/transport-fever-3/rail-signals-guide">rail and signals setup</Link>
+is where to evaluate the next transport step.
+
+The factory recipe does not change because the vehicle changes. Whatever mode
+handles the long leg still has to deliver the same required amount to the next
+industry.
+
+
+<h2
+  id="cargo-troubleshooting"
+  className="scroll-mt-24"
+>
+  Find the First Place Where the Expected Cargo Disappears
+</h2>
+
+A large freight network is easier to diagnose when you stop looking at it as one
+system.
+
+Choose the item that is missing and follow only that item.
+
+### Nothing appears at the producer
+
+Check whether the building is actually producing. A required input, worker
+connection, or production condition may still be missing.
+
+### Cargo exists but the vehicle stays empty
+
+Confirm that the vehicle can carry the item and that the line reaches a valid
+loading terminal.
+
+### The vehicle loads but the destination receives nothing
+
+Check the unloading terminal and whether it serves the factory or town buildings
+that actually consume the cargo.
+
+### Cargo arrives and returns with the same vehicle
+
+Look at destination storage and consumption. A full destination may simply be
+receiving more than it can use.
+
+### One factory input is always full while another stays empty
+
+Compare the production recipe with the incoming line rates. Equal fleets are
+often wrong when the inputs are consumed at different ratios.
+
+### Raw materials fill the warehouse but finished goods never come back
+
+Follow the factory leg. Confirm that every required input leaves storage,
+reaches the factory, and that the return line can carry the finished product.
+
+### The chain worked until an industry increased production
+
+Recheck output against transport rate. The network may still be sized for the
+old production level.
+
+### Trucks queue outside a cargo station
+
+Go to the front of the queue. If the first trucks are waiting for a loading
+position, inspect terminal use before changing the road.
+
+The first broken handoff is the one worth fixing. Once cargo passes that point,
+let the chain run again before changing the next line.
