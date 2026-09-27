@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/transport-fever-3`;
 const pageUrl = hubUrl;
 
 const metadataTitle =
-  "Transport Fever 3 Guide: Beginner, Cargo, Rail & City Growth";
+  "Transport Fever 3 Guide: Beginner, Cargo, Rail & Campaign";
 
 const metadataDescription =
-  "Build your first Transport Fever 3 network, manage money and cargo, fix road and rail bottlenecks, grow towns, and clear the first campaign missions.";
+  "Start Transport Fever 3 with a stable town, manage money and cargo, fix road and rail bottlenecks, grow cities, and complete Campaign Missions 1–6.";
 
 const articleDescription =
-  "Start with one working town, decide whether money or cargo flow is limiting expansion, move from roads to rail when demand proves it, respond to town growth, and handle the opening campaign missions.";
+  "Build one working town first, separate money problems from cargo-flow problems, decide when roads need better routing or rail capacity, respond to changing town needs, and work through Campaign Missions 1–6.";
 
 const toc = [
   {
@@ -30,7 +30,7 @@ const toc = [
   },
   {
     id: "road-or-rail",
-    label: "Road capacity or rail?",
+    label: "Road problem or rail capacity?",
   },
   {
     id: "town-changes",
@@ -38,7 +38,7 @@ const toc = [
   },
   {
     id: "campaign",
-    label: "Campaign missions",
+    label: "Campaign Missions 1–6",
   },
   {
     id: "later-network",
@@ -73,16 +73,18 @@ const relatedLinks = [
   },
   {
     href: "/transport-fever-3/campaign-walkthrough",
-    label: "Campaign Walkthrough",
+    label: "Campaign Walkthrough: Missions 1–6",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -90,6 +92,7 @@ export const metadata: Metadata = {
     description: articleDescription,
     siteName: "Whisper of the House",
   },
+
   twitter: {
     card: "summary",
     title: metadataTitle,
@@ -99,10 +102,12 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
+
   "@graph": [
     {
       "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+
       itemListElement: [
         {
           "@type": "ListItem",
@@ -118,17 +123,23 @@ const jsonLd = {
         },
       ],
     },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
+
       headline: "Transport Fever 3 Guide: What to Build and Fix Next",
+
       description: articleDescription,
+
       datePublished: "2026-09-26",
-      dateModified: "2026-09-26",
+      dateModified: "2026-09-27",
+
       about: [
         {
           "@type": "VideoGame",
@@ -141,44 +152,62 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 cargo",
+          name: "Transport Fever 3 money and economy",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 rail",
+          name: "Transport Fever 3 cargo and industries",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 rail and signals",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 traffic and roads",
         },
         {
           "@type": "Thing",
           name: "Transport Fever 3 city growth",
         },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 campaign",
+        },
       ],
+
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
     },
+
     {
       "@type": "Organization",
       "@id": `${siteUrl}#organization`,
       name: "Whisper of the House",
       url: siteUrl,
     },
+
     {
       "@type": "WebSite",
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+
       publisher: {
         "@id": `${siteUrl}#organization`,
       },
@@ -194,7 +223,9 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
@@ -204,7 +235,7 @@ export default function Page() {
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 26, 2026"
+          updatedAt="September 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

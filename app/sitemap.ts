@@ -1018,9 +1018,9 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  'transport-fever-3': '2026-09-26',
+  'transport-fever-3': '2026-09-27',
   'transport-fever-3/beginner-guide': '2026-09-26',
-  'transport-fever-3/campaign-walkthrough': '2026-09-26',
+  'transport-fever-3/campaign-walkthrough': '2026-09-27',
   'transport-fever-3/cargo-industry-guide': '2026-09-26',
   'transport-fever-3/city-growth-guide': '2026-09-26',
   'transport-fever-3/economy-money-guide': '2026-09-26',

@@ -11,28 +11,40 @@ const hubUrl = `${siteUrl}/transport-fever-3`;
 const pageUrl = `${hubUrl}/campaign-walkthrough`;
 
 const metadataTitle =
-  "Transport Fever 3 Campaign Walkthrough: Missions 1–4";
+  "Transport Fever 3 Campaign Walkthrough: Missions 1–6";
 
 const metadataDescription =
-  "Complete Transport Fever 3 Missions 1–4 with objective order, star requirements, alligator and artifact locations, sewage, blankets, and festival tips.";
+  "Complete Transport Fever 3 Missions 1–6 with star requirements, objective order, special awards, the 1,000-oil race, and Island Expansion contracts.";
 
 const articleDescription =
-  "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure, and Biggest Festival Ever with the required objective order, quantities, star conditions, special objectives, and the steps that commonly stop mission progress.";
+  "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, Oil for the People, and Island Expansion with objective order, required quantities, star conditions, special objectives, and the steps that can stop mission progress.";
 
 const imageUrls = [
   `${siteUrl}/images/transport-fever-3/transport-fever-3-mardi-gras-alligators.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-mardi-gras-wood-delivery.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-mardi-gras-parade-route.webp`,
+
   `${siteUrl}/images/transport-fever-3/transport-fever-3-alpine-crossing-signals.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-alpine-crossing-zermatt.webp`,
+
   `${siteUrl}/images/transport-fever-3/transport-fever-3-desert-maintenance-camp.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-desert-truck-condition.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-desert-remains.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-desert-excavation.webp`,
+
   `${siteUrl}/images/transport-fever-3/transport-fever-3-festival-sewage-line.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-festival-instruments.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-festival-public-transport.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-festival-helicopter.webp`,
+
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-oil-people-prospecting.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-oil-people-steel-dry-dock.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-oil-people-lighthouse-rescue.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-oil-people-oil-race.webp`,
+
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-island-expansion-objectives.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-trans-philippine-railroad.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-island-expansion-yacht-oil.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -53,6 +65,14 @@ const toc = [
   {
     id: "mission-4-biggest-festival-ever",
     label: "Mission 4: Biggest Festival Ever",
+  },
+  {
+    id: "mission-5-oil-for-the-people",
+    label: "Mission 5: Oil for the People",
+  },
+  {
+    id: "mission-6-island-expansion",
+    label: "Mission 6: Island Expansion",
   },
 ];
 
@@ -82,15 +102,18 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+
     images: [
       {
         url: heroImage,
@@ -100,6 +123,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -110,10 +134,12 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
+
   "@graph": [
     {
       "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+
       itemListElement: [
         {
           "@type": "ListItem",
@@ -135,18 +161,26 @@ const jsonLd = {
         },
       ],
     },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Transport Fever 3 Campaign Walkthrough: Missions 1–4",
+
+      headline:
+        "Transport Fever 3 Campaign Walkthrough: Missions 1–6",
+
       description: articleDescription,
+
       image: imageUrls,
+
       datePublished: "2026-09-26",
-      dateModified: "2026-09-26",
+      dateModified: "2026-09-27",
+
       about: [
         {
           "@type": "VideoGame",
@@ -169,34 +203,52 @@ const jsonLd = {
           "@type": "Thing",
           name: "Biggest Festival Ever",
         },
+        {
+          "@type": "Thing",
+          name: "Oil for the People",
+        },
+        {
+          "@type": "Thing",
+          name: "Island Expansion",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 campaign star requirements",
+        },
       ],
+
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
     },
+
     {
       "@type": "Organization",
       "@id": `${siteUrl}#organization`,
       name: "Whisper of the House",
       url: siteUrl,
     },
+
     {
       "@type": "WebSite",
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+
       publisher: {
         "@id": `${siteUrl}#organization`,
       },
@@ -212,17 +264,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Campaign Walkthrough: Missions 1–4"
+          title="Transport Fever 3 Campaign Walkthrough: Missions 1–6"
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 26, 2026"
+          updatedAt="September 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
