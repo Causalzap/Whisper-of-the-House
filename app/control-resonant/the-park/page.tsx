@@ -11,42 +11,34 @@ const hubUrl = `${siteUrl}/control-resonant`;
 const pageUrl = `${hubUrl}/the-park`;
 
 const metadataTitle =
-  "CONTROL Resonant Collective Guide: The Park Mold Route";
+  "CONTROL Resonant The Park: 4 Mold Locations & Collective";
 
 const metadataDescription =
-  "Find all four Park Mold samples, open the Mold Gateway, beat the Collective, handle its tentacles and weak points, then choose Spore Burst or Growth.";
+  "Find all four Mold locations in The Park, open the Mold Gateway, beat the Collective, fix blocked Mold interactions, and choose Spore Burst or Growth.";
 
 const articleDescription =
-  "Reach The Park, collect the four required Mold strains from the Gateway, Minimart, Pizzeria and Gym, open the Mold Gateway, defeat the Collective, and choose between Spore Burst and Growth.";
+  "Enter The Park, collect the four required Mold strains from the Gateway, Minimart, Pizzeria and Gym, open the Mold Gateway, defeat the Collective, and choose between Spore Burst and Growth.";
 
 const imageUrls = [
-  `${siteUrl}/images/control-resonant/control-resonant-the-park-entry.webp`,
   `${siteUrl}/images/control-resonant/control-resonant-the-park-mold-gateway.webp`,
+  `${siteUrl}/images/control-resonant/control-resonant-the-park-entry.webp`,
   `${siteUrl}/images/control-resonant/control-resonant-the-park-final-mold.webp`,
 ];
 
-const heroImage = imageUrls[1];
+const heroImage = imageUrls[0];
 
 const toc = [
   {
     id: "how-to-enter-the-park",
-    label: "How to reach The Park",
+    label: "How to Reach The Park",
   },
   {
     id: "start-park-resonant",
     label: "Start The Park Resonant",
   },
   {
-    id: "minimart-mold",
-    label: "Minimart Mold",
-  },
-  {
-    id: "pizzeria-mold",
-    label: "Pizzeria Mold",
-  },
-  {
-    id: "gym-mold",
-    label: "Gym Mold",
+    id: "mold-locations",
+    label: "All 4 Mold Locations",
   },
   {
     id: "open-mold-gateway",
@@ -54,23 +46,23 @@ const toc = [
   },
   {
     id: "collective-boss",
-    label: "How to beat the Collective",
+    label: "How to Beat the Collective",
   },
   {
-    id: "collective-first-tentacles",
-    label: "First wall tentacles",
+    id: "collective-opening",
+    label: "First Tentacles",
   },
   {
     id: "collective-weak-points",
-    label: "Collective weak points",
+    label: "Collective Weak Points",
   },
   {
     id: "collective-wall-ceiling-phase",
-    label: "Wall & ceiling phase",
+    label: "Wall & Ceiling Phase",
   },
   {
     id: "collective-final-phase",
-    label: "Final phase",
+    label: "Final Phase",
   },
   {
     id: "spore-burst-or-growth",
@@ -78,15 +70,11 @@ const toc = [
   },
   {
     id: "is-park-required",
-    label: "Is The Park required?",
+    label: "Is The Park Required?",
   },
   {
     id: "other-park-objectives",
-    label: "Other Park activities",
-  },
-  {
-    id: "stuck",
-    label: "Park Resonant stuck fixes",
+    label: "Other Park Activities",
   },
 ];
 
@@ -101,15 +89,15 @@ const relatedLinks = [
   },
   {
     href: "/control-resonant/search-for-jesse",
-    label: "How to Find Jesse",
+    label: "Search for Jesse",
   },
   {
     href: "/control-resonant/last-taxi",
     label: "The Last Taxi",
   },
   {
-    href: "/control-resonant/walkthrough",
-    label: "Main Story Walkthrough",
+    href: "/control-resonant/quests",
+    label: "Quest List",
   },
 ];
 
@@ -157,7 +145,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "The Park & Collective",
+          name: "The Park",
           item: pageUrl,
         },
       ],
@@ -170,18 +158,22 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "CONTROL Resonant Collective Guide: The Park Mold Route & Boss Fight",
+        "CONTROL Resonant The Park: All 4 Mold Locations & Collective Boss",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-23",
-      dateModified: "2026-09-23",
+      dateModified: "2026-09-28",
       about: [
         {
           "@type": "VideoGame",
           name: "CONTROL Resonant",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "The Park",
         },
         {
           "@type": "Thing",
@@ -193,11 +185,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "CONTROL Resonant The Park",
+          name: "Mold Gateway",
         },
         {
           "@type": "Thing",
-          name: "Mold Gateway",
+          name: "Mold Locations",
         },
         {
           "@type": "Thing",
@@ -218,10 +210,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Growth",
-        },
-        {
-          "@type": "Thing",
-          name: "Infected status",
         },
       ],
       isPartOf: {
@@ -264,13 +252,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="CONTROL Resonant Collective Guide: The Park Mold Route & Boss Fight"
-          description="Find all four Mold strains in The Park, open the Mold Gateway, destroy the Collective's tentacles and weak points, and choose Spore Burst or Growth after the fight."
+          title="CONTROL Resonant The Park – All 4 Mold Locations & Collective Boss"
+          description="Find the Gateway, Minimart, Pizzeria and Gym Mold strains, open the sealed route, beat the Collective, and choose Spore Burst or Growth."
           gameTitle="CONTROL Resonant"
           gameHref="/control-resonant"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="September 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

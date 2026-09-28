@@ -11,77 +11,49 @@ const hubUrl = `${siteUrl}/control-resonant`;
 const pageUrl = `${hubUrl}/map`;
 
 const metadataTitle =
-  "CONTROL Resonant Map Guide: All 7 Zones & Map Kits";
+  "CONTROL Resonant Map: All 7 Zones & How to Reveal Them";
 
 const metadataDescription =
-  "Reveal every CONTROL Resonant zone map by activating three Sensors and the Map Kit Pylon, and see all seven zones, their order, and blocked routes.";
+  "See all 7 CONTROL Resonant map zones, how they connect, how Map Kits and three Sensors reveal each area, and why some routes remain blocked.";
 
 const articleDescription =
-  "Reveal CONTROL Resonant's seven Manhattan zones by activating each Map Kit's three Sensors and returning to its Pylon, then use the map to navigate Central, West Incursion, the Underpass, Unknown, and the other regions.";
+  "A complete CONTROL Resonant map guide covering all seven Manhattan zones, how the regions connect, how Map Kits and Sensors reveal each map, and why some visible routes remain inaccessible.";
 
 const imageUrls = [
-  `${siteUrl}/images/control-resonant/control-resonant-mapping-pylon-map-data.webp`,
   `${siteUrl}/images/control-resonant/control-resonant-zone-overview-watchtower.webp`,
+  `${siteUrl}/images/control-resonant/control-resonant-mapping-pylon-map-data.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "how-to-unlock-map",
-    label: "How to reveal the map",
-  },
-  {
-    id: "map-kit-sensors",
-    label: "Map Kit Sensors",
-  },
-  {
     id: "all-zones",
-    label: "All 7 map zones",
+    label: "Full Map Overview",
   },
   {
-    id: "early-map",
-    label: "Early map orientation",
+    id: "zone-connections",
+    label: "How the Zones Connect",
   },
   {
-    id: "downtown",
-    label: "Downtown",
+    id: "how-to-unlock-map",
+    label: "How to Reveal the Map",
   },
   {
-    id: "central",
-    label: "Central",
-  },
-  {
-    id: "evacuation-zone",
-    label: "Evacuation Zone",
-  },
-  {
-    id: "west-incursion",
-    label: "West Incursion Zone",
-  },
-  {
-    id: "the-park",
-    label: "The Park",
-  },
-  {
-    id: "underpass",
-    label: "Underpass",
-  },
-  {
-    id: "unknown",
-    label: "Unknown",
-  },
-  {
-    id: "zone-order",
-    label: "Best zone order",
+    id: "zone-guide",
+    label: "All 7 Map Zones",
   },
   {
     id: "blocked-route",
-    label: "Why a revealed route is blocked",
+    label: "Why Routes Are Blocked",
   },
   {
     id: "map-not-revealing",
-    label: "Why the map is still blank",
+    label: "Why the Map Is Still Blank",
+  },
+  {
+    id: "where-to-go-next",
+    label: "Where to Go Next",
   },
 ];
 
@@ -95,16 +67,16 @@ const relatedLinks = [
     label: "Main Story Walkthrough",
   },
   {
-    href: "/control-resonant/central-checkpoint",
-    label: "Central Checkpoint",
+    href: "/control-resonant/quests",
+    label: "Quests & Missions",
   },
   {
-    href: "/control-resonant/west-incursion-zone",
-    label: "West Incursion Zone",
+    href: "/control-resonant/the-park",
+    label: "The Park Guide",
   },
   {
     href: "/control-resonant/underpass",
-    label: "Underpass Walkthrough",
+    label: "Underpass Guide",
   },
 ];
 
@@ -165,13 +137,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "CONTROL Resonant Map Guide: All 7 Zones & Map Kits",
+        "CONTROL Resonant Map: All 7 Zones, Map Kits & Navigation",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-23",
-      dateModified: "2026-09-23",
+      dateModified: "2026-09-28",
       about: [
         {
           "@type": "VideoGame",
@@ -180,7 +152,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "CONTROL Resonant map",
+          name: "CONTROL Resonant Map",
+        },
+        {
+          "@type": "Thing",
+          name: "CONTROL Resonant Zones",
         },
         {
           "@type": "Thing",
@@ -263,13 +239,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="CONTROL Resonant Map Guide: All 7 Zones & How to Reveal Them"
-          description="Activate each Map Kit's three Sensors, return to the Pylon to reveal the map, and see how Downtown, Central, West Incursion, The Park, Underpass and Unknown connect."
+          title="CONTROL Resonant Map – All 7 Zones, Map Kits & Navigation"
+          description="See all seven Manhattan zones, how they connect, how Map Kits reveal each area, and why a visible route may still be blocked."
           gameTitle="CONTROL Resonant"
           gameHref="/control-resonant"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="September 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

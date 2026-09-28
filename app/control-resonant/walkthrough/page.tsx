@@ -14,10 +14,10 @@ const metadataTitle =
   "CONTROL Resonant Walkthrough: Main Story & Progression";
 
 const metadataDescription =
-  "Follow CONTROL Resonant's main story from Manhattan and the CFD to the Underpass and Hedron, with fixes for Resonants, Jesse Faults and story gates.";
+  "Follow CONTROL Resonant's main story from Central through the CFD, Sinkhole, Underpass and Hedron, with fixes for Jesse Faults and stalled progression.";
 
 const articleDescription =
-  "Follow the CONTROL Resonant main story from Orientation and Central through Evacuation Procedures, CFD preparation, Power Lines, the Sinkhole, required Resonants, the Underpass, Jesse Faults, and the Hedron crisis.";
+  "Follow the CONTROL Resonant main story from Orientation and Central through Evacuation Procedures, CFD preparation, Power Lines, Into the Sinkhole, required Resonants, the Underpass, Jesse Faults, Unknown and the Hedron crisis.";
 
 const imageUrls = [
   `${siteUrl}/images/control-resonant/control-resonant-zone-overview-watchtower.webp`,
@@ -29,12 +29,8 @@ const heroImage = imageUrls[0];
 
 const toc = [
   {
-    id: "how-progression-works",
-    label: "How story progression works",
-  },
-  {
     id: "main-route",
-    label: "Main story route at a glance",
+    label: "Main Story Route",
   },
   {
     id: "opening",
@@ -45,16 +41,12 @@ const toc = [
     label: "Central Checkpoint",
   },
   {
-    id: "central-field-office",
-    label: "Central Field Office",
-  },
-  {
-    id: "evacuation-procedures",
-    label: "Evacuation Procedures",
+    id: "field-office-evacuation",
+    label: "Field Office & Evacuation",
   },
   {
     id: "cfd-gate",
-    label: "CFD progression gate",
+    label: "CFD Story Gate",
   },
   {
     id: "power-lines",
@@ -70,7 +62,7 @@ const toc = [
   },
   {
     id: "cfd-test",
-    label: "CFD test",
+    label: "CFD Test",
   },
   {
     id: "underpass",
@@ -78,23 +70,23 @@ const toc = [
   },
   {
     id: "jesse-progression",
-    label: "Jesse Fault progression",
+    label: "Jesse Faults",
   },
   {
     id: "late-game",
-    label: "Late-game progression",
+    label: "Late-Game Route",
   },
   {
     id: "hedron",
-    label: "Hedron links",
+    label: "Hedron Links",
   },
   {
     id: "ending",
-    label: "After the final fight",
+    label: "After the Final Fight",
   },
   {
     id: "stuck",
-    label: "Main story stuck fixes",
+    label: "Story Stuck Fixes",
   },
 ];
 
@@ -105,15 +97,15 @@ const relatedLinks = [
   },
   {
     href: "/control-resonant/quests",
-    label: "Main Missions & Side Stories",
-  },
-  {
-    href: "/control-resonant/resonants",
-    label: "All Resonants",
+    label: "Quest List",
   },
   {
     href: "/control-resonant/search-for-jesse",
     label: "Search for Jesse",
+  },
+  {
+    href: "/control-resonant/resonants",
+    label: "All Resonants",
   },
   {
     href: "/control-resonant/underpass",
@@ -169,7 +161,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Main Story Walkthrough",
+          name: "Walkthrough",
           item: pageUrl,
         },
       ],
@@ -188,7 +180,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-23",
-      dateModified: "2026-09-23",
+      dateModified: "2026-09-28",
       about: [
         {
           "@type": "VideoGame",
@@ -197,11 +189,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "CONTROL Resonant walkthrough",
+          name: "CONTROL Resonant Walkthrough",
         },
         {
           "@type": "Thing",
-          name: "CONTROL Resonant main story",
+          name: "CONTROL Resonant Main Story",
         },
         {
           "@type": "Thing",
@@ -247,6 +239,10 @@ const jsonLd = {
           "@type": "Thing",
           name: "Sever the Hedron Links",
         },
+        {
+          "@type": "Thing",
+          name: "The Beginning",
+        },
       ],
       isPartOf: {
         "@type": "WebSite",
@@ -288,13 +284,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="CONTROL Resonant Walkthrough: Main Story & Progression"
-          description="Follow the story from Manhattan and the Central Field Office through the CFD, required Resonants, the Underpass, Jesse Faults, Unknown and the Hedron crisis, with fixes for the major progression gates."
+          title="CONTROL Resonant Walkthrough – Main Story & Progression"
+          description="Follow the story from Manhattan through the CFD, required Resonants, the Underpass, Jesse Faults and the Hedron crisis, with the checks that solve the major progression blocks."
           gameTitle="CONTROL Resonant"
           gameHref="/control-resonant"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="September 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

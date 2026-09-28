@@ -11,26 +11,26 @@ const hubUrl = `${siteUrl}/control-resonant`;
 const pageUrl = `${hubUrl}/quests`;
 
 const metadataTitle =
-  "CONTROL Resonant Quest List: Main Missions & Side Stories";
+  "CONTROL Resonant Quest List: Main Story & Side Stories";
 
 const metadataDescription =
-  "Track CONTROL Resonant main quests, Jesse Faults, Resonant missions and Side Stories, with progression gates and the best order when several quests are active.";
+  "See the CONTROL Resonant quest list, main story order, Jesse Faults, Resonant missions, Side Stories, and what to check when progression stops.";
 
 const articleDescription =
-  "Follow the three overlapping quest chains in CONTROL Resonant, check the main-story order, track Jesse Faults and Resonants, and see when to complete or postpone Side Stories.";
+  "Track CONTROL Resonant's main story, Search for Jesse Faults, regional Resonant quests and Side Stories, with the quest order and progression requirements that can hold up the next mission.";
 
 const toc = [
   {
     id: "main-story",
-    label: "Main story quests",
+    label: "Main Story Quest Order",
   },
   {
     id: "search-for-jesse",
-    label: "Search for Jesse quests",
+    label: "Search for Jesse",
   },
   {
     id: "resonant-quests",
-    label: "Regional Resonant quests",
+    label: "Regional Resonant Quests",
   },
   {
     id: "side-stories",
@@ -38,31 +38,15 @@ const toc = [
   },
   {
     id: "best-order",
-    label: "Best quest order",
+    label: "Which Quest to Do Next",
   },
   {
-    id: "enemy-of-my-enemy",
-    label: "Enemy of My Enemy",
-  },
-  {
-    id: "underpass-block",
-    label: "Underpass progression gate",
-  },
-  {
-    id: "unknown",
-    label: "Unknown & Pope's Research",
+    id: "story-stops",
+    label: "When Story Progression Stops",
   },
   {
     id: "side-quest-timing",
-    label: "Side Stories to leave for later",
-  },
-  {
-    id: "last-taxi",
-    label: "The Last Taxi",
-  },
-  {
-    id: "party-wont-stop",
-    label: "The Party Won't Stop",
+    label: "Quests to Leave Until Later",
   },
   {
     id: "after-ending",
@@ -88,8 +72,8 @@ const relatedLinks = [
     label: "All Resonants",
   },
   {
-    href: "/control-resonant/last-taxi",
-    label: "The Last Taxi",
+    href: "/control-resonant/underpass",
+    label: "Underpass Guide",
   },
 ];
 
@@ -148,12 +132,12 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "CONTROL Resonant Quest List: Main Missions & Side Stories",
+        "CONTROL Resonant Quest List: Main Story, Jesse Faults & Side Stories",
       description: articleDescription,
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-23",
-      dateModified: "2026-09-23",
+      dateModified: "2026-09-28",
       about: [
         {
           "@type": "VideoGame",
@@ -162,7 +146,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "CONTROL Resonant quests",
+          name: "CONTROL Resonant Quests",
+        },
+        {
+          "@type": "Thing",
+          name: "CONTROL Resonant Quest List",
         },
         {
           "@type": "Thing",
@@ -178,6 +166,14 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Jesse Faults",
+        },
+        {
+          "@type": "Thing",
+          name: "Resonant Quests",
+        },
+        {
+          "@type": "Thing",
           name: "Side Stories",
         },
         {
@@ -186,11 +182,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "The Last Taxi",
-        },
-        {
-          "@type": "Thing",
-          name: "The Party Won't Stop",
+          name: "The Beginning",
         },
       ],
       isPartOf: {
@@ -233,13 +225,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="CONTROL Resonant Quest List: Main Missions, Jesse Faults & Side Stories"
-          description="Track the main story, Search for Jesse, regional Resonants and Side Stories, and see which unfinished quest can block the next stage of progression."
+          title="CONTROL Resonant Quest List – Main Story, Jesse Faults & Side Stories"
+          description="Follow the main story order, Search for Jesse Faults, regional Resonant quests and Side Stories, and check the requirements that can hold up your next mission."
           gameTitle="CONTROL Resonant"
           gameHref="/control-resonant"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="September 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
