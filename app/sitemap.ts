@@ -1011,6 +1011,14 @@ const paths = [
     'transport-fever-3/rail-signals-guide',
     'transport-fever-3/traffic-road-guide',
 
+    '/ace-combat-8',
+    '/ace-combat-8/walkthrough',
+    '/ace-combat-8/mission-9-land-battleship-blockade',
+    '/ace-combat-8/mission-11-maximum-payload',
+    '/ace-combat-8/mission-27-fatsia-ocean-fortress',
+    '/ace-combat-8/mission-30-song-of-wings',
+    '/ace-combat-8/trophies-achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1018,6 +1026,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/ace-combat-8': '2026-09-29',
+  '/ace-combat-8/walkthrough': '2026-09-29',
+  '/ace-combat-8/mission-9-land-battleship-blockade': '2026-09-29',
+  '/ace-combat-8/mission-11-maximum-payload': '2026-09-29',
+  '/ace-combat-8/mission-27-fatsia-ocean-fortress': '2026-09-29',
+  '/ace-combat-8/mission-30-song-of-wings': '2026-09-29',
+  '/ace-combat-8/trophies-achievements': '2026-09-29',
+  
   'transport-fever-3': '2026-09-27',
   'transport-fever-3/beginner-guide': '2026-09-26',
   'transport-fever-3/campaign-walkthrough': '2026-09-27',

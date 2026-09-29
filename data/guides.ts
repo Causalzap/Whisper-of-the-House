@@ -131,6 +131,257 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Ace Combat 8: Wings of Theve",
+    game: "Ace Combat 8: Wings of Theve",
+    href: "/ace-combat-8",
+    slug: "ace-combat-8",
+    kind: "game",
+    status: "active",
+    accent: "blue",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "Campaign, Missions & Completion",
+    eyebrow: "Spotlight Guide",
+    hubStatus:
+      "30-mission campaign + Land Battleship + Podarge transports + Fatsia + Song of Wings + trophies and achievements",
+  
+    description:
+      "Follow Ace Combat 8 from the Prologue through all 30 missions, react to changing objectives, solve the major multi-stage battles, choose useful aircraft and weapons, and finish the remaining trophies and achievements.",
+  
+    coverage: [
+      "Full campaign progression from the Prologue through all 30 missions, including escorts, score objectives, missile interception, identification sequences, fleet defense and late-game multi-stage battles",
+  
+      "Mission 9 through the Land Battleship bomb-truck approach, all eight secondary treads, final containment sequence and two rocket thrusters",
+  
+      "Mission 11 through thundercloud jamming, Podarge contrails, engines and propellers, transport interception and the final air battle",
+  
+      "Mission 27 through Fatsia structural damage, support pillars, hold-fire order, central entry and the fusion-reactor attack before the shutter closes",
+  
+      "Mission 30 through Endurance defense, Tonitra Spear guidance UAVs, submarine armaments, VLS launchers, the underwater missile tube and the final ramming attack",
+  
+      "Post-campaign completion through 55 shared achievement requirements, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection and cumulative combat goals",
+    ],
+  
+    image:
+      "/images/ace-combat-8/ace-combat-8-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 56,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Ace Combat 8 Guide & Walkthrough: All 30 Missions",
+        href: "/ace-combat-8",
+        type: "Guide Hub",
+        description:
+          "Follow the campaign from the Prologue through Mission 30, understand changing mission priorities, solve the biggest blockers, choose useful loadouts, and prepare for post-game completion.",
+        image:
+          "/images/ace-combat-8/mission-30-laser-guidance-uavs.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "All 30 missions, changing objectives, Land Battleship, Podarge transports, Fatsia, Song of Wings, aircraft choices and post-game completion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Walkthrough: All 30 Missions",
+        href: "/ace-combat-8/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the Prologue and all 30 missions in order, with the objective changes, failure conditions and target priorities that keep each operation moving.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-16-disguised-ship-sun-emblem-three-cranes.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 411,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Prologue, all 30 missions, escorts, score requirements, missile interception, identification, fortress battles and final operations",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 9 Walkthrough: Land Battleship",
+        href: "/ace-combat-8/mission-9-land-battleship-blockade",
+        type: "Walkthrough",
+        description:
+          "Protect the bomb trucks, expose and destroy all eight secondary treads, complete the final containment sequence, and disable both rocket thrusters.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-9-bomb-truck-exposes-secondary-tread.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 412,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Bomb trucks, eight secondary treads, containment, Remaining Distance, rocket thrusters and the ENO Special Zone",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 11 Walkthrough: Maximum Payload",
+        href: "/ace-combat-8/mission-11-maximum-payload",
+        type: "Walkthrough",
+        description:
+          "Find the Podarge transports through thundercloud jamming, attack their engines and propellers, and stop every shipment from reaching Rocky Island.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-11-podarge-contrails.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 413,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Thundercloud jamming, Podarge contrails, engines, propellers, defensive weapons, Queen Flight and transport interception",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 27 Walkthrough: Fatsia",
+        href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
+        type: "Walkthrough",
+        description:
+          "Break Fatsia with structural attacks, stop firing during the surrender order, enter the central structure, and destroy the fusion reactor before the shutter closes.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-27-mega-float-support-pillars.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 414,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Eight float modules, support pillars, structural damage, surrender, hold fire, central entry and fusion reactor",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 30 Walkthrough: Song of Wings",
+        href: "/ace-combat-8/mission-30-song-of-wings",
+        type: "Walkthrough",
+        description:
+          "Protect the Endurance, stop hostile laser guidance, dismantle the surfaced submarine, destroy its underwater launch tube, and survive the final ram.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-30-laser-guidance-uavs.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 415,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Endurance defense, Tonitra Spear, laser-guidance UAVs, submarine VLS, underwater launch tube and final ramming attack",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Trophies & Achievements: All 55 Requirements",
+        href: "/ace-combat-8/trophies-achievements",
+        type: "Achievements",
+        description:
+          "Track all 55 shared achievement requirements, including ACE S ranks, Assault Records, medals, MRP, aircraft collection, wingman tasks and combat counters.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/mission-30-airship-laser-retarget-submarine.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 416,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "55 shared achievements, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection and long counters",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Transport Fever 3",
     game: "Transport Fever 3",
     href: "/transport-fever-3",
