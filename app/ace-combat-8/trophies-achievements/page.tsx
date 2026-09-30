@@ -17,7 +17,7 @@ const metadataDescription =
   "Track all 55 Ace Combat 8 achievements, including ACE S ranks, Assault Records, medals, MRP, aircraft collection, wingman tasks, and campaign goals.";
 
 const articleDescription =
-  "Complete every Ace Combat 8 trophy and achievement with a 55-item tracker covering the campaign, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft, and combat counters.";
+  "Complete all 55 Ace Combat 8 achievement requirements with a progress tracker covering the campaign, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection, and combat counters.";
 
 const toc = [
   {
@@ -33,20 +33,20 @@ const toc = [
     label: "Wingman & Quick Tasks",
   },
   {
-    id: "aircraft-mrp",
-    label: "Aircraft & MRP",
-  },
-  {
-    id: "long-counters",
-    label: "Kill Counters",
+    id: "ace-and-s-ranks",
+    label: "ACE & S Ranks",
   },
   {
     id: "records-medals",
     label: "Assault Records & Medals",
   },
   {
-    id: "ace-and-s-ranks",
-    label: "ACE & S Ranks",
+    id: "aircraft-mrp",
+    label: "Aircraft & MRP",
+  },
+  {
+    id: "long-counters",
+    label: "Kill Counters",
   },
   {
     id: "final-cleanup",
@@ -56,28 +56,20 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
-  {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
   },
   {
-    href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
+    href: "/ace-combat-8/assault-records",
+    label: "All Assault Records",
   },
   {
-    href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
+    href: "/ace-combat-8/mrp-farm",
+    label: "MRP Farming",
   },
   {
-    href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
-  },
-  {
-    href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
+    href: "/ace-combat-8",
+    label: "Ace Combat 8 Guide",
   },
 ];
 
@@ -91,7 +83,7 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
   },
   twitter: {
@@ -117,7 +109,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -135,14 +127,24 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "Ace Combat 8 Trophies & Achievements: All 55 Requirements",
+      headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -183,19 +185,7 @@ const jsonLd = {
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -209,6 +199,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -228,12 +221,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Trophies & Achievements: All 55 Requirements"
-          description="Track every shared achievement requirement, protect the campaign-long tasks on your first run, then finish ACE ranks, Assault Records, medals, MRP, aircraft collection, and long combat counters."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

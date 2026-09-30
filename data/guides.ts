@@ -142,11 +142,12 @@ export const guideClusters: GuideCluster[] = [
   
     label: "Campaign, Missions & Completion",
     eyebrow: "Spotlight Guide",
+  
     hubStatus:
-      "30-mission campaign + Land Battleship + Podarge transports + Fatsia + Song of Wings + trophies and achievements",
+      "30-mission campaign + major mission blockers + Assault Records + MRP + trophies and achievements",
   
     description:
-      "Follow Ace Combat 8 from the Prologue through all 30 missions, react to changing objectives, solve the major multi-stage battles, choose useful aircraft and weapons, and finish the remaining trophies and achievements.",
+      "Follow Ace Combat 8 from the Prologue through all 30 missions, react to changing objectives, solve the major multi-stage battles, choose useful aircraft and weapons, and finish Assault Records, MRP goals, trophies and achievements.",
   
     coverage: [
       "Full campaign progression from the Prologue through all 30 missions, including escorts, score objectives, missile interception, identification sequences, fleet defense and late-game multi-stage battles",
@@ -155,11 +156,15 @@ export const guideClusters: GuideCluster[] = [
   
       "Mission 11 through thundercloud jamming, Podarge contrails, engines and propellers, transport interception and the final air battle",
   
+      "Mission 16 through disguised container-ship identification, civilian traffic, the UAV launch timer and explosive-UAV interception",
+  
+      "Mission 18 through the Rainband approach, Shadow Squadron interruption, two rocket launches and falling launch-vehicle debris",
+  
       "Mission 27 through Fatsia structural damage, support pillars, hold-fire order, central entry and the fusion-reactor attack before the shutter closes",
   
       "Mission 30 through Endurance defense, Tonitra Spear guidance UAVs, submarine armaments, VLS launchers, the underwater missile tube and the final ramming attack",
   
-      "Post-campaign completion through 55 shared achievement requirements, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection and cumulative combat goals",
+      "Post-campaign completion through 83 Assault Records, 55 shared achievement requirements, ACE difficulty, S ranks, medals, MRP, aircraft collection and cumulative combat goals",
     ],
   
     image:
@@ -179,12 +184,17 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Guide & Walkthrough: All 30 Missions",
+  
         href: "/ace-combat-8",
+  
         type: "Guide Hub",
+  
         description:
           "Follow the campaign from the Prologue through Mission 30, understand changing mission priorities, solve the biggest blockers, choose useful loadouts, and prepare for post-game completion.",
+  
         image:
           "/images/ace-combat-8/mission-30-laser-guidance-uavs.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -203,13 +213,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Walkthrough: All 30 Missions",
+  
         href: "/ace-combat-8/walkthrough",
+  
         type: "Walkthrough",
+  
         description:
           "Follow the Prologue and all 30 missions in order, with the objective changes, failure conditions and target priorities that keep each operation moving.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-16-disguised-ship-sun-emblem-three-cranes.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -218,8 +234,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 411,
+  
           spotlightFeature: true,
           spotlightOrder: 1,
+  
           spotlightMeta:
             "Prologue, all 30 missions, escorts, score requirements, missile interception, identification, fortress battles and final operations",
         },
@@ -233,13 +251,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Mission 9 Walkthrough: Land Battleship",
+  
         href: "/ace-combat-8/mission-9-land-battleship-blockade",
+  
         type: "Walkthrough",
+  
         description:
           "Protect the bomb trucks, expose and destroy all eight secondary treads, complete the final containment sequence, and disable both rocket thrusters.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-9-bomb-truck-exposes-secondary-tread.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -248,8 +272,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 412,
+  
           spotlightFeature: true,
           spotlightOrder: 2,
+  
           spotlightMeta:
             "Bomb trucks, eight secondary treads, containment, Remaining Distance, rocket thrusters and the ENO Special Zone",
         },
@@ -263,13 +289,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Mission 11 Walkthrough: Maximum Payload",
+  
         href: "/ace-combat-8/mission-11-maximum-payload",
+  
         type: "Walkthrough",
+  
         description:
           "Find the Podarge transports through thundercloud jamming, attack their engines and propellers, and stop every shipment from reaching Rocky Island.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-11-podarge-contrails.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -278,8 +310,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 413,
+  
           spotlightFeature: true,
           spotlightOrder: 3,
+  
           spotlightMeta:
             "Thundercloud jamming, Podarge contrails, engines, propellers, defensive weapons, Queen Flight and transport interception",
         },
@@ -293,13 +327,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Mission 27 Walkthrough: Fatsia",
+  
         href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
+  
         type: "Walkthrough",
+  
         description:
           "Break Fatsia with structural attacks, stop firing during the surrender order, enter the central structure, and destroy the fusion reactor before the shutter closes.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-27-mega-float-support-pillars.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -308,8 +348,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 414,
+  
           spotlightFeature: true,
           spotlightOrder: 4,
+  
           spotlightMeta:
             "Eight float modules, support pillars, structural damage, surrender, hold fire, central entry and fusion reactor",
         },
@@ -323,13 +365,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Mission 30 Walkthrough: Song of Wings",
+  
         href: "/ace-combat-8/mission-30-song-of-wings",
+  
         type: "Walkthrough",
+  
         description:
           "Protect the Endurance, stop hostile laser guidance, dismantle the surfaced submarine, destroy its underwater launch tube, and survive the final ram.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-30-laser-guidance-uavs.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -338,8 +386,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 415,
+  
           spotlightFeature: true,
           spotlightOrder: 5,
+  
           spotlightMeta:
             "Endurance defense, Tonitra Spear, laser-guidance UAVs, submarine VLS, underwater launch tube and final ramming attack",
         },
@@ -353,13 +403,19 @@ export const guideClusters: GuideCluster[] = [
       {
         title:
           "Ace Combat 8 Trophies & Achievements: All 55 Requirements",
+  
         href: "/ace-combat-8/trophies-achievements",
+  
         type: "Achievements",
+  
         description:
           "Track all 55 shared achievement requirements, including ACE S ranks, Assault Records, medals, MRP, aircraft collection, wingman tasks and combat counters.",
+  
         date: "Updated recently",
+  
         image:
           "/images/ace-combat-8/mission-30-airship-laser-retarget-submarine.webp",
+  
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -368,8 +424,10 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestFeatured: true,
           latestOrder: 416,
+  
           spotlightFeature: true,
           spotlightOrder: 6,
+  
           spotlightMeta:
             "55 shared achievements, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection and long counters",
         },
@@ -377,6 +435,146 @@ export const guideClusters: GuideCluster[] = [
         archive: {
           showInCollections: true,
           order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 16 Singer: Ships & UAVs",
+  
+        href: "/ace-combat-8/mission-16-singer",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Identify the three disguised terrorist ships by their cranes and sun emblem, avoid civilian vessels, and intercept the explosive UAVs before 40,000 feet.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/ace-combat-8/mission-16-disguised-ship-sun-emblem-three-cranes.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 417,
+  
+          spotlightMeta:
+            "Three disguised ships, sun emblem, three cranes, civilian traffic, UAV launch timer and 40,000-foot interception",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Mission 18: Moonlight and Shadows",
+  
+        href: "/ace-combat-8/mission-18-moonlight-and-shadows",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Cross the Rainband, help Queen Flight against Shadow Squadron, destroy both rockets after launch, and stop the falling wreckage before impact.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/ace-combat-8/mission-18-two-rockets-ceiling.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 418,
+  
+          spotlightMeta:
+            "Rainband crossing, Shadow Squadron, two rocket launches, flight ceiling and falling launch-vehicle debris",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 Assault Records: All 83 & Ace Spawns",
+  
+        href: "/ace-combat-8/assault-records",
+  
+        type: "Collectibles",
+  
+        description:
+          "Find all 83 Assault Records, including the 31 conditional Aces, difficulty requirements, timed triggers, route triggers and cross-mission conditions.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/ace-combat-8/mission-28-harmonius-tu160-bombers.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 419,
+  
+          spotlightMeta:
+            "83 Assault Records, 31 conditional Aces, named aircraft, timed triggers, route triggers and cross-mission conditions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "Ace Combat 8 MRP Farm: How to Earn 25 Million MRP",
+  
+        href: "/ace-combat-8/mrp-farm",
+  
+        type: "Guide",
+  
+        description:
+          "Work toward the 16 million and 25 million MRP milestones with Mission 28 bomber priorities, Sema Island resupply and productive campaign replays.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/ace-combat-8/mission-28-sema-island-resupply-ready.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 420,
+  
+          spotlightMeta:
+            "16M and 25M MRP milestones, Mission 28 bomber waves, Sema Island resupply and ammunition management",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
         },
       },
     ],

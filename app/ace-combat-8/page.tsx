@@ -13,19 +13,27 @@ const metadataTitle =
   "Ace Combat 8 Guide & Walkthrough: All 30 Missions";
 
 const metadataDescription =
-  "Ace Combat 8 guide for all 30 missions, major campaign blockers, Mission 9, Maximum Payload, Fatsia, Song of Wings, and post-game completion.";
+  "Ace Combat 8 guide for all 30 missions, major blockers, aircraft and loadout choices, Assault Records, MRP farming, trophies, and post-game completion.";
 
 const articleDescription =
-  "Follow the Ace Combat 8 campaign from the Prologue through Mission 30, solve the biggest mission blockers, and move from a first clear into post-game completion.";
+  "Follow Ace Combat 8 from the first campaign through Mission 30, understand the missions that change objectives mid-sortie, choose aircraft and loadouts, and plan the remaining Assault Records, MRP, ranks, and achievements after the ending.";
 
 const toc = [
   {
     id: "first-campaign",
-    label: "Full Campaign Route",
+    label: "First Campaign",
+  },
+  {
+    id: "reading-the-battle",
+    label: "Reading the Battle",
   },
   {
     id: "major-blockers",
     label: "Major Mission Blockers",
+  },
+  {
+    id: "aircraft-and-loadouts",
+    label: "Aircraft & Loadouts",
   },
   {
     id: "first-clear",
@@ -43,24 +51,16 @@ const relatedLinks = [
     label: "All 30 Missions Walkthrough",
   },
   {
-    href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
-  },
-  {
-    href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
-  },
-  {
-    href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
-  },
-  {
-    href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
-  },
-  {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
+  },
+  {
+    href: "/ace-combat-8/mrp-farm",
+    label: "MRP Farming",
   },
 ];
 
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
   },
   twitter: {
@@ -100,7 +100,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: pageUrl,
         },
       ],
@@ -118,8 +118,19 @@ const jsonLd = {
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -136,19 +147,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Land Battleship",
+          name: "Ace Combat 8 missions",
         },
         {
           "@type": "Thing",
-          name: "Podarge transports",
+          name: "Ace Combat 8 mission objectives",
         },
         {
           "@type": "Thing",
-          name: "Fatsia, The Ocean Fortress",
+          name: "Ace Combat 8 aircraft and loadouts",
         },
         {
           "@type": "Thing",
-          name: "Song of Wings",
+          name: "Ace Combat 8 Assault Records",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 MRP",
         },
         {
           "@type": "Thing",
@@ -156,19 +171,7 @@ const jsonLd = {
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -182,6 +185,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -201,12 +207,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Guide & Walkthrough: All 30 Missions"
-          description="Follow the campaign from the Prologue through Mission 30, solve the biggest mission blockers, and know when to move from the first clear into post-game completion."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

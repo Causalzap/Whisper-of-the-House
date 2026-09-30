@@ -14,10 +14,10 @@ const metadataTitle =
   "Ace Combat 8 Mission 30 Walkthrough: Song of Wings";
 
 const metadataDescription =
-  "Beat Ace Combat 8 Mission 30 by protecting the Endurance, stopping laser UAV guidance, destroying the submarine's weapons, and surviving the final ram.";
+  "Beat Ace Combat 8 Mission 30 by protecting the Endurance, controlling Tonitra Spear guidance, dismantling the submarine, and stopping the final ram.";
 
 const articleDescription =
-  "Protect the Endurance through the Tonitra Spear attack, remove the submarine's VLS and underwater launch tube, then sink it before the final collision.";
+  "Protect the Endurance from anti-ship missiles, take control of the Tonitra Spear guidance fight, destroy the submarine's weapons and hidden launch tube, then sink it before the final ram.";
 
 const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-30-laser-guidance-uavs.webp`,
@@ -26,7 +26,7 @@ const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-30-submarine-ramming.webp`,
 ];
 
-const heroImage = imageUrls[0];
+const ogImage = imageUrls[0];
 
 const toc = [
   {
@@ -39,15 +39,15 @@ const toc = [
   },
   {
     id: "dismantle-submarine",
-    label: "Dismantle the submarine",
+    label: "Dismantle the Submarine",
   },
   {
     id: "underwater-launch-tube",
-    label: "Underwater launch tube",
+    label: "Underwater Launch Tube",
   },
   {
     id: "final-ram",
-    label: "Stop the final ram",
+    label: "Stop the Final Ram",
   },
   {
     id: "after-song-of-wings",
@@ -57,28 +57,24 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
-  {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
   },
   {
-    href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
-  },
-  {
-    href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
   },
   {
     href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
+    label: "Mission 27: Fatsia",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8",
+    label: "Ace Combat 8 Guide",
   },
 ];
 
@@ -92,11 +88,11 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: heroImage,
+        url: ogImage,
         width: 1600,
         height: 900,
         alt: "Ace Combat 8 Mission 30 laser-guidance UAVs targeting the Endurance",
@@ -107,7 +103,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [heroImage],
+    images: [ogImage],
   },
 };
 
@@ -127,7 +123,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -152,8 +148,19 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -194,19 +201,7 @@ const jsonLd = {
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -220,6 +215,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -239,12 +237,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Mission 30 Walkthrough: Song of Wings"
-          description="Protect the Endurance, take control of the Tonitra Spear guidance fight, dismantle the surfaced submarine, destroy its hidden launch tube, and stop the final ramming attack."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

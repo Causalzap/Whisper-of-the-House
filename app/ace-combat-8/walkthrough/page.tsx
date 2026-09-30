@@ -14,19 +14,22 @@ const metadataTitle =
   "Ace Combat 8 Walkthrough: All 30 Missions & Bosses";
 
 const metadataDescription =
-  "Complete all 30 Ace Combat 8 missions with target priorities, escort and missile blockers, Land Battleships, Fatsia, Selene, and the final submarine.";
+  "Complete all 30 Ace Combat 8 missions with target priorities, phase changes, escort and missile blockers, Land Battleships, Fatsia, and Song of Wings.";
 
 const articleDescription =
-  "Follow the full Ace Combat 8 campaign from Jokers Wild through Song of Wings, with the targets, phase changes, escort threats, missiles, bosses, and mission blockers that matter for a first clear.";
+  "Follow all 30 Ace Combat 8 campaign missions from Jokers Wild through Song of Wings, with the objective changes, escort threats, missile interceptions, major targets, and mission blockers that can stop a first clear.";
+
+const heroImage =
+  "/images/ace-combat-8/mission-7-faith-park-bonus-time.webp";
+
+const heroImageUrl = `${siteUrl}${heroImage}`;
 
 const imageUrls = [
-  `${siteUrl}/images/ace-combat-8/mission-7-faith-park-bonus-time.webp`,
+  heroImageUrl,
   `${siteUrl}/images/ace-combat-8/mission-10-airship-laser.webp`,
   `${siteUrl}/images/ace-combat-8/mission-16-disguised-ship-sun-emblem-three-cranes.webp`,
   `${siteUrl}/images/ace-combat-8/mission-20-escort-orbiter-large-missile.webp`,
 ];
-
-const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -53,28 +56,36 @@ const toc = [
     id: "endgame",
     label: "Missions 26–30",
   },
+  {
+    id: "after-campaign",
+    label: "After Mission 30",
+  },
 ];
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
-  {
     href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
+    label: "Mission 9: Land Battleship Blockade",
   },
   {
     href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
+    label: "Mission 11: Maximum Payload",
+  },
+  {
+    href: "/ace-combat-8/mission-16-singer",
+    label: "Mission 16: Singer",
+  },
+  {
+    href: "/ace-combat-8/mission-18-moonlight-and-shadows",
+    label: "Mission 18: Moonlight and Shadows",
   },
   {
     href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
+    label: "Mission 27: Fatsia",
   },
   {
     href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
+    label: "Mission 30: Song of Wings",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
@@ -92,14 +103,14 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: heroImage,
+        url: heroImageUrl,
         width: 1600,
         height: 900,
-        alt: "Ace Combat 8 Mission 7 reaching the 24,000-point Faith Park objective",
+        alt: "Ace Combat 8 Mission 7 after reaching the Faith Park score requirement",
       },
     ],
   },
@@ -107,7 +118,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [heroImage],
+    images: [heroImageUrl],
   },
 };
 
@@ -127,7 +138,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -145,14 +156,25 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Ace Combat 8 Walkthrough: All 30 Missions & Bosses",
+      headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -181,40 +203,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 Selene",
-        },
-        {
-          "@type": "Thing",
           name: "Ace Combat 8 Song of Wings",
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
+        "@id": `${siteUrl}/#website`,
       },
     },
     {
       "@type": "Organization",
-      "@id": `${siteUrl}#organization`,
+      "@id": `${siteUrl}/#organization`,
       name: "Whisper of the House",
       url: siteUrl,
     },
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}#website`,
+      "@id": `${siteUrl}/#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
     },
   ],
 };
@@ -234,12 +243,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Walkthrough: All 30 Missions & Bosses"
-          description="Follow all 30 campaign missions from Jokers Wild to Song of Wings, with the target changes, escort threats, missile interceptions, Land Battleships, and late-game fights that can stop a clear."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

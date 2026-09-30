@@ -1018,6 +1018,10 @@ const paths = [
     '/ace-combat-8/mission-27-fatsia-ocean-fortress',
     '/ace-combat-8/mission-30-song-of-wings',
     '/ace-combat-8/trophies-achievements',
+    '/ace-combat-8/assault-records',
+    '/ace-combat-8/mission-16-singer',
+    '/ace-combat-8/mission-18-moonlight-and-shadows',
+    '/ace-combat-8/mrp-farm',
 
 ] as const;
 
@@ -1033,6 +1037,10 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/ace-combat-8/mission-27-fatsia-ocean-fortress': '2026-09-29',
   '/ace-combat-8/mission-30-song-of-wings': '2026-09-29',
   '/ace-combat-8/trophies-achievements': '2026-09-29',
+  '/ace-combat-8/assault-records': '2026-09-30',
+  '/ace-combat-8/mission-16-singer': '2026-09-30',
+  '/ace-combat-8/mission-18-moonlight-and-shadows': '2026-09-30',
+  '/ace-combat-8/mrp-farm': '2026-09-30',
   
   'transport-fever-3': '2026-09-27',
   'transport-fever-3/beginner-guide': '2026-09-26',

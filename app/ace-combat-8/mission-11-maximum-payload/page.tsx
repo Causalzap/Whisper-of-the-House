@@ -14,22 +14,22 @@ const metadataTitle =
   "Ace Combat 8 Mission 11 Walkthrough: Maximum Payload";
 
 const metadataDescription =
-  "Beat Ace Combat 8 Mission 11 by following Podarge contrails, attacking engines and propellers, surviving jamming, and stopping every transport.";
+  "Beat Ace Combat 8 Mission 11 by following Podarge contrails through jamming, damaging engines and propellers, and stopping every transport before it escapes.";
 
 const articleDescription =
-  "Find the Podarge transports through electronic warfare, slow them with engine damage, destroy their propellers, and finish the air battle before any cargo escapes.";
+  "Find the Podarge transports through electronic warfare, follow their contrails, damage engines and propellers, and bring down every transport before its cargo reaches Rocky Island.";
 
 const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-11-podarge-contrails.webp`,
   `${siteUrl}/images/ace-combat-8/mission-11-podarge-propellers.webp`,
 ];
 
-const heroImage = imageUrls[0];
+const ogImage = imageUrls[0];
 
 const toc = [
   {
     id: "prepare-for-interception",
-    label: "Prepare for interception",
+    label: "Prepare for Interception",
   },
   {
     id: "find-the-podarges",
@@ -37,38 +37,38 @@ const toc = [
   },
   {
     id: "bring-down-a-podarge",
-    label: "Bring down a Podarge",
+    label: "Bring Down a Podarge",
   },
   {
     id: "finish-the-air-battle",
-    label: "Finish the air battle",
+    label: "Finish the Air Battle",
+  },
+  {
+    id: "after-mission-11",
+    label: "After Mission 11",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
-  {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
   },
   {
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
+  },
+  {
     href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
-  },
-  {
-    href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
-  },
-  {
-    href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
+    label: "Mission 9: Land Battleship Blockade",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8",
+    label: "Ace Combat 8 Guide",
   },
 ];
 
@@ -82,14 +82,14 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: heroImage,
+        url: ogImage,
         width: 1600,
         height: 900,
-        alt: "Ace Combat 8 Mission 11 Podarge contrails visible through electronic warfare and cloud cover",
+        alt: "Ace Combat 8 Mission 11 Podarge contrails visible through cloud cover and electronic warfare",
       },
     ],
   },
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [heroImage],
+    images: [ogImage],
   },
 };
 
@@ -117,7 +117,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -142,8 +142,19 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -168,31 +179,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Podarge contrails",
+        },
+        {
+          "@type": "Thing",
           name: "Podarge engines and propellers",
         },
         {
           "@type": "Thing",
           name: "55th Unit",
         },
-        {
-          "@type": "Thing",
-          name: "Fort Grays",
-        },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -206,6 +205,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -225,12 +227,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Mission 11 Walkthrough: Maximum Payload"
-          description="Follow the Podarge contrails through the jamming, slow the transports with engine damage, destroy their propellers, and stop every shipment from escaping."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -14,35 +14,36 @@ const metadataTitle =
   "Ace Combat 8 Mission 27 Walkthrough: Fatsia";
 
 const metadataDescription =
-  "Beat Ace Combat 8 Mission 27 by collapsing Fatsia supports, obeying hold fire, entering the central structure, and destroying the fusion reactor.";
+  "Beat Ace Combat 8 Mission 27 by breaking Fatsia's eight-arm structure, collapsing support pillars, obeying hold fire, and destroying the fusion reactor.";
 
 const articleDescription =
-  "Break Fatsia with structural attacks, stop firing during the surrender order, enter the central opening, and destroy the fusion reactor before the shutter closes.";
+  "Break Fatsia efficiently across its eight outer arms, use support pillars and explosive targets for structural damage, stop firing during surrender, then enter the central structure and destroy the fusion reactor.";
 
 const imageUrls = [
+  `${siteUrl}/images/ace-combat-8/mission-27-fatsia-eight-spokes-layout.webp`,
   `${siteUrl}/images/ace-combat-8/mission-27-mega-float-support-pillars.webp`,
   `${siteUrl}/images/ace-combat-8/mission-27-hold-fire-surrender.webp`,
   `${siteUrl}/images/ace-combat-8/mission-27-fusion-reactor-shutter.webp`,
 ];
 
-const heroImage = imageUrls[0];
+const ogImage = imageUrls[0];
 
 const toc = [
   {
     id: "break-fatsia-exterior",
-    label: "Break Fatsia's exterior",
+    label: "Break Fatsia's Exterior",
   },
   {
     id: "hold-fire",
-    label: "Hold fire",
+    label: "Hold Fire",
   },
   {
     id: "central-entry",
-    label: "Enter the central structure",
+    label: "Enter the Central Structure",
   },
   {
     id: "fusion-reactor",
-    label: "Destroy the fusion reactor",
+    label: "Destroy the Fusion Reactor",
   },
   {
     id: "after-fatsia",
@@ -52,28 +53,28 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
-  {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
   },
   {
-    href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9 Land Battleship",
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
   },
   {
-    href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
+    href: "/ace-combat-8/mrp-farm",
+    label: "Mission 28 MRP Farming",
   },
   {
     href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
+    label: "Mission 30: Song of Wings",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8",
+    label: "Ace Combat 8 Guide",
   },
 ];
 
@@ -87,14 +88,12 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: heroImage,
-        width: 1600,
-        height: 900,
-        alt: "Ace Combat 8 Mission 27 support pillars beneath the Fatsia Mega Float",
+        url: ogImage,
+        alt: "Ace Combat 8 Mission 27 Fatsia showing eight outer modules around the central terminal",
       },
     ],
   },
@@ -102,7 +101,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [heroImage],
+    images: [ogImage],
   },
 };
 
@@ -122,7 +121,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -147,8 +146,19 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -169,6 +179,10 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Fatsia outer modules",
+        },
+        {
+          "@type": "Thing",
           name: "Support pillars",
         },
         {
@@ -185,19 +199,7 @@ const jsonLd = {
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -211,6 +213,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -230,12 +235,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Mission 27 Walkthrough: Fatsia, The Ocean Fortress"
-          description="Collapse Fatsia's structure efficiently, stop firing when the surrender order arrives, enter the central section, and destroy the fusion reactor before the shutter closes."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

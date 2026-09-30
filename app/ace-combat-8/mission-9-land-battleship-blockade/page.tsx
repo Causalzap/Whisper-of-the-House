@@ -14,10 +14,10 @@ const metadataTitle =
   "Ace Combat 8 Mission 9 Walkthrough: Land Battleship";
 
 const metadataDescription =
-  "Beat Ace Combat 8 Mission 9 by protecting bomb trucks, destroying all 8 secondary treads, triggering containment, and taking out both thrusters.";
+  "Beat Ace Combat 8 Mission 9 by protecting the IED vehicles, destroying all 8 secondary treads, beating Remaining Distance, and destroying both rocket thrusters.";
 
 const articleDescription =
-  "Stop the Mission 9 Land Battleship by opening its secondary tread armor, destroying all eight treads, beating the Remaining Distance countdown, and disabling both rocket thrusters.";
+  "Stop the Mission 9 Land Battleship by protecting the IED vehicles, exposing and destroying all eight secondary treads, triggering the final containment demolition, and destroying both rocket thrusters.";
 
 const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-9-bomb-truck-exposes-secondary-tread.webp`,
@@ -25,51 +25,47 @@ const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-9-land-battleship-thrusters.webp`,
 ];
 
-const heroImage = imageUrls[0];
+const ogImage = imageUrls[0];
 
 const toc = [
-    {
-      id: "secondary-treads",
-      label: "Secondary treads",
-    },
-    {
-      id: "final-containment",
-      label: "Final containment",
-    },
-    {
-      id: "rocket-thrusters",
-      label: "Rocket thrusters",
-    },
-    {
-      id: "after-mission-9",
-      label: "After Mission 9",
-    },
-  ];
+  {
+    id: "secondary-treads",
+    label: "Secondary Treads",
+  },
+  {
+    id: "final-containment",
+    label: "Final Containment",
+  },
+  {
+    id: "rocket-thrusters",
+    label: "Rocket Thrusters",
+  },
+  {
+    id: "after-mission-9",
+    label: "After Mission 9",
+  },
+];
 
 const relatedLinks = [
-  {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
-  },
   {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
   },
   {
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
+  },
+  {
     href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11 Maximum Payload",
-  },
-  {
-    href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27 Fatsia",
-  },
-  {
-    href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30 Song of Wings",
+    label: "Mission 11: Maximum Payload",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8",
+    label: "Ace Combat 8 Guide",
   },
 ];
 
@@ -83,11 +79,11 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: heroImage,
+        url: ogImage,
         width: 1600,
         height: 900,
         alt: "Ace Combat 8 Mission 9 IED vehicle exposing the Land Battleship secondary tread armor",
@@ -98,7 +94,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [heroImage],
+    images: [ogImage],
   },
 };
 
@@ -118,7 +114,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Ace Combat 8 Guide",
+          name: "Ace Combat 8: Wings of Theve",
           item: hubUrl,
         },
         {
@@ -143,8 +139,19 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-29",
+      dateModified: "2026-09-30",
       articleSection: "Ace Combat 8 Guides",
+      author: {
+        "@type": "Organization",
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
       about: [
         {
           "@type": "VideoGame",
@@ -173,23 +180,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Remaining Distance",
+        },
+        {
+          "@type": "Thing",
           name: "Rocket thrusters",
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
       },
     },
     {
@@ -203,6 +202,9 @@ const jsonLd = {
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
     },
   ],
 };
@@ -222,12 +224,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Ace Combat 8 Mission 9 Walkthrough: Land Battleship Blockade"
-          description="Protect the bomb trucks, expose and destroy all eight secondary treads, beat the final containment countdown, and disable both rocket thrusters."
+          description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="September 29, 2026"
+          breadcrumbBaseHref="/ace-combat-8"
+          breadcrumbBaseLabel="Ace Combat 8"
+          updatedAt="September 30, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
