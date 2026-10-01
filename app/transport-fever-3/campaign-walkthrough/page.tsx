@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/transport-fever-3`;
 const pageUrl = `${hubUrl}/campaign-walkthrough`;
 
 const metadataTitle =
-  "Transport Fever 3 Campaign Walkthrough: Missions 1–6";
+  "Transport Fever 3 Campaign Walkthrough: Missions 1–7";
 
 const metadataDescription =
-  "Complete Transport Fever 3 Missions 1–6 with star requirements, objective order, special awards, the 1,000-oil race, and Island Expansion contracts.";
+  "Complete Transport Fever 3 Missions 1–7 with star requirements, objective order, special awards, the oil race, contracts, and Big City Problems.";
 
 const articleDescription =
-  "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, Oil for the People, and Island Expansion with objective order, required quantities, star conditions, special objectives, and the steps that can stop mission progress.";
+  "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, Oil for the People, Island Expansion, and Big City Problems with required quantities, star conditions, special objectives, and the steps that can stop mission progress.";
 
 const imageUrls = [
   `${siteUrl}/images/transport-fever-3/transport-fever-3-mardi-gras-alligators.webp`,
@@ -45,6 +45,11 @@ const imageUrls = [
   `${siteUrl}/images/transport-fever-3/transport-fever-3-island-expansion-objectives.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-trans-philippine-railroad.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-island-expansion-yacht-oil.webp`,
+
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-big-city-problems-objectives.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-big-city-five-districts.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-big-city-cheers.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-big-city-election.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -74,6 +79,10 @@ const toc = [
     id: "mission-6-island-expansion",
     label: "Mission 6: Island Expansion",
   },
+  {
+    id: "mission-7-big-city-problems",
+    label: "Mission 7: Big City Problems",
+  },
 ];
 
 const relatedLinks = [
@@ -96,6 +105,10 @@ const relatedLinks = [
   {
     href: "/transport-fever-3/traffic-road-guide",
     label: "Traffic & Road Guide",
+  },
+  {
+    href: "/transport-fever-3/city-growth-guide",
+    label: "City Growth Guide",
   },
 ];
 
@@ -172,14 +185,14 @@ const jsonLd = {
       },
 
       headline:
-        "Transport Fever 3 Campaign Walkthrough: Missions 1–6",
+        "Transport Fever 3 Campaign Walkthrough: Missions 1–7",
 
       description: articleDescription,
 
       image: imageUrls,
 
       datePublished: "2026-09-26",
-      dateModified: "2026-09-27",
+      dateModified: "2026-10-01",
 
       about: [
         {
@@ -213,7 +226,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big City Problems",
+        },
+        {
+          "@type": "Thing",
           name: "Transport Fever 3 campaign star requirements",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 special awards",
         },
       ],
 
@@ -270,13 +291,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Campaign Walkthrough: Missions 1–6"
+          title="Transport Fever 3 Campaign Walkthrough: Missions 1–7"
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 27, 2026"
+          updatedAt="October 1, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

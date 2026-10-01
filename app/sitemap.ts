@@ -1042,9 +1042,9 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/ace-combat-8/mission-18-moonlight-and-shadows': '2026-09-30',
   '/ace-combat-8/mrp-farm': '2026-09-30',
   
-  'transport-fever-3': '2026-09-27',
+  'transport-fever-3': '2026-10-01',
   'transport-fever-3/beginner-guide': '2026-09-26',
-  'transport-fever-3/campaign-walkthrough': '2026-09-27',
+  'transport-fever-3/campaign-walkthrough': '2026-10-01',
   'transport-fever-3/cargo-industry-guide': '2026-09-26',
   'transport-fever-3/city-growth-guide': '2026-09-26',
   'transport-fever-3/economy-money-guide': '2026-09-26',
