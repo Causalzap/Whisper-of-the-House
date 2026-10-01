@@ -1023,6 +1023,16 @@ const paths = [
     '/ace-combat-8/mission-18-moonlight-and-shadows',
     '/ace-combat-8/mrp-farm',
 
+    // Nivalis Nights
+    '/nivalis-nights',
+    '/nivalis-nights/beginner-guide',
+    '/nivalis-nights/business-guide',
+    '/nivalis-nights/manager',
+    '/nivalis-nights/fishing-guide',
+    '/nivalis-nights/farming-guide',
+    '/nivalis-nights/curfew',
+    '/nivalis-nights/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1030,6 +1040,15 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/nivalis-nights': '2026-10-01',
+  '/nivalis-nights/beginner-guide': '2026-10-01',
+  '/nivalis-nights/business-guide': '2026-10-01',
+  '/nivalis-nights/manager': '2026-10-01',
+  '/nivalis-nights/fishing-guide': '2026-10-01',
+  '/nivalis-nights/farming-guide': '2026-10-01',
+  '/nivalis-nights/curfew': '2026-10-01',
+  '/nivalis-nights/achievements': '2026-10-01',
+
   '/ace-combat-8': '2026-09-29',
   '/ace-combat-8/walkthrough': '2026-09-29',
   '/ace-combat-8/mission-9-land-battleship-blockade': '2026-09-29',

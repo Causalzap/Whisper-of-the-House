@@ -131,6 +131,306 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Nivalis Nights",
+    game: "Nivalis Nights",
+    href: "/nivalis-nights",
+    slug: "nivalis-nights",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Life Sim, Business & City Progression",
+    eyebrow: "Spotlight Guide",
+  
+    hubStatus:
+      "Opening progression + Ramen Noir business + Manager automation + fishing + farming + 2 AM curfew + Achievement Points + 120 achievements",
+  
+    description:
+      "Start with Ramen Noir, stabilize the restaurant, unlock automation, branch into fishing and farming, open more of Nivalis through Achievement Points and transport, and track all 120 achievements.",
+  
+    coverage: [
+      "Opening progression from Lowtown to Meridian Market through Ramen Noir setup, Chicken Noodle Soup, the live ingredient shopping list, the first worker, first-night cash decisions and the point where the restaurant can support longer trips",
+  
+      "Ramen Noir business management through menu costs, staff bottlenecks, inherited debt, real daily profit and loss, venue progression, pricing, ingredient costs, expansion and the decision to open another venue",
+  
+      "Manager progression through Venue Level 3, Manager access, worker assignment, automatic ingredient restocking, staff motivation, cash drain, unpaid staff and the point where Ramen Noir can operate while you travel",
+  
+      "Fishing progression through Boardwalk Addy's starting rod, shore fishing, the Putter, Fish Detector, Fish Database, boat scanner signals, early fish locations and Fishing Level upgrades",
+  
+      "Farming through Clen, Thaddeus's starter greenhouse, Onion Seeds, farming modules, crop levels, Farming Level 4 environmental controls, useful crop choices and Greenhouse 3B expansion",
+  
+      "Night travel through the 2:00 AM curfew, apartments, public shelters, CorpSec cameras and drones, detection consequences and recovery when normal travel is no longer practical",
+  
+      "City progression through Achievement Points, taxi, train and boat connections, relationships, properties, side jobs and the decision of where to go after Ramen Noir becomes stable",
+  
+      "Completion through all 120 achievements, including 17 business achievements, 24 fish, farming milestones, 18 locations, 11 apartment discoveries, dining, collectibles, postcards and hidden character objectives",
+    ],
+  
+    image:
+      "/images/nivalis-nights/nivalis-nights-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 57,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Nivalis Nights Guide: Progression, Business, Fishing & Map",
+        href: "/nivalis-nights",
+        type: "Guide Hub",
+        description:
+          "Stabilize Ramen Noir, identify the system currently limiting progress, then move into automation, fishing, farming, district unlocks, travel, relationships and completion.",
+        image:
+          "/images/nivalis-nights/nivalis-nights-journal-systems.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Progression, Ramen Noir, Manager automation, fishing, farming, Achievement Points, map travel, curfew and all 120 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Beginner Guide: What to Do First & Day 1",
+        href: "/nivalis-nights/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Follow the opening route to Meridian Market, set up Ramen Noir, restock the first ingredients, hire the first worker, protect your cash and get through the first night.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-meridian-market-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 421,
+  
+          spotlightFeature: true,
+          spotlightOrder: 1,
+  
+          spotlightMeta:
+            "Lowtown, Meridian Market, Ramen Noir setup, Chicken Noodle Soup, live shopping list, first worker, first curfew and Day 2",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Ramen Noir Guide: Profit, Staff & Level 3",
+        href: "/nivalis-nights/business-guide",
+        type: "Systems",
+        description:
+          "Control menu costs, staffing, debt and pricing, read the daily report correctly, reach Venue Level 3 and expand only when the existing restaurant can support it.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-ramen-noir-daily-loss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 422,
+  
+          spotlightFeature: true,
+          spotlightOrder: 2,
+  
+          spotlightMeta:
+            "Menu costs, staff bottlenecks, 50,000 Lims debt, real daily loss, profit decisions, Level 3, pricing, farming costs and second venue",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Manager Guide: Unlock, Hire & Automate Ramen Noir",
+        href: "/nivalis-nights/manager",
+        type: "Systems",
+        description:
+          "Reach Venue Level 3, unlock the Manager role, assign the right worker, automate ingredient restocking and fix the cash drain that can leave staff unpaid.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-ramen-noir-level-3-manager.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 423,
+  
+          spotlightFeature: true,
+          spotlightOrder: 3,
+  
+          spotlightMeta:
+            "Venue Level 3, Manager unlock, worker assignment, grocery automation, Ingredients Restocked, payroll failures and cash-buffer checks",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Fishing Guide: Rod, Putter, Fish Locations & Database",
+        href: "/nivalis-nights/fishing-guide",
+        type: "Guide",
+        description:
+          "Get the free fishing rod, unlock the Putter, use the Fish Detector and Database, read boat scanner signals and begin finding new fish species.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-fishing-detector-database.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 424,
+  
+          spotlightFeature: true,
+          spotlightOrder: 4,
+  
+          spotlightMeta:
+            "Boardwalk Addy, free rod, shore fishing, Putter, Fish Detector, Fish Database, boat scanner, Stickleback and Fishing Levels",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Farming Guide: Greenhouse, Seeds, Modules & Crops",
+        href: "/nivalis-nights/farming-guide",
+        type: "Guide",
+        description:
+          "Unlock the starter greenhouse, grow onions, buy useful seeds and modules, reach Farming Level 4, improve crop yields and expand only when space becomes limiting.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-first-greenhouse-root-module.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 425,
+  
+          spotlightFeature: true,
+          spotlightOrder: 5,
+  
+          spotlightMeta:
+            "Clen, starter greenhouse, Onion Seeds, Root Farming Module, crop levels, environmental controls, yield bonuses and Greenhouse 3B",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Curfew Guide: 2 AM, Shelters, Cameras & Drones",
+        href: "/nivalis-nights/curfew",
+        type: "Systems",
+        description:
+          "Plan around the 2 AM curfew, choose between home and a public shelter, avoid CorpSec surveillance and recover when you are stuck outside.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-curfew-2am-warning.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 426,
+  
+          spotlightFeature: true,
+          spotlightOrder: 6,
+  
+          spotlightMeta:
+            "2:00 AM deadline, apartments, public shelters, cameras, drones, detection, penalties and first-night recovery",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Nivalis Nights Achievements: All 120 Requirements & Tracker",
+        href: "/nivalis-nights/achievements",
+        type: "Achievements",
+        description:
+          "Track all 120 achievements across business, fishing, farming, locations, apartments, dining, collectibles, postcards, quests and hidden objectives.",
+        date: "Updated recently",
+        image:
+          "/images/nivalis-nights/nivalis-nights-achievements-list.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 427,
+  
+          spotlightFeature: true,
+          spotlightOrder: 7,
+  
+          spotlightMeta:
+            "All 120 requirements, interactive tracker, 17 business achievements, 24 fish, farming, 18 locations, 11 apartments, dining, collectibles and hidden quests",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+    ],
+  },
+  {
     title: "Ace Combat 8: Wings of Theve",
     game: "Ace Combat 8: Wings of Theve",
     href: "/ace-combat-8",
