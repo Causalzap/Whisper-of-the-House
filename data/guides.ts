@@ -131,6 +131,338 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Gears of War: E-Day",
+    game: "Gears of War: E-Day",
+    href: "/gears-of-war-e-day",
+    slug: "gears-of-war-e-day",
+    kind: "game",
+    status: "active",
+    accent: "blue",
+    archiveCategory: "RPG, action, builds & combat",
+
+    label: "Campaign, Acts & Completion",
+    eyebrow: "Spotlight Guide",
+
+    hubStatus:
+      "Full Campaign + Act 1–5 + final operation + Hard Cases + Secondary Objectives + Supply Caches + achievements",
+
+    description:
+      "Follow Gears of War: E-Day from the Prologue through all five Acts and the Epilogue, solve the major Campaign blockers, understand optional progression, and finish the remaining achievements.",
+
+    coverage: [
+      "Complete Campaign progression through the Prologue, all five Acts, 26 numbered chapters, the final operation and Epilogue",
+
+      "Act 1 through Police HQ, the armory, recruitment center, Pay N Save, Mayor Shaw, Emergence Holes and the City Hall defense",
+
+      "Act 2 through Legacy Bridge, the jammed first controls, Skytrain high ground, Octus Way, All Father's Plaza, Charlie Squad, Raven deployment and the collapsing airfield",
+
+      "Act 3 through Fairlight Outpost, the helipad breaker, Locust tunnels, Cooper Station, the Corpser pillar fight, stadium evacuation, convoy bridge and Fort Vigil",
+
+      "Act 4 through the correct train, Prospect Bay power station, 85% breaker, weather station, evacuation broadcast, refinery, Zone 5 and the light mass converter",
+
+      "Act 5 through the return train, Ghost Town, Raven's Nest, three flood valves, the jammed third valve, Resolute, The Fall of Kalona and east bridge controls",
+
+      "Final operation through the Impaler encounter, Marcus and Dom sequence, Skytrain route, detonator, final fight and Epilogue",
+
+      "Campaign completion through Hard Cases, Secondary Objectives, Collectibles, Supply Cache items, equipment mods, Co-Op, Insane and the Steam and Xbox achievement lists",
+    ],
+
+    image:
+      "/images/gears-of-war-e-day/gears-of-war-e-day-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 58,
+      footerFeatured: true,
+    },
+
+    pages: [
+      {
+        title:
+          "Gears of War E-Day Guide: Walkthrough, Acts & Achievements",
+        href: "/gears-of-war-e-day",
+        type: "Guide Hub",
+        description:
+          "Find the right Campaign route, follow Act 1–5, finish the final operation, and understand Hard Cases, Secondary Objectives, Supply Caches, upgrades and achievement completion.",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-act-5-ship-launch.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          spotlightMeta:
+            "Prologue, 5 Acts, 26 chapters, Hard Cases, Secondary Objectives, Supply Caches, equipment upgrades, Co-Op, Insane, ending and achievements",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Walkthrough: All Acts & Chapters",
+        href: "/gears-of-war-e-day/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the Prologue, all five Acts, 26 numbered chapters, final operation and Epilogue in Campaign order, with direct routes to the detailed Act walkthroughs.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-enemy-lines-pillar-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 428,
+
+          spotlightFeature: true,
+          spotlightOrder: 1,
+
+          spotlightMeta:
+            "Prologue, all 5 Acts, 26 numbered chapters, chapter order, Legacy Bridge, Locust tunnels, refinery, Resolute, final operation and Epilogue",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Act 1 Walkthrough: Police HQ & City Hall",
+        href: "/gears-of-war-e-day/act-1-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Reach Police HQ, find the armory, rescue the recruitment-center and Pay N Save survivors, escort Mayor Shaw, close Emergence Holes and defend City Hall.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-police-hq-armory.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 429,
+
+          spotlightFeature: true,
+          spotlightOrder: 2,
+
+          spotlightMeta:
+            "Police HQ, armory, Lancer, recruitment-center truck route, Pay N Save, Tai, Mayor Shaw, Emergence Holes and City Hall",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Act 2 Walkthrough: Legacy Bridge",
+        href: "/gears-of-war-e-day/act-2-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Retake Legacy Bridge, reach the eastern controls, follow Bravo's downtown assignments, find Charlie Squad, defend the Raven and escape the collapsing airfield.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-legacy-bridge-skytrain-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 430,
+
+          spotlightFeature: true,
+          spotlightOrder: 3,
+
+          spotlightMeta:
+            "Legacy Bridge, first control-room jam, Skytrain high ground, eastern controls, Octus Way, All Father's Plaza, Charlie Squad, Raven and airfield",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Act 3 Walkthrough: Corpser & Fort Vigil",
+        href: "/gears-of-war-e-day/act-3-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Restore the Fairlight helipad, cross the Locust tunnels and Cooper Station, beat the Corpser, evacuate the stadium, lower the convoy bridge and reach Fort Vigil.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-enemy-lines-pillar-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 431,
+
+          spotlightFeature: true,
+          spotlightOrder: 4,
+
+          spotlightMeta:
+            "Fairlight Outpost, helipad breaker, Locust tunnels, Cooper Station, Corpser pillars, stadium, convoy bridge, rooftops and Fort Vigil",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Act 4 Walkthrough: Light Mass Converter",
+        href: "/gears-of-war-e-day/act-4-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Take the correct train, restore Prospect Bay power, close the breaker at 85%, reach the weather station, enter Zone 5 and stop the light mass converter.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-power-station-85-percent-breaker.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 432,
+
+          spotlightFeature: true,
+          spotlightOrder: 5,
+
+          spotlightMeta:
+            "Correct train, Prospect Bay, 85% breaker, weather-station trail, evacuation broadcast, refinery, coolant feed, Zone 5 and light mass converter",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Act 5 Walkthrough: The Fall of Kalona",
+        href: "/gears-of-war-e-day/act-5-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Return to Kalona, cross Ghost Town, reach Raven's Nest, open all three flood valves, free the jammed third valve, launch Resolute and reach the east bridge controls.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-paths-diverge-east-control-room.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 433,
+
+          spotlightFeature: true,
+          spotlightOrder: 6,
+
+          spotlightMeta:
+            "Return train, Ghost Town, Raven's Nest, three flood valves, third-valve jam, manual release, Resolute, The Fall of Kalona and east controls",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Final Boss & Ending Guide",
+        href: "/gears-of-war-e-day/ending-final-boss",
+        type: "Endings",
+        description:
+          "Continue after the east bridge controls fail, survive the Impaler fight, reach the detonator through the Skytrain, finish the final battle and follow the Epilogue.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-final-bridge-grenade-fight.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 434,
+
+          spotlightFeature: true,
+          spotlightOrder: 7,
+
+          spotlightMeta:
+            "East bridge failure, Impaler grenade fight, Marcus and Dom, Skytrain, detonator, final battle, Port Ferrell and Epilogue",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+
+      {
+        title:
+          "Gears of War E-Day Achievements Guide: All 55 on Steam",
+        href: "/gears-of-war-e-day/achievements",
+        type: "Achievements",
+        description:
+          "Track all 55 Steam achievements and the 54 Xbox achievements across Campaign completion, Hard Cases, Secondary Objectives, Co-Op, Insane, Horde Siege and Versus.",
+        date: "Updated recently",
+        image:
+          "/images/gears-of-war-e-day/gears-e-day-hard-case-campaign.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 435,
+
+          spotlightFeature: true,
+          spotlightOrder: 8,
+
+          spotlightMeta:
+            "55 Steam achievements, 54 Xbox achievements, Hard Cases, Secondary Objectives, Collectibles, Supply Cache items, Co-Op, Insane, Horde Siege and Versus",
+        },
+
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+    ],
+  },  
+  {
     title: "Nivalis Nights",
     game: "Nivalis Nights",
     href: "/nivalis-nights",

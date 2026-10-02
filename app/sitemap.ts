@@ -1033,6 +1033,16 @@ const paths = [
     '/nivalis-nights/curfew',
     '/nivalis-nights/achievements',
 
+    '/gears-of-war-e-day',
+    '/gears-of-war-e-day/walkthrough',
+    '/gears-of-war-e-day/act-1-walkthrough',
+    '/gears-of-war-e-day/act-2-walkthrough',
+    '/gears-of-war-e-day/act-3-walkthrough',
+    '/gears-of-war-e-day/act-4-walkthrough',
+    '/gears-of-war-e-day/act-5-walkthrough',
+    '/gears-of-war-e-day/ending-final-boss',
+    '/gears-of-war-e-day/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1040,6 +1050,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/gears-of-war-e-day': '2026-10-02',
+  '/gears-of-war-e-day/walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/act-1-walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/act-2-walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/act-3-walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/act-4-walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/act-5-walkthrough': '2026-10-02',
+  '/gears-of-war-e-day/ending-final-boss': '2026-10-02',
+  '/gears-of-war-e-day/achievements': '2026-10-02',
+  
   '/nivalis-nights': '2026-10-01',
   '/nivalis-nights/beginner-guide': '2026-10-01',
   '/nivalis-nights/business-guide': '2026-10-01',
