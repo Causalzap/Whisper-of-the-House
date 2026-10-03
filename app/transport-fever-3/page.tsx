@@ -6,6 +6,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import TransportFever3Content from "@/data/transport-fever-3/index.mdx";
 
+
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/transport-fever-3`;
 const pageUrl = hubUrl;
@@ -14,37 +15,55 @@ const metadataTitle =
   "Transport Fever 3 Guide: Beginner, Cargo, Rail & Campaign";
 
 const metadataDescription =
-  "Start Transport Fever 3 with a stable town, manage money and cargo, fix road and rail bottlenecks, grow cities, and complete all 8 campaign missions.";
+  "Start Transport Fever 3, fix money, cargo, production, road and rail problems, grow towns, complete all 8 campaign missions, and track achievements.";
 
 const articleDescription =
-  "Build one working town first, separate money problems from cargo-flow problems, decide when roads need better routing or rail capacity, respond to changing town needs, and work through all eight campaign missions.";
+  "Start with one working route, then diagnose money, cargo, production, road, rail, and town-growth problems before expanding into the campaign and achievement goals.";
+
 
 const toc = [
   {
     id: "first-network",
-    label: "Build the first network",
+    label: "Start Your First Network",
   },
   {
-    id: "money-or-flow",
-    label: "Money problem or transport problem?",
+    id: "money-or-profit",
+    label: "Money & Route Profit",
   },
   {
-    id: "road-or-rail",
-    label: "Road problem or rail capacity?",
+    id: "cargo-not-moving",
+    label: "Cargo Not Moving",
   },
   {
-    id: "town-changes",
-    label: "When the town changes",
+    id: "production-problems",
+    label: "Industry Not Producing",
+  },
+  {
+    id: "road-capacity",
+    label: "Road Capacity",
+  },
+  {
+    id: "road-to-rail",
+    label: "When to Use Rail",
+  },
+  {
+    id: "town-growth",
+    label: "Town Growth",
   },
   {
     id: "campaign",
     label: "All 8 Campaign Missions",
   },
   {
+    id: "achievement-progress",
+    label: "41 Achievements",
+  },
+  {
     id: "later-network",
-    label: "Use later unlocks well",
+    label: "Later Transport Options",
   },
 ];
+
 
 const relatedLinks = [
   {
@@ -60,12 +79,16 @@ const relatedLinks = [
     label: "Cargo & Industry Guide",
   },
   {
-    href: "/transport-fever-3/rail-signals-guide",
-    label: "Rail & Signals Guide",
+    href: "/transport-fever-3/production-chains",
+    label: "Production Chains & Industries",
   },
   {
     href: "/transport-fever-3/traffic-road-guide",
     label: "Traffic & Road Guide",
+  },
+  {
+    href: "/transport-fever-3/rail-signals-guide",
+    label: "Rail & Signals Guide",
   },
   {
     href: "/transport-fever-3/city-growth-guide",
@@ -75,7 +98,12 @@ const relatedLinks = [
     href: "/transport-fever-3/campaign-walkthrough",
     label: "Campaign Walkthrough: All 8 Missions",
   },
+  {
+    href: "/transport-fever-3/achievements",
+    label: "All 41 Achievements",
+  },
 ];
+
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -89,7 +117,7 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: articleDescription,
+    description: metadataDescription,
     siteName: "Whisper of the House",
   },
 
@@ -99,6 +127,7 @@ export const metadata: Metadata = {
     description: metadataDescription,
   },
 };
+
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -148,7 +177,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 beginner guide",
+          name: "Transport Fever 3 beginner gameplay",
         },
         {
           "@type": "Thing",
@@ -156,15 +185,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 cargo and industries",
+          name: "Transport Fever 3 cargo transport",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 rail and signals",
+          name: "Transport Fever 3 production chains and industries",
         },
         {
           "@type": "Thing",
           name: "Transport Fever 3 traffic and roads",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 rail and signals",
         },
         {
           "@type": "Thing",
@@ -176,26 +209,20 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 Big City Problems",
-        },
-        {
-          "@type": "Thing",
-          name: "Transport Fever 3 Final Countdown",
+          name: "Transport Fever 3 achievements",
         },
       ],
 
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
+      },
+
+      author: {
+        "@id": `${siteUrl}#organization`,
       },
 
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
 
       breadcrumb: {
@@ -222,6 +249,7 @@ const jsonLd = {
     },
   ],
 };
+
 
 export default function Page() {
   return (

@@ -776,7 +776,7 @@ export const guideClusters: GuideCluster[] = [
     eyebrow: "Spotlight Guide",
   
     hubStatus:
-      "30-mission campaign + major mission blockers + Assault Records + MRP + trophies and achievements",
+      "30-mission campaign + major mission blockers + 34 aircraft + Assault Records + MRP + trophies and achievements",
   
     description:
       "Follow Ace Combat 8 from the Prologue through all 30 missions, react to changing objectives, solve the major multi-stage battles, choose useful aircraft and weapons, and finish Assault Records, MRP goals, trophies and achievements.",
@@ -797,6 +797,8 @@ export const guideClusters: GuideCluster[] = [
       "Mission 30 through Endurance defense, Tonitra Spear guidance UAVs, submarine armaments, VLS launchers, the underwater missile tube and the final ramming attack",
   
       "Post-campaign completion through 83 Assault Records, 55 shared achievement requirements, ACE difficulty, S ranks, medals, MRP, aircraft collection and cumulative combat goals",
+
+      "Aircraft progression through all 34 planes, Fighter, Multirole and Attacker roles, MRP prices, Aircraft Tree routes, early purchases, late-game choices and post-game unlocks",
     ],
   
     image:
@@ -833,7 +835,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "All 30 missions, changing objectives, Land Battleship, Podarge transports, Fatsia, Song of Wings, aircraft choices and post-game completion",
+            "All 30 missions, major mission blockers, 34 aircraft and Aircraft Tree progression, Assault Records, MRP and post-game completion",
         },
   
         archive: {
@@ -1209,6 +1211,37 @@ export const guideClusters: GuideCluster[] = [
           order: 11,
         },
       },
+
+      {
+        title:
+          "Ace Combat 8 Aircraft Guide: All Planes, Unlocks & Tree",
+        href: "/ace-combat-8/aircraft-guide",
+        type: "Guide",
+        description:
+          "Compare all 34 aircraft, their roles, MRP costs and unlock conditions, follow the Aircraft Tree branches, and choose useful planes for early, late and post-game progression.",
+        date: "Updated recently",
+        image:
+          "/images/ace-combat-8/aircraft-tree-early-game.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+      
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 438,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "34 aircraft, Fighter, Multirole and Attacker roles, MRP costs, Aircraft Tree routes, early upgrades, late-game aircraft and post-game planes",
+        },
+      
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+
     ],
   },
   {
@@ -1224,25 +1257,29 @@ export const guideClusters: GuideCluster[] = [
     label: "Transport Tycoon, Cargo, Rail & City Growth",
     eyebrow: "Spotlight Guide",
     hubStatus:
-      "Beginner setup + money + cargo industries + rail signals + traffic + city growth + campaign Missions 1–4",
-  
+      "Beginner setup + money + cargo transport + production chains + rail signals + traffic + city growth + all 8 campaign missions + 41 achievements",
+
     description:
-      "Start a stable Transport Fever 3 company, manage loans and cargo chains, move proven routes onto rail, fix road congestion, grow towns, and complete the first four campaign missions.",
-  
+      "Start a stable Transport Fever 3 company, manage money, cargo and production chains, move proven routes onto rail, fix traffic and town growth, complete all eight campaign missions, and track all 41 achievements.",
+
     coverage: [
       "Opening progression through town Supplies, district coverage, passenger stops, depot placement, Line Manager metrics, the first cargo delivery and capacity decisions",
-  
+
       "Company finances through starting loans, complete project cost, line profitability, recurring vehicle costs, subsidies, debt repayment, Company Rank and expansion timing",
-  
-      "Cargo and industry networks through production chains, industry terminals, vehicle compatibility, input ratios, worker transport bonuses, warehouses, distribution centers and loading or unloading failures",
-  
+
+      "Cargo transport through industry terminals, vehicle compatibility, warehouses, transfers, Force Unload, loading and unloading failures, terminal congestion and route throughput",
+
+      "Production chains through all industry inputs and outputs, production ratios, raw producers, cargo boosters, workers, input and output stocks, climate-specific industries and production bottlenecks",
+
       "Railway construction through proven road demand, station placement, double track, crossovers, signals, No Path failures, depot access, train consists, mixed-speed traffic, station bottlenecks and electrification",
-  
+
       "Road traffic through bypasses, waypoints, road hierarchy, roundabouts, lane management, traffic lights, bus lanes, vehicle count, road maintenance, trams and underground passenger transport",
-  
+
       "Town growth through passenger service, requested cargo, settlement levels, Headquarters growth bonuses, noise, pollution, reputation, landmarks and Marketing Campaigns",
-  
-      "Campaign Missions 1–4 through Saving Mardi Gras, Alpine Crossing, Desert Adventure and Biggest Festival Ever, including star requirements, optional objectives and mission-specific blockers",
+
+      "Campaign progression through all eight missions from Saving Mardi Gras to Final Countdown, including required quantities, star conditions, special objectives and mission blockers",
+
+      "Achievement completion through all 41 requirements, including campaign stars and medals, Free Game milestones, climate goals, industry challenges, cumulative totals and the hidden UFO achievement",
     ],
   
     image:
@@ -1274,7 +1311,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "Beginner setup, money, cargo, rail signals, traffic, city growth and campaign Missions 1–4",
+            "Beginner setup, money, cargo, production chains, rail signals, traffic, city growth, all 8 campaign missions and 41 achievements",
         },
   
         archive: {
@@ -1465,18 +1502,18 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Transport Fever 3 Campaign Walkthrough: Missions 1–4",
+          "Transport Fever 3 Campaign Walkthrough: All 8 Missions",
         href: "/transport-fever-3/campaign-walkthrough",
         type: "Walkthrough",
         description:
-          "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure and Biggest Festival Ever with objective order, quantities, star conditions and special objectives.",
+          "Complete all eight campaign missions from Saving Mardi Gras through Final Countdown with objective order, required quantities, star conditions, special objectives and mission-specific blockers.",
         date: "Updated recently",
         image:
           "/images/transport-fever-3/transport-fever-3-mardi-gras-alligators.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-  
+      
         home: {
           latest: true,
           latestFeatured: true,
@@ -1484,14 +1521,75 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 7,
           spotlightMeta:
-            "Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, star requirements, special objectives and mission blockers",
+            "All 8 missions, Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, Oil for the People, Island Expansion, Big City Problems and Final Countdown",
         },
-  
+      
         archive: {
           showInCollections: true,
           order: 8,
         },
       },
+
+      {
+        title:
+          "Transport Fever 3 Production Chains & Industry Guide",
+        href: "/transport-fever-3/production-chains",
+        type: "Systems",
+        description:
+          "Check industry inputs and outputs, production ratios, workers and cargo boosters, then diagnose empty input stocks, full outputs and broken production chains.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-oil-refinery-production-ratio.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+      
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 436,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "All production recipes, required inputs, outputs, boosters, workers, industry stocks, forestry, oil, chemicals, steel, machines and climate differences",
+        },
+      
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+
+      {
+        title:
+          "Transport Fever 3 Achievements: All 41 Requirements",
+        href: "/transport-fever-3/achievements",
+        type: "Achievements",
+        description:
+          "Track all 41 achievements across Campaign completion, stars and medals, Free Game milestones, towns, industries, climates, vehicles, cargo totals and the hidden UFO achievement.",
+        date: "Updated recently",
+        image:
+          "/images/transport-fever-3/transport-fever-3-achievements-list.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+      
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 437,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "41 achievements, Campaign stars and medals, UFO, all climates, 1M passengers, 1M cargo, 50K population, industry challenges and long-term totals",
+        },
+      
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+
     ],
   },
   {

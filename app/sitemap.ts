@@ -1010,6 +1010,8 @@ const paths = [
     'transport-fever-3/economy-money-guide',
     'transport-fever-3/rail-signals-guide',
     'transport-fever-3/traffic-road-guide',
+    'transport-fever-3/production-chains',
+    'transport-fever-3/achievements',
 
     '/ace-combat-8',
     '/ace-combat-8/walkthrough',
@@ -1091,6 +1093,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'transport-fever-3/economy-money-guide': '2026-09-26',
   'transport-fever-3/rail-signals-guide': '2026-09-26',
   'transport-fever-3/traffic-road-guide': '2026-09-26',
+  'transport-fever-3/production-chains': '2026-10-03',
+  'transport-fever-3/achievements': '2026-10-03',
 
   'wild-west-pioneers': '2026-09-25',
   'wild-west-pioneers/best-settlement-layout': '2026-09-25',
