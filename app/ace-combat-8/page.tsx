@@ -13,35 +13,31 @@ const metadataTitle =
   "Ace Combat 8 Guide & Walkthrough: All 30 Missions";
 
 const metadataDescription =
-  "Ace Combat 8 guide for all 30 missions, major blockers, aircraft and loadout choices, Assault Records, MRP farming, trophies, and post-game completion.";
+  "Ace Combat 8 guide for all 30 missions, Aircraft Tree progression, trophies, Assault Records, MRP farming, and post-game completion.";
 
 const articleDescription =
-  "Follow Ace Combat 8 from the first campaign through Mission 30, understand the missions that change objectives mid-sortie, choose aircraft and loadouts, and plan the remaining Assault Records, MRP, ranks, and achievements after the ending.";
+  "Start the Ace Combat 8 campaign, follow all 30 missions, find focused routes for major mission blockers, plan Aircraft Tree progression, and choose the right post-game path for trophies, Assault Records, ranks, and MRP.";
 
 const toc = [
   {
     id: "first-campaign",
-    label: "First Campaign",
+    label: "30-Mission Campaign",
   },
   {
-    id: "reading-the-battle",
-    label: "Reading the Battle",
+    id: "mission-guides",
+    label: "Mission-Specific Guides",
   },
   {
-    id: "major-blockers",
-    label: "Major Mission Blockers",
-  },
-  {
-    id: "aircraft-and-loadouts",
-    label: "Aircraft & Loadouts",
+    id: "aircraft-progression",
+    label: "Aircraft Progression",
   },
   {
     id: "first-clear",
     label: "First Clear Priorities",
   },
   {
-    id: "after-the-ending",
-    label: "After the Ending",
+    id: "after-campaign",
+    label: "After Mission 30",
   },
 ];
 
@@ -49,6 +45,10 @@ const relatedLinks = [
   {
     href: "/ace-combat-8/walkthrough",
     label: "All 30 Missions Walkthrough",
+  },
+  {
+    href: "/ace-combat-8/aircraft-guide",
+    label: "Aircraft Guide",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
@@ -112,13 +112,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "Ace Combat 8 Guide & Walkthrough: All 30 Missions",
+      headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-30",
+      dateModified: "2026-10-03",
       articleSection: "Ace Combat 8 Guides",
       author: {
         "@type": "Organization",
@@ -126,7 +125,7 @@ const jsonLd = {
         url: siteUrl,
       },
       publisher: {
-        "@id": `${siteUrl}#organization`,
+        "@id": `${siteUrl}/#organization`,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
@@ -139,7 +138,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 campaign",
+          name: "Ace Combat 8 guide",
         },
         {
           "@type": "Thing",
@@ -151,11 +150,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 mission objectives",
+          name: "Ace Combat 8 campaign",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 aircraft and loadouts",
+          name: "Ace Combat 8 aircraft",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 Aircraft Tree",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 trophies and achievements",
         },
         {
           "@type": "Thing",
@@ -165,28 +172,24 @@ const jsonLd = {
           "@type": "Thing",
           name: "Ace Combat 8 MRP",
         },
-        {
-          "@type": "Thing",
-          name: "Ace Combat 8 trophies and achievements",
-        },
       ],
       isPartOf: {
-        "@id": `${siteUrl}#website`,
+        "@id": `${siteUrl}/#website`,
       },
     },
     {
       "@type": "Organization",
-      "@id": `${siteUrl}#organization`,
+      "@id": `${siteUrl}/#organization`,
       name: "Whisper of the House",
       url: siteUrl,
     },
     {
       "@type": "WebSite",
-      "@id": `${siteUrl}#website`,
+      "@id": `${siteUrl}/#website`,
       name: "Whisper of the House",
       url: siteUrl,
       publisher: {
-        "@id": `${siteUrl}#organization`,
+        "@id": `${siteUrl}/#organization`,
       },
     },
   ],
@@ -212,7 +215,7 @@ export default function Page() {
           gameHref="/ace-combat-8"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 30, 2026"
+          updatedAt="October 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

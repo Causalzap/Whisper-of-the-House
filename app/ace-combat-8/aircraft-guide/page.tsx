@@ -4,103 +4,81 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import AceCombat8WalkthroughContent from "@/data/ace-combat-8/walkthrough.mdx";
+import AceCombat8AircraftGuideContent from "@/data/ace-combat-8/aircraft-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/ace-combat-8`;
-const pageUrl = `${hubUrl}/walkthrough`;
+const pageUrl = `${hubUrl}/aircraft-guide`;
 
 const metadataTitle =
-  "Ace Combat 8 Walkthrough: All 30 Missions & Bosses";
+  "Ace Combat 8 Aircraft Guide: All Planes, Unlocks & Tree";
 
 const metadataDescription =
-  "Ace Combat 8 walkthrough and mission list for all 30 missions, with target priorities, phase changes, escorts, Land Battleships, Fatsia, and bosses.";
+  "All 34 Ace Combat 8 aircraft with roles, MRP costs, unlocks, Aircraft Tree routes, early-game upgrades, late-game picks, and post-game planes.";
 
 const articleDescription =
-  "Follow all 30 Ace Combat 8 campaign missions from Jokers Wild through Song of Wings, with mission routes, objective changes, target priorities, escort threats, missile interceptions, major targets, and the blockers that can stop a first clear.";
+  "See all 34 aircraft in Ace Combat 8, how the Aircraft Tree works, what each plane costs, which routes unlock key upgrades, and what to buy from the first campaign through post-game.";
 
 const heroImage =
-  "/images/ace-combat-8/mission-7-faith-park-bonus-time.webp";
+  "/images/ace-combat-8/aircraft-tree-early-game.webp";
 
 const heroImageUrl = `${siteUrl}${heroImage}`;
 
 const imageUrls = [
   heroImageUrl,
-  `${siteUrl}/images/ace-combat-8/mission-10-airship-laser.webp`,
-  `${siteUrl}/images/ace-combat-8/mission-14-mushroom-cloud-escape.webp`,
-  `${siteUrl}/images/ace-combat-8/mission-15-heavy-bomber-engine.webp`,
-  `${siteUrl}/images/ace-combat-8/mission-16-disguised-ship-sun-emblem-three-cranes.webp`,
-  `${siteUrl}/images/ace-combat-8/mission-20-escort-orbiter-large-missile.webp`,
-  `${siteUrl}/images/ace-combat-8/mission-28-sema-island-resupply.webp`,
+  `${siteUrl}/images/ace-combat-8/aircraft-tree-parts-and-weapons.webp`,
+  `${siteUrl}/images/ace-combat-8/aircraft-tree-ew-branch.webp`,
+  `${siteUrl}/images/ace-combat-8/aircraft-tree-f35c-late-game.webp`,
+  `${siteUrl}/images/ace-combat-8/aircraft-tree-post-game-branch.webp`,
 ];
 
 const toc = [
   {
-    id: "opening-missions",
-    label: "Missions 1–5",
+    id: "aircraft-tree",
+    label: "Aircraft Tree",
   },
   {
-    id: "counterattack",
-    label: "Missions 6–10",
+    id: "best-progression-route",
+    label: "Best Progression Route",
   },
   {
-    id: "land-battleships",
-    label: "Missions 11–15",
+    id: "late-game-aircraft",
+    label: "Su-57 vs F-22A",
   },
   {
-    id: "space-elevator",
-    label: "Missions 16–20",
+    id: "all-aircraft",
+    label: "All 34 Aircraft",
   },
   {
-    id: "rocky-island",
-    label: "Missions 21–25",
+    id: "post-game",
+    label: "Post-Game Aircraft",
   },
   {
-    id: "endgame",
-    label: "Missions 26–30",
+    id: "what-to-buy-first",
+    label: "What to Buy First",
   },
   {
-    id: "after-campaign",
-    label: "After Mission 30",
+    id: "mrp-and-completion",
+    label: "MRP & Completion",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8/mission-9-land-battleship-blockade",
-    label: "Mission 9: Land Battleship Blockade",
-  },
-  {
-    href: "/ace-combat-8/mission-11-maximum-payload",
-    label: "Mission 11: Maximum Payload",
-  },
-  {
-    href: "/ace-combat-8/mission-16-singer",
-    label: "Mission 16: Singer",
-  },
-  {
-    href: "/ace-combat-8/mission-18-moonlight-and-shadows",
-    label: "Mission 18: Moonlight and Shadows",
-  },
-  {
-    href: "/ace-combat-8/mission-27-fatsia-ocean-fortress",
-    label: "Mission 27: Fatsia",
-  },
-  {
-    href: "/ace-combat-8/mission-30-song-of-wings",
-    label: "Mission 30: Song of Wings",
-  },
-  {
-    href: "/ace-combat-8/assault-records",
-    label: "Assault Records",
+    href: "/ace-combat-8/walkthrough",
+    label: "All 30 Missions Walkthrough",
   },
   {
     href: "/ace-combat-8/mrp-farm",
-    label: "MRP Farming",
+    label: "MRP Farming Guide",
   },
   {
     href: "/ace-combat-8/trophies-achievements",
     label: "Trophies & Achievements",
+  },
+  {
+    href: "/ace-combat-8/assault-records",
+    label: "Assault Records",
   },
 ];
 
@@ -121,7 +99,7 @@ export const metadata: Metadata = {
         url: heroImageUrl,
         width: 1600,
         height: 900,
-        alt: "Ace Combat 8 Mission 7 after reaching the Faith Park score requirement",
+        alt: "Ace Combat 8 Aircraft Tree showing aircraft, weapons, parts, and connected unlock paths",
       },
     ],
   },
@@ -155,7 +133,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Walkthrough",
+          name: "Aircraft Guide",
           item: pageUrl,
         },
       ],
@@ -172,7 +150,7 @@ const jsonLd = {
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-09-29",
+      datePublished: "2026-10-03",
       dateModified: "2026-10-03",
       articleSection: "Ace Combat 8 Guides",
       author: {
@@ -194,27 +172,35 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 walkthrough",
+          name: "Ace Combat 8 aircraft",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 mission list",
+          name: "Ace Combat 8 Aircraft Tree",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 campaign",
+          name: "Ace Combat 8 aircraft unlocks",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 Land Battleships",
+          name: "Ace Combat 8 aircraft MRP costs",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 Fatsia",
+          name: "Ace Combat 8 Fighter aircraft",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 Song of Wings",
+          name: "Ace Combat 8 Multirole aircraft",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 Attacker aircraft",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 Electronic Warfare aircraft",
         },
       ],
       isPartOf: {
@@ -253,7 +239,7 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Ace Combat 8 Walkthrough: All 30 Missions & Bosses"
+          title="Ace Combat 8 Aircraft Guide: All Planes, Unlocks & Tree"
           description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
@@ -263,7 +249,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <AceCombat8WalkthroughContent />
+          <AceCombat8AircraftGuideContent />
         </GuideArticlePage>
       </main>
 
