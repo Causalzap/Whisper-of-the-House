@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/transport-fever-3`;
 const pageUrl = `${hubUrl}/campaign-walkthrough`;
 
 const metadataTitle =
-  "Transport Fever 3 Campaign Walkthrough: Missions 1–7";
+  "Transport Fever 3 Campaign Walkthrough: All 8 Missions";
 
 const metadataDescription =
-  "Complete Transport Fever 3 Missions 1–7 with star requirements, objective order, special awards, the oil race, contracts, and Big City Problems.";
+  "Complete all 8 Transport Fever 3 campaign missions with star requirements, special awards, objective order, cargo targets, and Final Countdown launch tips.";
 
 const articleDescription =
-  "Complete Saving Mardi Gras, Alpine Crossing, Desert Adventure, Biggest Festival Ever, Oil for the People, Island Expansion, and Big City Problems with required quantities, star conditions, special objectives, and the steps that can stop mission progress.";
+  "Complete all eight Transport Fever 3 campaign missions from Saving Mardi Gras through Final Countdown, with required quantities, star conditions, special awards, timed objectives, and the mission-specific problems that can stop progress.";
 
 const imageUrls = [
   `${siteUrl}/images/transport-fever-3/transport-fever-3-mardi-gras-alligators.webp`,
@@ -83,6 +83,10 @@ const toc = [
     id: "mission-7-big-city-problems",
     label: "Mission 7: Big City Problems",
   },
+  {
+    id: "mission-8-final-countdown",
+    label: "Mission 8: Final Countdown",
+  },
 ];
 
 const relatedLinks = [
@@ -95,12 +99,16 @@ const relatedLinks = [
     label: "Beginner Guide",
   },
   {
-    href: "/transport-fever-3/rail-signals-guide",
-    label: "Rail & Signals Guide",
+    href: "/transport-fever-3/economy-money-guide",
+    label: "Money & Economy Guide",
   },
   {
     href: "/transport-fever-3/cargo-industry-guide",
     label: "Cargo & Industry Guide",
+  },
+  {
+    href: "/transport-fever-3/rail-signals-guide",
+    label: "Rail & Signals Guide",
   },
   {
     href: "/transport-fever-3/traffic-road-guide",
@@ -185,14 +193,14 @@ const jsonLd = {
       },
 
       headline:
-        "Transport Fever 3 Campaign Walkthrough: Missions 1–7",
+        "Transport Fever 3 Campaign Walkthrough: All 8 Missions",
 
       description: articleDescription,
 
       image: imageUrls,
 
       datePublished: "2026-09-26",
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-03",
 
       about: [
         {
@@ -227,6 +235,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Big City Problems",
+        },
+        {
+          "@type": "Thing",
+          name: "Final Countdown",
         },
         {
           "@type": "Thing",
@@ -291,13 +303,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Campaign Walkthrough: Missions 1–7"
+          title="Transport Fever 3 Campaign Walkthrough: All 8 Missions"
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 1, 2026"
+          updatedAt="October 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

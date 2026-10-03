@@ -14,10 +14,10 @@ const metadataTitle =
   "Transport Fever 3 Guide: Beginner, Cargo, Rail & Campaign";
 
 const metadataDescription =
-  "Start Transport Fever 3 with a stable town, manage money and cargo, fix road and rail bottlenecks, grow cities, and complete Campaign Missions 1–7.";
+  "Start Transport Fever 3 with a stable town, manage money and cargo, fix road and rail bottlenecks, grow cities, and complete all 8 campaign missions.";
 
 const articleDescription =
-  "Build one working town first, separate money problems from cargo-flow problems, decide when roads need better routing or rail capacity, respond to changing town needs, and work through Campaign Missions 1–7.";
+  "Build one working town first, separate money problems from cargo-flow problems, decide when roads need better routing or rail capacity, respond to changing town needs, and work through all eight campaign missions.";
 
 const toc = [
   {
@@ -38,7 +38,7 @@ const toc = [
   },
   {
     id: "campaign",
-    label: "Campaign Missions 1–7",
+    label: "All 8 Campaign Missions",
   },
   {
     id: "later-network",
@@ -73,7 +73,7 @@ const relatedLinks = [
   },
   {
     href: "/transport-fever-3/campaign-walkthrough",
-    label: "Campaign Walkthrough: Missions 1–7",
+    label: "Campaign Walkthrough: All 8 Missions",
   },
 ];
 
@@ -138,7 +138,7 @@ const jsonLd = {
       description: articleDescription,
 
       datePublished: "2026-09-26",
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-03",
 
       about: [
         {
@@ -177,6 +177,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Transport Fever 3 Big City Problems",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 Final Countdown",
         },
       ],
 
@@ -239,7 +243,7 @@ export default function Page() {
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 1, 2026"
+          updatedAt="October 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
