@@ -12,13 +12,13 @@ const hubUrl = `${siteUrl}/gears-of-war-e-day`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "Gears of War E-Day Walkthrough: All Acts & Chapters";
+  "Gears of War E-Day Walkthrough: All 5 Acts & 26 Chapters";
 
 const metadataDescription =
-  "Gears of War E-Day walkthrough with all 5 Acts, 26 chapters, Prologue, Epilogue, campaign order, routes, and links to each objective.";
+  "Complete Gears of War E-Day from Prologue to Epilogue with all 5 Acts, 26 chapters, campaign order, route blockers, bosses, and the final operation.";
 
 const articleDescription =
-  "Follow the complete Gears of War: E-Day campaign order from the Prologue through all five Acts and the Epilogue, with chapter links, route summaries, and direct help for each major objective.";
+  "Follow the complete Gears of War: E-Day Campaign from the Prologue through all five Acts and the Epilogue, with all 26 chapters in order and direct help for the major route blockers along the way.";
 
 const toc = [
   {
@@ -55,40 +55,29 @@ const toc = [
   },
   {
     id: "after-campaign",
-    label: "After the Epilogue",
+    label: "After the Campaign",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/gears-of-war-e-day/act-1-walkthrough",
-    label: "Act 1 Walkthrough",
+    href: "/gears-of-war-e-day/bosses",
+    label: "Boss Guide",
   },
   {
-    href: "/gears-of-war-e-day/act-2-walkthrough",
-    label: "Act 2 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-3-walkthrough",
-    label: "Act 3 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-4-walkthrough",
-    label: "Act 4 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-5-walkthrough",
-    label: "Act 5 Walkthrough",
+    href: "/gears-of-war-e-day/weapon-mods",
+    label: "Weapon Mods & Locations",
   },
   {
     href: "/gears-of-war-e-day/ending-final-boss",
-    label: "Final Operation & Ending",
+    label: "Final Boss & Ending",
   },
   {
     href: "/gears-of-war-e-day/achievements",
-    label: "Achievements",
+    label: "Achievement Tracker",
   },
 ];
+
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -104,7 +93,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: metadataTitle,
     description: metadataDescription,
   },
@@ -143,7 +132,7 @@ export default function GearsEDayWalkthroughPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Walkthrough — All Acts & Chapters",
+          "Gears of War: E-Day Walkthrough — All 5 Acts & 26 Chapters",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -161,8 +150,8 @@ export default function GearsEDayWalkthroughPage() {
         publisher: {
           "@id": `${siteUrl}/#organization`,
         },
-        dateModified: "2026-10-02",
         datePublished: "2026-10-01",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         about: {
           "@type": "VideoGame",
@@ -201,13 +190,13 @@ export default function GearsEDayWalkthroughPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Walkthrough — All Acts & Chapters"
+          title="Gears of War: E-Day Walkthrough — All 5 Acts & 26 Chapters"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
           gameHref="/gears-of-war-e-day"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

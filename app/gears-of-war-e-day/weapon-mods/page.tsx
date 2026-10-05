@@ -4,98 +4,92 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import GearsEDayAct3Content from "@/data/gears-of-war-e-day/act-3-walkthrough.mdx";
+import GearsEDayWeaponModsContent from "@/data/gears-of-war-e-day/weapon-mods.mdx";
 
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/gears-of-war-e-day`;
-const pageUrl = `${hubUrl}/act-3-walkthrough`;
+const pageUrl = `${hubUrl}/weapon-mods`;
 
 const metadataTitle =
-  "Gears of War E-Day Act 3 Walkthrough: Enemy Lines & Fort Vigil";
+  "Gears of War E-Day Best Weapon Mods & Locations";
 
 const metadataDescription =
-  "Complete Gears of War E-Day Act 3 through Fairlight Outpost, Enemy Lines, Cooper Station, the convoy bridge, rooftop evacuation, and Fort Vigil.";
+  "Find the best Campaign weapon mods in Gears of War: E-Day, including Lancer Laser, Gut Puncher upgrades, Torque Bow Laser and Act 2–4 locations.";
 
 const articleDescription =
-  "Follow Gears of War: E-Day Act 3 from the Fairlight Outpost helipad through Enemy Lines, Cooper Station, the stadium evacuation, convoy bridge, rooftop escape, and Fort Vigil defense.";
+  "Find the best Gears of War: E-Day Campaign weapon mods, where to get them in Acts 2 and 4, which Secondary Objectives unlock them, and which upgrades are worth the detour.";
 
 const heroImage =
-  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-convoy-bridge-control-room.webp`;
+  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-torque-bow-mobile-targeting-laser.webp`;
 
 const imageUrls = [
   heroImage,
-  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-fairlight-helipad-breaker.webp`,
-  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-desperate-times-sniper-tower.webp`,
+  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-lost-in-translation-lancer-laser.webp`,
+  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-vanguard-car-showroom.webp`,
+  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-black-raven-down-crashed-raven.webp`,
+  `${siteUrl}/images/gears-of-war-e-day/gears-e-day-trapped-locust-train-carriage.webp`,
 ];
 
 const toc = [
   {
-    id: "chapter-1-stranded",
-    label: "Stranded",
+    id: "act-2-best-mods",
+    label: "Best Act 2 Mods",
   },
   {
-    id: "helipad-breaker",
-    label: "Fairlight Breaker",
+    id: "lancer-laser",
+    label: "Lancer Laser",
   },
   {
-    id: "chapter-2-enemy-lines",
-    label: "Enemy Lines",
+    id: "hammerburst-bayonet",
+    label: "Hammerburst Bayonet",
   },
   {
-    id: "cooper-station",
-    label: "Cooper Station",
+    id: "trapped-family",
+    label: "Trapped Family",
   },
   {
-    id: "corpser-fight",
-    label: "Corpser Encounter",
+    id: "black-raven-down",
+    label: "Gut Puncher Upgrade",
   },
   {
-    id: "chapter-3-last-foothold",
-    label: "Last Foothold",
+    id: "act-4-mods",
+    label: "Best Act 4 Mods",
   },
   {
-    id: "chapter-4-the-convoy",
-    label: "The Convoy",
+    id: "blood-mag-overpacked",
+    label: "Blood Mag & Overpacked",
   },
   {
-    id: "convoy-upper-deck",
-    label: "Bridge Controls",
+    id: "torque-bow-laser",
+    label: "Torque Bow Laser",
   },
   {
-    id: "chapter-5-desperate-times",
-    label: "Desperate Times",
+    id: "trapped-locust",
+    label: "Trapped Locust Mods",
   },
   {
-    id: "sniper-tower",
-    label: "Sniper Tower",
+    id: "fire-in-the-hole",
+    label: "Incendiary Rounds",
   },
   {
-    id: "chapter-6-desperate-measures",
-    label: "Fort Vigil",
-  },
-  {
-    id: "before-act-4",
-    label: "After Fort Vigil",
+    id: "best-priority",
+    label: "Best Mods to Prioritize",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/gears-of-war-e-day/walkthrough",
-    label: "Complete Campaign Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/bosses",
-    label: "Boss Guide",
-  },
-  {
-    href: "/gears-of-war-e-day/act-2-walkthrough",
+    href: "/gears-of-war-e-day/act-2-walkthrough/",
     label: "Act 2 Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/act-4-walkthrough",
+    href: "/gears-of-war-e-day/act-4-walkthrough/",
     label: "Act 4 Walkthrough",
+  },
+  {
+    href: "/gears-of-war-e-day/achievements/",
+    label: "Achievements",
   },
 ];
 
@@ -117,7 +111,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Gears of War E-Day Act 3 convoy bridge control room on the route to Fort Vigil",
+        alt: "Torque Bow Mobile Targeting Laser weapon mod in Gears of War E-Day",
       },
     ],
   },
@@ -130,7 +124,7 @@ export const metadata: Metadata = {
 };
 
 
-export default function GearsEDayAct3WalkthroughPage() {
+export default function GearsEDayWeaponModsPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -153,7 +147,7 @@ export default function GearsEDayAct3WalkthroughPage() {
           {
             "@type": "ListItem",
             position: 3,
-            name: "Act 3 Walkthrough",
+            name: "Weapon Mods",
             item: pageUrl,
           },
         ],
@@ -162,7 +156,7 @@ export default function GearsEDayAct3WalkthroughPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Act 3 Walkthrough — Enemy Lines & Fort Vigil",
+          "Gears of War: E-Day Best Weapon Mods — Where to Find Them",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -180,7 +174,7 @@ export default function GearsEDayAct3WalkthroughPage() {
         publisher: {
           "@id": `${siteUrl}/#organization`,
         },
-        datePublished: "2026-10-01",
+        datePublished: "2026-10-05",
         dateModified: "2026-10-05",
         inLanguage: "en-US",
         image: imageUrls,
@@ -221,17 +215,17 @@ export default function GearsEDayAct3WalkthroughPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Act 3 Walkthrough — Enemy Lines & Fort Vigil"
+          title="Gears of War: E-Day Best Weapon Mods — Where to Find Them"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
-          gameHref="/gears-of-war-e-day"
+          gameHref="/gears-of-war-e-day/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <GearsEDayAct3Content />
+          <GearsEDayWeaponModsContent />
         </GuideArticlePage>
       </main>
 

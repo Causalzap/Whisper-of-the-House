@@ -12,13 +12,13 @@ const hubUrl = `${siteUrl}/gears-of-war-e-day`;
 const pageUrl = `${hubUrl}/act-2-walkthrough`;
 
 const metadataTitle =
-  "Gears of War E-Day Act 2 Walkthrough: Legacy Bridge";
+  "Gears of War E-Day Act 2 Walkthrough: Legacy Bridge & Airfield";
 
 const metadataDescription =
-  "Complete Gears of War E-Day Act 2 with Legacy Bridge, Octus Way, Charlie Squad, the Raven flight, and the collapsing airfield escape.";
+  "Complete Gears of War E-Day Act 2 through Legacy Bridge, Hold the Line, Charlie Squad, the Raven mission, and the collapsing airfield.";
 
 const articleDescription =
-  "Complete Gears of War: E-Day Act 2 from Legacy Bridge through Bravo Squad's downtown assignments, Charlie Squad, the Raven flight, and the collapsing airfield.";
+  "Follow Gears of War: E-Day Act 2 from Legacy Bridge through Bravo Squad's downtown assignments, Charlie Squad's last signal, the Raven flight, and the airfield retreat.";
 
 const heroImage =
   `${siteUrl}/images/gears-of-war-e-day/gears-e-day-legacy-bridge-skytrain-route.webp`;
@@ -37,15 +37,19 @@ const toc = [
   },
   {
     id: "legacy-bridge-first-control-room",
-    label: "First Bridge Controls",
+    label: "Jammed Bridge Controls",
   },
   {
     id: "legacy-bridge-eastern-control-room",
-    label: "Eastern Control Room",
+    label: "Eastern Controls",
   },
   {
     id: "chapter-2-hold-the-line",
     label: "Hold the Line",
+  },
+  {
+    id: "quartermaster-weapon-modification",
+    label: "Quartermaster",
   },
   {
     id: "octus-way-station",
@@ -73,11 +77,15 @@ const toc = [
   },
   {
     id: "raven-guns",
-    label: "Raven Guns",
+    label: "Raven Defense",
   },
   {
     id: "chapter-5-overrun",
     label: "Overrun",
+  },
+  {
+    id: "leave-tarmac",
+    label: "Leave the Runway",
   },
   {
     id: "west-control-tower",
@@ -99,12 +107,12 @@ const relatedLinks = [
     label: "Act 1 Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/act-3-walkthrough",
-    label: "Act 3 Walkthrough",
+    href: "/gears-of-war-e-day/weapon-mods",
+    label: "Weapon Mods & Locations",
   },
   {
-    href: "/gears-of-war-e-day/achievements",
-    label: "Achievements",
+    href: "/gears-of-war-e-day/act-3-walkthrough",
+    label: "Act 3 Walkthrough",
   },
 ];
 
@@ -126,7 +134,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Gears of War E-Day Act 2 Legacy Bridge Skytrain route",
+        alt: "Gears of War E-Day Act 2 Legacy Bridge Skytrain route toward the eastern controls",
       },
     ],
   },
@@ -171,7 +179,7 @@ export default function GearsEDayAct2WalkthroughPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Act 2 Walkthrough — Legacy Bridge",
+          "Gears of War: E-Day Act 2 Walkthrough — Legacy Bridge & Airfield",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -190,7 +198,7 @@ export default function GearsEDayAct2WalkthroughPage() {
           "@id": `${siteUrl}/#organization`,
         },
         datePublished: "2026-10-01",
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         image: imageUrls,
         about: {
@@ -230,13 +238,13 @@ export default function GearsEDayAct2WalkthroughPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Act 2 Walkthrough — Legacy Bridge"
+          title="Gears of War: E-Day Act 2 Walkthrough — Legacy Bridge & Airfield"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
           gameHref="/gears-of-war-e-day"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

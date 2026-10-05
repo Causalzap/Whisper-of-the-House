@@ -12,13 +12,13 @@ const hubUrl = `${siteUrl}/gears-of-war-e-day`;
 const pageUrl = `${hubUrl}/act-4-walkthrough`;
 
 const metadataTitle =
-  "Gears of War E-Day Act 4 Walkthrough: Light Mass Converter";
+  "Gears of War E-Day Act 4 Walkthrough: Power Station & Refinery";
 
 const metadataDescription =
-  "Complete Gears of War E-Day Act 4 with the 85% breaker, weather station, refinery route, Zone 5 key card, and light mass converter.";
+  "Complete Gears of War E-Day Act 4 with the second train, 85% breaker, weather station, refinery, Zone 5 key card, Scoria, and tank dump.";
 
 const articleDescription =
-  "Complete Gears of War: E-Day Act 4 from Prospect Bay and the power station through the weather station, evacuation broadcast, refinery, Zone 5, and light mass converter.";
+  "Follow Gears of War: E-Day Act 4 through Prospect Bay, the correct train, 85% power-station breaker, weather station, civilian evacuation, Zone 5, Scoria fight, and light mass converter shutdown.";
 
 const heroImage =
   `${siteUrl}/images/gears-of-war-e-day/gears-e-day-power-station-85-percent-breaker.webp`;
@@ -76,15 +76,15 @@ const toc = [
   },
   {
     id: "backup-coolant-feed",
-    label: "Coolant Feed",
+    label: "Backup Coolant Feed",
   },
   {
     id: "zone-5-key-card",
     label: "Zone 5 Key Card",
   },
   {
-    id: "stop-enriched-emulsion-feed",
-    label: "Emulsion Feed",
+    id: "converter-fight",
+    label: "Scoria Fight",
   },
   {
     id: "dump-the-tanks",
@@ -98,20 +98,20 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/gears-of-war-e-day/walkthrough",
-    label: "Complete Campaign Walkthrough",
-  },
-  {
     href: "/gears-of-war-e-day/act-3-walkthrough",
     label: "Act 3 Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/act-5-walkthrough",
-    label: "Act 5 Walkthrough",
+    href: "/gears-of-war-e-day/weapon-mods",
+    label: "Weapon Mods & Locations",
   },
   {
-    href: "/gears-of-war-e-day/achievements",
-    label: "Achievements",
+    href: "/gears-of-war-e-day/bosses",
+    label: "Boss Guide",
+  },
+  {
+    href: "/gears-of-war-e-day/act-5-walkthrough",
+    label: "Act 5 Walkthrough",
   },
 ];
 
@@ -133,7 +133,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Gears of War E-Day Act 4 power station generator reaching 85 percent before the breaker is closed",
+        alt: "Gears of War E-Day Act 4 Prospect Bay power station breaker at 85 percent generator output",
       },
     ],
   },
@@ -178,7 +178,7 @@ export default function GearsEDayAct4WalkthroughPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Act 4 Walkthrough — Light Mass Converter",
+          "Gears of War: E-Day Act 4 Walkthrough — Power Station & Refinery",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -197,7 +197,7 @@ export default function GearsEDayAct4WalkthroughPage() {
           "@id": `${siteUrl}/#organization`,
         },
         datePublished: "2026-10-01",
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         image: imageUrls,
         about: {
@@ -237,13 +237,13 @@ export default function GearsEDayAct4WalkthroughPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Act 4 Walkthrough — Light Mass Converter"
+          title="Gears of War: E-Day Act 4 Walkthrough — Power Station & Refinery"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
           gameHref="/gears-of-war-e-day"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

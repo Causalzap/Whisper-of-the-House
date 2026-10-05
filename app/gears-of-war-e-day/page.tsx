@@ -11,17 +11,17 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/gears-of-war-e-day`;
 
 const metadataTitle =
-  "Gears of War E-Day Guide: Walkthrough, Acts & Achievements";
+  "Gears of War E-Day Guide: Walkthrough, Bosses & Achievements";
 
 const metadataDescription =
-  "Gears of War E-Day guide with Act 1–5 walkthroughs, Hard Cases, Secondary Objectives, Supply Caches, upgrades, final boss, and achievements.";
+  "Gears of War E-Day guide with all five Acts, major route blockers, bosses, weapon mods, final boss and ending, and all 55 Steam achievements.";
 
 const articleDescription =
-  "Follow Gears of War: E-Day from the Prologue through all five Acts and the Epilogue, with routes for major blockers plus Hard Cases, Secondary Objectives, Collectibles, Supply Caches, equipment upgrades, Co-Op, Insane, and achievement completion.";
+  "Follow Gears of War: E-Day through all five Acts, major Campaign blockers, boss fights, optional weapon upgrades, the final operation, and achievement completion.";
 
 const toc = [
   {
-    id: "walkthrough",
+    id: "campaign",
     label: "Campaign Walkthrough",
   },
   {
@@ -46,74 +46,46 @@ const toc = [
   },
   {
     id: "final-boss-ending",
-    label: "Final Boss & Epilogue",
+    label: "Final Boss & Ending",
   },
   {
-    id: "exploration",
+    id: "bosses",
+    label: "Bosses",
+  },
+  {
+    id: "weapon-mods",
+    label: "Weapon Mods",
+  },
+  {
+    id: "before-leaving-area",
     label: "Before Leaving an Area",
   },
   {
-    id: "hard-cases",
-    label: "Hard Cases",
-  },
-  {
-    id: "secondary-objectives",
-    label: "Secondary Objectives",
-  },
-  {
-    id: "collectibles",
-    label: "Collectibles",
-  },
-  {
-    id: "supply-caches",
-    label: "Supply Caches",
-  },
-  {
-    id: "equipment-upgrades",
-    label: "Equipment Upgrades",
-  },
-  {
-    id: "co-op-insane",
-    label: "Co-Op & Insane",
-  },
-  {
-    id: "achievements",
-    label: "Achievements",
+    id: "campaign-completion",
+    label: "Campaign Completion",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/gears-of-war-e-day/walkthrough",
+    href: "/gears-of-war-e-day/walkthrough/",
     label: "Complete Campaign Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/act-1-walkthrough",
-    label: "Act 1 Walkthrough",
+    href: "/gears-of-war-e-day/bosses/",
+    label: "Boss Guide",
   },
   {
-    href: "/gears-of-war-e-day/act-2-walkthrough",
-    label: "Act 2 Walkthrough",
+    href: "/gears-of-war-e-day/weapon-mods/",
+    label: "Weapon Mods & Locations",
   },
   {
-    href: "/gears-of-war-e-day/act-3-walkthrough",
-    label: "Act 3 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-4-walkthrough",
-    label: "Act 4 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-5-walkthrough",
-    label: "Act 5 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/ending-final-boss",
+    href: "/gears-of-war-e-day/ending-final-boss/",
     label: "Final Boss & Ending",
   },
   {
-    href: "/gears-of-war-e-day/achievements",
-    label: "Achievements",
+    href: "/gears-of-war-e-day/achievements/",
+    label: "Achievement Tracker",
   },
 ];
 
@@ -132,7 +104,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: metadataTitle,
     description: metadataDescription,
   },
@@ -165,7 +137,7 @@ export default function GearsEDayPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Guide — Walkthrough, Acts & Achievements",
+          "Gears of War: E-Day Guide — Walkthrough, Bosses & Achievements",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -184,7 +156,7 @@ export default function GearsEDayPage() {
           "@id": `${siteUrl}/#organization`,
         },
         datePublished: "2026-10-01",
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         about: {
           "@type": "VideoGame",
@@ -223,13 +195,13 @@ export default function GearsEDayPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Guide — Walkthrough, Acts & Achievements"
+          title="Gears of War: E-Day Guide — Walkthrough, Bosses & Achievements"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
-          gameHref="/gears-of-war-e-day"
+          gameHref="/gears-of-war-e-day/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

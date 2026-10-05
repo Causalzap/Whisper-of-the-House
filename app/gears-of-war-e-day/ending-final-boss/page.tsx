@@ -12,13 +12,13 @@ const hubUrl = `${siteUrl}/gears-of-war-e-day`;
 const pageUrl = `${hubUrl}/ending-final-boss`;
 
 const metadataTitle =
-  "Gears of War E-Day Final Boss & Ending Guide";
+  "Gears of War E-Day Vraahk Final Boss & Ending Guide";
 
 const metadataDescription =
-  "Beat the Impaler bridge fight, reach the detonator, finish the final battle, and see what happens in the Gears of War: E-Day Epilogue.";
+  "Beat Vraahk, cross the failed east bridge, use the Skytrain, reach the detonator, and understand the Gears of War: E-Day ending.";
 
 const articleDescription =
-  "Finish Gears of War: E-Day after the east bridge controls fail, including the Impaler fight, Skytrain route, detonator, final battle, and Epilogue.";
+  "Beat Vraahk in the final Gears of War: E-Day operation, including the failed east bridge, Skytrain route, detonator fight, Port Ferrell, and ending.";
 
 const heroImage =
   `${siteUrl}/images/gears-of-war-e-day/gears-e-day-final-bridge-grenade-fight.webp`;
@@ -34,11 +34,15 @@ const imageUrls = [
 const toc = [
   {
     id: "bridge-controls-fail",
-    label: "Bridge Controls Fail",
+    label: "East Bridge Controls",
   },
   {
-    id: "impaler-bridge-fight",
-    label: "Impaler Bridge Fight",
+    id: "first-vraahk-fight",
+    label: "First Vraahk Fight",
+  },
+  {
+    id: "incinerator",
+    label: "Incinerator vs Vraahk",
   },
   {
     id: "dom-marcus",
@@ -53,8 +57,8 @@ const toc = [
     label: "Skytrain Route",
   },
   {
-    id: "final-boss",
-    label: "Final Boss",
+    id: "final-vraahk-fight",
+    label: "Final Vraahk Fight",
   },
   {
     id: "hit-detonator",
@@ -62,7 +66,7 @@ const toc = [
   },
   {
     id: "ending",
-    label: "Epilogue",
+    label: "Ending & Epilogue",
   },
   {
     id: "port-ferrell",
@@ -70,7 +74,7 @@ const toc = [
   },
   {
     id: "dom-home",
-    label: "Dom Goes Home",
+    label: "Why Dom Goes Home",
   },
   {
     id: "ending-conversation",
@@ -80,16 +84,16 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/gears-of-war-e-day/walkthrough",
-    label: "Complete Campaign Walkthrough",
-  },
-  {
     href: "/gears-of-war-e-day/act-5-walkthrough",
     label: "Act 5 Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/achievements",
-    label: "Achievements",
+    href: "/gears-of-war-e-day/bosses",
+    label: "Boss Guide",
+  },
+  {
+    href: "/gears-of-war-e-day/walkthrough",
+    label: "Complete Campaign Walkthrough",
   },
 ];
 
@@ -111,7 +115,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Gears of War E-Day Impaler bridge fight near the end of the campaign",
+        alt: "Vraahk the Impaler during the final bridge fight in Gears of War E-Day",
       },
     ],
   },
@@ -147,7 +151,7 @@ export default function GearsEDayEndingFinalBossPage() {
           {
             "@type": "ListItem",
             position: 3,
-            name: "Final Boss & Ending",
+            name: "Vraahk Final Boss & Ending",
             item: pageUrl,
           },
         ],
@@ -156,7 +160,7 @@ export default function GearsEDayEndingFinalBossPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Final Boss & Ending Guide",
+          "Gears of War: E-Day Vraahk Final Boss & Ending Guide",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -175,7 +179,7 @@ export default function GearsEDayEndingFinalBossPage() {
           "@id": `${siteUrl}/#organization`,
         },
         datePublished: "2026-10-01",
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         image: imageUrls,
         about: {
@@ -215,13 +219,13 @@ export default function GearsEDayEndingFinalBossPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Final Boss & Ending Guide"
+          title="Gears of War: E-Day Vraahk Final Boss & Ending Guide"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
           gameHref="/gears-of-war-e-day"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

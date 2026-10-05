@@ -12,13 +12,13 @@ const hubUrl = `${siteUrl}/gears-of-war-e-day`;
 const pageUrl = `${hubUrl}/achievements`;
 
 const metadataTitle =
-  "Gears of War E-Day Achievements Guide: All 55 on Steam";
+  "Gears of War E-Day Achievements Guide: 55 Steam, 54 Xbox";
 
 const metadataDescription =
-  "Track all Gears of War E-Day achievements: 55 on Steam and 54 on Xbox, with Campaign, Insane, Co-Op, Horde Siege, Versus, and cleanup tips.";
+  "Track all 55 Steam and 54 Xbox achievements in Gears of War E-Day, including Campaign, Co-Op, Insane, Horde Siege, Versus, and cleanup requirements.";
 
 const articleDescription =
-  "Track every Gears of War: E-Day achievement across Campaign, Co-Op, Insane, Horde Siege, Versus, progression, revives, and combat-specific requirements.";
+  "Track every Gears of War: E-Day achievement across Campaign completion, Co-Op, Insane, Horde Siege, Versus, account progression, revives, and combat-specific requirements.";
 
 const heroImage =
   `${siteUrl}/images/gears-of-war-e-day/gears-e-day-hard-case-campaign.webp`;
@@ -35,7 +35,7 @@ const toc = [
   },
   {
     id: "campaign",
-    label: "Campaign Achievements",
+    label: "Story Achievements",
   },
   {
     id: "campaign-completion",
@@ -66,10 +66,6 @@ const toc = [
     label: "Combat Achievements",
   },
   {
-    id: "revives",
-    label: "Revive Achievements",
-  },
-  {
     id: "final-achievements",
     label: "Final Achievements",
   },
@@ -81,24 +77,12 @@ const relatedLinks = [
     label: "Complete Campaign Walkthrough",
   },
   {
-    href: "/gears-of-war-e-day/act-1-walkthrough",
-    label: "Act 1 Walkthrough",
+    href: "/gears-of-war-e-day/weapon-mods",
+    label: "Weapon Mods & Locations",
   },
   {
-    href: "/gears-of-war-e-day/act-2-walkthrough",
-    label: "Act 2 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-3-walkthrough",
-    label: "Act 3 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-4-walkthrough",
-    label: "Act 4 Walkthrough",
-  },
-  {
-    href: "/gears-of-war-e-day/act-5-walkthrough",
-    label: "Act 5 Walkthrough",
+    href: "/gears-of-war-e-day/ending-final-boss",
+    label: "Final Boss & Ending",
   },
 ];
 
@@ -120,7 +104,7 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Gears of War E-Day Campaign Hard Case discovered during exploration",
+        alt: "Gears of War E-Day Hard Case found during Campaign achievement completion",
       },
     ],
   },
@@ -165,7 +149,7 @@ export default function GearsEDayAchievementsPage() {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
         headline:
-          "Gears of War: E-Day Achievements Guide — All 55 on Steam",
+          "Gears of War: E-Day Achievements Guide — 55 Steam & 54 Xbox",
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -184,7 +168,7 @@ export default function GearsEDayAchievementsPage() {
           "@id": `${siteUrl}/#organization`,
         },
         datePublished: "2026-10-01",
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-05",
         inLanguage: "en-US",
         image: imageUrls,
         about: {
@@ -224,13 +208,13 @@ export default function GearsEDayAchievementsPage() {
         />
 
         <GuideArticlePage
-          title="Gears of War: E-Day Achievements Guide — All 55 on Steam"
+          title="Gears of War: E-Day Achievements Guide — 55 Steam & 54 Xbox"
           description={articleDescription}
           gameTitle="Gears of War: E-Day"
           gameHref="/gears-of-war-e-day"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 2, 2026"
+          updatedAt="October 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
