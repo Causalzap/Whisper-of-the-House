@@ -131,6 +131,270 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Monsters & Memories",
+    game: "Monsters & Memories",
+    href: "/monsters-and-memories",
+    slug: "monsters-and-memories",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "MMORPG, Classes & Leveling",
+    eyebrow: "Spotlight Guide",
+  
+    hubStatus:
+      "Early Access + first-hour setup + solo classes + leveling 1–25 + corpse recovery + tradeskills + Faelindral Ranger quest",
+  
+    description:
+      "Start your character, choose a class that fits solo or group play, find efficient leveling camps, recover lost corpses, manage early tradeskills, and solve the Faelindral Ranger scouting quest.",
+  
+    coverage: [
+      "First-hour progression through the Starter Note, class guild, guards, Journal, starting abilities, early combat, merchants, food, light and inventory management",
+  
+      "Solo class choices across Necromancer, Elementalist, Druid, Beastmaster, Bard, Ranger and Rogue, including pet play, healing, charm, exploration and positional combat",
+  
+      "Early leveling from 1–25 through starter camps, Wyrmsbane, Blacktide Bay, River Pirates and Glass Flats, with Rested XP, party XP checks and camp efficiency decisions",
+  
+      "Death and corpse recovery through bindpoints, Locate Corpse, corpse dragging, resurrection, Cantrips, backup spellbooks and expired-corpse recovery",
+  
+      "Tradeskills through Tanning, Leatherworking, Tailoring and Fishing, including early backpack materials, cloth containers, fish oil and connected crafting resources",
+  
+      "Faelindral Ranger progression through Captain Relgen Greenblade, the ruined archway, Spore Haven Karst, Whispering Pools, the Full Ranger's Log Book and Initiate Keeper's Cloak",
+    ],
+  
+    image:
+      "/images/monsters-and-memories/monsters-and-memories-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 59,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Monsters & Memories Guide: Classes, Leveling & What to Do",
+        href: "/monsters-and-memories",
+        type: "Guide Hub",
+        description:
+          "Start with your class setup, then choose the right next step for solo play, leveling, inventory, corpse recovery, tradeskills or the Faelindral Ranger quest.",
+        image:
+          "/images/monsters-and-memories/necromancer-pet-tanking.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Starter setup, solo classes, leveling 1–25, Wyrmsbane, Blacktide Bay, River Pirates, corpse recovery, tradeskills and Faelindral Ranger quest",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Beginner Guide: What to Do First",
+        href: "/monsters-and-memories/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Use the Starter Note, find your class guild, learn starting abilities, choose safe first fights, manage early money and loot, and leave town prepared.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/starter-note-class-guild.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 441,
+  
+          spotlightFeature: true,
+          spotlightOrder: 1,
+  
+          spotlightMeta:
+            "Starter Note, class guild, guards, Journal, starter quest, abilities, first combat, merchants, food, light, weight and first death",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Best Solo Classes: Which Class to Pick",
+        href: "/monsters-and-memories/best-solo-classes",
+        type: "Guide",
+        description:
+          "Compare Necromancer, Elementalist, Druid, Beastmaster, Bard, Ranger and Rogue for solo combat, recovery, exploration, control and group flexibility.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/necromancer-pet-tanking.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 442,
+  
+          spotlightFeature: true,
+          spotlightOrder: 2,
+  
+          spotlightMeta:
+            "Necromancer, Elementalist, Druid, Beastmaster, Bard, Ranger and Rogue solo strengths, limitations, pets, charm, healing and exploration",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Leveling Guide: 1–25 Zones & Camps",
+        href: "/monsters-and-memories/leveling-guide",
+        type: "Guide",
+        description:
+          "Level from 1–25 through starter camps, Wyrmsbane, Blacktide Bay and River Pirates while managing Rested XP, party level spread, recovery and spawn availability.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/level-1-dryads-faelindral.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 443,
+  
+          spotlightFeature: true,
+          spotlightOrder: 3,
+  
+          spotlightMeta:
+            "Levels 1–25, starter camps, Wyrmsbane, Blacktide Bay, River Pirates, Glass Flats, 15% Rested XP, party XP and solo versus group decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Corpse Recovery Guide: Find Your Body",
+        href: "/monsters-and-memories/corpse-recovery",
+        type: "Systems",
+        description:
+          "Find a lost corpse, use Locate Corpse, drag unsafe bodies, recover a missing spellbook, use resurrection and retrieve equipment after a corpse expires.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/locate-corpse-shaded-dunes.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 444,
+  
+          spotlightFeature: true,
+          spotlightOrder: 4,
+  
+          spotlightMeta:
+            "Bindpoints, Locate Corpse, Necromancer, Bard, Shadow Knight, corpse dragging, Cantrips, backup spellbooks, resurrection and expired corpses",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Tradeskills Guide: Bags, Fishing & Crafting",
+        href: "/monsters-and-memories/tradeskills",
+        type: "Systems",
+        description:
+          "Work through early Tanning, Leatherworking, Tailoring and Fishing, make useful bags, follow material chains and avoid wasting scarce silver and storage.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/tradeskills-skill-list.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 445,
+  
+          spotlightFeature: true,
+          spotlightOrder: 5,
+  
+          spotlightMeta:
+            "Tanning, Leatherworking, Tailoring, Fishing, backpacks, pouches, satchels, pelts, wood, resin, cloth, fish oil and material chains",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Monsters & Memories Faelindral Ranger Quest: Log Book & Cloak",
+        href: "/monsters-and-memories/faelindral-ranger-quest",
+        type: "Guide",
+        description:
+          "Complete Captain Relgen Greenblade's scouting assignment at the ruined archway, Spore Haven Karst and Whispering Pools, then combine the Log Book and claim the cloak.",
+        date: "Updated recently",
+        image:
+          "/images/monsters-and-memories/ranger-quest-ruined-archway.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 446,
+  
+          spotlightFeature: true,
+          spotlightOrder: 6,
+  
+          spotlightMeta:
+            "Captain Relgen Greenblade, Ranger's Log Book, ruined archway, Spore Haven Karst, Whispering Pools, Full Ranger's Log Book and Keeper's Cloak",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Gears of War: E-Day",
     game: "Gears of War: E-Day",
     href: "/gears-of-war-e-day",

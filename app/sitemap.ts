@@ -1048,6 +1048,14 @@ const paths = [
     '/gears-of-war-e-day/bosses',
     '/gears-of-war-e-day/weapon-mods',
 
+    '/monsters-and-memories',
+    '/monsters-and-memories/beginner-guide',
+    '/monsters-and-memories/best-solo-classes',
+    '/monsters-and-memories/leveling-guide',
+    '/monsters-and-memories/corpse-recovery',
+    '/monsters-and-memories/tradeskills',
+    '/monsters-and-memories/faelindral-ranger-quest',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1055,6 +1063,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/monsters-and-memories': '2026-10-06',
+  '/monsters-and-memories/beginner-guide': '2026-10-06',
+  '/monsters-and-memories/best-solo-classes': '2026-10-06',
+  '/monsters-and-memories/leveling-guide': '2026-10-06',
+  '/monsters-and-memories/corpse-recovery': '2026-10-06',
+  '/monsters-and-memories/tradeskills': '2026-10-06',
+  '/monsters-and-memories/faelindral-ranger-quest': '2026-10-06',
+  
   '/gears-of-war-e-day': '2026-10-05',
   '/gears-of-war-e-day/walkthrough': '2026-10-05',
   '/gears-of-war-e-day/act-1-walkthrough': '2026-10-02',
