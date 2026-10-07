@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/ace-combat-8`;
 const pageUrl = `${hubUrl}/trophies-achievements`;
 
 const metadataTitle =
-  "Ace Combat 8 Trophies & Achievements: All 55 Requirements";
+  "Ace Combat 8 Trophy Guide & Roadmap: All 55 Achievements";
 
 const metadataDescription =
-  "Track all 55 Ace Combat 8 achievements, including ACE S ranks, Assault Records, medals, MRP, aircraft collection, wingman tasks, and campaign goals.";
+  "Ace Combat 8 trophy guide for all 55 achievements, with a completion roadmap for ACE S ranks, Assault Records, MRP, aircraft, medals, and cleanup.";
 
 const articleDescription =
-  "Complete all 55 Ace Combat 8 achievement requirements with a progress tracker covering the campaign, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection, and combat counters.";
+  "Track all 55 Ace Combat 8 achievement requirements and follow a practical completion order for the first campaign, ACE difficulty, S ranks, Assault Records, Meritorious Service, MRP, aircraft collection, and long counters.";
 
 const toc = [
   {
@@ -38,7 +38,7 @@ const toc = [
   },
   {
     id: "records-medals",
-    label: "Assault Records & Medals",
+    label: "Records & Meritorious Service",
   },
   {
     id: "aircraft-mrp",
@@ -56,8 +56,8 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/ace-combat-8/walkthrough",
-    label: "All 30 Missions Walkthrough",
+    href: "/ace-combat-8/medals",
+    label: "All 29 Campaign Medals",
   },
   {
     href: "/ace-combat-8/assault-records",
@@ -68,8 +68,8 @@ const relatedLinks = [
     label: "MRP Farming",
   },
   {
-    href: "/ace-combat-8",
-    label: "Ace Combat 8 Guide",
+    href: "/ace-combat-8/walkthrough",
+    label: "All 30 Missions Walkthrough",
   },
 ];
 
@@ -115,7 +115,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Trophies & Achievements",
+          name: "Trophy Guide & Roadmap",
           item: pageUrl,
         },
       ],
@@ -132,7 +132,7 @@ const jsonLd = {
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-09-30",
+      dateModified: "2026-10-07",
       articleSection: "Ace Combat 8 Guides",
       author: {
         "@type": "Organization",
@@ -173,7 +173,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Medals",
+          name: "Meritorious Service",
         },
         {
           "@type": "Thing",
@@ -220,13 +220,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Ace Combat 8 Trophies & Achievements: All 55 Requirements"
+          title="Ace Combat 8 Trophy Guide & Roadmap: All 55 Achievements"
           description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
-          breadcrumbBaseHref="/ace-combat-8"
-          breadcrumbBaseLabel="Ace Combat 8"
-          updatedAt="September 30, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 7, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

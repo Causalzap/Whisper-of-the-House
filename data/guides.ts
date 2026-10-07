@@ -1104,33 +1104,37 @@ export const guideClusters: GuideCluster[] = [
     accent: "blue",
     archiveCategory: "RPG, action, builds & combat",
   
-    label: "Campaign, Missions & Completion",
+    label: "Campaign, Aircraft & Completion",
     eyebrow: "Spotlight Guide",
   
     hubStatus:
-      "30-mission campaign + major mission blockers + 34 aircraft + Assault Records + MRP + trophies and achievements",
-  
-    description:
-      "Follow Ace Combat 8 from the Prologue through all 30 missions, react to changing objectives, solve the major multi-stage battles, choose useful aircraft and weapons, and finish Assault Records, MRP goals, trophies and achievements.",
-  
-    coverage: [
-      "Full campaign progression from the Prologue through all 30 missions, including escorts, score objectives, missile interception, identification sequences, fleet defense and late-game multi-stage battles",
-  
-      "Mission 9 through the Land Battleship bomb-truck approach, all eight secondary treads, final containment sequence and two rocket thrusters",
-  
-      "Mission 11 through thundercloud jamming, Podarge contrails, engines and propellers, transport interception and the final air battle",
-  
-      "Mission 16 through disguised container-ship identification, civilian traffic, the UAV launch timer and explosive-UAV interception",
-  
-      "Mission 18 through the Rainband approach, Shadow Squadron interruption, two rocket launches and falling launch-vehicle debris",
-  
-      "Mission 27 through Fatsia structural damage, support pillars, hold-fire order, central entry and the fusion-reactor attack before the shutter closes",
-  
-      "Mission 30 through Endurance defense, Tonitra Spear guidance UAVs, submarine armaments, VLS launchers, the underwater missile tube and the final ramming attack",
-  
-      "Post-campaign completion through 83 Assault Records, 55 shared achievement requirements, ACE difficulty, S ranks, medals, MRP, aircraft collection and cumulative combat goals",
+      "30-mission campaign + major mission blockers + 34 aircraft + 29 Campaign Medals + 83 Assault Records + trophies + MRP",
 
-      "Aircraft progression through all 34 planes, Fighter, Multirole and Attacker roles, MRP prices, Aircraft Tree routes, early purchases, late-game choices and post-game unlocks",
+    description:
+      "Follow the Ace Combat 8 campaign, solve the missions most likely to stop progress, choose useful aircraft and upgrades, then finish Campaign Medals, Assault Records, trophies, S ranks and MRP goals.",
+
+    coverage: [
+      "Campaign progression from the Prologue through all 30 missions, including escorts, score objectives, missile interception, identification, fleet defense and late-game multi-stage battles",
+
+      "Mission 9 through the Land Battleship bomb-truck approach, eight secondary treads, final containment sequence and two rocket thrusters",
+
+      "Mission 11 through thundercloud jamming, Podarge contrails, engines, propellers, transport interception and the final air battle",
+
+      "Mission 16 through disguised container-ship identification, civilian traffic, the UAV launch timer and explosive-UAV interception",
+
+      "Mission 18 through the Rainband approach, Shadow Squadron interruption, two rocket launches and falling launch-vehicle debris",
+
+      "Mission 27 through Fatsia structural damage, support pillars, the surrender transition, central entry and the fusion-reactor attack",
+
+      "Mission 29 through Moon 11's X-40 fight, APS Escort UAVs, attack windows, the separated nose unit, laser guidance and S-Rank decisions",
+
+      "Mission 30 through Endurance defense, Tonitra Spear guidance UAVs, submarine armaments, VLS launchers, the underwater missile tube and final ramming attack",
+
+      "Aircraft progression through all 34 planes, Fighter, Multirole and Attacker roles, MRP costs, Aircraft Tree routes, early purchases, late-game choices and post-game unlocks",
+
+      "Campaign Medals through all 29 requirements, the shortest route to 10 medals, mission-specific challenges, S-Rank medals and campaign restrictions",
+
+      "Post-campaign completion through 83 Assault Records, 55 shared achievement requirements, ACE difficulty, S ranks, MRP, aircraft collection and cumulative combat goals",
     ],
   
     image:
@@ -1149,7 +1153,7 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "Ace Combat 8 Guide & Walkthrough: All 30 Missions",
+          "Ace Combat 8 Guide: Campaign, Aircraft & Post-Game",
   
         href: "/ace-combat-8",
   
@@ -1167,7 +1171,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "All 30 missions, major mission blockers, 34 aircraft and Aircraft Tree progression, Assault Records, MRP and post-game completion",
+            "Campaign progression, major mission blockers, 34 aircraft, 29 Campaign Medals, 83 Assault Records, trophies, S ranks and MRP",
         },
   
         archive: {
@@ -1211,6 +1215,82 @@ export const guideClusters: GuideCluster[] = [
         archive: {
           showInCollections: true,
           order: 2,
+        },
+      },
+
+      {
+        title:
+          "Ace Combat 8 Moon 11 Guide: Beat Selene in Mission 29",
+      
+        href: "/ace-combat-8/mission-29-selene",
+      
+        type: "Guide",
+      
+        description:
+          "Beat Moon 11 by choosing better attack windows, handling the APS Escort UAVs, surviving the X-40 second phase and keeping the S-Rank route efficient.",
+      
+        date: "Updated recently",
+      
+        image:
+          "/images/ace-combat-8/mission-29-moon-11-laser-designator.webp",
+      
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+      
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 447,
+      
+          spotlightFeature: true,
+          spotlightOrder: 12,
+      
+          spotlightMeta:
+            "Moon 11, Selene, X-40 attack windows, APS Escort UAVs, separated nose unit, laser designator and S-Rank decisions",
+        },
+      
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+
+      {
+        title:
+          "Ace Combat 8 Medals Guide: All 29 & Easiest 10 to Get",
+      
+        href: "/ace-combat-8/medals",
+      
+        type: "Guide",
+      
+        description:
+          "Check all 29 Campaign Medal requirements, choose the shortest 10 for Meritorious Service, and solve the easy-to-miss conditions in Missions 25, 27 and 30.",
+      
+        date: "Updated recently",
+      
+        image:
+          "/images/ace-combat-8/ace-combat-8-campaign-medals.webp",
+      
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+      
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 448,
+      
+          spotlightFeature: true,
+          spotlightOrder: 13,
+      
+          spotlightMeta:
+            "29 Campaign Medals, easiest 10, Meritorious Service, S-Rank medals, Mission 25 Podarge, Mission 27 chain reaction and Mission 30 defense",
+        },
+      
+        archive: {
+          showInCollections: true,
+          order: 14,
         },
       },
   
@@ -1368,36 +1448,36 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Ace Combat 8 Trophies & Achievements: All 55 Requirements",
-  
+          "Ace Combat 8 Trophy Guide & Roadmap: All 55 Achievements",
+      
         href: "/ace-combat-8/trophies-achievements",
-  
+      
         type: "Achievements",
-  
+      
         description:
-          "Track all 55 shared achievement requirements, including ACE S ranks, Assault Records, medals, MRP, aircraft collection, wingman tasks and combat counters.",
-  
+          "Track all 55 shared achievement requirements and follow a practical route through the first campaign, ACE S ranks, Assault Records, Meritorious Service, MRP and aircraft collection.",
+      
         date: "Updated recently",
-  
+      
         image:
           "/images/ace-combat-8/mission-30-airship-laser-retarget-submarine.webp",
-  
+      
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
-  
+      
         home: {
           latest: true,
           latestFeatured: true,
           latestOrder: 416,
-  
+      
           spotlightFeature: true,
           spotlightOrder: 6,
-  
+      
           spotlightMeta:
-            "55 shared achievements, ACE difficulty, S ranks, Assault Records, medals, MRP, aircraft collection and long counters",
+            "55 shared achievements, first-campaign priorities, ACE difficulty, S ranks, Assault Records, Meritorious Service, MRP and aircraft collection",
         },
-  
+      
         archive: {
           showInCollections: true,
           order: 7,

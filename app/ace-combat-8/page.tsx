@@ -10,34 +10,34 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/ace-combat-8`;
 
 const metadataTitle =
-  "Ace Combat 8 Guide & Walkthrough: All 30 Missions";
+  "Ace Combat 8 Guide: Campaign, Aircraft & Post-Game";
 
 const metadataDescription =
-  "Ace Combat 8 guide for all 30 missions, Aircraft Tree progression, trophies, Assault Records, MRP farming, and post-game completion.";
+  "Ace Combat 8 guide for campaign progression, mission blockers, Aircraft Tree choices, medals, trophies, Assault Records, S ranks, and MRP cleanup.";
 
 const articleDescription =
-  "Start the Ace Combat 8 campaign, follow all 30 missions, find focused routes for major mission blockers, plan Aircraft Tree progression, and choose the right post-game path for trophies, Assault Records, ranks, and MRP.";
+  "Use this Ace Combat 8 guide to choose the right campaign route, solve the missions most likely to block progress, plan Aircraft Tree spending, and decide what to replay for medals, trophies, Assault Records, ranks, and MRP.";
 
 const toc = [
   {
     id: "first-campaign",
-    label: "30-Mission Campaign",
+    label: "First Campaign",
   },
   {
-    id: "mission-guides",
-    label: "Mission-Specific Guides",
+    id: "mission-blockers",
+    label: "Mission Blockers",
   },
   {
     id: "aircraft-progression",
     label: "Aircraft Progression",
   },
   {
-    id: "first-clear",
-    label: "First Clear Priorities",
+    id: "replay-goals",
+    label: "Post-Game Goals",
   },
   {
-    id: "after-campaign",
-    label: "After Mission 30",
+    id: "replay-priority",
+    label: "Replay Priorities",
   },
 ];
 
@@ -51,8 +51,12 @@ const relatedLinks = [
     label: "Aircraft Guide",
   },
   {
+    href: "/ace-combat-8/medals",
+    label: "All 29 Campaign Medals",
+  },
+  {
     href: "/ace-combat-8/trophies-achievements",
-    label: "Trophies & Achievements",
+    label: "Trophy Guide & Roadmap",
   },
   {
     href: "/ace-combat-8/assault-records",
@@ -117,7 +121,7 @@ const jsonLd = {
       url: pageUrl,
       inLanguage: "en",
       datePublished: "2026-09-29",
-      dateModified: "2026-10-03",
+      dateModified: "2026-10-07",
       articleSection: "Ace Combat 8 Guides",
       author: {
         "@type": "Organization",
@@ -142,23 +146,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 walkthrough",
-        },
-        {
-          "@type": "Thing",
-          name: "Ace Combat 8 missions",
-        },
-        {
-          "@type": "Thing",
           name: "Ace Combat 8 campaign",
         },
         {
           "@type": "Thing",
-          name: "Ace Combat 8 aircraft",
+          name: "Ace Combat 8 mission progression",
         },
         {
           "@type": "Thing",
           name: "Ace Combat 8 Aircraft Tree",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 Campaign Medals",
         },
         {
           "@type": "Thing",
@@ -167,6 +167,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Ace Combat 8 Assault Records",
+        },
+        {
+          "@type": "Thing",
+          name: "Ace Combat 8 S ranks",
         },
         {
           "@type": "Thing",
@@ -209,13 +213,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Ace Combat 8 Guide & Walkthrough: All 30 Missions"
+          title="Ace Combat 8 Guide: Campaign, Aircraft & Post-Game"
           description={articleDescription}
           gameTitle="Ace Combat 8: Wings of Theve"
           gameHref="/ace-combat-8"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 3, 2026"
+          updatedAt="October 7, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
