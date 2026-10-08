@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,15 +15,21 @@ const metadataTitle =
   "Transport Fever 3 Rail & Signals Guide: Fix No Path";
 
 const metadataDescription =
-  "Build working railways in Transport Fever 3 with good station access, crossovers, signal direction, depots, train consists, electrification, and No Path fixes.";
+  "Fix No Path and train deadlocks in Transport Fever 3. Set up path signals, passing loops, crossovers, one-way tracks, station platforms, and depots.";
 
 const articleDescription =
-  "Move to rail after road demand is proven, place stations where existing passengers can reach them, build usable track and crossovers before signaling it, and fix No Path, depot access, station bottlenecks, mixed-speed traffic, and electrification problems.";
+  "Find out why trains cannot reach their destination, stop at red signals, or block station junctions. Fix track connections, signal direction, passing loops, platform access, and line priority.";
+
+const articleTitle =
+  "Transport Fever 3 Rail & Signals Guide: Fix No Path";
+
+const publishedAt = "2026-09-26";
+const modifiedAt = "2026-10-08";
 
 const imageUrls = [
-  `${siteUrl}/images/transport-fever-3/transport-fever-3-double-track-station.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-crossovers-and-signals.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-signal-no-path.webp`,
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-double-track-station.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-train-depot-connection.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-first-passenger-train.webp`,
 ];
@@ -40,19 +47,19 @@ const toc = [
   },
   {
     id: "build-track-first",
-    label: "Build the track first",
+    label: "Tracks & crossovers",
   },
   {
     id: "how-signals-work",
-    label: "How signals work",
+    label: "Path-based signaling",
   },
   {
     id: "signal-placement",
-    label: "Signal placement",
+    label: "Signals & passing loops",
   },
   {
     id: "signal-direction",
-    label: "Signal direction & No Path",
+    label: "Fix No Path",
   },
   {
     id: "train-depot",
@@ -60,15 +67,15 @@ const toc = [
   },
   {
     id: "train-consist",
-    label: "Train consists",
+    label: "Locomotives & wagons",
   },
   {
     id: "mixed-speed-trains",
-    label: "Mixed-speed trains",
+    label: "Mixed speeds & priority",
   },
   {
     id: "station-bottlenecks",
-    label: "Station bottlenecks",
+    label: "Platforms & bottlenecks",
   },
   {
     id: "electrification",
@@ -102,8 +109,8 @@ const relatedLinks = [
     label: "Money & Economy Guide",
   },
   {
-    href: "/transport-fever-3/campaign-walkthrough",
-    label: "Campaign Walkthrough",
+    href: "/transport-fever-3/production-chains",
+    label: "Production Chains Guide",
   },
 ];
 
@@ -119,12 +126,14 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+    publishedTime: publishedAt,
+    modifiedTime: modifiedAt,
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Transport Fever 3 double-track passenger railway with a station connected to the local transport network",
+        alt: "Transport Fever 3 double-track railway with crossovers and signals near a station approach",
       },
     ],
   },
@@ -170,11 +179,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Transport Fever 3 Rail & Signals Guide",
+      headline: articleTitle,
       description: articleDescription,
       image: imageUrls,
-      datePublished: "2026-09-26",
-      dateModified: "2026-09-26",
+      inLanguage: "en",
+      datePublished: publishedAt,
+      dateModified: modifiedAt,
       about: [
         {
           "@type": "VideoGame",
@@ -183,32 +193,30 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 signals",
+          name: "Transport Fever 3 railway signals",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 No Path",
+          name: "Transport Fever 3 path-based signaling",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 train stations",
+          name: "Transport Fever 3 No Path errors",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 crossovers",
+          name: "Transport Fever 3 passing loops",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 railway junctions and platforms",
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
@@ -240,17 +248,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Rail & Signals Guide"
+          title={articleTitle}
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 26, 2026"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,10 +15,16 @@ const metadataTitle =
   "Transport Fever 3 Money Guide: Loans, Profit & Debt";
 
 const metadataDescription =
-  "Manage Transport Fever 3 loans, line profit, running costs, subsidies, debt, vehicle replacement, company rank, expansion, and cash shortages.";
+  "Make money in Transport Fever 3: learn when cargo pays, why warehouse transfers lose money, and how to manage loans, vehicle costs, subsidies, and debt.";
+
+const articleTitle =
+  "Transport Fever 3 Money Guide: Loans, Profit & Debt";
 
 const articleDescription =
-  "Borrow enough to finish working transport, judge mature lines by real revenue, control recurring vehicle costs, use subsidies selectively, repay debt without draining operating cash, and expand only when the company can carry the next project.";
+  "Learn how to keep your transport company profitable, from choosing starting loans and controlling vehicle costs to understanding cargo payments, warehouse transfers, line profits, subsidies, and debt repayment.";
+
+const publishedAt = "2026-09-26";
+const modifiedAt = "2026-10-08";
 
 const imageUrls = [
   `${siteUrl}/images/transport-fever-3/transport-fever-3-loan-options.webp`,
@@ -29,19 +36,46 @@ const imageUrls = [
 const heroImage = imageUrls[0];
 
 const toc = [
-  { id: "starting-loan", label: "Choose the starting loan" },
-  { id: "complete-project-cost", label: "Price the complete project" },
-  { id: "line-profit", label: "Read line profit" },
-  { id: "recurring-costs", label: "Control recurring costs" },
+  {
+    id: "starting-loan",
+    label: "Starting loans",
+  },
+  {
+    id: "complete-project-cost",
+    label: "Full project costs",
+  },
+  {
+    id: "line-profit",
+    label: "Cargo payments & line profit",
+  },
+  {
+    id: "recurring-costs",
+    label: "Running costs & return cargo",
+  },
   {
     id: "maintenance-and-replacement",
     label: "Vehicle replacement",
   },
-  { id: "subsidies", label: "Use subsidies well" },
-  { id: "debt", label: "Repay or refinance debt" },
-  { id: "company-rank", label: "Company Rank" },
-  { id: "when-to-expand", label: "When to expand" },
-  { id: "company-finances", label: "When cash gets tight" },
+  {
+    id: "subsidies",
+    label: "Subsidies & rewards",
+  },
+  {
+    id: "debt",
+    label: "Loans & debt repayment",
+  },
+  {
+    id: "company-rank",
+    label: "Company rank",
+  },
+  {
+    id: "when-to-expand",
+    label: "When to expand",
+  },
+  {
+    id: "company-finances",
+    label: "Running out of money",
+  },
 ];
 
 const relatedLinks = [
@@ -58,6 +92,10 @@ const relatedLinks = [
     label: "Cargo & Industry Guide",
   },
   {
+    href: "/transport-fever-3/production-chains",
+    label: "Production Chains",
+  },
+  {
     href: "/transport-fever-3/rail-signals-guide",
     label: "Rail & Signals Guide",
   },
@@ -70,24 +108,29 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+    publishedTime: publishedAt,
+    modifiedTime: modifiedAt,
     images: [
       {
         url: heroImage,
-        width: 1600,
-        height: 900,
-        alt: "Transport Fever 3 loan options with different amounts repayment periods and interest rates",
+        width: 800,
+        height: 100,
+        alt: "Transport Fever 3 loan options showing different borrowing amounts, repayment periods, and interest rates",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -98,10 +141,12 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
+
   "@graph": [
     {
       "@type": "BreadcrumbList",
       "@id": `${pageUrl}#breadcrumb`,
+
       itemListElement: [
         {
           "@type": "ListItem",
@@ -123,18 +168,24 @@ const jsonLd = {
         },
       ],
     },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Transport Fever 3 Money Guide: Loans, Profit & Debt",
+
+      headline: articleTitle,
       description: articleDescription,
       image: imageUrls,
-      datePublished: "2026-09-26",
-      dateModified: "2026-09-26",
+
+      inLanguage: "en",
+      datePublished: publishedAt,
+      dateModified: modifiedAt,
+
       about: [
         {
           "@type": "VideoGame",
@@ -143,11 +194,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 loans",
+          name: "Transport Fever 3 money and profit",
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 line profit",
+          name: "Transport Fever 3 loans and debt",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 cargo payments",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 freight revenue",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 warehouse transfer revenue",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 vehicle operating costs",
         },
         {
           "@type": "Thing",
@@ -155,36 +222,36 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 Company Rank",
+          name: "Transport Fever 3 company rank",
         },
       ],
+
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
+
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
     },
+
     {
       "@type": "Organization",
       "@id": `${siteUrl}#organization`,
       name: "Whisper of the House",
       url: siteUrl,
     },
+
     {
       "@type": "WebSite",
       "@id": `${siteUrl}#website`,
       name: "Whisper of the House",
       url: siteUrl,
+
       publisher: {
         "@id": `${siteUrl}#organization`,
       },
@@ -200,17 +267,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Money Guide: Loans, Profit, Debt & Expansion"
+          title={articleTitle}
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 26, 2026"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

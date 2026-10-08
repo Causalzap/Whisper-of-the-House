@@ -200,7 +200,7 @@ const jsonLd = {
       image: imageUrls,
 
       datePublished: "2026-09-26",
-      dateModified: "2026-10-03",
+      dateModified: "2026-10-08",
 
       about: [
         {
@@ -298,7 +298,7 @@ export default function Page() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
 
@@ -309,7 +309,7 @@ export default function Page() {
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 3, 2026"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

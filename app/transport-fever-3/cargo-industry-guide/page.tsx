@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,15 +15,21 @@ const metadataTitle =
   "Transport Fever 3 Cargo Guide: Industries, Rates & Warehouses";
 
 const metadataDescription =
-  "Fix cargo that will not move, match industry input ratios, use terminals and warehouses, improve production, and diagnose loading or transfer problems.";
+  "Fix cargo loading and unloading in Transport Fever 3. Check warehouse coverage, line settings, vehicle compatibility, transfers, and industry rates.";
+
+const articleTitle =
+  "Transport Fever 3 Cargo Guide: Fix Loading & Warehouses";
 
 const articleDescription =
-  "Trace cargo backward from its destination, use the correct industry terminals and vehicles, match transport rates to production ratios, connect workers where production benefits, build useful transfers, and diagnose cargo that will not load, unload, or leave storage.";
+  "Find out why freight vehicles leave empty, warehouses receive no goods, or cargo returns without unloading. Fix station coverage, loading settings, vehicle compatibility, storage transfers, and transport rates.";
+
+const publishedAt = "2026-09-26";
+const modifiedAt = "2026-10-08";
 
 const imageUrls = [
+  `${siteUrl}/images/transport-fever-3/transport-fever-3-distribution-center-layout.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-first-cargo-route.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-cargo-rate-matching.webp`,
-  `${siteUrl}/images/transport-fever-3/transport-fever-3-distribution-center-layout.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-warehouse-transfer.webp`,
   `${siteUrl}/images/transport-fever-3/transport-fever-3-force-unload-cargo.webp`,
 ];
@@ -32,27 +39,27 @@ const heroImage = imageUrls[0];
 const toc = [
   {
     id: "trace-chain-backward",
-    label: "Trace the chain backward",
+    label: "Find missing cargo",
   },
   {
     id: "industry-terminals",
-    label: "Industry terminals",
+    label: "Terminals & coverage",
   },
   {
     id: "cargo-compatibility",
-    label: "Cargo compatibility",
+    label: "Cargo not loading",
   },
   {
     id: "production-ratios",
-    label: "Match production ratios",
+    label: "Match transport rates",
   },
   {
     id: "worker-transport",
-    label: "Worker transport",
+    label: "Workers & freight",
   },
   {
     id: "warehouses",
-    label: "When to use warehouses",
+    label: "Warehouse setup",
   },
   {
     id: "distribution-center",
@@ -60,15 +67,15 @@ const toc = [
   },
   {
     id: "confirm-transfer",
-    label: "Confirm the transfer works",
+    label: "Cargo transfers",
   },
   {
     id: "cargo-not-unloading",
-    label: "Cargo will not unload",
+    label: "Cargo not unloading",
   },
   {
     id: "production-too-slow",
-    label: "Industry produces too slowly",
+    label: "Slow production",
   },
   {
     id: "terminal-congestion",
@@ -76,11 +83,11 @@ const toc = [
   },
   {
     id: "long-haul-cargo",
-    label: "Long-haul cargo",
+    label: "Trucks vs. trains",
   },
   {
     id: "cargo-troubleshooting",
-    label: "Cargo troubleshooting",
+    label: "Fix a broken line",
   },
 ];
 
@@ -90,24 +97,24 @@ const relatedLinks = [
     label: "Transport Fever 3 Guide",
   },
   {
-    href: "/transport-fever-3/beginner-guide",
-    label: "Beginner Guide",
-  },
-  {
-    href: "/transport-fever-3/traffic-road-guide",
-    label: "Traffic & Road Guide",
-  },
-  {
-    href: "/transport-fever-3/rail-signals-guide",
-    label: "Rail & Signals Guide",
+    href: "/transport-fever-3/production-chains",
+    label: "Production Chains",
   },
   {
     href: "/transport-fever-3/economy-money-guide",
     label: "Money & Economy Guide",
   },
   {
-    href: "/transport-fever-3/city-growth-guide",
-    label: "City Growth Guide",
+    href: "/transport-fever-3/rail-signals-guide",
+    label: "Rail & Signals Guide",
+  },
+  {
+    href: "/transport-fever-3/traffic-road-guide",
+    label: "Traffic & Road Guide",
+  },
+  {
+    href: "/transport-fever-3/beginner-guide",
+    label: "Beginner Guide",
   },
 ];
 
@@ -123,12 +130,14 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+    publishedTime: publishedAt,
+    modifiedTime: modifiedAt,
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Transport Fever 3 crop farm with built-in cargo terminals for the first freight route",
+        alt: "Transport Fever 3 distribution center with warehouse storage and cargo transfer connections",
       },
     ],
   },
@@ -174,11 +183,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Transport Fever 3 Cargo & Industry Guide",
+      headline: articleTitle,
       description: articleDescription,
       image: imageUrls,
-      datePublished: "2026-09-26",
-      dateModified: "2026-09-26",
+      inLanguage: "en",
+      datePublished: publishedAt,
+      dateModified: modifiedAt,
       about: [
         {
           "@type": "VideoGame",
@@ -187,11 +197,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 cargo",
-        },
-        {
-          "@type": "Thing",
-          name: "Transport Fever 3 production chains",
+          name: "Transport Fever 3 cargo loading and unloading",
         },
         {
           "@type": "Thing",
@@ -199,20 +205,26 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Transport Fever 3 line rate",
+          name: "Transport Fever 3 cargo transfers",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 industry terminals",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 freight transport rates",
+        },
+        {
+          "@type": "Thing",
+          name: "Transport Fever 3 distribution centers",
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
@@ -244,17 +256,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
 
         <GuideArticlePage
-          title="Transport Fever 3 Cargo & Industry Guide"
+          title={articleTitle}
           description={articleDescription}
           gameTitle="Transport Fever 3"
           gameHref="/transport-fever-3"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 26, 2026"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
