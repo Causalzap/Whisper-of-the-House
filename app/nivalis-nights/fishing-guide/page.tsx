@@ -159,7 +159,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-08",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -211,9 +211,9 @@ export default function NivalisNightsFishingGuidePage() {
           description="Get the free fishing rod, unlock the Putter, use the Fish Detector and Database, read scanner signals correctly, and start finding new species without wasting casts."
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
-          breadcrumbBaseHref="/nivalis-nights"
-          breadcrumbBaseLabel="Nivalis Nights"
-          updatedAt="October 1, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

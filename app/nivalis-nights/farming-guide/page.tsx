@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,13 +12,16 @@ const hubUrl = `${siteUrl}/nivalis-nights`;
 const pageUrl = `${hubUrl}/farming-guide`;
 
 const metadataTitle =
-  "Nivalis Nights Farming Guide: Greenhouse, Seeds, Modules & Crops";
+  "Nivalis Nights Farming Guide: Seeds, Crops & Greenhouses";
 
 const metadataDescription =
-  "Unlock farming in Nivalis Nights, find Clen and the starter greenhouse, grow onions, buy seeds and modules, reach Farming Level 4, improve crop yields, and decide when Greenhouse 3B is worth renting.";
+  "Unlock farming with Clen, grow onions and potatoes, choose farming modules, reach Level 4, improve crop yields, and expand your greenhouse in Nivalis Nights.";
+
+const articleTitle =
+  "Nivalis Nights Farming Guide: How to Grow Crops & Expand";
 
 const articleDescription =
-  "A practical Nivalis Nights farming guide covering how to unlock the starter greenhouse, plant and harvest onions, buy new seeds, match crops to farming modules, unlock environmental controls at Farming Level 4, improve crop yields, choose useful crops, and decide when another greenhouse is worth the cost.";
+  "Find Clen at the Docks and start growing onions in Thaddius's greenhouse. Follow the potato-growing objective, buy seeds, choose compatible farming modules, unlock environmental controls at Farming Level 4, improve crop yields, and decide when Greenhouse 3B or another property is worth renting.";
 
 const imageUrls = [
   `${siteUrl}/images/nivalis-nights/nivalis-nights-clen-onion-seeds.webp`,
@@ -34,43 +38,43 @@ const heroImage =
 const toc = [
   {
     id: "unlock-farming",
-    label: "Talk to Clen at the Docks to Unlock Farming",
+    label: "Find Clen & Unlock Farming",
   },
   {
     id: "first-greenhouse",
-    label: "Use the Starter Greenhouse First",
+    label: "Plant Onions in the First Greenhouse",
   },
   {
     id: "harvest-and-replant",
-    label: "Harvest, Replant, and Keep Modules Working",
+    label: "Harvest Onions & Grow Potatoes",
   },
   {
     id: "buy-seeds",
-    label: "Buy New Seeds Only When You Can Grow Them",
+    label: "Where to Buy Seeds",
   },
   {
     id: "farming-modules",
-    label: "Match Each Crop to the Correct Farming Module",
+    label: "Farming Modules & Crop Types",
   },
   {
     id: "environment-controls",
-    label: "Farming Level 4 Environmental Controls",
+    label: "Level 4 Environmental Controls",
   },
   {
     id: "crop-levels",
-    label: "Crop Levels and Yield Bonuses",
+    label: "Crop Levels & Yield Bonuses",
   },
   {
     id: "what-to-grow-first",
-    label: "What Should You Grow First?",
+    label: "Best Crops to Grow First",
   },
   {
     id: "greenhouse-3b",
-    label: "When Is Greenhouse 3B Worth Renting?",
+    label: "Greenhouse 3B & Expansion",
   },
   {
     id: "farming-priority",
-    label: "What to Prioritize After the First Harvest",
+    label: "What to Do After the First Harvest",
   },
 ];
 
@@ -96,9 +100,11 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -110,10 +116,11 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Nivalis Nights starter greenhouse with the Root Farming Module used to grow onions",
+        alt: "Thaddius's starter greenhouse with a Root Farming Module for growing onions in Nivalis Nights",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -152,7 +159,7 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
-      headline: metadataTitle,
+      headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
       mainEntityOfPage: {
@@ -160,7 +167,8 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-08",
+      inLanguage: "en",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -187,6 +195,7 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "Whisper of the House",
+      inLanguage: "en",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -208,13 +217,13 @@ export default function NivalisNightsFarmingGuidePage() {
         />
 
         <GuideArticlePage
-          title="Nivalis Nights Farming Guide: How to Unlock the Greenhouse & Grow Crops"
-          description="Find Clen, start with the free greenhouse and Onion Seeds, match crops to the right modules, unlock environmental controls, improve yields, and expand only when the starter space becomes the bottleneck."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
-          breadcrumbBaseHref="/nivalis-nights"
-          breadcrumbBaseLabel="Nivalis Nights"
-          updatedAt="October 1, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

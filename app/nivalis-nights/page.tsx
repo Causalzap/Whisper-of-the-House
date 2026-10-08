@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,13 +11,16 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/nivalis-nights`;
 
 const metadataTitle =
-  "Nivalis Nights Guide: Progression, Business, Fishing & Map";
+  "Nivalis Nights Guide: Progression, Map & What to Do Next";
 
 const metadataDescription =
-  "A complete Nivalis Nights guide to progression, Ramen Noir, Managers, fishing, farming, Achievement Points, map travel, relationships, curfew, properties, side jobs, and achievements.";
+  "Start with Ramen Noir, explore fishing and farming, unlock districts with Achievement Points, and find what to do next in Nivalis Nights.";
+
+const articleTitle =
+  "Nivalis Nights Guide: What to Do Next, Map & Progression";
 
 const articleDescription =
-  "A practical Nivalis Nights guide to what to do first, how progression works, when to stay with Ramen Noir, when to branch into fishing or farming, how Achievement Points unlock districts, how city travel works, and how relationships, curfew, properties, side jobs, and achievements fit into the wider progression loop.";
+  "Start at Ramen Noir in Meridian Market, then decide whether to improve your business, visit the Docks for fishing and boat travel, grow ingredients with Clen, or continue exploring Nivalis. Learn how Achievement Points unlock districts, how transport connections work, and what to check when quests or travel stop progressing.";
 
 const imageUrls = [
   `${siteUrl}/images/nivalis-nights/nivalis-nights-journal-systems.webp`,
@@ -33,23 +37,23 @@ const toc = [
   },
   {
     id: "progression-systems",
-    label: "How Progression Works",
+    label: "Journal & Progression",
   },
   {
     id: "business",
-    label: "Keep Ramen Noir Stable",
+    label: "Ramen Noir Business",
   },
   {
     id: "where-to-go-next",
-    label: "Where to Go After the Opening",
+    label: "Where to Go Next",
   },
   {
     id: "achievement-points",
-    label: "Achievement Points & District Unlocks",
+    label: "Achievement Points & Districts",
   },
   {
     id: "map-and-travel",
-    label: "Map, Taxi, Train & Boat Travel",
+    label: "Map & Travel",
   },
   {
     id: "relationships",
@@ -65,15 +69,15 @@ const toc = [
   },
   {
     id: "side-jobs",
-    label: "Side Jobs & Efficient Routes",
+    label: "Side Jobs & Quests",
   },
   {
     id: "achievements",
-    label: "Achievements & Completion",
+    label: "Achievements",
   },
   {
     id: "when-stuck",
-    label: "What to Check When You Are Stuck",
+    label: "What to Do When Stuck",
   },
 ];
 
@@ -88,19 +92,23 @@ const relatedLinks = [
   },
   {
     href: "/nivalis-nights/manager",
-    label: "Manager Unlock & Automation Guide",
+    label: "Manager Unlock & Restocking",
   },
   {
     href: "/nivalis-nights/fishing-guide",
-    label: "Nivalis Nights Fishing Guide",
+    label: "Fishing, Boat & Fish Database",
+  },
+  {
+    href: "/nivalis-nights/seafaring-treasures",
+    label: "Seafaring Treasures Walkthrough",
   },
   {
     href: "/nivalis-nights/farming-guide",
-    label: "Nivalis Nights Farming Guide",
+    label: "Farming, Seeds & Greenhouses",
   },
   {
     href: "/nivalis-nights/curfew",
-    label: "Nivalis Nights Curfew Guide",
+    label: "Curfew & Shelter Guide",
   },
   {
     href: "/nivalis-nights/achievements",
@@ -111,9 +119,11 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -125,10 +135,11 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Nivalis Nights journal showing business fishing farming skills people recipes apartments and achievements",
+        alt: "Nivalis Nights journal showing skills, business, fishing, farming, people, recipes, and achievements",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -161,7 +172,7 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
-      headline: metadataTitle,
+      headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
       mainEntityOfPage: {
@@ -169,11 +180,12 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-08",
+      inLanguage: "en",
       about: [
         {
-          "@type": "Thing",
-          name: "Nivalis Nights progression",
+          "@type": "VideoGame",
+          name: "Nivalis Nights",
         },
         {
           "@type": "Thing",
@@ -181,11 +193,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Nivalis Nights business",
+          name: "Nivalis Nights progression",
         },
         {
           "@type": "Thing",
-          name: "Nivalis Nights fishing",
+          name: "Nivalis Nights fishing and boat travel",
         },
         {
           "@type": "Thing",
@@ -197,15 +209,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Nivalis Nights map and travel",
+          name: "Nivalis Nights map and district travel",
         },
         {
           "@type": "Thing",
-          name: "Nivalis Nights relationships",
-        },
-        {
-          "@type": "Thing",
-          name: "Nivalis Nights curfew",
+          name: "Nivalis Nights quests and relationships",
         },
         {
           "@type": "Thing",
@@ -238,6 +246,7 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "Whisper of the House",
+      inLanguage: "en",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -259,13 +268,13 @@ export default function NivalisNightsPage() {
         />
 
         <GuideArticlePage
-          title="Nivalis Nights Guide: Progression, Business, Fishing & What to Do Next"
-          description="Start with Ramen Noir, then choose your next move based on the current bottleneck: automate the business, head to the Docks, build the farming supply chain, unlock more districts, or combine quests with city exploration."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 1, 2026"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

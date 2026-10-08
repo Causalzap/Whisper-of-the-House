@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,21 +12,21 @@ const hubUrl = `${siteUrl}/nivalis-nights`;
 const pageUrl = `${hubUrl}/beginner-guide`;
 
 const metadataTitle =
-  "Nivalis Nights Beginner Guide: What to Do First & Day 1 Walkthrough";
+  "Nivalis Nights Beginner Guide: What to Do First on Day 1";
 
 const metadataDescription =
-  "Start Nivalis Nights without wasting your first day: reach Ramen Noir, set up the restaurant, restock ingredients, hire your first worker, handle curfew, and know when to leave Meridian Market.";
+  "Start Nivalis Nights at Ramen Noir, buy ingredients, hire your first waiter, handle the first curfew, and prepare for Day 2 in Meridian Market.";
+
+const articleTitle =
+  "Nivalis Nights Beginner Guide: What to Do First on Day 1";
 
 const articleDescription =
-  "A step-by-step Nivalis Nights beginner guide covering the opening route from Lowtown to Meridian Market, the first Ramen Noir setup, Chicken Noodle Soup ingredients, the live shopping list, early recipes, the first worker, cash management, the first curfew, Day 2 preparation, and what to do once the opening restaurant loop is stable.";
+  "Start in Lowtown, take the HOVA taxi to Meridian Market, and set up Ramen Noir. Follow the changing shopping list, collect early recipes, hire your first waiter, keep enough cash for another service, and prepare for curfew and Day 2 before exploring Nivalis.";
 
 const imageUrls = [
   `${siteUrl}/images/nivalis-nights/nivalis-nights-meridian-market-map.webp`,
   `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-level-1.webp`,
   `${siteUrl}/images/nivalis-nights/nivalis-nights-shopping-list-meridian-market.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-first-day-debt.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-curfew-shelter.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-tier-2.webp`,
 ];
 
 const heroImage =
@@ -34,43 +35,39 @@ const heroImage =
 const toc = [
   {
     id: "go-to-meridian-market",
-    label: "Go From Lowtown to Meridian Market First",
+    label: "Lowtown to Meridian Market",
   },
   {
-    id: "open-ramen-noir",
-    label: "Open Ramen Noir Before Buying Anything Else",
+    id: "set-up-ramen-noir",
+    label: "Set Up Ramen Noir",
   },
   {
-    id: "buy-first-ingredients",
-    label: "Follow the Live Shopping List",
+    id: "first-shopping-list",
+    label: "Complete the First Shopping List",
   },
   {
-    id: "get-more-recipes",
-    label: "Get More Recipes Without Overspending",
+    id: "get-first-recipes",
+    label: "Get Your First Recipes",
   },
   {
     id: "hire-first-worker",
-    label: "Hire Your First Worker",
+    label: "Hire Your First Waiter",
   },
   {
-    id: "do-not-overexpand",
-    label: "Keep Cash Available Early",
+    id: "first-day-cash",
+    label: "Manage Your Day 1 Cash",
   },
   {
-    id: "get-home-before-curfew",
-    label: "Get Home Before the First Curfew",
+    id: "first-curfew",
+    label: "Handle the First Curfew",
   },
   {
     id: "day-two",
-    label: "What to Do on Day 2",
+    label: "What to Check on Day 2",
   },
   {
-    id: "reach-tier-two",
-    label: "Reach Ramen Noir Tier 2",
-  },
-  {
-    id: "what-to-do-next",
-    label: "What to Do After the Opening",
+    id: "opening-breakpoint",
+    label: "When to Explore Nivalis",
   },
 ];
 
@@ -96,9 +93,11 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -110,10 +109,11 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Nivalis Nights travel map showing Meridian Market during the opening route to Ramen Noir",
+        alt: "Nivalis Nights city map showing Meridian Market during the opening journey to Ramen Noir",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -152,7 +152,7 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
-      headline: metadataTitle,
+      headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
       mainEntityOfPage: {
@@ -160,7 +160,8 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-08",
+      inLanguage: "en",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -185,8 +186,9 @@ const jsonLd = {
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      url: siteUrl,
       name: "Whisper of the House",
+      url: siteUrl,
+      inLanguage: "en",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -208,13 +210,13 @@ export default function NivalisNightsBeginnerGuidePage() {
         />
 
         <GuideArticlePage
-          title="Nivalis Nights Beginner Guide: What to Do First on Day 1"
-          description="Follow the opening route to Ramen Noir, set up the first menu, restock correctly, hire your first worker, protect your cash, and know when the restaurant is stable enough to start exploring Nivalis."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
-          breadcrumbBaseHref="/nivalis-nights"
-          breadcrumbBaseLabel="Nivalis Nights"
-          updatedAt="October 1, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

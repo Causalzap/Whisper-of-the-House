@@ -5,114 +5,91 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import BusinessGuideContent from "@/data/nivalis-nights/business-guide.mdx";
+import SeafaringTreasuresContent from "@/data/nivalis-nights/seafaring-treasures.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/nivalis-nights`;
-const pageUrl = `${hubUrl}/business-guide`;
+const pageUrl = `${hubUrl}/seafaring-treasures`;
 
 const metadataTitle =
-  "Nivalis Nights Ramen Noir Guide: Menu, Profit & Staff";
+  "Nivalis Nights Seafaring Treasures: All 3 Locations";
 
 const metadataDescription =
-  "Keep Ramen Noir profitable with local food preferences, weekly menu sales, pricing, staffing, debt management, and Level 3 upgrades in Nivalis Nights.";
-
-const articleTitle =
-  "Nivalis Nights Ramen Noir Business Guide: How to Stay Profitable";
+  "Find all 3 Seafaring treasures in Nivalis Nights: the Android Head near the Oil Rig, body at Calypso Island, and CPU beyond the Sewers.";
 
 const articleDescription =
-  "Learn how to make Ramen Noir profitable by choosing dishes that match local preferences, comparing weekly menu orders, managing ingredient costs and staff wages, adjusting prices, paying down debt, and deciding when to expand.";
+  "Find all three of Salt Pete's Seafaring treasures, including the Old Android Head near the Oil Rig, Android Body at Calypso Island, and Old Android CPU beyond the Sewers. Follow the required conversations, locate the correct fishing signals, and complete the captain's story.";
 
 const imageUrls = [
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-level-1.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-local-preferences.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-weekly-menu-sales.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-first-day-debt.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-daily-loss.webp`,
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-level-3-manager.webp`,
+  `${siteUrl}/images/nivalis-nights/seafaring-android-head.webp`,
+  `${siteUrl}/images/nivalis-nights/seafaring-sewers-water-exit.webp`,
+  `${siteUrl}/images/nivalis-nights/seafaring-third-treasure-signal.webp`,
+  `${siteUrl}/images/nivalis-nights/seafaring-android-chip.webp`,
 ];
 
 const heroImage =
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-daily-loss.webp`;
+  `${siteUrl}/images/nivalis-nights/seafaring-android-head.webp`;
 
 const toc = [
   {
-    id: "business-dashboard",
-    label: "Read the Ramen Noir Monitor",
+    id: "start-seafaring",
+    label: "How to Start Seafaring",
   },
   {
-    id: "menu-costs",
-    label: "Local Preferences & Menu Sales",
+    id: "first-treasure-oil-rig",
+    label: "First Treasure: Old Android Head",
   },
   {
-    id: "staff",
-    label: "Hiring & Staff Coverage",
+    id: "second-treasure-calypso",
+    label: "Second Treasure: Android Body",
   },
   {
-    id: "debt",
-    label: "Repaying the 50,000-Lim Debt",
+    id: "caleb-foamheart",
+    label: "Where to Find Caleb Foamheart",
   },
   {
-    id: "revenue-vs-profit",
-    label: "Why a Busy Restaurant Can Lose Money",
+    id: "third-treasure-sewers",
+    label: "Third Treasure: Old Android CPU",
   },
   {
-    id: "make-more-money",
-    label: "How to Increase Sales",
+    id: "sewers-water-exit",
+    label: "Which Sewers Exit to Use",
   },
   {
-    id: "recover-from-loss",
-    label: "Recover From Restaurant Losses",
+    id: "sewers-overlapping-signals",
+    label: "How to Find the Correct Fishing Signal",
   },
   {
-    id: "level-three",
-    label: "Ramen Noir Level 3 Unlocks",
+    id: "complete-the-captain",
+    label: "How to Complete Seafaring",
   },
   {
-    id: "pricing",
-    label: "When to Raise Menu Prices",
-  },
-  {
-    id: "ingredient-costs",
-    label: "Reduce Ingredient Costs & Waste",
-  },
-  {
-    id: "second-venue",
-    label: "When to Open a Second Restaurant",
-  },
-  {
-    id: "business-priority",
-    label: "What to Improve Next",
+    id: "seafaring-treasure-not-working",
+    label: "Treasure Not Appearing or Quest Stuck",
   },
 ];
 
 const relatedLinks = [
   {
-    href: "/nivalis-nights/beginner-guide",
-    label: "Nivalis Nights Beginner Guide",
-  },
-  {
-    href: "/nivalis-nights/manager",
-    label: "How to Unlock and Use a Manager",
-  },
-  {
-    href: "/nivalis-nights/farming-guide",
-    label: "Nivalis Nights Farming Guide",
-  },
-  {
     href: "/nivalis-nights/fishing-guide",
-    label: "Nivalis Nights Fishing Guide",
+    label: "Nivalis Nights Fishing & Boat Guide",
+  },
+  {
+    href: "/nivalis-nights/achievements",
+    label: "Nivalis Nights Achievements & Checklist",
+  },
+  {
+    href: "/nivalis-nights",
+    label: "Nivalis Nights Walkthrough & Guides",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
-
   alternates: {
     canonical: pageUrl,
   },
-
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -124,11 +101,10 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Ramen Noir daily financial report showing meal sales, costs, customers, and a negative venue balance in Nivalis Nights",
+        alt: "Nivalis Nights Old Android Head recovered during Salt Pete's Seafaring treasure quest",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -159,7 +135,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Ramen Noir Business Guide",
+          name: "Seafaring Treasures",
           item: pageUrl,
         },
       ],
@@ -167,7 +143,7 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
-      headline: articleTitle,
+      headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
       mainEntityOfPage: {
@@ -175,8 +151,8 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
+      datePublished: "2026-10-08",
       dateModified: "2026-10-08",
-      inLanguage: "en",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -203,7 +179,6 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "Whisper of the House",
-      inLanguage: "en",
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -211,7 +186,7 @@ const jsonLd = {
   ],
 };
 
-export default function NivalisNightsBusinessGuidePage() {
+export default function NivalisNightsSeafaringTreasuresPage() {
   return (
     <>
       <Header />
@@ -225,8 +200,8 @@ export default function NivalisNightsBusinessGuidePage() {
         />
 
         <GuideArticlePage
-          title={articleTitle}
-          description={articleDescription}
+          title="Nivalis Nights Seafaring Treasures: All 3 Locations"
+          description="Find Salt Pete's three treasures at the Oil Rig, Calypso Island, and Sewers, with the correct fishing locations, required NPC conversations, and final quest steps."
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
           breadcrumbBaseHref="/"
@@ -235,7 +210,7 @@ export default function NivalisNightsBusinessGuidePage() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BusinessGuideContent />
+          <SeafaringTreasuresContent />
         </GuideArticlePage>
       </main>
 

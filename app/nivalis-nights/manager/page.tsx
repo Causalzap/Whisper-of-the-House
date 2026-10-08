@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,13 +12,16 @@ const hubUrl = `${siteUrl}/nivalis-nights`;
 const pageUrl = `${hubUrl}/manager`;
 
 const metadataTitle =
-  "Nivalis Nights Manager Guide: How to Unlock, Hire & Automate Ramen Noir";
+  "Nivalis Nights Manager Guide: How to Unlock & Restock";
 
 const metadataDescription =
-  "Unlock the Manager at Ramen Noir, reach Venue Level 3, assign the right worker, automate ingredient restocks, and fix cash drain or unpaid staff.";
+  "Unlock Managers at Ramen Noir Level 3, automate ingredient restocking, understand delivery delays, and fix cash drain or unpaid staff.";
+
+const articleTitle =
+  "Nivalis Nights Manager: How to Hire, Restock & Fix Problems";
 
 const articleDescription =
-  "A practical Nivalis Nights Manager guide covering how Ramen Noir reaches Venue Level 3, how the Manager role unlocks, which worker to assign, what Manager automation actually handles, why automatic restocking can leave staff unpaid, and how to tell when the restaurant is ready to run without you.";
+  "Unlock the Manager role at Ramen Noir Level 3, choose an employee and set their working hours. Learn when automatic restocking starts, how pending deliveries and Manager skill affect supplies, and what to do when orders stall or leave staff unpaid.";
 
 const imageUrls = [
   `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-level-3-manager.webp`,
@@ -25,37 +29,36 @@ const imageUrls = [
   `${siteUrl}/images/nivalis-nights/nivalis-nights-manager-ingredients-restocked.webp`,
 ];
 
-const heroImage =
-  `${siteUrl}/images/nivalis-nights/nivalis-nights-ramen-noir-level-3-manager.webp`;
+const heroImage = imageUrls[0];
 
 const toc = [
   {
     id: "unlock-manager",
-    label: "How to Reach Level 3 and Unlock the Manager",
+    label: "Unlock Manager at Level 3",
   },
   {
     id: "hire-manager",
-    label: "How to Hire or Assign a Manager",
+    label: "Hire a Manager & Set Shifts",
   },
   {
     id: "manager-automation",
-    label: "What Does a Manager Actually Automate?",
+    label: "Restocking, Deliveries & Skill",
   },
   {
     id: "manager-cash-drain",
-    label: "Why Can a Manager Leave Staff Unpaid?",
+    label: "Why Staff Become Unpaid",
   },
   {
     id: "when-to-leave",
-    label: "When Is Ramen Noir Ready to Be Left Alone?",
+    label: "When You Can Leave Ramen Noir",
   },
   {
     id: "manager-not-restocking",
-    label: "What to Check if the Manager Is Not Restocking",
+    label: "Manager Not Restocking",
   },
   {
     id: "recover-manager-cash",
-    label: "How to Recover From Manager Cash Drain",
+    label: "Recover From Cash Drain",
   },
 ];
 
@@ -81,9 +84,11 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
@@ -95,10 +100,11 @@ export const metadata: Metadata = {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Nivalis Nights Ramen Noir reaching Venue Level 3 and unlocking the Manager role",
+        alt: "Ramen Noir Level 3 unlocking the Manager role in Nivalis Nights",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
@@ -137,7 +143,7 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
-      headline: metadataTitle,
+      headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
       mainEntityOfPage: {
@@ -145,7 +151,7 @@ const jsonLd = {
         "@id": pageUrl,
       },
       image: imageUrls,
-      dateModified: "2026-10-01",
+      dateModified: "2026-10-08",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -193,13 +199,13 @@ export default function NivalisNightsManagerPage() {
         />
 
         <GuideArticlePage
-          title="Nivalis Nights Manager Guide: How to Unlock and Use a Manager"
-          description="Reach Ramen Noir Level 3, assign the right worker, confirm automatic restocking is working, and avoid the cash drain that can leave staff unpaid."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Nivalis Nights"
           gameHref="/nivalis-nights"
-          breadcrumbBaseHref="/nivalis-nights"
-          breadcrumbBaseLabel="Nivalis Nights"
-          updatedAt="October 1, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 8, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
