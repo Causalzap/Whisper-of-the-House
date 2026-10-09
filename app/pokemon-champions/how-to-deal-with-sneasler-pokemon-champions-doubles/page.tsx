@@ -179,7 +179,7 @@ export default function Page() {
               label: "How to Counter Incineroar in Pokemon Champions Doubles",
             },
             {
-              href: "/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles/",
+              href: "/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles",
               label: "How to Beat Tailwind in Pokemon Champions Doubles",
             },
             {

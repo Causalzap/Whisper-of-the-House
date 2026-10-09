@@ -131,6 +131,235 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Permafrost",
+    game: "Permafrost",
+    href: "/permafrost",
+    slug: "permafrost",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Survival, Quests & Crafting",
+    eyebrow: "Spotlight Guide",
+  
+    hubStatus:
+      "Early survival + 3 backgrounds + 4 specializations + main quests to Logan's Camp + Copper and Coal + Cold Zones",
+  
+    description:
+      "Survive the opening, choose your starting class, build New Home, mine Copper and Coal, repair the radio network, and prepare for dangerous Cold Zones.",
+  
+    coverage: [
+      "Starting choices across Hunter, Survivor and Smuggler backgrounds, Engineer, Tracker, Scavenger and Marksman specializations, starting gear, skill bonuses and Blueprint Points",
+  
+      "Early survival through Campfire warming, basic tools, Horizon, Robyn's cooking request, Bone Cave, Dog Days, rescuing the dog and establishing New Home",
+  
+      "Main quest progression through New Home's Radio Station Bench, Hunter's Glade, High Frequency, The Way Home, Tribal clothing, House Camp Flipper, Anna, Tower of Finn and Logan's Camp",
+  
+      "Mining through Bone Cave Flint, the repaired road bridge, Copper and Coal deposits, pickaxe restrictions, the Stone Furnace, Copper Ingots and Wire crafting",
+  
+      "Cold survival through Body Warmth, Warm Hands, heated shelters, Makeshift Heater repairs, Improvised Coffee and Tea, Warming Dish, Wolf Head Hat comparisons and dangerous Cold Zones",
+  
+      "Equipment and resource priorities across Wood, Rope, Cloth, Plastic, Copper Ingots, Wire, Scrap tools, Tailoring Bench construction and House Camp repairs",
+    ],
+  
+    image:
+      "/images/permafrost/permafrost-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 60,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Permafrost Guide: What to Do First & Where to Go Next",
+  
+        href: "/permafrost",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Choose your first priorities, reach Horizon and New Home, solve crafting blockers, decide which upgrades matter, and prepare for later settlements.",
+  
+        image:
+          "/images/permafrost/permafrost-new-home-building-objectives.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Starting classes, first survival tasks, New Home, crafting blockers, equipment priorities, Hunter's Glade, House Camp and Cold Zones",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Permafrost Best Starting Class: Backgrounds & Skills",
+  
+        href: "/permafrost/classes-skills",
+  
+        type: "Guide",
+  
+        description:
+          "Compare Hunter, Survivor and Smuggler, all four Specializations, starting gear, skill bonuses, Hunter + Engineer, and Blueprint Points.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/permafrost/permafrost-hunter-starting-gear.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 450,
+  
+          spotlightFeature: true,
+          spotlightOrder: 1,
+  
+          spotlightMeta:
+            "Hunter, Survivor, Smuggler, Engineer, Tracker, Scavenger, Marksman, Wolf Head Hat, best combinations, 16 skills and Blueprint Points",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Permafrost Walkthrough: Main Quests to Logan's Camp",
+  
+        href: "/permafrost/main-quests-walkthrough",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Follow the story through Horizon, Bone Cave, New Home, Hunter's Glade, House Camp, Finn's radio tower and Logan's Camp.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/permafrost/permafrost-bone-cave-dog-location.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 451,
+  
+          spotlightFeature: true,
+          spotlightOrder: 2,
+  
+          spotlightMeta:
+            "Robyn, Dog Days, New Home radio, High Frequency, 13 tower repairs, Skinwalker, Tribal clothing, House Camp Flipper, Anna, Finn and Logan",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Permafrost Mining Guide: Copper, Coal, Flint & Wire",
+  
+        href: "/permafrost/mining-guide",
+  
+        type: "Guide",
+  
+        description:
+          "Find Copper, Coal and Flint, repair the road bridge, upgrade your pickaxe, build the Stone Furnace, and craft Copper Ingots and Wire.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/permafrost/permafrost-copper-ingot-smelting.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 452,
+  
+          spotlightFeature: true,
+          spotlightOrder: 3,
+  
+          spotlightMeta:
+            "Copper ravine, broken bridge, Wood and Rope repairs, Bone Cave Flint, Coal Boulders, pickaxe tiers, Stone Furnace, Copper Ingots and Wire",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Permafrost: How to Stay Warm & Survive Cold Zones",
+  
+        href: "/permafrost/staying-warm",
+  
+        type: "Systems",
+  
+        description:
+          "Recover Body Warmth, use Campfires, repair Makeshift Heaters, compare winter clothing, and survive extreme cold with food and drinks.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/permafrost/permafrost-cold-zone-no-build.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 453,
+  
+          spotlightFeature: true,
+          spotlightOrder: 4,
+  
+          spotlightMeta:
+            "Body Warmth, Campfire Warm Hands, cold shelters, Makeshift Heater, Coffee, Tea, Warming Dish, Wolf Head Hat, Hybrid clothing and Cold Zones",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Monsters & Memories",
     game: "Monsters & Memories",
     href: "/monsters-and-memories",

@@ -1059,6 +1059,12 @@ const paths = [
     '/monsters-and-memories/tradeskills',
     '/monsters-and-memories/faelindral-ranger-quest',
 
+    '/permafrost',
+    '/permafrost/classes-skills',
+    '/permafrost/main-quests-walkthrough',
+    '/permafrost/mining-guide',
+    '/permafrost/staying-warm',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1066,6 +1072,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/permafrost': '2026-10-09',
+  '/permafrost/classes-skills': '2026-10-09',
+  '/permafrost/main-quests-walkthrough': '2026-10-09',
+  '/permafrost/mining-guide': '2026-10-09',
+  '/permafrost/staying-warm': '2026-10-09',
+  
   '/monsters-and-memories': '2026-10-06',
   '/monsters-and-memories/beginner-guide': '2026-10-06',
   '/monsters-and-memories/best-solo-classes': '2026-10-06',
