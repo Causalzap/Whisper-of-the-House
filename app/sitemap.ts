@@ -1065,6 +1065,13 @@ const paths = [
     '/permafrost/mining-guide',
     '/permafrost/staying-warm',
 
+    '/car-park-capital',
+    '/car-park-capital/car-production',
+    '/car-park-capital/gulf-of-freedom',
+    '/car-park-capital/oil-gasoline',
+    '/car-park-capital/unrest-protests',
+    '/car-park-capital/bald-town-city-walkthrough',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1072,6 +1079,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/car-park-capital': '2026-10-10',
+  '/car-park-capital/car-production': '2026-10-10',
+  '/car-park-capital/gulf-of-freedom': '2026-10-10',
+  '/car-park-capital/oil-gasoline': '2026-10-10',
+  '/car-park-capital/unrest-protests': '2026-10-10',
+  '/car-park-capital/bald-town-city-walkthrough': '2026-10-10',
+
   '/permafrost': '2026-10-09',
   '/permafrost/classes-skills': '2026-10-09',
   '/permafrost/main-quests-walkthrough': '2026-10-09',

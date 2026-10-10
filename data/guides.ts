@@ -130,6 +130,269 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+{
+  title: "Car Park Capital",
+  game: "Car Park Capital",
+  href: "/car-park-capital",
+  slug: "car-park-capital",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Parking Tycoon, Economy & Progression",
+  eyebrow: "Spotlight Guide",
+
+  hubStatus:
+    "Beginner setup + Car Dependency Levels + Car Braininess + Bald Town City + Gulf of Freedom + car production + gasoline + unrest",
+
+  description:
+    "Build profitable parking lots, increase Car Dependency, satisfy new customer needs, complete Bald Town City, develop Gulf of Freedom, and fix vehicle, fuel and protest problems.",
+
+  coverage: [
+    "Beginner setup through the amusement park tutorial, parking entrances and exits, bay direction, demand heatmaps, parking fees, Car Braininess, propaganda and early money decisions",
+
+    "Car Dependency progression through high-demand parking spaces, car ownership, new building unlocks, changing customer needs, drive-thru services and suburban housing",
+
+    "Bald Town City scenario through its Day 40 deadline, Level 7, 75% Car Braininess, 400 simultaneously parked cars, seven subway demolitions and 75 suburban residents",
+
+    "Civil Unrest and protests through Riot Control Truck Garages, police deployment, patrol waypoints, blocked businesses, fires, damaged cars and Plastic Trees",
+
+    "Oil and gasoline supply through Pump Jacks, Crude Oil Transportation, Oil Refineries, Gasoline Transportation, Gas Stations and fuel delivery failures",
+
+    "Car production through Car Factories, Car Carriers, Car Shop Carousels, empty vehicle stock, delayed deliveries and vehicle sales bottlenecks",
+
+    "Gulf of Freedom progression through hotel and beach parking demand, Level 2 Amphibious Car Factory unlocks, road-to-water connections, island transport and suburban housing",
+  ],
+
+  image: "/images/car-park-capital/car-park-capital-hub.webp",
+  imageFit: "contain",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 61,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Car Park Capital Guide: Beginner Tips, Progression & Money",
+
+      href: "/car-park-capital",
+
+      type: "Guide Hub",
+
+      description:
+        "Build your first parking lot, read the demand heatmap, increase Car Braininess, unlock new services, manage money, and choose the next scenario objective.",
+
+      image:
+        "/images/car-park-capital/car-park-capital-hub.webp",
+
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Parking setup, Car Dependency Levels, customer needs, money, Bald Town City, Gulf of Freedom, car factories, gasoline and protests",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Car Park Capital Bald Town City Walkthrough: Beat Day 40",
+
+      href:
+        "/car-park-capital/bald-town-city-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Complete Bald Town City before Day 40, reach Level 7, maintain 75% Car Braininess, park 400 cars, demolish seven subway stations, and move 75 suburban residents.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/car-park-capital/car-park-capital-bald-town-city-objectives.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 454,
+
+        spotlightFeature: true,
+        spotlightOrder: 1,
+
+        spotlightMeta:
+          "Day 40 deadline, five victory conditions, Level 7, qualifying parking spaces, 400 parked cars, seven subway stations and 75 suburban residents",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Car Park Capital: How to Reduce Unrest & Stop Protests",
+
+      href:
+        "/car-park-capital/unrest-protests",
+
+      type: "Systems",
+
+      description:
+        "Arrest protesters, deploy riot police, fix unreachable patrol waypoints, respond to fires, clear damaged cars, and reduce Civil Unrest with Plastic Trees.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/car-park-capital/car-park-capital-riot-control-garage.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 455,
+
+        spotlightMeta:
+          "Protesters blocking businesses, Riot Control Truck Garage, police units, patrol waypoints, fires, vehicle recovery and Plastic Trees",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Car Park Capital Gasoline Guide: Fix Fuel Supply & Delivery",
+
+      href:
+        "/car-park-capital/oil-gasoline",
+
+      type: "Systems",
+
+      description:
+        "Build the Crude Oil to Gasoline production chain, connect refineries and trucks, supply Gas Stations, and resolve depleted fuel and delivery delays.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/car-park-capital/car-park-capital-gasoline-supply-depleted.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 456,
+
+        spotlightMeta:
+          "Pump Jacks, Crude Oil Transportation, Oil Refinery, Gasoline Transportation, Gas Station drive-thru, missing fuel and delivery bottlenecks",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Car Park Capital Car Factory & No Vehicles for Sale Fix",
+
+      href:
+        "/car-park-capital/car-production",
+
+      type: "Systems",
+
+      description:
+        "Manufacture cars, move stock with Car Carriers, supply Car Shop Carousels, fix No Vehicles for Sale, and decide when to expand production or delivery.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/car-park-capital/car-park-capital-car-shop-no-vehicles-for-sale.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 457,
+
+        spotlightMeta:
+          "Car Factory, Car Carrier, Car Shop Carousel, factory stock, empty shops, delayed deliveries, car ownership and production expansion",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Car Park Capital Gulf of Freedom: Amphibious Cars & Islands",
+
+      href:
+        "/car-park-capital/gulf-of-freedom",
+
+      type: "Walkthrough",
+
+      description:
+        "Start Gulf of Freedom, locate hotel and beach parking demand, unlock Amphibious Cars at Level 2, connect roads to water, and develop accessible island routes.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/car-park-capital/car-park-capital-amphibious-car-entering-water.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 458,
+
+        spotlightFeature: true,
+        spotlightOrder: 2,
+
+        spotlightMeta:
+          "Gulf of Freedom objectives, hotel and beach parking, Amphibious Car Factory, Level 2 unlock, shoreline connections and island navigation",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+  ],
+},
+
   {
     title: "Permafrost",
     game: "Permafrost",
