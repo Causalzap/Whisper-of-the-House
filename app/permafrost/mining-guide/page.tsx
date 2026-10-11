@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,13 +12,13 @@ const hubUrl = `${siteUrl}/permafrost`;
 const pageUrl = `${hubUrl}/mining-guide`;
 
 const metadataTitle =
-  "Permafrost Mining Guide: Copper, Coal, Flint & Wire";
+  "Permafrost Mining Guide: Copper, Iron, Moonrock & Wire";
 
 const metadataDescription =
-  "Find Copper, Flint, and Coal in Permafrost, repair the bridge near New Home, upgrade your pickaxe, make Copper Ingots, and craft Wire for the radio.";
+  "Find Flint, Copper, Coal, Iron, and Moonrock in Permafrost. Upgrade pickaxes, make Wire and Ingots, and use the Stone Furnace and Professional Smelter.";
 
 const articleDescription =
-  "Find early Copper, Flint, and Coal deposits, repair the road bridge, choose the correct pickaxe, build the Stone Furnace, and turn Copper into Ingots and Wire.";
+  "Find Flint, Copper, Coal, Iron, and Moonrock deposits, choose the right pickaxe, process ore into Ingots and Wire, and prepare Quality Metal for advanced equipment.";
 
 const heroImage =
   "/images/permafrost/permafrost-copper-ingot-smelting.webp";
@@ -31,12 +32,12 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "copper-location",
-    label: "Copper Locations & Bridge",
-  },
-  {
     id: "flint-location",
     label: "Flint & Flint Pickaxe",
+  },
+  {
+    id: "copper-location",
+    label: "Copper Locations & Bridge",
   },
   {
     id: "pickaxe-upgrades",
@@ -59,8 +60,16 @@ const toc = [
     label: "Craft Wire From Copper",
   },
   {
+    id: "iron-mining",
+    label: "Iron & Advanced Pickaxes",
+  },
+  {
+    id: "moonrock-smelting",
+    label: "Moonrock & Quality Metal",
+  },
+  {
     id: "mining-problems",
-    label: "Mining & Crafting Problems",
+    label: "Mining & Smelting Problems",
   },
 ];
 
@@ -71,7 +80,7 @@ const relatedLinks = [
   },
   {
     href: "/permafrost/main-quests-walkthrough",
-    label: "New Home & Radio Walkthrough",
+    label: "Main Quests & White Hell Preparation",
   },
   {
     href: "/permafrost/staying-warm",
@@ -79,7 +88,11 @@ const relatedLinks = [
   },
   {
     href: "/permafrost/classes-skills",
-    label: "Starting Skills & Specializations",
+    label: "Starting Classes & Skill Progression",
+  },
+  {
+    href: "/permafrost/achievements",
+    label: "All 42 Achievements",
   },
 ];
 
@@ -138,8 +151,7 @@ export default function PermafrostMiningPage() {
       {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
-        headline:
-          "Permafrost Mining Guide: Copper, Coal, Flint & Wire",
+        headline: metadataTitle,
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -147,7 +159,7 @@ export default function PermafrostMiningPage() {
         },
         image: imageUrls,
         datePublished: "2026-10-09",
-        dateModified: "2026-10-09",
+        dateModified: "2026-10-11",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -191,13 +203,13 @@ export default function PermafrostMiningPage() {
         />
 
         <GuideArticlePage
-          title="Permafrost Mining Guide: Copper, Coal, Flint & Wire"
+          title={metadataTitle}
           description={articleDescription}
           gameTitle="Permafrost"
           gameHref="/permafrost"
-          breadcrumbBaseHref="/permafrost"
-          breadcrumbBaseLabel="Permafrost"
-          updatedAt="October 9, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -11,13 +11,13 @@ const hubUrl = `${siteUrl}/permafrost`;
 const pageUrl = `${hubUrl}/main-quests-walkthrough`;
 
 const metadataTitle =
-  "Permafrost Walkthrough: Main Quests to Logan's Camp";
+  "Permafrost Walkthrough: Main Quests to White Hell Prep";
 
 const metadataDescription =
-  "Follow Permafrost main quests through Horizon, Bone Cave, New Home, Hunter's Glade, House Camp, Finn's tower, and Logan's Camp, with key quest requirements.";
+  "Follow Permafrost main quests from Horizon to Crow's Nest: Bone Cave, New Home, House Camp, Logan, Parking Zoo, Solar Facility, and White Hell armor.";
 
 const articleDescription =
-  "Follow Permafrost's main quest route from the opening through Logan's Camp, including Dog Days, New Home, High Frequency, The Way Home, House Camp Flipper, and the radio towers.";
+  "Follow Permafrost's main quest route from Horizon and Bone Cave through New Home, Hunter's Glade, House Camp, Logan's assignments, Solar Facility, and Crow's Nest, then prepare the armor needed before heading to Last Stand.";
 
 const heroImage =
   "/images/permafrost/permafrost-new-home-building-objectives.webp";
@@ -87,7 +87,35 @@ const toc = [
   },
   {
     id: "solar-fields",
-    label: "Solar Fields & Logan",
+    label: "Logan's Warehouse in New Town",
+  },
+  {
+    id: "parking-zoo",
+    label: "Parking Zoo & Rat Queen",
+  },
+  {
+    id: "doctor-clinic",
+    label: "Logan's Doctor Assignment",
+  },
+  {
+    id: "solar-facility",
+    label: "Solar Facility Radio",
+  },
+  {
+    id: "crows-nest",
+    label: "Urban District & Crow's Nest",
+  },
+  {
+    id: "jeremiah-supplies",
+    label: "Jeremiah's Supplies Container",
+  },
+  {
+    id: "dressed-for-white-hell",
+    label: "Dressed for White Hell",
+  },
+  {
+    id: "last-stand",
+    label: "Go to the Last Stand",
   },
 ];
 
@@ -98,7 +126,7 @@ const relatedLinks = [
   },
   {
     href: "/permafrost/mining-guide",
-    label: "Copper, Coal & Wire",
+    label: "Copper, Coal, Moonrock & Mining",
   },
   {
     href: "/permafrost/staying-warm",
@@ -106,7 +134,11 @@ const relatedLinks = [
   },
   {
     href: "/permafrost/classes-skills",
-    label: "Classes & Skill Bonuses",
+    label: "Classes & Skill Progression",
+  },
+  {
+    href: "/permafrost/achievements",
+    label: "All 42 Achievements",
   },
 ];
 
@@ -165,8 +197,7 @@ export default function PermafrostWalkthroughPage() {
       {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
-        headline:
-          "Permafrost Walkthrough: Main Quests to Logan's Camp",
+        headline: metadataTitle,
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -174,7 +205,7 @@ export default function PermafrostWalkthroughPage() {
         },
         image: imageUrls,
         datePublished: "2026-10-09",
-        dateModified: "2026-10-09",
+        dateModified: "2026-10-11",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -218,13 +249,13 @@ export default function PermafrostWalkthroughPage() {
         />
 
         <GuideArticlePage
-          title="Permafrost Walkthrough: Main Quests to Logan's Camp"
+          title={metadataTitle}
           description={articleDescription}
           gameTitle="Permafrost"
           gameHref="/permafrost"
-          breadcrumbBaseHref="/permafrost"
-          breadcrumbBaseLabel="Permafrost"
-          updatedAt="October 9, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,10 +15,10 @@ const metadataTitle =
   "Permafrost Best Starting Class: Backgrounds & Skills";
 
 const metadataDescription =
-  "Compare Hunter, Survivor, Smuggler, and all 4 Specializations in Permafrost. Find starting gear, skill bonuses, the best combinations, and blueprint tips.";
+  "Choose the best Permafrost starting class. Compare Hunter, Survivor, Smuggler, all 4 Specializations, 16 skills, and how to earn more Blueprint Points.";
 
 const articleDescription =
-  "Choose your Permafrost Background and Specialization with starting equipment, Engineer, Tracker, Scavenger, and Marksman bonuses, recommended combinations, and skill progression.";
+  "Compare Hunter, Survivor, and Smuggler starting equipment, choose from four Specializations, learn how all 16 skills progress, and get more Blueprint Points for crafting and building.";
 
 const heroImage =
   "/images/permafrost/permafrost-hunter-starting-gear.webp";
@@ -26,7 +27,6 @@ const imageUrls = [
   `${siteUrl}${heroImage}`,
   `${siteUrl}/images/permafrost/permafrost-survivor-starting-gear.webp`,
   `${siteUrl}/images/permafrost/permafrost-engineer-specialization.webp`,
-  `${siteUrl}/images/permafrost/permafrost-scavenger-specialization.webp`,
   `${siteUrl}/images/permafrost/permafrost-skills-and-blueprints.webp`,
 ];
 
@@ -49,15 +49,15 @@ const toc = [
   },
   {
     id: "skill-progression",
-    label: "How Skills Level Up",
+    label: "How to Level All 16 Skills",
   },
   {
     id: "blueprint-points",
-    label: "Skills vs. Blueprint Points",
+    label: "How to Get Blueprint Points",
   },
   {
     id: "difficulty-settings",
-    label: "Class & World Difficulty",
+    label: "Background & Difficulty",
   },
   {
     id: "after-character-creation",
@@ -81,6 +81,10 @@ const relatedLinks = [
   {
     href: "/permafrost/main-quests-walkthrough",
     label: "Main Quests Walkthrough",
+  },
+  {
+    href: "/permafrost/achievements",
+    label: "All 42 Achievements",
   },
 ];
 
@@ -139,8 +143,7 @@ export default function PermafrostClassesSkillsPage() {
       {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
-        headline:
-          "Permafrost Best Starting Class: Backgrounds & Skills",
+        headline: metadataTitle,
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -148,7 +151,7 @@ export default function PermafrostClassesSkillsPage() {
         },
         image: imageUrls,
         datePublished: "2026-10-09",
-        dateModified: "2026-10-09",
+        dateModified: "2026-10-11",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -192,13 +195,13 @@ export default function PermafrostClassesSkillsPage() {
         />
 
         <GuideArticlePage
-          title="Permafrost Best Starting Class: Backgrounds & Skills"
+          title={metadataTitle}
           description={articleDescription}
           gameTitle="Permafrost"
           gameHref="/permafrost"
-          breadcrumbBaseHref="/permafrost"
-          breadcrumbBaseLabel="Permafrost"
-          updatedAt="October 9, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

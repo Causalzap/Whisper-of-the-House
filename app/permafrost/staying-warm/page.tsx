@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,23 +12,23 @@ const hubUrl = `${siteUrl}/permafrost`;
 const pageUrl = `${hubUrl}/staying-warm`;
 
 const metadataTitle =
-  "Permafrost: How to Stay Warm & Survive Cold Zones";
+  "How to Stay Warm in Permafrost: Heaters & Cold Zones";
 
 const metadataDescription =
-  "Stop freezing in Permafrost with Campfires, Warm Hands, Makeshift Heater repairs, Cold Resistance drinks, Warming Dish, and better winter clothing.";
+  "Stop freezing in Permafrost. Recover Body Warmth, use Campfires, repair Makeshift Heaters, compare Cold Resistance gear, and survive dangerous Cold Zones.";
 
 const articleDescription =
-  "Recover Body Warmth, repair your Makeshift Heater, compare cold-resistant clothing, use warming food and drinks, and prepare for dangerous Cold Zones.";
+  "Learn how to recover Body Warmth, use Campfires and portable heaters, choose warmer clothing, prepare food and drinks, and cross Cold Zones without freezing.";
 
 const heroImage =
-  "/images/permafrost/permafrost-hybrid-wolf-hat-cold-resistance.webp";
+  "/images/permafrost/permafrost-body-warmth-status.webp";
 
 const imageUrls = [
   `${siteUrl}${heroImage}`,
-  `${siteUrl}/images/permafrost/permafrost-body-warmth-status.webp`,
   `${siteUrl}/images/permafrost/permafrost-campfire-warm-hands.webp`,
   `${siteUrl}/images/permafrost/permafrost-makeshift-heater-repair.webp`,
   `${siteUrl}/images/permafrost/permafrost-warming-dish-effect.webp`,
+  `${siteUrl}/images/permafrost/permafrost-hybrid-wolf-hat-cold-resistance.webp`,
   `${siteUrl}/images/permafrost/permafrost-cold-zone-no-build.webp`,
 ];
 
@@ -42,7 +43,7 @@ const toc = [
   },
   {
     id: "heated-shelter",
-    label: "Shelter Too Cold to Sleep",
+    label: "Too Cold to Sleep",
   },
   {
     id: "makeshift-heater",
@@ -50,7 +51,7 @@ const toc = [
   },
   {
     id: "cold-resistance-drinks",
-    label: "Coffee vs. Tea",
+    label: "Improvised Coffee vs. Tea",
   },
   {
     id: "warming-dish",
@@ -58,7 +59,7 @@ const toc = [
   },
   {
     id: "clothing",
-    label: "Best Cold-Resistant Clothing",
+    label: "Cold-Resistant Clothing",
   },
   {
     id: "wolf-hat-vs-hybrid",
@@ -66,7 +67,7 @@ const toc = [
   },
   {
     id: "cold-zones",
-    label: "Surviving Cold Zones",
+    label: "Crossing Cold Zones",
   },
   {
     id: "cold-warning-troubleshooting",
@@ -80,16 +81,20 @@ const relatedLinks = [
     label: "Permafrost Beginner Guide",
   },
   {
+    href: "/permafrost/main-quests-walkthrough",
+    label: "Main Quests & Cold Zone Routes",
+  },
+  {
     href: "/permafrost/classes-skills",
     label: "Starting Classes & Equipment",
   },
   {
-    href: "/permafrost/main-quests-walkthrough",
-    label: "Main Quests & Finn's Tower",
-  },
-  {
     href: "/permafrost/mining-guide",
     label: "Mining & Crafting Materials",
+  },
+  {
+    href: "/permafrost/achievements",
+    label: "All 42 Achievements",
   },
 ];
 
@@ -140,7 +145,7 @@ export default function PermafrostStayingWarmPage() {
           {
             "@type": "ListItem",
             position: 3,
-            name: "Staying Warm",
+            name: "How to Stay Warm",
             item: pageUrl,
           },
         ],
@@ -148,8 +153,7 @@ export default function PermafrostStayingWarmPage() {
       {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
-        headline:
-          "Permafrost: How to Stay Warm & Survive Cold Zones",
+        headline: metadataTitle,
         description: articleDescription,
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -157,7 +161,7 @@ export default function PermafrostStayingWarmPage() {
         },
         image: imageUrls,
         datePublished: "2026-10-09",
-        dateModified: "2026-10-09",
+        dateModified: "2026-10-11",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -201,13 +205,13 @@ export default function PermafrostStayingWarmPage() {
         />
 
         <GuideArticlePage
-          title="Permafrost: How to Stay Warm & Survive Cold Zones"
+          title={metadataTitle}
           description={articleDescription}
           gameTitle="Permafrost"
           gameHref="/permafrost"
-          breadcrumbBaseHref="/permafrost"
-          breadcrumbBaseLabel="Permafrost"
-          updatedAt="October 9, 2026"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

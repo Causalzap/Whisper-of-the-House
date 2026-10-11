@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -13,10 +14,10 @@ const metadataTitle =
   "Permafrost Guide: What to Do First & Where to Go Next";
 
 const metadataDescription =
-  "Start Permafrost, choose your class, build New Home, solve early crafting problems, reach Hunter's Glade, and prepare for House Camp and Cold Zones.";
+  "Start Permafrost, choose your class, fix New Home and quest blockers, survive Cold Zones, continue past Logan, and prepare for White Hell.";
 
 const articleDescription =
-  "Decide what to do first in Permafrost, which upgrades and resources matter, what can wait, and how to get past the main obstacles from Horizon to Solar Fields.";
+  "Decide what to do next in Permafrost, from your starting class and New Home to House Camp, Logan, Crow's Nest, and White Hell preparation. Find the right upgrades, resources, and next objectives.";
 
 const heroImage =
   "/images/permafrost/permafrost-new-home-building-objectives.webp";
@@ -39,43 +40,43 @@ const toc = [
     label: "Where Are You Stuck?",
   },
   {
-    id: "equipment-priorities",
-    label: "Equipment Priorities",
-  },
-  {
-    id: "resource-decisions",
-    label: "Materials Worth Saving",
-  },
-  {
     id: "survival",
-    label: "Cold Zone Preparation",
+    label: "Cold Zone Survival",
   },
   {
-    id: "what-can-wait",
-    label: "What Can Wait",
+    id: "after-logan",
+    label: "What to Do After Logan",
   },
   {
-    id: "where-to-go-next",
-    label: "Quest Not Advancing",
+    id: "equipment-priorities",
+    label: "Equipment & Resource Priorities",
+  },
+  {
+    id: "achievements",
+    label: "All 42 Achievements",
   },
 ];
 
 const relatedLinks = [
   {
+    href: "/permafrost/main-quests-walkthrough",
+    label: "Main Quests & White Hell Preparation",
+  },
+  {
     href: "/permafrost/classes-skills",
     label: "Best Starting Class & Skills",
   },
   {
-    href: "/permafrost/main-quests-walkthrough",
-    label: "Main Quests Walkthrough",
-  },
-  {
     href: "/permafrost/mining-guide",
-    label: "Copper, Coal & Flint",
+    label: "Copper, Iron, Moonrock & Mining",
   },
   {
     href: "/permafrost/staying-warm",
-    label: "Cold Resistance & Staying Warm",
+    label: "Cold Zones & Staying Warm",
+  },
+  {
+    href: "/permafrost/achievements",
+    label: "All 42 Achievements Tracker",
   },
 ];
 
@@ -136,7 +137,7 @@ export default function PermafrostPage() {
         },
         image: imageUrls,
         datePublished: "2026-10-09",
-        dateModified: "2026-10-09",
+        dateModified: "2026-10-11",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -180,13 +181,13 @@ export default function PermafrostPage() {
         />
 
         <GuideArticlePage
-          title="Permafrost Beginner Guide: What to Do First & Where to Go Next"
+          title={metadataTitle}
           description={articleDescription}
           gameTitle="Permafrost"
           gameHref="/permafrost"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 9, 2026"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

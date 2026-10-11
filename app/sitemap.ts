@@ -1064,6 +1064,7 @@ const paths = [
     '/permafrost/main-quests-walkthrough',
     '/permafrost/mining-guide',
     '/permafrost/staying-warm',
+    '/permafrost/achievements',
 
     '/car-park-capital',
     '/car-park-capital/car-production',
@@ -1085,12 +1086,13 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/car-park-capital/oil-gasoline': '2026-10-10',
   '/car-park-capital/unrest-protests': '2026-10-10',
   '/car-park-capital/bald-town-city-walkthrough': '2026-10-10',
-
-  '/permafrost': '2026-10-09',
-  '/permafrost/classes-skills': '2026-10-09',
-  '/permafrost/main-quests-walkthrough': '2026-10-09',
-  '/permafrost/mining-guide': '2026-10-09',
-  '/permafrost/staying-warm': '2026-10-09',
+  
+  '/permafrost': '2026-10-11',
+  '/permafrost/classes-skills': '2026-10-11',
+  '/permafrost/main-quests-walkthrough': '2026-10-11',
+  '/permafrost/mining-guide': '2026-10-11',
+  '/permafrost/staying-warm': '2026-10-11',
+  '/permafrost/achievements': '2026-10-11',
   
   '/monsters-and-memories': '2026-10-06',
   '/monsters-and-memories/beginner-guide': '2026-10-06',
