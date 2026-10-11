@@ -14,14 +14,15 @@ const metadataTitle =
   "Monsters & Memories Leveling Guide: 1–25 Zones & Camps";
 
 const metadataDescription =
-  "Level from 1–25 in Monsters & Memories with early camps, Wyrmsbane, Blacktide Bay, River Pirates, group XP checks, Rested XP, and solo advice.";
+  "Level 1–25 in Monsters & Memories with Wyrmsbane, Blacktide Bay, The Bends, River Pirates, Scarwood, Hell Levels, party XP and camp choices.";
 
 const articleDescription =
-  "Level from 1 to 25 in Monsters & Memories by choosing efficient camps, using Rested XP, moving through Wyrmsbane, Blacktide Bay and River Pirates, checking party XP, and knowing when to solo, group, or change zones.";
+  "Find efficient leveling camps from 1–25 in Monsters & Memories, including Wyrmsbane, Blacktide Bay, The Bends, River Pirates, Scarwood and Glass Flats, with Hell Levels, party XP checks, Rested XP and practical advice for changing camps.";
 
 const imageUrls = [
   `${siteUrl}/images/monsters-and-memories/level-1-dryads-faelindral.webp`,
-  `${siteUrl}/images/monsters-and-memories/necromancer-pet-tanking.webp`,
+  `${siteUrl}/images/monsters-and-memories/scarwood-bandit-leveling-camp.webp`,
+
 ];
 
 const ogImage = imageUrls[0];
@@ -101,7 +102,7 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1600,
         height: 900,
-        alt: "Monsters & Memories level 1 characters fighting Dryads near Faelindral",
+        alt: "Monsters & Memories early leveling near Faelindral with Dryad enemies",
       },
     ],
   },
@@ -154,7 +155,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-06",
-      dateModified: "2026-10-06",
+      dateModified: "2026-10-11",
       articleSection: "Monsters & Memories Guides",
       author: {
         "@type": "Organization",
@@ -191,11 +192,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "The Bends",
+        },
+        {
+          "@type": "Thing",
           name: "River Pirates",
         },
         {
           "@type": "Thing",
+          name: "Scarwood",
+        },
+        {
+          "@type": "Thing",
           name: "Glass Flats",
+        },
+        {
+          "@type": "Thing",
+          name: "Hell Levels",
         },
         {
           "@type": "Thing",
@@ -208,6 +221,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Solo Leveling",
+        },
+        {
+          "@type": "Thing",
+          name: "Group Leveling",
+        },
+        {
+          "@type": "Thing",
+          name: "Leveling Camps",
         },
       ],
       isPartOf: {
@@ -252,7 +273,7 @@ export default function Page() {
           gameHref="/monsters-and-memories"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 6, 2026"
+          updatedAt="October 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
