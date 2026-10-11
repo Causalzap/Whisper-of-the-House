@@ -1,11 +1,24 @@
+
 import type { Metadata } from "next";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
+
 import TheLastCaretakerPowerFuelContent from "@/data/the-last-caretaker/power-fuel-wall-outlets.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker/power-fuel-wall-outlets`;
+const hubUrl = `${siteUrl}/the-last-caretaker`;
+const pageUrl = `${hubUrl}/power-fuel-wall-outlets`;
+
+const metadataTitle =
+  "The Last Caretaker Power, Fuel & Wall Outlets Guide";
+
+const metadataDescription =
+  "Fix wall outlets, power and gas lines, Fill vs Equalize, 30 kWh Bulk Batteries, 20,000 L fuel tanks, Transfer Gate power and North Bastion methane.";
+
+const articleDescription =
+  "Fix blocked wall outlets, cable range, power and fuel routing, and mixed-battery charging. Compare Update 6 Bulk Batteries and fuel tanks, prepare power for the Lazarus Transfer Gate, and connect the North Bastion Methane Extractor.";
 
 const imageUrls = [
   `${siteUrl}/images/the-last-caretaker/the-last-caretaker-wall-outlets-skill-unlocks.webp`,
@@ -17,13 +30,117 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Power, Fuel & Wall Outlets Guide",
-  description:
-    "Fix wall outlet range, power and fuel routing, use Fill vs Equalize correctly, and decide when 20 kWh batteries or 10,000L tanks are worth it.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
+  openGraph: {
+    title: metadataTitle,
+    description: metadataDescription,
+    url: pageUrl,
+    type: "article",
+    siteName: "Whisper of the House",
+    images: [
+      {
+        url: imageUrls[0],
+        alt: "The Last Caretaker wall outlets and electrical routing skill unlocks.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [imageUrls[0]],
+  },
 };
+
+const toc = [
+  {
+    id: "fix-the-bottleneck",
+    label: "Find the Network Problem",
+  },
+  {
+    id: "what-wall-outlets-do",
+    label: "Power, Fuel & Gas Outlets",
+  },
+  {
+    id: "build-from-the-load",
+    label: "Connect Machines & Sources",
+  },
+  {
+    id: "range-blocked-output",
+    label: "Range & Blocked Output",
+  },
+  {
+    id: "bulk-storage-update-55",
+    label: "Update 6 Bulk Storage",
+  },
+  {
+    id: "bulk-battery-fill-equalize",
+    label: "Bulk Battery: Fill vs Equalize",
+  },
+  {
+    id: "bulk-tanks",
+    label: "20,000 L Bulk Fuel Tanks",
+  },
+  {
+    id: "boat-or-fixed-base",
+    label: "Boat vs Fixed Base",
+  },
+  {
+    id: "fuel-gas-routing",
+    label: "Fuel & Gas Connections",
+  },
+  {
+    id: "transfer-gate-power-update-6",
+    label: "Lazarus Transfer Gate Power",
+  },
+  {
+    id: "north-bastion-methane",
+    label: "North Bastion Methane",
+  },
+  {
+    id: "grid-scan",
+    label: "Grid Scan",
+  },
+  {
+    id: "power-fuel-troubleshooting",
+    label: "Troubleshooting",
+  },
+  {
+    id: "when-to-stop-rebuilding",
+    label: "Finish Your Network Setup",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/the-last-caretaker/",
+    label: "The Last Caretaker Guides",
+  },
+  {
+    href: "/the-last-caretaker/walkthrough/",
+    label: "Walkthrough & North Bastion",
+  },
+  {
+    href: "/the-last-caretaker/moses-warehouse-alpha-guide/",
+    label: "MOSES Warehouse Alpha",
+  },
+  {
+    href: "/the-last-caretaker/new-horizons-guide/",
+    label: "New Horizons",
+  },
+  {
+    href: "/the-last-caretaker/oil-whale-guide/",
+    label: "Oil Whale",
+  },
+  {
+    href: "/the-last-caretaker/project-eden-guide/",
+    label: "Project Eden",
+  },
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -36,13 +153,13 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "The Last Caretaker Guide",
-          item: `${siteUrl}/the-last-caretaker`,
+          item: hubUrl,
         },
         {
           "@type": "ListItem",
@@ -59,13 +176,11 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "The Last Caretaker Power, Fuel & Wall Outlets: How to Fix Your Boat Network",
-      description:
-        "A practical guide to The Last Caretaker power, fuel and gas routing, including Update 5 wall outlets, electric cable extenders, range and blocked-output problems, Grid Scan, Update 5.5 Bulk Batteries and Bulk Fuel Tanks, current 20 kWh and 10,000L capacities, Fill versus Equalize behavior, mixed battery banks, and deciding whether large storage belongs on the boat or at Lazarus and Exodus.",
+      headline: metadataTitle,
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-07",
+      dateModified: "2026-10-11",
       about: [
         {
           "@type": "VideoGame",
@@ -86,6 +201,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Gas Routing",
+        },
+        {
+          "@type": "Thing",
+          name: "Electric Cable Extenders",
         },
         {
           "@type": "Thing",
@@ -113,20 +232,32 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "The Last Caretaker Update 5.5",
+          name: "Lazarus Transfer Gate",
+        },
+        {
+          "@type": "Thing",
+          name: "Methane Extractor",
+        },
+        {
+          "@type": "Thing",
+          name: "North Bastion",
+        },
+        {
+          "@type": "Thing",
+          name: "The Last Caretaker Update 6",
         },
       ],
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
-        url: siteUrl,
+        url: `${siteUrl}/`,
       },
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
-        url: siteUrl,
+        url: `${siteUrl}/`,
       },
     },
   ],
@@ -136,6 +267,7 @@ export default function Page() {
   return (
     <>
       <Header />
+
       <main>
         <script
           type="application/ld+json"
@@ -145,89 +277,20 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Power, Fuel & Wall Outlets: What Actually Works?"
-          description="If the boat keeps losing power, a wall socket will not connect, or your new Bulk Battery refuses to fill, trace the failure first. Clean up only the network that is causing trouble, then decide whether the 5.5 bulk storage is worth rebuilding around."
+          title={metadataTitle}
+          description={articleDescription}
           gameTitle="The Last Caretaker"
-          gameHref="/the-last-caretaker"
+          gameHref="/the-last-caretaker/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 7, 2026"
-          toc={[
-            {
-              id: "fix-the-bottleneck",
-              label: "Fix the real bottleneck",
-            },
-            {
-              id: "what-wall-outlets-do",
-              label: "What wall outlets do",
-            },
-            {
-              id: "build-from-the-load",
-              label: "Build from the load",
-            },
-            {
-              id: "range-blocked-output",
-              label: "Range & blocked output",
-            },
-            {
-              id: "bulk-storage-update-55",
-              label: "5.5 bulk storage",
-            },
-            {
-              id: "bulk-battery-fill-equalize",
-              label: "Fill vs Equalize",
-            },
-            {
-              id: "bulk-tanks",
-              label: "10,000L bulk tanks",
-            },
-            {
-              id: "boat-or-fixed-base",
-              label: "Boat or fixed base",
-            },
-            {
-              id: "fuel-gas-routing",
-              label: "Fuel & gas routing",
-            },
-            {
-              id: "grid-scan",
-              label: "Grid Scan",
-            },
-            {
-              id: "power-fuel-troubleshooting",
-              label: "Troubleshooting",
-            },
-            {
-              id: "when-to-stop-rebuilding",
-              label: "When to stop rebuilding",
-            },
-          ]}
-          relatedLinks={[
-            {
-              href: "/the-last-caretaker",
-              label: "The Last Caretaker Guide Hub",
-            },
-            {
-              href: "/the-last-caretaker/new-horizons-guide",
-              label: "New Horizons Guide",
-            },
-            {
-              href: "/the-last-caretaker/oil-whale-guide",
-              label: "Oil Whale Guide",
-            },
-            {
-              href: "/the-last-caretaker/project-eden-guide",
-              label: "Project Eden Guide",
-            },
-            {
-              href: "/the-last-caretaker/walkthrough",
-              label: "The Last Caretaker Walkthrough",
-            },
-          ]}
+          updatedAt="October 11, 2026"
+          toc={toc}
+          relatedLinks={relatedLinks}
         >
           <TheLastCaretakerPowerFuelContent />
         </GuideArticlePage>
       </main>
+
       <Footer />
     </>
   );

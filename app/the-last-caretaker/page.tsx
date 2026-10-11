@@ -1,27 +1,130 @@
+
 import type { Metadata } from "next";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
+
 import TheLastCaretakerContent from "@/data/the-last-caretaker/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/the-last-caretaker`;
 
+const metadataTitle =
+  "The Last Caretaker Guide: Walkthrough & North Bastion";
+
+const metadataDescription =
+  "Find what to do next in The Last Caretaker, from Lazarus and Exodus to Project Crossing, North Bastion, Project Eden, MOSES, human growth, and power fixes.";
+
+const articleTitle =
+  "The Last Caretaker Guide: What Should You Do Next?";
+
+const articleDescription =
+  "Start with Beacon 49, Lazarus, Human Seeds and Exodus, or pick up your current objective in Project Crossing, North Bastion, Project Eden, Theta 9, MOSES or Transposium. Find the right route when power, fuel or Human growth stops your progress.";
+
 const imageUrls = [
   `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-time-to-let-go-soon.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transfer-gate-north-bastion.webp`,
   `${siteUrl}/images/the-last-caretaker/the-last-caretaker-new-horizons-pishon-marker.webp`,
   `${siteUrl}/images/the-last-caretaker/the-last-caretaker-moses-field-reserve-program-locked.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transposium-camera-room-998.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Guide: Walkthrough, Progression & Update 5.5",
-  description:
-    "Find what to do next in The Last Caretaker, from Lazarus and Exodus to Project Eden, Theta 9, MOSES, Update 5.5 secrets, power, and human growth.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
+  openGraph: {
+    title: metadataTitle,
+    description: metadataDescription,
+    url: pageUrl,
+    siteName: "Whisper of the House",
+    type: "article",
+    images: [
+      {
+        url: imageUrls[0],
+        alt: "The Last Caretaker Time to Let Go Soon objective leading toward Exodus Station.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [imageUrls[0]],
+  },
 };
+
+const toc = [
+  {
+    id: "where-to-go-next",
+    label: "What to Do Next",
+  },
+  {
+    id: "core-progression",
+    label: "Beacon 49 to Exodus",
+  },
+  {
+    id: "update-6-project-crossing",
+    label: "Update 6: North Bastion",
+  },
+  {
+    id: "returning-new-horizons",
+    label: "New Horizons Routes",
+  },
+  {
+    id: "update-55",
+    label: "MOSES, Aaron & Transposium",
+  },
+  {
+    id: "system-blockers",
+    label: "Power, Fuel & Human Growth",
+  },
+  {
+    id: "unfinished-searches",
+    label: "Unresolved Objectives",
+  },
+  {
+    id: "when-to-turn-back",
+    label: "When to Return to the Boat",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/the-last-caretaker/walkthrough",
+    label: "Walkthrough & North Bastion",
+  },
+  {
+    href: "/the-last-caretaker/power-fuel-wall-outlets",
+    label: "Power, Fuel & Wall Outlets",
+  },
+  {
+    href: "/the-last-caretaker/human-growth-professions-guide",
+    label: "Human Growth & Professions",
+  },
+  {
+    href: "/the-last-caretaker/exodus-launch-guide",
+    label: "Exodus Launch",
+  },
+  {
+    href: "/the-last-caretaker/new-horizons-guide",
+    label: "New Horizons",
+  },
+  {
+    href: "/the-last-caretaker/project-eden-guide",
+    label: "Project Eden",
+  },
+  {
+    href: "/the-last-caretaker/research-outpost-theta-9-guide",
+    label: "Research Outpost Theta 9",
+  },
+  {
+    href: "/the-last-caretaker/moses-warehouse-alpha-guide",
+    label: "MOSES Warehouse Alpha",
+  },
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -34,7 +137,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
@@ -45,19 +148,30 @@ const jsonLd = {
       ],
     },
     {
+      "@type": "WebPage",
+      "@id": pageUrl,
+      url: pageUrl,
+      name: articleTitle,
+      description: articleDescription,
+      inLanguage: "en",
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
       mainEntityOfPage: {
-        "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "The Last Caretaker Guide: What to Do Next, Progression Routes and Update 5.5",
-      description:
-        "A player-focused guide hub for The Last Caretaker that helps new and returning players choose the next useful objective. It routes early progression through Lazarus, Human Growth and Exodus, then separates mature routes for New Horizons, Project Eden, Oil Whale, Research Outpost Theta 9, MOSES and Warehouse Alpha, Memory for Aaron, Transposium Room 998, ship power and fuel systems, while keeping unfinished Early Access mysteries from taking over the run.",
+      headline: articleTitle,
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-09-07",
+      dateModified: "2026-10-11",
       about: [
         {
           "@type": "VideoGame",
@@ -69,11 +183,31 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Beacon 49",
+        },
+        {
+          "@type": "Thing",
           name: "Lazarus Complex",
         },
         {
           "@type": "Thing",
+          name: "Human Growth",
+        },
+        {
+          "@type": "Thing",
           name: "Exodus Station",
+        },
+        {
+          "@type": "Thing",
+          name: "Project Crossing",
+        },
+        {
+          "@type": "Thing",
+          name: "Transfer Gate",
+        },
+        {
+          "@type": "Thing",
+          name: "North Bastion",
         },
         {
           "@type": "Thing",
@@ -82,6 +216,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Pishon",
+        },
+        {
+          "@type": "Thing",
+          name: "Oil Whale",
         },
         {
           "@type": "Thing",
@@ -103,23 +241,29 @@ const jsonLd = {
           "@type": "Thing",
           name: "Transposium Room 998",
         },
-        {
-          "@type": "Thing",
-          name: "Update 5.5 Deck Drop",
-        },
       ],
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
       },
+      isPartOf: {
+        "@id": `${siteUrl}#website`,
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: "Whisper of the House",
+      url: `${siteUrl}/`,
+      inLanguage: "en",
+      publisher: {
+        "@id": `${siteUrl}#organization`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: "Whisper of the House",
+      url: `${siteUrl}/`,
     },
   ],
 };
@@ -138,77 +282,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Guide: What Should You Do Next?"
-          description="Use your current blocker to choose the next trip. Follow the main route if you are new; on a developed save, jump straight to the system, location, or Update 5.5 objective that is actually holding you up."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 7, 2026"
-          toc={[
-            {
-              id: "where-to-go-next",
-              label: "What to do next",
-            },
-            {
-              id: "core-progression",
-              label: "Core progression",
-            },
-            {
-              id: "returning-new-horizons",
-              label: "Returning for New Horizons",
-            },
-            {
-              id: "update-55",
-              label: "Update 5.5 routes",
-            },
-            {
-              id: "system-blockers",
-              label: "System blockers",
-            },
-            {
-              id: "when-to-turn-back",
-              label: "When to turn back",
-            },
-            {
-              id: "unfinished-searches",
-              label: "Unfinished searches",
-            },
-            {
-              id: "early-access-rule",
-              label: "Early Access rule",
-            },
-            {
-              id: "pick-one-job",
-              label: "Give the next trip one job",
-            },
-          ]}
-          relatedLinks={[
-            {
-              href: "/the-last-caretaker/walkthrough",
-              label: "The Last Caretaker Walkthrough",
-            },
-            {
-              href: "/the-last-caretaker/human-growth-professions-guide",
-              label: "Human Growth & Professions Guide",
-            },
-            {
-              href: "/the-last-caretaker/exodus-launch-guide",
-              label: "Exodus Launch Guide",
-            },
-            {
-              href: "/the-last-caretaker/new-horizons-guide",
-              label: "New Horizons Guide",
-            },
-            {
-              href: "/the-last-caretaker/project-eden-guide",
-              label: "Project Eden Guide",
-            },
-            {
-              href: "/the-last-caretaker/research-outpost-theta-9-guide",
-              label: "Research Outpost Theta 9 Guide",
-            },
-          ]}
+          updatedAt="October 11, 2026"
+          toc={toc}
+          relatedLinks={relatedLinks}
         >
           <TheLastCaretakerContent />
         </GuideArticlePage>
