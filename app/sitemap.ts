@@ -1073,6 +1073,10 @@ const paths = [
     '/car-park-capital/unrest-protests',
     '/car-park-capital/bald-town-city-walkthrough',
 
+    '/dreadmoor',
+    '/dreadmoor/walkthrough',
+    '/dreadmoor/fishing-guide',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1080,6 +1084,10 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/dreadmoor': '2026-10-13',
+  '/dreadmoor/walkthrough': '2026-10-13',
+  '/dreadmoor/fishing-guide': '2026-10-13',
+
   '/car-park-capital': '2026-10-10',
   '/car-park-capital/car-production': '2026-10-10',
   '/car-park-capital/gulf-of-freedom': '2026-10-10',

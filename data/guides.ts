@@ -131,6 +131,159 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "DREADMOOR",
+    game: "DREADMOOR",
+    href: "/dreadmoor",
+    slug: "dreadmoor",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Fishing, Boat Upgrades & Demo Walkthrough",
+    eyebrow: "Demo Guide",
+  
+    hubStatus:
+      "October 2026 Demo + Fishing Contracts + Dry Dock Repairs + Upgraded Engine + The Throat Gate",
+  
+    description:
+      "Find what to do next in DREADMOOR, catch the required fish, repair and upgrade your motorboat, and open The Throat gate to finish the demo.",
+  
+    coverage: [
+      "Opening progression through the abandoned house, Radio, Betsy and Sons, Essence treatment, Bunkhouse repairs and the first night",
+  
+      "Fishing contracts covering 5 Snappers, 3 Softgrazers, 3 Harpooners, the Simple Rod and the required deliveries",
+  
+      "Fishing mechanics through Fish Stamina, Line Tension, rod controls, Wind-Up Tin, Rainbow Fin, predator splash zones and Chromatic Scales",
+  
+      "Dry Dock progression through John the Fifth, Moonshine Still repairs, Coral Fiber, Bug Slime, Fuse Box power, boat cleaning and hull repairs",
+  
+      "Boat upgrades through Scraps of Knowledge, Weak Hull Protection, module storage, the Carburetor purchase and Upgraded Engine installation",
+  
+      "The Throat progression through Generator fuel, Thermal Coil, Gear, two Buckets, Water Pump repairs, water-flow controls, both water wheels and the final gate",
+    ],
+  
+    image:
+      "/images/dreadmoor/dreadmoor-boat-cleaning-water-cannon.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 62,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "DREADMOOR Demo Guide: What to Do Next & How to Finish",
+  
+        href: "/dreadmoor",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Find your next objective at Betsy and Sons, solve fishing and Dry Dock blockers, prepare the boat, and reach The Throat.",
+  
+        image:
+          "/images/dreadmoor/dreadmoor-boat-cleaning-water-cannon.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Trading Post, fishing contracts, Dry Dock, Carburetor, boat upgrades and The Throat",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "DREADMOOR Demo Walkthrough: All Quests & The Throat Gate",
+  
+        href: "/dreadmoor/walkthrough",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Follow the demo from Betsy and Sons through fishing contracts, Dry Dock repairs, Hull Protection, the engine upgrade and The Throat gate.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dreadmoor/dreadmoor-the-throat-waterway-controls.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 460,
+  
+          spotlightFeature: true,
+          spotlightOrder: 1,
+  
+          spotlightMeta:
+            "5 Snappers, 3 Softgrazers, 3 Harpooners, John the Fifth, Carburetor, Upgraded Engine and The Throat",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "DREADMOOR Fishing Guide: Bait, Line Tension & Harpooners",
+  
+        href: "/dreadmoor/fishing-guide",
+  
+        type: "Guide",
+  
+        description:
+          "Use the Simple Rod, manage Stamina and Line Tension, craft Wind-Up Tin and Rainbow Fin, catch Softgrazers and Harpooners, and obtain Chromatic Scales.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dreadmoor/dreadmoor-harpooner-splash-zone.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 459,
+  
+          spotlightRail: true,
+          spotlightOrder: 2,
+  
+          spotlightMeta:
+            "Simple Rod, Earthworm, Stamina, Line Tension, Wind-Up Tin, Softgrazers, Chromatic Scales, Rainbow Fin and Harpooners",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+    ],
+  },
+  
 {
   title: "Car Park Capital",
   game: "Car Park Capital",
