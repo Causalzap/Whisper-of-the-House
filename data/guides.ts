@@ -131,6 +131,267 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+{
+  title: "Valor Mortis",
+  game: "Valor Mortis",
+  href: "/valor-mortis",
+  slug: "valor-mortis",
+  kind: "game",
+  status: "active",
+  accent: "rose",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "Walkthrough, Bosses & Story Progression",
+  eyebrow: "Complete Story Guide",
+
+  hubStatus:
+    "All 11 Chapters + General Lothaire + Valley of Ashes + Fallen Village + Caverns + The Emissary + Grapple, Stasis and Shield",
+
+  description:
+    "Follow all 11 story chapters, defeat major bosses, unlock Grapple, Stasis and Shield, find missing keys, rescue Louis, and return for hidden upgrades and side quests.",
+
+  coverage: [
+    "All 11 story chapters from Revival and Regroup through Reflection, including required bosses, key story objectives and the final encounter with The Entity",
+
+    "General Lothaire's Chapter 1 encounter, early victory rewards, the Chapter 2 rematch condition, both combat phases, weak points and Torn Banner",
+
+    "Valley of Ashes progression through Guidepost, The Climb, missing scouts, Adjutant truth or lie rewards, Military Camp and Quarry",
+
+    "Fallen Village progression through Fields, The Scarecrow, Blunderbuss, Weathered Key, Storage Key, Lullaby, Iron Marshall, Grapple and rescuing Louis",
+
+    "Caverns and Salt Mine progression through Cave Grotto Key, Homesick, Weeping Ledge, Stasis, Old Mine machinery, minecart tracks, Mining Shaft Key and Sphinx",
+
+    "The Emissary investigation across Chapters 2, 5 and 8, including the Seal, Letter, Shield return, hidden escort camp, final red fabric and quest rewards",
+
+    "Ability unlocks and return routes, including Grapple upgrades in upper Quarry, Stasis machinery, Shield-blocked poison passages and Abyssal Eviction",
+
+    "Weapon and upgrade decisions involving Saber, Rapier, Blunderbuss, Pure Blade Material, Ferrofluid Flask upgrades and early boss preparation",
+  ],
+
+  image:
+    "/images/valor-mortis/general-lothaire-battlefield-arena.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 63,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Valor Mortis Walkthrough: All 11 Chapters & Progression",
+
+      href: "/valor-mortis",
+
+      type: "Guide Hub",
+
+      description:
+        "Follow all 11 chapters, find your next objective, unlock Grapple, Stasis and Shield, and return to earlier regions for upgrades.",
+
+      image:
+        "/images/valor-mortis/general-lothaire-battlefield-arena.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "11 chapters, General Lothaire, Iron Marshall, Sphinx, Grapple, Stasis, Shield, the Ancient Lair and final boss",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis General Lothaire: First Win, Rewards & Boss",
+
+      href: "/valor-mortis/general-lothaire",
+
+      type: "Bosses",
+
+      description:
+        "Learn what happens if you beat Lothaire in Chapter 1, how to skip the Chapter 2 rematch, claim Catalyst rewards and survive both phases.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/general-lothaire-first-win-reward.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 465,
+
+        spotlightFeature: true,
+        spotlightOrder: 1,
+
+        spotlightMeta:
+          "Chapter 1 early victory, 20,000 Catalysts, Commander's Catalyst Clot, Chapter 2 rematch, weak points and Torn Banner",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis Valley of Ashes Walkthrough: Lift & Quarry",
+
+      href: "/valor-mortis/valley-of-ashes",
+
+      type: "Walkthrough",
+
+      description:
+        "Get the Pistol, open The Climb lift, find the missing scouts, choose the Adjutant reward, clear Military Camp and return to Quarry with Grapple.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/valley-of-ashes-lift-hidden-cave.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 463,
+
+        spotlightMeta:
+          "Guidepost, Pistol, lift mechanism, missing scouts, truth or lie, Eternal Guardist, Military Camp, Quarry and Pure Blade Material",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis Fallen Village Walkthrough: Keys & Grapple",
+
+      href: "/valor-mortis/fallen-village",
+
+      type: "Walkthrough",
+
+      description:
+        "Complete The Scarecrow and Lullaby, find the Weathered and Storage Keys, get the Blunderbuss, defeat Iron Marshall, unlock Grapple and rescue Louis.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/fallen-village-grapple-unlock.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 464,
+
+        spotlightRail: true,
+        spotlightOrder: 2,
+
+        spotlightMeta:
+          "Rapier, Fields, Scarecrow, Blunderbuss, Marketplace keys, Iron Marshall, Ultima Ratio Regum, Grapple and Louis",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis Caverns Walkthrough: Stasis & Mining Shaft Key",
+
+      href: "/valor-mortis/caverns",
+
+      type: "Walkthrough",
+
+      description:
+        "Enter Caverns with the Cave Grotto Key, unlock Stasis, solve Old Mine machinery, redirect minecarts, find the Mining Shaft Key and defeat Sphinx.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/caverns-mining-shaft-key.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 462,
+
+        spotlightRail: true,
+        spotlightOrder: 3,
+
+        spotlightMeta:
+          "Cave Grotto Key, Homesick, Weeping Ledge, Stasis, suspended crate, track switch, Mining Shaft Key and Sphinx",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis The Emissary: Seal, Shield & Quest Rewards",
+
+      href: "/valor-mortis/the-emissary",
+
+      type: "Guide",
+
+      description:
+        "Find the Emissary's Seal and Letter, return with Shield, investigate the hidden camp, locate the final red fabric and claim both rewards.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/the-emissary-final-investigation.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 461,
+
+        spotlightMeta:
+          "Chapter 2 Seal, Chapter 5 Letter, Chapter 8 Shield, poisoned passage, dead escort, red fabric, Sands of Time and Perfect Copy",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+  ],
+},
   {
     title: "DREADMOOR",
     game: "DREADMOOR",
