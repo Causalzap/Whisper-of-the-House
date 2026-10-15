@@ -1083,7 +1083,8 @@ const paths = [
     '/valor-mortis/fallen-village',
     '/valor-mortis/the-emissary',
     '/valor-mortis/general-lothaire', 
-
+    
+    '/enshrouded', 
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1091,6 +1092,8 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/enshrouded': '2026-10-15',
+  
   '/valor-mortis': '2026-10-14',
   '/valor-mortis/caverns': '2026-10-14',
   '/valor-mortis/valley-of-ashes': '2026-10-14',
