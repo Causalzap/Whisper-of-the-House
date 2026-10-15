@@ -1088,6 +1088,13 @@ const paths = [
     '/valor-mortis/cursed-hollow', 
     
     '/enshrouded', 
+
+    'planet-zoo-2', 
+    'planet-zoo-2/career-chapter-1', 
+    'planet-zoo-2/career-chapter-2', 
+    'planet-zoo-2/aquariums', 
+    'planet-zoo-2/wildlife-reserves', 
+    'planet-zoo-2/achievements', 
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1095,6 +1102,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'planet-zoo-2': '2026-10-15',
+  'planet-zoo-2/career-chapter-1': '2026-10-15',
+  'planet-zoo-2/career-chapter-2': '2026-10-15',
+  'planet-zoo-2/aquariums': '2026-10-15',
+  'planet-zoo-2/wildlife-reserves': '2026-10-15',
+  'planet-zoo-2/achievements': '2026-10-15',
+
   '/enshrouded': '2026-10-15',
   
   '/valor-mortis/achievements': '2026-10-15',

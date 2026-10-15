@@ -132,6 +132,273 @@ export type GuideCluster = HomeImageFields & {
 export const guideClusters: GuideCluster[] = [
 
 {
+  title: "Planet Zoo 2",
+  game: "Planet Zoo 2",
+  href: "/planet-zoo-2",
+  slug: "planet-zoo-2",
+  kind: "game",
+  status: "active",
+  accent: "emerald",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Career Walkthrough, Aquariums & Wildlife Reserves",
+  eyebrow: "4-Chapter Career Guide",
+
+  hubStatus:
+    "18 Career scenarios + 4 chapters + aquariums + wildlife reserves + 39 achievements",
+
+  description:
+    "Follow Planet Zoo 2 Career across four chapters, unlock new locations, build aquariums, restore wildlife reserves, manage zoos, and track all 39 achievements.",
+
+  coverage: [
+    "Career progression across 4 chapters and 18 scenarios, including Bronze, Silver and Gold medals, Accreditation tiers, locked locations and return visits",
+
+    "Chapter 1 through Great Rift Valley and East Africa, including wildlife photography, Aardvark welfare, Shoebill Aviary construction and Masai Giraffe release",
+
+    "Chapter 2 through Nordic Fjords, South East Wales, New England, Scottish Highlands and South Africa, including animal care, broken habitats, zoo finances and conservation work",
+
+    "Aquarium construction through Aquarium Staff Gates, automatic water filling, filtration networks, power, Freshwater and Saltwater settings, temperature and aquatic animal welfare",
+
+    "Wildlife Reserve management through Release Groups, Ecosystem requirements, invasive flora, predator reintroduction, research networks and Biodiversity Rating",
+
+    "All 39 achievements with an interactive checklist, 100% completion planning, Career Gold medals, breeding goals, species research and specialized habitat requirements",
+
+    "Zoo management through animal welfare, guest education, ticket prices, donations, shops, staff training, marketing and reputation progression",
+  ],
+
+  image:
+    "/images/planet-zoo-2/career-chapter-1-zebra-photo-objective.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 64,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Planet Zoo 2 Guide: Career Walkthrough & Progression",
+
+      href: "/planet-zoo-2",
+
+      type: "Guide Hub",
+
+      description:
+        "Follow all four Career chapters, find your next scenario, understand medal requirements, and get help with aquariums and wildlife reserves.",
+
+      image:
+        "/images/planet-zoo-2/career-chapter-1-zebra-photo-objective.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "4 chapters, 18 Career scenarios, Bronze and Gold medals, Accreditation, aquariums, wildlife reserves and achievements",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Planet Zoo 2 Chapter 1: Great Rift Valley & East Africa",
+
+      href: "/planet-zoo-2/career-chapter-1",
+
+      type: "Walkthrough",
+
+      description:
+        "Photograph Hippos, Elephants and Zebras, fix Aardvark welfare, build the Shoebill Aviary, and release Masai Giraffes at Great Rift Valley.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/planet-zoo-2/career-chapter-1-zebra-photo-objective.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 469,
+
+        spotlightRail: true,
+        spotlightOrder: 5,
+
+        spotlightMeta:
+          "Great Rift Valley, two-Zebra photo, East Africa, Aardvark Terrain Welfare, Shoebill Aviary and Masai Giraffe release",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Planet Zoo 2 Chapter 2 Walkthrough: All 5 Scenarios",
+
+      href: "/planet-zoo-2/career-chapter-2",
+
+      type: "Walkthrough",
+
+      description:
+        "Complete Nordic Fjords, South East Wales, New England, Scottish Highlands and South Africa, including aquarium, welfare, finance and rescue objectives.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/planet-zoo-2/career-chapter-2-otter-habitat-repair.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 470,
+
+        spotlightRail: true,
+        spotlightOrder: 4,
+
+        spotlightMeta:
+          "Nordic Fjords, South East Wales Otters, New England loan and Flamingo marketing, Scottish Highlands Lynx and South Africa rescue",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Planet Zoo 2 Aquarium Guide: Build, Fill & Filter",
+
+      href: "/planet-zoo-2/aquariums",
+
+      type: "Systems",
+
+      description:
+        "Fill an Aquarium with the correct Staff Gate, connect filtration and power, set salinity and temperature, and prepare water for aquatic animals.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/planet-zoo-2/aquarium-filtration-network.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 471,
+
+        spotlightRail: true,
+        spotlightOrder: 3,
+
+        spotlightMeta:
+          "Aquarium Staff Gate, no water, Water Filter Not Powered, Filtration Network, Saltwater, 28°C and aquatic animal welfare",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Planet Zoo 2 Wildlife Reserves: Releases & Ecosystems",
+
+      href: "/planet-zoo-2/wildlife-reserves",
+
+      type: "Systems",
+
+      description:
+        "Prepare Release Groups, fix invalid ecosystems, establish research networks, release suitable animals, and improve Biodiversity Rating.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/planet-zoo-2/wildlife-reserve-biodiversity-rating.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 472,
+
+        spotlightRail: true,
+        spotlightOrder: 2,
+
+        spotlightMeta:
+          "Release Groups, Dense Forest, Montane Forest, invalid ecosystems, observation platforms, research and Biodiversity Rating",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Planet Zoo 2 Achievements: All 39 & 100% Checklist",
+
+      href: "/planet-zoo-2/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Track all 39 achievements with an interactive checklist and plan Career Gold, breeding, research, aquarium and Wildlife Reserve completion goals.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/planet-zoo-2/career-chapter-1-zebra-photo-objective.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 473,
+
+        spotlightFeature: true,
+        spotlightOrder: 1,
+
+        spotlightMeta:
+          "39 achievements, interactive checklist, 100% roadmap, all Career Gold medals, 80 researched species and Thriving habitats",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+  ],
+},
+
+
+{
   title: "Valor Mortis",
   game: "Valor Mortis",
   href: "/valor-mortis",
