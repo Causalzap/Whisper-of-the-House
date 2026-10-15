@@ -1083,6 +1083,9 @@ const paths = [
     '/valor-mortis/fallen-village',
     '/valor-mortis/the-emissary',
     '/valor-mortis/general-lothaire', 
+    '/valor-mortis/achievements', 
+    '/valor-mortis/sewers-keys', 
+    '/valor-mortis/cursed-hollow', 
     
     '/enshrouded', 
 ] as const;
@@ -1094,11 +1097,14 @@ type SitemapPath = (typeof paths)[number];
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/enshrouded': '2026-10-15',
   
-  '/valor-mortis': '2026-10-14',
+  '/valor-mortis/achievements': '2026-10-15',
+  '/valor-mortis/sewers-keys': '2026-10-15',
+  '/valor-mortis/cursed-hollow': '2026-10-15',
+  '/valor-mortis': '2026-10-15',
   '/valor-mortis/caverns': '2026-10-14',
   '/valor-mortis/valley-of-ashes': '2026-10-14',
   '/valor-mortis/fallen-village': '2026-10-14',
-  '/valor-mortis/the-emissary': '2026-10-14',
+  '/valor-mortis/the-emissary': '2026-10-15',
   '/valor-mortis/general-lothaire': '2026-10-14',
 
   '/dreadmoor': '2026-10-13',

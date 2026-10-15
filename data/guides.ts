@@ -141,31 +141,35 @@ export const guideClusters: GuideCluster[] = [
   accent: "rose",
   archiveCategory: "RPG, action, builds & combat",
 
-  label: "Walkthrough, Bosses & Story Progression",
-  eyebrow: "Complete Story Guide",
+  label: "Walkthrough, Bosses, Achievements & Quests",
+  eyebrow: "11-Chapter Walkthrough",
 
   hubStatus:
-    "All 11 Chapters + General Lothaire + Valley of Ashes + Fallen Village + Caverns + The Emissary + Grapple, Stasis and Shield",
+    "All 11 Chapters + 39 Achievements + Bosses + Keys + Side Quests",
 
   description:
-    "Follow all 11 story chapters, defeat major bosses, unlock Grapple, Stasis and Shield, find missing keys, rescue Louis, and return for hidden upgrades and side quests.",
+    "Follow all 11 Valor Mortis chapters, defeat major bosses, find key items, unlock Grapple, Stasis and Shield, complete side quests, and track all 39 achievements.",
 
   coverage: [
-    "All 11 story chapters from Revival and Regroup through Reflection, including required bosses, key story objectives and the final encounter with The Entity",
+    "All 11 main-story chapters from Revival to Reflection, including required bosses, story transitions, major ability unlocks, prison escape and the final encounter with The Entity",
 
-    "General Lothaire's Chapter 1 encounter, early victory rewards, the Chapter 2 rematch condition, both combat phases, weak points and Torn Banner",
+    "General Lothaire's Chapter 1 encounter, early victory rewards, Chapter 2 rematch conditions, combat phases, weak points and Torn Banner",
 
-    "Valley of Ashes progression through Guidepost, The Climb, missing scouts, Adjutant truth or lie rewards, Military Camp and Quarry",
+    "Valley of Ashes progression through Guidepost, The Climb, missing scouts, Adjutant choices, Military Camp, Quarry and the later Grapple return route",
 
-    "Fallen Village progression through Fields, The Scarecrow, Blunderbuss, Weathered Key, Storage Key, Lullaby, Iron Marshall, Grapple and rescuing Louis",
+    "Fallen Village progression through Fields, The Scarecrow, Marketplace, Weathered Key, Storage Key, Blunderbuss, Iron Marshall, Grapple and Louis's rescue",
 
-    "Caverns and Salt Mine progression through Cave Grotto Key, Homesick, Weeping Ledge, Stasis, Old Mine machinery, minecart tracks, Mining Shaft Key and Sphinx",
+    "Caverns and Salt Mine progression, including Cave Grotto Key, Weeping Ledge, Stasis, Old Mine machinery, minecart tracks, Mining Shaft Key and Sphinx",
 
-    "The Emissary investigation across Chapters 2, 5 and 8, including the Seal, Letter, Shield return, hidden escort camp, final red fabric and quest rewards",
+    "Cursed Hollow walkthrough from Eerie View to Village Church, including The Bride, Headman's Key, Sleeping Beauty choices, Seamus Diggory, Claymore, Red Ribbon and Till Death",
 
-    "Ability unlocks and return routes, including Grapple upgrades in upper Quarry, Stasis machinery, Shield-blocked poison passages and Abyssal Eviction",
+    "City of Orphans sewer progression, including the Sewers Key, Sewers Master Key, their locked gates, the flooded platform puzzle, optional rewards and the route toward the Shrike",
 
-    "Weapon and upgrade decisions involving Saber, Rapier, Blunderbuss, Pure Blade Material, Ferrofluid Flask upgrades and early boss preparation",
+    "The Emissary investigation across Chapters 2, 5 and 8, including the Seal, Letter, Shield return, hidden escort camp, Blood-Soaked Velvet, Sands of Time and Perfect Copy",
+
+    "All 39 Valor Mortis achievements with an interactive checklist, chapter-by-chapter 100% roadmap, Ambersmith, Monster Hunt, Eternal Guardists and repeatable combat challenges",
+
+    "Upgrade planning for Abyssal Eviction, Shield Level 5, rare Transmutation materials, maximum-level melee weapons, firearms and previously blocked exploration routes",
   ],
 
   image:
@@ -184,14 +188,14 @@ export const guideClusters: GuideCluster[] = [
   pages: [
     {
       title:
-        "Valor Mortis Walkthrough: All 11 Chapters & Progression",
+        "Valor Mortis Walkthrough: All 11 Chapters & Where to Go Next",
 
       href: "/valor-mortis",
 
       type: "Guide Hub",
 
       description:
-        "Follow all 11 chapters, find your next objective, unlock Grapple, Stasis and Shield, and return to earlier regions for upgrades.",
+        "Follow all 11 chapters, find your next story objective, unlock Grapple, Stasis and Shield, and return to earlier regions for upgrades and unfinished quests.",
 
       image:
         "/images/valor-mortis/general-lothaire-battlefield-arena.webp",
@@ -202,7 +206,7 @@ export const guideClusters: GuideCluster[] = [
 
       home: {
         spotlightMeta:
-          "11 chapters, General Lothaire, Iron Marshall, Sphinx, Grapple, Stasis, Shield, the Ancient Lair and final boss",
+          "11 chapters, General Lothaire, Iron Marshall, Sphinx, Cursed Hollow, sewer keys, Grapple, Stasis, Shield and final boss",
       },
 
       archive: {
@@ -220,7 +224,7 @@ export const guideClusters: GuideCluster[] = [
       type: "Bosses",
 
       description:
-        "Learn what happens if you beat Lothaire in Chapter 1, how to skip the Chapter 2 rematch, claim Catalyst rewards and survive both phases.",
+        "Learn what happens if you beat Lothaire in Chapter 1, how the Chapter 2 rematch changes, and how to claim early rewards and survive both phases.",
 
       date: "Updated recently",
 
@@ -240,7 +244,7 @@ export const guideClusters: GuideCluster[] = [
         spotlightOrder: 1,
 
         spotlightMeta:
-          "Chapter 1 early victory, 20,000 Catalysts, Commander's Catalyst Clot, Chapter 2 rematch, weak points and Torn Banner",
+          "Chapter 1 victory, 20,000 Catalysts, Commander's Catalyst Clot, Chapter 2 rematch, weak points and Torn Banner",
       },
 
       archive: {
@@ -258,7 +262,7 @@ export const guideClusters: GuideCluster[] = [
       type: "Walkthrough",
 
       description:
-        "Get the Pistol, open The Climb lift, find the missing scouts, choose the Adjutant reward, clear Military Camp and return to Quarry with Grapple.",
+        "Get the Pistol, activate The Climb lift, find the missing scouts, choose the Adjutant reward, clear Quarry and return with Grapple for upgrades.",
 
       date: "Updated recently",
 
@@ -274,7 +278,7 @@ export const guideClusters: GuideCluster[] = [
         latestOrder: 463,
 
         spotlightMeta:
-          "Guidepost, Pistol, lift mechanism, missing scouts, truth or lie, Eternal Guardist, Military Camp, Quarry and Pure Blade Material",
+          "Guidepost, lift mechanism, missing scouts, truth or lie, Eternal Guardist, Military Camp and Quarry upgrades",
       },
 
       archive: {
@@ -292,7 +296,7 @@ export const guideClusters: GuideCluster[] = [
       type: "Walkthrough",
 
       description:
-        "Complete The Scarecrow and Lullaby, find the Weathered and Storage Keys, get the Blunderbuss, defeat Iron Marshall, unlock Grapple and rescue Louis.",
+        "Find the Weathered and Storage Keys, complete village investigations, collect the Blunderbuss, defeat Iron Marshall, unlock Grapple and rescue Louis.",
 
       date: "Updated recently",
 
@@ -311,7 +315,7 @@ export const guideClusters: GuideCluster[] = [
         spotlightOrder: 2,
 
         spotlightMeta:
-          "Rapier, Fields, Scarecrow, Blunderbuss, Marketplace keys, Iron Marshall, Ultima Ratio Regum, Grapple and Louis",
+          "Rapier, Scarecrow, Lullaby, Marketplace keys, Iron Marshall, Grapple and Louis",
       },
 
       archive: {
@@ -329,7 +333,7 @@ export const guideClusters: GuideCluster[] = [
       type: "Walkthrough",
 
       description:
-        "Enter Caverns with the Cave Grotto Key, unlock Stasis, solve Old Mine machinery, redirect minecarts, find the Mining Shaft Key and defeat Sphinx.",
+        "Enter Caverns, unlock Stasis, solve moving-platform puzzles, redirect minecarts, find the Mining Shaft Key and defeat Sphinx in the Salt Mine.",
 
       date: "Updated recently",
 
@@ -348,7 +352,7 @@ export const guideClusters: GuideCluster[] = [
         spotlightOrder: 3,
 
         spotlightMeta:
-          "Cave Grotto Key, Homesick, Weeping Ledge, Stasis, suspended crate, track switch, Mining Shaft Key and Sphinx",
+          "Cave Grotto Key, Homesick, Weeping Ledge, Stasis, Old Mine machinery, Mining Shaft Key and Sphinx",
       },
 
       archive: {
@@ -366,7 +370,7 @@ export const guideClusters: GuideCluster[] = [
       type: "Guide",
 
       description:
-        "Find the Emissary's Seal and Letter, return with Shield, investigate the hidden camp, locate the final red fabric and claim both rewards.",
+        "Collect the Emissary's Seal and Letter, return with Shield, investigate the hidden camp, find Blood-Soaked Velvet and obtain Sands of Time and Perfect Copy.",
 
       date: "Updated recently",
 
@@ -382,7 +386,7 @@ export const guideClusters: GuideCluster[] = [
         latestOrder: 461,
 
         spotlightMeta:
-          "Chapter 2 Seal, Chapter 5 Letter, Chapter 8 Shield, poisoned passage, dead escort, red fabric, Sands of Time and Perfect Copy",
+          "Chapter 2 Seal, Chapter 5 Letter, Chapter 8 Shield, hidden escort camp, Blood-Soaked Velvet, Sands of Time and Perfect Copy",
       },
 
       archive: {
@@ -390,8 +394,114 @@ export const guideClusters: GuideCluster[] = [
         order: 6,
       },
     },
+
+    {
+      title:
+        "Valor Mortis Achievements: All 39 & 100% Roadmap",
+
+      href: "/valor-mortis/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Track all 39 achievements with an interactive checklist, protect Shield Level 5 materials, collect 28 unique Ambers and complete combat challenges.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/general-lothaire-battlefield-arena.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 468,
+
+        spotlightRail: true,
+        spotlightOrder: 4,
+
+        spotlightMeta:
+          "39 achievements, interactive checklist, 100% roadmap, Shield Bash, 28 Ambers, Monster Hunt and combat challenges",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 7,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis Sewers Key & Master Key: Locations & Doors",
+
+      href: "/valor-mortis/sewers-keys",
+
+      type: "Guide",
+
+      description:
+        "Find the Sewers Key and Sewers Master Key, open their locked gates, solve the flooded platform crossing and reach the Shrike.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/sewers-master-key-locked-door.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 467,
+
+        spotlightMeta:
+          "City of Orphans, Sewers Lantern, two keys, locked gates, pull-out platform, Masterwork Firearm Parts and Laboratory Key",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 8,
+      },
+    },
+
+    {
+      title:
+        "Valor Mortis Cursed Hollow Walkthrough: Keys & Claymore",
+
+      href: "/valor-mortis/cursed-hollow",
+
+      type: "Walkthrough",
+
+      description:
+        "Defeat the Bride, find Headman's Key, resolve Sleeping Beauty, help Seamus Diggory, collect Claymore and complete Till Death with the Red Ribbon.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/valor-mortis/cursed-hollow-headmans-key.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 466,
+
+        spotlightMeta:
+          "Eerie View, the Bride, Headman's Key, Sleeping Beauty, Blood or Wine, Village Church, Claymore and Red Ribbon",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 9,
+      },
+    },
   ],
 },
+
   {
     title: "DREADMOOR",
     game: "DREADMOOR",
