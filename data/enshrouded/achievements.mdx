@@ -1,0 +1,654 @@
+import Image from "next/image";
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import ProgressChecklist from "@/components/tools/ProgressChecklist";
+
+export const achievement = (
+  id,
+  name,
+  requirement,
+  category,
+  detailHref,
+  timing
+) => ({
+  id,
+  name,
+  requirement,
+  category,
+  detailHref,
+  timing,
+  searchText: `${name} ${requirement} ${category}`.toLowerCase(),
+});
+
+export const regionalAchievementGroups = [
+  {
+    id: "springlands",
+    region: "Springlands",
+    stargazer: "Springlands stargazer",
+    secretKeeper: "Springlands secret keeper",
+    spark: "Spark of the Springlands",
+    weeding: "Springland weeding",
+    mole: "Mole of the Springlands",
+    href: "#springlands",
+  },
+  {
+    id: "revelwoods",
+    region: "Revelwoods",
+    stargazer: "Revelwoods stargazer",
+    secretKeeper: "Revelwoods secret keeper",
+    spark: "Spark of the Revelwoods",
+    weeding: "Revelwood weeding",
+    mole: "Mole of the Revelwoods",
+    href: "#revelwoods",
+  },
+  {
+    id: "nomad-highlands",
+    region: "Nomad Highlands",
+    stargazer: "Nomad Highlands stargazer",
+    secretKeeper: "Nomad Highlands secret keeper",
+    spark: "Spark of the Nomad Highlands",
+    weeding: "Nomad Highlands weeding",
+    mole: "Mole of the Nomad Highlands",
+    href: "#nomad-highlands",
+  },
+  {
+    id: "kindlewastes",
+    region: "Kindlewastes",
+    stargazer: "Kindlewastes stargazer",
+    secretKeeper: "Kindlewastes secret keeper",
+    spark: "Spark of the Kindlewastes",
+    weeding: "Kindlewastes weeding",
+    mole: "Mole of the Kindlewastes",
+    href: "#kindlewastes",
+  },
+  {
+    id: "albaneve-summits",
+    region: "Albaneve Summits",
+    stargazer: "Albaneve Summits stargazer",
+    secretKeeper: "Albaneve Summits secret keeper",
+    spark: "Spark of the Albaneve Summits",
+    weeding: "Albaneve Summits weeding",
+    mole: "Mole of the Albaneve Summits",
+    href: "#albaneve-summits",
+  },
+  {
+    id: "veilwater-basin",
+    region: "Veilwater Basin",
+    stargazer: "Veilwater Basin stargazer",
+    secretKeeper: "Veilwater Basin secret keeper",
+    spark: "Spark of the Veilwater Basin",
+    weeding: "Veilwater Basin weeding",
+    mole: "Mole of the Veilwater Basin",
+    href: "#veilwater-basin",
+  },
+];
+
+export const enshroudedAchievementChecklistItems = [
+  achievement(
+    "place-to-call-home",
+    "A place to call home",
+    "Create a Flame Altar.",
+    "Getting Started",
+    "#completion-route",
+    "Opening"
+  ),
+  achievement(
+    "thus-it-begins",
+    "Thus it begins",
+    "Craft a simple item.",
+    "Getting Started",
+    "#completion-route",
+    "Opening"
+  ),
+  achievement(
+    "leave-a-mark",
+    "Leave a mark",
+    "Mine terrain for the first time.",
+    "Getting Started",
+    "#completion-route",
+    "Opening"
+  ),
+  achievement(
+    "erudite",
+    "Erudite",
+    "Unlock your first skill.",
+    "Getting Started",
+    "#completion-route",
+    "Opening"
+  ),
+  achievement(
+    "shortcut",
+    "Shortcut",
+    "Craft or obtain a Grappling Hook.",
+    "Getting Started",
+    "#completion-route",
+    "Early exploration"
+  ),
+  achievement(
+    "freefall",
+    "Freefall",
+    "Craft or obtain a Glider.",
+    "Getting Started",
+    "#completion-route",
+    "Early exploration"
+  ),
+  achievement(
+    "well-done",
+    "Well done!",
+    "Clear the first Elixir Well.",
+    "Getting Started",
+    "#springlands",
+    "First Shroud cleanup"
+  ),
+
+  ...[
+    ["doing-something-right", "Doing something right", 2],
+    ["on-the-way", "On the way", 5],
+    ["things-come-together", "Things come together", 10],
+    ["getting-a-feel-for-it", "Getting a feel for it", 15],
+    ["how-far-we-have-come", "How far we have come", 20],
+    ["impressive-journey", "Impressive journey", 25],
+    ["climbing-to-new-heights", "Climbing to new heights", 30],
+    ["reaching-the-top", "Reaching the top", 35],
+    ["ready-for-new-lands", "Ready for new lands", 40],
+    ["onto-new-horizons", "Onto new horizons", 45],
+    ["above-the-clouds", "Above the clouds", 50],
+  ].map(([id, name, level]) =>
+    achievement(
+      id,
+      name,
+      `Reach character level ${level}.`,
+      "Leveling",
+      "#leveling",
+      `Level ${level}`
+    )
+  ),
+
+  achievement(
+    "pieces-of-the-past",
+    "Pieces of the past",
+    "Find all forgotten Guard of the North armor pieces.",
+    "Special Collections",
+    "#special-achievements",
+    "Pikemead's Reach"
+  ),
+  achievement(
+    "winged-victory",
+    "Winged Victory",
+    "Obtain a Ghost Glider.",
+    "Special Collections",
+    "#special-achievements",
+    "Kindlewastes exploration"
+  ),
+
+  achievement(
+    "thundering-success",
+    "Thundering success",
+    "Defeat the guardian of the first Elixir Well.",
+    "Bosses",
+    "#boss-achievements",
+    "Springlands"
+  ),
+  achievement(
+    "dethroned",
+    "Dethroned",
+    "Defeat the Shroud Wyvern.",
+    "Bosses",
+    "#boss-achievements",
+    "Pikemead's Reach"
+  ),
+  achievement(
+    "king-of-the-mountain",
+    "King of the mountain",
+    "Defeat the dragon.",
+    "Bosses",
+    "#boss-achievements",
+    "Albaneve Summits"
+  ),
+  achievement(
+    "a-new-north-star",
+    "A new North Star",
+    "Defeat Lord Vorgoth.",
+    "Bosses",
+    "#cinders-cradle",
+    "1.0 final boss"
+  ),
+
+  ...regionalAchievementGroups.flatMap((region) => [
+    achievement(
+      `${region.id}-stargazer`,
+      region.stargazer,
+      `Reach the Ancient Spire in ${region.region}.`,
+      region.region,
+      region.href,
+      "Ancient Spire"
+    ),
+    achievement(
+      `${region.id}-secret-keeper`,
+      region.secretKeeper,
+      `Read all Obelisks in ${region.region}.`,
+      region.region,
+      region.href,
+      "Obelisks"
+    ),
+    achievement(
+      `${region.id}-spark`,
+      region.spark,
+      `Find all Flame Shrines and Sanctums in ${region.region}.`,
+      region.region,
+      region.href,
+      "Flame locations"
+    ),
+    achievement(
+      `${region.id}-weeding`,
+      region.weeding,
+      `Clear all Shroud Roots in ${region.region}.`,
+      region.region,
+      region.href,
+      "Regional Shroud cleanup"
+    ),
+    achievement(
+      `${region.id}-mole`,
+      region.mole,
+      `Mine every valuable material type in ${region.region}.`,
+      region.region,
+      region.href,
+      "Regional mining"
+    ),
+  ]),
+
+  achievement(
+    "cinders-cradle-stargazer",
+    "Cinder's Cradle stargazer",
+    "Scale the Ancient Spire in Cinder's Cradle.",
+    "Cinder's Cradle",
+    "#cinders-cradle",
+    "1.0 exploration"
+  ),
+  achievement(
+    "cinders-cradle-secret-keeper",
+    "Cinder's Cradle secret keeper",
+    "Read all Obelisks in Cinder's Cradle.",
+    "Cinder's Cradle",
+    "#cinders-cradle",
+    "1.0 exploration"
+  ),
+  achievement(
+    "cinders-cradle-weeding",
+    "Cinder's Cradle Weeding",
+    "Clear every Shroud Root in Cinder's Cradle.",
+    "Cinder's Cradle",
+    "#cinders-cradle",
+    "1.0 regional cleanup"
+  ),
+  achievement(
+    "cinders-cradle-mole",
+    "Mole of the Cinder's Cradle",
+    "Mine every valuable material type in Cinder's Cradle.",
+    "Cinder's Cradle",
+    "#cinders-cradle",
+    "1.0 mining"
+  ),
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Get 100% in Enshrouded 1.0?">
+Activate each region's Ancient Spire, read its Obelisks, and use the revealed locations to clear Shroud Roots and Flame Shrines. Collect valuable mining materials as you travel, then finish the remaining Cinder's Cradle objectives and reach **Level 50**.
+</GuideQuickAnswer>
+
+</section>
+
+Enshrouded has **58 Steam achievements** in version 1.0. The six newest achievements cover Cinder's Cradle, Level 50, and Lord Vorgoth, but they are only the last part of a much longer completion journey.
+
+Most of the work comes from exploring the existing regions thoroughly. You can defeat major bosses, reach the highest character levels, and finish the main story while still missing a few Flame Shrines, an overlooked Obelisk, or a Shroud Root hidden beyond the obvious route.
+
+The best way to approach 100% completion is to let normal progression unlock the easy achievements, then work through regional cleanup with a clear record of what you have already visited.
+
+<section id="achievement-tracker" className="scroll-mt-24">
+
+## All 58 Enshrouded Achievements Checklist
+
+<ProgressChecklist
+  storageKey="enshrouded-achievements-v1"
+  title="Enshrouded 58-Achievement Tracker"
+  description="Track all 58 Steam achievements, search their requirements, filter unfinished goals, and save progress in this browser."
+  items={enshroudedAchievementChecklistItems}
+  shareUrl="/enshrouded/achievements"
+  maxVisibleRows={58}
+/>
+
+Use the checklist to separate completed objectives from unfinished regions. An Ancient Spire can be finished long before the corresponding Obelisk, Shroud Root, or Flame Shrine achievement, so checking off one regional milestone does not mean the entire area is complete.
+
+The new Cinder's Cradle achievements can also be tracked independently from the older regions. You do not need to restart an existing character merely to begin working on them.
+
+</section>
+
+<section id="completion-route" className="scroll-mt-24">
+
+## The Best Order to Get All 58 Achievements
+
+The order that saves the most travel is slightly different from simply following every achievement as it becomes available.
+
+### Start with the Blacksmith, movement tools, and the first Elixir Well
+
+The opening achievements require very little extra work. Placing your first Flame Altar, making basic tools, mining terrain, unlocking a skill, and reaching the first character levels will happen during ordinary survival and crafting.
+
+Rescue the Blacksmith and build the tools needed for exploration. **Shortcut** unlocks when you obtain the Grappling Hook, while **Freefall** comes from obtaining the Glider. Both make the later regional cleanup substantially easier.
+
+The first Elixir Well is worth completing early for two separate reasons. Destroying its Shroud Root earns **Well done!**, and defeating the Fell Thunderbrute guarding the well earns **Thundering success**. Make sure the guardian is defeated rather than leaving immediately after clearing the Root.
+
+### Open the Ancient Spire before attempting a full regional sweep
+
+Ancient Spires are much more than fast-travel destinations for a completion run. Reaching their summits unlocks the regional Stargazer achievements and places you in a useful position for reaching surrounding objectives.
+
+That height becomes especially valuable once the Glider improves. Instead of approaching every Flame Shrine from the nearest road, you can often glide toward several locations from one elevated starting point.
+
+The Spire alone will not reveal everything needed for 100%, however. Obelisks are the next major part of the process.
+
+### Find both kinds of Obelisks before collecting every map marker
+
+The **Obelisk of Fire** and **Obelisk of Rot** provide different benefits.
+
+The Obelisk of Fire reveals Flame Shrines and Sanctums, while the Obelisk of Rot reveals Shroud Roots. Finding them turns a large part of achievement cleanup from wandering around unfamiliar terrain into visiting specific destinations.
+
+In the Springlands, reading the second Obelisk completes **Springlands secret keeper**. It also gives you a much better way to plan the remaining Flame Shrine and Shroud Root objectives.
+
+### Leave distant cleanup until you have the right equipment
+
+Some regional objectives appear much earlier than they become comfortable to complete. A Flame Shrine on the far side of a mountain might take several minutes of climbing, while a Shroud Root can sit behind enemies considerably stronger than your current character.
+
+There is no need to force every one of these objectives immediately.
+
+Finish nearby locations while passing through an area, then return for difficult or distant objectives after upgrading the Glider, improving combat equipment, and strengthening the Flame. This is particularly useful in the Nomad Highlands and the later regions, where a direct route on the map may not be a practical route on foot.
+
+</section>
+
+<section id="flame-shrines" className="scroll-mt-24">
+
+## Why Flame Shrines Are So Easy to Miss
+
+The regional **Spark** achievements are some of the longest parts of 100% completion.
+
+One frustrating detail is that collecting a Spark from a Flame Shrine does not provide the same clear permanent completion indication that you get from certain Obelisks or Shroud Roots. Shrines can also be visited again after a world reload.
+
+That creates a simple but expensive mistake: traveling all the way to a distant shrine, only to realize you collected its Spark earlier.
+
+A reliable way to avoid this is to mark the locations yourself.
+
+
+<figure className="my-8">
+  <Image
+    src="/images/enshrouded/enshrouded-achievements-obelisk-map-reveal.webp"
+    alt="Enshrouded Springlands map showing a marked Flame location north of Braelyn Bridge"
+    width={1540}
+    height={1000}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Flame location north of Braelyn Bridge. Keep a separate record of the Shrines you have visited, since a visible map marker does not tell you whether you already collected its Spark.
+  </figcaption>
+</figure>
+
+After collecting a Spark:
+
+1. Place a custom map marker beside the Shrine or Sanctum.
+2. Give it a recognizable name, such as "Completed."
+3. Change the marker color to green.
+4. Repeat this immediately at the next location.
+
+The color matters less than applying the same system everywhere. By the time you reach Albaneve Summits or Veilwater Basin, remembering which identical-looking Flame icons you visited several hours earlier becomes difficult.
+
+Do not confuse a Shrine or Sanctum with a Flame Altar you built for fast travel. Building more personal Flame Altars does not replace finding the fixed world locations required for the Spark achievements.
+
+</section>
+
+<section id="springlands" className="scroll-mt-24">
+
+## Springlands: Clear the Early Achievements Together
+
+Springlands is the best place to establish your completion routine because most of its objectives can be reached with early equipment.
+
+Begin with the Ancient Spire, then read the region's Obelisks before performing the final cleanup. Two particularly useful resource discoveries are **Flintstone** and **Salt**, which contribute to **Mole of the Springlands**.
+
+The Shroud Root achievement is not limited to the first Elixir Well. Continue clearing the region until **Springland weeding** unlocks.
+
+For the final Flame Shrine sweep, use the Spire's height and the revealed map markers. Collect nearby Sparks whenever another quest takes you into the same area, rather than repeatedly making separate trips from your base.
+
+The five regional achievements to finish are:
+
+- Springlands stargazer
+- Springlands secret keeper
+- Spark of the Springlands
+- Springland weeding
+- Mole of the Springlands
+
+The starting crafting and movement achievements will normally be complete well before this regional list is finished.
+
+</section>
+
+<section id="revelwoods" className="scroll-mt-24">
+
+## Revelwoods: Check Below the Hill Before Searching for a Shroud Root
+
+Revelwoods adds more difficult Shroud encounters and some misleading approaches to underground locations.
+
+One particular Shroud area has an abandoned house and several enemies near the top of a hill. It is tempting to assume that the entrance must be near those buildings.
+
+The actual way in is **below the hilltop, partway down the descent**. Searching the top or the very bottom of the trench sends you away from the entrance.
+
+There is another distinction that can waste time here: **Shroud Layers are not automatically Shroud Roots**. Some contain enemies and resources for Gem crafting without a Root to destroy. Clearing the enemies and finding no Root does not necessarily mean you missed a hidden room.
+
+For **Mole of the Revelwoods**, important materials encountered during progression include Copper and Amber. Continue checking the region's valuable material types instead of assuming that mining ordinary Stone or gathering plants will complete the achievement.
+
+The final regional cleanup follows the same pattern as Springlands: finish the Spire, locate all Obelisks, collect the revealed Sparks, and destroy the remaining Roots.
+
+</section>
+
+<section id="nomad-highlands" className="scroll-mt-24">
+
+## Nomad Highlands: The Shroud Root Is Not Always at the Elixir Well Icon
+
+Nomad Highlands has one particularly misleading Elixir Well objective.
+
+The marked Elixir Well entrance can be visible on the map, but the Shroud Root itself lies much farther inside the zone. Searching only around the icon will not lead directly to the target.
+
+Descend into the Shroud and follow the road toward the Grappling Hook section. The route continues past a Fell Monstrosity, with the actual Root roughly **200 meters southwest of the marked well location**.
+
+The Monstrosity launches dangerous Shroud projectiles and can be awkward for a bow-focused character. Arrive with enough ammunition, healing, and remaining Shroud time to handle the encounter and continue onward.
+
+Destroying that Root is part of **Nomad Highlands weeding**. The achievement requires the entire regional set, not just this difficult well.
+
+The Highlands also contain **13 Flame Shrines and Sanctums** in the earlier regional completion route. Several are high on mountains or set into steep slopes, making an improved Glider a substantial time saver.
+
+For the mining achievement, collect regional materials as you progress. Tin and the large **Fossilized Bones** found in the Highlands are two especially recognizable discoveries.
+
+The practical order here is to reach the Ancient Spire, locate the Obelisks, use the elevated fast-travel position for reachable Flame locations, and finish the harder Shroud objectives once your gear is ready.
+
+</section>
+
+<section id="kindlewastes" className="scroll-mt-24">
+
+## Kindlewastes: Sun Temples Count Toward the Flame Shrine Achievement
+
+The Kindlewastes completion route includes familiar objectives, but one additional location type matters for the Spark achievement: **Sun Temples**.
+
+These must be considered alongside the ordinary Flame Shrines and Sanctums during your regional sweep. Finishing the easier exposed locations while overlooking a temple can leave **Spark of the Kindlewastes** incomplete.
+
+The Ancient Spire provides a useful starting point, followed by the regional Obelisks. One of the Obelisks can be reached near the objective associated with finding scientific instruments for the Alchemist.
+
+This is also the region where the **Ghost Glider** becomes an important collection goal. Obtaining it unlocks **Winged Victory**, and its improved travel capabilities are useful for the harder regional cleanup still ahead.
+
+Finish your mining discoveries and Shroud Roots as part of ordinary exploration, then use the expanded movement range to reach the remaining Flame locations.
+
+</section>
+
+<section id="albaneve-summits" className="scroll-mt-24">
+
+## Albaneve Summits: Prepare for Long Shroud Wells and the Dragon
+
+Albaneve Summits combines difficult movement, cold conditions, strong enemies, and some unusually involved Elixir Wells.
+
+The two Obelisks are worth pursuing before a final sweep. One is among the windswept mountain peaks, while the other is far to the northeast, outside the Shroud zone. Reading both completes **Albaneve Summits secret keeper**.
+
+The mountain terrain makes reaching distant locations harder than the map suggests. A convenient Flame Altar, upgraded Glider, sufficient stamina, and cold-resistant equipment reduce repeated climbing.
+
+One of the more demanding Elixir Wells contains **three Shroud Roots in the same extended route**.
+
+After dealing with its entrance guardian, cross a large chasm using the updrafts to reach the first Root. Another Root lies off to the side, requiring a further crossing. Even after destroying both, the well remains active because a third Root sits higher along the route.
+
+That last Root is guarded by a powerful Fell Cyclops. Completing the first two does not mean the entire well is clear.
+
+This is an important difference from shorter Shroud locations, where one destroyed Root often appears to resolve the immediate objective.
+
+For **Mole of the Albaneve Summits**, Amethyst is one of the notable regional materials. It can be found during mountain and cave exploration.
+
+### King of the Mountain and the eight Balefires
+
+The Dragon Youngling is a separate boss objective tied to **King of the mountain**.
+
+After reaching the appropriate Flame progression, the quest sends you to ignite **eight Balefires** around Albaneve Summits. Their large red light beams make them easier to identify from a distance.
+
+Once all eight are lit, the Dragon Youngling can be challenged.
+
+Its attacks include falling fire projectiles, sweeping fire breath, and wing attacks that can knock you from the platform. The falling projectiles can also be parried back toward the boss, creating an opportunity to stun it.
+
+Avoid arriving without enough stamina to recover from a knockback or reposition during the fire attacks. Defeating the Dragon Youngling completes the boss achievement and provides a head needed for later Flame progression.
+
+The eight Balefires belong to this dragon quest; they are not the six Beacons associated with the final Cinder's Cradle story.
+
+</section>
+
+<section id="veilwater-basin" className="scroll-mt-24">
+
+## Veilwater Basin: One Obelisk Is Underwater
+
+Veilwater Basin adds a significant complication to regional completion: valuable locations can be underwater rather than on ordinary walking routes.
+
+For **Veilwater Basin secret keeper**, the two Obelisks are in very different places.
+
+The first is northeast of the region's Ancient Spire. The second lies in the northwestern lagoon, **at the bottom of the water**, rather than on the nearby shore.
+
+Reaching the lagoon and searching the surface is not enough. Dive into the water and investigate the bottom to locate the Obelisk.
+
+<figure className="my-8">
+  <Image
+    src="/images/enshrouded/enshrouded-achievements-veilwater-underwater-obelisk.webp"
+    alt="Ancient Obelisk discovered underwater while exploring Enshrouded"
+    width={1982}
+    height={930}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    An Ancient Obelisk can be hidden below the surface. In Veilwater Basin, the second Obelisk lies at the bottom of the northwestern lagoon, not on the shoreline.
+  </figcaption>
+</figure>
+
+Oxygen management becomes important for the area's underwater puzzles and exploration. In the Ancient Spire, one section requires descending into dark water around spike traps, with an opportunity to replenish oxygen near a lower-level button.
+
+Reaching the top completes **Veilwater Basin stargazer**.
+
+For **Veilwater Basin weeding**, the earlier completion route includes:
+
+- **3 Elixir Wells**
+- **6 additional Shroud Roots**
+- **9 targets in total**
+
+The final Root is beneath the northern Cromville Castle area, past the throne room and below it. Do not stop after clearing the more obvious Shroud locations scattered through the main basin.
+
+Strengthening the Flame to Level 9 is important for completing this region's more dangerous Shroud objectives. A character still blocked by deadly Shroud should finish that upgrade before attempting to force a route through the final areas.
+
+The regional mining achievement also benefits from underwater exploration. Aquamarine and Mother of Pearl are useful examples of valuable discoveries encountered while exploring the basin.
+
+Once the Obelisks, Shroud Roots, Ancient Spire, and mining requirements are complete, revisit the remaining Flame locations for **Spark of the Veilwater Basin**.
+
+</section>
+
+<section id="cinders-cradle" className="scroll-mt-24">
+
+## Enshrouded 1.0: The Six New Achievements
+
+Version 1.0 adds six achievements, extending completion into Cinder's Cradle, the final boss encounter, and the new Level 50 milestone.
+
+Four achievements follow the region's exploration activities:
+
+- **Cinder's Cradle stargazer** — reach the top of the region's Ancient Spire.
+- **Cinder's Cradle secret keeper** — read all Obelisks in the region.
+- **Cinder's Cradle Weeding** — destroy all **12 Shroud Roots**.
+- **Mole of the Cinder's Cradle** — mine every required valuable material type.
+
+The Shroud Roots deserve particular attention. Cinder's Cradle also contains six Beacon Dungeons connected to the final story, but activating those Beacons does not clear the region's 12 Shroud Roots. Check both objectives separately before leaving for the Floating Isles.
+
+For the mining achievement, finding a resource or looting it from an enemy is not the same as mining its deposit. Revisit the region's available ore and mineral deposits when you are missing a material discovery.
+
+The remaining two achievements mark the end of character and story progression.
+
+**Above the clouds** requires **Level 50**, extending the earlier Level 45 milestone. Keep gaining experience through remaining quests, combat, and exploration instead of stopping at the previous level cap.
+
+**A new North Star** unlocks after defeating **Lord Vorgoth** at the end of the Cinder's Cradle story. Completing that battle does not automatically finish the regional exploration achievements, so any remaining Obelisks, Roots, or mining discoveries can still require another trip.
+
+</section>
+
+<section id="leveling" className="scroll-mt-24">
+
+## How to Finish the Level 40, 45, and 50 Achievements
+
+The character-level achievements advance at regular intervals from Level 2 through Level 50.
+
+Early levels arrive naturally from ordinary play. The final milestones can take longer if you have already completed most nearby quests and are no longer gaining much experience from routine exploration.
+
+During the later stages of a completion run, one approach is to fight higher-level enemies in regions you can already survive comfortably.
+
+Increasing enemy spawns in the world settings can provide more enemies to fight when deliberately farming experience. A completion run through Veilwater Basin can use this to finish the Level 40 and Level 45 milestones after the regional exploration work is largely complete.
+
+There is little reason to spend hours farming those levels while major Shroud Roots, unexplored regions, and unfinished quests still remain. Complete useful objectives first, then deliberately farm only the experience you still need.
+
+Level 50 becomes the final target in 1.0.
+
+</section>
+
+<section id="special-achievements" className="scroll-mt-24">
+
+## Pieces of the Past and Winged Victory
+
+Two achievements are easy to overlook because they are specific equipment rewards rather than the recurring regional categories.
+
+**Pieces of the past** requires collecting the complete forgotten **Guard of the North armor set**. The pieces are associated with Pikemead's Reach. Finding one piece does not satisfy the achievement; complete the set before marking it finished.
+
+**Winged Victory** requires obtaining the **Ghost Glider**, found through the Kindlewastes Sun Temple progression.
+
+Both fit naturally into broader exploration. They do not require turning every armor set or every Glider upgrade into a separate completion objective.
+
+</section>
+
+<section id="boss-achievements" className="scroll-mt-24">
+
+## Boss Achievements That Need a Specific Kill
+
+**Thundering success** requires defeating the Fell Thunderbrute guarding the first Elixir Well. Destroying the Shroud Root alone does not replace the boss kill.
+
+**Dethroned** comes from defeating the Shroud Wyvern at Pikemead's Reach. This is a separate objective from the ordinary regional Shroud Root cleanup.
+
+The two later boss achievements belong to larger quest sequences. **King of the mountain** requires defeating the Dragon Youngling after the eight Balefires have been lit in Albaneve Summits, while **A new North Star** requires defeating Lord Vorgoth during the final Cinder's Cradle story.
+
+</section>
+
+<section id="final-cleanup" className="scroll-mt-24">
+
+## What to Check When You Are Stuck at 56 or 57 of 58 Achievements
+
+A nearly completed achievement list is best handled by checking the remaining category rather than revisiting every region blindly.
+
+If the missing achievement is a **Spark**, compare your custom completion markers against the region's Shrine and Sanctum locations. A Flame icon that you visited previously may not tell you whether you actually collected its Spark.
+
+For a **Secret Keeper** achievement, revisit the regional Obelisks. In Veilwater Basin, remember the submerged Obelisk in the northwestern lagoon.
+
+For **Weeding**, check for hidden or distant Shroud Roots. The Nomad Highlands well with its off-marker Root and the underground Cromville Castle route are examples where searching only the obvious icon can be misleading. Version 1.0 also added Shroud Roots to previously existing regions, so an older completion route may no longer cover everything.
+
+For a **Mole** achievement, look for a valuable material type you never mined. Finding a regional material in a chest or collecting a different resource does not replace the requirement to mine the relevant materials.
+
+Finally, distinguish story completion from regional completion. Defeating Vorgoth does not resolve every Shrine, Root, Obelisk, or mining objective.
+
+The achievement tracker above makes the final step easier: filter the unfinished items, identify the missing region, and return only for the objective that remains.
+
+</section>

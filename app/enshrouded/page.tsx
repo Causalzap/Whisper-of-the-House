@@ -14,25 +14,22 @@ const metadataTitle =
   "Enshrouded 1.0 Guide: Walkthrough & Progression";
 
 const metadataDescription =
-  "Follow Enshrouded 1.0 progression, reach Cinder's Cradle, activate six beacons, unlock the Flying Isles, and defeat Vorgoth.";
+  "Follow Enshrouded 1.0 progression, reach Cinder's Cradle, activate six Beacon Dungeons, unlock the Flying Isles, and prepare for Vorgoth.";
 
 const articleTitle =
   "Enshrouded 1.0 Guide: Walkthrough & What to Do Next";
 
 const articleDescription =
-  "Find your next objective in Enshrouded 1.0, from the first survivors to Cinder's Cradle, six Beacon Dungeons, the Flying Isles, and the final boss.";
+  "Find your next objective in Enshrouded 1.0, from rescuing survivors to Cinder's Cradle, the six Beacon Dungeons, the Flying Isles, and Vorgoth.";
 
 const imageUrls = [
   `${siteUrl}/images/enshrouded/enshrouded-floating-isles-unlocked.webp`,
   `${siteUrl}/images/enshrouded/enshrouded-flame-level-10.webp`,
   `${siteUrl}/images/enshrouded/enshrouded-first-beacon-activated.webp`,
-  `${siteUrl}/images/enshrouded/enshrouded-citadel-barrier-unlocked.webp`,
-  `${siteUrl}/images/enshrouded/enshrouded-lord-vorgoth-boss-fight.webp`,
   `${siteUrl}/images/enshrouded/enshrouded-blacksmith-vault-approach.webp`,
 ];
 
-const heroImage =
-  "/images/enshrouded/enshrouded-floating-isles-unlocked.webp";
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -85,10 +82,16 @@ const toc = [
   },
 ];
 
-const relatedLinks: {
-  href: string;
-  label: string;
-}[] = [];
+const relatedLinks = [
+  {
+    href: "/enshrouded/achievements",
+    label: "All 58 Achievements & 100% Roadmap",
+  },
+  {
+    href: "/enshrouded/vorgoth-final-boss",
+    label: "How to Beat Vorgoth Final Boss",
+  },
+];
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -100,84 +103,121 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: metadataDescription,
+    description: articleDescription,
     siteName: "Whisper of the House",
-    images: imageUrls.map((url) => ({
-      url,
-    })),
+    images: [
+      {
+        url: heroImage,
+        alt: "Enshrouded 1.0 Floating Isles unlocked after completing the six Beacon Dungeons",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
-    images: [imageUrls[0]],
+    images: [heroImage],
   },
 };
 
-export default function EnshroudedPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${pageUrl}#breadcrumb`,
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: siteUrl,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Enshrouded",
-            item: pageUrl,
-          },
-        ],
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Enshrouded",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: articleTitle,
+      description: articleDescription,
+      url: pageUrl,
+      inLanguage: "en",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
-      {
-        "@type": "Article",
-        "@id": `${pageUrl}#article`,
-        headline: articleTitle,
-        description: articleDescription,
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": pageUrl,
-        },
-        image: imageUrls,
-        datePublished: "2026-10-15",
-        dateModified: "2026-10-15",
-        author: {
-          "@type": "Organization",
-          name: "Whisper of the House",
-          url: siteUrl,
-        },
-        publisher: {
-          "@id": `${siteUrl}/#organization`,
-        },
-        breadcrumb: {
-          "@id": `${pageUrl}#breadcrumb`,
-        },
-      },
-      {
+      image: imageUrls,
+      datePublished: "2026-10-15",
+      dateModified: "2026-10-16",
+      author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
-      {
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "Enshrouded",
+          url: pageUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Enshrouded 1.0 progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Enshrouded Cinder's Cradle",
+        },
+        {
+          "@type": "Thing",
+          name: "Enshrouded six Beacon Dungeons",
+        },
+        {
+          "@type": "Thing",
+          name: "Enshrouded Flying Isles",
+        },
+        {
+          "@type": "Thing",
+          name: "Enshrouded Ancient Capital",
+        },
+      ],
+      isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
-        url: siteUrl,
-        name: "Whisper of the House",
-        publisher: {
-          "@id": `${siteUrl}/#organization`,
-        },
       },
-    ],
-  };
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Whisper of the House",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+    },
+  ],
+};
 
+export default function EnshroudedPage() {
   return (
     <>
       <Header />
@@ -197,7 +237,7 @@ export default function EnshroudedPage() {
           gameHref="/enshrouded"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 15, 2026"
+          updatedAt="October 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
