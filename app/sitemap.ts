@@ -1188,7 +1188,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/nivalis-nights/seafaring-treasures': '2026-10-08',
 
   '/ace-combat-8': '2026-10-07',
-  '/ace-combat-8/walkthrough': '2026-10-07',
+  '/ace-combat-8/walkthrough': '2026-10-17',
   '/ace-combat-8/mission-9-land-battleship-blockade': '2026-09-29',
   '/ace-combat-8/mission-11-maximum-payload': '2026-09-29',
   '/ace-combat-8/mission-27-fatsia-ocean-fortress': '2026-09-29',
@@ -1197,8 +1197,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/ace-combat-8/assault-records': '2026-09-30',
   '/ace-combat-8/mission-16-singer': '2026-09-30',
   '/ace-combat-8/mission-18-moonlight-and-shadows': '2026-09-30',
-  '/ace-combat-8/mrp-farm': '2026-09-30',
-  '/ace-combat-8/aircraft-guide': '2026-10-03',
+  '/ace-combat-8/mrp-farm': '2026-10-17',
+  '/ace-combat-8/aircraft-guide': '2026-10-17',
   '/ace-combat-8/medals': '2026-10-07',
   '/ace-combat-8/mission-29-selene': '2026-10-07',
   
