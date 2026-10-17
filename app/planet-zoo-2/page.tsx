@@ -11,19 +11,19 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/planet-zoo-2`;
 
 const metadataTitle =
-  "Planet Zoo 2 Guide: Career Walkthrough & Progression";
+  "Planet Zoo 2 Guide: Career Walkthrough & Franchise";
 
 const metadataDescription =
-  "Follow Planet Zoo 2 Career across 18 scenarios, see what unlocks each chapter, and find help for aquariums, wildlife reserves, and achievements.";
+  "Follow all 18 Planet Zoo 2 Career scenarios, unlock chapters, start a Franchise Zoo, and solve aquarium, Wildlife Reserve, and achievement challenges.";
 
 const articleTitle =
-  "Planet Zoo 2 Guide: Career Walkthrough & What to Do Next";
+  "Planet Zoo 2 Guide: Career Walkthrough & Franchise";
 
 const articleDescription =
-  "Navigate all four Career chapters, understand medal and Accreditation requirements, and decide when to move forward or return for Silver and Gold.";
+  "Navigate all four Career chapters, understand medal requirements, build your first Franchise Zoo, and find help with aquariums, Wildlife Reserves, and achievements.";
 
 const pageDescription =
-  "Start at Great Rift Valley, follow the Career locations in order, and find out which medals and objectives you need to unlock your next assignment.";
+  "Find your next Career objective, unlock new locations, or start a Franchise Zoo. Follow the chapter routes and solve animal care, aquarium, and conservation problems.";
 
 const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/career-medal-unlock-requirement.webp`,
@@ -32,24 +32,68 @@ const imageUrls = [
 const heroImage = imageUrls[0];
 
 const toc = [
-  { id: "start-career", label: "Where to Go First" },
-  { id: "career-chapters", label: "All 4 Career Chapters" },
-  { id: "career-locked", label: "Why Is the Next Scenario Locked?" },
-  { id: "bronze-silver-gold", label: "Bronze, Silver, or Gold?" },
-  { id: "aquarium-help", label: "Aquarium Problems" },
-  { id: "wildlife-reserves", label: "Wildlife Reserve Releases" },
-  { id: "zoo-management", label: "Fixing Zoo Management Problems" },
-  { id: "career-or-franchise", label: "Career, Franchise, or Sandbox?" },
+  {
+    id: "quick-answer",
+    label: "Where Should You Start?",
+  },
+  {
+    id: "game-modes",
+    label: "Career, Franchise, or Sandbox?",
+  },
+  {
+    id: "start-career",
+    label: "How to Unlock Nordic Fjords",
+  },
+  {
+    id: "career-chapters",
+    label: "All 4 Career Chapters",
+  },
+  {
+    id: "career-locked",
+    label: "Why Is the Next Scenario Locked?",
+  },
+  {
+    id: "bronze-silver-gold",
+    label: "Bronze, Silver, or Gold?",
+  },
+  {
+    id: "aquarium-help",
+    label: "Aquarium Problems",
+  },
+  {
+    id: "wildlife-reserves",
+    label: "Wildlife Reserve Releases",
+  },
+  {
+    id: "achievements",
+    label: "All 39 Achievements",
+  },
 ];
 
 const relatedLinks = [
   {
     href: "/planet-zoo-2/career-chapter-1",
-    label: "Chapter 1: Great Rift Valley & East Africa",
+    label: "Career Chapter 1: Great Rift Valley & East Africa",
   },
   {
     href: "/planet-zoo-2/career-chapter-2",
-    label: "Chapter 2: All 5 Scenarios",
+    label: "Career Chapter 2: All 5 Scenarios",
+  },
+  {
+    href: "/planet-zoo-2/career-chapter-3",
+    label: "Career Chapter 3: All 5 Scenarios",
+  },
+  {
+    href: "/planet-zoo-2/franchise-guide",
+    label: "Franchise: How to Start a Zoo & Make Money",
+  },
+  {
+    href: "/planet-zoo-2/franchise-accreditation",
+    label: "Franchise Accreditation: All 5 Tiers",
+  },
+  {
+    href: "/planet-zoo-2/franchise-breeding",
+    label: "Franchise: Inbreeding & Overcrowding",
   },
   {
     href: "/planet-zoo-2/aquariums",
@@ -79,7 +123,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
     images: imageUrls,
     publishedTime: "2026-10-15",
-    modifiedTime: "2026-10-15",
+    modifiedTime: "2026-10-17",
   },
   twitter: {
     card: "summary_large_image",
@@ -123,8 +167,8 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-15",
-      dateModified: "2026-10-15",
-      articleSection: "Planet Zoo 2 Career Guide",
+      dateModified: "2026-10-17",
+      articleSection: "Planet Zoo 2 Career & Franchise",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -175,7 +219,7 @@ export default function PlanetZoo2Page() {
           gameHref="/planet-zoo-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 15, 2026"
+          updatedAt="October 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

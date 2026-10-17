@@ -15,16 +15,16 @@ const metadataTitle =
   "Planet Zoo 2 Wildlife Reserves: Releases & Ecosystems";
 
 const metadataDescription =
-  "Prepare release groups, establish ecosystems, build research networks, and improve biodiversity in Planet Zoo 2 wildlife reserves.";
+  "Prepare Release Groups, fix invalid ecosystems and blocked animal releases, build research networks, and improve Biodiversity Rating in Planet Zoo 2.";
 
 const articleTitle =
   "Planet Zoo 2 Wildlife Reserves: Release Groups & Ecosystems";
 
 const articleDescription =
-  "Learn how to prepare and transport Release Groups, establish suitable ecosystems, resolve blocked animal releases, build Research Networks, and improve Wildlife Reserve Biodiversity Ratings.";
+  "Prepare animals for conservation releases, establish suitable ecosystems, resolve blocked transfers, build Research Networks, and improve Wildlife Reserve Biodiversity Ratings.";
 
 const pageDescription =
-  "Release animals into suitable ecosystems, fix Invalid habitat conditions, and improve your reserve's environmental restoration and research ratings.";
+  "Move animals from your zoo into Wildlife Reserves, fix Invalid Ecosystems, restore missing environmental requirements, and improve biodiversity through research and conservation.";
 
 const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/wildlife-reserve-biodiversity-rating.webp`,
@@ -34,12 +34,16 @@ const heroImage = imageUrls[0];
 
 const toc = [
   {
+    id: "quick-answer",
+    label: "How to Release Animals",
+  },
+  {
     id: "release-groups",
     label: "Prepare and Transport Release Groups",
   },
   {
     id: "ecosystems",
-    label: "Establish Ecosystems",
+    label: "How to Establish Ecosystems",
   },
   {
     id: "release-blocked",
@@ -55,34 +59,38 @@ const toc = [
   },
   {
     id: "sumatra",
-    label: "Sumatra: River and Peatland",
-  },
-  {
-    id: "before-next-release",
-    label: "Before Your Next Release",
+    label: "Fix the Sumatra River Ecosystem",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/planet-zoo-2",
-    label: "Planet Zoo 2 Career Guide",
+    label: "Planet Zoo 2: Career & Franchise Guide",
   },
   {
     href: "/planet-zoo-2/career-chapter-1",
-    label: "Great Rift Valley & East Africa",
+    label: "Career Chapter 1: Great Rift Valley & East Africa",
   },
   {
     href: "/planet-zoo-2/career-chapter-2",
-    label: "Scottish Highlands & Chapter 2",
+    label: "Career Chapter 2: Scottish Highlands & More",
+  },
+  {
+    href: "/planet-zoo-2/career-chapter-3",
+    label: "Career Chapter 3: Sumatra & Sweden",
+  },
+  {
+    href: "/planet-zoo-2/franchise-accreditation",
+    label: "Franchise Accreditation: All 5 Tiers",
+  },
+  {
+    href: "/planet-zoo-2/aquariums",
+    label: "Aquarium Building & Water Filtration",
   },
   {
     href: "/planet-zoo-2/achievements",
     label: "All 39 Achievements Checklist",
-  },
-  {
-    href: "/planet-zoo-2/aquariums",
-    label: "Aquarium Building & Filtration",
   },
 ];
 
@@ -100,7 +108,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
     images: imageUrls,
     publishedTime: "2026-10-15",
-    modifiedTime: "2026-10-15",
+    modifiedTime: "2026-10-17",
   },
   twitter: {
     card: "summary_large_image",
@@ -150,8 +158,8 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-15",
-      dateModified: "2026-10-15",
-      articleSection: "Wildlife Reserves and Conservation",
+      dateModified: "2026-10-17",
+      articleSection: "Planet Zoo 2 Wildlife Reserves",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -202,7 +210,7 @@ export default function PlanetZoo2WildlifeReservesPage() {
           gameHref="/planet-zoo-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 15, 2026"
+          updatedAt="October 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
