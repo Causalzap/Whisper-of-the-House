@@ -94,6 +94,8 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: metadataDescription,
     siteName: "Whisper of the House",
+    publishedTime: "2026-10-03",
+    modifiedTime: "2026-10-17",
     images: [
       {
         url: heroImageUrl,
@@ -151,7 +153,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-03",
-      dateModified: "2026-10-03",
+      dateModified: "2026-10-17",
       articleSection: "Ace Combat 8 Guides",
       author: {
         "@type": "Organization",
@@ -245,7 +247,7 @@ export default function Page() {
           gameHref="/ace-combat-8"
           breadcrumbBaseHref="/ace-combat-8"
           breadcrumbBaseLabel="Ace Combat 8"
-          updatedAt="October 3, 2026"
+          updatedAt="October 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

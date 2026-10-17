@@ -14,10 +14,10 @@ const metadataTitle =
   "Ace Combat 8 MRP Farm: How to Earn 25 Million MRP";
 
 const metadataDescription =
-  "Farm MRP in Ace Combat 8 with Mission 28, including bomber priorities, Sema Island resupply timing, loadout choices, and the 25 million MRP goal.";
+  "Farm MRP in Ace Combat 8 with Missions 16, 27, and 28. Compare guns-only bonuses, Su-34 bombing, rewards, loadouts, and the 25 million MRP goal.";
 
 const articleDescription =
-  "Earn MRP efficiently in Ace Combat 8 by combining campaign cleanup with Mission 28 farming, bomber kills, Sema Island resupply, and the 25 million MRP requirement.";
+  "Compare Mission 16 guns-only, Mission 27 Su-34 bombing, and Mission 28 air-defense farming in Ace Combat 8, including example MRP rewards, loadouts, farming risks, and the cumulative 25 million MRP goal.";
 
 const imageUrls = [
   `${siteUrl}/images/ace-combat-8/mission-28-sema-island-resupply-ready.webp`,
@@ -27,40 +27,54 @@ const imageUrls = [
 const heroImage =
   "/images/ace-combat-8/mission-28-sema-island-resupply-ready.webp";
 
-const toc = [
-  {
-    id: "when-to-farm-mrp",
-    label: "When to Start Farming MRP",
-  },
-  {
-    id: "why-mission-28",
-    label: "Why Mission 28 Works",
-  },
-  {
-    id: "mission-28-priority",
-    label: "Mission 28 Target Priority",
-  },
-  {
-    id: "when-to-resupply",
-    label: "When to Resupply",
-  },
-  {
-    id: "loadout-for-farming",
-    label: "MRP Farming Loadout",
-  },
-  {
-    id: "spend-or-save-mrp",
-    label: "Spend or Save MRP",
-  },
-  {
-    id: "combine-mrp-goals",
-    label: "Combine MRP With Other Goals",
-  },
-  {
-    id: "finish-25-million",
-    label: "Finish the 25 Million MRP Goal",
-  },
-];
+
+  const toc = [
+    {
+      id: "when-to-farm-mrp",
+      label: "When to Start Farming MRP",
+    },
+    {
+      id: "best-mrp-routes",
+      label: "Mission 16 vs 27 vs 28",
+    },
+    {
+      id: "mission-16-farm",
+      label: "Mission 16 MRP Farm",
+    },
+    {
+      id: "mission-27-farm",
+      label: "Mission 27 MRP Farm",
+    },
+    {
+      id: "why-mission-28",
+      label: "When to Farm Mission 28",
+    },
+    {
+      id: "mission-28-priority",
+      label: "Mission 28 Target Priority",
+    },
+    {
+      id: "when-to-resupply",
+      label: "When to Resupply",
+    },
+    {
+      id: "loadout-for-farming",
+      label: "Mission 28 Loadout",
+    },
+    {
+      id: "spend-or-save-mrp",
+      label: "Spend or Save MRP",
+    },
+    {
+      id: "combine-mrp-goals",
+      label: "Combine MRP With Other Goals",
+    },
+    {
+      id: "finish-25-million",
+      label: "Finish the 25 Million MRP Goal",
+    },
+  ];
+  
 
 const relatedLinks = [
   {
@@ -89,6 +103,8 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: metadataDescription,
     siteName: "Whisper of the House",
+    publishedTime: "2026-09-30",
+    modifiedTime: "2026-10-17",
     images: imageUrls.map((url) => ({
       url,
     })),
@@ -141,7 +157,7 @@ export default function AceCombat8MrpFarmPage() {
         },
         image: imageUrls,
         datePublished: "2026-09-30",
-        dateModified: "2026-09-30",
+        dateModified: "2026-10-17",
         author: {
           "@type": "Organization",
           name: "Whisper of the House",
@@ -191,7 +207,7 @@ export default function AceCombat8MrpFarmPage() {
           gameHref="/ace-combat-8"
           breadcrumbBaseHref="/ace-combat-8"
           breadcrumbBaseLabel="Ace Combat 8"
-          updatedAt="September 30, 2026"
+          updatedAt="October 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
