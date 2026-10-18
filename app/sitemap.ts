@@ -1092,6 +1092,7 @@ const paths = [
     '/enshrouded', 
     '/enshrouded/achievements', 
     '/enshrouded/vorgoth-final-boss', 
+    '/enshrouded/albaneve-summits-hollow-halls', 
 
     'planet-zoo-2', 
     'planet-zoo-2/career-chapter-1', 
@@ -1123,9 +1124,10 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'planet-zoo-2/achievements': '2026-10-15',
 
 
-  '/enshrouded': '2026-10-16',
+  '/enshrouded':'2026-10-18',
   '/enshrouded/achievements': '2026-10-16',
   '/enshrouded/vorgoth-final-boss': '2026-10-16',
+  '/enshrouded/albaneve-summits-hollow-halls': '2026-10-18',
   
   '/valor-mortis/achievements': '2026-10-15',
   '/valor-mortis/sewers-keys': '2026-10-15',

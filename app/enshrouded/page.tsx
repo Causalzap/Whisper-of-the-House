@@ -84,6 +84,10 @@ const toc = [
 
 const relatedLinks = [
   {
+    href: "/enshrouded/albaneve-summits-hollow-halls",
+    label: "Albaneve Summits Hollow Halls Walkthrough",
+  },
+  {
     href: "/enshrouded/achievements",
     label: "All 58 Achievements & 100% Roadmap",
   },
