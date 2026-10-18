@@ -1104,6 +1104,8 @@ const paths = [
     'planet-zoo-2/franchise-guide',
     'planet-zoo-2/franchise-accreditation',
     'planet-zoo-2/franchise-breeding',
+
+    'tropico-7',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1111,6 +1113,7 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'tropico-7': '2026-10-18',
   
   'planet-zoo-2': '2026-10-17',
   'planet-zoo-2/career-chapter-1': '2026-10-15',

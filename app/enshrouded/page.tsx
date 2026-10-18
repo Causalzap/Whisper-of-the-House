@@ -88,6 +88,10 @@ const relatedLinks = [
     label: "Albaneve Summits Hollow Halls Walkthrough",
   },
   {
+    href: "/enshrouded/albaneve-summits-hollow-halls",
+    label: "Albaneve Summits Hollow Halls Walkthrough",
+  },
+  {
     href: "/enshrouded/achievements",
     label: "All 58 Achievements & 100% Roadmap",
   },
@@ -158,7 +162,7 @@ const jsonLd = {
       },
       image: imageUrls,
       datePublished: "2026-10-15",
-      dateModified: "2026-10-16",
+      dateModified: "2026-10-18",
       author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -241,7 +245,7 @@ export default function EnshroudedPage() {
           gameHref="/enshrouded"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 16, 2026"
+          updatedAt="October 18, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
