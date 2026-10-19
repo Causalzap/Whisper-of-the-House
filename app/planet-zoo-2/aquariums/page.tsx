@@ -41,7 +41,6 @@ const toc = [
   { id: "aquatic-animals", label: "Add Fish and Sea Turtles" },
   { id: "animal-health", label: "Fix Unhappy Aquatic Animals" },
   { id: "editing-aquarium", label: "Edit a Filled Aquarium" },
-  { id: "aquarium-check", label: "Aquarium Readiness Check" },
 ];
 
 const relatedLinks = [

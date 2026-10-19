@@ -72,6 +72,10 @@ const toc = [
 
 const relatedLinks = [
   {
+    href: "/planet-zoo-2/career-chapter-4",
+    label: "Career Chapter 4: All 6 Scenarios",
+  },
+  {
     href: "/planet-zoo-2/career-chapter-1",
     label: "Career Chapter 1: Great Rift Valley & East Africa",
   },

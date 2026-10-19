@@ -1099,6 +1099,7 @@ const paths = [
     'planet-zoo-2/career-chapter-1', 
     'planet-zoo-2/career-chapter-2', 
     'planet-zoo-2/career-chapter-3', 
+    'planet-zoo-2/career-chapter-4', 
     'planet-zoo-2/aquariums', 
     'planet-zoo-2/wildlife-reserves', 
     'planet-zoo-2/achievements', 
@@ -1116,16 +1117,17 @@ type SitemapPath = (typeof paths)[number];
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'tropico-7': '2026-10-18',
   
-  'planet-zoo-2': '2026-10-17',
+  'planet-zoo-2': '2026-10-19',
   'planet-zoo-2/career-chapter-1': '2026-10-15',
   'planet-zoo-2/career-chapter-2': '2026-10-15',
-  'planet-zoo-2/career-chapter-3': '2026-10-17',
+  'planet-zoo-2/career-chapter-3': '2026-10-19',
   'planet-zoo-2/franchise-guide': '2026-10-17',
   'planet-zoo-2/franchise-accreditation': '2026-10-17',
   'planet-zoo-2/franchise-breeding': '2026-10-17',
-  'planet-zoo-2/aquariums': '2026-10-15',
+  'planet-zoo-2/aquariums': '2026-10-19',
   'planet-zoo-2/wildlife-reserves': '2026-10-17',
-  'planet-zoo-2/achievements': '2026-10-15',
+  'planet-zoo-2/achievements': '2026-10-19',
+  'planet-zoo-2/career-chapter-4': '2026-10-19',
 
 
   '/enshrouded':'2026-10-18',
