@@ -28,6 +28,11 @@ const pageDescription =
 
 const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/wildlife-reserve-biodiversity-rating.webp`,
+  `${siteUrl}/images/planet-zoo-2/wildlife-reserve-giraffe-storage.webp`,
+  `${siteUrl}/images/planet-zoo-2/wildlife-reserve-valid-ecosystem-filter.webp`,
+  `${siteUrl}/images/planet-zoo-2/wildlife-reserve-dense-forest-requirements.webp`,
+  `${siteUrl}/images/planet-zoo-2/wildlife-reserve-research-network-requirements.webp`,
+  `${siteUrl}/images/planet-zoo-2/wildlife-reserve-species-roles.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -39,27 +44,27 @@ const toc = [
   },
   {
     id: "release-groups",
-    label: "Prepare and Transport Release Groups",
+    label: "Release Groups & Eligible Animals",
   },
   {
     id: "ecosystems",
-    label: "How to Establish Ecosystems",
+    label: "Establish Ecosystems",
   },
   {
     id: "release-blocked",
-    label: "Why Animal Releases Are Blocked",
+    label: "Fix Blocked Animal Releases",
   },
   {
     id: "research-network",
-    label: "Build a Research Network",
+    label: "Research Outposts & Monitoring",
   },
   {
     id: "biodiversity-rating",
-    label: "Increase Biodiversity Rating",
+    label: "Biodiversity Rating & 3–5 Stars",
   },
   {
     id: "sumatra",
-    label: "Fix the Sumatra River Ecosystem",
+    label: "Fix Sumatra River Ecosystem",
   },
 ];
 
@@ -92,6 +97,14 @@ const relatedLinks = [
     href: "/planet-zoo-2/achievements",
     label: "All 39 Achievements Checklist",
   },
+  {
+    href: "/planet-zoo-2/career-chapter-4",
+    label: "Career Chapter 4: Poland & Maluku",
+  },
+  {
+    href: "/planet-zoo-2/franchise-breeding",
+    label: "Franchise Breeding & Inbreeding",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -106,9 +119,9 @@ export const metadata: Metadata = {
     description: metadataDescription,
     url: pageUrl,
     siteName: "Whisper of the House",
-    images: imageUrls,
+    images: [heroImage],
     publishedTime: "2026-10-15",
-    modifiedTime: "2026-10-17",
+    modifiedTime: "2026-10-20",
   },
   twitter: {
     card: "summary_large_image",
@@ -158,7 +171,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-15",
-      dateModified: "2026-10-17",
+      dateModified: "2026-10-20",
       articleSection: "Planet Zoo 2 Wildlife Reserves",
       author: {
         "@id": `${siteUrl}/#organization`,
@@ -210,7 +223,7 @@ export default function PlanetZoo2WildlifeReservesPage() {
           gameHref="/planet-zoo-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 17, 2026"
+          updatedAt="October 20, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

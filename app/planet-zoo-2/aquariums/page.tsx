@@ -28,6 +28,8 @@ const pageDescription =
 
 const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/aquarium-staff-gate-water-fill.webp`,
+  `${siteUrl}/images/planet-zoo-2/aquarium-underwater-tunnel-guest-gates.webp`,
+  `${siteUrl}/images/planet-zoo-2/aquarium-shallow-pond-deep-staff-gate.webp`,
   `${siteUrl}/images/planet-zoo-2/aquarium-filtration-network.webp`,
   `${siteUrl}/images/planet-zoo-2/aquarium-water-temperature.webp`,
 ];
@@ -35,12 +37,38 @@ const imageUrls = [
 const heroImage = imageUrls[0];
 
 const toc = [
-  { id: "build-aquarium", label: "Build and Fill an Aquarium" },
-  { id: "filtration-network", label: "Connect a Filtration Network" },
-  { id: "power-temperature", label: "Power, Salinity & Temperature" },
-  { id: "aquatic-animals", label: "Add Fish and Sea Turtles" },
-  { id: "animal-health", label: "Fix Unhappy Aquatic Animals" },
-  { id: "editing-aquarium", label: "Edit a Filled Aquarium" },
+  {
+    id: "build-aquarium",
+    label: "Build and Fill an Aquarium",
+  },
+  {
+    id: "editing-aquarium",
+    label: "Edit an Aquarium & Add Tunnels",
+  },
+  {
+    id: "gate-water-level",
+    label: "Fix Gate Above Water Level",
+  },
+  {
+    id: "filtration-network",
+    label: "Connect a Filtration Network",
+  },
+  {
+    id: "power-temperature",
+    label: "Power & Water Temperature",
+  },
+  {
+    id: "aquatic-animals",
+    label: "Add Aquatic Animals",
+  },
+  {
+    id: "shallow-aquarium",
+    label: "Build Shallow Aquariums",
+  },
+  {
+    id: "animal-health",
+    label: "Fix Unhappy Aquatic Animals",
+  },
 ];
 
 const relatedLinks = [
@@ -60,6 +88,10 @@ const relatedLinks = [
     href: "/planet-zoo-2/wildlife-reserves",
     label: "Wildlife Reserves & Ecosystems",
   },
+  {
+    href: "/planet-zoo-2/career-chapter-4",
+    label: "Maluku Islands & Chapter 4 Walkthrough",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -76,7 +108,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
     images: imageUrls,
     publishedTime: "2026-10-15",
-    modifiedTime: "2026-10-15",
+    modifiedTime: "2026-10-20",
   },
   twitter: {
     card: "summary_large_image",
@@ -126,7 +158,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-15",
-      dateModified: "2026-10-15",
+      dateModified:  "2026-10-20",
       articleSection: "Aquarium Construction and Management",
       author: {
         "@id": `${siteUrl}/#organization`,
@@ -178,7 +210,7 @@ export default function PlanetZoo2AquariumsPage() {
           gameHref="/planet-zoo-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 15, 2026"
+          updatedAt="October 20, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

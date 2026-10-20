@@ -1108,6 +1108,10 @@ const paths = [
     'planet-zoo-2/franchise-breeding',
 
     'tropico-7',
+
+    '/archeage-chronicles/cliff-of-madness',
+    '/archeage-chronicles',
+    '/archeage-chronicles/throne-of-hinnon',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1115,17 +1119,21 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/archeage-chronicles/cliff-of-madness': '2026-10-20',
+  '/archeage-chronicles': '2026-10-20',
+  '/archeage-chronicles/throne-of-hinnon': '2026-10-20',
+
   'tropico-7': '2026-10-18',
   
-  'planet-zoo-2': '2026-10-19',
+  'planet-zoo-2': '2026-10-20',
   'planet-zoo-2/career-chapter-1': '2026-10-15',
   'planet-zoo-2/career-chapter-2': '2026-10-15',
   'planet-zoo-2/career-chapter-3': '2026-10-19',
   'planet-zoo-2/franchise-guide': '2026-10-17',
   'planet-zoo-2/franchise-accreditation': '2026-10-17',
   'planet-zoo-2/franchise-breeding': '2026-10-17',
-  'planet-zoo-2/aquariums': '2026-10-19',
-  'planet-zoo-2/wildlife-reserves': '2026-10-17',
+  'planet-zoo-2/aquariums': '2026-10-20',
+  'planet-zoo-2/wildlife-reserves': '2026-10-20',
   'planet-zoo-2/achievements': '2026-10-19',
   'planet-zoo-2/career-chapter-4': '2026-10-19',
 
