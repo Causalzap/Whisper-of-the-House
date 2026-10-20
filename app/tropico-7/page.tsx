@@ -4,20 +4,21 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 import Tropico7GuideContent from "@/data/tropico-7/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/tropico-7/`;
+const pageUrl = `${siteUrl}/tropico-7`;
 
 const metadataTitle =
   "Tropico 7 Demo Guide: Little Great Britain Walkthrough";
 
 const metadataDescription =
-  "Follow Tropico 7's Little Great Britain demo with cattle ranches, Leather exports, transport fixes, mandate extensions, and independence tasks.";
+  "Complete the Tropico 7 demo with Cattle Ranches, Leather exports, mandate extensions, Revolutionary tasks, Neuschwanstein Castle, and the Chapter 1 ending.";
 
 const articleDescription =
-  "Start Little Great Britain with Cattle Ranches and Leather production, fix delayed shipments, manage Crown and Revolutionary tasks, protect your mandate, and work through the demo's independence objectives.";
+  "Complete Little Great Britain from the first Cattle Ranches and Leather export to Crown assignments, Revolutionary recruitment, Neuschwanstein Castle, and the island exchange that ends Chapter 1.";
 
 const imageUrls = [
   `${siteUrl}/images/tropico-7/little-great-britain-cattle-ranches.webp`,
@@ -26,9 +27,12 @@ const imageUrls = [
   `${siteUrl}/images/tropico-7/little-great-britain-revolutionary-newspaper.webp`,
   `${siteUrl}/images/tropico-7/little-great-britain-gold-food-objectives.webp`,
   `${siteUrl}/images/tropico-7/little-great-britain-planks-objective.webp`,
+  `${siteUrl}/images/tropico-7/tropico-7-pirate-cove-castle-operation.webp`,
+  `${siteUrl}/images/tropico-7/tropico-7-stolen-castle-placement.webp`,
+  `${siteUrl}/images/tropico-7/tropico-7-chapter-one-complete.webp`,
 ];
 
-const heroImage = imageUrls[1];
+const heroImage = imageUrls[7];
 
 const toc = [
   {
@@ -65,11 +69,14 @@ const toc = [
   },
   {
     id: "next-objective",
-    label: "What to do next",
+    label: "Finish Chapter 1",
   },
 ];
 
-const relatedLinks: { href: string; label: string }[] = [];
+const relatedLinks: {
+  href: string;
+  label: string;
+}[] = [];
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -86,7 +93,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
-        alt: "Tropico 7 Tannery placement in Little Great Britain, showing the early Leather production setup",
+        alt: "Tropico 7 Neuschwanstein Castle operation completed, with the landmark ready for placement in Little Great Britain",
       },
     ],
   },
@@ -132,7 +139,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-18",
-      dateModified: "2026-10-18",
+      dateModified: "2026-10-20",
       about: [
         {
           "@type": "VideoGame",
@@ -140,19 +147,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 demo",
-        },
-        {
-          "@type": "Thing",
           name: "Tropico 7 Little Great Britain",
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 campaign walkthrough",
+          name: "Tropico 7 demo campaign",
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 Leather production",
+          name: "Tropico 7 Cattle Ranches and Leather production",
         },
         {
           "@type": "Thing",
@@ -160,19 +163,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 economy and trade",
+          name: "Tropico 7 trade profit",
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 mandate extensions",
+          name: "Tropico 7 Colonial Era mandate",
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 independence",
-        },
-        {
-          "@type": "Thing",
-          name: "Tropico 7 Revolutionary faction",
+          name: "Tropico 7 Revolutionary objectives",
         },
         {
           "@type": "Thing",
@@ -180,11 +179,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Tropico 7 Gold exports",
-        },
-        {
-          "@type": "Thing",
-          name: "Tropico 7 Planks exports",
+          name: "Tropico 7 Gold and Planks exports",
         },
         {
           "@type": "Thing",
@@ -194,12 +189,30 @@ const jsonLd = {
           "@type": "Thing",
           name: "Tropico 7 Political Matrix",
         },
+        {
+          "@type": "Thing",
+          name: "Tropico 7 Pirate Cove",
+        },
+        {
+          "@type": "Thing",
+          name: "Tropico 7 Neuschwanstein Castle",
+        },
+        {
+          "@type": "Thing",
+          name: "Tropico 7 Chapter 1 ending",
+        },
       ],
       isPartOf: {
+        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
+        name: "Whisper of the House",
+        url: siteUrl,
       },
       publisher: {
+        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
+        name: "Whisper of the House",
+        url: siteUrl,
       },
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
@@ -240,15 +253,21 @@ export default function Page() {
           title="Tropico 7 Demo Guide: Little Great Britain Walkthrough"
           description={articleDescription}
           gameTitle="Tropico 7"
-          gameHref="/tropico-7/"
+          gameHref="/tropico-7"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 18, 2026"
+          updatedAt="October 20, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
           <Tropico7GuideContent />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Tropico 7"
+          heading="Finished the Tropico 7 demo? Find your next game."
+          description="Use the quick recommender to find another city builder, management sim, or strategy game that fits your mood, platform, and play mode, or build a Gaming DNA profile from nine games you already love."
+        />
       </main>
 
       <Footer />

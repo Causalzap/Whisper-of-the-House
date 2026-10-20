@@ -1123,7 +1123,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/archeage-chronicles': '2026-10-20',
   '/archeage-chronicles/throne-of-hinnon': '2026-10-20',
 
-  'tropico-7': '2026-10-18',
+  'tropico-7': '2026-10-20',
   
   'planet-zoo-2': '2026-10-20',
   'planet-zoo-2/career-chapter-1': '2026-10-15',
