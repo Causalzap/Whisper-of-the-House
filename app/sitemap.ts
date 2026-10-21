@@ -1112,6 +1112,9 @@ const paths = [
     '/archeage-chronicles/cliff-of-madness',
     '/archeage-chronicles',
     '/archeage-chronicles/throne-of-hinnon',
+
+    '/we-were-here-tomorrow',
+    '/we-were-here-tomorrow/walkthrough',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1119,6 +1122,10 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/we-were-here-tomorrow': '2026-10-21',
+  '/we-were-here-tomorrow/walkthrough': '2026-10-21',
+
+
   '/archeage-chronicles/cliff-of-madness': '2026-10-20',
   '/archeage-chronicles': '2026-10-20',
   '/archeage-chronicles/throne-of-hinnon': '2026-10-20',
