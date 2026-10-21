@@ -15,16 +15,16 @@ const metadataTitle =
   "Planet Zoo 2 Career Chapter 4 Walkthrough: All 6 Scenarios";
 
 const metadataDescription =
-  "Complete Planet Zoo 2 Career Chapter 4 across Maluku Islands, Channel Islands, Singapore, Poland, Swiss Alps and Tanzania, with medal goals and key fixes.";
+  "Planet Zoo 2 Chapter 4 walkthrough for all 6 scenarios: Maluku aquariums, Swiss Alps breeding, Poland wetlands, Tanzania ecosystems, and medal goals.";
 
 const articleTitle =
   "Planet Zoo 2 Chapter 4 Walkthrough: All 6 Scenarios";
 
 const articleDescription =
-  "Complete all six FENtastic Opportunity scenarios, from Maluku Islands aquariums and Channel Islands protests to Singapore, Poland, Swiss Alps breeding, and Tanzania conservation.";
+  "Work through all six FENtastic Opportunity scenarios, from Maluku Islands aquarium welfare and Channel Islands protests to Singapore Komodo Dragons, Swiss Alps breeding, Poland wetlands, and Tanzania conservation.";
 
 const pageDescription =
-  "Unlock Chapter 4, complete all six Career scenarios, and work through Bronze, Silver, and Gold objectives, including animal welfare, release groups, ecosystems, and zoo reputation.";
+  "Unlock Chapter 4 and tackle all six Career scenarios, with Bronze, Silver, and Gold requirements, animal welfare fixes, release groups, ecosystem restoration, and zoo reputation.";
 
 const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/career-chapter-4-maluku-sunfish-temperature.webp`,
@@ -32,6 +32,8 @@ const imageUrls = [
   `${siteUrl}/images/planet-zoo-2/career-chapter-4-channel-gold-medal.webp`,
   `${siteUrl}/images/planet-zoo-2/career-chapter-4-singapore-komodo-appeal.webp`,
   `${siteUrl}/images/planet-zoo-2/career-chapter-4-swiss-trade-center-path.webp`,
+  `${siteUrl}/images/planet-zoo-2/career-chapter-4-swiss-gold-medal.webp`,
+  `${siteUrl}/images/planet-zoo-2/career-chapter-4-tanzania-savannah-too-small.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -108,7 +110,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
     images: imageUrls,
     publishedTime: "2026-10-19",
-    modifiedTime: "2026-10-19",
+    modifiedTime: "2026-10-21",
   },
   twitter: {
     card: "summary_large_image",
@@ -158,7 +160,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-19",
-      dateModified: "2026-10-19",
+      dateModified: "2026-10-21",
       articleSection: "Planet Zoo 2 Career Chapter 4",
       author: {
         "@id": `${siteUrl}/#organization`,
@@ -210,7 +212,7 @@ export default function PlanetZoo2CareerChapter4Page() {
           gameHref="/planet-zoo-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 19, 2026"
+          updatedAt="October 21, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

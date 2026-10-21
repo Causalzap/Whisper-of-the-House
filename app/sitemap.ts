@@ -1132,7 +1132,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   'tropico-7': '2026-10-20',
   
-  'planet-zoo-2': '2026-10-20',
+  'planet-zoo-2': '2026-10-21',
   'planet-zoo-2/career-chapter-1': '2026-10-15',
   'planet-zoo-2/career-chapter-2': '2026-10-15',
   'planet-zoo-2/career-chapter-3': '2026-10-19',
@@ -1142,7 +1142,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'planet-zoo-2/aquariums': '2026-10-20',
   'planet-zoo-2/wildlife-reserves': '2026-10-20',
   'planet-zoo-2/achievements': '2026-10-19',
-  'planet-zoo-2/career-chapter-4': '2026-10-19',
+  'planet-zoo-2/career-chapter-4': '2026-10-21',
 
 
   '/enshrouded':'2026-10-18',
