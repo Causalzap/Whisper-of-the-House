@@ -13,11 +13,12 @@ const pageUrl = `${siteUrl}/we-were-here-tomorrow`;
 const metadataTitle =
   "We Were Here Tomorrow Guide: Progression & Co-op Tips";
 
+
 const metadataDescription =
-  "Find where to go next in We Were Here Tomorrow, from Norček's labs to Gravitonics, with co-op tips, prototype tools, achievements, and Rift Zero.";
+  "Follow We Were Here Tomorrow from Wellness Check to Rift Zero, including R&D, Xenobotany, time loops, co-op tips, and optional achievements.";
 
 const articleDescription =
-  "A We Were Here Tomorrow progression guide covering the Norček Industries opening, Wellness Check, shrinking laboratory, Exotic Matter Laboratory, Cargo Elevator, Particle Accelerator, Magnetic Stabilizer, and Gravitonics. Includes two-player communication, Hook Gun and Goop Gun mechanics, optional achievement conditions, and the later journey toward the Temporal Research Centre and Rift Zero.";
+  "Find your next objective in We Were Here Tomorrow, from Norček's opening laboratories and Gravitonics to R&D Headquarters, Temporal Research Centre, Xenobotany, time rewind, and Rift Zero. Includes co-op setup, prototype tools, and optional achievement conditions.";
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -73,6 +74,11 @@ const relatedLinks = [
     href: "/we-were-here-tomorrow/walkthrough",
     label: "We Were Here Tomorrow Walkthrough & Puzzle Solutions",
   },
+  {
+    href: "/we-were-here-tomorrow/achievements",
+    label: "We Were Here Tomorrow: All 37 Achievements & Checklist",
+  },
+  
 ];
 
 const jsonLd = {

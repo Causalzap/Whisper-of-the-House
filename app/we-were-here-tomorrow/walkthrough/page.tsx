@@ -12,10 +12,10 @@ const hubUrl = `${siteUrl}/we-were-here-tomorrow`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "We Were Here Tomorrow Walkthrough: Puzzles to Gravity";
+  "We Were Here Tomorrow Walkthrough: All Puzzles & Rift Zero";
 
 const metadataDescription =
-  "Follow We Were Here Tomorrow from the opening consoles through resin, circuit, floppy disk, Cargo Elevator, laser crystals, six rings, and gravity rooms.";
+  "Complete We Were Here Tomorrow puzzles from Wellness Check to Rift Zero, including resin, lasers, R&D wiring, TRC fuses, Xenobotany, and time loops.";
 
 const articleDescription =
   "Follow the co-op puzzle route from the Norček Industries opening and Wellness Check through canister transfer, shrinking and circuit matching, five-nozzle resin mixing, floppy disk direction puzzles, the 3D printer grid and Green Key Card, Hook Gun and Goop Gun interactions, Cargo Elevator Fuse and access cards, Particle Accelerator controls, Magnetic Stabilizer pressure plates, laser crystal calibration, Six Rings, and the connected gravity rooms.";
@@ -115,12 +115,50 @@ const toc = [
     id: "gravity-rooms",
     label: "Gravity & Upside-down Rooms",
   },
+
+{
+  id: "rd-power-network",
+  label: "R&D Power Network",
+},
+{
+  id: "rd-goop-upgrade",
+  label: "Goop Gun Upgrade",
+},
+{
+  id: "temporal-research-centre",
+  label: "Temporal Research Centre",
+},
+{
+  id: "trc-fuse-arrangement",
+  label: "TRC Fuse Arrangement",
+},
+{
+  id: "xenobotany",
+  label: "Xenobotany Plant Puzzles",
+},
+{
+  id: "time-loop",
+  label: "Time Loop Puzzle",
+},
+{
+  id: "xenobotany-power",
+  label: "Xenobotany Power Network",
+},
+{
+  id: "rift-zero",
+  label: "Rift Zero & Final Choice",
+},
+
 ];
 
 const relatedLinks = [
   {
     href: "/we-were-here-tomorrow",
     label: "We Were Here Tomorrow Guide & Progression",
+  },
+  {
+    href: "/we-were-here-tomorrow/achievements",
+    label: "We Were Here Tomorrow: All 37 Achievements & Checklist",
   },
 ];
 
