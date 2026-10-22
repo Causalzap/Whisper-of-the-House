@@ -88,6 +88,10 @@ const relatedLinks = [
     label: "Albaneve Summits Hollow Halls Walkthrough",
   },
   {
+    href: "/enshrouded/revelwood-hollow-halls",
+    label: "Revelwood Hollow Halls: Key, Runes & Cyclops",
+  },
+  {
     href: "/enshrouded/albaneve-summits-hollow-halls",
     label: "Albaneve Summits Hollow Halls Walkthrough",
   },

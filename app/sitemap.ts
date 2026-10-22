@@ -1095,6 +1095,8 @@ const paths = [
     '/enshrouded/albaneve-summits-hollow-halls', 
     '/enshrouded/veilwater-basin-hollow-halls', 
     '/enshrouded/six-beacon-dungeons', 
+    '/enshrouded/revelwood-hollow-halls', 
+    
 
     'planet-zoo-2', 
     'planet-zoo-2/career-chapter-1', 
@@ -1153,6 +1155,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/enshrouded/albaneve-summits-hollow-halls': '2026-10-18',
   '/enshrouded/veilwater-basin-hollow-halls': '2026-10-18',
   '/enshrouded/six-beacon-dungeons': '2026-10-22',
+  '/enshrouded/revelwood-hollow-halls': '2026-10-22',
   
   
   '/valor-mortis/achievements': '2026-10-15',

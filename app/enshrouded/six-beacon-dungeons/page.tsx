@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -98,6 +99,10 @@ const relatedLinks = [
   {
     href: "/enshrouded/achievements",
     label: "All 58 Achievements",
+  },
+  {
+    href: "/enshrouded/revelwood-hollow-halls",
+    label: "Revelwood Hollow Halls: Key, Runes & Cyclops",
   },
 ];
 
