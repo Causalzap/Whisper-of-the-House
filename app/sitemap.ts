@@ -1119,6 +1119,11 @@ const paths = [
     '/we-were-here-tomorrow',
     '/we-were-here-tomorrow/walkthrough',
     '/we-were-here-tomorrow/achievements',
+
+    '/cyberpunk-2077',
+    '/cyberpunk-2077/clampdown-walkthrough',
+    '/cyberpunk-2077/welcome-to-paradise-walkthrough',
+    '/cyberpunk-2077/dual-wield',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1126,6 +1131,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/cyberpunk-2077': '2026-10-23',
+  '/cyberpunk-2077/clampdown-walkthrough': '2026-10-23',
+  '/cyberpunk-2077/welcome-to-paradise-walkthrough': '2026-10-23',
+  '/cyberpunk-2077/dual-wield': '2026-10-23',
+
   '/we-were-here-tomorrow': '2026-10-22',
   '/we-were-here-tomorrow/walkthrough': '2026-10-22',
   '/we-were-here-tomorrow/achievements': '2026-10-22',

@@ -130,6 +130,196 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Cyberpunk 2077",
+  game: "Cyberpunk 2077",
+  href: "/cyberpunk-2077",
+  slug: "cyberpunk-2077",
+  kind: "game",
+  status: "active",
+  accent: "cyan",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "Update 2.5 Quests, Dual Wielding & Tarot",
+  eyebrow: "Update 2.5 — Edgerunners 2",
+
+  hubStatus:
+    "Clampdown + Welcome to Paradise + Double Trouble + 12 Minor Arcana + Glamdocs + Cross-Platform Mods",
+
+  description:
+    "Explore Cyberpunk 2077 Update 2.5, complete two new side jobs, unlock dual wielding, collect 12 Minor Arcana, customize cyberware, and use cross-platform mods.",
+
+  coverage: [
+    "Clampdown prison rescue through Wakako's two-gig requirement, King's equipment, Coronation revolver, Reaper Chip deactivation, Wex, Block C choices, Darius Bale and the morgue escape",
+
+    "Welcome to Paradise investigation through Street Cred 15, Haze's hidden shard, nine Night Corp tour stops, the Identity Cache decryption, Red Caliburn clue, Kabuki bridge and Aera's final decision",
+
+    "Double Trouble dual wielding through Cool 9, compatible Power Pistols and Revolvers, Primary and Secondary weapon slots, the 37.5% damage penalty and Heywood Hurricane",
+
+    "Triple Tequila's three-stack system, Splash of Love, Keep 'Em Comin', Two Right Hands, Plan B's eddies cost and dual-wield weapon selection",
+
+    "All 12 Minor Arcana across Swords, Wands, Cups and Pentacles, Tarot collection progress, Misty's dialogue and the final reward pickup",
+
+    "Glamdoc cyberware appearance customization, new clothing collections, mod.io support, modded save restrictions and Update 2.5 quality-of-life changes",
+  ],
+
+  image:
+    "/images/cyberpunk-2077/welcome-to-paradise-night-corp-approach.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 65,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Cyberpunk 2077 Update 2.5 Guide: Quests, Mods & Tarot",
+
+      href: "/cyberpunk-2077",
+
+      type: "Guide Hub",
+
+      description:
+        "Unlock Clampdown and Welcome to Paradise, try Double Trouble, find 12 Minor Arcana, visit Glamdocs and learn how mods affect saves.",
+
+      image:
+        "/images/cyberpunk-2077/welcome-to-paradise-night-corp-approach.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Two new side jobs, Cool 9 dual wielding, 12 Minor Arcana, Glamdocs, clothing vendors and modded saves",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Cyberpunk 2077 Clampdown Walkthrough & Choices",
+
+      href: "/cyberpunk-2077/clampdown-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Enter Night City Prison, recover King's gear and Coronation, disable the Reaper chips, resolve Block C and escape after defeating Darius.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/cyberpunk-2077/clampdown-bathroom-king-package.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 478,
+
+        spotlightRail: true,
+        spotlightOrder: 2,
+
+        spotlightMeta:
+          "Wakako gigs, King's gear, Coronation, Security Cortex, Reaper Server, Wex, Block C choice, Darius Bale and morgue escape",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Cyberpunk 2077 Welcome to Paradise Walkthrough",
+
+      href: "/cyberpunk-2077/welcome-to-paradise-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Find Haze's shard, complete nine Night Corp stops, decrypt the Identity Cache, investigate the Red Caliburn and decide whether to give Aera the evidence.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/cyberpunk-2077/welcome-to-paradise-kabuki-bridge.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 479,
+
+        spotlightRail: true,
+        spotlightOrder: 3,
+
+        spotlightMeta:
+          "Street Cred 15, Haze, Night Corp Tower, nine tour stops, Identity Cache, Red Caliburn, Kabuki bridge and Aera's choice",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Cyberpunk 2077 Dual Wield: Double Trouble & Guns",
+
+      href: "/cyberpunk-2077/dual-wield",
+
+      type: "Systems",
+
+      description:
+        "Unlock Double Trouble at Cool 9, equip two Power handguns, understand the damage penalty, and use Triple Tequila with Heywood Hurricane.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/cyberpunk-2077/dual-wield-primary-secondary-weapons.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 480,
+
+        spotlightFeature: true,
+        spotlightOrder: 1,
+
+        spotlightMeta:
+          "Cool 9, Double Trouble 2/2, Primary and Secondary guns, 37.5% damage penalty, Triple Tequila and Heywood Hurricane",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
 
   {
     title: "Planet Zoo 2",
