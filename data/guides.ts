@@ -130,6 +130,155 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+  {
+    title: "Moon Sweepers",
+    game: "Moon Sweepers",
+    href: "/moon-sweepers",
+    slug: "moon-sweepers",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Brush Upgrades, Automation & 33 Achievements",
+    eyebrow: "Moon Cleaning & Automation",
+  
+    hubStatus:
+      "Brush upgrades + vehicles + Moon Map + Dust processing + JONAS + 33 achievements",
+  
+    description:
+      "Start cleaning the Moon, choose brush and vehicle upgrades, explore flags and survey sites, automate Dust production, and track all 33 achievements.",
+  
+    coverage: [
+      "Early cleaning with the free Toothbrush, Dust packing, Depot deposits, completed hex rewards, Nail Brush, Handbrush, Household Broom, Wide Broom and Extra Wide Broom",
+  
+      "Upgrade Matrix choices covering container capacity, cleaning width, Dust Compactor, Auto Packer, Market Contracts, Supplier Network and Region Bounty",
+  
+      "Vehicle progression from Push Sweeper and Ride-on Sweeper to Lunar Sweeper and Mega Vacuum Rover, including purchase costs, cleaning widths, hopper capacities and unloading needs",
+  
+      "Moon Map navigation, cleaned and partly cleaned sectors, waypoints, station locations, flag rewards, lunar survey sites and multiplayer equipment decisions",
+  
+      "Automation with Robot Vacuum Mk I and Mk II, Conveyor belts, Garage unloading, Packager, Splitters, Mergers, solar power and battery storage",
+  
+      "Moon Dust processing through Pressure Chambers, Moon Sand, Stone Press production, Moonstone delivery, factory bottlenecks, JONAS and Capsule Catcher",
+  
+      "All 33 Steam achievements with an interactive checklist, hidden Conveyor loop, Depot deposit and launch milestones, lifetime earnings, spending and 100% Moon cleaning goals",
+    ],
+  
+    image:
+      "/images/moon-sweepers/moon-sweepers-hub.webp",
+    imageFit: "contain",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 66,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Moon Sweepers Beginner Guide: Best Upgrades & First Steps",
+  
+        href: "/moon-sweepers",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Start with the free Toothbrush, choose brush and container upgrades, earn cleaning rewards, compare vehicles, and explore the Moon Map.",
+  
+        image:
+          "/images/moon-sweepers/moon-sweepers-household-broom-capacity-upgrade.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "First Dust deposits, brush prices, 6 kg container upgrade, Moon Map, flags, surveys, Lunar Sweeper and Mega Vacuum Rover",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Moon Sweepers Automation: Conveyors, Power & JONAS",
+  
+        href: "/moon-sweepers/automation",
+  
+        type: "Systems",
+  
+        description:
+          "Connect Robot Vacuums and Conveyors, unload vehicles, make Moon Sand and Moonstone, manage power, and operate JONAS with a Capsule Catcher.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/moon-sweepers/moon-sweepers-stone-press-layout.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 481,
+  
+          spotlightMeta:
+            "Robot Vacuum Mk I and Mk II, Conveyors, Pressure Chamber, Stone Press, 18 kW power, Splitters, Mergers, JONAS and Capsule Catcher",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Moon Sweepers Achievements: All 33 & 100% Checklist",
+  
+        href: "/moon-sweepers/achievements",
+  
+        type: "Achievements",
+  
+        description:
+          "Track all 33 achievements, complete the hidden Conveyor loop, reach Dust and Depot milestones, and measure progress toward cleaning 100% of the Moon.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/moon-sweepers/moon-sweepers-moon-cleaning-progress.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 482,
+  
+          spotlightMeta:
+            "33 achievements, completion checklist, hidden Conveyor loop, 10,000 Depot deposits, $1 million milestones and 100% Moon cleanup",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+    ],
+  },
+  
   
 {
   title: "Cyberpunk 2077",
