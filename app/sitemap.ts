@@ -1128,6 +1128,11 @@ const paths = [
     '/moon-sweepers',
     '/moon-sweepers/automation',
     '/moon-sweepers/achievements',
+
+    '/dont-starve-together',
+    '/dont-starve-together/sanctum-walkthrough',
+    '/dont-starve-together/cursed-confrontation-part-2-walkthrough',
+    '/dont-starve-together/shrouded-queen',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1135,6 +1140,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+
+  '/dont-starve-together': '2026-10-25',
+  '/dont-starve-together/sanctum-walkthrough': '2026-10-25',
+  '/dont-starve-together/cursed-confrontation-part-2-walkthrough': '2026-10-25',
+  '/dont-starve-together/shrouded-queen': '2026-10-25',
+
   '/moon-sweepers': '2026-10-24',
   '/moon-sweepers/automation': '2026-10-24',
   '/moon-sweepers/achievements': '2026-10-24',

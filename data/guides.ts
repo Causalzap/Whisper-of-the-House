@@ -131,6 +131,184 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+{
+  title: "Don't Starve Together",
+  game: "Don't Starve Together",
+  href: "/dont-starve-together",
+  slug: "dont-starve-together",
+  kind: "game",
+  status: "active",
+  accent: "purple",
+  archiveCategory: "Cozy, crafting, survival & systems",
+
+  label: "Shadow Progression, Sanctum & Final Bosses",
+  eyebrow: "Cursed Confrontation Part 2",
+
+  hubStatus:
+    "Ancient Gateway + Shadow Rifts + Sanctum Keystone + 3 Blighted Offerings + Shrouded Queen + Umbral Abomination",
+
+  description:
+    "Follow the Shadow storyline, unlock Shadow Rifts, recover the Sanctum Keystone, complete Charlie's three-offering ritual, and defeat the final bosses.",
+
+  coverage: [
+    "Shadow progression through the Shadow Pieces, Ancient Guardian, Ancient Fuelweaver, Ancient Gateway repair and Charlie's Beckoning Hand",
+
+    "Shadow Rift activation with 5 Dreadstone, Nightmare Werepig's Cracked Pillars, world settings and Shadow versus Lunar progression",
+
+    "Sanctum walkthrough through the Giant Whirlpool, Ancient Archives connection, Waymark Compass, four Security Pulses and Sequitor jumping puzzle",
+
+    "Sanctum Key Room through the four Ancient Towers, Lustrous Weevil sockets, Reliquary Keystone and optional rooms",
+
+    "Cursed Confrontation Part 2 through the Possessed Shadow Atrium, friendly Ancient Fuelweaver, Blighted Rock Master, Hound Batilisk and Great Depths Worm",
+
+    "Shrouded Queen and Umbral Abomination combat through melee and ranged counters, Grim Harriers, Ink Blights, Dreadstone Outcrops and optic laser",
+
+    "King's Staff, Queen's Torch, Queen's Visage, ritual replay conditions and the Sanctum reset cycle",
+  ],
+
+  image:
+    "/images/dont-starve-together/cursed-confrontation-keystone-gateway.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 67,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Don't Starve Together Shadow Progression & Final Boss",
+
+      href: "/dont-starve-together",
+
+      type: "Guide Hub",
+
+      description:
+        "Find your next Shadow objective, repair the Ancient Gateway, activate Shadow Rifts, enter Sanctum, and reach Charlie's final confrontation.",
+
+      image:
+        "/images/dont-starve-together/cursed-confrontation-keystone-gateway.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "DST Sanctum Walkthrough: All Puzzles & Keystone",
+
+      href: "/dont-starve-together/sanctum-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Enter Sanctum, collect four Security Pulses, solve the Sequitor jumping puzzle, activate the Ancient Towers, and obtain the Keystone.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/dont-starve-together/sanctum-waymark-compass.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 483,
+
+        spotlightMeta:
+          "Giant Whirlpool, Waymark Compass, 4 Security Pulses, Sequitor puzzle, 4 Ancient Towers, Lustrous Weevils and Keystone",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "DST Cursed Confrontation Part 2 Walkthrough",
+
+      href:
+        "/dont-starve-together/cursed-confrontation-part-2-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Obtain the Possessed Shadow Atrium, summon friendly Fuelweaver, collect three Blighted offerings, and complete Charlie's ritual.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/dont-starve-together/blighted-rock-master-dash.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 484,
+
+        spotlightMeta:
+          "Possessed Shadow Atrium, friendly Fuelweaver, Blighted Claw, Larynx, Guts, King's Staff and final rewards",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "DST Shrouded Queen & Umbral Abomination Boss Guide",
+
+      href: "/dont-starve-together/shrouded-queen",
+
+      type: "Bosses",
+
+      description:
+        "Defeat both Shadow bosses with phase thresholds, melee and ranged counters, Ink Blights, Dreadstone hazards and optic laser dodges.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/dont-starve-together/umbral-abomination-optic-laser.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 485,
+
+        spotlightMeta:
+          "18,500 HP Shrouded Queen, 16,000 HP Umbral Abomination, counter phases, Enlightenment hazards and wide laser",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
+
   {
     title: "Moon Sweepers",
     game: "Moon Sweepers",
