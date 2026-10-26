@@ -131,6 +131,226 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "Probably Stolen",
+    game: "Probably Stolen",
+    href: "/probably-stolen",
+    slug: "probably-stolen",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Beginner Guide, Water Trading, Rat Breeding & Profit Planner",
+    eyebrow: "Shopkeeping & Trading Simulator",
+  
+    hubStatus:
+      "Starting Scenarios + Rent + Display Case + Water Merchant + Pure Water + Rat Breeding + Money-Making Planner",
+  
+    description:
+      "Start your shop in Probably Stolen, choose a scenario, attract buyers, manage rent, build a water business, breed rats, and compare profits with an interactive calculator.",
+  
+    coverage: [
+      "Starting Scenarios, including Apprentice, Water Merchant, Rat Wrangler and Rock Bottom, with difficulty choices, Starting Perks and first-day priorities",
+  
+      "Shop management through customer requests, the Display Case, item inspection, counterfeit goods, rent payments, Security reputation and overnight preparation",
+  
+      "Water Merchant progression from starting inventory and Bottle Printer to storage upgrades, regular water sales, Georgio's investment and Water Supply Crisis events",
+  
+      "Pure Water production with Moisture Farm Quality, Water Scanner, Kotton Fabric, Water Filter, UV Lamp, Water Purifier, filter durability and water label corrections",
+  
+      "Rat breeding through Animal Cage expansion, feeding, overcrowding, parent selection, Growth inheritance, Livestock Serums, disease, aging and meat harvesting",
+  
+      "Interactive Money-Making Planner comparing Water, Wine, Rat Farming and item trading through batch profit, equipment payback, rent safety and seven-day cash flow",
+  
+      "Demo shop buyout limitations and preparation for the full game",
+    ],
+  
+    image:
+      "/images/probably-stolen/water-merchant-starting-stock.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 68,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Probably Stolen Beginner Guide: Starts, Rent & Shop Tips",
+  
+        href: "/probably-stolen",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Choose a starting scenario, attract customers with the Display Case, manage rent, inspect counterfeit goods, and avoid Security trouble.",
+  
+        image:
+          "/images/probably-stolen/water-merchant-starting-stock.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Starting Scenarios, first-day setup, Display Case, rent, Hard Mode, Starting Perks, counterfeit inspection and Security",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Probably Stolen Water Merchant Guide: Start to Late Game",
+  
+        href: "/probably-stolen/water-merchant-guide",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Trade your starting water, survive rent, manage bottles and storage, handle Georgio's investment, and prepare for Water Supply Crisis events.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/probably-stolen/water-merchant-supply-crisis.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 486,
+  
+          spotlightMeta:
+            "Water Merchant opening, Bottle Printer, first rent, Georgio investment, Day 77 Water Supply Crisis and late-game production",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "How to Make Pure Water in Probably Stolen",
+  
+        href: "/probably-stolen/water-purification",
+  
+        type: "Systems",
+  
+        description:
+          "Produce Pure Water with a Moisture Farm, Kotton Fabric, Water Filter, UV Lamp and Water Purifier. Fix incorrect water grades and labels.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/probably-stolen/pure-water-scanner-result.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 487,
+  
+          spotlightMeta:
+            "99.97% Pure Water, Moisture Farm Quality, filtering order, Water Purifier modules, filter durability and Match Label",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Probably Stolen Rat Breeding: Growth, Genetics & Farming",
+  
+        href: "/probably-stolen/rat-breeding",
+  
+        type: "Systems",
+  
+        description:
+          "Breed higher-Growth rats, compare parent and offspring traits, manage Animal Cages and feeding, use Serums, and harvest meat.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/probably-stolen/rat-natural-growth-148.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 488,
+  
+          spotlightMeta:
+            "1.46 and 1.15 Growth parents, 1.30–1.37 offspring, natural 1.48 Growth, Serum boosts, cage expansion and meat harvesting",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Probably Stolen Money-Making Planner & Profit Calculator",
+  
+        href: "/probably-stolen/money-making",
+  
+        type: "Systems",
+  
+        description:
+          "Compare Water, Wine, Rat Farming and trading profits with interactive batch calculations, equipment payback and seven-day cash flow.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/probably-stolen/water-merchant-supply-crisis.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 489,
+  
+          spotlightFeature: true,
+          spotlightOrder: 1,
+  
+          spotlightMeta:
+            "Interactive Profit Planner, three business cases, Water vs Wine vs Rats, equipment payback, rent survival and seven-day cash flow",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  
 {
   title: "Don't Starve Together",
   game: "Don't Starve Together",

@@ -1133,6 +1133,13 @@ const paths = [
     '/dont-starve-together/sanctum-walkthrough',
     '/dont-starve-together/cursed-confrontation-part-2-walkthrough',
     '/dont-starve-together/shrouded-queen',
+
+    '/probably-stolen',
+    '/probably-stolen/money-making',
+    '/probably-stolen/rat-breeding',
+    '/probably-stolen/water-merchant-guide',
+    '/probably-stolen/water-purification',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1140,6 +1147,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/probably-stolen': '2026-10-26',
+  '/probably-stolen/money-making': '2026-10-26',
+  '/probably-stolen/rat-breeding': '2026-10-26',
+  '/probably-stolen/water-merchant-guide': '2026-10-26',
+  '/probably-stolen/water-purification': '2026-10-26',
 
   '/dont-starve-together': '2026-10-25',
   '/dont-starve-together/sanctum-walkthrough': '2026-10-25',
