@@ -131,6 +131,255 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+{
+  title: "CRACK",
+  game: "CRACK",
+  href: "/crack",
+  slug: "crack",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Work Orders, Workbots, Endings & 40 Achievements",
+  eyebrow: "Egg Excavation & Laboratory Simulator",
+
+  hubStatus:
+    "Full Work Orders + Agitation + Workbots + Redacted Room + 2 Endings + 40 Achievements",
+
+  description:
+    "Crack open the giant egg, complete Hatch Corp Work Orders, choose equipment upgrades, manage specimen reactions, operate Workbots, unlock secret rooms, and track all 40 achievements.",
+
+  coverage: [
+    "Beginner decisions covering equipment purchases, Bucket capacity, vehicle timing, Work Order priorities, egg Agitation, Sedation, work cycles, Dream Bonus and optional spending",
+
+    "Complete Work Orders from the first Shell chunks through Membrane, Blight, Tissue, Deposit Scanner, Golf Cart upgrades, Gristle Nodules, Eggsteroids, Scaffolding, Artery Sacks, deep excavation and Containment Plating",
+
+    "Collector Bots and Delivery Drones through Workbot Storage unlocks, Bucket collection, automated transport, Looking for Work problems, Wrench repairs, Chalazite upgrades and Level 5",
+
+    "Redacted security room puzzle through the elevated ventilation hatch, UV Flashlight, three hidden pairs of digits, randomized six-digit passcode and locked keypad",
+
+    "Both specimen endings through the normal Holding Chamber delivery, boarded KEEP OUT entrance, concealed excavation passage and chicken-marked escape exit",
+
+    "All 40 Steam achievements with an interactive checklist, six hidden achievements, Paper Trail, Workbot milestones, productivity audits, multiplayer challenges, arcade scores and 100% completion",
+  ],
+
+  image:
+    "/images/crack/crack-hub.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 69,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "CRACK Beginner Guide: Best Upgrades, Agitation & Shifts",
+
+      href: "/crack",
+
+      type: "Guide Hub",
+
+      description:
+        "Choose which tools to buy, control egg Agitation, manage limited Sedation, and improve earnings through each work cycle.",
+
+      image:
+        "/images/crack/crack-agitation-sedation.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Work Order priorities, tools vs Buckets, scanner upgrades, three Sedation doses, specimen reactions, Dream Bonus and sleep",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "CRACK Walkthrough: All Work Orders & Final Specimen",
+
+      href: "/crack/walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Complete required deposits, unlock equipment catalogs, build Scaffolding, clear Containment Plating, and retrieve the specimen.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/crack/crack-containment-plating-breach.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 490,
+
+        spotlightMeta:
+          "Shell, Membrane, Blight, Tissue, Golf Cart Tier 2, Deposit Scanner, Gristle Nodules, 10m Scaffolding, Calcite, Bone and Containment Plating",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "CRACK Redacted Door Code: UV Flashlight & All 3 Clues",
+
+      href: "/crack/redacted-door-code",
+
+      type: "Puzzle Help",
+
+      description:
+        "Find the UV Flashlight, reveal hidden numbers in three laboratory locations, and solve the randomized six-digit Redacted keypad.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/crack/crack-redacted-uv-digits.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 491,
+
+        spotlightMeta:
+          "Vent Hatch, UV Flashlight, Breakroom Extension, Vehicle Bay, six-digit positioning, random code and Redacted security room",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "CRACK Endings: How to Get Both Endings & Secret Exit",
+
+      href: "/crack/endings",
+
+      type: "Endings",
+
+      description:
+        "Deliver the chicken through the Holding Chamber or open the hidden KEEP OUT passage and bring it to the secret exit.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/crack/crack-ending-do-not-enter-door.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 492,
+
+        spotlightMeta:
+          "Ending 1/2, Ending 2/2, Holding Chamber, KEEP OUT door, Hammer, underground passage, chicken-marked exit and Free Range",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "CRACK Workbots: Collectors, Drones, Repairs & Upgrades",
+
+      href: "/crack/workbots",
+
+      type: "Systems",
+
+      description:
+        "Unlock Workbots, manage Collector Bots and Delivery Drones, repair idle or damaged robots, and upgrade them using Chalazite.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/crack/workbot-station.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 493,
+
+        spotlightMeta:
+          "$70 Tissue unlock, Collector Bots, Delivery Drones, Bucket transport, Looking for Work, Wrench repair, Purple Chalazite and Level 5",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "CRACK Achievements: All 40 & 100% Checklist",
+
+      href: "/crack/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Track all 40 Steam achievements with saved progress, unlock both endings, find six hidden achievements, and finish arcade and multiplayer challenges.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/crack/crack-achievements-productivity-audit.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 494,
+
+        spotlightMeta:
+          "40 achievements, six hidden unlocks, interactive progress checklist, Paper Trail, Well Rested, Snake Whisperer, Eggsteroids and both endings",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+  ],
+},
+
   {
     title: "Probably Stolen",
     game: "Probably Stolen",

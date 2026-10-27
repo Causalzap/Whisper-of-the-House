@@ -1140,6 +1140,13 @@ const paths = [
     '/probably-stolen/water-merchant-guide',
     '/probably-stolen/water-purification',
 
+    'crack',
+    'crack/walkthrough',
+    'crack/endings',
+    'crack/redacted-door-code',
+    'crack/workbots',
+    'crack/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1147,6 +1154,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'crack': '2026-10-27',
+  'crack/walkthrough': '2026-10-27',
+  'crack/endings': '2026-10-27',
+  'crack/redacted-door-code': '2026-10-27',
+  'crack/workbots': '2026-10-27',
+  'crack/achievements': '2026-10-27',
+
   '/probably-stolen': '2026-10-26',
   '/probably-stolen/money-making': '2026-10-26',
   '/probably-stolen/rat-breeding': '2026-10-26',
