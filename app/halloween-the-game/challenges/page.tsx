@@ -26,6 +26,7 @@ const heroImage =
 const imageUrls = [
   heroImage,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-chapter-5-into-the-shadows-challenges.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-scythe-progressive-reward.webp`,
 ];
 
 const toc = [
