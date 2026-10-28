@@ -1147,6 +1147,11 @@ const paths = [
     'crack/workbots',
     'crack/achievements',
 
+    'the-long-dark-iron-road',
+    'the-long-dark-iron-road/anna-island-walkthrough',
+    'the-long-dark-iron-road/prototype-train-guide',
+    'the-long-dark-iron-road/fulmar-boat',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1154,6 +1159,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'the-long-dark-iron-road': '2026-10-28',
+  'the-long-dark-iron-road/anna-island-walkthrough': '2026-10-28',
+  'the-long-dark-iron-road/prototype-train-guide': '2026-10-28',
+  'the-long-dark-iron-road/fulmar-boat': '2026-10-28',
+
   'crack': '2026-10-27',
   'crack/walkthrough': '2026-10-27',
   'crack/endings': '2026-10-27',

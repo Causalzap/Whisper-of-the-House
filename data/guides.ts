@@ -131,6 +131,182 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "The Long Dark: Iron Road",
+    game: "The Long Dark: Iron Road",
+    href: "/the-long-dark-iron-road",
+    slug: "the-long-dark-iron-road",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Cauldron Island, Fulmar Boat, Prototype Train & Survival",
+    eyebrow: "Iron Road — Cauldron Island Early Access",
+  
+    hubStatus:
+      "Anna Island + Fulmar Crossing + Lighthouse & Church + Prototype Train + Whale-Oil Heater + 16 Wax Cylinders",
+  
+    description:
+      "Start Iron Road in Survival Mode, sail to Cauldron Island, follow Alice's clues, operate and repair the Prototype Train, and explore the new Whale-Oil equipment.",
+  
+    coverage: [
+      "Survival Mode access through Desolation Point, existing-save compatibility, DLC installation, Cauldron Island arrival and first-expedition preparation",
+  
+      "Fulmar boat at Hibernia Processing, including 5 Tinder Plugs, 20 L of water, 5,000 calories, 20 kg of fuel, boiler operation and the return voyage",
+  
+      "Anna Island progression from Port Remnant to the lighthouse, Alice's hand-drawn map, Port Remnant Cave, the church and the trail toward the Prototype Train",
+  
+      "Prototype Train driving through steam pressure, Slow and Fast gears, Whale Oil and water consumption, obstacles, damaged railway sections and overpressure risks",
+  
+      "Train maintenance covering Wheels, Cowcatcher, Boiler, Brake Shoes, repair material thresholds, component condition, onboard storage and sleeping",
+  
+      "Portable Whale-Oil Heater with 2.5 L capacity, three heating settings, fuel consumption, operating duration, repair requirements and Great Bear return use",
+  
+      "The first 16 Wax Cylinders, Anna Island's approximately 30 km of railway, and the available content in the initial Early Access release",
+    ],
+  
+    image:
+      "/images/the-long-dark-iron-road/anna-island-church-entrance.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 70,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "The Long Dark: Iron Road Guide — How to Start & Progress",
+  
+        href: "/the-long-dark-iron-road",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Reach Cauldron Island, choose a Survival save, follow Alice's clues, compare Whale-Oil Heater settings and explore the current Iron Road content.",
+  
+        image:
+          "/images/the-long-dark-iron-road/anna-island-church-entrance.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Survival Mode, Desolation Point, Fulmar, Anna Island, Portable Whale-Oil Heater, 16 Wax Cylinders and Early Access",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Iron Road Fulmar Boat: Location, Supplies & Return",
+  
+        href: "/the-long-dark-iron-road/fulmar-boat",
+  
+        type: "Guide",
+  
+        description:
+          "Find the Fulmar at Hibernia Processing, load the required Tinder, water, calories and fuel, then sail to Cauldron Island and return.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/the-long-dark-iron-road/fulmar-hibernia-docks.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 495,
+  
+          spotlightMeta:
+            "Hibernia Processing docks, 5 Tinder Plugs, 20 L water, 5,000 calories, 20 kg fuel, boiler, throttle and return crossing",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Iron Road Anna Island: Lighthouse, Cave & Church",
+  
+        href: "/the-long-dark-iron-road/anna-island-walkthrough",
+  
+        type: "Walkthrough",
+  
+        description:
+          "Follow Alice's map from Port Remnant to the lighthouse, find Port Remnant Cave, reach the church and continue toward the Prototype Train.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/the-long-dark-iron-road/anna-island-lighthouse-map.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 496,
+  
+          spotlightMeta:
+            "Port Remnant, Alice's lighthouse recording, hand-drawn map, Port Remnant Cave, church route and Prototype Train Key",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Iron Road Prototype Train: Driving, PSI & Repairs",
+  
+        href: "/the-long-dark-iron-road/prototype-train-guide",
+  
+        type: "Systems",
+  
+        description:
+          "Drive the Prototype Train, manage steam pressure and Whale Oil, clear obstacles, avoid damaged tracks and repair Wheels, Boiler and brakes.",
+  
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestOrder: 497,
+  
+          spotlightMeta:
+            "25–400 PSI, Slow and Fast gears, 500 L Whale Oil tank, 600 L water tank, railway obstacles, Wheels, Cowcatcher and Boiler repairs",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
+  
 {
   title: "CRACK",
   game: "CRACK",
