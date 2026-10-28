@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,21 +11,23 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/halloween-the-game`;
 
 const metadataTitle =
-  "Halloween: The Game Guide – Walkthrough, Challenges & Multiplayer";
+  "Halloween: The Game Guide: Story, Multiplayer & Unlocks";
 
 const metadataDescription =
-  "Find Halloween: The Game walkthroughs, challenges, multiplayer guides, best Civilians, items, escapes, achievements, Prestige, endings, and more.";
+  "Choose what to do next in Halloween: The Game. Find Story walkthroughs, Civilian escape strategies, Tower Farm, challenges, perks, Prestige, and endings.";
 
 const articleDescription =
-  "Choose the right Halloween: The Game guide for Story Mode, challenges, Civilian multiplayer, characters, items, escapes, Michael detainment, progression, Prestige, achievements, collectibles, and endings.";
+  "Find your next objective in Halloween: The Game. Follow Story Mode, plan Civilian escapes, explore Tower Farm, compare free and paid unlocks, complete challenges, and earn Prestige rewards.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp`;
 
+const imageUrls = [heroImage];
+
 const toc = [
   {
     id: "where-to-start",
-    label: "Choose What You Need",
+    label: "What should you do next?",
   },
   {
     id: "story",
@@ -39,44 +42,36 @@ const toc = [
     label: "Civilian Multiplayer",
   },
   {
-    id: "best-civilians",
-    label: "Best Civilians",
+    id: "progression",
+    label: "Progression & Prestige",
   },
   {
-    id: "items",
-    label: "Items & Inventory",
+    id: "patch-1-2-0",
+    label: "Patch 1.2.0 changes",
   },
   {
     id: "escape-search",
-    label: "Escape Decisions",
-  },
-  {
-    id: "arrest-michael",
-    label: "Arrest Michael",
-  },
-  {
-    id: "progression",
-    label: "Progression & Perks",
-  },
-  {
-    id: "prestige",
-    label: "Prestige",
-  },
-  {
-    id: "endings",
-    label: "Endings",
-  },
-  {
-    id: "achievements",
-    label: "Achievements",
-  },
-  {
-    id: "collectibles",
-    label: "Collectibles",
+    label: "Which escape to finish?",
   },
   {
     id: "multiplayer-maps",
-    label: "Multiplayer Maps",
+    label: "Tower Farm & five maps",
+  },
+  {
+    id: "free-paid-unlocks",
+    label: "Free vs paid unlocks",
+  },
+  {
+    id: "halloween-event",
+    label: "Halloween event rewards",
+  },
+  {
+    id: "arrest-michael",
+    label: "Escape or arrest Michael?",
+  },
+  {
+    id: "after-story",
+    label: "What to do after Story",
   },
 ];
 
@@ -87,43 +82,47 @@ const relatedLinks = [
   },
   {
     href: "/halloween-the-game/challenges",
-    label: "All Challenges Guide",
+    label: "Challenges & Unlocks",
   },
   {
     href: "/halloween-the-game/multiplayer-guide",
     label: "Civilian Multiplayer Guide",
   },
   {
+    href: "/halloween-the-game/escape-helper",
+    label: "Escape & Spawn Helper",
+  },
+  {
+    href: "/halloween-the-game/tower-farm-map-guide",
+    label: "Tower Farm Map & Sewer Escape",
+  },
+  {
     href: "/halloween-the-game/best-civilians",
-    label: "Best Civilians Guide",
+    label: "Best Civilians Tier List",
   },
   {
     href: "/halloween-the-game/items-guide",
-    label: "All Items & Uses Guide",
+    label: "All Items & Uses",
   },
   {
-    href: "/halloween-the-game/escape-helper",
-    label: "Escape & Spawn Helper",
+    href: "/halloween-the-game/progression-perks",
+    label: "Progression & Perks",
+  },
+  {
+    href: "/halloween-the-game/prestige-guide",
+    label: "Prestige Challenges & Rewards",
   },
   {
     href: "/halloween-the-game/how-to-arrest-michael-myers",
     label: "How to Arrest Michael Myers",
   },
   {
-    href: "/halloween-the-game/progression-perks",
-    label: "Progression & Perks Guide",
-  },
-  {
-    href: "/halloween-the-game/prestige-guide",
-    label: "Prestige Guide",
-  },
-  {
     href: "/halloween-the-game/achievements",
-    label: "All 50 Achievements Guide",
+    label: "All 50 Achievements",
   },
   {
     href: "/halloween-the-game/endings",
-    label: "Endings Guide",
+    label: "Story Endings",
   },
 ];
 
@@ -139,7 +138,8 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      "Find Story Mode routes, Civilian escape decisions, Tower Farm's Sewer Escape, new character unlocks, challenges, Prestige rewards, and achievement cleanup.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -154,7 +154,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      "Plan your next Halloween: The Game objective with Story walkthroughs, multiplayer escapes, Tower Farm, challenges, character unlocks, and Prestige.",
     images: [heroImage],
   },
 };
@@ -194,11 +195,11 @@ const jsonLd = {
       headline: metadataTitle,
       description: articleDescription,
       url: pageUrl,
-      image: [heroImage],
+      image: imageUrls,
       inLanguage: "en",
 
       datePublished: "2026-09-04",
-      dateModified: "2026-09-23",
+      dateModified: "2026-10-28",
 
       articleSection: "Halloween: The Game Guides",
 
@@ -206,6 +207,11 @@ const jsonLd = {
         {
           "@type": "VideoGame",
           name: "Halloween: The Game",
+          url: pageUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Story Mode",
         },
         {
           "@type": "Thing",
@@ -217,19 +223,39 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game multiplayer",
+          name: "Civilian multiplayer",
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game Civilians",
+          name: "Civilian escape routes",
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game items",
+          name: "Resident discovery",
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game escape routes",
+          name: "Michael Myers Bloodthirst",
+        },
+        {
+          "@type": "Thing",
+          name: "Tower Farm",
+        },
+        {
+          "@type": "Thing",
+          name: "Sewer Escape",
+        },
+        {
+          "@type": "Thing",
+          name: "Scythe",
+        },
+        {
+          "@type": "Thing",
+          name: "Michelle Blanton",
+        },
+        {
+          "@type": "Thing",
+          name: "Eugene Kelly",
         },
         {
           "@type": "Thing",
@@ -237,7 +263,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game Prestige",
+          name: "Perk Points",
+        },
+        {
+          "@type": "Thing",
+          name: "Prestige Challenges",
+        },
+        {
+          "@type": "Thing",
+          name: "Michael Myers detainment",
         },
         {
           "@type": "Thing",
@@ -295,13 +329,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Halloween: The Game Guide – Walkthrough, Challenges & Multiplayer"
-          description={articleDescription}
+          title="Halloween: The Game Guide: Story, Multiplayer & Unlocks"
+          description="Choose your next objective in Story Mode or Civilian multiplayer, compare escape routes, explore Tower Farm, and find the right challenges, perks, Prestige rewards, and endings."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 23, 2026"
+          updatedAt="October 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

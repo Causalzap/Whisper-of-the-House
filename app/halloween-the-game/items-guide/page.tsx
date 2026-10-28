@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -8,16 +9,16 @@ import ItemsGuideContent from "@/data/halloween-the-game/items-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/halloween-the-game`;
-const pageUrl = `${siteUrl}/halloween-the-game/items-guide`;
+const pageUrl = `${hubUrl}/items-guide`;
 
 const metadataTitle =
   "Halloween: The Game All Items & Uses – What to Keep";
 
 const metadataDescription =
-  "See what Halloween: The Game items do, what to keep in three inventory slots, and when to use knives, rare items, escape tools, healing, guns, and weapons.";
+  "Compare Halloween: The Game items and what to keep in three inventory slots, including grab-escape knives, Bolt Cutters, Flare Gun, healing, and weapons.";
 
 const articleDescription =
-  "A practical Halloween: The Game item guide covering three-slot inventory choices, rare items, grab escapes, escape tools, healing, consumables, throwables, firearms, melee weapons, and when to keep or drop each pickup.";
+  "Choose which items to carry, use, or drop in Halloween: The Game. Compare rare defensive items, grab-escape blades, escape tools, Flare Gun uses, Flashlight changes, consumables, healing, firearms, melee weapons, and inventory tradeoffs.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-lawn-darts-stack.webp`;
@@ -40,7 +41,7 @@ const toc = [
   },
   {
     id: "rare-items",
-    label: "Rare items",
+    label: "Ancient Amulet, Lantern & Hourglass",
   },
   {
     id: "grab-escape-items",
@@ -48,7 +49,7 @@ const toc = [
   },
   {
     id: "flare-gun",
-    label: "Flare Gun",
+    label: "Flare Gun: Police or combat?",
   },
   {
     id: "light-items",
@@ -56,15 +57,15 @@ const toc = [
   },
   {
     id: "repair-kit",
-    label: "Repair Kit",
+    label: "Repair Kit uses",
   },
   {
     id: "sedan",
-    label: "Sedan Key & Gas",
+    label: "Sedan Key & Gas Can",
   },
   {
     id: "bolt-cutters",
-    label: "Bolt Cutters",
+    label: "Bolt Cutters & locks",
   },
   {
     id: "exit-gate",
@@ -76,23 +77,23 @@ const toc = [
   },
   {
     id: "consumables",
-    label: "Consumables",
+    label: "Beer, Joint & Pop",
   },
   {
     id: "healing",
-    label: "Healing items",
+    label: "Healing Spray vs Medkit",
   },
   {
     id: "throwables",
-    label: "Throwables",
+    label: "Throwables & Lawn Darts",
   },
   {
     id: "firearms",
-    label: "Firearms",
+    label: "Magnum, Shotgun & Rifle",
   },
   {
     id: "melee-weapons",
-    label: "Melee weapons",
+    label: "Melee weapons & Scythe",
   },
   {
     id: "drop-first",
@@ -102,12 +103,16 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/halloween-the-game/escape-helper",
-    label: "Escape & Spawn Helper",
-  },
-  {
     href: "/halloween-the-game/multiplayer-guide",
     label: "Civilian Multiplayer Guide",
+  },
+  {
+    href: "/halloween-the-game/tower-farm-map-guide",
+    label: "Tower Farm Map & Sewer Escape",
+  },
+  {
+    href: "/halloween-the-game/escape-helper",
+    label: "Escape & Spawn Helper",
   },
   {
     href: "/halloween-the-game/best-civilians",
@@ -135,14 +140,15 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      "Compare Civilian items, defensive tools, escape equipment, Flare Gun uses, healing, throwables, and weapons. Decide what to keep in three inventory slots.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Halloween The Game Civilian inventory showing three Lawn Darts stacked in one slot",
+        alt: "Halloween The Game inventory showing three Lawn Darts stacked in one item slot",
       },
     ],
   },
@@ -150,7 +156,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
-    description: metadataDescription,
+    description:
+      "What should you keep in Halloween: The Game? Compare rare items, grab-escape knives, escape tools, firearms, and melee weapons.",
     images: [heroImage],
   },
 };
@@ -168,7 +175,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
@@ -206,7 +213,7 @@ const jsonLd = {
       inLanguage: "en",
 
       datePublished: "2026-09-17",
-      dateModified: "2026-09-17",
+      dateModified: "2026-10-28",
 
       articleSection:
         "Halloween: The Game Multiplayer Guides",
@@ -223,7 +230,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game inventory",
+          name: "Civilian inventory",
         },
         {
           "@type": "Thing",
@@ -231,7 +238,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Brass Lantern",
+        },
+        {
+          "@type": "Thing",
+          name: "Fragile Hourglass",
+        },
+        {
+          "@type": "Thing",
           name: "Pocket Knife",
+        },
+        {
+          "@type": "Thing",
+          name: "Butterfly Knife",
         },
         {
           "@type": "Thing",
@@ -240,6 +259,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Flare Gun",
+        },
+        {
+          "@type": "Thing",
+          name: "Flashlight",
         },
         {
           "@type": "Thing",
@@ -255,7 +278,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Gas Can",
+        },
+        {
+          "@type": "Thing",
           name: "Electric Fuse",
+        },
+        {
+          "@type": "Thing",
+          name: "Lawn Dart",
+        },
+        {
+          "@type": "Thing",
+          name: "Scythe",
         },
       ],
 
@@ -312,12 +347,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Halloween: The Game All Items & Uses – What Should You Keep?"
-          description="Learn what each Civilian item does, what deserves one of your three inventory slots, and when to use or drop rare items, escape tools, healing, throwables, guns, and melee weapons."
+          description="Decide which Civilian items deserve your three carried-item slots, when to use rare defensive tools, and which escape items, healing supplies, or weapons to keep."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/halloween-the-game"
           breadcrumbBaseLabel="Halloween: The Game"
-          updatedAt="September 17, 2026"
+          updatedAt="October 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

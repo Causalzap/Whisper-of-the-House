@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,7 +15,10 @@ const metadataTitle =
   "Halloween: The Game Prestige Guide – Challenges & Rewards";
 
 const metadataDescription =
-  "Learn how Prestige works in Halloween: The Game, including level requirements, challenge costs, Profile and Jennifer objectives, rewards, and current errors.";
+  "Learn how to Prestige in Halloween: The Game, including level caps, Perk Point costs, Profile and Jennifer challenges, rewards, and tracking problems.";
+
+const articleDescription =
+  "Learn how Prestige works in Halloween: The Game, from Profile, Michael, Civilian, and Weapon level requirements to timed challenges, Perk Point costs, Bloodthirsty Pitchfork executions, Jennifer's townsfolk objective, Private Match attempts, rewards, and challenge troubleshooting.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-prestige-level-100.webp`;
@@ -33,11 +37,23 @@ const toc = [
   },
   {
     id: "starting-a-prestige-challenge",
-    label: "Cost & when to start",
+    label: "Challenge costs & requirements",
   },
   {
     id: "confirmed-prestige-challenges",
-    label: "Confirmed challenges & rewards",
+    label: "Prestige challenges & rewards",
+  },
+  {
+    id: "profile-prestige",
+    label: "Profile Prestige: Pitchfork",
+  },
+  {
+    id: "profile-prestige-private-match",
+    label: "Pitchfork in Private Matches",
+  },
+  {
+    id: "jennifer-prestige",
+    label: "Jennifer: Convince 30 Townsfolk",
   },
   {
     id: "prestige-not-working",
@@ -45,30 +61,30 @@ const toc = [
   },
   {
     id: "before-starting-prestige",
-    label: "Before starting Prestige",
-  },
-  {
-    id: "other-prestige-objectives",
-    label: "Other Prestige objectives",
-  },
-  {
-    id: "private-match-prestige",
-    label: "Private Match farming",
+    label: "When to start Prestige",
   },
   {
     id: "after-prestige",
-    label: "What happens after Prestige",
+    label: "Challenges after Prestige",
+  },
+  {
+    id: "prestige-reset-rewards",
+    label: "Prestige resets & rewards",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/halloween-the-game/progression-perks",
-    label: "Progression, Perks & Leveling Guide",
+    label: "Progression & Perks Guide",
+  },
+  {
+    href: "/halloween-the-game/challenges",
+    label: "Challenges & Unlocks Guide",
   },
   {
     href: "/halloween-the-game/multiplayer-guide",
-    label: "Multiplayer Guide",
+    label: "Civilian Multiplayer Guide",
   },
   {
     href: "/halloween-the-game/achievements",
@@ -87,25 +103,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Prestige Guide – Challenges & Rewards",
+    title: metadataTitle,
     description:
-      "Reach the correct level cap, start a timed Prestige Challenge, manage Perk Point costs, and work through confirmed Profile and Civilian objectives.",
+      "Reach Prestige level caps, check challenge costs, complete Profile and Jennifer objectives, and troubleshoot missing or stalled progress.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Halloween The Game Profile Prestige screen requiring Level 100 before Prestige 1",
+        alt: "Halloween The Game Profile Prestige screen showing the Level 100 requirement for Prestige 1",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Prestige Guide – Challenges & Rewards",
+    title: metadataTitle,
     description:
-      "Prestige requirements, challenge costs, confirmed objectives, rewards, Private Match farming, and current Prestige errors.",
+      "Prestige level requirements, timed challenges, Perk Point costs, Profile Pitchfork executions, Jennifer's challenge, and rewards.",
     images: [heroImage],
   },
 };
@@ -121,7 +137,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
@@ -145,14 +161,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game Prestige Guide — Challenges, Rewards & Requirements",
-      description:
-        "A player-focused guide to Prestige in Halloween: The Game, covering Profile, Michael, Civilian and Weapon level requirements, timed Prestige Challenges, Perk Point costs, the Profile Bloodthirsty Pitchfork objective, Jennifer's townsfolk objective, Private Match farming, and current challenge tracking or availability errors.",
+        "Halloween: The Game Prestige Guide – Challenges & Rewards",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-12",
-      dateModified: "2026-09-12",
+      dateModified: "2026-10-28",
       articleSection: "Halloween: The Game Progression",
       about: [
         {
@@ -190,11 +205,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Bloodthirsty Pitchfork Executions",
+        },
+        {
+          "@type": "Thing",
           name: "Clown Myers",
         },
         {
           "@type": "Thing",
-          name: "Bloodthirsty Pitchfork Executions",
+          name: "Michael Prestige Tints",
+        },
+        {
+          "@type": "Thing",
+          name: "Perk Points",
+        },
+        {
+          "@type": "Thing",
+          name: "Private Matches",
+        },
+        {
+          "@type": "Thing",
+          name: "Passive Challenges",
         },
       ],
       isPartOf: {
@@ -230,13 +261,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Halloween: The Game Prestige Guide – Challenges, Rewards & Requirements"
-          description="Reach the right level cap, start Prestige at the right time, and work through the confirmed Profile and Civilian challenges without wasting hours on a broken counter."
+          title="Halloween: The Game Prestige Guide – How to Prestige"
+          description="Reach the required level cap, check Prestige costs and timed objectives, complete Profile or Jennifer challenges, and fix problems with missing or stalled progress."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 12, 2026"
+          updatedAt="October 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

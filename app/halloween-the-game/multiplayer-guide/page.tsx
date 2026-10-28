@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -14,7 +15,10 @@ const metadataTitle =
   "Halloween: The Game Multiplayer Guide for Civilians";
 
 const metadataDescription =
-  "Learn what to do first as a Civilian, call police, manage items, open car or Storm Cellar escapes, switch routes, and know when to leave.";
+  "Find Residents and Special Targets, call police, complete Sedan and Storm Cellar escapes, avoid Michael's interruptions, and survive Civilian multiplayer.";
+
+const articleDescription =
+  "Learn how to survive Civilian multiplayer in Halloween: The Game. Discover Residents and Special Targets, understand Bloodthirst map reveals, make police calls, manage escape items, complete Sedan and Storm Cellar objectives, handle Noise Pings and Blackout, and choose when to escape or help teammates.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-first-objectives.webp`;
@@ -23,8 +27,8 @@ const imageUrls = [
   heroImage,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-call-police.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-police-call-retry.webp`,
-  `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-car-items.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-resident-call-help.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-car-items.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-tornado-shelter-padlock.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-multiplayer-open-exit-decision.webp`,
 ];
@@ -33,6 +37,14 @@ const toc = [
   {
     id: "opening-route",
     label: "What to do first",
+  },
+  {
+    id: "resident-target-discovery",
+    label: "Find Residents & Special Targets",
+  },
+  {
+    id: "michael-bloodthirst-map",
+    label: "Michael's Bloodthirst map reveals",
   },
   {
     id: "call-police",
@@ -44,48 +56,64 @@ const toc = [
   },
   {
     id: "residents",
-    label: "How to use residents",
+    label: "Resident commands",
   },
   {
     id: "car-escape",
-    label: "How the car escape works",
+    label: "Sedan escape requirements",
   },
   {
     id: "storm-cellar",
-    label: "How the Storm Cellar works",
+    label: "Storm Cellar barriers",
+  },
+  {
+    id: "escape-noise-pings",
+    label: "Escape Noise Pings",
+  },
+  {
+    id: "tower-farm-sewer",
+    label: "Tower Farm Sewer Escape",
   },
   {
     id: "switch-routes",
-    label: "When to switch escape routes",
+    label: "When to switch escapes",
   },
   {
     id: "police-window",
-    label: "Use police and weapons for time",
+    label: "Police pressure & weapons",
   },
   {
     id: "open-exit",
     label: "When to take an open exit",
   },
-  {
-    id: "next-match",
-    label: "How to approach the next match",
-  },
 ];
 
 const relatedLinks = [
-    {
-      href: "/halloween-the-game/how-to-arrest-michael-myers",
-      label: "How to Arrest Michael Myers",
-    },
-    {
-      href: "/halloween-the-game/progression-perks",
-      label: "Progression, Perks & Prestige",
-    },
-    {
-      href: "/halloween-the-game",
-      label: "Halloween: The Game Guide",
-    },
-  ];
+  {
+    href: "/halloween-the-game/escape-helper",
+    label: "Escape & Spawn Helper",
+  },
+  {
+    href: "/halloween-the-game/tower-farm-map-guide",
+    label: "Tower Farm Map & Sewer Escape",
+  },
+  {
+    href: "/halloween-the-game/items-guide",
+    label: "All Items & Uses Guide",
+  },
+  {
+    href: "/halloween-the-game/best-civilians",
+    label: "Best Civilians Tier List",
+  },
+  {
+    href: "/halloween-the-game/how-to-arrest-michael-myers",
+    label: "How to Arrest Michael Myers",
+  },
+  {
+    href: "/halloween-the-game/progression-perks",
+    label: "Progression & Perks Guide",
+  },
+];
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -98,25 +126,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Multiplayer Guide — Civilian Survival",
+    title: metadataTitle,
     description:
-      "Build a Civilian match around real escape progress: make police calls, connect items to objectives, use residents, finish the car or Storm Cellar, and leave when the route is ready.",
+      "Survive Civilian multiplayer with Resident discovery, police calls, escape tools, Sedan and Storm Cellar objectives, route switching, and updated Michael counterplay.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Halloween The Game Civilian multiplayer opening objectives",
+        alt: "Halloween The Game Civilian multiplayer opening objectives showing Residents, items, police, and escape tasks",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Multiplayer Guide",
+    title: metadataTitle,
     description:
-      "Learn the Civilian opening, police calls, inventory choices, car and Storm Cellar routes, and when an open exit is worth taking.",
+      "Learn Civilian opening priorities, Resident discovery, Bloodthirst map reveals, police calls, escape decisions, and how to survive Michael.",
     images: [heroImage],
   },
 };
@@ -132,7 +160,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: siteUrl,
+          item: `${siteUrl}/`,
         },
         {
           "@type": "ListItem",
@@ -157,13 +185,12 @@ const jsonLd = {
       },
       headline:
         "Halloween: The Game Multiplayer Guide for Civilians",
-      description:
-        "A practical Civilian multiplayer guide for Halloween: The Game covering the opening search, safe police calls and retries, inventory decisions, resident commands, the three-step car escape, variable Storm Cellar barriers, route switching, using police pressure and weapons to create interaction time, and deciding whether to rescue teammates or take an already-open exit.",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
+      dateModified: "2026-10-28",
       articleSection: "Halloween: The Game Multiplayer Guides",
       about: [
         {
@@ -181,11 +208,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Resident discovery",
+        },
+        {
+          "@type": "Thing",
+          name: "Special Targets",
+        },
+        {
+          "@type": "Thing",
+          name: "Michael Myers Bloodthirst",
+        },
+        {
+          "@type": "Thing",
           name: "Police calls",
         },
         {
           "@type": "Thing",
-          name: "Car escape",
+          name: "Sedan escape",
         },
         {
           "@type": "Thing",
@@ -193,7 +232,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Haddonfield residents",
+          name: "Tower Farm Sewer Escape",
+        },
+        {
+          "@type": "Thing",
+          name: "Escape Noise Pings",
+        },
+        {
+          "@type": "Thing",
+          name: "Blackout",
+        },
+        {
+          "@type": "Thing",
+          name: "Civilian inventory",
         },
       ],
       isPartOf: {
@@ -229,13 +280,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Turn the First Useful Find Into an Escape Plan"
-          description="Civilian matches get easier once every item, resident, police call, and fight is judged by whether it moves a real escape forward."
+          title="Halloween: The Game Multiplayer Guide – How to Escape as a Civilian"
+          description="Learn where to search first, how to discover Residents and Special Targets, when to call police, and how to finish an escape before Michael interrupts it."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="October 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

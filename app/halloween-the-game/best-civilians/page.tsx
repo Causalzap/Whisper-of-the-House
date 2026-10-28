@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -7,14 +8,14 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import BestCiviliansContent from "@/data/halloween-the-game/best-civilians.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/halloween-the-game/`;
-const pageUrl = `${siteUrl}/halloween-the-game/best-civilians/`;
+const hubUrl = `${siteUrl}/halloween-the-game`;
+const pageUrl = `${hubUrl}/best-civilians`;
 
 const metadataTitle =
   "Halloween: The Game Best Civilians – Tier List & Who to Pick";
 
 const metadataDescription =
-  "Rank all 12 Halloween: The Game Civilians and see who to pick for repairs, Residents, fighting Michael, mobility, escape progress, and support.";
+  "Compare all 14 Halloween: The Game Civilians, including Michelle and Eugene, by stats, traits, repairs, healing, stealth, mobility, and team roles.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-best-civilians-tier-list.webp`;
@@ -27,6 +28,8 @@ const imageUrls = [
   `${siteUrl}/images/halloween-the-game/halloween-the-game-tanya-stats-traits.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-rachel-stats-traits.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-jennifer-stats-traits.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-michelle-blanton-stats-traits.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-eugene-kelly-stats-traits.webp`,
 ];
 
 const toc = [
@@ -55,42 +58,42 @@ const toc = [
     label: "Jennifer Aarons",
   },
   {
+    id: "eugene-michelle",
+    label: "Eugene & Michelle",
+  },
+  {
+    id: "michelle-blanton",
+    label: "Michelle Blanton",
+  },
+  {
+    id: "eugene-kelly",
+    label: "Eugene Kelly",
+  },
+  {
     id: "b-tier",
-    label: "When B-tier Civilians are good",
+    label: "When B-tier Civilians work",
   },
   {
     id: "ranking-changes",
     label: "When the ranking changes",
   },
-  {
-    id: "michael-pressure",
-    label: "Michael ability matchups",
-  },
-  {
-    id: "perk-direction",
-    label: "Perks for each role",
-  },
-  {
-    id: "who-to-pick",
-    label: "Who should you pick?",
-  },
 ];
 
 const relatedLinks = [
   {
-    href: "/halloween-the-game/multiplayer-guide/",
+    href: "/halloween-the-game/multiplayer-guide",
     label: "Civilian Multiplayer Guide",
   },
   {
-    href: "/halloween-the-game/progression-perks/",
+    href: "/halloween-the-game/progression-perks",
     label: "Progression & Perks Guide",
   },
   {
-    href: "/halloween-the-game/escape-helper/",
+    href: "/halloween-the-game/escape-helper",
     label: "Escape & Spawn Helper",
   },
   {
-    href: "/halloween-the-game/how-to-arrest-michael-myers/",
+    href: "/halloween-the-game/how-to-arrest-michael-myers",
     label: "How to Arrest Michael Myers",
   },
 ];
@@ -106,25 +109,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Best Civilians – Tier List & Picks",
+    title: metadataTitle,
     description:
-      "Compare all 12 Civilians and choose the best character for repairs, Residents, mobility, anti-Michael pressure, escape progress, or general multiplayer.",
+      "Compare 12 ranked Civilians plus Michelle Blanton and Eugene Kelly. Find the best picks for repairs, Resident support, healing, stealth, and survival.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Halloween The Game tier list ranking all 12 playable Civilians into S A and B tiers",
+        alt: "Halloween The Game Civilian tier list and character comparisons",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Best Civilians – Tier List & Picks",
+    title: metadataTitle,
     description:
-      "Compare all 12 Civilians and choose the right character for repairs, Residents, mobility, fighting Michael, or general multiplayer.",
+      "Compare 14 playable Civilians, their stats, traits, strengths, and weaknesses to choose the right character for each multiplayer role.",
     images: [heroImage],
   },
 };
@@ -166,12 +169,12 @@ const jsonLd = {
       headline:
         "Halloween: The Game Best Civilians – Tier List and Who to Pick",
       description:
-        "A practical ranking of all 12 Halloween: The Game Civilians, including who to pick for repairs, Resident support, mobility, anti-Michael pressure, escape progress, and different multiplayer match states.",
+        "Compare 14 Halloween: The Game Civilians by stats, traits, and multiplayer roles. Includes Laurie, Marcus, Alexis, Michelle, Eugene, and the best choices for repairs, healing, stealth, and Resident support.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-15",
-      dateModified: "2026-09-15",
+      dateModified: "2026-10-28",
       articleSection: "Halloween: The Game Multiplayer Guides",
       about: [
         {
@@ -186,10 +189,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Halloween: The Game Civilian tier list",
-        },
-        {
-          "@type": "Thing",
-          name: "Best Civilians",
         },
         {
           "@type": "Thing",
@@ -217,6 +216,14 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Michelle Blanton",
+        },
+        {
+          "@type": "Thing",
+          name: "Eugene Kelly",
+        },
+        {
+          "@type": "Thing",
           name: "Civilian stats and traits",
         },
         {
@@ -225,19 +232,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Repair Expert",
+          name: "Therapeutic",
         },
         {
           "@type": "Thing",
-          name: "Popular",
-        },
-        {
-          "@type": "Thing",
-          name: "Full Moon",
-        },
-        {
-          "@type": "Thing",
-          name: "Ghost",
+          name: "Lurker",
         },
       ],
       isPartOf: {
@@ -274,12 +273,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Halloween: The Game Best Civilians – Who Should You Pick?"
-          description="Compare all 12 Civilians by the job they actually perform best, from repairs and Resident support to mobility, Michael pressure, escape progress, and general survival."
+          description="Compare 14 playable Civilians, including Michelle and Eugene, and find the best character for repairs, Resident support, team healing, stealth, and escaping Michael."
           gameTitle="Halloween: The Game"
-          gameHref="/halloween-the-game/"
+          gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 15, 2026"
+          updatedAt="October 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

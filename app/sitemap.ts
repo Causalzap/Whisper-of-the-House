@@ -884,6 +884,7 @@ const paths = [
 '/halloween-the-game/best-civilians',
 '/halloween-the-game/items-guide',
 '/halloween-the-game/challenges',
+'/halloween-the-game/tower-farm-map-guide',
 
   '/wanderburg',
   '/wanderburg/progression-unlocks',
@@ -1442,37 +1443,23 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   "/the-last-caretaker/memory-for-aaron-guide": "2026-09-07",
   "/the-last-caretaker/transposium-room-998-guide": "2026-09-07",
 
-  '/halloween-the-game': '2026-09-23',
-
-'/halloween-the-game/walkthrough': '2026-09-11',
-
-'/halloween-the-game/endings': '2026-09-04',
-
-'/halloween-the-game/multiplayer-guide': '2026-09-04',
-
-'/halloween-the-game/progression-perks': '2026-09-23',
-
-'/halloween-the-game/how-to-arrest-michael-myers': '2026-09-11',
-
-'/halloween-the-game/main-street-walkthrough': '2026-09-23',
-
-'/halloween-the-game/the-babysitters-walkthrough': '2026-09-23',
-
-'/halloween-the-game/prologue-challenge-5': '2026-09-23',
-
-'/halloween-the-game/prologue-challenges': '2026-09-23',
-
-'/halloween-the-game/achievements': '2026-09-12',
-
-'/halloween-the-game/escape-helper': '2026-09-09',
-
-'/halloween-the-game/prestige-guide': '2026-09-12',
-
-'/halloween-the-game/best-civilians': '2026-09-15',
-
-'/halloween-the-game/items-guide': '2026-09-17',
-
-'/halloween-the-game/challenges': '2026-09-23',
+  '/halloween-the-game': '2026-10-28',
+  '/halloween-the-game/walkthrough': '2026-09-11',
+  '/halloween-the-game/endings': '2026-09-04',
+  '/halloween-the-game/multiplayer-guide': '2026-10-28',
+  '/halloween-the-game/progression-perks': '2026-10-28',
+  '/halloween-the-game/how-to-arrest-michael-myers': '2026-09-11',
+  '/halloween-the-game/main-street-walkthrough': '2026-09-23',
+  '/halloween-the-game/the-babysitters-walkthrough': '2026-09-23',
+  '/halloween-the-game/prologue-challenge-5': '2026-09-23',
+  '/halloween-the-game/prologue-challenges': '2026-09-23',
+  '/halloween-the-game/achievements': '2026-09-12',
+  '/halloween-the-game/escape-helper': '2026-09-09',
+  '/halloween-the-game/prestige-guide': '2026-10-28',
+  '/halloween-the-game/best-civilians': '2026-10-28',
+  '/halloween-the-game/items-guide': '2026-10-28',
+  '/halloween-the-game/challenges': '2026-10-28',
+  '/halloween-the-game/tower-farm-map-guide': '2026-10-28',
 
   '/neverness-to-everness': '2026-09-02',
   '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',

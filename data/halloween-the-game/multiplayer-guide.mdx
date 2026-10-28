@@ -1,24 +1,44 @@
 import Link from "next/link";
 import Image from "next/image";
 import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+
+export const bloodthirstColumns = [
+  { key: "tier", label: "Bloodthirst" },
+  { key: "revealed", label: "Target Areas Revealed on Michael's Map" },
+];
+
+export const bloodthirstRows = [
+  {
+    tier: "Tier 0",
+    revealed: "No Resident or Special Target areas",
+  },
+  {
+    tier: "Tier 1",
+    revealed: "One random Resident area",
+  },
+  {
+    tier: "Tier 2",
+    revealed: "50% of Resident areas and one Special Target area",
+  },
+  {
+    tier: "Tier 3",
+    revealed: "All remaining unhidden Resident and Special Target areas, including Special Target beams",
+  },
+];
+
 
 <GuideQuickAnswer title="Quick Answer">
-**Start with the nearest useful building, make an early police call when the
-room is safe, then let the first real escape clue decide what you carry and
-where you search next.**
+Search nearby buildings for Residents, a usable phone, and escape clues. In Patch 1.2.0, Resident areas are uncovered by proximity, and each Resident you convince expands your discovery range and reveals a Special Target.
 
-For the car, check which of its three jobs is still unfinished. For the Storm
-Cellar, follow the barrier objectives shown in that match rather than assuming
-one fixed tool requirement.
-
-Once an exit is open, leave unless you know exactly who you are going back for
-and what route will get them out.
+Once an escape route becomes viable, carry the item that finishes its current objective. Recheck the exit before committing to it, because Michael's Blackout can now close an open escape.
 </GuideQuickAnswer>
 
 <div className="my-4 text-sm text-slate-400">
-  Last updated: September 17, 2026. Civilian multiplayer: opening priorities,
-  police calls, residents, inventory decisions, car and Storm Cellar routes,
-  route switching, and the decision to stay or escape.
+  Last updated: October 28, 2026. Covers Patch 1.2.0 Resident
+  discovery, Special Target locations, police calls, inventory choices,
+  Civilian escapes, route switching, and Michael's map visibility.
 </div>
 
 <figure className="my-8">
@@ -40,8 +60,7 @@ and what route will get them out.
   Leave the first house with information, not just more loot
 </h2>
 
-My first multiplayer match began with just under **20 minutes** showing on the
-clock.
+One multiplayer opening began with just under 20 minutes remaining on the clock.
 
 The HUD was already asking for several things:
 
@@ -76,6 +95,44 @@ finish.
 
 Until one of those connections exists, I am collecting possibilities rather
 than making progress.
+
+
+<h2 id="resident-target-discovery">
+  Why Are Residents and Special Targets Missing From the Map?
+</h2>
+
+In Patch 1.2.0, Civilians no longer begin a match with every Resident and Special Target area already marked. An empty-looking map does not mean those characters failed to spawn.
+
+Resident areas now become visible as you move close enough to discover them. That changes the opening search: enter nearby streets and buildings instead of trying to plan a complete rescue route from markers that have not appeared yet.
+
+Convincing a Resident is also part of uncovering the map.
+
+- Each Resident you successfully convince increases your discovery range.
+- Each successful conviction also marks a Special Target until all Special Targets have been marked.
+- Once enough Residents have died or escaped, remaining Special Targets are marked automatically.
+- Resident and Special Target conversations now have a better chance of providing escape items or escape-location information.
+
+The last point makes successful conversations valuable even before an escape is open. A Resident can help identify the next objective rather than serving only as someone to escort.
+
+The target areas are also less precise than before. Treat a newly revealed area as somewhere to investigate, not as an exact position that guarantees the character will be standing on the marker.
+
+<h3 id="michael-bloodthirst-map">
+  What Does Michael See at Each Bloodthirst Tier?
+</h3>
+
+Michael's map also starts with less information. Resident and Special Target areas are gradually revealed as his Bloodthirst rises.
+
+<GuideTable
+  caption="How Michael's Bloodthirst tiers reveal Resident and Special Target areas in Patch 1.2.0."
+  columns={bloodthirstColumns}
+  rows={bloodthirstRows}
+/>
+
+The progression applies to Residents and Special Targets that are not hidden. A revealed area is still a search lead rather than a guaranteed live location.
+
+For Michael, the early lack of markers is now expected. As Bloodthirst rises, the map provides more places to investigate. At Tier 3, Special Target beams make those targets much easier to pursue.
+
+For Civilians, this creates a reason to gather information early. Convince Residents, discover escape clues, and turn that information into progress before Michael's map becomes more complete.
 
 <h2 id="call-police">
   A quiet phone room is worth using early
@@ -115,9 +172,9 @@ continues after I leave the phone behind.
 
 A failed attempt also does not necessarily kill the plan.
 
-One of my calls ended with **Unconvincing Call**. The phone was still available,
-so I tried again rather than writing off the entire police route. The retry
-succeeded.
+
+One call returned **Unconvincing Call**. The phone remained available, and a second attempt succeeded without having to find another phone.
+
 
 <figure className="my-8">
   <Image
@@ -154,25 +211,9 @@ route gains real progress, the inventory becomes easier to read. The item that
 finishes the known job moves ahead of something I am carrying only because it
 *might* become useful later.
 
-A Sedan is a good example. Once the car is marked, I check the HUD instead of
-collecting every car-related object I see. If the engine still needs work, a
-Repair Kit has a destination. If the engine is already repaired but the tank is
-empty, Gas matters more. If repair and fuel are complete, getting the Sedan Key
-to the vehicle is the remaining job.
 
-<figure className="my-8">
-  <Image
-    src="/images/halloween-the-game/halloween-the-game-multiplayer-car-items.webp"
-    alt="Halloween The Game inventory and car objectives showing Repair Engine Fill Gas Tank and Use Sedan Keys"
-    width={1600}
-    height={900}
-    className="rounded-xl"
-  />
-  <figcaption className="mt-3 text-sm text-slate-400">
-    Once the Sedan is known, the unfinished HUD objective tells me which car
-    item actually deserves attention.
-  </figcaption>
-</figure>
+The Sedan is a useful test of inventory priorities. Once the car is discovered, check its unfinished objective before carrying another car-related item. An item that finishes the current requirement is worth more than one you are holding for a route the team has not found.
+
 
 The same rule applies away from the car. Bolt Cutters become valuable when a
 known lock needs them; a grab-escape blade becomes more important before a
@@ -212,27 +253,20 @@ A successful resident interaction can lead to three commands:
   </figcaption>
 </figure>
 
-The screenshot above caught a useful state: the resident interaction succeeded,
-but the HUD still showed **No Open Escapes Discovered**.
+The screenshot shows a successful Resident conversation while the HUD still reads **No Open Escapes Discovered**.
 
-That changes the choice.
+That is no longer an information dead end. In Patch 1.2.0, convincing the Resident expands your discovery range and marks a Special Target. Successful conversations also have a better chance of revealing an escape item or location.
 
-Leading the resident across town without a destination only creates another
-moving responsibility.
+Check what the conversation revealed before choosing the Resident's next command.
 
-At that stage I prefer **Call For Help** when I want more authority pressure, or
-**Hide** when Michael is close and I cannot safely move the resident.
+**Call For Help** is useful when additional police pressure supports the team's plan. **Hide** is the safer choice when Michael is nearby and moving the Resident would expose them. **Follow Me** becomes especially valuable after you know where an escape is and can realistically escort the Resident there.
 
-**Follow Me** becomes much stronger after an exit has been found.
+Followers can now follow Civilians over vaulting and mantling routes, making some shortcuts more practical during an escort. That does not remove the need to check whether Michael is waiting beyond the obstacle.
 
-Now there is somewhere to go.
+Without a destination, leading a Resident across the map can create unnecessary risk. With a known escape, the same Resident becomes part of a concrete rescue route.
 
-This is one of the places where multiplayer rewards doing things in the right
-order rather than simply doing more things.
+The main decision is whether the conversation gave you new information, whether the Resident can be moved safely, and whether another objective is already more urgent.
 
-A resident plus no destination is another problem.
-
-A resident plus an open exit is a rescue route.
 
 <h2 id="car-escape">
   The car is three jobs, not one discovery
@@ -248,19 +282,23 @@ The route requires:
 2. **Fill the Car's Gas Tank**
 3. **Use the Sedan Keys to Start the Car**
 
-Those jobs remain separate.
 
-A Repair Kit solves the engine.
+<figure className="my-8">
+  <Image
+    src="/images/halloween-the-game/halloween-the-game-multiplayer-car-items.webp"
+    alt="Sedan escape objectives showing Repair the Car's Engine, Fill the Car's Gas Tank, and Use the Sedan Keys"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Sedan has three separate requirements. Check the unfinished objective before searching for another item.
+  </figcaption>
+</figure>
 
-It does not fill the tank.
+The three requirements must be completed separately. A Repair Kit handles the engine, a Gas Can fills the tank, and Sedan Keys start the vehicle once the other work is finished. Carrying another repair item after the engine is complete does not bring this Sedan closer to escape.
 
-Sedan Keys do not compensate for missing gas.
-
-And finding another repair item after the engine is already complete does not
-move this particular car any closer to leaving.
-
-The fastest way to waste a car route is to keep searching for “car stuff”
-without checking which line is unfinished.
+Check the unfinished HUD objective before searching for another car item. The team needs the missing requirement, not another object that happens to be associated with the vehicle.
 
 I start treating the vehicle as my main route once there is more than a marker
 on the map.
@@ -272,6 +310,11 @@ among several.
 
 That difference matters when another teammate discovers an exit on the other
 side of the map.
+
+
+Patch 1.2.0 also slowed the Car Repair minigame. A Repair Kit still solves the same objective, but finishing the interaction can require a longer safe window.
+
+That makes protection and timing more important. If Michael keeps returning before the repair can be completed, having the correct item is not enough to make the Sedan the best available route.
 
 <h2 id="storm-cellar">
   The Storm Cellar can change its barrier, so read the objective in front of you
@@ -304,6 +347,10 @@ followed by:
 Another setup showed **Key or Bolt Cutters** at the padlock and also tracked
 boards that needed to be destroyed.
 
+
+If the current escape also requires clearing Overgrowth, allow more time for that interaction. Patch 1.2.0 increased the time needed to remove it, so an exposed entrance may require someone else to distract Michael while the work is completed.
+
+
 Because of that variation, I would not enter every match carrying one memorized
 Storm Cellar shopping list.
 
@@ -323,43 +370,52 @@ the first place.
 When a teammate is already opening the cellar, that is a good moment for someone
 else to stop looting and protect the interaction.
 
+
+<h2 id="escape-noise-pings">
+  Can Michael Detect You While You Work on an Escape?
+</h2>
+
+Escape interactions now generate **Noise Pings**. Working on an objective is therefore not something I would assume remains unnoticed just because Michael was elsewhere when the interaction started.
+
+Before committing to a long repair or barrier-clearing action, check the nearby exits from that area and whether another Civilian can cover the approach.
+
+If Michael starts moving toward the objective, decide whether there is enough time to finish or whether breaking off and returning later is safer.
+
+This matters most when the interaction already takes time, such as repairing a car or clearing Overgrowth. The right item does not guarantee a safe completion window.
+
+The update does not establish an exact detection radius for every escape interaction. Treat the ping as a reason to expect attention, not proof that Michael knows your exact position at all times.
+
+
+<h2 id="tower-farm-sewer">
+  Should You Use the Sewer Escape on Tower Farm?
+</h2>
+
+Tower Farm adds a Sewer Hatch escape alongside the routes available elsewhere. Finding the hatch gives the team another possible destination, but the entrance may still require several unlocking actions before it can be used.
+
+Compare the work remaining at the Sewer with the team's other discovered exits.
+
+If the Sewer has been found and the team already holds a required unlocking tool, it may be worth pursuing instead of continuing a Sedan search with several missing items. If Michael is guarding the hatch or the team has not collected the necessary tools, a different escape may be more practical.
+
+For the exact Sewer Hatch objectives, Chains and Padlock variants, and how to navigate toward the entrance, use the <Link href="/halloween-the-game/tower-farm-map-guide">Tower Farm map guide</Link>.
+
+
 <h2 id="switch-routes">
   Compare what is still missing before you defend sunk progress
 </h2>
 
-A route can be half complete and still become the worse option.
+A partially repaired Sedan can still be the wrong escape to pursue. Suppose the engine is finished, but the team has not found Gas or Sedan Keys, and Michael keeps returning to the vehicle. Meanwhile, another Civilian discovers a Storm Cellar and already carries the tool needed to remove its current barrier.
 
-Suppose the car engine is repaired.
+The engine repair is progress, but it does not make the missing Gas or Keys any easier to find. From this point, the Storm Cellar may offer a faster escape with fewer unknown requirements. I would switch to the Cellar if its remaining interaction is manageable and Michael has not already taken control of that entrance. If the Cellar is also guarded or still has additional barriers, I would compare those obstacles before abandoning the Sedan.
 
-Gas is still missing.
+I recheck the route whenever:
 
-Nobody has seen the Sedan Keys.
+- A new escape is discovered.
+- A required item becomes available.
+- Michael repeatedly returns to the objective area.
+- An escape that was previously open becomes inaccessible.
 
-Michael has returned to the car more than once.
+The last condition matters more after Patch 1.2.0. Blackout can close open escapes, so a route that was ready a moment ago may need to be reconsidered before the team spends more time or items on it.
 
-Then another player discovers a Storm Cellar and already has the tool needed for
-its current barrier.
-
-The repaired engine feels valuable because the team has already invested time
-there.
-
-That time is gone either way.
-
-The useful comparison is what each route costs **from this moment forward**.
-
-A route missing one known piece is usually attractive.
-
-A route missing two unknown pieces while Michael controls the area becomes much
-harder to justify.
-
-An alternate exit with its missing tool already in someone's inventory can move
-from backup plan to best plan immediately.
-
-I recheck the route whenever one of three things happens:
-
-- a new exit is discovered;
-- a required item appears;
-- Michael starts repeatedly controlling the objective area.
 
 That keeps an early decision from becoming a match-long obligation.
 
@@ -397,6 +453,14 @@ A short interruption can be enough to complete the last part of an escape.
 
 Chasing Michael down the street afterward usually gives those seconds back.
 
+
+Patch 1.2.0 makes prolonged group fights riskier. When at least three targets surround Michael, he gains additional combat strength. A coordinated interruption can still buy escape time, but crowding around him to keep trading hits may make the situation worse.
+
+Police Reinforcements now also spawn with weapons. Use the distraction or pressure they create to finish a useful objective, rather than assuming their arrival automatically makes Michael safe to approach.
+
+For Michael's updated combat effects and ability changes, see the <Link href="/halloween-the-game/progression-perks">Progression & Perks guide</Link>.
+
+
 There is a separate route built around police pressure, Loomis, stuns, and
 detaining Michael. If the team has deliberately switched from escape to capture,
 the
@@ -409,12 +473,7 @@ covers that sequence.
   An open exit turns staying into the risky choice
 </h2>
 
-One of my clearest multiplayer decisions happened after the Storm Cellar was
-already open.
-
-The escape marker was only **12 meters** away.
-
-Other players were still alive.
+In one match, the Storm Cellar was already open, and its escape marker was only **12 meters** away while other Civilians were still alive.
 
 <figure className="my-8">
   <Image
@@ -425,75 +484,26 @@ Other players were still alive.
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    At 12 meters from an open exit, escaping is already solved. Staying behind
-    needs a specific rescue plan.
+    
+An open Storm Cellar just 12 meters away is a strong escape opportunity. Reaching it before Michael interferes is still important, especially now that Blackout can close open escapes.
+
   </figcaption>
 </figure>
 
-I went back for another player.
 
-The match immediately became another chase.
+Returning for another player turned an immediate escape opportunity into another chase.
 
-That is not proof that helping teammates is a bad play. It showed me where the
-decision changes.
+Helping a teammate can still be the right decision, but the exit cannot be treated as permanently available. Patch 1.2.0 allows Michael to use Blackout to close open escapes within its radius.
 
-Before the exit opens, taking risks is part of solving the match.
+If I am already close to an open exit, I check whether Michael is approaching and whether the interaction is still available. An open marker gives me a route worth taking now, not a guarantee that the route will remain open indefinitely.
 
-After the exit opens, there needs to be a reason to add risk back in.
+Going back for someone makes more sense when I know:
 
-I am comfortable turning around when I know:
+- Where the other player is.
+- How I can reach them without running through Michael's position.
+- Whether the open exit is still accessible.
+- How both of us can return before Michael disrupts the route.
 
-- where the other player is;
-- how I can reach them;
-- where Michael is occupied;
-- how both of us can return to the open escape.
+When those pieces are missing, leaving through the available escape is usually the lower-risk decision.
 
-If all I know is “someone is still alive somewhere,” I leave.
-
-An open route that I understand is real value.
-
-An unknown rescue on the opposite side of Haddonfield is a new objective with
-no guarantee that I can solve it.
-
-<h2 id="next-match">
-  Let the first useful discovery give you a job
-</h2>
-
-The opening feels less chaotic after a few matches because roles begin forming
-without anyone formally assigning them.
-
-Find a safe phone first?
-
-Handle the call.
-
-Pick up Sedan Keys and learn where the car is?
-
-That connection gives you a route to follow.
-
-Find the tool for a marked Storm Cellar?
-
-Deliver it instead of continuing to search unrelated houses.
-
-Convince a resident after somebody has already opened an exit?
-
-Now escorting them has a destination.
-
-The useful role can change halfway through the match. Dropping that role when
-new information makes another route cheaper is part of playing well, not a
-failure to finish what you started.
-
-That is the multiplayer loop I use:
-
-**discover something useful → connect it to a real objective → finish that job
-or switch when a cheaper route appears.**
-
-Once that part becomes familiar, XP, Civilian levels, perk cards, and starting
-item unlocks are covered in the
-<Link href="/halloween-the-game/progression-perks">
-  {" "}Progression & Perks Guide
-</Link>
-. After a track reaches its level cap, move to the
-<Link href="/halloween-the-game/prestige-guide">
-  {" "}Prestige Challenges & Rewards Guide
-</Link>
-for the next progression step.
+If Michael has already interrupted or closed the exit, reassess the current objective rather than assuming the earlier open state still applies.
