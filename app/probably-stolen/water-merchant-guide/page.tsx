@@ -15,17 +15,16 @@ const metadataTitle =
   "Probably Stolen Water Merchant Guide: Start to Late Game";
 
 const metadataDescription =
-  "Start as a Water Merchant in Probably Stolen, survive rent, manage buyers and bottles, prepare for water shortages, and expand production.";
+  "Start Water Merchant in Probably Stolen, manage low-budget buyers and rent, use Georgio's help, prepare for water shortages, and expand production.";
 
 const articleDescription =
-  "Start a Probably Stolen Water Merchant business with its initial water supplies and Bottle Printer. Learn the early buying and selling sequence, Hard Mode rent decisions, storage and machine upgrades, Georgio's investment, Day 77 Water Supply Crisis preparation, regular water production, and the Day 98 rent milestone in a long Demo run.";
+  "Start a Water Merchant shop in Probably Stolen, sell the starting water to buyers with limited Credits, and protect rent money before upgrading. Compare Georgio's investment and scavenging assistance, prepare stock for Water Supply Crisis, account for reduced output from multiple Moisture Farms, and save for the store Deed.";
 
 const imageUrls = [
   `${siteUrl}/images/probably-stolen/water-merchant-starting-stock.webp`,
   `${siteUrl}/images/probably-stolen/water-merchant-display-water.webp`,
   `${siteUrl}/images/probably-stolen/water-merchant-georgio-return.webp`,
   `${siteUrl}/images/probably-stolen/water-merchant-supply-crisis.webp`,
-  `${siteUrl}/images/probably-stolen/water-merchant-day-98-rent.webp`,
 ];
 
 export const metadata: Metadata = {
@@ -52,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Build a Water Merchant business from the starting inventory through shortages, equipment upgrades, and late-game rent.",
+      "Build a Water Merchant business, manage Georgio offers and water shortages, and save for the store Deed.",
     images: [imageUrls[3]],
   },
 };
@@ -72,7 +71,7 @@ const toc = [
   },
   {
     id: "georgio",
-    label: "Georgio Investment",
+    label: "Georgio: Investment & Scavenging",
   },
   {
     id: "water-shortages",
@@ -87,8 +86,8 @@ const toc = [
     label: "Late-Game Shop Management",
   },
   {
-    id: "surviving-day-100",
-    label: "Surviving to Day 100",
+    id: "shop-buyout",
+    label: "Store Deed & Buyout",
   },
 ];
 
@@ -147,7 +146,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-26",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -171,11 +170,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Georgio Investment",
+          name: "Georgio investment and scavenging assistance",
         },
         {
           "@type": "Thing",
-          name: "Equipment expansion and rent survival",
+          name: "Moisture Farm expansion and store Deed purchase",
         },
       ],
       isPartOf: {
@@ -217,7 +216,7 @@ export default function Page() {
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 26, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

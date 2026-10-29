@@ -18,7 +18,7 @@ const metadataDescription =
   "Choose a start in Probably Stolen, attract buyers, handle rent, inspect items, avoid Security trouble, and prepare your shop for the next day.";
 
 const articleDescription =
-  "Choose a starting scenario in Probably Stolen, prepare the shop before opening, use the Display Case to attract buyers, inspect customer merchandise, and manage rent. Understand Starting Perks, Hard Mode restrictions, counterfeit goods, Security risks, overnight preparation, and the Demo shop buyout limitation.";
+  "Choose a starting scenario, prepare for the first customer, use the Display Case, and protect rent money. Compare Starting Perks, Hoarder cleanup tradeoffs, Security risks, overnight scavenging, and purchasing the store Deed in Probably Stolen.";
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -133,7 +133,7 @@ const jsonLd = {
       description: articleDescription,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-26",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -207,7 +207,7 @@ export default function Page() {
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 26, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

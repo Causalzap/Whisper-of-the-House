@@ -18,11 +18,7 @@ const metadataDescription =
   "Compare water, wine, rat farming and trading in Probably Stolen. Plan rent, estimate batch profit, equipment payback and 7-day cash flow.";
 
 const articleDescription =
-  "Compare Probably Stolen money-making strategies with an interactive Planner for Water Trading, Wine Production, Rat Farming, and buying and reselling goods. Enter actual prices, saleable quantities, production costs, equipment investment, and expected sale dates. Examine three operating cases, calculate batch profits, compare equipment payback, assess rent-day cash safety, and simulate seven-day balances with optional two-business combinations.";
-
-const imageUrls = [
-  `${siteUrl}/images/probably-stolen/water-merchant-supply-crisis.webp`,
-];
+  "Compare water, wine, rat farming, and reselling in Probably Stolen with an interactive Planner. Enter actual prices, saleable quantities, batch costs, purchases, and sale dates to estimate profit, equipment payback, and seven-day cash flow. Assess Water Supply Crisis sales, Perfume's 15% trading bonus, and the next rent payment.";
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -37,19 +33,12 @@ export const metadata: Metadata = {
     description:
       "Compare water, wine, rat farming, and trading with your own prices, costs, sale dates, and rent obligations.",
     siteName: "Whisper of the House",
-    images: [
-      {
-        url: imageUrls[0],
-        alt: "Probably Stolen Water Supply Crisis showing water price changes and rent due",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: metadataTitle,
     description:
       "Calculate batch profit, equipment payback, and seven-day cash flow before choosing your next business investment.",
-    images: [imageUrls[0]],
   },
 };
 
@@ -80,7 +69,7 @@ const toc = [
   },
   {
     id: "demo-prices",
-    label: "Demo Prices & Market Changes",
+    label: "1.0 Equipment Prices",
   },
 ];
 
@@ -140,10 +129,9 @@ const jsonLd = {
       headline:
         "Probably Stolen Money-Making Planner: Which Business Pays Best?",
       description: articleDescription,
-      image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-26",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -217,7 +205,7 @@ export default function Page() {
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 26, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

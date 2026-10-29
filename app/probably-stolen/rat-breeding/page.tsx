@@ -141,7 +141,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-26",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -215,7 +215,7 @@ export default function Page() {
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 26, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

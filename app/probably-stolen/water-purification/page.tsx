@@ -15,16 +15,15 @@ const metadataTitle =
   "How to Make Pure Water in Probably Stolen";
 
 const metadataDescription =
-  "Make Pure Water in Probably Stolen with a Moisture Farm, manual filters, and Water Purifier. Fix worn filters, wrong grades, and labels.";
+  "Make 99.9% Pure Water in Probably Stolen with Water Purifier Quality modules. Fix worn filters, water mixing, low Max Purity, and mismatched labels.";
 
 const articleDescription =
-  "Produce Pure Water in Probably Stolen by using a Moisture Farm, Water Scanner, Kotton Fabric, Water Filter, UV Lamp, and Water Purifier. Understand machine Quality bonuses, manual filtering, filter durability, water mixing, energy requirements, and why a container can test as 99.97% Pure Water while still carrying a High-Quality Water label.";
+  "Make Pure Water in Probably Stolen by checking AquaScan purity, using water treatments and Quality modules, and upgrading a Water Purifier to 99.9% Max Purity. Troubleshoot depleted filters, mix nearly clean water to cross 99%, and correct outdated container labels with Match Label.";
 
 const imageUrls = [
   `${siteUrl}/images/probably-stolen/water-scanner-contaminants.webp`,
   `${siteUrl}/images/probably-stolen/moisture-farm-output.webp`,
   `${siteUrl}/images/probably-stolen/moisture-farm-high-quality.webp`,
-  `${siteUrl}/images/probably-stolen/kotton-fabric-filter.webp`,
   `${siteUrl}/images/probably-stolen/water-purifier-module-stats.webp`,
   `${siteUrl}/images/probably-stolen/water-filter-durability.webp`,
   `${siteUrl}/images/probably-stolen/pure-water-scanner-result.webp`,
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[6],
+        url: imageUrls[5],
         alt: "Probably Stolen Water Scanner showing 99.97% Pure Water with an outdated High-Quality Water label",
       },
     ],
@@ -54,8 +53,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Learn the Pure Water production sequence, required filters, quality settings, and common purification failures.",
-    images: [imageUrls[6]],
+      "Use Water Purifier Quality modules to reach 99.9% purity, troubleshoot filters, and correct water labels.",
+    images: [imageUrls[5]],
   },
 };
 
@@ -137,7 +136,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-26",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -157,7 +156,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Kotton Fabric, Water Filter, and UV Lamp",
+          name: "Water Filters, Water Purification Tablets, and UV Lamp",
         },
         {
           "@type": "Thing",
@@ -211,7 +210,7 @@ export default function Page() {
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 26, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

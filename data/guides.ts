@@ -556,225 +556,289 @@ export const guideClusters: GuideCluster[] = [
   ],
 },
 
-  {
-    title: "Probably Stolen",
-    game: "Probably Stolen",
-    href: "/probably-stolen",
-    slug: "probably-stolen",
-    kind: "game",
-    status: "active",
-    accent: "amber",
-    archiveCategory: "Strategy, simulation, puzzle & discovery",
-  
-    label: "Beginner Guide, Water Trading, Rat Breeding & Profit Planner",
-    eyebrow: "Shopkeeping & Trading Simulator",
-  
-    hubStatus:
-      "Starting Scenarios + Rent + Display Case + Water Merchant + Pure Water + Rat Breeding + Money-Making Planner",
-  
-    description:
-      "Start your shop in Probably Stolen, choose a scenario, attract buyers, manage rent, build a water business, breed rats, and compare profits with an interactive calculator.",
-  
-    coverage: [
-      "Starting Scenarios, including Apprentice, Water Merchant, Rat Wrangler and Rock Bottom, with difficulty choices, Starting Perks and first-day priorities",
-  
-      "Shop management through customer requests, the Display Case, item inspection, counterfeit goods, rent payments, Security reputation and overnight preparation",
-  
-      "Water Merchant progression from starting inventory and Bottle Printer to storage upgrades, regular water sales, Georgio's investment and Water Supply Crisis events",
-  
-      "Pure Water production with Moisture Farm Quality, Water Scanner, Kotton Fabric, Water Filter, UV Lamp, Water Purifier, filter durability and water label corrections",
-  
-      "Rat breeding through Animal Cage expansion, feeding, overcrowding, parent selection, Growth inheritance, Livestock Serums, disease, aging and meat harvesting",
-  
-      "Interactive Money-Making Planner comparing Water, Wine, Rat Farming and item trading through batch profit, equipment payback, rent safety and seven-day cash flow",
-  
-      "Demo shop buyout limitations and preparation for the full game",
-    ],
-  
-    image:
-      "/images/probably-stolen/water-merchant-starting-stock.webp",
-    imageFit: "cover",
-    imagePosition: "center",
-    imagePadding: false,
-  
-    home: {
-      featuredHub: true,
-      featuredHubSpotlight: true,
-      featuredHubOrder: 68,
-      footerFeatured: true,
-    },
-  
-    pages: [
-      {
-        title:
-          "Probably Stolen Beginner Guide: Starts, Rent & Shop Tips",
-  
-        href: "/probably-stolen",
-  
-        type: "Guide Hub",
-  
-        description:
-          "Choose a starting scenario, attract customers with the Display Case, manage rent, inspect counterfeit goods, and avoid Security trouble.",
-  
-        image:
-          "/images/probably-stolen/water-merchant-starting-stock.webp",
-  
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-  
-        home: {
-          spotlightMeta:
-            "Starting Scenarios, first-day setup, Display Case, rent, Hard Mode, Starting Perks, counterfeit inspection and Security",
-        },
-  
-        archive: {
-          showInCollections: true,
-          order: 1,
-        },
-      },
-  
-      {
-        title:
-          "Probably Stolen Water Merchant Guide: Start to Late Game",
-  
-        href: "/probably-stolen/water-merchant-guide",
-  
-        type: "Walkthrough",
-  
-        description:
-          "Trade your starting water, survive rent, manage bottles and storage, handle Georgio's investment, and prepare for Water Supply Crisis events.",
-  
-        date: "Updated recently",
-  
-        image:
-          "/images/probably-stolen/water-merchant-supply-crisis.webp",
-  
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-  
-        home: {
-          latest: true,
-          latestOrder: 486,
-  
-          spotlightMeta:
-            "Water Merchant opening, Bottle Printer, first rent, Georgio investment, Day 77 Water Supply Crisis and late-game production",
-        },
-  
-        archive: {
-          showInCollections: true,
-          order: 2,
-        },
-      },
-  
-      {
-        title:
-          "How to Make Pure Water in Probably Stolen",
-  
-        href: "/probably-stolen/water-purification",
-  
-        type: "Systems",
-  
-        description:
-          "Produce Pure Water with a Moisture Farm, Kotton Fabric, Water Filter, UV Lamp and Water Purifier. Fix incorrect water grades and labels.",
-  
-        date: "Updated recently",
-  
-        image:
-          "/images/probably-stolen/pure-water-scanner-result.webp",
-  
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-  
-        home: {
-          latest: true,
-          latestOrder: 487,
-  
-          spotlightMeta:
-            "99.97% Pure Water, Moisture Farm Quality, filtering order, Water Purifier modules, filter durability and Match Label",
-        },
-  
-        archive: {
-          showInCollections: true,
-          order: 3,
-        },
-      },
-  
-      {
-        title:
-          "Probably Stolen Rat Breeding: Growth, Genetics & Farming",
-  
-        href: "/probably-stolen/rat-breeding",
-  
-        type: "Systems",
-  
-        description:
-          "Breed higher-Growth rats, compare parent and offspring traits, manage Animal Cages and feeding, use Serums, and harvest meat.",
-  
-        date: "Updated recently",
-  
-        image:
-          "/images/probably-stolen/rat-natural-growth-148.webp",
-  
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-  
-        home: {
-          latest: true,
-          latestOrder: 488,
-  
-          spotlightMeta:
-            "1.46 and 1.15 Growth parents, 1.30–1.37 offspring, natural 1.48 Growth, Serum boosts, cage expansion and meat harvesting",
-        },
-  
-        archive: {
-          showInCollections: true,
-          order: 4,
-        },
-      },
-  
-      {
-        title:
-          "Probably Stolen Money-Making Planner & Profit Calculator",
-  
-        href: "/probably-stolen/money-making",
-  
-        type: "Systems",
-  
-        description:
-          "Compare Water, Wine, Rat Farming and trading profits with interactive batch calculations, equipment payback and seven-day cash flow.",
-  
-        date: "Updated recently",
-  
-        image:
-          "/images/probably-stolen/water-merchant-supply-crisis.webp",
-  
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-  
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 489,
-  
-          spotlightFeature: true,
-          spotlightOrder: 1,
-  
-          spotlightMeta:
-            "Interactive Profit Planner, three business cases, Water vs Wine vs Rats, equipment payback, rent survival and seven-day cash flow",
-        },
-  
-        archive: {
-          showInCollections: true,
-          order: 5,
-        },
-      },
-    ],
+
+{
+  title: "Probably Stolen",
+  game: "Probably Stolen",
+  href: "/probably-stolen",
+  slug: "probably-stolen",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Starting Scenarios, Water, Chemistry, Factions & Achievements",
+  eyebrow: "Shopkeeping & Trading Simulator",
+
+  hubStatus:
+    "9 Guides: Shop Basics + Water + Rats + Profit Planner + Chemist + Factions + Augs + Achievements",
+
+  description:
+    "Choose a starting scenario, manage rent and customers, produce water and Dream Dust, breed rats, handle faction reputation and Augs, and track all 21 achievements in Probably Stolen.",
+
+  coverage: [
+    "Nine starting scenarios, including Apprentice, Water Merchant, Chemist, Rat Wrangler and Rock Bottom, with difficulty choices, Starting Perks and first-day priorities",
+
+    "Shop trading, Display Case customer attraction, counterfeit inspection, rent, Security risks, Hoarder scavenging choices and store Deed purchase",
+
+    "Water Merchant progression with Bottle Printer, customer budgets, storage upgrades, Georgio's investment and scavenging help, Water Supply Crisis and two-farm production penalties",
+
+    "Pure Water production with Moisture Farm Quality, AquaScan, manual filters, Water Purifier Max Purity, water blending, filter durability and Match Label",
+
+    "Rat breeding with parent and offspring Growth, Animal Cages, feeding, overcrowding, livestock serums, disease, aging and harvesting",
+
+    "Interactive Money-Making Planner for water, wine, rat farming and reselling, with Perfume break-even, batch profit, equipment payback and seven-day rent cash flow",
+
+    "Chemist production from Dream Caps to Dream Dust with Blender, Heating Plate, Evaporator, Chem Finisher, purity checks and Cartel delivery quotas",
+
+    "Six factions with reputation thresholds, benefits, penalties, Security conflicts, trading consequences and Cartel collection outcomes",
+
+    "Aug identification, Aug Scanner, shotgun restrictions, confirmed eliminations, Aug Menace and Aug Hunter requirements",
+
+    "All 21 achievements with a progress checklist, store buyout, Prodigious before Day 50, Rock Bottom, Clean Hands and Scratcher jackpot",
+  ],
+
+  image:
+    "/images/probably-stolen/water-merchant-starting-stock.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 68,
+    footerFeatured: true,
   },
+
+  pages: [
+    {
+      title:
+        "Probably Stolen Beginner Guide: Starts, Rent & Shop Tips",
+      href: "/probably-stolen",
+      type: "Guide Hub",
+      description:
+        "Choose a scenario, manage rent and buyers, use the Display Case, inspect suspicious goods, select Starting Perks, and prepare for the store Deed.",
+      image:
+        "/images/probably-stolen/water-merchant-starting-stock.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        spotlightMeta:
+          "Starting Scenarios, first-day trading, Display Case, rent, Red Ink difficulty, Hoarder, Security and shop buyout",
+      },
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Water Merchant Guide: Start to Late Game",
+      href: "/probably-stolen/water-merchant-guide",
+      type: "Walkthrough",
+      description:
+        "Sell starting water, manage customer budgets and bottles, survive rent, use Georgio's help, prepare for shortages and expand production.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/water-merchant-supply-crisis.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 486,
+        spotlightMeta:
+          "Water Merchant opening, Bottle Printer, Day 14 buyer, Georgio's investment and scavenging, Water Crisis and two-farm 80% output",
+      },
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "How to Make Pure Water in Probably Stolen",
+      href: "/probably-stolen/water-purification",
+      type: "Systems",
+      description:
+        "Reach 99.9% Pure Water with the right purifier upgrades, handle worn filters, mix water near 99%, and correct outdated labels.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/pure-water-scanner-result.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 487,
+        spotlightMeta:
+          "99.9% Pure Water, Water Purifier Max Purity, Moisture Farm Quality, 99% blending, filter durability and Match Label",
+      },
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Rat Breeding: Growth, Genetics & Farming",
+      href: "/probably-stolen/rat-breeding",
+      type: "Systems",
+      description:
+        "Select breeding parents, compare offspring Growth, manage cage space and feeding, use serums and choose rats for harvesting.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/rat-natural-growth-148.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 488,
+        spotlightMeta:
+          "Growth inheritance, natural 1.48 Growth, serum effects, cage expansion, overcrowding and meat harvesting",
+      },
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Money-Making Planner & Profit Calculator",
+      href: "/probably-stolen/money-making",
+      type: "Systems",
+      description:
+        "Compare water, wine, rat farming and resale profits using actual batch costs, Perfume bonuses, equipment payback and seven-day cash flow.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/water-merchant-supply-crisis.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 489,
+        spotlightFeature: true,
+        spotlightOrder: 1,
+        spotlightMeta:
+          "Interactive Profit Planner, Water vs Wine vs Rats, Perfume 15% break-even, equipment payback and rent cash flow",
+      },
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Achievements: All 21 & 100% Checklist",
+      href: "/probably-stolen/achievements",
+      type: "Systems",
+      description:
+        "Track all 21 Steam achievements, including the store Deed, Prodigious before Day 50, Clean Hands, Rock Bottom and Aug Hunter.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/store-buyout-deed-confirmation.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 490,
+        spotlightMeta:
+          "21-achievement checklist, Prodigious, Clean Hands, Rock Bottom, Perfect Appraisals, Aug Hunter and Jackpot",
+      },
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Augs: How to Identify and Kill Them",
+      href: "/probably-stolen/augs",
+      type: "Systems",
+      description:
+        "Identify Aug customers, use the Aug Scanner, solve shotgun equip problems, avoid false kills and survive Aug Menace.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/aug-confirmed-kill-101-credits.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 491,
+        spotlightMeta:
+          "Aug identification, Aug Scanner, Shotgun restrictions, confirmed kills, 101-Credit reward and Aug Hunter",
+      },
+      archive: {
+        showInCollections: true,
+        order: 7,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Chemist: Dream Dust Recipe & Cartel Quota",
+      href: "/probably-stolen/chemist",
+      type: "Systems",
+      description:
+        "Make Dream Dust with the Blender, Heating Plate, Evaporator and Chem Finisher; reach purity targets and complete Cartel deliveries.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/chemist-dream-dust-4695-purity.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 492,
+        spotlightMeta:
+          "Dream Dust recipe, Wet Ingredient Detected, 46.95% purity and Cartel quotas of 10 at 40% then 15 at 45%",
+      },
+      archive: {
+        showInCollections: true,
+        order: 8,
+      },
+    },
+
+    {
+      title:
+        "Probably Stolen Factions: Reputation Perks & Penalties",
+      href: "/probably-stolen/factions",
+      type: "Systems",
+      description:
+        "Compare six factions, reputation thresholds, rewards and penalties; understand Security conflicts and Cartel reputation losses.",
+      date: "Updated recently",
+      image:
+        "/images/probably-stolen/factions-reputation-panel.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 493,
+        spotlightMeta:
+          "Lower Levels, Security, Black Market, Upper Levels, Revolution, Sector 13 Cartel and reputation thresholds",
+      },
+      archive: {
+        showInCollections: true,
+        order: 9,
+      },
+    },
+  ],
+},
+
   
 {
   title: "Don't Starve Together",
