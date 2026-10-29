@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -12,21 +11,24 @@ const hubUrl = `${siteUrl}/the-long-dark-iron-road`;
 const pageUrl = `${hubUrl}/anna-island-walkthrough`;
 
 const metadataTitle =
-  "Iron Road Anna Island: Lighthouse, Cave & Church";
+  "Iron Road Anna Island Walkthrough: Lighthouse to Train";
 
 const metadataDescription =
-  "Follow Alice's clues from Port Remnant to the lighthouse, find Port Remnant Cave, reach the church, and continue toward the train key.";
+  "Find Port Remnant Cave, reach the church, follow Alice's Track Section Five map, and collect the Train Key in The Long Dark: Iron Road.";
 
 const articleTitle =
   "Where Do You Go Next on Anna Island in The Long Dark: Iron Road?";
 
 const articleDescription =
-  "Follow Alice from Port Remnant to the lighthouse, interpret her hand-drawn map, reach the church through Port Remnant Cave, and continue toward the Prototype Train.";
+  "Follow Alice's clues from Port Remnant through the lighthouse, cave, church, and Track Section Five to find the Train Key and Prototype Train.";
 
 const imageUrls = [
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-lighthouse-map.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-port-remnant-cave.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-church-entrance.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/anna-island-track-section-five-map.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/anna-island-train-key.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/anna-island-alice-journal-01.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -46,7 +48,7 @@ const toc = [
   },
   {
     id: "train-tunnel",
-    label: "Continue toward the train",
+    label: "Track Section Five & Train Key",
   },
 ];
 
@@ -134,7 +136,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-28",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -163,7 +165,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Track Section Five map",
+        },
+        {
+          "@type": "Thing",
           name: "Prototype Train Key",
+        },
+        {
+          "@type": "Thing",
+          name: "Alice McLeod's Journal",
         },
       ],
       isPartOf: {
@@ -220,7 +230,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 28, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

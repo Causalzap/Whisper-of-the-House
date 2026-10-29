@@ -21,7 +21,16 @@ const articleTitle =
   "How Do You Drive and Repair the Train in The Long Dark: Iron Road?";
 
 const articleDescription =
-  "Start the Prototype Train, manage its steam pressure and Whale Oil, choose Slow or Fast gear, clear obstacles, and repair damaged train components.";
+  "Start the Prototype Train, manage steam pressure and Whale Oil, choose driving gears, clear railway obstacles, and repair worn components.";
+
+const imageUrls = [
+  `${siteUrl}/images/the-long-dark-iron-road/prototype-train-controls.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/prototype-train-fuel-water.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/prototype-train-repair.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/prototype-train-interior.webp`,
+];
+
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -85,11 +94,18 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+    images: [
+      {
+        url: heroImage,
+        alt: "The Long Dark Iron Road Prototype Train driving controls showing brake, gear and steam pressure",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
+    images: [heroImage],
   },
 };
 
@@ -130,9 +146,10 @@ const jsonLd = {
       headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
+      image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-28",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -218,7 +235,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 28, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

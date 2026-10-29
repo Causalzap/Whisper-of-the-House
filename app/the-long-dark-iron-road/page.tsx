@@ -14,13 +14,19 @@ const metadataTitle =
   "The Long Dark: Iron Road Guide — How to Start & Progress";
 
 const metadataDescription =
-  "Start Iron Road in Survival Mode, reach Cauldron Island, follow Alice's clues, and compare the Whale-Oil Heater, Wax Cylinders, and launch content.";
+  "Start Iron Road in Survival Mode, reach Cauldron Island, follow Alice's clues, pack for Anna Island, and learn how the Whale-Oil Heater works.";
 
 const articleTitle =
   "How Do You Start and Progress in The Long Dark: Iron Road?";
 
 const articleDescription =
-  "Reach Cauldron Island from Desolation Point, choose a Survival save, follow Alice's first objectives, and decide when to use the train and Whale-Oil Heater.";
+  "Choose a Survival save, reach Cauldron Island, follow Alice's objectives, prepare for Anna Island, and compare Whale-Oil Heater and train fuel use.";
+
+const imageUrls = [
+  `${siteUrl}/images/the-long-dark-iron-road/anna-island-church-entrance.webp`,
+];
+
+const heroImage = imageUrls[0];
 
 const toc = [
   {
@@ -33,7 +39,7 @@ const toc = [
   },
   {
     id: "packing",
-    label: "What to leave behind",
+    label: "What to bring to Anna Island",
   },
   {
     id: "whale-oil-heater",
@@ -41,7 +47,7 @@ const toc = [
   },
   {
     id: "wax-cylinders",
-    label: "Wax Cylinders",
+    label: "Do you need all 16 Wax Cylinders?",
   },
   {
     id: "launch-content",
@@ -80,11 +86,18 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
+    images: [
+      {
+        url: heroImage,
+        alt: "The church on Anna Island in The Long Dark Iron Road",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: metadataTitle,
     description: metadataDescription,
+    images: [heroImage],
   },
 };
 
@@ -119,9 +132,10 @@ const jsonLd = {
       headline: articleTitle,
       description: articleDescription,
       url: pageUrl,
+      image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-28",
+      dateModified: "2026-10-29",
       about: [
         {
           "@type": "VideoGame",
@@ -129,11 +143,11 @@ const jsonLd = {
           url: pageUrl,
         },
         {
-          "@type": "Thing",
+          "@type": "Place",
           name: "Cauldron Island",
         },
         {
-          "@type": "Thing",
+          "@type": "Place",
           name: "Anna Island",
         },
         {
@@ -207,7 +221,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 28, 2026"
+          updatedAt="October 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
