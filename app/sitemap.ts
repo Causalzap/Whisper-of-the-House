@@ -767,6 +767,9 @@ const paths = [
   '/crimson-desert/hunting-guide',
   '/crimson-desert/abyss-artifacts-guide',
   '/crimson-desert/side-quests-guide',
+  '/crimson-desert/charting-the-unknown',
+  '/crimson-desert/ships',
+  '/crimson-desert/beyond-the-margins',
 
 '/project-pitt',
 '/project-pitt/progression-guide',
@@ -1578,6 +1581,9 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/crimson-desert/hunting-guide': '2026-08-19',
   '/crimson-desert/abyss-artifacts-guide': '2026-08-19',
   '/crimson-desert/side-quests-guide': '2026-08-19',
+  '/crimson-desert/charting-the-unknown': '2026-10-30',
+  '/crimson-desert/ships': '2026-10-30',
+  '/crimson-desert/beyond-the-margins': '2026-10-30',
   
   '/mortal-shell-2': '2026-08-27',
   '/mortal-shell-2/progression-guide': '2026-08-18',
