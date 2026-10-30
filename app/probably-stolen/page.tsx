@@ -15,7 +15,7 @@ const metadataTitle =
   "Probably Stolen Beginner Guide: Starts, Rent & Shop Tips";
 
 const metadataDescription =
-  "Choose a start in Probably Stolen, attract buyers, handle rent, inspect items, avoid Security trouble, and prepare your shop for the next day.";
+  "Probably Stolen beginner guide: compare 9 starting scenarios, survive rent, use Starting Perks, manage customers and Security, and buy the store.";
 
 const articleDescription =
   "Choose a starting scenario, prepare for the first customer, use the Display Case, and protect rent money. Compare Starting Perks, Hoarder cleanup tradeoffs, Security risks, overnight scavenging, and purchasing the store Deed in Probably Stolen.";

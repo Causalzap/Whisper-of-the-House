@@ -1144,6 +1144,8 @@ const paths = [
     '/probably-stolen/rat-breeding',
     '/probably-stolen/water-merchant-guide',
     '/probably-stolen/water-purification',
+    '/probably-stolen/security-investigation',
+    '/probably-stolen/gunsmith',
 
     'crack',
     'crack/walkthrough',
@@ -1176,7 +1178,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'crack/workbots': '2026-10-27',
   'crack/achievements': '2026-10-27',
 
-  '/probably-stolen': '2026-10-29',
+  '/probably-stolen': '2026-10-30',
   '/probably-stolen/achievements': '2026-10-29',
   '/probably-stolen/augs': '2026-10-29',
   '/probably-stolen/chemist': '2026-10-29',
@@ -1185,6 +1187,9 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/probably-stolen/rat-breeding': '2026-10-29',
   '/probably-stolen/water-merchant-guide': '2026-10-29',
   '/probably-stolen/water-purification': '2026-10-29',
+  '/probably-stolen/security-investigation': '2026-10-30',
+  '/probably-stolen/gunsmith': '2026-10-30',
+
 
   '/dont-starve-together': '2026-10-25',
   '/dont-starve-together/sanctum-walkthrough': '2026-10-25',
