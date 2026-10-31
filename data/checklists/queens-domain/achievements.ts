@@ -494,7 +494,7 @@ const rawAchievements: RawAchievement[] = [
     "Quests & Activities",
     "Long-term",
     "High",
-    "#npc-quests",
+    "#lost-books",
   ],
   [
     "cha_item_upgradeallweps",

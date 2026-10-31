@@ -13,35 +13,81 @@ const metadataTitle =
   "Queen's Domain: All 53 Achievements & Checklist";
 
 const metadataDescription =
-  "Track all 53 achievements, four endings, five Wind Gems, NPC deliveries, bosses, secret doors, chests, and complete weapon collections.";
+  "Track all 53 Queen's Domain achievements with a checklist for four endings, Missing Books, Orbewa Eggs, Wourha, weapon collections, and bosses.";
 
 const articleTitle =
   "How Do You Unlock All 53 Achievements in Queen's Domain?";
 
 const articleDescription =
-  "Track all 53 achievements with a saveable checklist, including bosses, locations, equipment, collectibles, NPC quests, island-wide exploration, and four endings.";
+  "Mark all 53 achievements as you progress, track unfinished collections, return Missing Books, complete NPC deliveries, and plan for all four endings.";
 
 const imageUrls = [
   `${siteUrl}/images/queens-domain/meal-ticket-chef-gagi.webp`,
   `${siteUrl}/images/queens-domain/wourha-bestiary-research.webp`,
+  `${siteUrl}/images/queens-domain/erma-orbewa-egg-delivery.webp`,
+  `${siteUrl}/images/queens-domain/fallen-raiders-necklace-pickup.webp`,
+  `${siteUrl}/images/queens-domain/tower-missing-books-categories.webp`,
+  `${siteUrl}/images/queens-domain/tower-wourha-cleanup-confirmation.webp`,
 ];
 
 const heroImage = imageUrls[0];
 
+
 const toc = [
-  { id: "achievement-checklist", label: "All 53 achievements checklist" },
-  { id: "locations-bosses", label: "Locations and bosses" },
-  { id: "weapons-items", label: "Weapons, accessories and items" },
-  { id: "wind-gems", label: "Wind Gems and Storm Gem" },
-  { id: "npc-quests", label: "NPC quests and special activities" },
-  { id: "umbada", label: "Umbada's Trading Outpost" },
-  { id: "meal-tickets", label: "60 Meal Tickets for Chef Gagi" },
-  { id: "wourha", label: "Knowledge Keeper Wourha" },
-  { id: "tower-cleanup", label: "Sparkling Clean" },
-  { id: "world-completion", label: "Chests, secret doors and travel points" },
-  { id: "ending-achievements", label: "All four endings" },
-  { id: "completion-plan", label: "100% completion plan" },
-];
+    {
+      id: "achievement-checklist",
+      label: "All 53 Achievements Checklist",
+    },
+    {
+      id: "locations-bosses",
+      label: "Locations & Bosses",
+    },
+    {
+      id: "weapons-items",
+      label: "Weapons, Accessories & Items",
+    },
+    {
+      id: "wind-gems",
+      label: "Wind Gems & Storm Gem",
+    },
+    {
+      id: "npc-quests",
+      label: "NPC Quests & Activities",
+    },
+    {
+      id: "umbada",
+      label: "Umbada's Trading Outpost",
+    },
+    {
+      id: "meal-tickets",
+      label: "60 Meal Tickets for Chef Gagi",
+    },
+    {
+      id: "wourha",
+      label: "Knowledge Keeper Wourha",
+    },
+    {
+      id: "lost-books",
+      label: "Missing Books & Library Sections",
+    },
+    {
+      id: "tower-cleanup",
+      label: "Sparkling Clean",
+    },
+    {
+      id: "world-completion",
+      label: "Chests, Secret Doors & Travel Points",
+    },
+    {
+      id: "ending-achievements",
+      label: "All Four Endings",
+    },
+    {
+      id: "completion-plan",
+      label: "100% Completion Plan",
+    },
+  ];
+  
 
 const relatedLinks = [
   {
@@ -173,8 +219,8 @@ export default function QueensDomainAchievementsPage() {
           description={articleDescription}
           gameTitle="Queen's Domain"
           gameHref="/queens-domain"
-          breadcrumbBaseHref="/queens-domain"
-          breadcrumbBaseLabel="Queen's Domain"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="October 31, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

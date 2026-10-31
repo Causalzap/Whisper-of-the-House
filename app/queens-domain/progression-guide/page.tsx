@@ -172,8 +172,8 @@ export default function QueensDomainProgressionGuidePage() {
           description={articleDescription}
           gameTitle="Queen's Domain"
           gameHref="/queens-domain"
-          breadcrumbBaseHref="/queens-domain"
-          breadcrumbBaseLabel="Queen's Domain"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="October 31, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

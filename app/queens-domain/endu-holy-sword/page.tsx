@@ -13,21 +13,22 @@ const metadataTitle =
   "Queen's Domain Holy Sword Endu: Wind Gems & Upgrades";
 
 const metadataDescription =
-  "Get Endu, unlock more Wind Dashes, find the early Wind Gems, understand weapon leveling and the Storm Gem, and learn about Akunra.";
+  "Get Holy Sword Endu, find Wind Gems, use Wind Dash, evolve into Soul Bound Endu at Level 10, and unlock the Storm Gem attack.";
 
 const articleTitle =
   "How Do You Get and Use the Holy Sword Endu in Queen's Domain?";
 
 const articleDescription =
-  "Learn where Endu comes from, how its Wind Gem sockets affect traversal, where to find the early gems, and how its weapon levels and Storm Gem differ.";
+  "Find Endu, unlock more Wind Dashes, collect early Wind Gems, and evolve the sword at Level 10 into Soul Bound Endu with 13 Power and a holy energy arc.";
 
 const imageUrls = [
   `${siteUrl}/images/queens-domain/endu-wind-gem-sockets.webp`,
   `${siteUrl}/images/queens-domain/endu-second-wind-gem-location.webp`,
   `${siteUrl}/images/queens-domain/endu-two-wind-dashes.webp`,
   `${siteUrl}/images/queens-domain/endu-weapon-level-3.webp`,
+  `${siteUrl}/images/queens-domain/endu-soulbound-level-10.webp`,
 ];
-
+  
 const heroImage = imageUrls[2];
 
 const toc = [
@@ -171,8 +172,8 @@ export default function EnduHolySwordPage() {
           description={articleDescription}
           gameTitle="Queen's Domain"
           gameHref="/queens-domain"
-          breadcrumbBaseHref="/queens-domain"
-          breadcrumbBaseLabel="Queen's Domain"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="October 31, 2026"
           toc={toc}
           relatedLinks={relatedLinks}

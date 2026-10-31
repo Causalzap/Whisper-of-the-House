@@ -13,13 +13,13 @@ const metadataTitle =
   "Queen's Domain Tower of Knowledge Walkthrough";
 
 const metadataDescription =
-  "Solve Gargoyles 3 and 7, get the Storm Gem and Forbidden Archives Key, defeat the Necronomicon, and open the Mausoleum route.";
+  "Solve Gargoyles 3 and 7, get the Storm Gem and Archives Key, beat the Necronomicon, and collect the Acid Vial and Golden Duck Figurine.";
 
 const articleTitle =
   "How Do You Complete the Tower of Knowledge in Queen's Domain?";
 
 const articleDescription =
-  "Open the Tower, solve its numbered Gargoyles, reach the Storm Gem and Budaen, enter the Forbidden Archives, and defeat the Necronomicon.";
+  "Solve the Tower's Gargoyle puzzle, rotate the staircase, obtain Budaen's Forbidden Archives Key, defeat the Necronomicon, and use acid-enhanced daggers to clear blocked passages.";
 
 const imageUrls = [
   `${siteUrl}/images/queens-domain/tower-of-knowledge-gargoyle-puzzle.webp`,
@@ -28,6 +28,8 @@ const imageUrls = [
   `${siteUrl}/images/queens-domain/tower-of-knowledge-forbidden-archives-key.webp`,
   `${siteUrl}/images/queens-domain/necronomicon-boss-fight.webp`,
   `${siteUrl}/images/queens-domain/tower-of-knowledge-acid-vial-barrier.webp`,
+  `${siteUrl}/images/queens-domain/necronomicon-acid-vial-description.webp`,
+  `${siteUrl}/images/queens-domain/necronomicon-golden-duck-figurine.webp`,
 ];
 
 const heroImage = imageUrls[4];
@@ -39,7 +41,7 @@ const toc = [
   { id: "rotating-staircase", label: "Activate the rotating staircase" },
   { id: "forbidden-archives-key", label: "Get the Forbidden Archives Key" },
   { id: "necronomicon", label: "Beat the Necronomicon" },
-  { id: "acid-vial", label: "Acid Vial and blocked passages" },
+  { id: "acid-vial", label: "Acid Vial & Golden Duck Rewards" },
   { id: "mausoleum", label: "Reach Deimpo Mausoleum" },
 ];
 
@@ -173,8 +175,8 @@ export default function TowerOfKnowledgeWalkthroughPage() {
           description={articleDescription}
           gameTitle="Queen's Domain"
           gameHref="/queens-domain"
-          breadcrumbBaseHref="/queens-domain"
-          breadcrumbBaseLabel="Queen's Domain"
+          breadcrumbBaseHref="/"
+          breadcrumbBaseLabel="Home"
           updatedAt="October 31, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
