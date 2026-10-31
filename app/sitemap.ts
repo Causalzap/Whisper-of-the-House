@@ -1162,6 +1162,15 @@ const paths = [
     'the-long-dark-iron-road/prototype-train-guide',
     'the-long-dark-iron-road/fulmar-boat',
 
+    'queens-domain',
+    'queens-domain/isle-of-neasied-walkthrough',
+    'queens-domain/progression-guide',
+    'queens-domain/endu-holy-sword',
+    'queens-domain/obmuer-temple-walkthrough',
+    'queens-domain/tower-of-knowledge-walkthrough',
+    'queens-domain/achievements',
+
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1169,6 +1178,15 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+
+  'queens-domain': '2026-10-31',
+  'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
+  'queens-domain/progression-guide': '2026-10-31',
+  'queens-domain/endu-holy-sword': '2026-10-31',
+  'queens-domain/obmuer-temple-walkthrough': '2026-10-31',
+  'queens-domain/tower-of-knowledge-walkthrough': '2026-10-31',
+  'queens-domain/achievements': '2026-10-31',
+
   'the-long-dark-iron-road': '2026-10-28',
   'the-long-dark-iron-road/anna-island-walkthrough': '2026-10-28',
   'the-long-dark-iron-road/prototype-train-guide': '2026-10-28',

@@ -130,6 +130,291 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Queen's Domain",
+  game: "Queen's Domain",
+  href: "/queens-domain",
+  slug: "queens-domain",
+  kind: "game",
+  status: "active",
+  accent: "purple",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "Progression, Endu, Dungeons & 53 Achievements",
+  eyebrow: "First-Person Fantasy Action RPG",
+
+  hubStatus:
+    "Opening Route + 3 Gargoyle Beacons + Wind Gems + Obmuer Temple + Tower of Knowledge + 53 Achievements",
+
+  description:
+    "Start Queen's Domain, obtain the Holy Sword Endu, unlock Wind Dash routes, solve dungeon puzzles, defeat Dagoom and the Necronomicon, and track all 53 achievements.",
+
+  coverage: [
+    "Opening route from the starting camp to the shipwreck, Dagger Belt, Crypt, Endu Shrine Gate Key, Shrine Guardian, Holy Sword Endu and Umbada's Trading Outpost",
+
+    "Early area progression through the Azure Torch, three Gargoyle beacons, western broken bridge, Obmuer Temple, Tower of Knowledge and Deimpo Mausoleum entrance",
+
+    "Holy Sword Endu mechanics covering Wind Dash charges, five Wind Gem sockets, early Wind Gem locations, weapon leveling, Storm Gem ability and True Holy Sword Akunra",
+
+    "Obmuer Temple walkthrough covering four Triangular Slates, Trident Keys, third Wind Gem, three Royal Guards, Dagoom the Sea King and the final island Gargoyle",
+
+    "Tower of Knowledge walkthrough covering the numbered Gargoyle puzzle, Storm Gem, rotating staircase, Budaen, Forbidden Archives Key, Necronomicon and Acid Vial",
+
+    "Beginner decisions covering early weapons, Slash versus Impact damage, attack-power recovery, healing, saving, Ancient Coins and when to revisit blocked passages",
+
+    "All 53 achievements with an interactive progress checklist, four endings, five Wind Gems, 60 Meal Tickets, NPC requests, weapons, chests and secret doors",
+  ],
+
+  image:
+    "/images/queens-domain/holy-sword-endu-pickup.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 71,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Queen's Domain Guide: How to Start and Progress",
+
+      href: "/queens-domain",
+
+      type: "Guide Hub",
+
+      description:
+        "Get Endu, choose your next destination, prepare for difficult fights, unlock new regions and find help with equipment, dungeons and achievements.",
+
+      image:
+        "/images/queens-domain/holy-sword-endu-pickup.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Rusted Sword, Dagger Belt, Shrine Guardian, Endu, Wind Dash, early combat, Ancient Coins and area progression",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Beginner Walkthrough: How to Get Endu",
+
+      href: "/queens-domain/isle-of-neasied-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Follow the coastal opening route, find the Dagger Belt and Shrine Key, open the Crypt, defeat the Shrine Guardian and obtain Endu.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/shrine-guardian-arena.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 498,
+
+        spotlightMeta:
+          "Shipwreck, Dagger Belt, Crypt entrance switch, Shrine Gate Key, hidden wall, Shrine Guardian and Holy Sword Endu",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Progression Guide: Where to Go Next",
+
+      href: "/queens-domain/progression-guide",
+
+      type: "Walkthrough",
+
+      description:
+        "Find the Azure Torch and three Gargoyle beacons, unlock two Wind Dashes, cross the western bridge and reach the Tower of Knowledge.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/azure-torch-tower-approach.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 499,
+
+        spotlightMeta:
+          "Azure Torch, 3 Gargoyle beacons, 2 Wind Dashes, western bridge, Obmuer Temple, Tower unlock and Mausoleum route",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Holy Sword Endu: Wind Gems & Upgrades",
+
+      href: "/queens-domain/endu-holy-sword",
+
+      type: "Systems",
+
+      description:
+        "Use Endu's Wind Dash, find the early Wind Gems, understand weapon leveling and the Storm Gem, and learn about Akunra.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/endu-two-wind-dashes.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 500,
+
+        spotlightMeta:
+          "Holy Sword Endu, 5 Wind Gem sockets, second and third Wind Gems, Wind Dash, weapon levels, Storm Gem and Akunra",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Obmuer Temple Walkthrough & Dagoom",
+
+      href: "/queens-domain/obmuer-temple-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Find four Triangular Slates, open Trident Key passages, obtain the third Wind Gem, defeat the Royal Guards and beat Dagoom.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/dagoom-sea-king-poison-water.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 501,
+
+        spotlightMeta:
+          "4 Triangular Slates, Trident Keys, third Wind Gem, Royal Guards, Dagoom the Sea King and temple exit",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Tower of Knowledge Walkthrough",
+
+      href: "/queens-domain/tower-of-knowledge-walkthrough",
+
+      type: "Walkthrough",
+
+      description:
+        "Solve the numbered Gargoyle puzzle, recover the Storm Gem, activate the rotating staircase, find Budaen and defeat the Necronomicon.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/tower-of-knowledge-storm-gem.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 502,
+
+        spotlightMeta:
+          "Gargoyles 3 and 7, Storm Gem, rotating staircase, Budaen, Forbidden Archives Key, Necronomicon and Acid Vial",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain: All 53 Achievements & Checklist",
+
+      href: "/queens-domain/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Track all 53 achievements with a saved checklist, including four endings, boss victories, weapon collections, NPC deliveries and island exploration.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/meal-ticket-chef-gagi.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 503,
+
+        spotlightMeta:
+          "53-achievement checklist, 4 endings, 5 Wind Gems, 60 Meal Tickets, 1,000 Ancient Coins, every chest and secret door",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 7,
+      },
+    },
+  ],
+},
 
   {
     title: "The Long Dark: Iron Road",
