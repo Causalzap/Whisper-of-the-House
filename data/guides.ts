@@ -130,6 +130,156 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+{
+  title: "Can 'Em All",
+  game: "Can 'Em All",
+  href: "/can-em-all",
+  slug: "can-em-all",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Factory Automation, Prestige, Ending & 12 Achievements",
+  eyebrow: "First-Person Incremental Factory Simulator",
+
+  hubStatus:
+    "Factory Upgrades + Industrial Vacuum + Grinders + Conveyors + Prestige + Freedom + 12 Achievements",
+
+  description:
+    "Upgrade your factory, automate Grinders and conveyors, increase can profits, unlock permanent upgrades through Prestige, reach Freedom, and complete all 12 achievements.",
+
+  coverage: [
+    "Early factory progression with cans per creature, Premium Cans, $40 Industrial Vacuum, Basket, first weapons and workday upgrades",
+
+    "Factory automation through Grinder processing speed, additional Grinders, conveyor connections, Vacuum capacity and Corpse Roombas",
+
+    "Money-making upgrades covering Shiny creatures, can duplication, Hole in One direct-sales bonuses and Smoked Meat production",
+
+    "Combat upgrades through Baseball Bat, Knife, Pistol, Shotgun, RPG, Chainsaw, Flamethrower, ammunition and automatic turrets",
+
+    "Prestige and factory resets covering Sell Your Factory, Permanent Upgrade Points, starting bonuses, Shiny Shipment and Cold Storage",
+
+    "Freedom and ending progression through all regular factory upgrades, the $666,666,666 Freedom at Last purchase, debt repayment and upstairs exit",
+
+    "All 12 Steam achievements including four hidden achievements, Collateral Damage, feeding milestones, The Perfect Employee and Freedom at Last",
+  ],
+
+  image:
+    "/images/can-em-all/can-em-all-connected-conveyor-belt.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 72,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Can 'Em All Guide: Best Upgrades & Factory Automation",
+
+      href: "/can-em-all",
+
+      type: "Guide Hub",
+
+      description:
+        "Choose early upgrades, unlock the Industrial Vacuum, connect conveyors, increase Grinder capacity and earn more from every can.",
+
+      image:
+        "/images/can-em-all/can-em-all-connected-conveyor-belt.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Premium Cans, $40 Vacuum, Grinder capacity, conveyor belts, Corpse Roombas, weapons, turrets and factory profits",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Can 'Em All Prestige & Ending: How to Unlock Freedom",
+
+      href: "/can-em-all/prestige-ending",
+
+      type: "Endings",
+
+      description:
+        "Sell your factory for permanent upgrade points, choose bonuses, unlock Freedom at Last for $666,666,666 and leave through the upstairs exit.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/can-em-all/can-em-all-freedom-unlock-requirement.webp",
+
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 504,
+
+        spotlightMeta:
+          "Factory sale, Permanent Upgrade Points, Shiny Shipment, Cold Storage, $666,666,666 Freedom, debt repayment and final exit",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Can 'Em All Achievements: All 12 & Hidden Unlocks",
+
+      href: "/can-em-all/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Unlock all 12 achievements, including four hidden factory interactions, explosive-bullet kills, 100,000 children fed and the ending.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/can-em-all/can-em-all-not-a-can-transport-tube.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 505,
+
+        spotlightMeta:
+          "12 Steam achievements, Not a Can, Special Delivery, Fresh Meat, Human Meat, Collateral Damage, The Perfect Employee and Freedom at Last",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+  ],
+},
+
   
 {
   title: "Queen's Domain",

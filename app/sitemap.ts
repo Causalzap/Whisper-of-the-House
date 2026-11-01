@@ -1170,6 +1170,10 @@ const paths = [
     'queens-domain/tower-of-knowledge-walkthrough',
     'queens-domain/achievements',
 
+    'queens-domain/can-em-all',
+    'queens-domain/can-em-all/prestige-ending',
+    'queens-domain/can-em-all/achievements',
+
 
 ] as const;
 
@@ -1178,6 +1182,9 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'queens-domain/can-em-all': '2026-11-01',
+  'queens-domain/can-em-all/prestige-ending': '2026-11-01',
+  'queens-domain/can-em-all/achievements': '2026-11-01',
 
   'queens-domain': '2026-10-31',
   'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
