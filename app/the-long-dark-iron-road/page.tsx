@@ -13,18 +13,22 @@ const pageUrl = `${siteUrl}/the-long-dark-iron-road`;
 const metadataTitle =
   "The Long Dark: Iron Road Guide — How to Start & Progress";
 
+
 const metadataDescription =
-  "Start Iron Road in Survival Mode, reach Cauldron Island, follow Alice's clues, pack for Anna Island, and learn how the Whale-Oil Heater works.";
+  "Start Iron Road in Survival Mode, reach Cauldron Island, follow Alice's clues to the Prototype Train, and find and use the Portable Whale-Oil Heater.";
 
 const articleTitle =
   "How Do You Start and Progress in The Long Dark: Iron Road?";
 
 const articleDescription =
-  "Choose a Survival save, reach Cauldron Island, follow Alice's objectives, prepare for Anna Island, and compare Whale-Oil Heater and train fuel use.";
+  "Choose a Survival save, take the Fulmar to Cauldron Island, follow Alice's route to the train, and find the Whale-Oil Heater in Track Section Two.";
 
-const imageUrls = [
-  `${siteUrl}/images/the-long-dark-iron-road/anna-island-church-entrance.webp`,
-];
+
+  const imageUrls = [
+    `${siteUrl}/images/the-long-dark-iron-road/anna-island-church-entrance.webp`,
+    `${siteUrl}/images/the-long-dark-iron-road/portable-whale-oil-heater-track-section-2-repair-depot.webp`,
+  ];
+  
 
 const heroImage = imageUrls[0];
 
@@ -43,7 +47,7 @@ const toc = [
   },
   {
     id: "whale-oil-heater",
-    label: "Portable Whale-Oil Heater",
+    label: "Find & use the Whale-Oil Heater",
   },
   {
     id: "wax-cylinders",
@@ -72,6 +76,10 @@ const relatedLinks = [
     href: "/the-long-dark-iron-road/prototype-train-guide",
     label: "Prototype Train: Driving & Repairs",
   },
+  {
+    href: "/the-long-dark-iron-road/wax-cylinders",
+    label: "All 16 Wax Cylinders: Locations",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -86,12 +94,16 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
-    images: [
-      {
-        url: heroImage,
-        alt: "The church on Anna Island in The Long Dark Iron Road",
-      },
-    ],
+    
+images: [
+  {
+    url: heroImage,
+    width: 1906,
+    height: 1106,
+    alt: "The Desecrated Church on Anna Island in The Long Dark: Iron Road",
+  },
+],
+
   },
   twitter: {
     card: "summary_large_image",
@@ -135,7 +147,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-29",
+      dateModified: "2026-11-02",
       about: [
         {
           "@type": "VideoGame",
@@ -221,7 +233,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 29, 2026"
+          updatedAt="November 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

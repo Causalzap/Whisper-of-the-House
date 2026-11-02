@@ -15,13 +15,13 @@ const metadataTitle =
   "Iron Road Train: How to Drive, Repair & Refuel";
 
 const metadataDescription =
-  "Start the Prototype Train, manage PSI and Whale Oil, clear railway obstacles, avoid damaged tracks, and repair the Wheels, Boiler and brakes.";
+  "Start the Prototype Train at 25 PSI, use driving gears, clear obstacles, repair worn components, and refuel Whale Oil and Water in Iron Road.";
 
 const articleTitle =
   "How Do You Drive and Repair the Train in The Long Dark: Iron Road?";
 
 const articleDescription =
-  "Start the Prototype Train, manage steam pressure and Whale Oil, choose driving gears, clear railway obstacles, and repair worn components.";
+  "Start the Prototype Train, manage steam pressure, switch driving gears, navigate railway junctions, repair damaged components, and refuel at stations.";
 
 const imageUrls = [
   `${siteUrl}/images/the-long-dark-iron-road/prototype-train-controls.webp`,
@@ -43,7 +43,7 @@ const toc = [
   },
   {
     id: "obstacles",
-    label: "Clear railway obstacles",
+    label: "Obstacles & railway switches",
   },
   {
     id: "broken-track",
@@ -59,7 +59,7 @@ const toc = [
   },
   {
     id: "refueling",
-    label: "Whale Oil & water consumption",
+    label: "Refueling Whale Oil & Water",
   },
   {
     id: "mobile-shelter",
@@ -94,12 +94,16 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: articleDescription,
     siteName: "Whisper of the House",
-    images: [
-      {
-        url: heroImage,
-        alt: "The Long Dark Iron Road Prototype Train driving controls showing brake, gear and steam pressure",
-      },
-    ],
+    
+images: [
+  {
+    url: heroImage,
+    width: 933,
+    height: 595,
+    alt: "Prototype Train controls showing the brake, driving gear, and steam pressure in The Long Dark: Iron Road",
+  },
+],
+
   },
   twitter: {
     card: "summary_large_image",
@@ -149,7 +153,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-29",
+      dateModified: "2026-11-02",
       about: [
         {
           "@type": "VideoGame",
@@ -235,7 +239,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 29, 2026"
+          updatedAt="November 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

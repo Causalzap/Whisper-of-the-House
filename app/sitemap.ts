@@ -1159,11 +1159,12 @@ const paths = [
     'crack/redacted-door-code',
     'crack/workbots',
     'crack/achievements',
-
+    
     'the-long-dark-iron-road',
     'the-long-dark-iron-road/anna-island-walkthrough',
     'the-long-dark-iron-road/prototype-train-guide',
     'the-long-dark-iron-road/fulmar-boat',
+    'the-long-dark-iron-road/wax-cylinders',
 
     'queens-domain',
     'queens-domain/isle-of-neasied-walkthrough',
@@ -1197,10 +1198,11 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'queens-domain/tower-of-knowledge-walkthrough': '2026-10-31',
   'queens-domain/achievements': '2026-10-31',
 
-  'the-long-dark-iron-road': '2026-10-28',
-  'the-long-dark-iron-road/anna-island-walkthrough': '2026-10-28',
-  'the-long-dark-iron-road/prototype-train-guide': '2026-10-28',
-  'the-long-dark-iron-road/fulmar-boat': '2026-10-28',
+  'the-long-dark-iron-road': '2026-11-02',
+  'the-long-dark-iron-road/anna-island-walkthrough': '2026-11-02',
+  'the-long-dark-iron-road/prototype-train-guide': '2026-11-02',
+  'the-long-dark-iron-road/fulmar-boat': '2026-11-02',
+  'the-long-dark-iron-road/wax-cylinders': '2026-11-02',
 
   'crack': '2026-10-27',
   'crack/walkthrough': '2026-10-27',

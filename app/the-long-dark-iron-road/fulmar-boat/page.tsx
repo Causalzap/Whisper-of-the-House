@@ -14,14 +14,16 @@ const pageUrl = `${hubUrl}/fulmar-boat`;
 const metadataTitle =
   "Iron Road Fulmar Boat: Location, Supplies & Return";
 
+
 const metadataDescription =
-  "Find the Fulmar at Hibernia Processing, load the exact food, water, fuel and Tinder requirements, and sail to Cauldron Island.";
+  "Find the Fulmar at Hibernia Processing, load 5,000 Calories, 20 kg Fuel, 20 L Water and 5 Tinder Plugs, and prepare to return from Cauldron Island.";
 
 const articleTitle =
   "Where Is the Fulmar Boat in The Long Dark: Iron Road?";
 
+
 const articleDescription =
-  "Find the Fulmar at Hibernia Processing, prepare its four required supplies, operate the boiler and throttle, and return from Cauldron Island.";
+  "Find the Fulmar at Hibernia Processing, prepare the required supplies, start the boiler, sail to Cauldron Island, and restock for the return trip.";
 
 const imageUrls = [
   `${siteUrl}/images/the-long-dark-iron-road/fulmar-hibernia-docks.webp`,
@@ -139,7 +141,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-28",
+      dateModified: "2026-11-02",
       about: [
         {
           "@type": "VideoGame",
@@ -221,7 +223,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 28, 2026"
+          updatedAt="November 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

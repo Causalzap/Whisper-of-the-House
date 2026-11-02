@@ -22,14 +22,16 @@ const articleTitle =
 const articleDescription =
   "Follow Alice's clues from Port Remnant through the lighthouse, cave, church, and Track Section Five to find the Train Key and Prototype Train.";
 
+
 const imageUrls = [
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-lighthouse-map.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-port-remnant-cave.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-church-entrance.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-track-section-five-map.webp`,
+  `${siteUrl}/images/the-long-dark-iron-road/anna-island-train-shelter-journal-desk.webp`,
   `${siteUrl}/images/the-long-dark-iron-road/anna-island-train-key.webp`,
-  `${siteUrl}/images/the-long-dark-iron-road/anna-island-alice-journal-01.webp`,
 ];
+  
 
 const heroImage = imageUrls[0];
 
@@ -48,7 +50,7 @@ const toc = [
   },
   {
     id: "train-tunnel",
-    label: "Track Section Five & Train Key",
+    label: "Track Sections Five & Six, Train Key",
   },
 ];
 
@@ -136,7 +138,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-28",
-      dateModified: "2026-10-29",
+      dateModified: "2026-11-02",
       about: [
         {
           "@type": "VideoGame",
@@ -230,7 +232,7 @@ export default function Page() {
           gameHref="/the-long-dark-iron-road"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 29, 2026"
+          updatedAt="November 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
