@@ -1159,7 +1159,7 @@ const paths = [
     'crack/redacted-door-code',
     'crack/workbots',
     'crack/achievements',
-    
+
     'the-long-dark-iron-road',
     'the-long-dark-iron-road/anna-island-walkthrough',
     'the-long-dark-iron-road/prototype-train-guide',
@@ -1173,11 +1173,13 @@ const paths = [
     'queens-domain/obmuer-temple-walkthrough',
     'queens-domain/tower-of-knowledge-walkthrough',
     'queens-domain/achievements',
+    'queens-domain/deimpo-mausoleum',
+    'queens-domain/pandora-blade',
+    'queens-domain/missing-books',
 
     'can-em-all',
     'can-em-all/prestige-ending',
     'can-em-all/achievements',
-
 
 ] as const;
 
@@ -1190,13 +1192,16 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'can-em-all/prestige-ending': '2026-11-01',
   'can-em-all/achievements': '2026-11-01',
 
-  'queens-domain': '2026-10-31',
+  'queens-domain': '2026-11-02',
   'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
   'queens-domain/progression-guide': '2026-10-31',
   'queens-domain/endu-holy-sword': '2026-10-31',
   'queens-domain/obmuer-temple-walkthrough': '2026-10-31',
   'queens-domain/tower-of-knowledge-walkthrough': '2026-10-31',
   'queens-domain/achievements': '2026-10-31',
+  'queens-domain/deimpo-mausoleum': '2026-11-02',
+  'queens-domain/pandora-blade': '2026-11-02',
+  'queens-domain/missing-books': '2026-11-02',
 
   'the-long-dark-iron-road': '2026-11-02',
   'the-long-dark-iron-road/anna-island-walkthrough': '2026-11-02',

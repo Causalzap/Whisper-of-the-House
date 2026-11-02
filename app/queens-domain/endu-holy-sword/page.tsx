@@ -24,6 +24,7 @@ const articleDescription =
 const imageUrls = [
   `${siteUrl}/images/queens-domain/endu-wind-gem-sockets.webp`,
   `${siteUrl}/images/queens-domain/endu-second-wind-gem-location.webp`,
+  `${siteUrl}/images/queens-domain/endu-fourth-wind-gem.webp`,
   `${siteUrl}/images/queens-domain/endu-two-wind-dashes.webp`,
   `${siteUrl}/images/queens-domain/endu-weapon-level-3.webp`,
   `${siteUrl}/images/queens-domain/endu-soulbound-level-10.webp`,

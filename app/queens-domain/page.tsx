@@ -32,12 +32,13 @@ const toc = [
   { id: "next-destination", label: "Where to go next" },
   { id: "movement", label: "Wind Dash and broken bridges" },
   { id: "tower-unlock", label: "Unlock the Tower of Knowledge" },
-  { id: "dungeons", label: "First major dungeons" },
+  { id: "dungeons", label: "Obmuer, Tower & Deimpo" },
   { id: "combat", label: "Combat and damage types" },
   { id: "coins-and-shop", label: "Best early purchases" },
   { id: "saving", label: "Saving, healing and status effects" },
   { id: "achievements", label: "Achievements and collectibles" },
 ];
+
 
 const relatedLinks = [
   {
@@ -53,12 +54,24 @@ const relatedLinks = [
     label: "Holy Sword Endu: Wind Gems & Upgrades",
   },
   {
+    href: "/queens-domain/pandora-blade",
+    label: "Pandora Blade: Location, Secret Jump & MAX",
+  },
+  {
     href: "/queens-domain/obmuer-temple-walkthrough",
     label: "Obmuer Temple: Slates, Keys & Dagoom",
   },
   {
     href: "/queens-domain/tower-of-knowledge-walkthrough",
     label: "Tower of Knowledge: Puzzles & Necronomicon",
+  },
+  {
+    href: "/queens-domain/missing-books",
+    label: "All Six Missing Books & Shelf Order",
+  },
+  {
+    href: "/queens-domain/deimpo-mausoleum",
+    label: "Deimpo Mausoleum: Six Sigils & Boss",
   },
   {
     href: "/queens-domain/achievements",
@@ -79,7 +92,7 @@ export const metadata: Metadata = {
     description: metadataDescription,
     siteName: "Whisper of the House",
     publishedTime: "2026-10-31",
-    modifiedTime: "2026-10-31",
+    modifiedTime: "2026-11-02",
     images: [
       {
         url: heroImage,
@@ -127,7 +140,7 @@ const jsonLd = {
       },
       image: imageUrls,
       datePublished: "2026-10-31",
-      dateModified: "2026-10-31",
+      dateModified: "2026-11-02",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -179,7 +192,7 @@ export default function QueensDomainPage() {
           gameHref="/queens-domain"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 31, 2026"
+          updatedAt="November 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
