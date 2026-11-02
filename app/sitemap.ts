@@ -770,6 +770,9 @@ const paths = [
   '/crimson-desert/charting-the-unknown',
   '/crimson-desert/ships',
   '/crimson-desert/beyond-the-margins',
+  '/crimson-desert/auronui-island',
+  '/crimson-desert/forged-resolve',
+  '/crimson-desert/from-the-ashes',
 
 '/project-pitt',
 '/project-pitt/progression-guide',
@@ -1170,9 +1173,9 @@ const paths = [
     'queens-domain/tower-of-knowledge-walkthrough',
     'queens-domain/achievements',
 
-    'queens-domain/can-em-all',
-    'queens-domain/can-em-all/prestige-ending',
-    'queens-domain/can-em-all/achievements',
+    'can-em-all',
+    'can-em-all/prestige-ending',
+    'can-em-all/achievements',
 
 
 ] as const;
@@ -1182,9 +1185,9 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  'queens-domain/can-em-all': '2026-11-01',
-  'queens-domain/can-em-all/prestige-ending': '2026-11-01',
-  'queens-domain/can-em-all/achievements': '2026-11-01',
+  'can-em-all': '2026-11-01',
+  'can-em-all/prestige-ending': '2026-11-01',
+  'can-em-all/achievements': '2026-11-01',
 
   'queens-domain': '2026-10-31',
   'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
@@ -1609,6 +1612,9 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/crimson-desert/charting-the-unknown': '2026-10-30',
   '/crimson-desert/ships': '2026-10-30',
   '/crimson-desert/beyond-the-margins': '2026-10-30',
+  '/crimson-desert/auronui-island': '2026-11-02',
+  '/crimson-desert/forged-resolve': '2026-11-02',
+  '/crimson-desert/from-the-ashes': '2026-11-02',
   
   '/mortal-shell-2': '2026-08-27',
   '/mortal-shell-2/progression-guide': '2026-08-18',
