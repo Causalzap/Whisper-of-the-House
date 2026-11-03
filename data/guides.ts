@@ -131,6 +131,153 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "GRAVHOUNDS",
+    game: "GRAVHOUNDS",
+    href: "/gravhounds",
+    slug: "gravhounds",
+    kind: "game",
+    status: "active",
+    accent: "blue",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "First Shift, Mod Deck, Missions & Blueprints",
+    eyebrow: "Co-op Mining, Base Defense & Roguelite Progression",
+  
+    hubStatus:
+      "First Shift + Mod Deck Builder + Research + Blueprints + Fuel Pump + Coffee Cat Escort",
+  
+    description:
+      "Complete your first shift, build defenses, edit your Mod Deck, choose research upgrades, scan Blueprints, defend the Fuel Pump, and escort Coffee Cat.",
+  
+    coverage: [
+      "First Shift tutorial covering Pipeline connections, Fabricator placement, Titanium mining, resource delivery, Turret construction, repairs and Launch Prep",
+  
+      "Mod Deck Builder unlock, Research Lab MOD LOADOUT, 11-Mod selection, Mod replacement, Reward Pod rewards and Showstopper choices",
+  
+      "Planet selection through Master Control, mission objectives, Research Points, Turret and Weapon upgrades, Training and resource requirements",
+  
+      "Blueprint collection through planet progress indicators, item pickup, Scan interactions and successful Turret Blueprint confirmation",
+  
+      "Fuel Pump defense covering Pipeline connections, defensive preparation, fuel transfer, enemy waves, Pump survival and extraction",
+  
+      "Coffee Cat Escort through Bring Her Home, protecting the moving target, reaching the Collector and surviving final extraction",
+    ],
+  
+    image:
+      "/images/gravhounds/gravhounds-planet-selection-objectives.webp",
+    imageFit: "contain",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 73,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Gravhounds Guide: Progression, Missions & Blueprints",
+  
+        href: "/gravhounds",
+  
+        type: "Guide Hub",
+  
+        description:
+          "Choose your next planet, prioritize research, scan Blueprints, defend the Fuel Pump, and bring Coffee Cat back to the Collector.",
+  
+        image:
+          "/images/gravhounds/gravhounds-planet-selection-objectives.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Planet selection, Research Lab, Blueprints, Fuel Pump defense, Coffee Cat Escort and extraction",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Gravhounds Beginner Guide: First Shift & Extraction",
+  
+        href: "/gravhounds/beginner-guide",
+  
+        type: "Beginner Guide",
+  
+        description:
+          "Connect your first Pipeline, build a Fabricator, mine Titanium, place and repair Turrets, and survive Launch Prep.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/gravhounds/gravhounds-first-shift-fabricator-placement.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 508,
+  
+          spotlightMeta:
+            "Holo Table, Pipeline, Fabricator, Titanium, Grav Beam, Turret repairs, Launch Prep and first Research unlock",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Gravhounds Mod Deck Builder: Unlock, Edit & Choose Mods",
+  
+        href: "/gravhounds/mod-deck-builder",
+  
+        type: "Systems",
+  
+        description:
+          "Unlock the Mod Deck Builder, edit your 11-Mod loadout, replace researched Mods, and control Reward Pod choices.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/gravhounds/gravhounds-mod-deck-unlock.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 507,
+  
+          spotlightMeta:
+            "Deck Builder unlock, MOD LOADOUT 11/11, Mod replacement, Reward Pods, Field Mechanic and Showstoppers",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+    ],
+  },
+  
 {
   title: "Can 'Em All",
   game: "Can 'Em All",
