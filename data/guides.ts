@@ -291,14 +291,15 @@ export const guideClusters: GuideCluster[] = [
   accent: "purple",
   archiveCategory: "RPG, action, builds & combat",
 
-  label: "Progression, Endu, Dungeons & 53 Achievements",
+  label:
+    "Progression, Endu, Dungeons, 8 Sipeha Seals & 53 Achievements",
   eyebrow: "First-Person Fantasy Action RPG",
 
   hubStatus:
-    "Opening Route + 3 Gargoyle Beacons + Wind Gems + Obmuer Temple + Tower of Knowledge + 53 Achievements",
+    "Opening Route + Endu + Pandora Blade + Obmuer Temple + Tower of Knowledge + Deimpo Mausoleum + Missing Books + 8 Sipeha Seals + 53 Achievements",
 
   description:
-    "Start Queen's Domain, obtain the Holy Sword Endu, unlock Wind Dash routes, solve dungeon puzzles, defeat Dagoom and the Necronomicon, and track all 53 achievements.",
+    "Start Queen's Domain, obtain Endu, explore Obmuer Temple and the Tower of Knowledge, solve Deimpo Mausoleum's six sigils, return the Missing Books, find eight Sipeha seals, and track all 53 achievements.",
 
   coverage: [
     "Opening route from the starting camp to the shipwreck, Dagger Belt, Crypt, Endu Shrine Gate Key, Shrine Guardian, Holy Sword Endu and Umbada's Trading Outpost",
@@ -307,9 +308,17 @@ export const guideClusters: GuideCluster[] = [
 
     "Holy Sword Endu mechanics covering Wind Dash charges, five Wind Gem sockets, early Wind Gem locations, weapon leveling, Storm Gem ability and True Holy Sword Akunra",
 
+    "Pandora Blade location behind the Crypt's hidden wall, Lunging Stab movement, airborne jump timing, Level 100 MAX and weapon upgrade decisions",
+
     "Obmuer Temple walkthrough covering four Triangular Slates, Trident Keys, third Wind Gem, three Royal Guards, Dagoom the Sea King and the final island Gargoyle",
 
     "Tower of Knowledge walkthrough covering the numbered Gargoyle puzzle, Storm Gem, rotating staircase, Budaen, Forbidden Archives Key, Necronomicon and Acid Vial",
+
+    "Deimpo Mausoleum progression through moving pillars, the fourth Wind Gem, Puwema's Lens, Mask of Second Sight, six magical sigils, Poenir and Duenir, King Gius Abraon and Unok's Remains",
+
+    "All six Missing Books across the island, numbered library shelves, Wourha's History of Dragons reward, Rare Artifact Storage and I'm Not Paying the Late Fee",
+
+    "All eight Sipeha seals across Rotting Cavern, Deimpo Mausoleum, the Underground Prison, Isle of Neasied, Tower of Knowledge, Obmuer Temple and Record of Sin, with Verdant Hollow gate and lens requirements",
 
     "Beginner decisions covering early weapons, Slash versus Impact damage, attack-power recovery, healing, saving, Ancient Coins and when to revisit blocked passages",
 
@@ -464,6 +473,37 @@ export const guideClusters: GuideCluster[] = [
 
     {
       title:
+        "Queen's Domain Pandora Blade: Location, Jump & Max Level",
+
+      href: "/queens-domain/pandora-blade",
+
+      type: "Guide",
+
+      description:
+        "Find Pandora Blade behind the Crypt's hidden wall, perform its forward-lunge jump, reach Level 100 MAX and compare its combat and movement uses.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/crypt-hidden-wall.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Crypt hidden wall, Pandora Blade, Lunging Stab, airborne dash-jump, Level 100 MAX and +300% Power",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
         "Queen's Domain Obmuer Temple Walkthrough & Dagoom",
 
       href: "/queens-domain/obmuer-temple-walkthrough",
@@ -492,7 +532,7 @@ export const guideClusters: GuideCluster[] = [
 
       archive: {
         showInCollections: true,
-        order: 5,
+        order: 6,
       },
     },
 
@@ -526,7 +566,103 @@ export const guideClusters: GuideCluster[] = [
 
       archive: {
         showInCollections: true,
-        order: 6,
+        order: 7,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Missing Books: All 6 Locations & Shelf Order",
+
+      href: "/queens-domain/missing-books",
+
+      type: "Collectibles",
+
+      description:
+        "Find all six Missing Books, match shelves I–VI, receive The History of Dragons from Wourha, and reopen Rare Artifact Storage.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/tower-missing-books-categories.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Six library books, shelves I–VI, Rubedo, Upim's Fairy Tales, Wourha, Rare Artifact Storage and Late Fee achievement",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 8,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain Deimpo Mausoleum: Six Sigils & Bosses",
+
+      href: "/queens-domain/deimpo-mausoleum",
+
+      type: "Walkthrough",
+
+      description:
+        "Cross the moving pillars, obtain Puwema's Lens and the Mask of Second Sight, dispel six sigils, defeat Poenir and Duenir, and recover Unok's Remains.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/mausoleum-sigil-candlelit-sarcophagus.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Moving pillars, fourth Wind Gem, Puwema's Lens, Mask of Second Sight, six sigils, Poenir and Duenir, Unok's Remains",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 9,
+      },
+    },
+
+    {
+      title:
+        "Queen's Domain: All 8 Sipeha Statues & Verdant Hollow Gate",
+
+      href: "/queens-domain/verdant-hollow-statues",
+
+      type: "Puzzle Help",
+
+      description:
+        "Find eight Sipeha seals across the island, reach hidden underground statues, cross the Deimpo chasm, and unlock the sealed Verdant Hollow entrance.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/queens-domain/verdant-hollow-statue-rotting-cavern.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 506,
+
+        spotlightMeta:
+          "Eight Sipeha seals, Verdant Hollow gate, Sipeha's Lens, hidden underground statues, Deimpo chasm and 7/8 troubleshooting",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 10,
       },
     },
 
@@ -560,11 +696,12 @@ export const guideClusters: GuideCluster[] = [
 
       archive: {
         showInCollections: true,
-        order: 7,
+        order: 11,
       },
     },
   ],
 },
+
 
   {
     title: "The Long Dark: Iron Road",

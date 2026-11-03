@@ -1176,6 +1176,7 @@ const paths = [
     'queens-domain/deimpo-mausoleum',
     'queens-domain/pandora-blade',
     'queens-domain/missing-books',
+    'queens-domain/verdant-hollow-statues',
 
     'can-em-all',
     'can-em-all/prestige-ending',
@@ -1202,6 +1203,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'queens-domain/deimpo-mausoleum': '2026-11-02',
   'queens-domain/pandora-blade': '2026-11-02',
   'queens-domain/missing-books': '2026-11-02',
+  'queens-domain/verdant-hollow-statues': '2026-11-03',
 
   'the-long-dark-iron-road': '2026-11-02',
   'the-long-dark-iron-road/anna-island-walkthrough': '2026-11-02',

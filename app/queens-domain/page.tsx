@@ -74,9 +74,14 @@ const relatedLinks = [
     label: "Deimpo Mausoleum: Six Sigils & Boss",
   },
   {
+    href: "/queens-domain/verdant-hollow-statues",
+    label: "All 8 Sipeha Statues & Verdant Hollow Gate",
+  },
+  {
     href: "/queens-domain/achievements",
     label: "All 53 Achievements & Checklist",
   },
+
 ];
 
 export const metadata: Metadata = {
@@ -92,7 +97,7 @@ export const metadata: Metadata = {
     description: metadataDescription,
     siteName: "Whisper of the House",
     publishedTime: "2026-10-31",
-    modifiedTime: "2026-11-02",
+    modifiedTime: "2026-11-03",
     images: [
       {
         url: heroImage,
@@ -140,7 +145,7 @@ const jsonLd = {
       },
       image: imageUrls,
       datePublished: "2026-10-31",
-      dateModified: "2026-11-02",
+      dateModified: "2026-11-03",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -192,7 +197,7 @@ export default function QueensDomainPage() {
           gameHref="/queens-domain"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 2, 2026"
+          updatedAt="November 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
