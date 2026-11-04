@@ -1186,6 +1186,11 @@ const paths = [
     'gravhounds',
     'gravhounds/mod-deck-builder',
 
+    'potato-please',
+    'potato-please/automation',
+    'potato-please/endings',
+    'potato-please/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1193,6 +1198,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'potato-please': '2026-11-04',
+  'potato-please/automation': '2026-11-04',
+  'potato-please/endings': '2026-11-04',
+  'potato-please/achievements': '2026-11-04',
+
   'gravhounds/beginner-guide': '2026-11-03',
   'gravhounds': '2026-11-03',
   'gravhounds/mod-deck-builder': '2026-11-03',

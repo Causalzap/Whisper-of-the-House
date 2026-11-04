@@ -131,6 +131,181 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+{
+  title: "Potato Please",
+  game: "Potato Please",
+  href: "/potato-please",
+  slug: "potato-please",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Automation, Hidden Key, 3 Endings & 20 Achievements",
+  eyebrow: "First-Person Potato Peeling & Factory Automation",
+
+  hubStatus:
+    "First Shift + Journal + Machines + Snowstorm + 60,000 Quota + Golden Key + 3 Endings + 20 Achievements",
+
+  description:
+    "Start peeling potatoes, choose upgrades, automate production, clear the snowstorm, complete the 60,000-potato Quota, escape the facility, and track all 20 achievements.",
+
+  coverage: [
+    "Opening progression with the first potato, Chute deliveries, Warm-up Shift, Rusty Knife, Journal skills, Carry Capacity, money and worker objectives",
+
+    "Automation upgrades through the Crank Peel Machine, Auto Peel Machine, Sack Gantry, Sack Cableway, Overclock, Claw Crane, Crane Autopilot and Potato Vacuum",
+
+    "Production challenges covering potato delivery, machine bottlenecks, grenades, coughing, cold exposure, the snowstorm and Flamethrower thawing objective",
+
+    "Final escape after the 60,000-potato Quota, parachute-delivered Golden Key, Iron Door and three train destinations: Northern Front, Varenka and Western Industry",
+
+    "All 20 Steam achievements with an interactive checklist, manual peeling milestones, Good Boy, No Escape, machine automation and the three train endings",
+  ],
+
+  image:
+    "/images/potato-please/potato-please-storm-flamethrower.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 74,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Potato Please Guide: Progression, Upgrades & What to Do",
+
+      href: "/potato-please",
+      type: "Guide Hub",
+
+      description:
+        "Complete the Warm-up Shift, follow Journal objectives, clear the snowstorm, improve potato production and finish the 60,000-potato Quota.",
+
+      image:
+        "/images/potato-please/potato-please-storm-flamethrower.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "First Shift, Chute, Journal, upgrades, grenades, Flamethrower, snowstorm, 60,000 Quota and final escape",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Potato Please Automation Guide: Best Upgrades & Machines",
+
+      href: "/potato-please/automation",
+      type: "Systems",
+
+      description:
+        "Compare knife and Journal upgrades, run peeling machines, load Sack Gantry and Cableway, unlock Crane Autopilot and use the Potato Vacuum.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/potato-please/potato-please-sack-gantry-upgrades.webp",
+
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 510,
+
+        spotlightMeta:
+          "Rusty Knife, Steel Knife, Journal skills, Auto Peel Machine, Sack Gantry, Cableway, Overclock, Claw Crane and Potato Vacuum",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Potato Please All Endings: Hidden Key & Escape Guide",
+
+      href: "/potato-please/endings",
+      type: "Endings",
+
+      description:
+        "Find the Golden Key, open the Iron Door, choose Northern Front, Varenka or Western Industry, and complete all three train endings.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/potato-please/potato-please-train-route-selection.webp",
+
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 511,
+
+        spotlightMeta:
+          "60,000 Quota, Golden Key, Iron Door, Line 01 Ministry, Line 02 Villagers, Line 03 Resistance and Every Path Has a Price",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Potato Please Achievements: All 20 & 100% Checklist",
+
+      href: "/potato-please/achievements",
+      type: "Achievements",
+
+      description:
+        "Track all 20 Steam achievements with a saved checklist, including hand-peeling totals, Good Boy, No Escape, automation and all three endings.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/potato-please/potato-please-good-boy-achievement.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 509,
+
+        spotlightMeta:
+          "20-achievement checklist, 500 and 1,000 manual peels, Good Boy, Industrial Revolution, Fully Automated, No Escape and three endings",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
+
   {
     title: "GRAVHOUNDS",
     game: "GRAVHOUNDS",
