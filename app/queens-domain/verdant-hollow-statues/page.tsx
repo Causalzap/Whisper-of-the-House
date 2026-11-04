@@ -34,6 +34,7 @@ const imageUrls = [
   `${siteUrl}/images/queens-domain/verdant-hollow-statue-obmuer-temple.webp`,
   `${siteUrl}/images/queens-domain/verdant-hollow-statue-record-of-sin.webp`,
   `${siteUrl}/images/queens-domain/verdant-hollow-required-lens.webp`,
+  `${siteUrl}/images/queens-domain/mask-of-second-sight-four-gods.webp`,
 ];
 
 const heroImage = imageUrls[0];
