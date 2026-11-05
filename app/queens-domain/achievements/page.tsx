@@ -28,6 +28,8 @@ const imageUrls = [
   `${siteUrl}/images/queens-domain/fallen-raiders-necklace-pickup.webp`,
   `${siteUrl}/images/queens-domain/tower-missing-books-categories.webp`,
   `${siteUrl}/images/queens-domain/tower-wourha-cleanup-confirmation.webp`,
+  `${siteUrl}/images/queens-domain/queens-domain-ending-one-failure.webp`,
+  `${siteUrl}/images/queens-domain/queens-domain-ending-two-success.webp`,
 ];
 
 const heroImage = imageUrls[0];
