@@ -131,6 +131,216 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "Loftia",
+    game: "Loftia",
+    href: "/loftia",
+    slug: "loftia",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Cozy, crafting, survival & systems",
+  
+    label: "Beginner, Research, Dew, Pets & Progression",
+    eyebrow: "Cozy Solarpunk MMO, Farming & Crafting",
+  
+    hubStatus:
+      "Loftia City + Glider + Hanging Gardens + Research Stations + Hammer Lv.2 + Pruners Lv.2 + Dew + Pets + Gridfall Preparation",
+  
+    description:
+      "Start Loftia, unlock your Glider, explore Hanging Gardens, earn Dew through farming and cooking, upgrade tools through research, and adopt your first pet.",
+  
+    coverage: [
+      "Opening progression through Pebble and Milo's quests, first house, Project Station, Garden Beds, Amani Permits, Refining Station, Glider and Airtram travel",
+  
+      "Hanging Gardens progression through Kassim's fishing introduction, Research Stations, Field Research, residents' tasks and Bounce Shoes preparation",
+  
+      "Research upgrades through Anadromous Odyssey, Heavy-Weight Titans, Murky Waters, Project Station Lv.2, Hammer Lv.2 and Pruners Lv.2",
+  
+      "Money making through Fruit Smoothies, Cotton, Tomatoes, Fries, Shipping Bin sales, Vending Machine listings and ingredient cost comparisons",
+  
+      "First pet rescue through Joanna's Notes From the Fauna quest, five Dog Location Pieces, Lettuce and Carrot requirements, adoption and customization",
+  
+      "Other activities including Adventures, Scrambled Coordinates, World Projects, World Maintenance, Collections and Memories",
+    ],
+  
+    image:
+      "/images/loftia/loftia-hanging-gardens-airtram.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 75,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Loftia Guide: What to Do First, Regions & Progression",
+  
+        href: "/loftia",
+        type: "Guide Hub",
+  
+        description:
+          "Follow Loftia City quests, unlock the Glider, reach Hanging Gardens, begin research and prepare for Gridfall.",
+  
+        image:
+          "/images/loftia/loftia-hanging-gardens-airtram.webp",
+  
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Loftia City, Glider, Hanging Gardens, Research Stations, Dew, pets, Adventures and Gridfall preparation",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Loftia Beginner Guide: First Quests, Glider & Upgrades",
+  
+        href: "/loftia/beginner-guide",
+        type: "Beginner Guide",
+  
+        description:
+          "Complete Milo and Hazel's first quests, set up your house, unlock the Refining Station, craft the Glider and reach Hanging Gardens.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/loftia/loftia-glider-crafting-requirements.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 512,
+  
+          spotlightMeta:
+            "Milo's salvage quests, Garden Bed permits, Battery, Refining Station, Ryder's Adventure, Glider and Airtram",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Loftia Money Making: How to Earn Dew Fast",
+  
+        href: "/loftia/money-making",
+        type: "Systems",
+  
+        description:
+          "Earn Dew with Fruit Smoothies, crops and cooking. Compare seed costs, shipping prices and profits from selling ingredients or finished dishes.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/loftia/loftia-fruit-smoothie-recipe.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 514,
+  
+          spotlightMeta:
+            "Fruit Smoothies, Wild Berries, Sugar, Cotton, Tomatoes, Fries, Shipping Bin and Vending Machine",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Loftia Pets: How to Rescue and Adopt Your First Dog",
+  
+        href: "/loftia/pets",
+        type: "Guide",
+  
+        description:
+          "Find Joanna, investigate five dog tracks, bring four Lettuce and two Carrots, adopt your Small Dog and unlock pet customization.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/loftia/loftia-dog-rescue-food-requirements.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 513,
+  
+          spotlightMeta:
+            "Joanna, Notes From the Fauna, five Dog Location Pieces, Pet Bowl, four Lettuce, two Carrots and Small Dog adoption",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Loftia Research Guide: Hammer & Pruners Lv.2 Upgrades",
+  
+        href: "/loftia/research-and-tool-upgrades",
+        type: "Systems",
+  
+        description:
+          "Complete Central Lake Research Bundles, upgrade crafting stations and unlock Hammer Lv.2 and Pruners Lv.2 with the required materials.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/loftia/loftia-heavy-weight-titans-hammer-research.webp",
+  
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 515,
+  
+          spotlightMeta:
+            "Anadromous Odyssey, Heavy-Weight Titans, Murky Waters, Project Station Lv.2, Hammer Lv.2 and Pruners Lv.2",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  
 {
   title: "Potato Please",
   game: "Potato Please",

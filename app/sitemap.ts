@@ -1191,6 +1191,12 @@ const paths = [
     'potato-please/endings',
     'potato-please/achievements',
 
+    'loftia',
+    'loftia/beginner-guide',
+    'loftia/money-making',
+    'loftia/pets',
+    'loftia/research-and-tool-upgrades',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1198,6 +1204,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'loftia': '2026-11-05',
+  'loftia/beginner-guide': '2026-11-05',
+  'loftia/money-making': '2026-11-05',
+  'loftia/pets': '2026-11-05',
+  'loftia/research-and-tool-upgrades': '2026-11-05',
+  
   'potato-please': '2026-11-04',
   'potato-please/automation': '2026-11-04',
   'potato-please/endings': '2026-11-04',
