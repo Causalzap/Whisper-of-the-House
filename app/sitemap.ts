@@ -1197,6 +1197,13 @@ const paths = [
     'loftia/pets',
     'loftia/research-and-tool-upgrades',
 
+    'underkeep',
+    'underkeep/races-classes',
+    'underkeep/beginner-guide',
+    'underkeep/early-game-walkthrough',
+    'underkeep/fast-travel',
+    'underkeep/mausoleum-walkthrough',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1204,6 +1211,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'underkeep': '2026-11-06',
+  'underkeep/races-classes': '2026-11-06',
+  'underkeep/beginner-guide': '2026-11-06',
+  'underkeep/early-game-walkthrough': '2026-11-06',
+  'underkeep/fast-travel': '2026-11-06',
+  'underkeep/mausoleum-walkthrough': '2026-11-06',
+
   'loftia': '2026-11-05',
   'loftia/beginner-guide': '2026-11-05',
   'loftia/money-making': '2026-11-05',

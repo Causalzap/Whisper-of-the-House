@@ -130,6 +130,239 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Underkeep",
+  game: "Underkeep",
+  href: "/underkeep",
+  slug: "underkeep",
+  kind: "game",
+  status: "active",
+  accent: "purple",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "Progression, Classes, Fast Travel & Mausoleum",
+  eyebrow: "First-Person Dungeon Crawler & Party-Based RPG",
+
+  hubStatus:
+    "Starting Forest + Silver Key + Village + 7 Classes + 4 Obelisks + Mausoleum + Source + Tower Key Fragments",
+
+  description:
+    "Start Underkeep, build a four-character party, reach the village, unlock Fast Travel, explore the Mausoleum, and investigate Underkeep Tower.",
+
+  coverage: [
+    "Starting Forest, Hollow Grave Tunnels, Orc Warehouse, Silver Key, Garric and the route to Village of Underkeep",
+
+    "Seven classes, six races, party formation, racial traits, skills, equipment restrictions and starting party choices",
+
+    "Beginner controls, combat actions, inventory, potions, Food, Rest, map markers, healing and recovery",
+
+    "Four Obelisk locations, hidden forest passage, Fallen Obelisk, Orc Encampment, Wards of the West and Teleportation Stone",
+
+    "Mausoleum progression through Skeleton King, Ixarion, Jacob, Maltherion, Zerethic, Thalric, three Golden Keys and the Source decision",
+
+    "Regional exploration through Northern Carolyn, Dwarven Camp, Fangroot Forest, Tower Key Fragments and Torin's 300 Gold offer",
+  ],
+
+  image:
+    "/images/underkeep/underkeep-tower-four-key-fragments.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 76,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Underkeep Guide: How to Start, Progress & Open the Tower",
+
+      href: "/underkeep",
+      type: "Guide Hub",
+
+      description:
+        "Reach the village, choose your next region, investigate the Source, learn Dwarven mining skills and find Tower Key Fragments.",
+
+      image:
+        "/images/underkeep/underkeep-tower-four-key-fragments.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Starting Forest, Village, Northern Carolyn, Dwarven Camp, Fangroot Forest, Source and Tower Key Fragments",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Underkeep Races & Classes: Skills, Traits & Best Party",
+
+      href: "/underkeep/races-classes",
+      type: "Builds",
+
+      description:
+        "Compare all seven classes and six races, understand skills and racial traits, and choose a balanced four-character party.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/underkeep/underkeep-seven-classes.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 516,
+        spotlightMeta:
+          "Warrior, Thief, Paladin, Ranger, Voidcaller, Wizard, Blood Mage, six races and party formation",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Underkeep Beginner Guide: Controls, Combat, Rest & Food",
+
+      href: "/underkeep/beginner-guide",
+      type: "Beginner Guide",
+
+      description:
+        "Learn movement and inventory controls, combat actions, potion use, Food, Rest, healing, map markers and early survival.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/underkeep/underkeep-combat-action-rules.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 517,
+        spotlightMeta:
+          "Controls, skills, combat turns, potions, inventory, Food, Rest, revival and map markers",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Underkeep Early Game Walkthrough: Silver Key & Village",
+
+      href: "/underkeep/early-game-walkthrough",
+      type: "Walkthrough",
+
+      description:
+        "Follow the starting forest and Hollow Grave Tunnels, open the throwing gate, find the Silver Key and get past Garric.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/underkeep/underkeep-silver-key-location.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 518,
+        spotlightMeta:
+          "Starting Forest, Hollow Grave Tunnels, throwing puzzle, Orc Chieftain, Silver Key and Garric",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Underkeep Fast Travel: All 4 Obelisks & Teleportation Stone",
+
+      href: "/underkeep/fast-travel",
+      type: "Systems",
+
+      description:
+        "Find all four Obelisks, reach the Fallen Obelisk through beetle tunnels and receive the Teleportation Stone from Khelebar.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/underkeep/underkeep-fast-travel-first-obelisk-runes.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 519,
+        spotlightMeta:
+          "Wards of the West, four Obelisks, hidden passage, Fallen Obelisk, Orc Encampment and Waystones",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title:
+        "Underkeep Mausoleum Walkthrough: 3 Keys & Source Choice",
+
+      href: "/underkeep/mausoleum-walkthrough",
+      type: "Walkthrough",
+
+      description:
+        "Rescue Jacob, bind Ixarion, defeat the three High Clerics, open the Source Gate and choose whether to destroy the Source.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/underkeep/underkeep-mausoleum-three-key-gate.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 520,
+
+        spotlightMeta:
+          "Skeleton King, Ixarion, Jacob, Maltherion, Zerethic, Thalric, three Golden Keys, Guardians and Source choice",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+  ],
+},
 
   {
     title: "Loftia",
