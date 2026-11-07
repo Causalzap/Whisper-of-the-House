@@ -12,11 +12,13 @@ const pageUrl = hubUrl;
 
 const metadataTitle = "Find The Needle Beginner Guide: First Orders & Production";
 const metadataDescription =
-  "Start Find The Needle, earn money, deliver the first 20 Bales, produce Straw Panels, manage Depot stock, and unlock new machines through the Order Book.";
+  "Start Find The Needle, complete First Bales, make Straw Panels and Wrapped Bales, manage Depot materials, and progress through The Dairy.";
+
 
 const articleTitle = "How Do You Start and Progress in Find The Needle?";
 const articleDescription =
-  "Earn your first money, deliver 20 Bales, make Straw Panels, manage Depot inventory, and follow the Order Book into later production.";
+  "Earn your first money, complete First Bales, produce Straw Panels and Wrapped Bales, manage Depot inventory, and unlock new machinery through orders.";
+
 
 const imageUrls = [
   `${siteUrl}/images/find-the-needle/find-the-needle-first-bales-order-book.webp`,

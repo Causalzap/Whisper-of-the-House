@@ -1247,11 +1247,11 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'can-em-all/prestige-ending': '2026-11-01',
   'can-em-all/achievements': '2026-11-01',
 
-  'queens-domain': '2026-11-03',
+  'queens-domain': '2026-11-07',
   'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
   'queens-domain/progression-guide': '2026-10-31',
   'queens-domain/endu-holy-sword': '2026-10-31',
-  'queens-domain/obmuer-temple-walkthrough': '2026-10-31',
+  'queens-domain/obmuer-temple-walkthrough': '2026-11-07',
   'queens-domain/tower-of-knowledge-walkthrough': '2026-10-31',
   'queens-domain/achievements': '2026-10-31',
   'queens-domain/deimpo-mausoleum': '2026-11-02',
