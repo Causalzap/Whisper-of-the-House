@@ -130,6 +130,135 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+  {
+    title: "Find The Needle",
+    game: "Find The Needle",
+    href: "/find-the-needle",
+    slug: "find-the-needle",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "First Orders, Automation, Scanner & 60 Achievements",
+    eyebrow: "First-Person Haystack Digging & Factory Automation",
+    hubStatus:
+      "First Bales + Straw Panels + Depot + 20 Orders + Scanner Mk I + 24 Needles + 60 Achievements",
+  
+    description:
+      "Start Find The Needle, deliver the first 20 Bales, produce Straw Panels, manage Depot stock, automate hay collection, use Scanner Mk I, and track all 60 achievements.",
+  
+    coverage: [
+      "Opening tools and upgrades through Bigger Handful, Toy Shovel, Bucket, Spade, Conveyor Plans and Electricity",
+      "Order Book progression across five stages and 20 orders, starting with First Bales and its 20-Bale delivery",
+      "Early production through Bale Compressor, Panel Press, Straw Panels, Depot storage and Smelter inputs",
+      "Automation with Conveyor Belts, Hay Generators, Power Poles, Piston Rakes, Robot Arms and machine-jam fixes",
+      "Scanner Mk I unlock, two-Straw-Panel build cost, scrap cannon settings, needle drawer and scanning speed",
+      "All 60 Steam achievements with an interactive checklist, eight hidden achievements, 24 needles and special-run challenges",
+    ],
+  
+    image:
+      "/images/find-the-needle/find-the-needle-first-bales-order-book.webp",
+    imageFit: "contain",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 77,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title: "Find The Needle Beginner Guide: First Orders & Production",
+        href: "/find-the-needle",
+        type: "Guide Hub",
+        description:
+          "Earn your first money, deliver 20 Bales, make Straw Panels, manage Depot inventory, and follow the Order Book into later production.",
+        image:
+          "/images/find-the-needle/find-the-needle-first-bales-order-book.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "First Bales, 20 orders, five stages, Panel Press, Straw Panels, Depot, early production and next unlocks",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Find The Needle Automation: Conveyors, Power & Machine Jams",
+        href: "/find-the-needle/automation",
+        type: "Systems",
+        description:
+          "Connect conveyors and powered collectors, keep Hay Generators fueled, compare Piston Rakes and Robot Arms, and fix jams or power shortages.",
+        date: "Updated recently",
+        image:
+          "/images/find-the-needle/find-the-needle-power-pole-coverage.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 521,
+          spotlightMeta:
+            "Conveyor Belts, Piston Rake, Robot Arms, Hay Generator, Power Poles, 63% power and machine jams",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Find The Needle Scanner: How to Unlock, Build & Use Mk I",
+        href: "/find-the-needle/scanner",
+        type: "Systems",
+        description:
+          "Unlock Scanner Mk I after First Bales, store two Straw Panels, aim the scrap cannon, inspect the needle drawer, and resolve scanning problems.",
+        date: "Updated recently",
+        image:
+          "/images/find-the-needle/find-the-needle-scanner-mk1-unlock-stats.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 522,
+          spotlightMeta:
+            "First Bales unlock, $250 and two Straw Panels, Scanner Mk I, Show Range, scrap cannon, needle drawer and scan upgrades",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Find The Needle Achievements: All 60 & Hidden Checklist",
+        href: "/find-the-needle/achievements",
+        type: "Achievements",
+        description:
+          "Track all 60 achievements with a saved checklist, including eight hidden achievements, all 24 needles, 20 orders and special-run challenges.",
+        date: "Updated recently",
+        home: {
+          latest: true,
+          latestOrder: 523,
+          spotlightMeta:
+            "60 achievements, eight hidden, 24 needles, Book Closed, Every Last Needle, Old School and Haste Makes Hay",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
   
 {
   title: "Underkeep",

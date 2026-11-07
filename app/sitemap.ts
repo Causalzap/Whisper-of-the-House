@@ -1204,6 +1204,11 @@ const paths = [
     'underkeep/fast-travel',
     'underkeep/mausoleum-walkthrough',
 
+    'find-the-needle',
+    'find-the-needle/automation',
+    'find-the-needle/scanner',
+    'find-the-needle/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1211,6 +1216,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'find-the-needle': '2026-11-07',
+  'find-the-needle/automation': '2026-11-07',
+  'find-the-needle/scanner': '2026-11-07',
+  'find-the-needle/achievements': '2026-11-07',
+
   'underkeep': '2026-11-06',
   'underkeep/races-classes': '2026-11-06',
   'underkeep/beginner-guide': '2026-11-06',
