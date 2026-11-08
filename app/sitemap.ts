@@ -601,10 +601,15 @@ const paths = [
   '/guides/hozy/dreams-explained',
   '/guides/hozy/hardest-levels-ranked',
   '/guides/hozy/penthouse-layout-guide',
+
   '/retro-rewind/is-the-black-market-worth-it',
   '/retro-rewind/when-to-replace-damaged-tape',
   '/retro-rewind/custom-videos',
   '/retro-rewind/community',
+  '/retro-rewind/achievements',
+  '/retro-rewind/tech-shed-electronics',
+  '/retro-rewind/video-game-rentals',
+
   '/guides/beginner-guide',
   '/guides/game-progression-guide',
   '/guides/top-tips-and-tricks',
@@ -1216,6 +1221,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/retro-rewind': '2026-11-08',
+  '/retro-rewind/when-to-replace-damaged-tape': '2026-11-08',
+  '/retro-rewind/achievements': '2026-11-08',
+  '/retro-rewind/tech-shed-electronics': '2026-11-08',
+  '/retro-rewind/video-game-rentals': '2026-11-08',
+
   'find-the-needle': '2026-11-07',
   'find-the-needle/automation': '2026-11-07',
   'find-the-needle/scanner': '2026-11-07',

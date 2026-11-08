@@ -1,77 +1,124 @@
 import type { Metadata } from "next";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import DamagedTapeContent from "@/data/retro-rewind/when-to-replace-damaged-tape.mdx";
+
+import RetroRewindContent from "@/data/retro-rewind/when-to-replace-damaged-tape.mdx";
+
+const siteUrl = "https://www.whisperofthehouse.com";
+const hubUrl = `${siteUrl}/retro-rewind`;
+const pageUrl = `${siteUrl}/retro-rewind/when-to-replace-damaged-tape`;
+
+const articleTitle = "Should You Repair or Replace Broken VHS Tapes in Retro Rewind?";
+const articleDescription =
+  "Repair broken VHS tapes using the $100 Repair Desk, understand damage fees, prioritize new releases and holographic copies, and decide when replacement is worthwhile.";
+
+const metadataTitle = articleTitle;
+const metadataDescription =
+  "Unlock the $100 Repair Desk in Retro Rewind, repair broken VHS tapes, handle damage fees, and decide when to restore, replace, or discard damaged movies.";
+
+const imageUrls = [
+  `${siteUrl}/images/retro-rewind/retro-rewind-vhs-tape-repair.webp`,
+];
+
+const toc = [
+  { id: "how-to-repair-broken-vhs-tapes", label: "Use the Repair Desk" },
+  { id: "broken-tape-fees", label: "Damage Fees vs Repair" },
+  { id: "repair-or-replace", label: "Repair, Replace or Discard" },
+  { id: "new-release-priority", label: "New Release Repair Priority" },
+  { id: "rare-holographic-movies", label: "Holographic & Rare Movies" },
+  { id: "cash-and-order-limits", label: "Cash & Order Decisions" },
+  { id: "repair-not-working", label: "Repair Troubleshooting" },
+];
+
+const relatedLinks: { href: string; label: string }[] = [];
 
 export const metadata: Metadata = {
-  title: "When Should You Replace a Damaged Tape in Retro Rewind?",
-  description:
-    "Broken tape fees in Retro Rewind often do not cover replacement costs. Here’s when to skip it, and how to recover lost revenue instead of chasing exact replacements.",
+  title: metadataTitle,
+  description: metadataDescription,
+  alternates: { canonical: pageUrl },
+  openGraph: {
+    type: "article",
+    url: pageUrl,
+    siteName: "Whisper of the House",
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [{ url: imageUrls[0] }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [imageUrls[0]],
+  },
 };
 
-export default function Page() {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Whisper of the House",
+      url: siteUrl,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Whisper of the House",
+      url: siteUrl,
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "Retro Rewind", item: hubUrl },
+        { "@type": "ListItem", position: 3, name: "Damaged VHS Tapes", item: pageUrl },
+      ],
+    },
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      headline: articleTitle,
+      description: articleDescription,
+      inLanguage: "en",
+      mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      author: { "@id": `${siteUrl}/#organization` },
+      publisher: { "@id": `${siteUrl}/#organization` },
+      dateModified: "2026-11-08",
+      image: imageUrls,
+    },
+  ],
+};
+
+export default function RetroRewindPage() {
   return (
     <>
       <Header />
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+
         <GuideArticlePage
-          title="When to Replace a Damaged Tape in Retro Rewind"
-          description="Broken tape fees often feel too low, which means you should not replace every damaged tape. Here’s when replacing one makes sense, when to wait, and when to let it go."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Retro Rewind"
+          gameHref="/retro-rewind"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="March 24, 2026"
-          toc={[
-            {
-              id: "why-damaged-tapes-feel-so-punishing",
-              label: "Why damaged tapes feel punishing",
-            },
-            {
-              id: "why-replacing-the-exact-title-is-often-the-wrong-move",
-              label: "Why exact replacement is wrong",
-            },
-            {
-              id: "replace-revenue-not-the-title",
-              label: "Replace revenue, not title",
-            },
-            {
-              id: "replace-the-title-genre-or-revenue",
-              label: "What should you replace",
-            },
-            {
-              id: "when-to-replace-immediately",
-              label: "When to replace immediately",
-            },
-            {
-              id: "when-to-wait-or-skip-replacement",
-              label: "When to wait or skip",
-            },
-            {
-              id: "replace-now-wait-or-trash-it",
-              label: "Replace vs wait vs trash",
-            },
-            {
-              id: "when-this-advice-does-not-apply",
-              label: "Exceptions",
-            },
-            {
-              id: "final-verdict-by-player-type",
-              label: "Final verdict",
-            },
-            {
-              id: "faq",
-              label: "FAQ",
-            },
-          ]}
-          relatedLinks={[
-            {
-              href: "/retro-rewind/is-the-black-market-worth-it",
-              label: "Is the Black Market Worth It in Retro Rewind?",
-            },
-          ]}
+          updatedAt="November 8, 2026"
+          toc={toc}
+          relatedLinks={relatedLinks}
         >
-          <DamagedTapeContent />
+          <RetroRewindContent />
         </GuideArticlePage>
       </main>
       <Footer />
