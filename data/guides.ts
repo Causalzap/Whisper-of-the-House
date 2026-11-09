@@ -130,6 +130,179 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  {
+    title: "Playrooms",
+    game: "Playrooms",
+    href: "/playrooms",
+    slug: "playrooms",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+
+    label: "First Day, Walkthrough, Hotel, 20 Sparrows & 30 Achievements",
+    eyebrow: "Ball-Cleaning Simulator, Exploration & Horror",
+    hubStatus:
+      "First Shift + 8 Ball Pits + Skills + Equipment + Hotel + 20 Sparrows + 14 Office Items + 30 Achievements",
+    description:
+      "Start Playrooms, earn money from ball pits, choose upgrades and cleaning equipment, unlock new rooms, and find collectibles and secrets.",
+
+    coverage: [
+      "First-day routine, light.exe, earning money, early skills, equipment choices, workday timing and Cozy, Normal or Hardcore mode",
+      "Main walkthrough through the Waiting Area, Backroom, Poolroom, School, Office and Hotel, including key prices, ball pits and the final exit",
+      "Hotel numbered-room navigation, Cleaning Schedule, room checks and difficult-to-reach balls",
+      "All 20 Sparrow locations across seven areas, including Ball Pit 6 and Hotel guest-room landmarks",
+      "All 14 office collectibles, including Gramophone, Wall Clock, Copper Icosahedron and Hotel decorations, plus Eagle Eye",
+      "All 30 Steam achievements with a checklist, hidden and special-run conditions, Hardcore and monochrome challenges",
+      "Hidden Green Office entrance, Whale location, Out of Water achievement and maze exit markers",
+    ],
+
+    image: "/images/playrooms/playrooms-first-ball-pit-sprint-unlock.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 78,
+      footerFeatured: true,
+    },
+
+    pages: [
+      {
+        title: "Playrooms Beginner Guide: First Day, Upgrades & Equipment",
+        href: "/playrooms",
+        type: "Guide Hub",
+        description:
+          "Start your first shift with light.exe, collect and deliver balls, choose early skills, compare equipment and get home before blackout.",
+        image: "/images/playrooms/playrooms-first-day-light-exe.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "First shift, light.exe, skills.exe, Ball Magnet, Big Pockets, shop.exe, equipment, blackout and difficulty modes",
+        },
+        archive: { showInCollections: true, order: 1 },
+      },
+      {
+        title: "Playrooms Walkthrough: Room Order, All Keys & Ending",
+        href: "/playrooms/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Unlock the six new areas, meet each room's ball-pit requirements, avoid local hazards and reach the final exit.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-first-ball-pit-sprint-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 524,
+          spotlightMeta:
+            "Waiting Area, Backroom, Poolroom, School, Office, Hotel, six keys, eight ball pits and final exit",
+        },
+        archive: { showInCollections: true, order: 2 },
+      },
+      {
+        title: "Playrooms Hotel Guide: Cleaning Schedule & Stuck Balls",
+        href: "/playrooms/hotel",
+        type: "Systems",
+        description:
+          "Use the numbered-room Cleaning Schedule, inspect unfinished guest rooms and recover balls that seem inaccessible.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-hotel-cleaning-schedule-board.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 525,
+          spotlightMeta:
+            "Hotel key, numbered rooms, Cleaning Schedule, Reset Room Balls, room checks and final cleanup",
+        },
+        archive: { showInCollections: true, order: 3 },
+      },
+      {
+        title: "Playrooms Sparrow Locations: All 20 & Missing 19/20",
+        href: "/playrooms/sparrows",
+        type: "Collectibles",
+        description:
+          "Find all 20 hidden Sparrows using furniture landmarks and Collect prompts across the seven areas.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-sparrow-above-ball-pit-six.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 526,
+          spotlightMeta:
+            "20 Sparrows, Playroom padding, Ball Pit 6 counter, Waiting Area, School, Office and Hotel guest rooms",
+        },
+        archive: { showInCollections: true, order: 4 },
+      },
+      {
+        title: "Playrooms Office Items: All 14 Locations & Eagle Eye",
+        href: "/playrooms/office-items",
+        type: "Collectibles",
+        description:
+          "Locate all 14 office decorations, from the Gramophone and School lockers to the Hotel Television and sculpture.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-gramophone-location.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 527,
+          spotlightMeta:
+            "14 office items, Gramophone, Bookshelf, Wall Clock, Copper Icosahedron, Tall Plant and Eagle Eye",
+        },
+        archive: { showInCollections: true, order: 5 },
+      },
+      {
+        title: "Playrooms Achievements: All 30 & 100% Checklist",
+        href: "/playrooms/achievements",
+        type: "Achievements",
+        description:
+          "Track all 30 achievements with a checklist, including full cleanup, Sparrows, office items and special-mode challenges.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-monochrome-orange-ball-pit.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 528,
+          spotlightMeta:
+            "30 achievements, full cleanup, eight ball pits, all Sparrows, Eagle Eye, monochrome pit and Hardcore",
+        },
+        archive: { showInCollections: true, order: 6 },
+      },
+      {
+        title: "Playrooms Green Office Map: Whale Location & Exit Route",
+        href: "/playrooms/green-office-map",
+        type: "Puzzle Help",
+        description:
+          "Find the hidden Green Office entrance, follow the Whale route and identify the maze's exit markers.",
+        date: "Updated recently",
+        image: "/images/playrooms/playrooms-green-office-whale-second-run.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 529,
+          spotlightMeta:
+            "Waiting Area hidden entrance, Green Office maze, Whale, Out of Water and exit wall",
+        },
+        archive: { showInCollections: true, order: 7 },
+      },
+    ],
+  },
 
   {
     title: "Find The Needle",
