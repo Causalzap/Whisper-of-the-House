@@ -1222,6 +1222,13 @@ const paths = [
     'playrooms/sparrows',
     'playrooms/walkthrough',
 
+    'casualties-unknown/crafting',
+    'casualties-unknown/endings',
+    'casualties-unknown/index',
+    'casualties-unknown/medical',
+    'casualties-unknown/progression',
+
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1229,6 +1236,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'casualties-unknown/crafting': '2026-11-10',
+  'casualties-unknown/endings': '2026-11-10',
+  'casualties-unknown/index': '2026-11-10',
+  'casualties-unknown/medical': '2026-11-10',
+  'casualties-unknown/progression': '2026-11-10',
+
   'playrooms': '2026-11-09',
   'playrooms/achievements': '2026-11-09',
   'playrooms/green-office-map': '2026-11-09',

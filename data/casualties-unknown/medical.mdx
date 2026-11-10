@@ -1,0 +1,333 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+export const medicalSymptomsColumns = [
+  { key: "Warning", label: "What You See" },
+  { key: "Meaning", label: "What It Means" },
+  { key: "Action", label: "First Action" },
+];
+
+export const medicalSymptomsRows = [
+  {
+    Warning: "Bleeding / Heavy bleeding",
+    Meaning: "An external wound is actively costing blood.",
+    Action: "Find the bleeding limb and apply an appropriate dressing or other bleeding control.",
+  },
+  {
+    Warning: "Internal bleeding",
+    Meaning: "Blood is being lost inside the body, possibly without an obvious external wound.",
+    Action: "Check blood loss and use an internal-bleeding treatment such as L.R.D. or Procoagulant.",
+  },
+  {
+    Warning: "Infection / Severe infection",
+    Meaning: "A damaged limb is infected; worsening infection can progress toward sepsis.",
+    Action: "Find the affected limb, disinfect it, and monitor whether infection is receding.",
+  },
+  {
+    Warning: "Fractured bone",
+    Meaning: "A broken limb has reduced function and makes some movement painful.",
+    Action: "Protect the limb and apply a Splint if available; assess other injuries too.",
+  },
+  {
+    Warning: "Dislocated joint",
+    Meaning: "A joint is out of position and may be treated through the health-panel interaction.",
+    Action: "Assess pain before attempting to reset it; a Splint or Bruise Kit may help.",
+  },
+  {
+    Warning: "Sepsis / Septic shock",
+    Meaning: "An infection is affecting the whole body and threatening circulation.",
+    Action: "Treat the infected limb urgently and watch blood pressure and consciousness.",
+  },
+  {
+    Warning: "Low blood pressure / Falling blood volume",
+    Meaning: "Ongoing blood loss or another systemic problem may be causing collapse.",
+    Action: "Find the cause first; restoring fluid or blood volume does not stop an active bleed.",
+  },
+];
+
+export const medicalItemColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Use", label: "Main Use" },
+  { key: "Limit", label: "Important Limitation" },
+];
+
+export const medicalItemRows = [
+  {
+    Item: "Ripped Dressing / Dressing",
+    Use: "Reduce external bleeding and help damaged skin recover.",
+    Limit: "Not a direct treatment for internal bleeding; an ordinary Dressing is not a substitute for disinfection.",
+  },
+  {
+    Item: "Sterilized Dressing / Antiseptic",
+    Use: "Disinfect an injured or infected limb.",
+    Limit: "Check infection progress afterward; disinfection does not instantly repair every underlying injury.",
+  },
+  {
+    Item: "Tourniquet",
+    Use: "Temporarily stop major bleeding from an eligible limb.",
+    Limit: "Does not heal the wound and can injure the limb if left on too long.",
+  },
+  {
+    Item: "Splint",
+    Use: "Support recovery from fractures and dislocations.",
+    Limit: "Does not instantly restore the bone or fix other damage on that limb.",
+  },
+  {
+    Item: "Bruise Kit",
+    Use: "Recover skin and muscle damage and reduce dislocation severity.",
+    Limit: "Not a specific cure for internal bleeding or infection.",
+  },
+  {
+    Item: "L.R.D. / Makeshift L.R.D.",
+    Use: "Treat several forms of trauma; use on the thorax for internal bleeding.",
+    Limit: "It is a limited medical resource, not a reason to ignore ongoing danger.",
+  },
+  {
+    Item: "Procoagulant",
+    Use: "Reduce blood loss, including internal bleeding.",
+    Limit: "Raises blood viscosity; repeated use can create dangerous complications.",
+  },
+  {
+    Item: "Chest Drain",
+    Use: "Reduce hemothorax after blood has accumulated around the lungs.",
+    Limit: "Different from stopping the internal bleed that caused it.",
+  },
+  {
+    Item: "Bone Welding Tool",
+    Use: "Accelerate fracture recovery.",
+    Limit: "Damages tissue and causes pain; plan to treat the resulting wound.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+Open the **health panel**, inspect the affected limb, and check the body's blood-loss warnings before using medicine. Use a **Dressing** for an external bleeding wound, an **antiseptic treatment** for an infected limb, and a **Splint** to help a fracture heal. **Internal Bleeding is different from a visible wound**: it needs an appropriate treatment such as **L.R.D.** or **Procoagulant**. Check the condition again after treatment instead of assuming that one item fixed every problem.
+</GuideQuickAnswer>
+
+A bad fall in Casualties: Unknown can leave you with more than one injury. You might stop a visible wound from bleeding, then notice that blood volume is still falling. A leg can be fractured and infected at the same time. A successful dressing does not necessarily make a damaged limb usable again.
+
+Check the health panel before choosing a treatment. Identify the injury causing the most immediate danger, address it, and inspect the remaining conditions before moving again. If the surrounding terrain is still damaging you, find a safer position before attempting further treatment.
+
+<h2 id="read-health-panel">
+  How Do You Read the Health Panel?
+</h2>
+
+The body diagram shows where damage is concentrated. Select or hover over a limb to inspect the condition of that specific body part, rather than relying entirely on the warning text at the edge of the screen.
+
+Two important values describe different problems:
+
+- **Skin health** affects the condition of the wound and its susceptibility to bleeding and infection.
+- **Muscle health** affects how well the body part functions. Severe muscle damage can make movement, climbing, or using an arm much harder.
+
+Also look beyond the selected limb. **Blood volume, blood pressure, oxygen, consciousness, and the current status warnings** can reveal a problem that is not obvious from the surface wound alone. A serious internal bleed, for example, will not appear as a normal bleeding wound on the body diagram.
+
+<figure className="my-8">
+  <Image
+    src="/images/casualties-unknown/casualties-unknown-medical-health-panel.webp"
+    alt="Casualties Unknown UNI-HEALTH panel showing vital signs, body condition, and an injured hand"
+    width={1454}
+    height={972}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check the affected body part and the overall vital signs before choosing a treatment.
+  </figcaption>
+</figure>
+
+If you are on an **Unchipped** run, some diagnostic information is limited. Release 1.0 nevertheless added visible fracture and dislocation information for this mode. Do not assume an absent numerical readout means you have no injury.
+
+<h3 id="medical-priority">
+  Which Injury Should You Treat First?
+</h3>
+
+Deal with the problem that can end the run while you are trying to fix something else. Heavy ongoing blood loss, worsening internal bleeding, severe infection, and loss of consciousness take precedence over ordinary discomfort or a minor skin injury.
+
+<GuideTable
+  caption="Identify the warning before choosing a medical item."
+  columns={medicalSymptomsColumns}
+  rows={medicalSymptomsRows}
+/>
+
+If you are standing in freezing water, exposed to magma, or directly in a trap's attack path, reaching safe terrain may be the necessary first move. Treating yourself while the same hazard continues damaging you can undo your progress immediately.
+
+<h2 id="stop-external-bleeding">
+  How Do You Stop Bleeding in Casualties: Unknown?
+</h2>
+
+A normal external wound appears on an injured limb. The health panel shows its skin damage and may display bleeding indicators. If the bleeding warning grows more serious, your available time to gather supplies or experiment with items is shrinking.
+
+<figure className="my-8">
+  <Image
+    src="/images/casualties-unknown/casualties-unknown-medical-leg-bleeding.webp"
+    alt="Casualties Unknown health panel showing a bleeding injury on the left lower leg"
+    width={1480}
+    height={1124}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The blood-drop indicator identifies the affected leg. Inspect that limb before applying treatment.
+  </figcaption>
+</figure>
+
+### Use a dressing on the bleeding limb
+
+1. Open the health panel and identify which limb is bleeding.
+2. Take an appropriate **Ripped Dressing**, **Dressing**, **Medical Gauze**, or another available wound treatment from your inventory.
+3. Apply it to the injured limb through the medical interface and complete the applicable bandaging interaction.
+4. Recheck that limb and the overall blood-loss warning. If another limb is bleeding, treat it separately.
+
+A regular Dressing can reduce external bleeding and help skin recover. It does **not** directly stop internal bleeding. You also need to distinguish a clean, covered wound from a disinfected one: not every basic bandage provides an antiseptic effect.
+
+### When should you use a tourniquet?
+
+A **Tourniquet** is a temporary emergency measure when a limb is bleeding heavily and you cannot immediately control the wound with a dressing. It interrupts bleeding, buying time to find or apply a proper treatment.
+
+A tourniquet does not heal the wound. Prolonged use restricts circulation and can cause pain and muscle damage, so remove it once the bleeding is properly controlled and reassess the limb. Tourniquets are intended for eligible limbs, not the head or torso.
+
+<figure className="my-8">
+  <Image
+    src="/images/casualties-unknown/casualties-unknown-medical-tourniquet.webp"
+    alt="Casualties Unknown Tourniquet item tooltip explaining temporary bleeding control and circulation risks"
+    width={964}
+    height={604}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Tourniquet temporarily stops bleeding in the affected limb, but prolonged use restricts circulation and causes pain.
+  </figcaption>
+</figure>
+
+<h3 id="blood-volume-still-falling">
+  Why Is Your Blood Volume Still Falling After Bandaging?
+</h3>
+
+Check whether you missed another bleeding limb. If the external wounds are controlled but the blood-loss warning persists, **look for Internal Bleeding** rather than applying more dressing to the same skin wound.
+
+Replacing lost blood volume and stopping its source are separate tasks. Fluids or blood-volume restoration may help the body recover after a bleed, but they do not automatically treat an internal injury that is still causing more blood loss.
+
+<h2 id="treat-infection">
+  How Do You Treat Infection and Sepsis?
+</h2>
+
+Infection typically develops when a limb has damaged skin. The health panel can reveal an infected area, and infection warnings become more urgent as the condition worsens. The affected body part may show progressively more visible discoloration.
+
+The practical mistake is waiting for the status to become life-threatening before using the antiseptic supplies you already have.
+
+### Treat the infected limb, not just the warning
+
+1. Find the limb marked as infected in the health panel.
+2. Apply a suitable disinfectant to that limb. Depending on what you have, this may be **Antiseptic**, **Sterilized Dressing**, **Antiseptic Mush**, or another item with a confirmed disinfecting effect.
+3. If you do not have standard antiseptic, **Glowplant Fruit** can provide a makeshift disinfecting option.
+4. Check whether the infection indicator is improving or continuing to worsen.
+5. Keep the wound protected and support recovery rather than repeatedly exposing damaged skin to dirty terrain.
+
+**Disinfected is a protective status, not a guarantee that every infection will disappear immediately.** Severe immune-system problems can interfere with the normal recovery process. Rest, adequate supplies, and reducing additional injury also matter when infection has already taken hold.
+
+### What if the warning changes to Sepsis?
+
+**Sepsis** means the infection has begun affecting the body more broadly. The game can show confusion, fever, worsening blood pressure, and eventually more dangerous circulatory problems.
+
+Do not assume that treating only the low blood pressure will solve the cause. Find and address the infected limb or limbs, then watch the body-wide warnings for improvement.
+
+If your antiseptic treatment does not seem to help, check whether you treated the correct limb, whether multiple areas are infected, and whether the effect has worn off while the underlying wound remains damaged.
+
+A severe infection is a reason to interrupt looting or optional combat. Continuing into another layer while the condition is worsening can leave you without the time or supplies needed to recover.
+
+<h2 id="treat-fracture">
+  How Do You Heal a Fracture or Broken Bone?
+</h2>
+
+A fractured arm can interfere with holding or using equipment. A fractured leg makes jumping and landing more painful and reduces how safely you can navigate large drops. The health panel indicates the affected bone, so check the actual limb instead of guessing from movement alone.
+
+<figure className="my-8">
+  <Image
+    src="/images/casualties-unknown/casualties-unknown-medical-fracture-indicator.webp"
+    alt="Casualties Unknown health panel showing a red bone injury warning on the character's arm"
+    width={1486}
+    height={976}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The red bone warning marks the injured arm on the health panel.
+  </figcaption>
+</figure>
+
+### Apply a Splint and protect the limb
+
+A **Splint** supports gradual recovery rather than instantly repairing the fracture. Apply a standard Splint, Carcass Splint, or another suitable support to the affected limb, then avoid movements that aggravate the injury. If you need to make one, check the <Link href="/casualties-unknown/crafting">required materials and tools</Link>.
+
+If your arm is broken, do not depend on it to carry essential equipment. If your leg is broken, avoid large drops and difficult jumps until you have regained enough function to travel safely.
+
+### Is a Bone Welding Tool better than a Splint?
+
+A **Bone Welding Tool** can shorten fracture recovery substantially, but its use damages surrounding skin and muscle and causes pain. It can create another wound that needs treatment.
+
+It is an aggressive option when the fracture is seriously preventing progress and you have the supplies to manage the side effects. It is not a free upgrade over a Splint.
+
+After using one, inspect the same limb again. Check for fresh bleeding and tissue damage instead of assuming the shorter fracture recovery time means the whole body part is healthy.
+
+<h2 id="fix-dislocation">
+  How Do You Fix a Dislocated Joint?
+</h2>
+
+A **Dislocation** is different from a fracture. It interferes with movement and can make using the affected limb painful, but the health panel offers a separate interaction for attempting to reposition the joint.
+
+Use the **Fix dislocation** option on the affected joint to open its repositioning interaction. The goal is to move the displaced part into the indicated position, not to force random movements as quickly as possible.
+
+Manual attempts can cause significant pain. A **Wrench** can reduce the pain involved in the repositioning interaction if you have one. If you cannot safely attempt it, a **Splint** can support recovery, while a **Bruise Kit** can help reduce the dislocation and associated damage.
+
+If the interaction reports too much pain, stop forcing it and recover before making another attempt. Also check for a fracture or skin wound from the original impact; successfully repositioning a joint does not necessarily remove those injuries.
+
+<h2 id="treat-internal-bleeding">
+  How Do You Stop Internal Bleeding?
+</h2>
+
+Internal Bleeding is one of the easiest injuries to misread because it **does not show up like ordinary bleeding on the body diagram**. You may notice blood loss, a specific internal-bleeding warning, or worsening breathing after a major impact even when the visible wound looks manageable.
+
+A fall, explosion, or gunshot that damages a vital area can cause this problem. Repeatedly bandaging an external wound will not fix bleeding happening inside the body.
+
+### Use a treatment that specifically affects internal bleeding
+
+**L.R.D.** and **Procoagulant** are two important options:
+
+- **L.R.D.:** Use it on the **thorax** when treating internal bleeding. It can also help damaged tissue and provide other medical benefits, but the application location matters for this specific effect.
+- **Procoagulant:** Reduces bleeding across the body, including internal bleeding. It also increases blood viscosity, so repeatedly using it without checking your condition can cause serious complications.
+
+A Makeshift L.R.D. can also be relevant when the fully equipped device is unavailable. Choose based on what you actually have and inspect the health panel afterward to see whether the bleed is improving.
+
+Do not keep stacking medication blindly because the blood-volume readout has not immediately returned to normal. The ongoing loss may stop before the lost volume has recovered, and some medicines have delayed effects or dangerous side effects.
+
+### Internal Bleeding vs. Hemothorax
+
+These are related but separate problems. Internal bleeding can lead to **Hemothorax**, where blood has accumulated around the lungs and begins restricting oxygen and breathing.
+
+**Chest Drain** is used for that accumulated blood. It does not replace the need to stop the original internal bleeding. If breathing or oxygen continues to worsen after the bleeding rate has improved, check for the separate hemothorax condition instead of assuming you need another ordinary dressing.
+
+<h2 id="medical-items">
+  Which Medical Item Should You Use?
+</h2>
+
+Do not pick an item only because it has a medical label. The correct choice depends on whether you need to stop blood loss, disinfect a limb, support a bone, repair tissue, or address a body-wide condition.
+
+<GuideTable
+  caption="Major medical items, what they address, and the limitation to remember."
+  columns={medicalItemColumns}
+  rows={medicalItemRows}
+/>
+
+For recipes, material quantities, and INT requirements, use the <Link href="/casualties-unknown/crafting">crafting guide</Link>. You do not need to manufacture an advanced medical tool when a simpler item you already possess solves the current injury.
+
+<h2 id="temperature-radiation-venom">
+  What About Hypothermia, Overheating, Radiation, and Venom?
+</h2>
+
+Not every dangerous status starts with a cut or fracture. Check the body-wide indicators when a limb-specific treatment is not addressing the problem.
+
+**Hypothermia or overheating:** Move out of the source of temperature damage first. Heating and cooling resources can help, but applying a dressing to an unrelated wound will not resolve the environmental condition. The <Link href="/casualties-unknown/progression">progression guide</Link> covers the heat sources in Frozen Chasm and cooling opportunities in Geothermal Vents.
+
+**Radiation:** Monitor the radiation warning and avoid further exposure. **Anti-rad** is relevant when available, but the full release allows an anti-rad overdose, so do not treat repeated use as risk-free. Do not confuse radiation sickness with an infected wound.
+
+**Venom and toxicosis:** Watch the body's venom or toxicosis status rather than assuming that an ordinary Dressing counteracts a toxin. **Antivenom** is the targeted item when available; Release 1.0 improved its effect. You still need to deal with any separate wound caused by the attack.
+
+**Opiates and consciousness:** Pain relief may help you function, but a medication can also alter the body's drug state. The full release added opiate and venom displays to the health panel. Inspect those indicators when a character becomes unusually drowsy or unstable after treatment.

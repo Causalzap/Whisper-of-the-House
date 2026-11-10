@@ -131,6 +131,146 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Casualties: Unknown",
+    game: "Casualties: Unknown",
+    href: "/casualties-unknown",
+    slug: "casualties-unknown",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Cozy, crafting, survival & systems",
+
+    label: "Beginner, 11 Layers, Crafting, Medical & 3 Endings",
+    eyebrow: "Survival Platformer, Crafting & Body Simulation",
+    hubStatus:
+      "11 Layers + Cargo + Crimson Ascent + 3 Characters + 3 Endings",
+    description:
+      "Start Casualties: Unknown, manage your inventory and injuries, survive all 11 layers, recover the cargo, and unlock the Bio-pod, Escape, and M.E.R.C. endings.",
+
+    coverage: [
+      "First-run settings, starting pod supplies, inventory controls, safe descents, lockpicking, code crates, Save and Quit, and character unlocks",
+      "All 11 layers, including Frozen Chasm, Fungal Pools, Crystalline Hollow, Geothermal Vents, Layer 10 cargo, and the Crimson Ascent return",
+      "Rope, Canvas, Foliage Bag, Canteen, Bio-chem Fluid, Material Pouch, INT requirements, tool qualities, and crafting failures",
+      "UNI-HEALTH panel, bleeding, infection, sepsis, fractures, dislocations, internal bleeding, and medical treatments",
+      "Bio-pod, Unchipped Escape, M.E.R.C. Scarf, all six hidden chips, laboratory procedures, and ending conditions",
+    ],
+
+    image:
+      "/images/casualties-unknown/casualties-unknown-starting-pod-plastic.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 79,
+      footerFeatured: true,
+    },
+
+    pages: [
+      {
+        title: "Casualties: Unknown Beginner Guide: What to Do First",
+        href: "/casualties-unknown",
+        type: "Guide Hub",
+        description:
+          "Choose your first-run settings, secure light and supplies, manage inventory, open locked crates, and use Save and Quit at layer transitions.",
+        image:
+          "/images/casualties-unknown/casualties-unknown-starting-pod-plastic.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Starting pod, first five minutes, hands and mouth slot, Ctrl item labels, lockpicking, code crates, Save and Quit, Milky and Dune",
+        },
+        archive: { showInCollections: true, order: 1 },
+      },
+      {
+        title: "Casualties: Unknown Progression: All 11 Layers & Surface",
+        href: "/casualties-unknown/progression",
+        type: "Walkthrough",
+        description:
+          "Survive every layer, navigate Frozen Chasm and geothermal hazards, retrieve the cargo, and climb through Crimson Ascent.",
+        date: "Updated recently",
+        image:
+          "/images/casualties-unknown/casualties-unknown-cargo-drill-pod.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 530,
+          spotlightMeta:
+            "11 layers, Frozen Chasm, Fungal Pools, Crystalline Hollow, Geothermal Vents, cargo, high-powered drill pod and Crimson Ascent",
+        },
+        archive: { showInCollections: true, order: 2 },
+      },
+      {
+        title: "Casualties: Unknown Crafting: Recipes, Bags & INT",
+        href: "/casualties-unknown/crafting",
+        type: "Systems",
+        description:
+          "Craft Rope, Canvas, a Foliage Bag, Dressing, Canteen and Material Pouch, and fix missing materials or INT requirements.",
+        date: "Updated recently",
+        image:
+          "/images/casualties-unknown/casualties-unknown-material-pouch-item.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 531,
+          spotlightMeta:
+            "Rope, Canvas, Foliage Bag, Dressing, Canteen, Bio-chem Fluid, Material Pouch, cutting and hammering qualities, INT",
+        },
+        archive: { showInCollections: true, order: 3 },
+      },
+      {
+        title: "Casualties: Unknown Medical: Treat Bleeding & Injuries",
+        href: "/casualties-unknown/medical",
+        type: "Systems",
+        description:
+          "Read the health panel and treat bleeding, infections, fractures, dislocations, internal bleeding, radiation and venom.",
+        date: "Updated recently",
+        image:
+          "/images/casualties-unknown/casualties-unknown-medical-health-panel.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 532,
+          spotlightMeta:
+            "UNI-HEALTH, Dressing, Tourniquet, infection, sepsis, Splint, dislocation, L.R.D., Procoagulant and Hemothorax",
+        },
+        archive: { showInCollections: true, order: 4 },
+      },
+      {
+        title: "Casualties: Unknown: All 3 Endings & M.E.R.C. Scarf",
+        href: "/casualties-unknown/endings",
+        type: "Endings",
+        description:
+          "Get the Bio-pod, Escape and M.E.R.C. endings, complete the laboratory escape, and collect all six hidden scarf chips.",
+        date: "Updated recently",
+        image:
+          "/images/casualties-unknown/casualties-unknown-escape-freedom.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 533,
+          spotlightMeta:
+            "Company's Best, Company's Worst, Unchipped lab escape, M.E.R.C. Scarf, six chips, Nano-tech Scanner and 18 INT",
+        },
+        archive: { showInCollections: true, order: 5 },
+      },
+    ],
+  },
+
+  {
     title: "Playrooms",
     game: "Playrooms",
     href: "/playrooms",
