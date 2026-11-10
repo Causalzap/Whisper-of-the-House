@@ -12,13 +12,16 @@ const hubUrl = `${siteUrl}/dreadmoor`;
 const pageUrl = `${hubUrl}/fishing-guide`;
 
 const metadataTitle =
-  "DREADMOOR Fishing Guide: Bait, Line Tension & Harpooners";
+  "How to Fish in DREADMOOR: Bait, Line Tension & Harpooners";
 
 const metadataDescription =
-  "Learn DREADMOOR fishing controls, prevent broken lines, craft Wind-Up Tin and Rainbow Fin, catch Softgrazers and Harpooners, and get Chromatic Scales.";
+  "Learn DREADMOOR fishing controls, manage Stamina and Line Tension, craft Wind-Up Tin and Rainbow Fin, and catch Snappers, Softgrazers, and Harpooners.";
 
 const articleDescription =
-  "Catch Snappers, Softgrazers, and Harpooners with the right bait. Learn how Stamina, Line Tension, and predator lure movement work.";
+  "Learn how to catch fish in DREADMOOR, choose the right bait, prevent broken lines, get Chromatic Scales, and handle difficult predatory catches.";
+
+const datePublished = "2026-10-13";
+const dateModified = "2026-11-10";
 
 const heroImage =
   `${siteUrl}/images/dreadmoor/dreadmoor-harpooner-splash-zone.webp`;
@@ -44,10 +47,12 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: metadataDescription,
     siteName: "Whisper of the House",
+    publishedTime: datePublished,
+    modifiedTime: dateModified,
     images: [
       {
         url: heroImage,
-        alt: "DREADMOOR Predator Fishing tutorial showing the Harpooner splash zone and how to attract fish with a moving lure.",
+        alt: "DREADMOOR Harpooner fishing tutorial showing the splash zone used to attract predatory fish with Rainbow Fin.",
       },
     ],
   },
@@ -75,7 +80,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "DREADMOOR Guide",
+          name: "DREADMOOR",
           item: hubUrl,
         },
         {
@@ -93,14 +98,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "DREADMOOR Fishing Guide: Bait, Line Tension, Softgrazers and Harpooners",
-      description:
-        "Learn how to fish in DREADMOOR using the Simple Rod, manage Fish Stamina and Line Tension, craft Wind-Up Tin and Rainbow Fin, catch Snappers, Softgrazers and Harpooners, and process Chromatic Scales.",
+      headline: metadataTitle,
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-10-13",
-      dateModified: "2026-10-13",
+      datePublished,
+      dateModified,
       about: [
         {
           "@type": "VideoGame",
@@ -112,39 +115,33 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Fish Stamina",
+          name: "Fish Stamina and Line Tension",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Line Tension",
+          name: "DREADMOOR fishing bait",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Wind-Up Tin",
+          name: "Wind-Up Tin and Rainbow Fin",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Rainbow Fin",
+          name: "Snapper, Softgrazer and Harpooner fishing",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Softgrazer",
+          name: "Chromatic Scales",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Harpooner",
-        },
-        {
-          "@type": "Thing",
-          name: "DREADMOOR Chromatic Scales",
+          name: "DREADMOOR fishing equipment",
         },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
       },
       breadcrumb: {
@@ -174,7 +171,7 @@ const toc = [
   },
   {
     id: "fish-stamina",
-    label: "How Fish Stamina Works",
+    label: "Drain Fish Stamina",
   },
   {
     id: "line-tension",
@@ -202,18 +199,34 @@ const toc = [
   },
   {
     id: "catch-harpooner",
-    label: "How to Catch Harpooners",
+    label: "Catch Harpooners",
+  },
+  {
+    id: "fishing-upgrades",
+    label: "When to Upgrade Fishing Gear",
+  },
+  {
+    id: "fishing-problems",
+    label: "Fishing Problems and Fixes",
+  },
+  {
+    id: "after-main-story",
+    label: "Fishing After the Story",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/dreadmoor",
-    label: "DREADMOOR Guide",
+    label: "DREADMOOR: What to Do Next",
   },
   {
     href: "/dreadmoor/walkthrough",
-    label: "DREADMOOR Demo Walkthrough",
+    label: "DREADMOOR Early Access Walkthrough",
+  },
+  {
+    href: "/dreadmoor/achievements",
+    label: "DREADMOOR 44 Achievements Checklist",
   },
 ];
 
@@ -231,13 +244,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="DREADMOOR Fishing Guide: Bait, Stamina & Harpooners"
+          title="How to Fish in DREADMOOR: Bait, Line Tension & Harpooners"
           description={articleDescription}
           gameTitle="DREADMOOR"
           gameHref="/dreadmoor"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 13, 2026"
+          updatedAt="November 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

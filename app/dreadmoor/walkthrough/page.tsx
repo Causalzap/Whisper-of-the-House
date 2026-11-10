@@ -12,13 +12,16 @@ const hubUrl = `${siteUrl}/dreadmoor`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "DREADMOOR Demo Walkthrough: All Quests & The Throat Gate";
+  "DREADMOOR Walkthrough: All Main Quests & Early Access Ending";
 
 const metadataDescription =
-  "Complete the DREADMOOR demo from Betsy and Sons to The Throat. Repair the Dry Dock, get the Carburetor, upgrade your engine, and open the gate.";
+  "Follow DREADMOOR's Early Access story from Church Settlement and The Throat to Drying Fort, the Observatory, Bone Reef, and the final Essence batch.";
 
 const articleDescription =
-  "Follow every main quest from the Trading Post through fishing contracts, Dry Dock repairs, Hull Protection, the upgraded engine, and The Throat waterway.";
+  "Complete DREADMOOR's main quests, repair your boat, pass The Throat, find Junior's Essence recipe, and reach the current Early Access ending.";
+
+const datePublished = "2026-10-13";
+const dateModified = "2026-11-10";
 
 const heroImage =
   `${siteUrl}/images/dreadmoor/dreadmoor-the-throat-waterway-controls.webp`;
@@ -34,7 +37,8 @@ const imageUrls = [
   `${siteUrl}/images/dreadmoor/dreadmoor-standard-engine-removal.webp`,
   `${siteUrl}/images/dreadmoor/dreadmoor-the-throat-repair-parts.webp`,
   `${siteUrl}/images/dreadmoor/dreadmoor-the-throat-waterway-controls.webp`,
-  `${siteUrl}/images/dreadmoor/dreadmoor-demo-complete.webp`,
+  `${siteUrl}/images/dreadmoor/dreadmoor-crude-lockpick-crafting-recipe.webp`,
+  `${siteUrl}/images/dreadmoor/dreadmoor-early-access-story-end-screen.webp`,
 ];
 
 export const metadata: Metadata = {
@@ -49,10 +53,12 @@ export const metadata: Metadata = {
     title: metadataTitle,
     description: metadataDescription,
     siteName: "Whisper of the House",
+    publishedTime: datePublished,
+    modifiedTime: dateModified,
     images: [
       {
         url: heroImage,
-        alt: "DREADMOOR The Throat waterway controls used to direct water toward both wheels.",
+        alt: "DREADMOOR The Throat waterway controls used to route water to both wheels.",
       },
     ],
   },
@@ -80,7 +86,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "DREADMOOR Guide",
+          name: "DREADMOOR",
           item: hubUrl,
         },
         {
@@ -98,14 +104,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "DREADMOOR Demo Walkthrough: All Quests and The Throat Gate",
-      description:
-        "Complete the DREADMOOR demo story quests, including the Trading Post, fishing contracts, John the Fifth's Moonshine Still, Dry Dock repairs, Hull Protection, Carburetor, Upgraded Engine, and The Throat waterway gate.",
+      headline: metadataTitle,
+      description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-10-13",
-      dateModified: "2026-10-13",
+      datePublished,
+      dateModified,
       about: [
         {
           "@type": "VideoGame",
@@ -113,39 +117,37 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR demo walkthrough",
+          name: "Church Settlement and Betsy and Sons",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR Dry Dock",
+          name: "DREADMOOR Dry Dock and boat repairs",
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR boat repairs",
-        },
-        {
-          "@type": "Thing",
-          name: "DREADMOOR Hull Protection",
-        },
-        {
-          "@type": "Thing",
-          name: "DREADMOOR Carburetor",
-        },
-        {
-          "@type": "Thing",
-          name: "DREADMOOR Upgraded Engine",
+          name: "DREADMOOR Beaver and Tuning Forks",
         },
         {
           "@type": "Thing",
           name: "DREADMOOR The Throat waterway",
         },
+        {
+          "@type": "Thing",
+          name: "Drying Fort and Observatory",
+        },
+        {
+          "@type": "Thing",
+          name: "Estelle and Bone Reef recordings",
+        },
+        {
+          "@type": "Thing",
+          name: "DREADMOOR Essence recipe",
+        },
       ],
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}#website`,
       },
       publisher: {
-        "@type": "Organization",
         "@id": `${siteUrl}#organization`,
       },
       breadcrumb: {
@@ -170,87 +172,131 @@ const jsonLd = {
 
 const toc = [
   {
-    id: "leave-the-abandoned-house-and-reach-the-trading-post",
-    label: "Reach the Trading Post",
+    id: "how-to-leave-church-settlement-and-get-the-boat",
+    label: "Church Settlement and boat",
   },
   {
-    id: "take-the-chest-to-the-bunkhouse-and-repair-the-wall",
-    label: "Repair the Bunkhouse",
+    id: "how-to-open-the-first-river-gate",
+    label: "Open the first river gate",
   },
   {
-    id: "catch-5-snappers-for-gill-and-bozur",
+    id: "reach-betsy-and-sons-and-get-your-first-essence",
+    label: "Reach Betsy and Sons",
+  },
+  {
+    id: "catch-five-snappers-and-repay-the-initial-debt",
     label: "Catch 5 Snappers",
   },
   {
-    id: "get-the-dry-dock-key-from-john-the-fifth",
+    id: "how-to-get-the-dry-dock-key-from-john-the-fifth",
     label: "Get the Dry Dock Key",
   },
   {
-    id: "process-fish-meat-and-refuel-the-motorboat",
-    label: "Make Fuel and Refuel",
+    id: "process-fish-and-refuel-the-motorboat",
+    label: "Make fuel and refuel",
   },
   {
     id: "repair-the-dry-dock-fuse-box-and-restore-power",
-    label: "Restore Dry Dock Power",
+    label: "Restore Dry Dock power",
   },
   {
-    id: "clean-the-boat-with-the-pressure-pump-and-water-cannon",
-    label: "Clean and Repair the Boat",
+    id: "clean-the-boat-and-repair-its-hull",
+    label: "Clean and repair the boat",
   },
   {
-    id: "catch-3-softgrazers-and-obtain-chromatic-scales",
+    id: "catch-three-softgrazers-for-chromatic-scales",
     label: "Get Chromatic Scales",
   },
   {
-    id: "research-weak-hull-protection-and-the-upgraded-engine",
-    label: "Research and Install Hull Protection",
+    id: "research-and-install-weak-hull-protection",
+    label: "Install Hull Protection",
   },
   {
-    id: "get-the-carburetor-from-gill-and-bozur",
-    label: "Get the Carburetor",
+    id: "get-the-carburetor-and-install-the-upgraded-engine",
+    label: "Get the Carburetor and engine",
   },
   {
-    id: "remove-the-standard-engine-and-install-the-upgraded-engine",
-    label: "Install the Upgraded Engine",
+    id: "how-to-get-past-the-beaver-blocking-the-throat",
+    label: "Get past the Beaver",
   },
   {
-    id: "sail-to-the-throat",
-    label: "Sail to The Throat",
+    id: "find-and-restore-all-three-tuning-forks",
+    label: "Restore the Tuning Forks",
   },
   {
-    id: "find-a-fuel-can-and-start-the-throat-generator",
-    label: "Start The Throat Generator",
+    id: "find-keeper-lilo-s-signal-horn",
+    label: "Get the Signal Horn",
   },
   {
-    id: "find-the-thermal-coil-gear-and-two-buckets",
-    label: "Repair The Throat Machinery",
+    id: "how-to-restore-the-throat-generator-and-waterway-machinery",
+    label: "Repair The Throat machinery",
   },
   {
-    id: "repair-the-water-pump-do-not-craft-a-new-one",
-    label: "Repair the Water Pump",
+    id: "how-to-get-both-water-wheels-turning",
+    label: "Get both water wheels turning",
   },
   {
-    id: "configure-the-water-flow-to-both-water-wheels",
-    label: "Configure Both Water Wheels",
+    id: "what-happens-after-you-pass-through-the-throat",
+    label: "After The Throat",
   },
   {
-    id: "open-the-throat-gate",
-    label: "Open The Throat Gate",
+    id: "cure-the-fuel-larva-at-the-new-trading-post",
+    label: "Cure the Fuel Larva",
   },
   {
-    id: "set-out-and-finish-the-dreadmoor-demo",
-    label: "Set Out and Finish the Demo",
+    id: "how-to-get-lockpicks-for-drying-fort",
+    label: "Craft Lockpicks",
+  },
+  {
+    id: "how-to-enter-drying-fort-and-clear-the-blight",
+    label: "Clear Drying Fort",
+  },
+  {
+    id: "how-to-help-jacqueline-at-the-grotto",
+    label: "Help Jacqueline at the Grotto",
+  },
+  {
+    id: "how-to-enter-the-observatory-and-find-junior-s-trail",
+    label: "Investigate the Observatory",
+  },
+  {
+    id: "return-the-missing-essence-recipe-to-gill-and-bozur",
+    label: "Return the Essence recipe",
+  },
+  {
+    id: "speak-to-estelle-about-the-failed-essence-recipe",
+    label: "Speak to Estelle",
+  },
+  {
+    id: "how-to-restore-the-recordings-at-bone-reef",
+    label: "Restore Bone Reef recordings",
+  },
+  {
+    id: "which-fish-does-estelle-need-for-the-special-essence",
+    label: "Special Essence fish",
+  },
+  {
+    id: "prepare-the-final-essence-batch-for-the-baron",
+    label: "Prepare the final Essence",
+  },
+  {
+    id: "what-happens-at-the-early-access-story-ending",
+    label: "Early Access story ending",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/dreadmoor",
-    label: "DREADMOOR Guide",
+    label: "DREADMOOR: What to Do Next",
   },
   {
     href: "/dreadmoor/fishing-guide",
     label: "DREADMOOR Fishing Guide",
+  },
+  {
+    href: "/dreadmoor/achievements",
+    label: "DREADMOOR 44 Achievements Checklist",
   },
 ];
 
@@ -268,13 +314,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="DREADMOOR Demo Walkthrough: All Quests & The Throat"
+          title="DREADMOOR Walkthrough: All Main Quests & Early Access Ending"
           description={articleDescription}
           gameTitle="DREADMOOR"
           gameHref="/dreadmoor"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 13, 2026"
+          updatedAt="November 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

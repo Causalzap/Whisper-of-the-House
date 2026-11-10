@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,13 +11,15 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/dreadmoor`;
 
 const metadataTitle =
-  "DREADMOOR Demo Guide: What to Do Next & How to Finish";
+  "DREADMOOR: What Should You Do Next in Early Access?";
 
 const metadataDescription =
-  "Stuck in DREADMOOR? Find what to do at Betsy and Sons, repair the Dry Dock, upgrade your boat, and open The Throat gate to finish the demo.";
+  "Stuck in DREADMOOR Early Access? Find your next step at Betsy and Sons, fix boat problems, get past The Throat, and discover what to do after the story.";
 
 const articleDescription =
-  "Find your next step in DREADMOOR, from the first fishing contracts and Dry Dock repairs to hull protection, the upgraded engine, and The Throat gate.";
+  "Find what to do next in DREADMOOR, from the Trading Post and boat upgrades to Drying Fort, the Observatory, the Early Access story ending, and Free Roam.";
+
+const lastUpdated = "2026-11-10";
 
 export const metadata: Metadata = {
   title: metadataTitle,
@@ -54,7 +57,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "DREADMOOR Guide",
+          name: "DREADMOOR",
           item: pageUrl,
         },
       ],
@@ -66,12 +69,10 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "DREADMOOR Demo Guide: What to Do Next and How to Finish",
-      description:
-        "Find what to do next in the DREADMOOR demo, including the Trading Post, fishing contracts, Dry Dock repairs, Hull Protection, the Upgraded Engine, and opening The Throat gate.",
+      headline: metadataTitle,
+      description: articleDescription,
       inLanguage: "en",
-      dateModified: "2026-10-13",
+      dateModified: lastUpdated,
       about: [
         {
           "@type": "VideoGame",
@@ -79,7 +80,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "DREADMOOR demo progression",
+          name: "DREADMOOR Early Access progression",
         },
         {
           "@type": "Thing",
@@ -88,6 +89,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "DREADMOOR The Throat",
+        },
+        {
+          "@type": "Thing",
+          name: "DREADMOOR Free Roam",
         },
       ],
       isPartOf: {
@@ -142,8 +147,28 @@ const toc = [
     label: "Get the Carburetor",
   },
   {
+    id: "beaver-blocking",
+    label: "Get past the Beaver",
+  },
+  {
     id: "throat-gate",
     label: "Open The Throat gate",
+  },
+  {
+    id: "after-throat",
+    label: "What happens after The Throat",
+  },
+  {
+    id: "drying-fort",
+    label: "Drying Fort Control Room",
+  },
+  {
+    id: "observatory",
+    label: "Find Junior's Essence recipe",
+  },
+  {
+    id: "essence-stuck",
+    label: "Finish the Essence quest",
   },
   {
     id: "what-to-do-first",
@@ -151,15 +176,31 @@ const toc = [
   },
   {
     id: "boat-upgrades",
-    label: "Which boat upgrades matter",
+    label: "Which boat upgrades to get",
   },
   {
-    id: "old-saves",
-    label: "Old Playtest saves",
+    id: "storage-or-speed",
+    label: "Storage or boat speed",
+  },
+  {
+    id: "boat-module-storage",
+    label: "Find crafted boat modules",
+  },
+  {
+    id: "fishing-gear",
+    label: "When to upgrade fishing gear",
   },
   {
     id: "demo-ending",
-    label: "Where the demo ends",
+    label: "Early Access story ending",
+  },
+  {
+    id: "after-story",
+    label: "What to do after the story",
+  },
+  {
+    id: "old-saves",
+    label: "Demo and Playtest saves",
   },
 ];
 
@@ -171,6 +212,10 @@ const relatedLinks = [
   {
     href: "/dreadmoor/fishing-guide",
     label: "DREADMOOR Fishing Guide",
+  },
+  {
+    href: "/dreadmoor/achievements",
+    label: "DREADMOOR Achievements Checklist",
   },
 ];
 
@@ -188,13 +233,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="DREADMOOR Demo Guide: What to Do Next"
+          title="DREADMOOR: What Should You Do Next in Early Access?"
           description={articleDescription}
           gameTitle="DREADMOOR"
           gameHref="/dreadmoor"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 13, 2026"
+          updatedAt="November 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

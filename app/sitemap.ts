@@ -1088,6 +1088,8 @@ const paths = [
     '/dreadmoor',
     '/dreadmoor/walkthrough',
     '/dreadmoor/fishing-guide',
+    '/dreadmoor/achievements',
+    
 
     '/valor-mortis',
     '/valor-mortis/caverns',
@@ -1383,9 +1385,10 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/valor-mortis/fortress': '2026-10-16',
   '/valor-mortis/prison-escape': '2026-10-16',
 
-  '/dreadmoor': '2026-10-13',
-  '/dreadmoor/walkthrough': '2026-10-13',
-  '/dreadmoor/fishing-guide': '2026-10-13',
+  '/dreadmoor': '2026-11-10',
+  '/dreadmoor/walkthrough': '2026-11-10',
+  '/dreadmoor/fishing-guide': '2026-11-10',
+  '/dreadmoor/achievements': '2026-11-10',
 
   '/car-park-capital': '2026-10-10',
   '/car-park-capital/car-production': '2026-10-10',
