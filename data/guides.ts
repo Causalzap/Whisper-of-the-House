@@ -130,6 +130,120 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+{
+  title: "Shrek 2 Remastered",
+  game: "Shrek 2 Remastered",
+  href: "/shrek-2-remastered",
+  slug: "shrek-2-remastered",
+  kind: "game",
+  status: "active",
+  accent: "emerald",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "11 Chapters, Bosses, Crazy Larry & 45 Achievements",
+  eyebrow: "Co-op Action Adventure, Character Puzzles & Boss Battles",
+
+  hubStatus:
+    "11 Chapters + Character Abilities + King Harold's Tasks + Crazy Larry + 45 Achievements",
+
+  description:
+    "Complete all 11 Shrek 2 Remastered chapters, solve character puzzles, finish King Harold's tasks, defeat Fairy Godmother, find Crazy Larry upgrades, and track all 45 achievements.",
+
+  coverage: [
+    "Complete 11-chapter walkthrough from Shrek's Swamp and Spooky Forest through Far Far Away, Prison Break, The Mines, Cookie Cookie and Final Fight",
+
+    "Character abilities for Shrek, Fiona, Donkey, Gingerbread Man, Lil' Red, Puss in Boots, Big Bad Wolf and the later party members",
+
+    "King Harold's six Far Far Away tasks, including Family Jewels, Street Brawl, Shopping Spree, Humpty Dumpty and Pied Piper",
+
+    "Boss encounters, Hero Time challenges, Fairy Godmother's potion factory, prison puzzles, Mongo's cookie targets and the final ballroom battle",
+
+    "Crazy Larry's three upgrade shops, all nine purchases, coin costs, Chapter Select and Bonus Levels",
+
+    "All 45 Steam and Xbox achievements with an interactive checklist, Magic Beans, Snapshots, no-damage challenges, perfect Hero Times and the PS5 Platinum trophy",
+  ],
+
+  image:
+    "/images/shrek-2-remastered/shrek-2-remastered-mongo-cookie-target.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 80,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Shrek 2 Remastered Walkthrough: All 11 Chapters & Bosses",
+
+      href: "/shrek-2-remastered",
+
+      type: "Guide Hub",
+
+      description:
+        "Finish all 11 chapters, solve character puzzles, complete King Harold's six tasks, defeat Puss in Boots and Fairy Godmother, and find Crazy Larry's upgrades.",
+
+      image:
+        "/images/shrek-2-remastered/shrek-2-remastered-fiona-slow-time.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Shrek's Swamp, Spooky Forest, Far Far Away, Ogre Killer, Walking the Path, Jack and Jill's Farm, Prison Break, The Mines, Cookie Cookie and Final Fight",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Shrek 2 Remastered Achievements: All 45 & Platinum Checklist",
+
+      href: "/shrek-2-remastered/achievements",
+
+      type: "Achievements",
+
+      description:
+        "Track all 45 achievements, complete no-damage and Hero Time challenges, collect Magic Beans and Snapshots, buy all nine upgrades, and earn the PS5 Platinum.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/shrek-2-remastered/shrek-2-remastered-fiona-blackbird-hero-time.webp",
+
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 534,
+
+        spotlightMeta:
+          "45-achievement checklist, 11 story clears, Black Bird Pie, Hero Needed, Giant Tomatoes, 108 Magic Beans, 70 Snapshots, Crazy Larry and Platinum",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+  ],
+},
+
   {
     title: "Casualties: Unknown",
     game: "Casualties: Unknown",

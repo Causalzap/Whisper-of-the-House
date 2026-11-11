@@ -1230,6 +1230,9 @@ const paths = [
     'casualties-unknown/medical',
     'casualties-unknown/progression',
 
+    'shrek-2-remastered',
+    'shrek-2-remastered/achievements',
+
 
 ] as const;
 
@@ -1238,6 +1241,9 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'shrek-2-remastered': '2026-11-11',
+  'shrek-2-remastered/achievements': '2026-11-11',
+
   'casualties-unknown/crafting': '2026-11-10',
   'casualties-unknown/endings': '2026-11-10',
   'casualties-unknown/index': '2026-11-10',
