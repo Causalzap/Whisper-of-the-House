@@ -12,10 +12,10 @@ const pageUrl = `${siteUrl}/casualties-unknown`;
 const metadataTitle = "Casualties: Unknown Beginner Guide: What to Do First";
 
 const metadataDescription =
-  "Start Casualties: Unknown with safer first steps, inventory controls, lockpicking, Save and Quit, character unlocks, and the route to all 11 layers.";
+  "New to Casualties: Unknown? Learn what to do first, manage your inventory, survive early falls, open locked crates, and save your run between layers.";
 
 const articleDescription =
-  "Choose first-run settings, explore the starting pod, secure a light and essential supplies, manage hands and inventory, recover dropped items, avoid bad falls, open locked and code crates, use Save and Quit at layer transitions, unlock Milky and Dune, and prepare for the 11-layer mission.";
+  "Learn how to start Casualties: Unknown, choose your first-run settings, collect supplies near the starting pod, manage your hands and inventory, survive dangerous drops, open locked and code crates, save between layers, and unlock Milky and Dune.";
 
 const imageUrls = [
   `${siteUrl}/images/casualties-unknown/casualties-unknown-starting-pod-plastic.webp`,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description: "Learn first-run settings, safe descents, inventory controls, lockpicking, code crates, and layer-transition saving.",
+    description: "Start your first Casualties: Unknown run, secure essential supplies, learn lockpicking, and save safely between layers.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -144,7 +144,7 @@ export default function Page() {
 
         <GuideArticlePage
           title="Casualties: Unknown Beginner Guide: What Should You Do First?"
-          description="Learn what to do around the starting pod, keep essential gear secure, survive your first drops, and use layer transitions to save your run."
+          description="Start your first run with the right settings, collect supplies around the starting pod, keep your light and inventory secure, and avoid dangerous falls before descending deeper."
           gameTitle="Casualties: Unknown"
           gameHref="/casualties-unknown"
           breadcrumbBaseHref="/"

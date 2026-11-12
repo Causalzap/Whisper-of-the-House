@@ -1211,6 +1211,7 @@ const paths = [
     'underkeep/fast-travel',
     'underkeep/mausoleum-walkthrough',
     'underkeep/soulforge-walkthrough',
+    'underkeep/tower-walkthrough',
 
     'find-the-needle',
     'find-the-needle/automation',
@@ -1247,7 +1248,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   'casualties-unknown/crafting': '2026-11-10',
   'casualties-unknown/endings': '2026-11-10',
-  'casualties-unknown/index': '2026-11-10',
+  'casualties-unknown/index': '2026-11-12',
   'casualties-unknown/medical': '2026-11-10',
   'casualties-unknown/progression': '2026-11-10',
 
@@ -1270,13 +1271,14 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'find-the-needle/scanner': '2026-11-07',
   'find-the-needle/achievements': '2026-11-07',
 
-  'underkeep': '2026-11-06',
+  'underkeep': '2026-11-12',
   'underkeep/races-classes': '2026-11-06',
   'underkeep/beginner-guide': '2026-11-06',
   'underkeep/early-game-walkthrough': '2026-11-06',
   'underkeep/fast-travel': '2026-11-06',
-  'underkeep/mausoleum-walkthrough': '2026-11-06',
+  'underkeep/mausoleum-walkthrough': '2026-11-12',
   'underkeep/soulforge-walkthrough': '2026-11-12',
+  'underkeep/tower-walkthrough': '2026-11-12',
 
   'loftia': '2026-11-05',
   'loftia/beginner-guide': '2026-11-05',
