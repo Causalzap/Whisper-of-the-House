@@ -68,11 +68,22 @@ const toc = [
   { id: "after-source-gate", label: "What Happens After You Enter the Source in Underkeep?" },
 ];
 
+
 const relatedLinks = [
-  { href: "/underkeep", label: "Underkeep: Regions, Tower & Progression" },
-  { href: "/underkeep/fast-travel", label: "Fast Travel: Four Obelisks & Waystones" },
-  { href: "/underkeep/early-game-walkthrough", label: "Early Game: Silver Key & Village" },
+  {
+    href: "/underkeep",
+    label: "Underkeep Walkthrough & Progression",
+  },
+  {
+    href: "/underkeep/fast-travel",
+    label: "Fast Travel: Obelisks & Waystones",
+  },
+  {
+    href: "/underkeep/tower-walkthrough",
+    label: "Tower: Puzzles, Architect & Torin",
+  },
 ];
+
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -1210,6 +1210,7 @@ const paths = [
     'underkeep/early-game-walkthrough',
     'underkeep/fast-travel',
     'underkeep/mausoleum-walkthrough',
+    'underkeep/soulforge-walkthrough',
 
     'find-the-needle',
     'find-the-needle/automation',
@@ -1275,6 +1276,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'underkeep/early-game-walkthrough': '2026-11-06',
   'underkeep/fast-travel': '2026-11-06',
   'underkeep/mausoleum-walkthrough': '2026-11-06',
+  'underkeep/soulforge-walkthrough': '2026-11-12',
 
   'loftia': '2026-11-05',
   'loftia/beginner-guide': '2026-11-05',

@@ -917,6 +917,57 @@ export const guideClusters: GuideCluster[] = [
         order: 6,
       },
     },
+
+
+{
+  title: "Underkeep Soulforge Walkthrough: All 8 Keys & Puzzles",
+  href: "/underkeep/soulforge-walkthrough",
+  type: "Walkthrough",
+  description:
+    "Find the Dwarven Expedition, spare the dragon, collect eight Blue Key Spheres, solve the gardens, defeat the Giant and obtain Soulcleaver.",
+  date: "Updated recently",
+  image:
+    "/images/underkeep/underkeep-soulforge-eight-key-door.webp",
+  imageFit: "contain",
+  imagePosition: "center",
+  imagePadding: false,
+  home: {
+    latest: true,
+    latestOrder: 535,
+    spotlightMeta:
+      "Dwarven Expedition, five symbol plates, dragon choice, eight Blue Key Spheres, Garden puzzles, Giant Incinerator and Soulcleaver",
+  },
+  archive: {
+    showInCollections: true,
+    order: 7,
+  },
+},
+
+{
+  title: "Underkeep Tower Walkthrough: Puzzles, Bosses & Ending",
+  href: "/underkeep/tower-walkthrough",
+  type: "Walkthrough",
+  description:
+    "Insert four Key Fragments, solve the floor-switch and Gallery puzzles, defeat the Architect and Torin, and reach the final portal.",
+  date: "Updated recently",
+  image:
+    "/images/underkeep/underkeep-tower-four-fragments-open.webp",
+  imageFit: "contain",
+  imagePosition: "center",
+  imagePadding: false,
+  home: {
+    latest: true,
+    latestFeatured: true,
+    latestOrder: 536,
+    spotlightMeta:
+      "Four Key Fragments, Shadow Beast, tower switches, Gallery runes, Architect, Torin and final portal ending",
+  },
+  archive: {
+    showInCollections: true,
+    order: 8,
+  },
+},
+
   ],
 },
 
