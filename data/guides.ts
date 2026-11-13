@@ -130,7 +130,121 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
-
+  {
+    title: "9 Kings",
+    game: "9 Kings",
+    href: "/9-kings",
+    slug: "9-kings",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "First Run, Year 33, Joker Builds & 99 Achievements",
+    eyebrow: "Roguelike Kingdom Building, Deckbuilding & Auto Battler",
+    hubStatus:
+      "First Run + Year 33 + 9 King Unlocks + Joker Mode + Best Builds + 99 Achievements",
+  
+    description:
+      "Win your first 9 Kings run, survive the Year 33 final assault, unlock all nine kings, experiment with Joker decks, compare card builds, and track 99 achievements.",
+  
+    coverage: [
+      "First-run opening, Castle and troop placement, battle rewards, gold, plots, the Pit, and common early failures",
+      "Year 33 final assault, Endless continuation, all nine king unlock requirements, Quest Mode and Daily Mayhem access",
+      "Joker Mode unlock, custom nine-card decks, Perks, Conditions, starting enemies, and setup problems",
+      "King of Greed, King of Nothing, Joker Leech, Joker Lab Rat Poison, and King of Spells builds with Rainbow card combinations",
+      "All 99 Steam achievements, including 45 added in 1.0, with a saved checklist and exact unlock conditions",
+    ],
+  
+    image: "/images/9-kings/9-kings-beginner-battle-loot.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 81,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title: "9 Kings Beginner Guide (1.0): How to Win Your First Run",
+        href: "/9-kings",
+        type: "Guide Hub",
+        description:
+          "Choose your first king, place Castle and troops, select useful battle rewards, survive Year 33, and unlock more kings and modes.",
+        image: "/images/9-kings/9-kings-beginner-battle-loot.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "King of Nothing, Castle, first battle, card rewards, Year 33, nine king unlocks, Quest Mode, Endless and Daily Mayhem",
+        },
+        archive: { showInCollections: true, order: 1 },
+      },
+      {
+        title: "9 Kings Joker Mode: How to Unlock & Build a Custom Deck",
+        href: "/9-kings/joker-mode",
+        type: "Systems",
+        description:
+          "Unlock Joker Mode, choose a custom nine-card deck, arrange Perks, set Conditions and starting enemies, and fix setup mistakes.",
+        date: "Updated recently",
+        image: "/images/9-kings/9-kings-joker-custom-deck-selection.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 537,
+          spotlightMeta:
+            "Nine regular kings, Joker unlock, nine-card deck, Perk slots, Conditions, starting enemies and Rainbow card choices",
+        },
+        archive: { showInCollections: true, order: 2 },
+      },
+      {
+        title: "9 Kings Achievements: All 99 & 1.0 Checklist",
+        href: "/9-kings/achievements",
+        type: "Achievements",
+        description:
+          "Track all 99 Steam achievements, find the 45 new 1.0 unlocks, and check exact conditions for kings, cards, combat and quests.",
+        date: "Updated recently",
+        image: "/images/9-kings/9-kings-achievements-1-0-list.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestOrder: 538,
+          spotlightMeta:
+            "99 Steam achievements, 45 new in version 1.0, checklist, Master of Nine, The Conqueror, Great Leap and Roadrunner",
+        },
+        archive: { showInCollections: true, order: 3 },
+      },
+      {
+        title: "9 Kings Best Builds (1.0): Joker, Greed & King Strategies",
+        href: "/9-kings/best-builds",
+        type: "Builds",
+        description:
+          "Compare Greed, Nothing, Joker Leech, Joker Lab Rat Poison and Spells builds, with card synergy, placement and recovery tips.",
+        date: "Updated recently",
+        image: "/images/9-kings/9-kings-greed-mercenary-gold-scaling.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 539,
+          spotlightMeta:
+            "Palace, Vault, Mercenary, Dispenser, Paladin, Farm, Leech, Treant, Lab Rat, Cauldron, Wizard and Rainbow cards",
+        },
+        archive: { showInCollections: true, order: 4 },
+      },
+    ],
+  },
 {
   title: "Shrek 2 Remastered",
   game: "Shrek 2 Remastered",
