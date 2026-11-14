@@ -130,6 +130,155 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+{
+  title: "Slotbound",
+  game: "Slotbound",
+  href: "/slotbound",
+  slug: "slotbound",
+  kind: "game",
+  status: "active",
+  accent: "purple",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "First Upgrades, Hard Mode Builds, Jester & 64 Achievements",
+  eyebrow: "Slot Machine Roguelike, Auto Battler & Unit Evolution",
+
+  hubStatus:
+    "First Run + Wave 30 + Permanent Upgrades + Best Builds + Jester + Cores & Items + 64 Achievements",
+
+  description:
+    "Start Slotbound in Open Forest, learn Spin, Nudge and Absorb, unlock permanent upgrades, develop Hard Mode builds, summon Jester, compare Cores and Items, and track all 64 Steam achievements.",
+
+  coverage: [
+    "Open Forest Easy tutorial, winning lines, Nudge, Absorb, Pierce I, Archer promotions and the first Wave 30 victory",
+    "Permanent upgrades including Advanced Units, Command Limit, Faction Synergy, Dormant Power, Awakening and six Campaign battlefields",
+    "Hard Mode builds for Open Forest, Deep Cave, Wasteland and Lost Ruins with Ent Lord, Arch-Shaman, Apocalypse, Flare and Gaze",
+    "Jester Hat summons, Joker Seed, Wildcard, Trickster, Illusionist, Ferret Tamer, Ringmaster and double Jester setups",
+    "Cores and Items including Gold Tooth, Copycat, First Aid, Sturdy Fist, Wasteland Camel, Hardening Powder and Fate Stones",
+    "All 64 Steam achievements with a checklist, six Hard battlefield clears, Jester Troupe, restricted runs and Endless Mode milestones",
+  ],
+
+  image: "/images/slotbound/slotbound-winning-line-nudge-tutorial.webp",
+  imageFit: "contain",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 82,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title: "Slotbound Beginner Guide: First Upgrades & Progression",
+      href: "/slotbound",
+      type: "Guide Hub",
+      description:
+        "Learn Spin, Nudge and Absorb, clear Open Forest Wave 30, unlock Advanced Units and Command Limit, and activate Awakening with Dormant Power.",
+      image: "/images/slotbound/slotbound-winning-line-nudge-tutorial.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        spotlightMeta:
+          "Open Forest Easy, winning lines, Nudge, Absorb, Pierce I, Wave 30, Advanced Units, Command Limit and Dormant Power",
+      },
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+    {
+      title: "Slotbound Best Builds: Hard Mode Teams & Evolutions",
+      href: "/slotbound/builds",
+      type: "Builds",
+      description:
+        "Compare four Hard Mode clears using Ent Lord and Arch-Shaman, Apocalypse cavalry, Flare Burn, and Skull Fighter evolving into Gaze.",
+      date: "Updated recently",
+      image: "/images/slotbound/slotbound-apocalypse-cataclysm-flurry.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 540,
+        spotlightMeta:
+          "Open Forest, Deep Cave, Wasteland, Lost Ruins, Ent Lord, Arch-Shaman, Apocalypse, Flare, Gaze and Forest Synergy",
+      },
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+    {
+      title: "Slotbound Jester Guide: How to Unlock, Summon & Awaken",
+      href: "/slotbound/jester",
+      type: "Systems",
+      description:
+        "Summon Jester with three Jester Hats, use Joker Seed and Wildcard, choose Illusionist or Ringmaster, and obtain two Jesters.",
+      date: "Updated recently",
+      image: "/images/slotbound/slotbound-jester-promotion-choices.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 541,
+        spotlightMeta:
+          "Joker Seed, Black Note, Torn Note, Wildcard, three Jester Hats, Nudge, Illusionist, Ringmaster and Jester Troupe",
+      },
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+    {
+      title: "Slotbound Best Cores & Items: Effects, Synergies & Picks",
+      href: "/slotbound/cores",
+      type: "Systems",
+      description:
+        "Compare Core triggers, spin discounts, reel effects, First Aid, Sturdy Fist, Wasteland Camel, Hardening Powder and Fate Stone quests.",
+      date: "Updated recently",
+      image: "/images/slotbound/slotbound-gold-tooth-core.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestOrder: 542,
+        spotlightMeta:
+          "Gold Tooth, Nutrient Leaf, Double Ledger, Copycat, Echo Mirror, Wildcard, First Aid, Sturdy Fist and Fate Stones",
+      },
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+    {
+      title: "Slotbound Achievements Guide: All 64 & Checklist",
+      href: "/slotbound/achievements",
+      type: "Achievements",
+      description:
+        "Track all 64 achievements, including six Hard battlefield clears, Jester Troupe, restricted runs, Collection tasks and Endless wave 130.",
+      date: "Updated recently",
+      home: {
+        latest: true,
+        latestOrder: 543,
+        spotlightMeta:
+          "64 Steam achievements, six Hard clears, Flawless, Undying Legion, Jester Troupe, Fate Stones, Collection and Endless medals",
+      },
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+  ],
+},
+
   {
     title: "9 Kings",
     game: "9 Kings",

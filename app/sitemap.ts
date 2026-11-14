@@ -1239,6 +1239,12 @@ const paths = [
      '9-kings/joker-mode',
      '9-kings/achievements',
      '9-kings/best-builds',
+     
+     'slotbound',
+     'slotbound/cores',
+     'slotbound/builds',
+     'slotbound/achievements',
+     'slotbound/jester',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1246,6 +1252,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'slotbound': '2026-11-14',
+  'slotbound/cores': '2026-11-14',
+  'slotbound/builds': '2026-11-14',
+  'slotbound/achievements': '2026-11-14',
+  'slotbound/jester': '2026-11-14',
+
   '9-kings': '2026-11-13',
   '9-kings/joker-mode': '2026-11-13',
   '9-kings/achievements': '2026-11-13',
