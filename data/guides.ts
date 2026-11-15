@@ -131,6 +131,112 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
 
+  {
+    title: "Zombies Aren't Real",
+    game: "Zombies Aren't Real",
+    href: "/zombies-arent-real",
+    slug: "zombies-arent-real",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Beginner, Safe Zones, Evacuation & 14 Achievements",
+    eyebrow: "Zombie Horde Defense, Real-Time Strategy & Civilian Evacuation",
+  
+    hubStatus:
+      "First Scenario + Garrisons + Mortars + Battle Abilities + Safe Zones + 14 Achievements",
+  
+    description:
+      "Start Zombies Aren't Real, build defensible Safe Zones, position Garrisons and Mortars, evacuate civilians with Gates, Broadcast, Hold and Corridors, and track all 14 Steam achievements.",
+  
+    coverage: [
+      "First Scenario preparation, Safe Zone construction, Garrison placement, firing coverage, budget management and early survival",
+      "Garrisons, Mortars, Snipers, Turrets, rooftop positions, ammunition, special buildings and defensive upgrades",
+      "Battle abilities including Paratroopers, bomber airstrikes and helicopters, plus Campaign progression and larger city maps",
+      "Safe Zone Gates, Broadcast, Hold circles, Evac Corridors, civilian movement problems, wall breaches and evacuation troubleshooting",
+      "All 14 Steam achievements with a saved checklist, Gold and Diamond badges, Flawless, Glittery, Sparkly, Daring, Masterful and No Friendly Fire",
+    ],
+  
+    image:
+      "/images/zombies-arent-real/zombies-arent-real-safe-zone-gate-placement.webp",
+    imageFit: "contain",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 83,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title: "Zombies Aren't Real Beginner Guide: What to Build First",
+        href: "/zombies-arent-real",
+        type: "Guide Hub",
+        description:
+          "Build your first Safe Zone, defend its walls with Garrisons, unlock Mortars and battle abilities, and prepare for larger Campaign scenarios.",
+        image:
+          "/images/zombies-arent-real/zombies-arent-real-safe-zone-gate-placement.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "First Scenario, Safe Zones, Garrisons, Mortars, Snipers, Turrets, Budget, Paratroopers, Bombers and Campaign progression",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Zombies Aren't Real Safe Zones: Gates, Hold & Evac Corridor",
+        href: "/zombies-arent-real/safe-zones",
+        type: "Systems",
+        description:
+          "Build and expand Safe Zones, place Gates, attract civilians with Broadcast, use Hold and Evac Corridors, and fix evacuation problems.",
+        date: "Updated recently",
+        image:
+          "/images/zombies-arent-real/zombies-arent-real-hold-zone-circles.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 544,
+          spotlightMeta:
+            "Safe Zone expansion, Gates, Broadcast, Hold circles, Evac Corridors, civilian pathfinding, wall costs and breaches",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Zombies Aren't Real Achievements: All 14 Requirements",
+        href: "/zombies-arent-real/achievements",
+        type: "Achievements",
+        description:
+          "Track all 14 achievements with a saved checklist, earn Gold and Diamond badges, and complete Flawless, Daring, Masterful and No Friendly Fire.",
+        date: "Updated recently",
+        home: {
+          latest: true,
+          latestOrder: 545,
+          spotlightMeta:
+            "14 Steam achievements, Beginner's Luck, Choke Point, Golden, Freshly Cut, Glittery, Sparkly, Flawless, Daring and Completionist",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+    ],
+  },
+  
 {
   title: "Slotbound",
   game: "Slotbound",

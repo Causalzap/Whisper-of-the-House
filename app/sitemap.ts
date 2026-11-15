@@ -1245,6 +1245,10 @@ const paths = [
      'slotbound/builds',
      'slotbound/achievements',
      'slotbound/jester',
+
+     'zombies-arent-real/jester',
+     'zombies-arent-real/safe-zones',
+     'zombies-arent-real/achievements',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1252,6 +1256,10 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'zombies-arent-real/jester': '2026-11-15',
+  'zombies-arent-real/safe-zones': '2026-11-15',
+  'zombies-arent-real/achievements': '2026-11-15',
+
   'slotbound': '2026-11-14',
   'slotbound/cores': '2026-11-14',
   'slotbound/builds': '2026-11-14',
