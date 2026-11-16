@@ -9794,6 +9794,7 @@ export const guideClusters: GuideCluster[] = [
       },
     ],
   },
+
   {
     title: "Slay the Spire 2",
     game: "Slay the Spire 2",
@@ -9804,25 +9805,38 @@ export const guideClusters: GuideCluster[] = [
     accent: "purple",
     archiveCategory: "Strategy, simulation, puzzle & discovery",
   
-    label: "Deckbuilding Roguelike & Run Strategy",
-    eyebrow: "Spotlight Hub",
+    label:
+      "First Win, A1–A10, Characters, Blitz, Dread & Aeonglass",
+    eyebrow:
+      "Deckbuilding Roguelike, Card Strategy & Co-op",
     hubStatus:
-      "First-win strategy + Ascension A1–A10 + Regent + Necrobinder + multiplayer",
+      "First Win + Ascension A1–A10 + Regent + Necrobinder + The Fool + Blitz + Dread + Aeonglass + Co-op",
   
     description:
-      "Use the Slay the Spire 2 guide hub to diagnose what is breaking a run, get the first clear, climb Ascension from A1 to A10, learn Regent and Necrobinder, coordinate co-op teams, and move to SpireGenius when exact card, relic, monster, boss, or map data is the better answer.",
+      "Get your first Slay the Spire 2 win, climb Ascension A1–A10, learn Regent, Necrobinder and The Fool, survive Aeonglass, and unlock Blitz and Dread.",
   
     coverage: [
-      "First-win decision making through full-map planning, card rewards and Skip decisions, Merchant value, card removal, Rest versus Smith, Elite readiness, potion timing, enemy priority, and resetting the plan between Acts",
-      "Ascension progression from A1 through A10, including stacked modifiers, route pressure, HP and Gold constraints, potion capacity, Ascender's Bane, fewer Rest Sites, Scarcity, tougher enemies, Elite risk, deck consistency, and the Act 3 double boss",
-      "Regent run strategy through Stars as a usable budget, Underdocks routing, defensive gaps, Merchant purchases, card removal, Rest versus upgrade decisions, boss preparation, and knowing when a working deck should stop adding cards",
-      "Necrobinder strategy through early removals, Osty defense, Doom timing, Forbidden Grimoire, aggressive Elite routes, stored Energy, Eradicate and Unleash finishers, potion use, and deciding when the engine is already complete",
-      "Multiplayer strategy through team roles, focus fire, shared Block, enemy debuffs, card passing, shared rewards, deck pollution, shop and campfire routing, backup plans, and separate co-op Ascension progression",
-      "Intent-based handoff to SpireGenius for structured Slay the Spire 2 card, relic, potion, monster, boss, map, pathing, and other exact game-data questions",
+      "First-win strategy: Act 1 routes, early card rewards, Skip, Merchants, Rest versus Smith, Elite fights, potions and Act 2 preparation",
+  
+      "Ascension A1–A10: stacked difficulty modifiers, reduced Ancient healing, Gold penalties, potion limits, A6 Inflation, Scarcity and two Act 3 bosses",
+  
+      "Regent: Stars versus Energy, Orbit, Forge, Sovereign Blade, card creation, defensive choices and difficult boss encounters",
+  
+      "Necrobinder: Osty, Summon, Unleash, Doom, Souls, Ethereal, Forbidden Grimoire, Banshee's Cry and Eradicate",
+  
+      "The Fool: Arrow attacks, Aim, Impaled, Melody, Motif, Sadness, Joy, Ecstasy and Wah Symphony",
+  
+      "Blitz Mode: unlock requirements, three starting cards, short Acts, free Merchant selections, forced fights and five Ascension levels",
+  
+      "Dread Mode: six-character A10 unlock requirement, 12 Boss Dominions, extra Ascender's Banes, Ritual, Plating and stronger bosses",
+  
+      "Aeonglass: Withering Presence, six-card Wither triggers, Ebb, Eye Lasers, Increasing Intensity, Artifact and debuff counters",
+  
+      "Multiplayer: focus fire, team-wide Block, shared debuffs, card passing, shared relics, co-op routes and separate Ascension progression",
     ],
   
     image:
-      "/images/slay-the-spire-2/slay-the-spire-2-hub.webp",
+      "/images/slay-the-spire-2/slay-the-spire-2-guide-ancient-boon-start.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
@@ -9830,18 +9844,18 @@ export const guideClusters: GuideCluster[] = [
     home: {
       featuredHub: true,
       featuredHubSpotlight: true,
-      featuredHubOrder: 47,
+      featuredHubOrder: 84,
       footerFeatured: true,
     },
   
     pages: [
       {
         title:
-          "Slay the Spire 2 Guide – Beginner, Ascension & Co-op",
+          "Slay the Spire 2 Guide: How to Win and What to Play Next",
         href: "/slay-the-spire-2",
         type: "Guide Hub",
         description:
-          "Start with the problem your current run is showing you, then move to first-win fundamentals, Ascension, Regent, Necrobinder, multiplayer, or the exact data layer that owns the answer.",
+          "Choose your first-run strategy, climb Ascension, learn Regent, Necrobinder and The Fool, compare Blitz and Dread, and prepare for Aeonglass.",
         image:
           "/images/slay-the-spire-2/slay-the-spire-2-guide-ancient-boon-start.webp",
         imageFit: "cover",
@@ -9850,7 +9864,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "First wins, map decisions, Ascension A1–A10, Regent, Necrobinder, multiplayer, co-op roles, and SpireGenius structured data",
+            "First wins, Ascension A1–A10, Regent, Necrobinder, The Fool, Blitz, Dread, Aeonglass, co-op and public-beta unlocks",
         },
   
         archive: {
@@ -9861,11 +9875,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Slay the Spire 2 Beginner Guide – How to Get Your First Win",
+          "Slay the Spire 2 Beginner Guide: How to Get Your First Win",
         href: "/slay-the-spire-2/beginner-guide",
         type: "Beginner Guide",
         description:
-          "Plan the full map, take cards that solve real problems, use Skip, spend Gold with a purpose, judge Rest versus Smith, and enter Elites only when the current deck can support the risk.",
+          "Choose safer Act 1 routes, pick useful early cards, Skip weak rewards, check lethal damage, spend Gold and prepare for Elites.",
         date: "Updated recently",
         image:
           "/images/slay-the-spire-2/slay-the-spire-2-beginner-map-branching-route.webp",
@@ -9875,12 +9889,11 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           latest: true,
-          latestFeatured: true,
           latestOrder: 321,
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "First clear, full-map planning, card rewards, Skip, 118-Gold Merchant decisions, card removal, Rest versus Smith, Elite readiness, potions, and Act transitions",
+            "Act 1 pathing, early card rewards, lethal checks, Skip, Merchants, Rest or Smith, Elite readiness, potions and Act 2",
         },
   
         archive: {
@@ -9893,9 +9906,9 @@ export const guideClusters: GuideCluster[] = [
         title:
           "Slay the Spire 2 Ascension Guide – How to Climb A1–A10",
         href: "/slay-the-spire-2/ascension-guide",
-        type: "Guide",
+        type: "Systems",
         description:
-          "Climb from A1 to A10 by adjusting routes, HP, Gold, potion use, Rest Sites, deck consistency and Elite risk as the Ascension modifiers stack.",
+          "Understand A1–A10 modifiers, plan around reduced healing and Gold, manage A6 Inflation, and prepare for two Act 3 bosses.",
         date: "Updated recently",
         image:
           "/images/slay-the-spire-2/slay-the-spire-2-ascension-three-elites-too-greedy.webp",
@@ -9905,12 +9918,11 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           latest: true,
-          latestFeatured: true,
           latestOrder: 322,
           spotlightFeature: true,
           spotlightOrder: 2,
           spotlightMeta:
-            "A1–A10, stacked modifiers, Swarming Elites, Weary Traveler, Poverty, potion slots, Ascender's Bane, Gloom, Scarcity, tougher enemies, and double boss",
+            "A1–A10 modifiers, Elite pressure, Weary Traveler, Poverty, potion limits, Ascender's Bane, Inflation, Scarcity and double boss",
         },
   
         archive: {
@@ -9921,26 +9933,23 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Slay the Spire 2 Regent Guide – Stars, Routes & Winning Runs",
+          "Slay the Spire 2 Regent Guide: Stars, Forge & Sovereign Blade",
         href: "/slay-the-spire-2/regent-guide",
-        type: "Guide",
+        type: "Builds",
         description:
-          "Use Stars as a resource rather than a goal, cover weak defensive turns, choose better routes and Merchant purchases, remove dead weight, and stop adding cards once the deck already works.",
+          "Balance Stars and Energy, use Orbit, strengthen Sovereign Blade with Forge, and choose defensive or card-creation rewards.",
         date: "Updated recently",
         image:
-          "/images/slay-the-spire-2/slay-the-spire-2-regent-underdocks-route.webp",
+          "/images/slay-the-spire-2/slay-the-spire-2-regent-orbit-card-pick.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
   
         home: {
           latest: true,
-          latestFeatured: true,
           latestOrder: 323,
-          spotlightFeature: true,
-          spotlightOrder: 3,
           spotlightMeta:
-            "Regent, Stars, Underdocks, defensive gaps, Elite routes, Merchant decisions, card removal, Rest versus upgrade, boss preparation, and stopping card additions",
+            "Stars, Energy, Divine Right, Orbit, Forge, Sovereign Blade, Arsenal, Pillar of Creation, CHARGE!! and BEGONE!",
         },
   
         archive: {
@@ -9951,26 +9960,23 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Slay the Spire 2 Necrobinder Guide – Doom, Osty & Runs",
+          "Slay the Spire 2 Necrobinder Guide – Osty, Doom & Builds",
         href: "/slay-the-spire-2/necrobinder-guide",
-        type: "Guide",
+        type: "Builds",
         description:
-          "Improve Necrobinder consistency with early removals, Osty defense, better Doom timing, stored Energy, aggressive routes, Eradicate and Unleash finishers, and cleaner draw cycles.",
+          "Protect Osty, build Summon and Unleash damage, use Doom and Souls, remove unwanted cards, and finish fights with Eradicate.",
         date: "Updated recently",
         image:
-          "/images/slay-the-spire-2/slay-the-spire-2-necrobinder-forbidden-grimoire-remove.webp",
+          "/images/slay-the-spire-2/slay-the-spire-2-necrobinder-533-damage-unleash.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
   
         home: {
           latest: true,
-          latestFeatured: true,
           latestOrder: 324,
-          spotlightFeature: true,
-          spotlightOrder: 4,
           spotlightMeta:
-            "Necrobinder, Osty, Doom, Strike removal, Forbidden Grimoire, Elite routing, stored Energy, Eradicate, Unleash, potions, and finished-deck decisions",
+            "Osty, Summon, Unleash, Doom, Souls, Ethereal, Banshee's Cry, Forbidden Grimoire, Eradicate and Borrowed Time",
         },
   
         archive: {
@@ -9981,11 +9987,126 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
+          "Slay the Spire 2 The Fool Guide: Arrows, Aim & Melody",
+        href: "/slay-the-spire-2/the-fool",
+        type: "Builds",
+        description:
+          "Use Aim to strengthen Arrow attacks, understand Impaled, build Melody combinations, and manage Sadness, Joy and Wah Symphony.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-fool-rapid-shot-aim-burst.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 546,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "The Fool, Arrow, Aim, Impaled, Nock, Rapid Shot, Melody, Motif, Sadness, Joy, Ecstasy and Wah Symphony",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Blitz Mode Guide: Unlocks & Strategies",
+        href: "/slay-the-spire-2/blitz",
+        type: "Systems",
+        description:
+          "Unlock Blitz, choose three starting cards, survive shorter Acts, use free Merchant selections, and climb five Ascension levels.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-blitz-starting-three-cards.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 547,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Blitz unlock, three starting cards, no normal map or Gold, short Acts, free Merchant rewards and five Ascension levels",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Dread Mode Guide: All Boss Dominions",
+        href: "/slay-the-spire-2/dread",
+        type: "Systems",
+        description:
+          "Unlock Dread after A10 with all six characters, compare 12 Boss Dominions, manage extra Banes and survive tougher bosses.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-dread-mode-rules.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 548,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Six-character A10 requirement, 12 Boss Dominions, extra Ascender's Banes, Ceremonial Beast Ritual, Kaiser Crab Plating and Knowledge Demon",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Aeonglass Boss Guide: Wither & Attacks",
+        href: "/slay-the-spire-2/aeonglass",
+        type: "Bosses",
+        description:
+          "Survive Ebb and Eye Lasers, count six-card Wither triggers, remove Artifact charges, and finish Aeonglass before its attacks intensify.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-aeonglass-wither-card-trigger.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 549,
+          spotlightMeta:
+            "Aeonglass, Withering Presence, Wither, six-card trigger, Ebb, Eye Lasers, Increasing Intensity, Artifact and Expose+",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
           "Slay the Spire 2 Co-op Guide – Teams, Roles & Ascension",
         href: "/slay-the-spire-2/multiplayer-guide",
         type: "Guide",
         description:
-          "Coordinate multiplayer around team-wide Block, focus fire, shared debuffs, passed cards, reward allocation, route decisions, backup plans, and separate co-op Ascension progression.",
+          "Coordinate up to four players with focus fire, team-wide Block, shared debuffs, card passing, relic choices and co-op Ascension.",
         date: "Updated recently",
         image:
           "/images/slay-the-spire-2/slay-the-spire-2-multiplayer-rally-34-block.webp",
@@ -9995,21 +10116,19 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           latest: true,
-          latestFeatured: true,
           latestOrder: 325,
-          spotlightFeature: true,
-          spotlightOrder: 5,
           spotlightMeta:
-            "Four-player co-op, team roles, Rally 34 Block, focus fire, debuffs, card passing, shared rewards, campfire routes, backup defense, and co-op Ascension",
+            "Four-player co-op, team roles, Rally Block, focus fire, shared debuffs, card passing, relic allocation, routes and co-op Ascension",
         },
   
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 10,
         },
       },
     ],
   },
+  
   {
     title: "The Crust",
     game: "The Crust",

@@ -1,0 +1,408 @@
+
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+export const dreadDominionColumns = [
+  { key: "Boss", label: "Upcoming Boss" },
+  { key: "Effect", label: "Dominion Effect" },
+  { key: "Decision", label: "What You Should Change" },
+];
+
+export const dreadDominionRows = [
+  {
+    Boss: "The Kin — Overgrowth",
+    Effect: "Start each combat with 2 Weak and Frail.",
+    Decision: "Do not assume your normal opening attacks and Defends will work at full strength. Look for immediate defense or a way to shorten the fight.",
+  },
+  {
+    Boss: "Ceremonial Beast — Overgrowth",
+    Effect: "All enemies gain 1 Ritual.",
+    Decision: "Prioritize early kills. Each extra turn gives surviving enemies more Strength.",
+  },
+  {
+    Boss: "Vantom — Overgrowth",
+    Effect: "Normal enemies gain 1 Slippery; Elites gain 2.",
+    Decision: "Make sure you can remove Slippery before relying on a single important attack.",
+  },
+  {
+    Boss: "Waterfall Giant — Underdocks",
+    Effect: "Enemies explode when killed.",
+    Decision: "Account for damage from kills, especially when several enemies are close to death.",
+  },
+  {
+    Boss: "Soul Fysh — Underdocks",
+    Effect: "Shuffle a Beckon into your Draw Pile at the start of combat.",
+    Decision: "Prepare to handle an unwanted card instead of assuming every draw will improve your hand.",
+  },
+  {
+    Boss: "Lagavulin Matriarch — Underdocks",
+    Effect: "Lose 1 Strength and Dexterity at the end of your first turn.",
+    Decision: "Do not depend entirely on slow Strength or Dexterity scaling. Protect the opening turn and keep alternative damage or defense available.",
+  },
+  {
+    Boss: "Knowledge Demon — Hive",
+    Effect: "Choose Sloth or Amnesia at the start of each combat.",
+    Decision: "Compare a three-card-per-turn limit against a weaker first turn before choosing.",
+  },
+  {
+    Boss: "The Insatiable — Hive",
+    Effect: "Take increasing damage at the end of each turn.",
+    Decision: "Avoid plans that require many turns of passive setup before meaningful damage begins.",
+  },
+  {
+    Boss: "Kaiser Crab — Hive",
+    Effect: "All enemies gain 7 Plating.",
+    Decision: "Expect recurring enemy Block. Check whether your attacks can make progress through it.",
+  },
+  {
+    Boss: "Queen — Glory",
+    Effect: "Gain 3 Weak, Frail, and Vulnerable at the start of turn 2.",
+    Decision: "Plan the second turn before playing the first. Do not rely on ordinary Block cards performing at full strength.",
+  },
+  {
+    Boss: "Test Subject — Glory",
+    Effect: "All enemies gain 3 Strength.",
+    Decision: "Value Weak and dependable defense more highly, particularly against repeated attacks.",
+  },
+  {
+    Boss: "Aeonglass — Glory",
+    Effect: "Add a Wither to the top of your Draw Pile at the start of your turn.",
+    Decision: "Treat extra draws and Status management as a survival problem, not automatically as more card access.",
+  },
+];
+
+export const dreadFailureColumns = [
+  { key: "Problem", label: "What Is Going Wrong?" },
+  { key: "Cause", label: "What to Check" },
+  { key: "Response", label: "Practical Response" },
+];
+
+export const dreadFailureRows = [
+  {
+    Problem: "Enemies become impossible to block after several turns",
+    Cause: "Ritual or another damage-scaling Dominion is growing faster than your deck.",
+    Response: "Add immediate damage, finish one enemy earlier, or spend a potion before the fight becomes unmanageable.",
+  },
+  {
+    Problem: "A Power-heavy deck never gets started",
+    Cause: "Knowledge Demon's Amnesia or another opening penalty disrupts your first turn.",
+    Response: "Carry enough immediate Block or damage to survive without playing several Powers first.",
+  },
+  {
+    Problem: "Enemies survive despite repeated attacks",
+    Cause: "Plating, Slippery, or insufficient sustained damage is consuming your output.",
+    Response: "Check the current Dominion and add an answer to that specific defensive effect.",
+  },
+  {
+    Problem: "Your deck draws too many unusable cards",
+    Cause: "Additional Ascender's Banes, Beckon, or Wither interfere with card access.",
+    Response: "Prioritize reliable card access and Status handling rather than adding another slow payoff.",
+  },
+  {
+    Problem: "You survive early Acts but lose the final encounter",
+    Cause: "The deck handles normal enemies but cannot survive the stronger Dread boss.",
+    Response: "Evaluate the boss separately from its Dominion and prepare enough sustained offense and defense.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+  <GuideQuickAnswer title="Check the Dominion Before Choosing Your Route">
+
+  Dread activates all ten Ascension modifiers, strengthens bosses, and gives normal enemies and Elites an additional effect based on the upcoming boss. You also accumulate more Ascender's Banes as the run continues.
+
+  The most important decision happens at the start of each Act: identify what the Dominion will punish, then check whether your current deck can handle it. Ritual makes slow kills dangerous, Knowledge Demon can disrupt your opening turn, and Plating makes weak sustained damage a serious problem. A strong normal A10 deck can still fail if it has no answer to the current Act.
+
+  </GuideQuickAnswer>
+</section>
+
+Dread Mode is the hardest alternate challenge introduced to *Slay the Spire 2* in the November 2026 `public-beta` update. It keeps the normal progression through the Spire, but the enemies you fight on the way to each boss are affected by that boss's Dominion.
+
+The result is not simply a longer enemy HP bar. A card that normally solves an encounter may become unreliable because you begin Weak, lose part of your opening hand, cannot play more than three cards, or have to fight through recurring Block.
+
+The strategies below apply to the early v0.113.x beta. Dominion effects and boss balance may change during Early Access.
+
+<h2 id="unlock-dread" className="scroll-mt-24">
+  How do you unlock Dread Mode in Slay the Spire 2?
+</h2>
+
+You unlock Dread by **reaching Ascension 10 with every playable character**, including The Fool.
+
+That means the requirement covers:
+
+- Ironclad
+- Silent
+- Defect
+- Regent
+- Necrobinder
+- The Fool
+
+Dread does not unlock after one A10 victory with a single character. You must progress far enough to unlock A10 across the roster.
+
+Dread was added to the Steam `public-beta` branch with v0.113.0. If it is missing despite meeting the progression requirement, check **Steam → Properties → Game Versions & Betas** and make sure you are on `public-beta`.
+
+For the normal A1–A10 progression requirements, use the <Link href="/slay-the-spire-2/ascension-guide">Slay the Spire 2 Ascension Guide</Link>.
+
+<h2 id="dread-rules" className="scroll-mt-24">
+  What makes Dread different from Ascension 10?
+</h2>
+
+Normal A10 already combines every earlier Ascension modifier. Dread adds three pressures on top of that difficulty.
+
+**First, the upcoming boss changes the fights before it.** Every normal enemy and Elite in the Act receives that boss's Dominion effect.
+
+**Second, the boss itself is stronger.** The Dominion is not simply copied onto the boss encounter. Bosses have separate Dread-specific changes, so defeating the enhanced hallway enemies does not mean you have already prepared for the exact boss mechanic.
+
+**Third, more Ascender's Banes enter your deck.** A10 already includes the Ascender's Bane modifier. Dread adds another Bane as you enter each later Act, giving you three by Act 3.
+
+The Banes are Ethereal, but they still interfere with the first pass through your deck. If your opening depends on drawing a particular defensive card or setting up several Powers immediately, a bad draw can become more dangerous as the run progresses.
+
+There is another important detail in Act 3: **only the second Act 3 boss contributes a Dominion**. The bosses still receive their own Dread changes.
+
+These rules interact. You must survive an Act modified by its upcoming boss while collecting enough damage and defense to beat the stronger boss afterward.
+
+<Image
+  src="/images/slay-the-spire-2/slay-the-spire-2-dread-mode-rules.webp"
+  alt="Dread Mode rules showing all Ascension modifiers, additional Ascender's Banes, Boss Dominion effects, and stronger bosses"
+  width={1452}
+  height={756}
+  className="my-8 rounded-xl"
+/>
+
+<h2 id="all-boss-dominions" className="scroll-mt-24">
+  What does each Dread Boss Dominion do?
+</h2>
+
+The Dominion appears because of the boss assigned to the Act. Check it before committing to a dangerous route or deciding which reward your deck needs.
+
+<GuideTable
+  caption="Dread Boss Dominions and the decisions they change in each Act."
+  columns={dreadDominionColumns}
+  rows={dreadDominionRows}
+/>
+
+The first question after revealing a Dominion is which part of your deck becomes unreliable.
+
+Vantom's Slippery can absorb hits intended for your main attack, while Waterfall Giant makes killing enemies dangerous when several are close to death. The Kin weakens both your opening damage and Block, and Queen makes the second turn especially dangerous.
+
+These effects require different answers. Against Slippery, check whether you can clear the protection before using your strongest attack. Against turn-based debuffs, calculate whether your opening defense still works at reduced effectiveness.
+
+Ceremonial Beast, Kaiser Crab, and Knowledge Demon create more specific problems: escalating enemy damage, recurring Block, and a choice between restricted card plays or a weaker opening. The encounters below show how those pressures changed actual runs.
+
+<h2 id="ceremonial-beast-ironclad" className="scroll-mt-24">
+  How do you survive Ceremonial Beast's Ritual Dominion?
+</h2>
+
+Ceremonial Beast's Dominion gives enemies **1 Ritual**. Surviving enemies gain Strength each turn, so an encounter that looks manageable at first can become significantly more dangerous if you leave multiple enemies alive.
+
+<Image
+  src="/images/slay-the-spire-2/slay-the-spire-2-dread-ceremonial-beast-ritual.webp"
+  alt="Ceremonial Beast's Dominion gives all enemies one Ritual, which increases their Strength during combat"
+  width={1118}
+  height={1014}
+  className="my-8 rounded-xl"
+/>
+
+A successful Ironclad Dread run demonstrates how this changes the early game.
+
+In Overgrowth, the player began with Ceremonial Beast as the upcoming boss. The first enemies already had Ritual, meaning that waiting too long to finish them would increase the damage they dealt.
+
+The deck needed early attacks that could actually remove enemies, not only cards that promised stronger turns later.
+
+The player also selected **Shrug It Off** because the deck lacked dependable Block. That defensive pickup did not replace the damage plan; it prevented an otherwise functional offensive deck from losing too much HP while fighting enemies that grew stronger every turn.
+
+The practical choice is between three responses:
+
+1. **Kill an enemy before its next attack.** Removing one attacker prevents that enemy from gaining and using more Strength.
+2. **Use Weak or immediate Block when a kill is not possible.** This protects the turn without requiring a slow setup.
+3. **Spend a relevant potion when it changes the result of the encounter.** Saving a potion is not useful if Ritual causes the current fight to consume most of your HP.
+
+There is a limit to what this example proves.
+
+The Ironclad run eventually became extremely powerful through card draw, upgrades, relics, and a strong Byrdpip interaction. It completed Dread successfully without needing to Rest.
+
+That was an unusually strong run, not evidence that Ritual can normally be ignored or that taking every Elite is safe.
+
+The more repeatable lesson is that **the early deck had to survive Ritual before its later engine became overwhelming**.
+
+<h2 id="kaiser-crab-plating" className="scroll-mt-24">
+  Why does Kaiser Crab's Dominion make some attacks feel weak?
+</h2>
+
+Kaiser Crab gives enemies **7 Plating**.
+
+<Image
+  src="/images/slay-the-spire-2/slay-the-spire-2-dread-kaiser-crab-plating.webp"
+  alt="Kaiser Crab's Dominion grants all enemies seven Plating, providing recurring Block that decreases over time"
+  width={858}
+  height={652}
+  className="my-8 rounded-xl"
+/>
+
+Plating gives Block at the end of a turn and decreases over time. In longer fights, that recurring protection can prevent weak attacks from making enough progress against the enemy's HP.
+
+The same successful Ironclad Dread run reached Hive with Kaiser Crab as the upcoming boss.
+
+The player immediately had to account for enemies gaining Plating. In one fight, the enemy's protection made a planned attack less effective, and a potion became part of the solution.
+
+The deck had developed strong draw interactions by then, including Offering and Dark Embrace. Those cards allowed it to find more actions and concentrate damage into productive turns.
+
+This is a useful contrast with Ceremonial Beast.
+
+Against Ritual, the central concern is enemies growing stronger the longer they survive. Against Plating, the concern is whether your damage can make progress through recurring Block.
+
+A deck can be excellent against one and awkward against the other.
+
+Before selecting another attack in a Plating Act, look at what your current cards actually achieve. If they frequently deal too little damage to overcome enemy Block, adding another similar attack may not improve the fight.
+
+<h2 id="knowledge-demon-dominion" className="scroll-mt-24">
+  Should you choose Sloth or Amnesia against Knowledge Demon's Dominion?
+</h2>
+
+Knowledge Demon creates one of Dread's most important decisions because the player must choose between two penalties at the beginning of each combat.
+
+The options are:
+
+- **Sloth:** You cannot play more than three cards per turn.
+- **Amnesia:** On turn 1, draw two fewer cards and lose one Energy.
+
+<Image
+  src="/images/slay-the-spire-2/slay-the-spire-2-dread-knowledge-demon-choice.webp"
+  alt="Knowledge Demon's Dominion choice between Sloth, which limits card plays, and Amnesia, which reduces first-turn draw and Energy"
+  width={1060}
+  height={864}
+  className="my-8 rounded-xl"
+/>
+
+Neither is universally safer.
+
+### Choose Sloth when the deck can function on three cards
+
+A deck built around a few expensive, impactful cards may be able to accept Sloth.
+
+For example, if one attack provides most of the damage and one defensive card covers the incoming attack, three card plays may be enough to finish a typical turn.
+
+Sloth becomes much worse for decks that require numerous cheap cards, repeated attacks, or several Melody triggers.
+
+The important question is not how many cards you normally draw. It is **how many cards you must play to make the turn work**.
+
+### Choose Amnesia when losing the first turn is survivable
+
+Amnesia only affects the opening turn.
+
+After that, you can play as many cards per turn as your Energy and other effects allow.
+
+That makes it attractive for a deck that needs long chains of card plays later in combat.
+
+However, the first turn may be exactly when you need to establish a defensive Power or use a starting draw bonus.
+
+If the opening hand becomes too small to find your important cards, Amnesia can leave the run in a dangerous position before the deck starts working.
+
+### A Silent Dread loss shows why this choice matters
+
+In one Silent Dread attempt, the deck relied heavily on Powers and early card access.
+
+Before Knowledge Demon appeared, the character could use its opening draw advantage to find the cards needed for setup.
+
+Under the Dominion, taking Amnesia removed much of that advantage. The deck was still full of Powers, but the first turn was no longer reliable enough to establish them safely.
+
+The player repeatedly struggled to find sufficient Block, then died during a later encounter.
+
+The final assessment was that the deck had too many Powers for the way its opening turns now functioned.
+
+That failure does not mean all Power decks are bad in Dread. It means a setup-heavy deck must remain playable when its normal first-turn advantage disappears.
+
+When faced with Sloth or Amnesia, inspect the current deck rather than choosing the same option every fight.
+
+<h2 id="curses-and-card-access" className="scroll-mt-24">
+  How should you handle extra Ascender's Banes in Dread?
+</h2>
+
+An extra Ascender's Bane may look less threatening than enemy Ritual or a large attack, but it changes the reliability of the first deck cycle.
+
+By Act 3, the additional Banes can compete with defensive cards, attacks, and setup pieces for space in your opening draws.
+
+This creates a particular problem for decks that need several cards to appear together.
+
+If your deck only functions after drawing two Powers and a specific attack, another unwanted card increases the chance of reaching the dangerous turn before your engine is ready.
+
+The answer is not to add every draw card you see.
+
+Card draw still needs Energy to turn into a playable hand. If your deck spends most of its Energy on its Powers, finding more cards may not solve the immediate problem.
+
+Instead, look for ways to make your first useful turn less dependent on a perfect draw.
+
+This can mean carrying a defensive card that works alone, reducing the cost of an important Power, or avoiding another setup card when the deck already has more than it can safely play.
+
+By Act 3, the additional Banes make the first deck cycle less predictable. If an important Block card or Power is buried behind unwanted cards, the deck needs another way to survive that turn.
+
+The goal is not to eliminate every bad draw. It is to keep the deck functional when the cards you need arrive later than expected.
+
+<h2 id="dread-bosses" className="scroll-mt-24">
+  Why can you survive a Dominion but still lose to its Boss?
+</h2>
+
+A Dominion changes the encounters leading up to a boss, but the boss itself receives separate Dread enhancements. Surviving the Act's modifier does not guarantee that your deck is ready for the final encounter.
+
+A Defect Dread attempt illustrates the difference. The deck survived the preceding fights but struggled against Aeonglass when Withers, difficult draws, and defensive requirements accumulated. It had strong damage cards, yet could not consistently reach and play them before the next dangerous turn.
+
+Before entering a Dread boss fight, check whether your deck can survive its enhanced attacks while still producing enough damage to finish. The answer may be different from the one that carried you through the Dominion.
+
+For Aeonglass's attack sequence, Wither timing, and card-order decisions, see the <Link href="/slay-the-spire-2/aeonglass">Aeonglass Boss Guide</Link>.
+
+<h2 id="fool-dread" className="scroll-mt-24">
+  What can The Fool's successful Dread run teach you?
+</h2>
+
+A successful Fool Dread run relied on Cho defense, Stretch, Weak, and Song Path to survive turns when its main Arrow damage was unavailable.
+
+That matters in Dread because opening penalties, stronger enemies, and extra Ascender's Banes can delay the turn your deck needs. If the entire defensive plan depends on drawing an Arrow payoff or completing several Melody triggers first, the run may end before those interactions become useful.
+
+The winning deck could defend while waiting for its damage. For the underlying Arrow, Melody, Stretch, and card-selection decisions, see the <Link href="/slay-the-spire-2/the-fool">The Fool Guide</Link>.
+
+<h2 id="dread-route-decisions" className="scroll-mt-24">
+  When should you avoid an Elite under a dangerous Dominion?
+</h2>
+
+An Elite route that works at normal A10 can become too costly when the current Dominion directly counters your deck.
+
+Under Ceremonial Beast, a slow kill allows Ritual to increase enemy Strength. Vantom's additional Slippery can delay the attack you need to finish the fight, while Kaiser Crab's Plating makes low sustained damage less effective.
+
+Before choosing an Elite route, check what the Dominion changes about your actual damage and defense:
+
+- **Ritual:** Can you finish a dangerous target before repeated Strength gains make its attacks unmanageable?
+- **Slippery:** Can you remove the protection without wasting the attack responsible for most of your damage?
+- **Plating:** Can you deal enough damage to make progress through recurring Block?
+- **Opening penalties:** Can your first hand survive when Weak, Frail, or Amnesia disrupts your normal setup?
+
+A successful Ironclad Dread run took aggressive Elite routes after its draw and damage engine became powerful enough to handle the modifiers. That does not make the same path appropriate for a deck still missing an answer to its Dominion.
+
+For ordinary Elite routing, potion use, and Rest Site decisions, see the <Link href="/slay-the-spire-2/beginner-guide">Beginner Guide</Link>.
+
+<h2 id="dread-troubleshooting" className="scroll-mt-24">
+  Why do your Dread runs keep failing?
+</h2>
+
+Dread often exposes a weakness that was already present in the deck but had not yet become expensive enough to end a normal A10 run.
+
+A deck may deal plenty of damage but need too many turns to start. Another may block reliably against normal enemies but fail once the Dominion reduces the value of its cards.
+
+<GuideTable
+  caption="Dread Mode: match the failure to the specific pressure causing it."
+  columns={dreadFailureColumns}
+  rows={dreadFailureRows}
+/>
+
+When a Dread run ends, review the first encounter where your normal plan stopped working.
+
+If the deck failed as soon as enemies gained Ritual, the next run needs a faster way to finish enemies.
+
+If Knowledge Demon prevented you from establishing several Powers, the deck needs a playable first turn without those Powers.
+
+If you reached the final boss but could not survive long enough to use your damage engine, stronger damage alone may not be the solution.
+
+A failed run can also reflect unfavorable rewards or a particularly difficult combination of enemies and Dominion effects. Not every loss can be repaired by one different card.
+
+The useful question is which part of the deck became unreliable under the current Dominion, and whether the next reward could have solved that problem before the dangerous encounter arrived.

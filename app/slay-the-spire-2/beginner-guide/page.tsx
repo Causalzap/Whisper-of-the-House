@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -13,7 +14,13 @@ const metadataTitle =
   "Slay the Spire 2 Beginner Guide – How to Get Your First Win";
 
 const metadataDescription =
-  "Get your first Slay the Spire 2 win with better route, card, shop, Elite, potion, Rest, and Smith decisions instead of forcing a build too early.";
+  "Get your first Slay the Spire 2 win with better Act 1 routes, card picks, Skip decisions, Merchant spending, Elite fights, potions, and Rest Site choices.";
+
+const articleTitle =
+  "Slay the Spire 2 Beginner Guide: How to Get Your First Win";
+
+const articleDescription =
+  "Learn how to survive Act 1, choose cards that solve immediate combat problems, avoid dangerous Elite routes, and spend HP, Gold, and potions effectively. Build a reliable deck without committing to a combination too early.";
 
 const imageUrls = [
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-beginner-map-branching-route.webp`,
@@ -26,31 +33,31 @@ const imageUrls = [
 const toc = [
   {
     id: "first-win-plan",
-    label: "Start with the map",
+    label: "Choosing an Act 1 route",
   },
   {
     id: "solve-the-next-fight",
-    label: "Build for the next fight",
+    label: "Picking early card rewards",
   },
   {
     id: "check-lethal",
-    label: "Check lethal before blocking",
+    label: "Checking lethal before Block",
   },
   {
     id: "skip-card-rewards",
-    label: "When to skip card rewards",
+    label: "When to Skip card rewards",
   },
   {
     id: "when-to-commit",
-    label: "When to commit to synergy",
+    label: "When to commit to a build",
   },
   {
     id: "shops",
-    label: "When a shop is worth it",
+    label: "Spending Gold at Merchants",
   },
   {
     id: "rest-or-smith",
-    label: "Rest or Smith?",
+    label: "Choosing Rest or Smith",
   },
   {
     id: "elite-readiness",
@@ -58,7 +65,7 @@ const toc = [
   },
   {
     id: "enemy-priority",
-    label: "Which enemy to kill first",
+    label: "Choosing which enemy to kill",
   },
   {
     id: "potions",
@@ -66,11 +73,11 @@ const toc = [
   },
   {
     id: "act-one-check",
-    label: "What Act 1 should prove",
+    label: "Preparing to leave Act 1",
   },
   {
     id: "act-two-reset",
-    label: "Reset your plan in Act 2",
+    label: "Adjusting your plan in Act 2",
   },
   {
     id: "after-first-win",
@@ -90,6 +97,10 @@ const relatedLinks = [
   {
     href: "/slay-the-spire-2/necrobinder-guide",
     label: "Slay the Spire 2 Necrobinder Guide",
+  },
+  {
+    href: "/slay-the-spire-2/the-fool",
+    label: "Slay the Spire 2 The Fool Guide",
   },
   {
     href: "/slay-the-spire-2/multiplayer-guide",
@@ -114,7 +125,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Learn how to plan a route, judge card rewards, spend Gold, use potions, choose Rest or Smith, and decide when an Elite is actually worth the risk.",
+      "Survive your first Slay the Spire 2 runs by choosing safer routes, judging card rewards, recognizing lethal attacks, and using Gold, potions, and Rest Sites effectively.",
 
     url: pageUrl,
 
@@ -125,7 +136,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: imageUrls[0],
-        alt: "Slay the Spire 2 map with branching routes between Rest Sites, Elites, enemies, and a Merchant",
+        alt: "Slay the Spire 2 Act 1 map showing branching paths, Rest Sites, Elite encounters, and a Merchant",
       },
     ],
   },
@@ -136,7 +147,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Plan the Act, take cards with a real job, skip weak rewards, spend Gold with a purpose, and reach your first Slay the Spire 2 win more consistently.",
+      "Learn Act 1 pathing, card rewards, Skip decisions, Elite preparation, Merchant spending, and Rest versus Smith for your first Slay the Spire 2 win.",
 
     images: [imageUrls[0]],
   },
@@ -183,17 +194,16 @@ const jsonLd = {
         "@id": pageUrl,
       },
 
-      headline:
-        "Slay the Spire 2 Beginner Guide: How to Get Your First Win",
+      headline: articleTitle,
 
       description:
-        "A player-focused Slay the Spire 2 beginner guide for getting a first clear by reading the full Act map before committing to a path, choosing cards that solve immediate combat problems, using Skip to protect draw quality, judging Merchant purchases against current Gold, deciding between Rest and Smith based on the next dangerous stretch, spending potions when they preserve a run, evaluating Elite risk from deck strength rather than HP alone, prioritizing enemies by their next threat, and resetting the route plan when entering a new Act.",
+        "Learn how to get your first win in Slay the Spire 2. Choose Act 1 routes with safer branches, compare early card rewards, check lethal damage before spending Energy on Block, Skip unnecessary cards, spend Gold at Merchants, decide between Rest and Smith, prepare for Elite encounters, use potions, and adjust your deck when entering Act 2.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -215,7 +225,7 @@ const jsonLd = {
       mentions: [
         {
           "@type": "Thing",
-          name: "Slay the Spire 2 map pathing",
+          name: "Act 1 pathing",
         },
         {
           "@type": "Thing",
@@ -223,7 +233,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Elite enemies",
+          name: "Card Skip",
+        },
+        {
+          "@type": "Thing",
+          name: "Elite encounters",
         },
         {
           "@type": "Thing",
@@ -232,6 +246,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Rest Sites",
+        },
+        {
+          "@type": "Thing",
+          name: "Card upgrades",
         },
         {
           "@type": "Thing",
@@ -278,11 +296,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Beginner Guide: How to Get Your First Win"
-          description="My first win gets much easier when I stop forcing a build and start solving the next problem: choose a route with an exit, take cards with a real job, spend Gold where it changes the run, and only take the risks the current deck can actually support."
-          gameTitle="Slay the Spire 2"
-          gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          title={articleTitle}
+          description={articleDescription}
+          gameTitle="Home"
+          gameHref="/"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

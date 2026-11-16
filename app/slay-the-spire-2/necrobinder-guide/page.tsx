@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,10 +11,16 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/slay-the-spire-2/necrobinder-guide`;
 
 const metadataTitle =
-  "Slay the Spire 2 Necrobinder Guide – Doom, Osty & Runs";
+  "Slay the Spire 2 Necrobinder Guide – Osty, Doom & Builds";
 
 const metadataDescription =
-  "Win more Necrobinder runs with better Strike removals, Osty defense, Doom timing, Elite routes, energy storage, Eradicate, and finisher decisions.";
+  "Learn Necrobinder builds in Slay the Spire 2 with Osty, Summon, Unleash, Doom, Souls, Banshee's Cry, Forbidden Grimoire, and Eradicate strategies.";
+
+const articleTitle =
+  "Slay the Spire 2 Necrobinder Guide: How to Win With Osty, Doom & Eradicate";
+
+const articleDescription =
+  "Build around Osty's HP and Unleash damage, survive until Doom finishes enemies, and use Souls or Ethereal cards when they support your deck. Learn when to remove Strikes, use Forbidden Grimoire, and convert stored Energy into Eradicate damage.";
 
 const imageUrls = [
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-necrobinder-remove-two-strikes.webp`,
@@ -26,63 +33,47 @@ const imageUrls = [
 const toc = [
   {
     id: "reach-real-cards",
-    label: "Reach the good cards faster",
+    label: "Should you remove Strikes early?",
   },
   {
     id: "first-floors",
-    label: "What Osty should do early",
+    label: "Osty: Defend or attack?",
   },
   {
     id: "do-not-force-doom",
-    label: "When Doom is actually worth it",
+    label: "When Doom beats direct damage",
+  },
+  {
+    id: "souls-and-ethereal",
+    label: "Souls, Ethereal & Banshee's Cry",
   },
   {
     id: "remove-until-it-hurts",
-    label: "How far to push card removal",
-  },
-  {
-    id: "when-to-stop-removing",
-    label: "When to stop removing",
+    label: "Forbidden Grimoire & card removal",
   },
   {
     id: "route-around-power",
-    label: "When an aggressive route works",
-  },
-  {
-    id: "greed-has-a-number",
-    label: "When HP greed is worth it",
+    label: "Surviving a four-Elite route",
   },
   {
     id: "osty-buys-time",
-    label: "Use Osty to buy useful turns",
+    label: "Why Pull Aggro helps Osty",
   },
   {
     id: "second-kill-condition",
-    label: "When to add a second finisher",
+    label: "When to take Eradicate",
   },
   {
     id: "energy-needs-an-outlet",
-    label: "Turn stored Energy into damage",
-  },
-  {
-    id: "potions-preserve-lines",
-    label: "When to spend potions",
-  },
-  {
-    id: "temporary-relic-plan",
-    label: "Route around temporary relic value",
-  },
-  {
-    id: "rest-when-engine-is-done",
-    label: "When HP beats another upgrade",
+    label: "Borrowed Time & Ice Cream",
   },
   {
     id: "when-the-deck-is-finished",
-    label: "Know when the deck is finished",
+    label: "533-damage Unleash",
   },
   {
     id: "why-necrobinder-runs-collapse",
-    label: "Why Necrobinder runs collapse",
+    label: "Why Necrobinder builds fail",
   },
 ];
 
@@ -104,6 +95,14 @@ const relatedLinks = [
     label: "Slay the Spire 2 Multiplayer Guide",
   },
   {
+    href: "/slay-the-spire-2/blitz",
+    label: "Slay the Spire 2 Blitz Mode Guide",
+  },
+  {
+    href: "/slay-the-spire-2/dread",
+    label: "Slay the Spire 2 Dread Mode Guide",
+  },
+  {
     href: "/slay-the-spire-2",
     label: "Slay the Spire 2 Guide",
   },
@@ -122,7 +121,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Learn when to remove starter cards, what job Osty should perform, when Doom deserves more support, and how Necrobinder turns energy and consistency into a finisher.",
+      "Learn how Osty protects Necrobinder, when Doom can finish enemies, how Souls and Ethereal cards work, and how to build powerful Unleash or Eradicate attacks.",
 
     url: pageUrl,
 
@@ -132,8 +131,8 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: imageUrls[0],
-        alt: "Necrobinder removing two Strike cards early in a Slay the Spire 2 run",
+        url: imageUrls[4],
+        alt: "Slay the Spire 2 Necrobinder using Unleash for 533 damage after strengthening Osty",
       },
     ],
   },
@@ -144,9 +143,9 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Build more consistent Necrobinder runs around removal, Osty, Doom, stored Energy, Elite routing, and finishers that the deck can actually support.",
+      "Play Necrobinder with Osty, Doom, Souls, Forge-free card removal through Forbidden Grimoire, and high-damage Eradicate or Unleash combinations.",
 
-    images: [imageUrls[0]],
+    images: [imageUrls[4]],
   },
 };
 
@@ -191,17 +190,16 @@ const jsonLd = {
         "@id": pageUrl,
       },
 
-      headline:
-        "Slay the Spire 2 Necrobinder Guide: Doom, Osty and Winning Runs",
+      headline: articleTitle,
 
       description:
-        "A player-focused Slay the Spire 2 Necrobinder guide built around consistent run decisions rather than a fixed build. It covers why early Strike removal can improve draw quality, how Osty changes defense and buys setup turns, when Doom has enough support to matter, how far to push card removal, when aggressive Elite routes become reasonable, how to price HP greed against a known reward, when stored Energy needs a second kill condition such as Eradicate, how potions protect a winning line, when temporary relic value should change pathing, and why a finished Necrobinder engine often benefits more from HP and consistency than another speculative card.",
+        "Learn how to play Necrobinder in Slay the Spire 2. Strengthen Osty with Summon, increase Unleash damage, survive until Doom defeats enemies, generate Souls for card draw, reduce Banshee's Cry's cost with played Ethereal cards, remove unwanted cards using Forbidden Grimoire, and combine Eradicate with Borrowed Time, Lethality, and Ice Cream for powerful finishing attacks.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -216,7 +214,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Necrobinder strategy",
+          name: "Necrobinder builds",
         },
       ],
 
@@ -227,11 +225,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Doom",
-        },
-        {
-          "@type": "Thing",
-          name: "Eradicate",
+          name: "Summon",
         },
         {
           "@type": "Thing",
@@ -239,15 +233,39 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Doom",
+        },
+        {
+          "@type": "Thing",
+          name: "Souls",
+        },
+        {
+          "@type": "Thing",
+          name: "Ethereal",
+        },
+        {
+          "@type": "Thing",
+          name: "Banshee's Cry",
+        },
+        {
+          "@type": "Thing",
           name: "Forbidden Grimoire",
         },
         {
           "@type": "Thing",
-          name: "Card removal",
+          name: "Pull Aggro",
         },
         {
           "@type": "Thing",
-          name: "Energy storage",
+          name: "Eradicate",
+        },
+        {
+          "@type": "Thing",
+          name: "Borrowed Time",
+        },
+        {
+          "@type": "Thing",
+          name: "Ice Cream",
         },
       ],
 
@@ -286,11 +304,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Necrobinder: How to Win More Runs"
-          description="Necrobinder becomes much more reliable when I clear weak draws before chasing a payoff, give Osty a real job, and only commit to Doom, Eradicate, or another finisher after the deck has enough defense, draw, and Energy to support it."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Slay the Spire 2"
           gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

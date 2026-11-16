@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -13,11 +14,16 @@ const metadataTitle =
   "Slay the Spire 2 Ascension Guide – How to Climb A1–A10";
 
 const metadataDescription =
-  "Climb Slay the Spire 2 from A1 to A10 with route, HP, Gold, Rest, deck consistency, Elite risk, and double-boss decisions that actually matter.";
+  "Climb Slay the Spire 2 from A1 to A10. Learn every Ascension modifier, A6 Inflation costs, Elite routes, HP management, and Act 3 double-boss strategy.";
+
+const articleTitle =
+  "Slay the Spire 2 Ascension: How to Climb A1–A10";
+
+const articleDescription =
+  "Climb from A1 to A10 by adapting to stacked difficulty modifiers. Manage early Elite routes, reduced Ancient healing, less Gold, expensive card removal, tougher enemies, and the two Act 3 bosses.";
 
 const imageUrls = [
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-ascension-three-elites-too-greedy.webp`,
-  `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-ascension-glitterstream-upgrade.webp`,
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-ascension-a10-bad-card-rewards.webp`,
 ];
 
@@ -36,7 +42,7 @@ const toc = [
   },
   {
     id: "a4-a7",
-    label: "A4–A7: Less room to recover",
+    label: "A4–A7: Potions, Bane, Inflation & Scarcity",
   },
   {
     id: "a8-a10",
@@ -74,6 +80,14 @@ const relatedLinks = [
     label: "Slay the Spire 2 Multiplayer Guide",
   },
   {
+    href: "/slay-the-spire-2/blitz",
+    label: "Slay the Spire 2 Blitz Mode Guide",
+  },
+  {
+    href: "/slay-the-spire-2/dread",
+    label: "Slay the Spire 2 Dread Mode Guide",
+  },
+  {
     href: "/slay-the-spire-2",
     label: "Slay the Spire 2 Guide",
   },
@@ -92,7 +106,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Learn what changes from A1 through A10, how stacked modifiers alter route and resource decisions, and what makes a deck reliable enough to keep climbing.",
+      "Understand how A1–A10 changes Elite routes, Ancient healing, Gold, potions, card removal, and the two Act 3 boss fights.",
 
     url: pageUrl,
 
@@ -114,7 +128,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Understand A1–A10 as stacked pressure on routing, HP, Gold, Rest Sites, deck consistency, Elite risk, and the Act 3 double boss.",
+      "Climb A1–A10 with better Elite decisions, HP and Gold management, A6 Inflation planning, and preparation for two Act 3 bosses.",
 
     images: [imageUrls[0]],
   },
@@ -165,13 +179,13 @@ const jsonLd = {
         "Slay the Spire 2 Ascension Guide: How to Climb from A1 to A10",
 
       description:
-        "A player-focused Slay the Spire 2 Ascension guide covering how the difficulty ladder unlocks, how the A1 through A10 modifiers stack, and how route planning, HP management, Gold, potion capacity, Ascender's Bane, fewer Rest Sites, Scarcity, tougher enemies, Elite risk, deck consistency, and the Act 3 double boss change real run decisions as the climb gets harder.",
+        "Climb Slay the Spire 2 from Ascension 1 to Ascension 10. Learn how Elite encounters, reduced Ancient healing, Gold penalties, smaller potion capacity, Ascender's Bane, A6 Inflation, Scarcity, stronger enemies, and the two Act 3 bosses affect your route, card choices, and survival.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -213,7 +227,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Gloom",
+          name: "Inflation",
         },
         {
           "@type": "Thing",
@@ -260,11 +274,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Ascension: How to Climb A1–A10"
-          description="Ascension keeps stacking pressure onto the same run. I use A1–A3 to tighten route, HP, and Gold decisions, A4–A7 to remove inconsistency, and A8–A10 to make sure the deck still works when weak turns stop being forgiven."
-          gameTitle="Slay the Spire 2"
-          gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          title={articleTitle}
+          description={articleDescription}
+          gameTitle="Home"
+          gameHref="/"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

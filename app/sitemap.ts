@@ -1249,6 +1249,11 @@ const paths = [
      'zombies-arent-real/jester',
      'zombies-arent-real/safe-zones',
      'zombies-arent-real/achievements',
+
+     '/slay-the-spire-2/the-fool',
+     '/slay-the-spire-2/blitz',
+     '/slay-the-spire-2/dread',
+     '/slay-the-spire-2/aeonglass',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1594,12 +1599,18 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
 
 
-  '/slay-the-spire-2': '2026-09-12',
-  '/slay-the-spire-2/beginner-guide': '2026-09-12',
-  '/slay-the-spire-2/ascension-guide': '2026-09-12',
-  '/slay-the-spire-2/regent-guide': '2026-09-12',
-  '/slay-the-spire-2/necrobinder-guide': '2026-09-12',
-  '/slay-the-spire-2/multiplayer-guide': '2026-09-12',
+  '/slay-the-spire-2': '2026-11-16',
+  '/slay-the-spire-2/beginner-guide': '2026-11-16',
+  '/slay-the-spire-2/ascension-guide': '2026-11-16',
+  '/slay-the-spire-2/regent-guide': '2026-11-16',
+  '/slay-the-spire-2/necrobinder-guide': '2026-11-16',
+  '/slay-the-spire-2/multiplayer-guide': '2026-11-16',
+
+  '/slay-the-spire-2/the-fool': '2026-11-16',
+  '/slay-the-spire-2/blitz': '2026-11-16',
+  '/slay-the-spire-2/dread': '2026-11-16',
+  '/slay-the-spire-2/aeonglass': '2026-11-16',
+
 
   '/the-crust': '2026-09-13',
   '/the-crust/walkthrough': '2026-09-13',

@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,58 +11,64 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/slay-the-spire-2/regent-guide`;
 
 const metadataTitle =
-  "Slay the Spire 2 Regent Guide – Stars, Routes & Winning Runs";
+  "Slay the Spire 2 Regent Guide: Stars, Forge & Sovereign Blade";
 
 const metadataDescription =
-  "Win more Regent runs in Slay the Spire 2 with better Stars, block, shop, removal, Rest, Elite route, and late-run card decisions.";
+  "Learn Regent in Slay the Spire 2 with Stars, Orbit, Forge, Sovereign Blade, card creation, defensive choices, and strategies for difficult fights.";
+
+const articleTitle =
+  "Slay the Spire 2 Regent Guide: How to Use Stars, Forge & Sovereign Blade";
+
+const articleDescription =
+  "Learn when Regent needs more Stars or Energy, how Orbit supports expensive turns, and when to build around Sovereign Blade. Compare Forge, Block, and card-creation rewards to keep your deck effective against Elites and bosses.";
 
 const imageUrls = [
-  `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-regent-underdocks-route.webp`,
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-regent-orbit-card-pick.webp`,
+  `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-regent-underdocks-route.webp`,
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-regent-block-over-stars.webp`,
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-regent-rest-before-dangerous-fight.webp`,
 ];
 
 const toc = [
   {
-    id: "stars-are-not-the-plan",
-    label: "Stars are a resource, not the plan",
+    id: "stars-vs-energy",
+    label: "When Regent needs Stars or Energy",
   },
   {
-    id: "act-one-route",
-    label: "Plan Act 1 around the first hard fight",
+    id: "orbit-energy",
+    label: "When to take or upgrade Orbit",
   },
   {
-    id: "fix-the-bad-turn",
-    label: "Buy what fixes the bad turn",
+    id: "sovereign-blade-forge",
+    label: "Building around Sovereign Blade",
   },
   {
-    id: "stars-as-budget",
-    label: "Treat Stars like a budget",
+    id: "regent-act-one",
+    label: "Preparing for early Elites",
   },
   {
-    id: "card-removal",
-    label: "When removal improves the deck",
+    id: "block-versus-stars",
+    label: "Choosing Block over Stars",
   },
   {
-    id: "rest-or-upgrade",
-    label: "Rest or upgrade?",
+    id: "regent-card-creation",
+    label: "Card Creation & CHARGE!!",
   },
   {
-    id: "prepare-next-boss",
-    label: "Prepare for the next boss",
+    id: "regent-removal",
+    label: "When to stop adding Star generators",
   },
   {
-    id: "stop-adding-cards",
-    label: "Know when to stop adding cards",
+    id: "regent-rest-upgrade",
+    label: "Pale Blue Dot: Upgrade or Rest?",
   },
   {
-    id: "act-checkpoints",
-    label: "What each Act should prove",
+    id: "regent-boss-matchups",
+    label: "BEGONE! against Soul Fysh",
   },
   {
-    id: "why-regent-runs-fail",
-    label: "Why Regent runs collapse",
+    id: "regent-run-problems",
+    label: "Why Regent builds stop working",
   },
 ];
 
@@ -83,6 +90,14 @@ const relatedLinks = [
     label: "Slay the Spire 2 Multiplayer Guide",
   },
   {
+    href: "/slay-the-spire-2/blitz",
+    label: "Slay the Spire 2 Blitz Mode Guide",
+  },
+  {
+    href: "/slay-the-spire-2/dread",
+    label: "Slay the Spire 2 Dread Mode Guide",
+  },
+  {
     href: "/slay-the-spire-2",
     label: "Slay the Spire 2 Guide",
   },
@@ -101,7 +116,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Learn how to turn Regent's Stars into reliable runs by fixing weak turns, choosing safer routes, buying the right shop answers, and stopping once the deck already solves its fights.",
+      "Learn when Regent needs Stars or Energy, how Orbit and Forge support Sovereign Blade, and why card creation or defensive rewards can change a difficult fight.",
 
     url: pageUrl,
 
@@ -112,7 +127,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: imageUrls[0],
-        alt: "Slay the Spire 2 Regent map with several Elite and Rest Site route options",
+        alt: "Regent considering Orbit at a Merchant to improve Energy availability in Slay the Spire 2",
       },
     ],
   },
@@ -123,7 +138,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Use Stars as a resource, cover weak defensive turns, route around real combat checks, and build a more consistent Regent run in Slay the Spire 2.",
+      "Build Regent around Stars, Orbit, Forge, Sovereign Blade, and card creation while keeping enough Energy and Block for dangerous fights.",
 
     images: [imageUrls[0]],
   },
@@ -170,17 +185,16 @@ const jsonLd = {
         "@id": pageUrl,
       },
 
-      headline:
-        "Slay the Spire 2 Regent Guide: Stars, Routes and Winning Runs",
+      headline: articleTitle,
 
       description:
-        "A player-focused Slay the Spire 2 Regent guide covering how to use Stars as a resource rather than a build goal, how to plan Act 1 around the first dangerous fight, when an Underdocks Elite route is too greedy, how to choose defensive cards over redundant Star generation, what to buy when a shop can fix a weak turn, when card removal improves draw quality, how to decide between Rest and Smith before a dangerous encounter, when to prepare for the next boss instead of adding more scaling, and how to recognize when a finished Regent deck should stop taking unnecessary cards and risks.",
+        "Learn how to play Regent in Slay the Spire 2. Manage persistent Stars and Energy, use Orbit to support expensive turns, increase Sovereign Blade damage with Forge, and combine card creation with Arsenal, Pillar of Creation, or other useful effects. Compare Star generation with Block, prepare for early Elites, use BEGONE! against Soul Fysh, and recognize when an established build needs defense or card access instead of more setup.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -195,7 +209,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Regent strategy",
+          name: "Regent builds",
         },
       ],
 
@@ -206,27 +220,63 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Forged Blade",
+          name: "Divine Right",
+        },
+        {
+          "@type": "Thing",
+          name: "Orbit",
+        },
+        {
+          "@type": "Thing",
+          name: "Forge",
+        },
+        {
+          "@type": "Thing",
+          name: "Sovereign Blade",
+        },
+        {
+          "@type": "Thing",
+          name: "Summon Forth",
+        },
+        {
+          "@type": "Thing",
+          name: "Refine Blade",
+        },
+        {
+          "@type": "Thing",
+          name: "Venerate",
+        },
+        {
+          "@type": "Thing",
+          name: "Bulwark",
+        },
+        {
+          "@type": "Thing",
+          name: "Card Creation",
+        },
+        {
+          "@type": "Thing",
+          name: "Arsenal",
+        },
+        {
+          "@type": "Thing",
+          name: "Pillar of Creation",
+        },
+        {
+          "@type": "Thing",
+          name: "CHARGE!!",
+        },
+        {
+          "@type": "Thing",
+          name: "BEGONE!",
+        },
+        {
+          "@type": "Thing",
+          name: "Soul Fysh",
         },
         {
           "@type": "Thing",
           name: "Underdocks",
-        },
-        {
-          "@type": "Thing",
-          name: "Elite routing",
-        },
-        {
-          "@type": "Thing",
-          name: "Card removal",
-        },
-        {
-          "@type": "Thing",
-          name: "Rest Sites",
-        },
-        {
-          "@type": "Thing",
-          name: "Merchants",
         },
       ],
 
@@ -265,11 +315,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Regent: How to Win More Consistently"
-          description="Regent becomes much more reliable when I stop treating Stars as the objective. I use them to support the turn the deck actually needs, pick up real Block when the route demands it, spend Gold on immediate weaknesses, and stop adding cards once the important fights are already covered."
-          gameTitle="Slay the Spire 2"
-          gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          title={articleTitle}
+          description={articleDescription}
+          gameTitle="Home"
+          gameHref="/"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

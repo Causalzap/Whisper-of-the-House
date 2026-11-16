@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -10,10 +11,16 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/slay-the-spire-2`;
 
 const metadataTitle =
-  "Slay the Spire 2 Guide – Beginner, Ascension & Co-op";
+  "Slay the Spire 2 Guide: Beginner, Ascension & Builds";
 
 const metadataDescription =
-  "Use this Slay the Spire 2 guide for first wins, Ascension A1–A10, Regent, Necrobinder, co-op strategy, and the right data tools for each run.";
+  "Get your first Slay the Spire 2 win, climb A1–A10, learn Regent, Necrobinder and The Fool, beat Aeonglass, and unlock Blitz and Dread.";
+
+const articleTitle =
+  "Slay the Spire 2 Guide: How to Win and What to Play Next";
+
+const articleDescription =
+  "Find out why your Slay the Spire 2 runs keep failing, from early card choices and Ascension modifiers to character-specific builds. Learn when to try Blitz or Dread, how to handle Aeonglass, and what changes when playing with friends.";
 
 const imageUrls = [
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-guide-ancient-boon-start.webp`,
@@ -23,35 +30,47 @@ const imageUrls = [
 const toc = [
   {
     id: "where-to-start",
-    label: "Choose the guide for your problem",
+    label: "Which guide should you start with?",
   },
   {
     id: "first-win",
-    label: "Get your first win",
+    label: "Why early runs die in Act 1",
   },
   {
     id: "ascension",
-    label: "Climb Ascension",
+    label: "Why higher Ascension feels harder",
   },
   {
     id: "regent",
-    label: "Learn Regent",
+    label: "Regent: Stars & Sovereign Blade",
   },
   {
     id: "necrobinder",
-    label: "Learn Necrobinder",
+    label: "Necrobinder: Osty & Doom",
+  },
+  {
+    id: "the-fool",
+    label: "The Fool: Arrows & Melody",
+  },
+  {
+    id: "blitz-vs-dread",
+    label: "Blitz vs Dread: Which mode?",
+  },
+  {
+    id: "aeonglass",
+    label: "Aeonglass: Wither & Artifact",
   },
   {
     id: "multiplayer",
-    label: "Play co-op",
+    label: "Playing co-op with friends",
   },
   {
     id: "exact-data",
-    label: "Cards, relics & exact data",
+    label: "Checking cards, relics & enemies",
   },
   {
     id: "what-to-play-next",
-    label: "Where to go next",
+    label: "Unlocking The Fool, Blitz & Dread",
   },
 ];
 
@@ -73,6 +92,22 @@ const relatedLinks = [
     label: "Slay the Spire 2 Necrobinder Guide",
   },
   {
+    href: "/slay-the-spire-2/the-fool",
+    label: "Slay the Spire 2 The Fool Guide",
+  },
+  {
+    href: "/slay-the-spire-2/blitz",
+    label: "Slay the Spire 2 Blitz Mode Guide",
+  },
+  {
+    href: "/slay-the-spire-2/dread",
+    label: "Slay the Spire 2 Dread Mode Guide",
+  },
+  {
+    href: "/slay-the-spire-2/aeonglass",
+    label: "Slay the Spire 2 Aeonglass Boss Guide",
+  },
+  {
     href: "/slay-the-spire-2/multiplayer-guide",
     label: "Slay the Spire 2 Multiplayer Guide",
   },
@@ -91,7 +126,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Find the right Slay the Spire 2 guide for your run, from first clears and Ascension to Regent, Necrobinder, multiplayer, and exact game data.",
+      "Start your first Slay the Spire 2 run, climb Ascension, learn Regent, Necrobinder and The Fool, survive Aeonglass, and take on Blitz or Dread.",
 
     url: pageUrl,
 
@@ -102,7 +137,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: imageUrls[0],
-        alt: "Slay the Spire 2 Ancient offering a choice between Max HP, a card and potion reward, or 333 Gold with Greed",
+        alt: "Slay the Spire 2 Ancient offering Max HP, a card and potion, or 333 Gold with Greed",
       },
     ],
   },
@@ -113,7 +148,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Start with the problem your current run is showing you, then use the right first-win, Ascension, character, co-op, or data guide.",
+      "Slay the Spire 2 tips for first wins, A1–A10, Regent, Necrobinder, The Fool, Aeonglass, co-op, Blitz and Dread.",
 
     images: [imageUrls[0]],
   },
@@ -154,17 +189,16 @@ const jsonLd = {
         "@id": pageUrl,
       },
 
-      headline:
-        "Slay the Spire 2 Guide: Beginner, Ascension, Characters and Co-op",
+      headline: articleTitle,
 
       description:
-        "A player-focused Slay the Spire 2 guide hub that routes common run problems to the right detailed guide. It covers first-win decisions, Ascension progression from A1 through A10, Regent and Necrobinder learning paths, multiplayer team strategy, and when exact card, relic, monster, boss, or map data is better handled through a dedicated structured database.",
+        "Learn how to win in Slay the Spire 2 by choosing early card rewards, managing HP and Gold, preparing for Elites, and climbing Ascension A1–A10. Understand Regent's Stars and Sovereign Blade, Necrobinder's Osty and Doom, and The Fool's Arrows and Melody. Compare Blitz and Dread, survive Aeonglass's Wither and Artifact mechanics, coordinate co-op battles, and check the November 2026 beta requirements for new characters and modes.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -177,12 +211,24 @@ const jsonLd = {
           "@type": "Thing",
           name: "Slay the Spire 2 strategy",
         },
+        {
+          "@type": "Thing",
+          name: "Slay the Spire 2 Ascension",
+        },
+        {
+          "@type": "Thing",
+          name: "Slay the Spire 2 public beta",
+        },
       ],
 
       mentions: [
         {
           "@type": "Thing",
-          name: "Ascension",
+          name: "Ancient rewards",
+        },
+        {
+          "@type": "Thing",
+          name: "Ascension 1 through Ascension 10",
         },
         {
           "@type": "Thing",
@@ -190,7 +236,59 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Stars",
+        },
+        {
+          "@type": "Thing",
+          name: "Sovereign Blade",
+        },
+        {
+          "@type": "Thing",
           name: "Necrobinder",
+        },
+        {
+          "@type": "Thing",
+          name: "Osty",
+        },
+        {
+          "@type": "Thing",
+          name: "Doom",
+        },
+        {
+          "@type": "Thing",
+          name: "The Fool",
+        },
+        {
+          "@type": "Thing",
+          name: "Aim",
+        },
+        {
+          "@type": "Thing",
+          name: "Melody",
+        },
+        {
+          "@type": "Thing",
+          name: "Blitz Mode",
+        },
+        {
+          "@type": "Thing",
+          name: "Dread Mode",
+        },
+        {
+          "@type": "Thing",
+          name: "Boss Dominions",
+        },
+        {
+          "@type": "Thing",
+          name: "Aeonglass",
+        },
+        {
+          "@type": "Thing",
+          name: "Wither",
+        },
+        {
+          "@type": "Thing",
+          name: "Artifact",
         },
         {
           "@type": "Thing",
@@ -199,18 +297,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Co-op",
-        },
-        {
-          "@type": "Thing",
-          name: "Map pathing",
-        },
-        {
-          "@type": "Thing",
-          name: "Cards",
-        },
-        {
-          "@type": "Thing",
-          name: "Relics",
         },
       ],
 
@@ -249,11 +335,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Guide: What to Fix in Your Next Run"
-          description="I use this hub to diagnose where a run is actually breaking: first-win fundamentals, Ascension pressure, Regent or Necrobinder decisions, or multiplayer coordination. Once I know the problem, I move to the guide that owns it instead of treating every loss like the same deck-building issue."
-          gameTitle="Slay the Spire 2"
-          gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          title={articleTitle}
+          description={articleDescription}
+          gameTitle="Home"
+          gameHref="/"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

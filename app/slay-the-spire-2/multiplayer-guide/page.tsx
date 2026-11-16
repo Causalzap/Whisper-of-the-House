@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -13,7 +14,13 @@ const metadataTitle =
   "Slay the Spire 2 Co-op Guide – Teams, Roles & Ascension";
 
 const metadataDescription =
-  "Play Slay the Spire 2 co-op with better team roles, focus fire, shared Block, card passing, relic choices, routes, and multiplayer Ascension decisions.";
+  "Play Slay the Spire 2 co-op with coordinated focus fire, team Block, shared debuffs, card passing, relic allocation, safer routes, and multiplayer Ascension.";
+
+const articleTitle =
+  "Slay the Spire 2 Co-op Guide: Teams, Roles & Ascension";
+
+const articleDescription =
+  "Coordinate up to four players by choosing targets, sharing defensive responsibilities, passing useful cards, and assigning rewards to the decks that benefit most. Learn how to handle weak draws, shared routes, and separate co-op Ascension progression.";
 
 const imageUrls = [
   `${siteUrl}/images/slay-the-spire-2/slay-the-spire-2-multiplayer-team-block-role.webp`,
@@ -26,55 +33,51 @@ const imageUrls = [
 const toc = [
   {
     id: "one-fight-four-hands",
-    label: "Play one fight, not four turns",
+    label: "Which enemy should the team kill first?",
   },
   {
     id: "team-roles",
-    label: "How team roles should form",
+    label: "Choosing team roles",
   },
   {
     id: "team-block",
-    label: "Team-wide Block",
+    label: "How team-wide Block works",
   },
   {
     id: "shared-debuffs",
-    label: "Why shared debuffs are stronger",
+    label: "Using shared debuffs",
   },
   {
     id: "focus-fire",
-    label: "How to call focus fire",
+    label: "Calling focus fire",
   },
   {
     id: "passing-cards",
-    label: "Who should receive passed cards",
+    label: "Passing cards between players",
   },
   {
     id: "do-not-pollute-all-four-decks",
-    label: "Avoid polluting teammates' decks",
+    label: "Avoiding unwanted cards",
   },
   {
     id: "shared-rewards",
-    label: "Who should take shared rewards",
+    label: "Dividing shared relics and rewards",
   },
   {
     id: "team-shop-decisions",
-    label: "Plan shops as a team",
+    label: "Planning Merchant visits",
   },
   {
     id: "multiplayer-pathing",
-    label: "Choose co-op routes",
+    label: "Choosing safer co-op routes",
   },
   {
     id: "backup-plans",
-    label: "Why every role needs a backup",
+    label: "Preparing for missed draws",
   },
   {
     id: "co-op-ascension",
-    label: "How co-op Ascension works",
-  },
-  {
-    id: "co-op-run-check",
-    label: "What to call before a hard fight",
+    label: "Co-op Ascension progression",
   },
 ];
 
@@ -96,6 +99,10 @@ const relatedLinks = [
     label: "Slay the Spire 2 Necrobinder Guide",
   },
   {
+    href: "/slay-the-spire-2/the-fool",
+    label: "Slay the Spire 2 The Fool Guide",
+  },
+  {
     href: "/slay-the-spire-2",
     label: "Slay the Spire 2 Guide",
   },
@@ -114,7 +121,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Coordinate four decks around one fight with team Block, focus fire, shared debuffs, passed cards, reward allocation, route decisions, and co-op Ascension.",
+      "Coordinate attacks, protect teammates with shared Block, pass cards, distribute relics, and prepare for tougher fights together in Slay the Spire 2 co-op.",
 
     url: pageUrl,
 
@@ -125,7 +132,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: imageUrls[1],
-        alt: "Slay the Spire 2 multiplayer card giving 34 Block to all players",
+        alt: "Slay the Spire 2 multiplayer combat with a card providing 34 Block to every player",
       },
     ],
   },
@@ -136,7 +143,7 @@ export const metadata: Metadata = {
     title: metadataTitle,
 
     description:
-      "Build useful team roles, coordinate targets and Block, allocate shared rewards, and understand multiplayer Ascension in Slay the Spire 2.",
+      "Learn focus fire, team-wide Block, card passing, shared rewards, backup defenses, and co-op Ascension in Slay the Spire 2.",
 
     images: [imageUrls[1]],
   },
@@ -167,7 +174,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Slay the Spire 2 Multiplayer Guide",
+          name: "Slay the Spire 2 Co-op Guide",
           item: pageUrl,
         },
       ],
@@ -183,17 +190,16 @@ const jsonLd = {
         "@id": pageUrl,
       },
 
-      headline:
-        "Slay the Spire 2 Co-op Guide: Teams, Roles and Multiplayer Ascension",
+      headline: articleTitle,
 
       description:
-        "A player-focused Slay the Spire 2 multiplayer guide covering how four decks coordinate around the same combat, when a player should specialize in team-wide Block, why shared enemy debuffs gain value in co-op, how to call focus fire before damage is spent, when cards should move between allies, how party-wide card effects can pollute multiple decks, how to allocate shared relics and rewards, when the team should route toward shops or campfires, why specialized roles still need backup plans, and how cooperative Ascension progression differs from solo play.",
+        "Learn how to play Slay the Spire 2 co-op with up to four players. Coordinate enemy targeting and focus fire, use team-wide Block and shared debuffs, pass cards between allies, avoid adding unwanted cards to teammates' decks, distribute shared relics, plan Merchant visits and campfire routes, prepare backup defenses, and understand how multiplayer Ascension progression differs from solo play.",
 
       image: imageUrls,
 
       inLanguage: "en",
 
-      dateModified: "2026-09-12",
+      dateModified: "2026-11-16",
 
       articleSection: "Slay the Spire 2 Guides",
 
@@ -208,14 +214,18 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Slay the Spire 2 co-op",
+          name: "Slay the Spire 2 cooperative play",
+        },
+        {
+          "@type": "Thing",
+          name: "Slay the Spire 2 co-op Ascension",
         },
       ],
 
       mentions: [
         {
           "@type": "Thing",
-          name: "Team Block",
+          name: "Team-wide Block",
         },
         {
           "@type": "Thing",
@@ -232,6 +242,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Shared relics",
+        },
+        {
+          "@type": "Thing",
+          name: "Multiplayer routes",
         },
         {
           "@type": "Thing",
@@ -274,11 +288,11 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Slay the Spire 2 Co-op Guide: Teams, Roles & Ascension"
-          description="Co-op gets much easier once four decks stop solving the same problem twice. I call the target first, work out who is covering incoming damage, pass shared resources to the deck that uses them best, and keep backup options when the team's specialist misses a key draw."
-          gameTitle="Slay the Spire 2"
-          gameHref="/slay-the-spire-2"
-          updatedAt="September 12, 2026"
+          title={articleTitle}
+          description={articleDescription}
+          gameTitle="Home"
+          gameHref="/"
+          updatedAt="November 16, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
