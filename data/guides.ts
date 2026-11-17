@@ -130,6 +130,173 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "How They Built the Pyramids",
+  game: "How They Built the Pyramids",
+  href: "/how-they-built-the-pyramids",
+  slug: "how-they-built-the-pyramids",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label: "Beginner, Automation, Shabti & 18 Achievements",
+  eyebrow: "Co-op Construction Simulation, Physics & Factory Automation",
+
+  hubStatus:
+    "First Bricks + 26 Layers + Strength & Speed + Automation + Shabti + Monuments + Gold Bricks + 18 Achievements",
+
+  description:
+    "Start How They Built the Pyramids, make clay bricks, choose early upgrades, automate production, hire Shabti, complete monuments, build all 26 layers, and unlock 18 Steam achievements.",
+
+  coverage: [
+    "First brick, Clay Bowl, Clay Molds, Strength and Speed training, early upgrades, coin earnings and first-layer progression",
+    "Brick automation with Clay Hoppers, Mold Racks, Standing Fans, Kilns, Brick Crates, Conveyor Belts, Sorters and Polishing Wheels",
+    "Shabti Market recruitment, worker attributes, Traits, Gold Shabti, Work Posts, Crew seats and idle-worker troubleshooting",
+    "Monument Blessings, golden brick placement, upper-layer transport, Trebuchets, Pigeon Lofts, final crowning and Grand Pyramid",
+    "All 18 Steam achievements, including Steady Chisel, Spin Doctor, Gold Fever, Worth Its Weight, Too Much Sun and Now You Know",
+  ],
+
+  image:
+    "/images/how-they-built-the-pyramids/pyramids-final-capstone.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 85,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "How They Built the Pyramids Beginner Guide: What to Build First?",
+
+      href: "/how-they-built-the-pyramids",
+      type: "Guide Hub",
+
+      description:
+        "Make your first bricks, train Strength and Speed, choose upgrades, hire workers, complete monuments, and crown the 26-layer pyramid.",
+
+      image:
+        "/images/how-they-built-the-pyramids/pyramids-clay-bowl-full-pour-into-mold.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Clay Bowl, first bricks, Strength, Speed, first upgrades, coins, Shabti, monuments, gold exterior, 26 layers and Grand Pyramid",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "How They Built the Pyramids Automation Guide: Belts & Bricks",
+
+      href: "/how-they-built-the-pyramids/automation",
+      type: "Systems",
+
+      description:
+        "Fix Clay Hopper range, automate brick drying and collection, configure Sorters, improve Polishing Wheel throughput, and deliver bricks uphill.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/how-they-built-the-pyramids/pyramids-polishing-wheel-crew-upgrades.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 550,
+
+        spotlightMeta:
+          "Clay Hopper, Mold Rack, Brick Crate, Standing Fan, Kiln, Conveyor, Sorter, Polishing Wheel, power, Trebuchet and Pigeon Loft",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "How They Built the Pyramids Shabti Guide: Jobs & Traits",
+
+      href: "/how-they-built-the-pyramids/shabti",
+      type: "Systems",
+
+      description:
+        "Hire Shabti, compare Strength, Speed, Stamina, Skill and Traits, assign Work Post jobs, and fix No Job Yet and worker-feeding problems.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/how-they-built-the-pyramids/pyramids-gold-shabti-remsen-profile.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 551,
+
+        spotlightMeta:
+          "Shabti Market, Gold Shabti, Ox Shoulders, Eats Like a Sparrow, Scarab Kiss, Work Posts, Mud jobs, Crew seats and No Job Yet",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "How They Built the Pyramids Achievements: All 18 Requirements",
+
+      href: "/how-they-built-the-pyramids/achievements",
+      type: "Achievements",
+
+      description:
+        "Track all 18 Steam achievements, complete a 100-quality engraving, reach 32 RPM, hire a Gold Shabti, crown the pyramid and leave Earth.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/how-they-built-the-pyramids/pyramids-final-capstone.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 552,
+
+        spotlightMeta:
+          "18 achievements, Steady Chisel, Spin Doctor, Reed Highway, Gold Fever, Worth Its Weight, Blessed, Too Much Sun and Now You Know",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
 
   {
     title: "Zombies Aren't Real",

@@ -1,0 +1,332 @@
+
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const automationProblemColumns = [
+  { key: "Problem", label: "What you see" },
+  { key: "Check", label: "Check first" },
+  { key: "Fix", label: "What to change" },
+];
+
+export const automationProblemRows = [
+  {
+    Problem: "Clay is being produced, but molds stay empty",
+    Check: "The hopper or digging machine cannot reach a receiving target",
+    Fix: "Inspect the reach warning and move the receiving equipment closer to the actual output",
+  },
+  {
+    Problem: "Bricks remain in molds",
+    Check: "Drying progress and Brick Crate collection coverage",
+    Fix: "Finish drying the bricks and reposition or add a crate where collection does not reach",
+  },
+  {
+    Problem: "Clay and bricks mix on the same conveyor",
+    Check: "The Sorter's exit rules and connected belt directions",
+    Fix: "Open the Sorter with F and assign separate exits for the materials you want to isolate",
+  },
+  {
+    Problem: "A machine has materials but produces nothing",
+    Check: "Power, required operators, and the machine's own status",
+    Fix: "Resolve the missing requirement shown by the machine before increasing its input",
+  },
+  {
+    Problem: "Bricks accumulate before the polishing or glazing stage",
+    Check: "Processing time, input capacity, and the rate of the previous stage",
+    Fix: "Increase capacity at the backed-up stage instead of accelerating the whole line",
+  },
+  {
+    Problem: "A conveyor will not climb or turn at a pyramid step",
+    Check: "Ramp clearance and the straight belt tiles around the height change",
+    Fix: "Move the turn away from the step and rebuild the rising section with enough straight space",
+  },
+  {
+    Problem: "Pigeons stop carrying bricks",
+    Check: "The Pigeon Loft's remaining bricks and its empty-spot distance warning",
+    Fix: "Refill the loft or position it where an unfinished pyramid spot is within reach",
+  },
+  {
+    Problem: "A trebuchet or catapult does not launch",
+    Check: "Its displayed firing restriction, available bricks, and crew",
+    Fix: "Read the interaction message and correct the stated restriction before rebuilding it",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+  <GuideQuickAnswer title="Get Clay, Bricks, and Transport Working Together">
+    Start by placing your molds where a Clay Hopper or other clay-feeding machine can reach them. Add drying coverage and a Brick Crate so finished bricks do not require constant manual collection. Then connect the output to conveyors and the transport equipment serving the pyramid.
+
+    When the line slows, follow the material from the clay source to the final destination. Fix the first machine that cannot receive, process, or release its material before buying another upgrade.
+  </GuideQuickAnswer>
+</section>
+
+A larger production line does not automatically build bricks faster in How They Built the Pyramids. Clay can accumulate before a mold, finished bricks can sit outside a collection radius, and a fully supplied machine can still become the slowest part of the operation.
+
+These failures become especially costly once your construction site has several Mold Racks, processing machines, and conveyors feeding the same transport route. More clay arriving at a blocked output only creates a larger pile to deal with later.
+
+The useful way to expand is to get one complete production route running, observe where it stalls, and spend the next upgrade on that specific limitation.
+
+<h2 id="where-production-stops" className="scroll-mt-24">
+  Why is my automated brick production stopping?
+</h2>
+
+Walk through the line in the same direction the material is supposed to travel. Start where clay enters the system, rather than checking the last machine first.
+
+Look at the molds. Are they receiving clay? If they are, check whether the bricks are still drying or have already finished. Next, inspect the collection point and the first conveyor. A pile of ready bricks beside an empty belt usually points to a collection or transfer problem, not a shortage of raw material.
+
+If the belt is moving bricks, follow it to the first processing machine. A full input with little output suggests that the processing stage deserves attention. An empty input on a machine farther downstream usually means the problem is earlier in the route.
+
+The final check is delivery. Bricks reaching a trebuchet, catapult, or Pigeon Loft are not necessarily reaching the pyramid. The transport equipment still needs a usable destination.
+
+This order prevents a common waste of money: upgrading clay production when the existing clay and bricks already have nowhere to go.
+
+<h2 id="clay-hopper-and-mold-racks" className="scroll-mt-24">
+  How do you automate clay feeding with a Clay Hopper and Mold Racks?
+</h2>
+
+The first major improvement is removing the repeated trip between the clay deposit and the molds.
+
+A Mold Rack lets you group several molds into a compact working area. That makes it easier to keep them within the reach of the machinery handling clay, drying, and collection. The arrangement matters more than the number of racks purchased.
+
+Place the receiving molds before committing to a larger supply machine. Leave room for a Brick Crate and for the conveyor that will eventually carry the output away. Then position the clay-feeding equipment so its actual delivery area covers the molds.
+
+A clay-feeding setup can look correctly aligned while reaching none of its intended targets. One production run encountered a `Nothing's in reach` warning even though the equipment appeared close to the molds. Changing the position was more useful than increasing the rate at which clay was produced.
+
+The game displays range information on the relevant equipment. Use that feedback rather than estimating the distance from the size of the building.
+
+A practical setup sequence is:
+
+1. Arrange the Mold Racks in a compact group.
+2. Place the Clay Hopper or other clay-feeding equipment within its usable delivery range.
+3. Run the equipment and watch for clay entering a mold.
+4. Make sure the completed bricks have a collection point.
+5. Add more molds only after the first group is receiving clay and releasing finished bricks.
+
+A Mud Wheel can throw clay toward molds and other supported receivers, but its delivery range still matters. After placing it, check that a load actually reaches its target before adding more clay-production equipment.
+
+Once clay delivery works, check the molds before buying more digging capacity. If most of the molds remain occupied by unfinished or uncollected bricks, additional clay will not solve the problem.
+
+<h2 id="drying-and-brick-collection" className="scroll-mt-24">
+  How do you stop molds from filling up with unfinished bricks?
+</h2>
+
+Drying and collection are two separate stages. A mold can receive clay correctly and still remain occupied because its brick is not ready. A finished brick can also remain in place if nothing is collecting it.
+
+Start by examining the drying status of a mold. Standing Fans improve drying speed for molds inside their coverage. In the example below, the Clay Mold reports `Drying x2 — Standing Fan +100%`.
+
+<Image
+  src="/images/how-they-built-the-pyramids/pyramids-clay-mold-standing-fan-drying.webp"
+  alt="Clay Mold showing Drying x2 from a Standing Fan's 100 percent drying bonus in How They Built the Pyramids"
+  width={1050}
+  height={832}
+  className="my-8 rounded-xl"
+/>
+
+The important part of this setup is coverage. A powerful drying machine is wasted on molds outside its effective area, while a small uncovered group can hold up an otherwise working collection route.
+
+Kilns offer another way to accelerate drying. Check their position, heat, and required operation before deciding to expand the drying equipment. After the November 16 update, Pot Bellows with enough speed can bring a Kiln to 100% heat.
+
+The next step is finished-brick collection.
+
+A Brick Crate can collect ready bricks from nearby molds. In an early production setup, adding a crate removed the need to empty each mold individually. But expanding the Mold Racks left some molds outside collection reach.
+
+The correction was to reconsider the crate positions instead of simply adding more molds.
+
+When inspecting your own site, look for three different states:
+
+- **Wet or unfinished bricks:** Improve drying or give the existing drying equipment time to work.
+- **Finished bricks still inside molds:** Check whether the collection system reaches those molds.
+- **Collected bricks accumulating with nowhere to go:** Expand the downstream transfer route, not the drying machinery.
+
+A fully automated clay supply is only useful if the same molds become available for the next batch.
+
+<h2 id="conveyor-belts-and-ramps" className="scroll-mt-24">
+  How do you connect conveyor belts and move bricks uphill?
+</h2>
+
+Conveyor belts become increasingly useful as the distance between production and the pyramid grows. Rather than carrying every stack yourself, you can bring the collected bricks onto a transport route that feeds your next destination.
+
+Begin with a short route and confirm that material actually moves through it. Once the output reaches the receiving point, extend the belt. This makes it easier to identify the segment responsible for a failure.
+
+Do not construct a complicated elevated route before checking whether its height changes are valid.
+
+When a belt approaches a pyramid step, the rising section needs enough straight space. An attempt to turn immediately beside a height change produced the warning `ramp needs two straight tiles at a step`. Moving the turn away from that transition allowed the route to be reconsidered.
+
+That leaves two distinct things to check whenever an elevated belt refuses to connect: whether there is enough straight space for the ramp and whether the next segment is facing the intended direction.
+
+At higher layers, it may be easier to move a delivery point and rebuild a short section of belt than to preserve an increasingly awkward route around the pyramid.
+
+Also, do not rely on parked trolleys as conveyor receivers. Since update 0.42, belts no longer fill parked trolleys, and trolleys no longer ride on belts.
+
+<h2 id="sorter-and-clay-overflow" className="scroll-mt-24">
+  How do you use the Sorter to separate clay and different bricks?
+</h2>
+
+A Sorter is valuable when one conveyor carries materials that should not share the same destination.
+
+For example, a clay-producing machine may supply more material than the molds can process. If excess clay enters the transport line, it can occupy belt space intended for finished bricks.
+
+A Sorter can send excess clay onto another belt, but the separated material still needs a usable destination. If that branch leads to a full receiver or nowhere at all, clay will accumulate again even though the exit rule is working.
+
+That distinction matters: successfully splitting a belt is not the same as having enough capacity at both outputs.
+
+<h3 id="sorter-controls" className="scroll-mt-24">
+  How do you configure the Sorter after update 0.42?
+</h3>
+
+The Sorter interface changed in update 0.42. Each of its three exits now has its own rule.
+
+Look at the Sorter and press **F** to open its configuration window. Set the relevant exit rules according to the materials you want separated, and make sure the outgoing conveyors lead to their intended receiving equipment.
+
+To isolate excess clay from finished bricks, give the clay an appropriate exit and configure the remaining routes for the other materials you need to move.
+
+Before connecting that route to the rest of the factory, let a small amount of material pass through and check where it goes. If the material arrives at the wrong destination, review the exit configuration and belt layout first.
+
+Older setups used a simpler filter-direction interaction. Do not copy those controls into the current interface without checking the new exit rules.
+
+<h3 id="sorter-backing-up" className="scroll-mt-24">
+  Why does the conveyor still back up after sorting?
+</h3>
+
+The Sorter does not remove excess material. It only directs material toward another output.
+
+If the clay output has nowhere to deliver its contents, that branch can become another source of congestion. Adding a splitter without deciding where its separated material goes simply moves the problem.
+
+Look at the end of each branch:
+
+- Is there a receiving machine, storage point, or other usable destination?
+- Is that destination processing material faster than it arrives?
+- Does the other branch still have room for finished bricks?
+- Did the belt direction or ramp placement leave one of the exits disconnected?
+
+After splitting excess clay onto another belt, watch both outputs. One branch may be moving correctly while the other is already full. Check that the separated materials can actually reach and enter their intended destinations.
+
+<h2 id="polishing-glazing-bottlenecks" className="scroll-mt-24">
+  Should you upgrade the Polishing Wheel or Glazing Kiln first?
+</h2>
+
+Neither machine should automatically receive every available upgrade. Their usefulness depends on how quickly the rest of the line can supply and remove bricks.
+
+A multiplayer factory initially identified the Glazing Kiln as the bottleneck. The players considered either adding another kiln or splitting the incoming materials across additional processing capacity.
+
+Later, after increasing processing speed, they encountered a different limitation: the Polishing Wheel was struggling to keep pace.
+
+The equipment had not become worse. Increasing capacity at one stage had exposed the next slowest stage.
+
+Before buying another machine, inspect the line on both sides of the equipment you intend to upgrade. If bricks are accumulating before the Polishing Wheel, investigate polishing capacity. If the Polishing Wheel is supplying bricks faster than the next stage can process them, upgrading polishing again may achieve little.
+
+<h3 id="polishing-wheel-upgrades" className="scroll-mt-24">
+  What do the Polishing Wheel upgrades change?
+</h3>
+
+The Polishing Wheel has separate upgrades for processing time, storage capacity, and crew capacity. These solve different problems.
+
+The following upgrade screen shows one working setup with two assigned Shabti and a displayed combined crew bonus of +165%.
+
+<Image
+  src="/images/how-they-built-the-pyramids/pyramids-polishing-wheel-crew-upgrades.webp"
+  alt="Polishing Wheel upgrade menu showing Polish Time, Bins, and Crew upgrades with two assigned Shabti workers"
+  width={892}
+  height={588}
+  className="my-8 rounded-xl"
+/>
+
+In this example, the available upgrades show:
+
+- **Polish Time:** 1.4 seconds per brick to 0.9 seconds per brick, with a displayed purchase cost of 2,500 coins.
+- **Bins:** Input and output storage increasing from x2 to x4, for 1,200 coins.
+- **Crew:** Capacity increasing from two seats to three, for 2,500 coins.
+
+These are the values shown by this particular upgraded machine, not the prices of every upgrade level.
+
+A shorter Polish Time helps when the machine itself cannot finish bricks quickly enough. Larger Bins help when limited input or output space interferes with the flow. Another Crew seat allows an additional Shabti to contribute, but does not guarantee that the next worker will provide the same performance bonus as the previous one.
+
+Notice that the screenshot also says the team wallet is short of the money required for the Polish Time and Crew upgrades. The screen shows what those purchases would do; it does not show that they were bought.
+
+If you have enough money for only one upgrade, decide whether the current limitation is processing speed, material storage, or available workers. Do not treat all three upgrades as interchangeable.
+
+For worker attributes, traits, and assigning Shabti to jobs, use the <Link href="/how-they-built-the-pyramids/shabti">Shabti jobs and Work Posts guide</Link>.
+
+<h2 id="power-and-operators" className="scroll-mt-24">
+  Why does an automated machine have materials but still not run?
+</h2>
+
+A stopped machine is not always waiting for material. Later equipment may also require power or an operator.
+
+Start with the machine's displayed status. A machine that has an input but no usable power should be investigated differently from a machine that has no bricks arriving.
+
+For powered equipment, inspect the water-wheel, shaft, or other drive arrangement involved in supplying it. Look for a working connection and an active drive before assuming that a nearby machine is powered simply because the two objects appear close together.
+
+A Mud Wheel displaying `Undriven` needs an operator. Adding more clay or storage will not make it run without someone driving it.
+
+If another machine has an empty Crew position, assign an available Shabti before increasing its processing capacity. For workers displaying `No job yet`, follow the <Link href="/how-they-built-the-pyramids/shabti">Shabti assignment steps</Link>.
+
+<h2 id="gold-production" className="scroll-mt-24">
+  How does Goldsmith's Crucible fit into the production line?
+</h2>
+
+Gold production is a separate processing concern from simply making more ordinary bricks. Once you begin using the Goldsmith's Crucible, watch the gold-chip supply and the output instead of assuming that a large stockpile of plain bricks will keep the new equipment productive.
+
+The Crucible's chip dish also has its own capacity consideration. Update 0.42 changed the dish so that its size increases with the machine's upgrade.
+
+In one co-op factory, the players had accumulated a substantial number of gold bricks while working with their Goldsmith equipment, but they also had to consider the cost and performance of the supporting machinery.
+
+If the goal is a steady supply of gold bricks, check the Goldsmith's Crucible separately from the rest of the ordinary-brick production line. Inspect its available chips, the machine's status, and whether its finished output is being collected or transported.
+
+Once the Goldsmith's Crucible is producing gold bricks, make sure its output can reach storage or delivery. For deciding where those bricks should go on the pyramid, see the <Link href="/how-they-built-the-pyramids">pyramid-building progression guide</Link>.
+
+<h2 id="trebuchets-and-pigeon-lofts" className="scroll-mt-24">
+  How do you deliver bricks to higher pyramid layers?
+</h2>
+
+A productive factory can still leave players carrying bricks by hand when the destination is far above the ground.
+
+Trebuchets and Pigeon Lofts help with that final delivery problem. They do not replace the need to supply bricks to the transport equipment, and they may stop working when the available destination is no longer suitable.
+
+<h3 id="trebuchet-delivery" className="scroll-mt-24">
+  Why is the trebuchet not launching?
+</h3>
+
+First check whether it has bricks available and whether the required operating conditions are met. On newer versions, pressing **E** on a trebuchet or catapult that cannot fire displays the reason.
+
+A trebuchet that served a lower layer can become poorly positioned as the unfinished brick spots move upward. Check whether it can still reach a valid placement area before rebuilding the feed route.
+
+If the machine has bricks but cannot launch, use its displayed restriction to distinguish a destination problem from missing input or crew. Correct that condition before relocating the equipment or extending the conveyor.
+
+<h3 id="pigeon-loft-range" className="scroll-mt-24">
+  Why does the Pigeon Loft say there is no empty spot?
+</h3>
+
+The Pigeon Loft sends bricks toward available positions on the pyramid, but it needs both bricks to carry and a reachable empty destination.
+
+In one co-op session, the loft began transporting bricks successfully, then stopped with the message `No empty spot within 54 m`.
+
+That number was the distance reported by the equipment in that particular situation, not a universal fixed Pigeon Loft range.
+
+When the loft stops, check how many bricks remain inside it and whether the current unfinished layer has a reachable placement position. If its distance warning indicates that there are no valid spots nearby, moving the loft closer to the working area may restore deliveries.
+
+Do not keep adding bricks to a loft that already has a full load and no destination. The obstruction is at the receiving end.
+
+<h2 id="automation-troubleshooting" className="scroll-mt-24">
+  What should you check when your automation setup is not working?
+</h2>
+
+Use the visible state of the equipment before deciding which part to rebuild.
+
+<GuideTable
+  caption="How They Built the Pyramids: automation problems and practical checks."
+  columns={automationProblemColumns}
+  rows={automationProblemRows}
+/>
+
+The most expensive automation failures tend to come from fixing the wrong part of the factory.
+
+If a crate cannot collect nearby bricks, faster drying does not repair its collection area. If the Sorter sends material into a blocked branch, increasing conveyor speed does not create storage. If a processing machine is already full, more clay production only increases the amount waiting upstream.
+
+Check the first obstruction, correct it, and let the line run long enough to see whether a new bottleneck appears. A successful change should produce visible movement or output at the stage that was previously stopped.
+
+The same principle applies when choosing between one large production line and several smaller ones. Separate routes can make it easier to isolate problems, but every additional machine also needs space, supply, and a useful output.
+
+Once your equipment is delivering bricks consistently, check whether your current construction stage still needs more production capacity. The <Link href="/how-they-built-the-pyramids">pyramid-building steps</Link> cover when to invest in another machine and when carrying the remaining bricks yourself makes more sense.
