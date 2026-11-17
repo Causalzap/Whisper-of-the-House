@@ -15,14 +15,14 @@ const metadataTitle =
   "Queen's Domain Missing Books: All 6 Locations & Shelf Order";
 
 const metadataDescription =
-  "Find all 6 Missing Books in Queen's Domain, match shelves I–VI, get The History of Dragons from Wourha, and unlock Rare Artifact Storage.";
+  "Find all 6 Missing Books in Queen's Domain, match shelves I–VI, recover books left in Tower door slots, and unlock Rare Artifact Storage.";
 
 const articleTitle =
   "Where Are All Six Missing Books in Queen's Domain?";
 
 const articleDescription =
-  "Find the six Missing Books in the Tower of Knowledge and across the island, match each book to its numbered shelf, unlock Wourha's dragon book reward, and complete the Rare Artifact Storage and Late Fee objectives.";
-
+  "Find all six Missing Books, match the Tower library shelves, get Wourha's dragon book reward, recover books left in earlier door puzzles, and unlock Rare Artifact Storage.";
+  
 const imageUrls = [
   `${siteUrl}/images/queens-domain/tower-missing-books-categories.webp`,
   `${siteUrl}/images/queens-domain/missing-books-wourha-dragon-book-reward.webp`,
@@ -51,6 +51,10 @@ const toc = [
   {
     id: "wrong-books",
     label: "Books That Do Not Count",
+  },
+  {
+    id: "recover-placed-books",
+    label: "How to Recover Books Left in Tower Slots",
   },
   {
     id: "rare-artifact-storage",
@@ -98,7 +102,7 @@ export const metadata: Metadata = {
     description: metadataDescription,
     siteName: "Whisper of the House",
     publishedTime: "2026-11-02",
-    modifiedTime: "2026-11-02",
+    modifiedTime: "2026-11-17",
     images: [
       {
         url: heroImage,
@@ -152,7 +156,7 @@ const jsonLd = {
       },
       image: imageUrls,
       datePublished: "2026-11-02",
-      dateModified: "2026-11-02",
+      dateModified: "2026-11-17",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -198,7 +202,7 @@ export default function MissingBooksPage() {
           gameHref="/queens-domain"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 2, 2026"
+          updatedAt="November 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -12,13 +12,13 @@ const metadataTitle =
   "Queen's Domain Guide: How to Start and Progress";
 
 const metadataDescription =
-  "Start Queen's Domain, get Endu, unlock the next areas, prepare for tougher dungeons, and find the right walkthrough when you're stuck.";
+  "Start Queen's Domain, unlock Endu and new areas, follow dungeon progression, and learn what to do after the first ending without restarting.";
 
 const articleTitle =
   "How Do You Start and Progress in Queen's Domain?";
 
 const articleDescription =
-  "Find your first weapons, unlock Endu and Wind Dash, choose the next area, prepare for tougher fights, and return when new abilities open blocked routes.";
+  "Find your first weapons, unlock Endu and Wind Dash, follow the main dungeon route, and discover how to continue toward other endings on the same save.";
 
 const imageUrls = [
   `${siteUrl}/images/queens-domain/holy-sword-endu-pickup.webp`,
@@ -27,18 +27,49 @@ const imageUrls = [
 
 const heroImage = imageUrls[0];
 
-const toc = [
-  { id: "where-to-start", label: "What to do first" },
-  { id: "next-destination", label: "Where to go next" },
-  { id: "movement", label: "Wind Dash and broken bridges" },
-  { id: "tower-unlock", label: "Unlock the Tower of Knowledge" },
-  { id: "dungeons", label: "Obmuer, Tower & Deimpo" },
-  { id: "combat", label: "Combat and damage types" },
-  { id: "coins-and-shop", label: "Best early purchases" },
-  { id: "saving", label: "Saving, healing and status effects" },
-  { id: "achievements", label: "Achievements and collectibles" },
-];
 
+const toc = [
+  {
+    id: "next-destination",
+    label: "Where to go next",
+  },
+  {
+    id: "where-to-start",
+    label: "What to do first",
+  },
+  {
+    id: "movement",
+    label: "Wind Dash and broken bridges",
+  },
+  {
+    id: "tower-unlock",
+    label: "Unlock the Tower of Knowledge",
+  },
+  {
+    id: "dungeons",
+    label: "Obmuer, Tower & Deimpo",
+  },
+  {
+    id: "combat",
+    label: "Combat and damage types",
+  },
+  {
+    id: "coins-and-shop",
+    label: "Best early purchases",
+  },
+  {
+    id: "saving",
+    label: "Saving, healing and status effects",
+  },
+  {
+    id: "after-first-ending",
+    label: "What to Do After the First Ending",
+  },
+  {
+    id: "achievements",
+    label: "Achievements and collectibles",
+  },
+];
 
 const relatedLinks = [
   {
@@ -97,7 +128,7 @@ export const metadata: Metadata = {
     description: metadataDescription,
     siteName: "Whisper of the House",
     publishedTime: "2026-10-31",
-    modifiedTime: "2026-11-03",
+    modifiedTime: "2026-11-17",
     images: [
       {
         url: heroImage,
@@ -145,7 +176,7 @@ const jsonLd = {
       },
       image: imageUrls,
       datePublished: "2026-10-31",
-      dateModified: "2026-11-03",
+      dateModified: "2026-11-17",
       author: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -197,7 +228,7 @@ export default function QueensDomainPage() {
           gameHref="/queens-domain"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 3, 2026"
+          updatedAt="November 17, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

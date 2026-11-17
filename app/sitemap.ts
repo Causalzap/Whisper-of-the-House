@@ -1342,7 +1342,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'can-em-all/prestige-ending': '2026-11-01',
   'can-em-all/achievements': '2026-11-01',
 
-  'queens-domain': '2026-11-07',
+  'queens-domain': '2026-11-17',
   'queens-domain/isle-of-neasied-walkthrough': '2026-10-31',
   'queens-domain/progression-guide': '2026-10-31',
   'queens-domain/endu-holy-sword': '2026-10-31',
@@ -1351,7 +1351,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'queens-domain/achievements': '2026-10-31',
   'queens-domain/deimpo-mausoleum': '2026-11-02',
   'queens-domain/pandora-blade': '2026-11-02',
-  'queens-domain/missing-books': '2026-11-02',
+  'queens-domain/missing-books': '2026-11-17',
   'queens-domain/verdant-hollow-statues': '2026-11-03',
 
   'the-long-dark-iron-road': '2026-11-02',
