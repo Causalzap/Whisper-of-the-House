@@ -130,6 +130,221 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+  {
+    title: "Dungeonbound",
+    game: "Dungeonbound",
+    href: "/dungeonbound",
+    slug: "dungeonbound",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "Beginner, Fusion, Act 1, Story, Heroes & 84 Achievements",
+    eyebrow: "Inventory Auto Battler, Roguelite & Incremental Dungeon RPG",
+  
+    hubStatus:
+      "The Long Haul + The Climb + Fusion Forge + Floor 8 + Five Story Dungeons + Hero Unlocks + 84 Achievements",
+  
+    description:
+      "Start Dungeonbound, build your equipment, beat Climb Act 1, master Fusion and Mega Forge, complete Joshua's five Story dungeons, unlock heroes, and track all 84 achievements.",
+  
+    coverage: [
+      "Beginner mode selection, Joshua's first Forest run, Equipment and Inventory grids, automatic combat, Gold, permanent upgrades and early survival",
+      "Merge, Fusion Forge, item variants, inherited effects, shared timers, Gems, Runes, Mega Forge, equipment upgrades and fusion mistakes",
+      "Climb Act 1 Floors 1–8, 10 Hearts, rival encounters, shop decisions, Poison, Paladin equipment combinations and Act II unlock",
+      "The Long Haul Story progression through The Forest, The Castle, The Crypt, The Demon Realm and The Dungeon, including Hydra, Dragon and The King",
+      "Climb hero unlock Quests, Paladin, Snuffy, Himiko, later-Act heroes, Story class upgrades, character prerequisites and Quest claiming",
+      "All 84 Steam achievements with an interactive checklist, hero victories, Climb milestones, Forge challenges, Co-op objectives and Death Defier",
+    ],
+  
+    image:
+      "/images/dungeonbound/dungeonbound-act-one-mega-forge-build.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 86,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Dungeonbound Beginner Guide: How to Start & Build Your Gear",
+        href: "/dungeonbound",
+        type: "Guide Hub",
+  
+        description:
+          "Choose Story or Climb, start Joshua's first run, equip useful items, understand combat stats, and improve your character after early defeats.",
+  
+        image:
+          "/images/dungeonbound/dungeonbound-story-joshua-forest-start.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "The Long Haul, The Climb, Joshua, first Forest run, Equipment, Inventory, Gold, upgrades, combat and Fusion basics",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Dungeonbound Fusion Guide: Forges, Runes & Mega Forge",
+        href: "/dungeonbound/fusion-guide",
+        type: "Systems",
+  
+        description:
+          "Merge identical equipment, compare Fusion Forge variants, preserve useful effects, manage Runes and shared timers, and use Mega Forge.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dungeonbound/dungeonbound-wooden-cloak-fusion-result.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 553,
+          spotlightMeta:
+            "Merge, Fusion Forge, Wooden Cloak, Valkyrie Coil, shared timers, item inheritance, Gems, Runes and Mega Forge",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Dungeonbound Act 1 Guide: How to Beat Floor 8",
+        href: "/dungeonbound/act-1",
+        type: "Walkthrough",
+  
+        description:
+          "Survive The Climb's first eight floors, manage 10 Hearts, improve your equipment, handle rival fights, and unlock Act II: The Castle.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dungeonbound/dungeonbound-act-one-mega-forge-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 554,
+          spotlightMeta:
+            "The Climb, Act I The Forest, 10 Hearts, Floors 1–8, PvP rivals, Poison, Paladin, Mega Forge, Floor 8 clear and Act II",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Dungeonbound Story Walkthrough: All 5 Dungeons & The King",
+        href: "/dungeonbound/walkthrough",
+        type: "Walkthrough",
+  
+        description:
+          "Progress through Joshua's five Story dungeons, defeat Hydra and Dragon, prepare for The King, and reach the final quests and Void Realm.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dungeonbound/dungeonbound-story-king-final-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 555,
+          spotlightMeta:
+            "The Forest, Hydra, The Castle, The Crypt, The Demon Realm, Dragon, The Dungeon, The King, Story quests and Void Realm",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Dungeonbound Hero Unlocks: Climb Quests & Story Classes",
+        href: "/dungeonbound/hero-unlocks",
+        type: "Systems",
+  
+        description:
+          "Find hero unlock Quests, claim Snuffy and Paladin, unlock Act bosses and special characters, and follow the Story class upgrade chain.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/dungeonbound/dungeonbound-snuffy-paladin-quest-claim.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 556,
+          spotlightMeta:
+            "Quick Paws, Snuffy, Laying on Hands, Paladin, Himiko, Zagreus, Erebus, Act boss Quests, The King and Story classes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Dungeonbound Achievements: All 84 & 100% Checklist",
+        href: "/dungeonbound/achievements",
+        type: "Achievements",
+  
+        description:
+          "Track all 84 Steam achievements, including Story completion, Floor 8 hero victories, Climb milestones, Fusion, Co-op and Death Defier.",
+  
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestOrder: 557,
+          spotlightMeta:
+            "84 achievements, First Steps, Holy Fire, Kingslayer, hero victories, PvP, Fusion, Co-op, Death Defier and completion checklist",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
   
 {
   title: "How They Built the Pyramids",

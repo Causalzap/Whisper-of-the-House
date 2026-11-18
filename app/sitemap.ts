@@ -1250,15 +1250,22 @@ const paths = [
      'zombies-arent-real/safe-zones',
      'zombies-arent-real/achievements',
 
-     '/slay-the-spire-2/the-fool',
-     '/slay-the-spire-2/blitz',
-     '/slay-the-spire-2/dread',
-     '/slay-the-spire-2/aeonglass',
+     'slay-the-spire-2/the-fool',
+     'slay-the-spire-2/blitz',
+     'slay-the-spire-2/dread',
+     'slay-the-spire-2/aeonglass',
 
-     '/how-they-built-the-pyramids',
-     '/how-they-built-the-pyramids/automation',
-     '/how-they-built-the-pyramids/shabti',
-     '/how-they-built-the-pyramids/achievements',
+     'how-they-built-the-pyramids',
+     'how-they-built-the-pyramids/automation',
+     'how-they-built-the-pyramids/shabti',
+     'how-they-built-the-pyramids/achievements',
+
+     'dungeonbound/fusion-guide',
+     'dungeonbound/act-1',
+     'dungeonbound/walkthrough',
+     'dungeonbound/achievements',
+     'dungeonbound/hero-unlocks',
+     'dungeonbound',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1266,10 +1273,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/how-they-built-the-pyramids': '2026-11-17',
-  '/how-they-built-the-pyramids/automation': '2026-11-17',
-  '/how-they-built-the-pyramids/shabti': '2026-11-17',
-  '/how-they-built-the-pyramids/achievements': '2026-11-17',
+  'dungeonbound/fusion-guide': '2026-11-18',
+  'dungeonbound/act-1': '2026-11-18',
+  'dungeonbound/walkthrough': '2026-11-18',
+  'dungeonbound/achievements': '2026-11-18',
+  'dungeonbound/hero-unlocks': '2026-11-18',
+  'dungeonbound': '2026-11-18',
+
+  'how-they-built-the-pyramids': '2026-11-17',
+  'how-they-built-the-pyramids/automation': '2026-11-17',
+  'how-they-built-the-pyramids/shabti': '2026-11-17',
+  'how-they-built-the-pyramids/achievements': '2026-11-17',
 
   'zombies-arent-real/jester': '2026-11-15',
   'zombies-arent-real/safe-zones': '2026-11-15',
@@ -1616,10 +1630,10 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/slay-the-spire-2/necrobinder-guide': '2026-11-16',
   '/slay-the-spire-2/multiplayer-guide': '2026-11-16',
 
-  '/slay-the-spire-2/the-fool': '2026-11-16',
-  '/slay-the-spire-2/blitz': '2026-11-16',
-  '/slay-the-spire-2/dread': '2026-11-16',
-  '/slay-the-spire-2/aeonglass': '2026-11-16',
+  'slay-the-spire-2/the-fool': '2026-11-16',
+  'slay-the-spire-2/blitz': '2026-11-16',
+  'slay-the-spire-2/dread': '2026-11-16',
+  'slay-the-spire-2/aeonglass': '2026-11-16',
 
 
   '/the-crust': '2026-09-13',
