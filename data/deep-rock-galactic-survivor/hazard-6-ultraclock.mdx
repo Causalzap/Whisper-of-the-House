@@ -1,0 +1,701 @@
+
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+export const masteryTypeColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "rules", label: "Main Rules" },
+  { key: "purpose", label: "What It Completes" },
+  { key: "ultraclock", label: "Unlocks UltraClock?" },
+];
+
+export const masteryTypeRows = [
+  {
+    mode: "Regular Hazard 6 Dive",
+    rules: "Standard mission objectives with the Hazard 6 enemy carryover rule.",
+    purpose: "Higher-difficulty progression, Gear, and applicable milestones.",
+    ultraclock: "No. A regular clear is not a Weapon Mastery clear.",
+  },
+  {
+    mode: "Weapon Mastery",
+    rules: "Three stages using one selected weapon.",
+    purpose: "Permanent weapon bonuses and additional rewards at higher Hazards.",
+    ultraclock: "Yes, when the selected weapon's Hazard 6 Mastery is completed.",
+  },
+  {
+    mode: "Class Mod Mastery",
+    rules: "Five stages with special healing restrictions and a Class Mod objective.",
+    purpose: "Permanent bonuses for the selected Class Mod.",
+    ultraclock: "No. It is a different Mastery category.",
+  },
+  {
+    mode: "Biome Mastery",
+    rules: "Ten stages with a longer sequence of encounters.",
+    purpose: "Permanent progression associated with the selected biome.",
+    ultraclock: "No. It does not replace Weapon Mastery.",
+  },
+];
+
+export const weaponMasteryRewardColumns = [
+  { key: "hazard", label: "Weapon Mastery" },
+  { key: "reward", label: "Reward" },
+  { key: "action", label: "What You Can Do Next" },
+];
+
+export const weaponMasteryRewardRows = [
+  {
+    hazard: "Earlier Mastery rewards",
+    reward: "The weapon's permanent Mastery stat improvements.",
+    action: "Use the improved weapon during later dives.",
+  },
+  {
+    hazard: "Hazard 5",
+    reward: "Unlock the mastered weapon as an optional starting weapon for compatible Class Mods.",
+    action: "Check the starting-weapon selector in supported modes.",
+  },
+  {
+    hazard: "Hazard 6",
+    reward: "Unlock UltraClock eligibility for the mastered weapon variant.",
+    action: "Equip that weapon during a later dive and look for its UltraClock Artifact.",
+  },
+];
+
+export const hazardSixProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "cause", label: "Why It Becomes Dangerous" },
+  { key: "response", label: "What to Change" },
+];
+
+export const hazardSixProblemRows = [
+  {
+    problem: "Too many enemies at the next stage",
+    cause: "Enemies left alive during the previous stage carry forward on Hazard 6.",
+    response: "Improve wave clearing and avoid leaving large groups alive when extraction is near.",
+  },
+  {
+    problem: "Enemies attack from every direction",
+    cause: "Open terrain allows several groups to converge at once.",
+    response: "Use a defensible edge to limit approach directions, but keep an exit open.",
+  },
+  {
+    problem: "You cannot reach the Drop Pod",
+    cause: "The horde closes the route while you continue fighting or collecting resources.",
+    response: "Move toward extraction earlier and use damage or terrain openings to escape.",
+  },
+  {
+    problem: "Your health collapses late in Mastery",
+    cause: "Damage taken earlier leaves too little room for later encounters.",
+    response: "Check the mode's healing restrictions and use the shop or available healing opportunities.",
+  },
+  {
+    problem: "A Weapon Mastery cannot clear groups",
+    cause: "One weapon must handle both crowds and dangerous individual targets.",
+    response: "Prioritize upgrades that solve the selected weapon's coverage or attack-frequency weakness.",
+  },
+];
+
+export const ultraclockProblemColumns = [
+  { key: "symptom", label: "What You See" },
+  { key: "check", label: "What to Check" },
+  { key: "next", label: "Next Action" },
+];
+
+export const ultraclockProblemRows = [
+  {
+    symptom: "UltraClock is still locked",
+    check: "Did you complete Hazard 6 Weapon Mastery for that exact weapon?",
+    next: "Complete the weapon's own Hazard 6 Mastery rather than a regular or Class Mod dive.",
+  },
+  {
+    symptom: "No UltraClock appears in Supply Pods",
+    check: "Is an eligible mastered weapon variant equipped?",
+    next: "Equip the correct weapon and continue checking Artifact offers. Appearance is not guaranteed.",
+  },
+  {
+    symptom: "UltraClock targets another weapon",
+    check: "Do you have multiple eligible weapons equipped?",
+    next: "Read the offered weapon and Overclock before selecting the Artifact.",
+  },
+  {
+    symptom: "Your desired weapon is unavailable at the start",
+    check: "Have you earned its Hazard 5 starting-weapon reward, and is the Class Mod compatible?",
+    next: "Use a supported mode and check the starting-weapon selection prompts.",
+  },
+  {
+    symptom: "You cannot choose a starting weapon in Mastery",
+    check: "Are you playing a restricted Mastery mode rather than Main Mission or Endless?",
+    next: "Select a supported mode when you want to customize your starting weapon.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Unlock UltraClock in DRG Survivor?">
+Complete **Hazard 6 Weapon Mastery** for the weapon you want to improve. During a later dive, equip that same eligible weapon and look for its **UltraClock Artifact** among your Artifact offers. UltraClock can grant an additional **Unstable Overclock**, even before the weapon reaches its normal Unstable Overclock level. Completing an ordinary Hazard 6 dive or a Class Mod Mastery does not unlock it.
+</GuideQuickAnswer>
+
+</section>
+
+**Hazard 6** is part of the free **Update 1.2** for Deep Rock Galactic: Survivor. You do not need the paid Knockout Expansion to access the new difficulty or the Weapon Mastery rewards.
+
+The main change is what happens when you leave enemies alive. On Hazard 6, surviving Glyphids carry over into the next stage instead of being left behind. A run can become increasingly difficult even when you are completing the objectives on time.
+
+Update 1.2 also changes what Weapon Mastery can unlock. Clearing Hazard 5 opens up starting-weapon choices for compatible Class Mods, while clearing Hazard 6 unlocks the chance to obtain UltraClock for the corresponding weapon.
+
+These are separate objectives. The distinction matters because a difficult five-stage Class Mod Mastery can be completed successfully without unlocking UltraClock for any weapon.
+
+<section id="hazard-6-rules" className="scroll-mt-24">
+
+## How Does Hazard 6 Work in DRG Survivor?
+
+Hazard 6 makes enemies more dangerous and introduces an important carryover mechanic:
+
+**Enemies that survive one stage can appear at the beginning of the next.**
+
+You may reach a Drop Pod and finish the current objective, but the enemies you failed to eliminate can still affect the next stage.
+
+That changes the usual balance between quickly completing objectives and keeping the enemy population under control.
+
+### Why Do Later Stages Become Overwhelming?
+
+Consider a run where your weapons can defeat Elites but struggle to eliminate the ordinary horde.
+
+You may survive Stage 1 by moving away from enemies until the Drop Pod arrives. However, leaving many enemies behind creates additional pressure in Stage 2.
+
+If the same thing happens again, the following stage becomes harder before your weapons have necessarily improved enough to compensate.
+
+This is why a build that survives Hazard 5 by constantly escaping can struggle on Hazard 6.
+
+You need enough damage to prevent the enemy population from growing out of control, not merely enough health to survive until the next extraction.
+
+### Do All Remaining Enemies Carry Over?
+
+On Hazard 6, a portion of the enemies left alive can appear at the beginning of the next stage.
+
+You should not assume that every enemy currently visible will be transferred individually, or plan around an exact number of carried enemies. Your immediate goal is to avoid leaving a large, dangerous population behind.
+
+If the screen is crowded near the end of a stage, clear what you safely can while preserving a route to the Drop Pod.
+
+Do not miss extraction trying to eliminate every last enemy.
+
+### Is Hazard 6 the Same as Brood Harvest Threat Level?
+
+No. These are different systems.
+
+Hazard 6 introduces enemy carryover between stages. Brood Harvest has a separate mission mechanic in which collecting Kytoplasm for additional Supply Pods increases alien threat.
+
+If you are playing the Knockout mission, the <Link href="/deep-rock-galactic-survivor/brood-harvest">Brood Harvest walkthrough</Link> explains its Kytoplasm, Supply Pod, and Threat Level decisions.
+
+</section>
+
+<section id="hazard-6-strategy" className="scroll-mt-24">
+
+## How to Beat Hazard 6 Without Getting Overrun
+
+The most useful Hazard 6 strategy is to balance three goals:
+
+- Kill enough enemies that the next stage remains manageable.
+- Keep a safe position during dangerous swarms and Elite encounters.
+- Preserve enough health and movement to reach extraction.
+
+A successful Hazard 6 Crusher Class Mod Mastery demonstrates how these decisions work under pressure.
+
+The run used several weapons, including Shockwave Emitter and G19 Hammerhead, while relying on movement and careful positioning to survive the late stages.
+
+The weapon combination is only one part of the result. Several difficult moments were resolved by controlling where enemies approached and waiting for a route to open.
+
+### Before Starting — Prepare for a Long Fight
+
+Check whether your equipment supports both survival and damage.
+
+Before starting Hazard 6, check three things:
+
+- **Enemy clearing:** Can your weapons eliminate enough ordinary enemies to prevent large groups from carrying into the next stage?
+- **Extraction mobility:** Can you reposition and reach the Drop Pod when enemies block the direct route?
+- **Health reserve:** Can you survive an Elite encounter or a positioning mistake without exhausting your health before the next stage?
+
+Choose equipment and upgrades that address the weakest of these three areas. If your build clears enemies comfortably but repeatedly fails during extraction, improving movement or survival may be more useful than adding more damage.
+
+For Brawler-specific Gear and weapon combinations, see the <Link href="/deep-rock-galactic-survivor/brawler-build">Crusher, Renegade, and Enforcer builds</Link>.
+
+### Early Stages — Keep the Enemy Population Under Control
+
+The opening stages establish whether your damage can keep up with the incoming enemies.
+
+Avoid spending so much time mining that enemies accumulate without resistance.
+
+Collect useful resources and experience while continuing to damage the horde. If your weapons attack automatically, use your movement to keep targets within their effective range without getting trapped.
+
+When an Elite appears, decide whether you have enough damage to fight it immediately or need to clear surrounding enemies first.
+
+If the Elite retreats or takes too long to die, avoid staying in a narrow position while ordinary enemies gather behind you.
+
+### Middle Stages — Limit the Directions Enemies Can Approach
+
+A successful Crusher Hazard 6 Mastery used terrain to reduce the number of directions from which enemies could attack.
+
+Instead of remaining in an open area surrounded by Glyphids, the player sometimes moved toward a corner and allowed enemies to approach from a narrower field of view.
+
+This can make automatic weapon targeting and area damage more reliable.
+
+However, a corner is only useful while you still have a way to leave it.
+
+Once the enemy population closes around the position, look for an opening created by your weapons and move through it before the gap disappears.
+
+Do not stand in place indefinitely waiting for the next attack.
+
+### Late Stages — Prioritize Survival and Extraction
+
+The later stages punish mistakes made earlier.
+
+If you have already taken significant damage, another optional offensive upgrade may be less valuable than a reliable healing opportunity.
+
+Watch the Drop Pod countdown and your position relative to the extraction point.
+
+When the route is becoming crowded, start moving toward the correct area rather than trying to reach the Drop Pod at the final moment.
+
+If necessary, use your weapons to create a path through the nearest enemies. Do not continue fighting in a corner after the extraction route has opened.
+
+### Final Boss — Preserve an Escape Route
+
+In the completed Crusher Class Mod Mastery, the final encounter involved the Twins and a dangerous concentration of surrounding enemies.
+
+The player had to respond to repeated attacks, healing behavior from the bosses, and enemies blocking the route around the arena.
+
+A narrow opening created enough room to reposition and continue the fight. Both bosses were eventually defeated, and the dive was completed.
+
+<figure className="my-6">
+  <Image
+    src="/images/deep-rock-galactic-survivor/hazard-six-crusher-final-boss.webp"
+    alt="Crusher Class Mod Mastery battle against the Dreadnought Twins"
+    width={1200}
+    height={916}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    The Dreadnought Twins fight requires enough room to reposition while both bosses and surrounding enemies remain active.
+  </figcaption>
+</figure>
+
+That example supports a useful general rule: **do not sacrifice mobility merely to keep attacking the boss.**
+
+If your weapons are dealing consistent damage, concentrate on surviving long enough for that damage to finish the encounter.
+
+The exact boss depends on the selected challenge. Hazard 6 does not require every mode to have the same final encounter.
+
+</section>
+
+<section id="mastery-types" className="scroll-mt-24">
+
+## Weapon Mastery vs Class Mod Mastery: What Is the Difference?
+
+Deep Rock Galactic: Survivor has several Mastery categories, and they do not provide identical rewards.
+
+<GuideTable
+  columns={masteryTypeColumns}
+  rows={masteryTypeRows}
+/>
+
+### Weapon Mastery — One Weapon, Three Stages
+
+Weapon Mastery restricts you to one selected weapon across a three-stage challenge.
+
+This means the weapon must handle ordinary enemies, dangerous targets, and its stage objectives without relying on a full multi-weapon setup.
+
+A weapon that performs well as supporting damage in a normal dive may be much harder to use alone.
+
+Weapon Mastery can provide permanent stat improvements, and the higher Hazard rewards introduced in Update 1.2 are tied to the specific weapon you complete.
+
+**This is the Mastery category required for UltraClock.**
+
+### Class Mod Mastery — Five Stages with Healing Restrictions
+
+Class Mod Mastery uses a longer five-stage structure with special restrictions.
+
+The maps are smaller, secondary objectives are removed, and normal healing options are more limited.
+
+In particular, Class Mod Mastery removes ordinary Life Regen, Red Sugar, and level-up healing. Recovery must instead come from available alternatives such as healing purchases between stages or an appropriate Artifact.
+
+<figure className="my-6">
+  <Image
+    src="/images/deep-rock-galactic-survivor/crusher-class-mod-mastery-rules.webp"
+    alt="Crusher Class Mod Mastery rules showing smaller maps and restricted healing"
+    width={1652}
+    height={922}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Class Mod Mastery removes Red Sugar, Life Regen, and level-up healing, making health preservation especially important.
+  </figcaption>
+</figure>
+
+That makes early damage especially expensive.
+
+A successful Hazard 6 Class Mod Mastery with Crusher provides a useful example of surviving the higher difficulty, but it does not unlock a Weapon Mastery UltraClock reward.
+
+### Biome Mastery — Ten Stages
+
+Biome Mastery is a longer challenge with ten stages.
+
+It tests your ability to keep a run functioning through an extended sequence rather than one restricted weapon.
+
+Completing it contributes to its own permanent progression, but it does not replace the requirement to complete Hazard 6 Weapon Mastery for UltraClock.
+
+Before starting a Mastery, read the challenge name and the selected Hazard level on the Mastery screen.
+
+For example, **Crusher Mastery** improves the Class Mod, while **Shockwave Emitter Mastery** tracks rewards for that specific weapon. Completing the former does not substitute for completing the latter.
+
+Select the challenge that matches the reward you want before launching the dive.
+
+</section>
+
+<section id="weapon-mastery" className="scroll-mt-24">
+
+## How to Unlock and Complete Hazard 6 Weapon Mastery
+
+Before attempting Hazard 6 Weapon Mastery, make sure the weapon's Mastery challenge is available.
+
+Weapon Masteries are unlocked individually by reaching **weapon level 18** in a dive and meeting the relevant Hazard access requirements shown in the Mastery menu.
+
+Once the challenge is available, select the weapon you want to master and choose Hazard 6.
+
+<figure className="my-6">
+  <Image
+    src="/images/deep-rock-galactic-survivor/hazard-six-weapon-mastery-rewards.webp"
+    alt="Shockwave Emitter Weapon Mastery showing Hazard 5 starting weapon and Hazard 6 UltraClock rewards"
+    width={570}
+    height={618}
+    className="mx-auto h-auto max-w-full rounded-lg"
+  />
+  <figcaption>
+    The Shockwave Emitter Mastery screen lists starting-weapon selection at Hazard 5 and UltraClock at Hazard 6. Hazard 3 is selected in this screenshot.
+  </figcaption>
+</figure>
+
+### Step 1 — Choose the Exact Weapon You Want to Improve
+
+UltraClock rewards are weapon-specific.
+
+Do not choose a weapon solely because its Hazard 6 Mastery appears easier. Think about whether you expect to use that weapon regularly in future dives.
+
+For example, if your preferred setup relies on a particular weapon for its main damage, completing its Mastery may be more useful than unlocking UltraClock for a weapon you rarely equip.
+
+The selection also affects the challenge itself, because you will be fighting with only that weapon.
+
+### Step 2 — Build Around the Selected Weapon's Weakness
+
+A single-weapon challenge removes many options available in normal dives.
+
+If the weapon attacks a narrow area, prioritize upgrades that make its coverage more reliable.
+
+If it attacks slowly, Reload Speed or other attack-frequency improvements may help prevent enemies from accumulating.
+
+If it clears groups but struggles against Elites, invest in the damage or Overclock choices that help it finish dangerous targets.
+
+Avoid spending upgrades on a secondary strategy that the selected weapon cannot support.
+
+The best decision is the upgrade that fixes the most dangerous current limitation.
+
+### Step 3 — Protect Your Health During the Three Stages
+
+A short Mastery still becomes difficult if the weapon cannot keep enemies at a safe distance.
+
+Use terrain to influence how enemies approach. Avoid getting surrounded in open spaces, but do not commit to a corner with no clear escape.
+
+Keep collecting experience and useful resources when safe, and do not stay near an optional pickup while a dangerous enemy closes in.
+
+If your damage is sufficient, survival becomes the priority. You cannot earn the completion reward if you fail the dive.
+
+### Step 4 — Finish the Final Stage and Extract
+
+Complete the Mastery objective and reach extraction.
+
+After the successful dive, check the Weapon Mastery rewards associated with the selected weapon.
+
+The important distinction is between reaching Hazard 6 in any mode and **successfully completing that weapon's Hazard 6 Mastery**.
+
+Only the latter satisfies the UltraClock unlock requirement.
+
+</section>
+
+<section id="starting-weapons" className="scroll-mt-24">
+
+## How to Change Your Starting Weapon After Hazard 5 Mastery
+
+Update 1.2 adds selectable starting weapons as a reward for **Hazard 5 Weapon Mastery**.
+
+This can change how you build a class, because you no longer have to begin every supported dive with the Class Mod's original weapon.
+
+However, the reward does not let every Class Mod equip every weapon.
+
+### How to Select an Unlocked Starting Weapon
+
+1. Complete the desired weapon's Hazard 5 Weapon Mastery.
+2. Start a supported Main Mission or Endless dive.
+3. Choose a Class Mod compatible with the unlocked weapon.
+4. Inspect the starting-weapon panel on the class selection screen.
+5. Use the displayed left and right weapon-selection controls to cycle through available weapons.
+6. Confirm the weapon shown before beginning the dive.
+
+The controller interface displays LB and RB beneath the weapon panel. Keyboard players should follow their assigned on-screen controls.
+
+<figure className="my-6">
+  <Image
+    src="/images/deep-rock-galactic-survivor/hazard-six-starting-weapon-selection.webp"
+    alt="Scout Classic class selection screen with starting weapon selector and controller prompts"
+    width={1700}
+    height={1052}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Use the left and right controls beneath the weapon panel to switch between unlocked starting weapons.
+  </figcaption>
+</figure>
+
+If you have completed the Mastery but cannot find the weapon, first check the selected Class Mod rather than assuming the reward failed.
+
+### Why Is an Unlocked Weapon Missing?
+
+A weapon can be unlocked as a starting option without being compatible with your current Class Mod.
+
+That means you may see it for one class but not another.
+
+Check the compatible classes or Class Mods indicated by the weapon's unlock information.
+
+Starting-weapon selection is available in supported Main Missions and Endless dives. Check your selected mode if the weapon selector does not appear.
+
+Restricted Mastery modes should not be treated as interchangeable with those ordinary starting-weapon selection screens.
+
+### Do You Need Hazard 6 to Change Starting Weapons?
+
+No. Hazard 5 Weapon Mastery provides the selectable starting-weapon reward.
+
+Hazard 6 Weapon Mastery adds UltraClock eligibility.
+
+You can therefore use the starting-weapon feature without first completing the UltraClock challenge.
+
+</section>
+
+<section id="ultraclock-unlock" className="scroll-mt-24">
+
+## How to Unlock UltraClock for a Specific Weapon
+
+UltraClock is an Artifact introduced with Update 1.2.
+
+It is not automatically added to your inventory merely because you complete Hazard 6.
+
+Instead, completing a weapon's Hazard 6 Mastery unlocks the possibility of encountering UltraClock for that weapon during later dives.
+
+Follow this order:
+
+1. Unlock and complete **Hazard 6 Weapon Mastery** for the desired weapon.
+2. Begin another dive using a class that can equip that weapon.
+3. Obtain and equip the eligible weapon variant during the dive.
+4. Open available Supply Pods and inspect their Artifact choices.
+5. If UltraClock appears, check which weapon and Unstable Overclock it offers.
+6. Select it only when the offered effect benefits your current run.
+
+**The weapon must be equipped.** Completing its Mastery does not make UltraClock appear for a weapon that is absent from your loadout.
+
+The reward is also tied to the appropriate weapon variant. An unlocked UltraClock for one weapon should not be treated as a universal upgrade for all weapons of a similar type.
+
+### Is UltraClock Guaranteed After Unlocking It?
+
+No. UltraClock is part of the Artifact selection system.
+
+Unlocking it makes the corresponding option eligible to appear, but it does not guarantee a particular Supply Pod will offer it.
+
+You may complete a dive without seeing the desired UltraClock.
+
+That does not, by itself, mean the Mastery reward is broken.
+
+### What If Several Equipped Weapons Have UltraClock Unlocked?
+
+If multiple eligible weapons are equipped, you may encounter an UltraClock offer for a weapon other than the one you want to strengthen.
+
+Pay attention to the weapon name shown on the Artifact before selecting it.
+
+Do not assume that finding UltraClock means you can freely assign it to any equipped weapon afterward.
+
+UltraClock can be selected only once per dive. Check the offered weapon and Unstable Overclock carefully before accepting it, especially when several eligible weapons are equipped.
+
+</section>
+
+<section id="ultraclock-effect" className="scroll-mt-24">
+
+## What Does UltraClock Do?
+
+UltraClock grants an additional **Unstable Overclock** to the eligible weapon.
+
+Normally, a weapon reaches its major Unstable Overclock choice through leveling. UltraClock adds another way to obtain such an effect.
+
+The important difference is that **UltraClock does not require the weapon to have already reached its normal Unstable Overclock level**.
+
+That allows a weapon to gain a powerful effect earlier than it otherwise could.
+
+It also makes combinations of two Unstable Overclocks possible.
+
+### Can You Have Two Unstable Overclocks on One Weapon?
+
+Yes. That is one of the main reasons UltraClock can be valuable.
+
+A weapon with its normal Unstable Overclock can also receive an additional one through UltraClock.
+
+However, the result depends on which effect is offered.
+
+Some combinations may complement each other, while others may be less useful for your chosen build.
+
+Check the actual weapon and effect before selecting the Artifact.
+
+### UltraClock Example: Thunderlash
+
+An UltraClock Artifact can display both the eligible weapon and the Unstable Overclock it will receive.
+
+For example, an UltraClock card can offer **Explosive Tip** for **Thunderlash**.
+
+<figure className="my-6">
+  <Image
+    src="/images/deep-rock-galactic-survivor/ultraclock-thunderlash-artifact.webp"
+    alt="UltraClock Artifact preview showing Explosive Tip for Thunderlash"
+    width={1934}
+    height={924}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    This UltraClock preview offers Explosive Tip for Thunderlash, showing the specific weapon and Unstable Overclock before selection.
+  </figcaption>
+</figure>
+
+Check both names before selecting the Artifact. UltraClock does not let you freely assign the offered effect to another weapon after making your choice.
+
+If several equipped weapons have completed Hazard 6 Weapon Mastery, the offered weapon and Overclock may differ from the combination you were hoping to obtain.
+
+For Thunderlash weapon upgrades and Enforcer build decisions, see the <Link href="/deep-rock-galactic-survivor/brawler-build">Brawler build guide</Link>.
+
+### Should You Unlock UltraClock for Every Weapon?
+
+That depends on your objective.
+
+If you want long-term completion and more available weapon upgrades, completing additional Hazard 6 Weapon Masteries makes sense.
+
+If you want a more focused Artifact pool, there is a tradeoff.
+
+Unlocking UltraClock for more weapons can create more eligible combinations when those weapons are equipped. This may reduce your ability to target one particular weapon's UltraClock during a multi-weapon dive.
+
+For an early high-difficulty progression plan, start with a weapon you already use successfully.
+
+Expand to other weapons after you understand how often the new Artifact is helping your builds.
+
+Do not assume that completing every possible Mastery is automatically the best short-term strategy for obtaining one preferred UltraClock.
+
+</section>
+
+<section id="ultraclock-not-appearing" className="scroll-mt-24">
+
+## Why Is UltraClock Not Appearing?
+
+If UltraClock is not showing up, check the unlock and equipment conditions before assuming there is a bug.
+
+<GuideTable
+  columns={ultraclockProblemColumns}
+  rows={ultraclockProblemRows}
+/>
+
+### Is the Reward Locked, or Is the Artifact Missing?
+
+These are different situations.
+
+If the weapon's Hazard 6 Mastery reward is still locked, check the exact challenge you completed. Finishing Crusher Class Mod Mastery, for example, does not unlock the UltraClock reward for Shockwave Emitter.
+
+If the reward is unlocked, make sure that weapon is equipped during the next dive. UltraClock remains a randomized Artifact offer, so a Supply Pod may not contain it even when the unlock conditions are satisfied.
+
+When an UltraClock card appears, read both the weapon name and Unstable Overclock before accepting it. The offered effect is tied to the named weapon, and UltraClock can only be selected once per dive.
+
+</section>
+
+<section id="hazard-6-problems" className="scroll-mt-24">
+
+## Why Do You Keep Losing on Hazard 6?
+
+Hazard 6 failures are easier to address when you identify whether the issue comes from damage, positioning, health, or the selected Mastery rules.
+
+<GuideTable
+  columns={hazardSixProblemColumns}
+  rows={hazardSixProblemRows}
+/>
+
+Look at when the dive started to become unmanageable.
+
+If the next stage begins with an overwhelming number of enemies, your previous stage probably ended with too much of the horde still alive. Prioritize attacks that clear ordinary enemies more reliably.
+
+If you survive the fighting but repeatedly miss extraction, start moving toward the Drop Pod earlier instead of continuing to collect resources.
+
+If Class Mod Mastery ends because your health runs out, account for its disabled healing options from the beginning of the dive. Do not plan around Red Sugar or passive Life Regen when the challenge removes them.
+
+</section>
+
+<section id="gear-rewards" className="scroll-mt-24">
+
+## Is Hazard 6 Worth Playing for Gear and Progression?
+
+Hazard 6 offers more than an additional difficulty challenge.
+
+Higher-Hazard runs can provide access to higher-level Gear, and Update 1.2 expands the progression available to players who have already completed earlier difficulties.
+
+There are also additional milestones associated with higher-Hazard completion.
+
+However, the most important reason to target a specific Hazard 6 Weapon Mastery is the **weapon-specific UltraClock unlock**.
+
+If your goal is better general equipment, a regular Hazard 6 dive may be the more natural starting point.
+
+If you want a particular weapon to gain access to an additional Unstable Overclock, that requires its Weapon Mastery instead.
+
+Do not assume that a higher Gear level automatically fixes a weapon whose attack pattern does not suit the challenge. Range, coverage, and the ability to survive increasingly crowded stages still matter.
+
+For a broader explanation of the free update, including Overtime Meta Upgrades and other progression changes, see the <Link href="/deep-rock-galactic-survivor">Knockout and Update 1.2 guide</Link>.
+
+</section>
+
+<section id="mastery-progression" className="scroll-mt-24">
+
+## What Order Should You Complete the New Mastery Rewards?
+
+If you have returned for Update 1.2 and are deciding what to do next, focus on the reward that changes your current gameplay most.
+
+<GuideTable
+  columns={weaponMasteryRewardColumns}
+  rows={weaponMasteryRewardRows}
+/>
+
+A practical progression order is:
+
+1. **Complete the earlier Mastery requirements** for weapons you already use regularly.
+2. **Finish Hazard 5 Weapon Mastery** when you want to change a compatible Class Mod's starting weapon.
+3. **Practice Hazard 6** until you can control the enemy carryover without losing too much health.
+4. **Complete Hazard 6 Weapon Mastery** for a weapon you expect to equip frequently.
+5. **Use that weapon in later dives** and watch for a matching UltraClock offer.
+6. **Expand to additional Weapon Masteries** once you are satisfied with your initial unlocks.
+
+This order is useful for players prioritizing practical build upgrades rather than completing every Mastery immediately.
+
+If your preferred weapon is difficult to use alone, improve your Gear and permanent upgrades before forcing the highest-Hazard challenge repeatedly.
+
+You can still pursue Class Mod and Biome Masteries for their own permanent rewards. Just keep those goals separate from the UltraClock unlock path.
+
+</section>
+
+<section id="next-steps" className="scroll-mt-24">
+
+## What Should You Do After Your First Hazard 6 Clear?
+
+After extraction, open the Mastery menu and check which challenge was recorded as completed.
+
+If you were working toward UltraClock, confirm that the Hazard 6 reward belongs to the exact weapon you intend to use. The reward does not add an Unstable Overclock immediately; you must equip the eligible weapon during another dive and obtain the corresponding Artifact offer.
+
+If your Mastery attempt failed because the enemy population grew too large between stages, improve your ability to clear ordinary enemies before making another attempt.
+
+For a different challenge, you can try <Link href="/deep-rock-galactic-survivor/brood-harvest">Brood Harvest</Link>, or use the <Link href="/deep-rock-galactic-survivor/brawler-build">Brawler weapon setups</Link> when adjusting Crusher, Renegade, or Enforcer.
+
+</section>

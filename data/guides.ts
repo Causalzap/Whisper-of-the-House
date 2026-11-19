@@ -130,6 +130,170 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Deep Rock Galactic: Survivor — Knockout",
+  game: "Deep Rock Galactic: Survivor",
+  href: "/deep-rock-galactic-survivor",
+  slug: "deep-rock-galactic-survivor",
+  kind: "game",
+  status: "active",
+  accent: "amber",
+  archiveCategory: "RPG, action, builds & combat",
+
+  label: "Knockout DLC, Brawler, Brood Harvest & Hazard 6",
+  eyebrow: "Action Roguelite, Auto-Shooter, Mining & Survival",
+
+  hubStatus:
+    "Knockout Expansion + Brawler + Brood Harvest + Sandblasted Corridors + Hazard 6 + UltraClock",
+
+  description:
+    "Start the Knockout expansion, choose a Brawler Class Mod, complete Brood Harvest, survive Sandblasted Corridors, and unlock Hazard 6 Weapon Mastery rewards.",
+
+  coverage: [
+    "Knockout DLC versus free Update 1.2, first steps, new content access, Sandblasted Corridors, Stabber Vines, Sand Twisters and explosive spores",
+
+    "Brawler Class Mods Crusher, Renegade and Enforcer, Bonk, Melee upgrades, Shockwave Emitter, Thunderlash, Plasma weapons and Overclock combinations",
+
+    "Brood Harvest's four stages, fleeing Broodlings, Kytoplasm collection, additional Supply Pods, escalating Threat Level, Dreadnought Empress and extraction",
+
+    "Hazard 6 enemy carryover, Weapon Mastery, Class Mod Mastery, starting-weapon selection, UltraClock unlock conditions and Unstable Overclocks",
+
+    "Free Update 1.2 Overtime upgrades, Fossil and Morkite Reactor Core objectives, new Artifacts, Gear management and bulk selling",
+  ],
+
+  image:
+    "/images/deep-rock-galactic-survivor/sandblasted-corridors-sand-twister.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 87,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "DRG Survivor Knockout Guide: Brawler, Missions & Unlocks",
+      href: "/deep-rock-galactic-survivor",
+      type: "Guide Hub",
+
+      description:
+        "Start Knockout, learn Brawler, survive Sandblasted Corridors, complete Fossil and Reactor Core objectives, and use Update 1.2 upgrades.",
+
+      image:
+        "/images/deep-rock-galactic-survivor/sandblasted-corridors-sand-twister.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Knockout DLC, free Update 1.2, Brawler, Sandblasted Corridors, Overtime, Fossils, Reactor Core and new Artifacts",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "DRG Survivor Brood Harvest Walkthrough: Empress & Kytoplasm",
+      href: "/deep-rock-galactic-survivor/brood-harvest",
+      type: "Walkthrough",
+
+      description:
+        "Complete all four Brood Harvest stages, hunt Broodlings for Kytoplasm, manage rising Threat Level, defeat the Dreadnought Empress, and extract.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/deep-rock-galactic-survivor/brood-harvest-empress-encounter.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 558,
+        spotlightMeta:
+          "Four stages, Broodlings, three Kytoplasm, extra Supply Pods, Threat Level, Dreadnought Empress, acid attacks and Drop Pod",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "DRG Survivor Brawler Builds: Crusher, Renegade & Enforcer",
+      href: "/deep-rock-galactic-survivor/brawler-build",
+      type: "Builds",
+
+      description:
+        "Compare Crusher, Renegade and Enforcer, improve Bonk, choose Melee and Plasma weapons, select Overclocks, and fix range or damage problems.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/deep-rock-galactic-survivor/brawler-crusher-class-selection.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 559,
+        spotlightMeta:
+          "Crusher, Renegade, Enforcer, Bonk, Shockwave Emitter, Diffractor Spike, Thunderlash, Plasma, Overclocks and Melee Range",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "DRG Survivor Hazard 6 Mastery & UltraClock Unlock Guide",
+      href: "/deep-rock-galactic-survivor/hazard-6-ultraclock",
+      type: "Systems",
+
+      description:
+        "Survive Hazard 6 enemy carryover, complete Weapon Mastery, unlock starting-weapon choices, obtain UltraClock, and fix missing Artifact rewards.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/deep-rock-galactic-survivor/hazard-six-weapon-mastery-rewards.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 560,
+        spotlightMeta:
+          "Hazard 6, enemy carryover, Weapon Mastery, Class Mod Mastery, Hazard 5 starting weapons, UltraClock and Unstable Overclocks",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
 
   {
     title: "Dungeonbound",

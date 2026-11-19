@@ -1266,6 +1266,11 @@ const paths = [
      'dungeonbound/achievements',
      'dungeonbound/hero-unlocks',
      'dungeonbound',
+
+     'deep-rock-galactic-survivor',
+     'deep-rock-galactic-survivor/brawler-build',
+     'deep-rock-galactic-survivor/brood-harvest',
+     'deep-rock-galactic-survivor/hazard-6-ultraclock',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1273,6 +1278,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'deep-rock-galactic-survivor': '2026-11-19',
+  'deep-rock-galactic-survivor/brawler-build': '2026-11-19',
+  'deep-rock-galactic-survivor/brood-harvest': '2026-11-19',
+  'deep-rock-galactic-survivor/hazard-6-ultraclock': '2026-11-19',
+
   'dungeonbound/fusion-guide': '2026-11-18',
   'dungeonbound/act-1': '2026-11-18',
   'dungeonbound/walkthrough': '2026-11-18',
