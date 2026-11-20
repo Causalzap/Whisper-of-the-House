@@ -1,0 +1,670 @@
+
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+export const layoutStageColumns = [
+  { key: "stage", label: "Workshop Stage" },
+  { key: "layout", label: "What to Keep Together" },
+  { key: "priority", label: "What to Fix First" },
+];
+
+export const layoutStageRows = [
+  {
+    stage: "Starting workshop",
+    layout:
+      "Keep the Furnace, Anvil, Quenching Bucket, Carpentry Workbench, and Item Chest within a compact working area.",
+    priority:
+      "Reduce unnecessary walking and avoid adding more workers than the available stations can support.",
+  },
+  {
+    stage: "Mining and smelting",
+    layout:
+      "Group Ore Storage, Smelters, and Ingot Storage into a manageable supply chain, with Assistants assigned to restocking.",
+    priority:
+      "Keep materials reaching the workstations before increasing Blacksmith production.",
+  },
+  {
+    stage: "Expanded workshop",
+    layout:
+      "Separate larger smelting operations, crafting stations, and retail space while keeping frequently used storage accessible.",
+    priority:
+      "Limit repeated travel between floors and balance the production of small, medium, and large ingots.",
+  },
+];
+
+export const bottleneckColumns = [
+  { key: "problem", label: "What You See" },
+  { key: "check", label: "What to Check" },
+  { key: "solution", label: "What to Change" },
+];
+
+export const bottleneckRows = [
+  {
+    problem: "Blacksmiths wait at the Furnace",
+    check:
+      "Available Furnace positions and the number of workers trying to use them.",
+    solution:
+      "Add another Furnace or upgrade to a larger model if heating capacity is the limiting step.",
+  },
+  {
+    problem: "Smelters keep running out of Ore",
+    check:
+      "Ore in the Warehouse, local Ore Storage, and the assigned Restock Resources worker.",
+    solution:
+      "Assign an Assistant to deliver the correct Ore before expanding smelting capacity.",
+  },
+  {
+    problem: "Ore is available, but Ingots run out",
+    check:
+      "Smelter assignments, output volume, Ingot Storage, and consumption by crafting workers.",
+    solution:
+      "Increase the appropriate Ingot production instead of adding more Blacksmiths.",
+  },
+  {
+    problem: "Workers travel to the Warehouse repeatedly",
+    check:
+      "Whether local resource storage is being replenished and whether the assigned Assistant covers that material.",
+    solution:
+      "Restock the local storage through a dedicated Assistant and check the supply again.",
+  },
+  {
+    problem: "Several workers wait around an Item Chest",
+    check:
+      "Completed items awaiting collection and whether Transfer Items workers are keeping up.",
+    solution:
+      "Improve finished-item collection before adding more crafting stations or another Chest.",
+  },
+  {
+    problem: "Store Racks stay empty",
+    check:
+      "Craft for Racks assignments, appropriate Rack availability, completed inventory, and deliveries.",
+    solution:
+      "Correct the production assignment or delivery bottleneck instead of assuming more sales capacity is needed.",
+  },
+  {
+    problem: "Complex items take much longer to finish",
+    check:
+      "The route between metalworking, Carpentry, Workbench assembly, and Item Chests.",
+    solution:
+      "Keep the required stations close and assign capable workers to multi-part production.",
+  },
+  {
+    problem: "Production slows after adding another floor",
+    check:
+      "Material deliveries, stairs, cross-floor travel, and access to the required workstations.",
+    solution:
+      "Move related production steps closer together and reduce unnecessary transfers between floors.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Should You Set Up Your Workshop in Blacksmith Master?">
+Build around the **actual production chain**, not just the number of available workstations. Keep your Furnace, Anvil, Quenching Bucket, Carpentry Workbench, and Item Chest close enough to avoid unnecessary trips. Once you start mining and smelting, assign Assistants to move resources from the Warehouse into local storage. If production slows, check whether the delay comes from missing materials, occupied equipment, or finished items waiting for delivery before hiring more workers.
+</GuideQuickAnswer>
+
+</section>
+
+A larger workshop does not automatically produce more items in **Blacksmith Master**. If several workers are waiting for the same Furnace, Anvil, or Item Chest, hiring another Blacksmith may increase the queue without improving output.
+
+The problem becomes more noticeable as you unlock Mines, Smelters, additional materials, multi-part items, and extra floors. Each new production step creates another place where materials or workers can get stuck.
+
+A reliable layout should make it easy to answer three questions:
+
+- Are materials arriving faster than workers consume them?
+- Can each worker reach the equipment needed to finish an item without excessive travel?
+- Are finished products leaving the workshop quickly enough to reach Merchant Offers or Store Racks?
+
+Fix those problems in that order whenever possible. There is little benefit in producing more items if the supplies cannot reach the workstations or completed goods remain in storage.
+
+<section id="production-chain" className="scroll-mt-24">
+
+## How Does the Blacksmith Master Production Chain Work?
+
+The most useful way to plan your workshop is to follow a product from its raw material to its destination.
+
+For ordinary metalworking, the process can involve:
+
+1. **Ore collection:** Miners gather raw materials, which become available through the Warehouse.
+2. **Ore restocking:** An Assistant brings the required Ore into the workshop's local storage.
+3. **Smelting:** An assigned worker converts Ore into Ingots.
+4. **Metalworking:** A Blacksmith takes the appropriate Ingot, heats it at a Furnace, shapes it at an Anvil, and uses the Quenching Bucket as required.
+5. **Finished-item collection:** The crafted item enters an Item Chest.
+6. **Delivery:** An Assistant transports the finished item toward its assigned destination, such as a Merchant Offer or Store Rack.
+
+Wooden items use Carpentry instead of the metalworking sequence. More advanced products can require both metalworking and wooden components, followed by assembly at a Workbench.
+
+Not every recipe uses every station. The important thing is to identify the stations required by the products you are currently making.
+
+### Why Does Station Placement Matter?
+
+A worker may have enough skill to make an item quickly but still spend much of the working day moving between stations.
+
+For example, a Blacksmith producing a metal item might have to:
+
+- Collect an Ingot.
+- Walk to the Furnace.
+- Move to an Anvil.
+- Use the Quenching Bucket.
+- Deposit the finished product in an Item Chest.
+
+If those stations are spread across the workshop, the worker repeats the same unnecessary trips for every item.
+
+Start with a compact arrangement. Put frequently used stations along a short working route and avoid placing unrelated furniture between production steps.
+
+Once you can observe a full production cycle, change the arrangement based on where the worker actually spends time.
+
+Do not assume that two stations placed next to each other are sufficient if the worker still needs to visit another station on the opposite side of the room.
+
+</section>
+
+<section id="starting-layout" className="scroll-mt-24">
+
+## What Is a Good Early Workshop Layout?
+
+Your first workshop does not need a complicated floor plan.
+
+At the beginning, you have limited space, a small workforce, and only a few production systems available. Use that simplicity to your advantage.
+
+### Step 1 — Keep Metalworking Equipment Together
+
+Place the Furnace, Anvil, and Quenching Bucket in the same working area.
+
+The goal is to let your first metalworking Blacksmith complete repeated items without walking across the entire workshop.
+
+Keep enough room to add a second Furnace or Anvil later. You do not need to purchase them immediately.
+
+If workers are queueing at the Furnace while other stations remain available, test whether a second Furnace reduces the waiting time.
+
+That is a useful example of why an occupied station can be a more important bottleneck than the number of Blacksmiths.
+
+If you see a worker waiting while another uses the Furnace, inspect the queue before hiring anyone else.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-second-furnace-bottleneck.webp"
+    alt="Early Blacksmith Master workshop with two Furnaces placed side by side"
+    width={1596}
+    height={1034}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Two Furnaces provide additional heating positions when several Blacksmiths need the same equipment.
+  </figcaption>
+</figure>
+
+### Step 2 — Place Carpentry Near Its Wood Supply
+
+Once Carpentry is available, keep the Carpentry Workbench reasonably close to the wood used by your workers.
+
+Early wooden items can provide an additional production option while your metalworking stations are busy.
+
+Assigning one Blacksmith to wooden items and another to metal items also helps prevent both workers from competing for the same equipment.
+
+You can adjust those preferences as production becomes more complicated.
+
+For the actual unlock order, see the <Link href="/blacksmith-master/mastery-tree">Mastery Tree and progression guide</Link>.
+
+### Step 3 — Make the Item Chest Easy to Reach
+
+The Item Chest is where completed products enter the delivery process.
+
+A Chest placed too far from production adds another journey after every crafted item.
+
+Keep it near the crafting area, but leave room for additional production stations.
+
+As your workforce grows, watch whether workers begin waiting to deposit completed items.
+
+An additional Chest can create another collection point, but it does not automatically solve a shortage of delivery workers.
+
+Check how quickly the existing Chest is emptied before adding more storage.
+
+### Step 4 — Add an Assistant Before the Delivery Work Becomes Excessive
+
+Assistants become increasingly useful because they can take over work that would otherwise interrupt your Blacksmiths.
+
+When completed items accumulate in an Item Chest, assign an Assistant to **Transfer Items**. Check whether deliveries begin moving and whether Blacksmiths can continue crafting without waiting for finished goods to be collected.
+
+If the Chest remains full, inspect the delivery assignments and destinations before hiring another worker.
+
+Before expanding the workforce again, identify whether the current delay comes from production or delivery. For early hiring costs and worker selection, see the <Link href="/blacksmith-master">Blacksmith Master beginner guide</Link>.
+
+</section>
+
+<section id="ore-ingots" className="scroll-mt-24">
+
+## Why Are Your Workers Running Out of Ore or Ingots?
+
+When metal production stalls, first identify whether the shortage is **Ore** or **Ingots**.
+
+These are different problems.
+
+An empty Ore Storage may indicate that material is not reaching the workshop. An empty Ingot Storage may indicate that the Smelters cannot keep up with crafting demand.
+
+Adding another Furnace will not fix either shortage.
+
+### Check Ore Production Before Buying Another Smelter
+
+Open the relevant resource and storage information.
+
+If the Warehouse has Ore available but the local storage is empty, the mining operation may be working correctly while the delivery system is falling behind.
+
+Check the Assistant assigned to **Restock Resources**.
+
+Make sure that worker is handling the material actually needed by the Smelters.
+
+Copper Ore can be available in the Warehouse while the local storage beside the Smelters remains empty. In that situation, open the Assistant assignments and confirm that a worker is set to **Restock Resources** with **Copper Ore** selected.
+
+Once the assignment is active, check whether Copper Ore reaches the intended storage. If deliveries resume, there is no reason to expand the Mine simply to correct the missing restocking job.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-copper-ore-restock.webp"
+    alt="Assistant Caleb assigned to carry Copper Ore from the Warehouse to eligible storage"
+    width={1340}
+    height={730}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Assign an Assistant to carry Copper Ore from the Warehouse to eligible storage so Smelters receive local supplies.
+  </figcaption>
+</figure>
+
+Apply the same check to Pine Wood and other materials. A functioning Mine or Forest does not guarantee that its resources are reaching the workshop.
+
+### Check Whether Your Smelters Can Keep Up
+
+If Ore is being delivered but Ingot Storage continues to empty, inspect the number of workers producing Ingots.
+
+Compare three things:
+
+1. How much Ore is available.
+2. How many Ingots are being produced.
+3. How quickly Blacksmiths consume those Ingots.
+
+A workshop with several Blacksmiths can consume Ingots faster than one Assistant produces them.
+
+This becomes more noticeable when you add new crafting stations or higher-material recipes.
+
+If production slows after hiring additional Blacksmiths, compare their Ingot consumption with the amount your Smelters are producing. An empty Ingot Storage while Ore remains available points toward insufficient Smelting output rather than a shortage of raw materials.
+
+Increase production of the Ingot type being consumed fastest, then watch whether the Blacksmiths can work without waiting for another delivery.
+
+### What If Automatic Ore Deliveries Cannot Keep Up?
+
+First, check whether the Warehouse contains the required Ore. If it does, inspect the assigned Assistant and the destination storage before increasing mining capacity.
+
+If Ore production itself is too low, manual restocking can keep an important crafting order moving temporarily. Once the supply resumes, watch whether local storage continues to empty faster than it is replenished.
+
+For decisions about spending money on supplies, wages, and early expansion, see the <Link href="/blacksmith-master">beginner guide</Link>.
+
+</section>
+
+<section id="furnace-smelter" className="scroll-mt-24">
+
+## Should You Add Another Furnace or Upgrade to a Medium Furnace?
+
+A Furnace upgrade can be more useful than hiring another Blacksmith, but only when Furnace availability is limiting production.
+
+The **Medium Furnace** supports two workers at the same time and uses less space than two separate Small Furnaces.
+
+That makes it valuable in a crowded workshop where you need additional heating capacity without filling an entire room with equipment.
+
+### When Should You Add Another Furnace?
+
+Consider another Furnace when:
+
+- Several Blacksmiths are waiting to heat Ingots.
+- Other stations have capacity but cannot be used until the Furnace is available.
+- Ingot supplies are sufficient.
+- There is room for the additional station without making workers travel farther.
+
+In that situation, additional heating capacity can remove a genuine production bottleneck.
+
+However, if Blacksmiths are idle because they have no Ingots, more Furnace capacity will simply create unused equipment.
+
+### Why Is the Medium Furnace Useful?
+
+Two Small Furnaces require more workshop space than one Medium Furnace serving two workers.
+
+Replacing smaller equipment can therefore free space for another station or improve your working arrangement.
+
+This matters more as the workshop grows crowded.
+
+You may eventually need several Anvils, Carpentry Workbenches, Item Chests, and specialized machines in the same production area.
+
+A more compact Furnace arrangement gives you greater flexibility.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-medium-furnace-layout.webp"
+    alt="Medium Furnace selected in the building menu with a 3 by 3 footprint"
+    width={1984}
+    height={986}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    The Medium Furnace occupies a 3×3 footprint and supports two workers, making it useful when heating capacity and floor space are both limited.
+  </figcaption>
+</figure>
+
+Do not replace working equipment solely because a larger model becomes available. Prioritize the upgrade when you need its capacity or the extra space.
+
+### Furnace vs. Smelter — Which One Is the Bottleneck?
+
+These machines perform different jobs.
+
+**Smelters produce Ingots. Furnaces are part of the metalworking process that uses those Ingots.**
+
+If Ingot Storage is empty, examine Smelters and resource delivery.
+
+If Ingots are available but Blacksmiths wait to heat them, examine Furnace capacity.
+
+This distinction prevents you from spending money on the wrong upgrade.
+
+</section>
+
+<section id="assistant-jobs" className="scroll-mt-24">
+
+## How Should You Assign Assistants and Blacksmiths?
+
+More workers only help when their assignments match the actual workload.
+
+Blacksmith Master allows workers to specialize in different parts of production. Those assignments become increasingly important once you operate a Store, resource facilities, and more complicated crafting stations.
+
+### Blacksmiths — Separate Production Goals
+
+Blacksmiths can be assigned production preferences and different destinations for their completed items.
+
+For example, you may need some workers making products for:
+
+- Merchant Offers.
+- Store Racks.
+- Trade Routes once those are available.
+
+Do not assume that a full production queue means every destination is receiving enough products.
+
+If most of your Blacksmiths are working on Merchant Offers, your Store Racks may remain empty even while the workshop is producing continuously.
+
+Conversely, assigning too many workers to retail stock can delay an important Merchant Offer.
+
+Review the work queue when switching between those goals.
+
+### Assistants — Give Each Material a Reliable Route
+
+An Assistant can be assigned different jobs, including:
+
+- **Transfer Items:** Move completed items to their destinations.
+- **Restock Resources:** Bring materials from the Warehouse to the relevant storage.
+- **Craft Ingots:** Operate the smelting process.
+
+These tasks serve different parts of the production chain.
+
+An Assistant responsible for delivering finished goods does not automatically solve a Copper Ore shortage.
+
+Likewise, adding another smelting worker does not replace the Assistant needed to move Pinewood into the workshop.
+
+Check the actual assignment rather than relying on the total number of Assistants employed.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-assistant-job-assignments.webp"
+    alt="Assistant staff overview showing Transfer Items, Restock Resources, and Craft Ingots assignments"
+    width={1592}
+    height={852}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Assistants are grouped by their assigned jobs. Check how many workers handle transfers, resource restocking, and Ingot production.
+  </figcaption>
+</figure>
+
+### When Does Carrying Capacity Matter More Than Walking Speed?
+
+For an Assistant making repeated deliveries, both carrying capacity and walking speed can be useful.
+
+Consider what the worker is doing.
+
+If someone repeatedly travels a long distance to bring back only a small amount of Ore, improving carrying capacity may reduce the number of trips.
+
+If the worker already transports enough materials but spends much of the day moving between distant stations, movement speed or a shorter route may help more.
+
+A worker cannot solve a shortage simply by moving faster if the task assignment or material source is wrong.
+
+### Should You Specialize Every Blacksmith?
+
+Specialization is particularly useful when your workshop has separate metalworking and Carpentry tasks.
+
+A worker with stronger Woodworking can focus on wooden items, while another handles metal products.
+
+As combined items become available, the decision changes.
+
+A complicated item may need both metalworking and wooden parts. If every experienced worker is restricted to simple items, those more advanced products may progress slowly.
+
+Use production preferences to match workers with the items currently needed, and reconsider those preferences when your product range expands.
+
+The most important question is whether your skilled workers are performing useful work or spending their time waiting for other stations.
+
+</section>
+
+<section id="complex-crafting" className="scroll-mt-24">
+
+## How Should You Arrange Workbenches for Complex Crafting?
+
+Multi-part items introduce longer production routes.
+
+A simple wooden or metal item can be completed using relatively few stations. A combined item may require several metalworking operations, a wooden component, and final assembly.
+
+The **Short Hoe** provides an example of this more complicated workflow.
+
+### Follow the Entire Crafting Route
+
+The production sequence can involve:
+
+1. Taking the required Ingot.
+2. Heating the metal.
+3. Shaping the metal at an Anvil.
+4. Quenching the metal component.
+5. Working on the component at a Workbench.
+6. Producing the required wooden part.
+7. Assembling the components.
+8. Depositing the finished item in an Item Chest.
+
+The exact sequence depends on the item.
+
+The layout problem is that workers may need to visit both metalworking and Carpentry stations before the product is complete.
+
+If these areas are separated by a long route, each complex item creates repeated travel.
+
+### Where Should the Workbench Go?
+
+Place the Workbench within reasonable reach of the stations used to make its components.
+
+A useful starting arrangement is to keep metalworking and Carpentry areas close enough that a worker can move between them without crossing the entire workshop.
+
+The Workbench should also have a convenient route toward the Item Chest.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-crafting-stations-layout.webp"
+    alt="Workshop building view with metalworking stations, crafting tables, and nearby item storage"
+    width={1214}
+    height={1052}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    Keep frequently used crafting stations and item storage within a manageable working area to reduce unnecessary travel.
+  </figcaption>
+</figure>
+
+Do not put it in the last remaining space without checking what else needs to fit nearby.
+
+In one workshop expansion, adding the Workbench reduced the room available for a future double Furnace.
+
+That illustrates a common problem: an arrangement that works for the current item can make the next equipment upgrade awkward.
+
+Leave some flexibility around the most frequently used production stations.
+
+### Why Do Complex Items Take Longer Even With Skilled Workers?
+
+The crafting time is only part of the total time needed to produce an item.
+
+A combined item can involve additional station visits, waiting for an occupied machine, or switching between Woodworking and Metalworking.
+
+If one part finishes quickly while the other repeatedly falls behind, identify which operation is taking longer.
+
+Assigning your strongest worker to a task will not necessarily fix a missing Workbench, an unavailable Furnace, or a long route between production areas.
+
+Before adding staff, watch one item move through its complete crafting process.
+
+</section>
+
+<section id="rack-restocking" className="scroll-mt-24">
+
+## Why Are Your Store Racks Empty When Workers Are Crafting Items?
+
+An empty Store Rack does not always mean your workshop lacks production capacity.
+
+Finished items still need to reach the Store.
+
+There are several possible interruptions:
+
+- No Blacksmith is assigned to craft the required items for Racks.
+- The correct item is not being produced.
+- The intended product does not have a suitable Rack.
+- Completed items are waiting in an Item Chest.
+- Assistants are occupied with other delivery work.
+
+### Step 1 — Check the Crafting Assignment
+
+First, inspect the Blacksmiths responsible for Store inventory.
+
+Make sure someone is actually producing items for Racks rather than working exclusively on Merchant Offers.
+
+If the crafting queue is filled with Merchant Orders, the Store may receive fewer products even while the workshop looks busy.
+
+Temporarily shifting some crafting capacity toward Racks can help determine whether production allocation is the problem.
+
+### Step 2 — Confirm That the Rack Matches the Product
+
+Open the empty Rack and check which product it is supposed to display. Compare that selection with the item your Blacksmiths are currently producing for Racks.
+
+If the workshop is crafting a different product, correct the production assignment or select a suitable Rack. More finished items will not fill a display that cannot accept them.
+
+### Step 3 — Check the Item Chest
+
+If finished products are present but Racks are empty, check whether the items are being collected and delivered.
+
+A Chest containing finished products is evidence that at least part of the crafting process is working.
+
+The next question is whether the delivery process is keeping up.
+
+Do not immediately add another Chest. First observe whether the existing one is being emptied regularly.
+
+### Step 4 — Check Assistant Delivery
+
+Review the Assistants responsible for transferring finished items.
+
+Watch whether products reach the intended destination over a full production period.
+
+If the workshop has several competing delivery tasks, changing which items are produced for Merchant Offers and Racks can help reveal where the backlog develops.
+
+Adding more Assistants may help when there is a genuine shortage of transport capacity. It is not a substitute for correcting the wrong assignment or missing display space.
+
+If a delivery priority appears to be ignored, inspect the actual movement of items before drawing conclusions. Repeated unusual pickup behavior should be distinguished from an ordinary shortage of workers or inventory.
+
+</section>
+
+<section id="multi-floor-layout" className="scroll-mt-24">
+
+## How Should You Organize a Multi-Floor Workshop?
+
+The Basement and additional floors give you room to separate production systems.
+
+That does not mean every system needs its own floor immediately.
+
+A new floor adds space, but workers may also need to transport materials between levels.
+
+The best division depends on how often each production area needs supplies from another one.
+
+<GuideTable
+  columns={layoutStageColumns}
+  rows={layoutStageRows}
+/>
+
+A separate floor is most useful when it gives a group of related machines enough room to operate without creating excessive transport between levels.
+
+Keep the basic Furnace, Anvil, and Item Chest route together while the workshop is small. As Smelting expands, consider a dedicated area for Ore Storage, Smelters, and Ingot Storage, but check how those Ingots will reach the Blacksmiths before moving the equipment.
+
+### Late Game — Separate Large Production Systems Carefully
+
+Large workshops eventually need space for multiple types of Ingots, advanced crafting, retail stock, and specialized machines.
+
+A dedicated smelting floor can work well when several workers handle different Ingot types.
+
+However, that arrangement also creates additional transport between floors.
+
+<figure className="my-6">
+  <Image
+    src="/images/blacksmith-master/blacksmith-master-new-smelting-floor.webp"
+    alt="Expanded workshop floor showing rows of processing and crafting equipment"
+    width={1970}
+    height={1032}
+    className="h-auto w-full rounded-lg"
+  />
+  <figcaption>
+    An expanded production floor provides room to group processing equipment while leaving space for additional workstations.
+  </figcaption>
+</figure>
+
+The important lesson is to plan both the production area and the destination of its output.
+
+**Before moving a machine to another floor, ask where its materials come from and where its finished products must go.**
+
+If several workers repeatedly need the same materials on another level, the extra travel can undermine some of the benefit of adding more machines.
+
+### When Should You Add Another Floor?
+
+Consider expanding when:
+
+- You cannot fit the next required production equipment without disrupting existing work.
+- Several different production systems compete for the same space.
+- A group of related machines can operate more effectively together in a new area.
+- Storage and transport can support the new arrangement.
+
+If your current floor still has available space and the main problem is missing Ore or Ingots, solve that supply problem before expanding.
+
+More floor space cannot correct a resource chain that is already falling behind.
+
+</section>
+
+<section id="bottleneck-checklist" className="scroll-mt-24">
+
+## Blacksmith Master Production Bottlenecks: What Should You Check First?
+
+When production slows, identify the symptom before changing the layout.
+
+<GuideTable
+  columns={bottleneckColumns}
+  rows={bottleneckRows}
+/>
+
+Use the table to locate the first point where production stops moving. An empty material container, an occupied workstation, and a full Item Chest require different fixes.
+
+Make one change at a time, then watch another production cycle. If materials arrive, workers can use the required stations, and finished goods reach their destinations, the immediate bottleneck has been resolved.
+
+If the same problem returns as you increase production, expand the part of the chain that is falling behind rather than adding more workers everywhere.
+
+</section>
+
+<section id="next-steps" className="scroll-mt-24">
+
+## What Should You Upgrade After Fixing Your Workshop Layout?
+
+Once the delayed materials and finished products are moving again, watch another production cycle before spending more Gold. If workers now finish items without waiting, the immediate problem is solved.
+
+When the next product requires an unavailable material or production system, check the <Link href="/blacksmith-master/mastery-tree">Mastery Tree</Link>. If larger orders expose another equipment shortage, expand the part of the workshop that is falling behind. Expensive late-game capabilities become available through <Link href="/blacksmith-master/master-workers">Master Workers</Link>, while hiring costs and daily income remain important considerations in the <Link href="/blacksmith-master">early business</Link>.
+
+</section>

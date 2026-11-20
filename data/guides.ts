@@ -130,7 +130,198 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+  {
+    title: "Blacksmith Master",
+    game: "Blacksmith Master",
+    href: "/blacksmith-master",
+    slug: "blacksmith-master",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
   
+    label:
+      "Beginner, Mastery Tree, Workshop, Master Workers & 72 Achievements",
+  
+    eyebrow:
+      "Blacksmith Simulation, Workshop Management & Crafting",
+  
+    hubStatus:
+      "1.0 + First Merchant Offers + Mastery Tree + Workshop Layout + 6 Master Workers + Siege Machines + 12 Sets + 72 Achievements",
+  
+    description:
+      "Start Blacksmith Master, complete Merchant Offers, manage workers and wages, unlock new production systems, fix workshop bottlenecks, recruit Master Workers, and track all 72 achievements.",
+  
+    coverage: [
+      "First Blacksmith, opening Mace order, Merchant Offers, Gold, worker traits, wages, Store setup, pricing, customers, Happiness and Direct Control",
+  
+      "Mastery Tree progression, crafting tier requirements, Carpentry, Assistants, Construction, Forests, Mines, Blueprint Research, Design Points and Trade Routes",
+  
+      "Workshop production chains, Furnace and Smelter capacity, Ore and Ingot supply, Assistant assignments, resource restocking, Store Racks and multi-floor layouts",
+  
+      "All six Master Workers, hiring requirements, Tier 3 Smelters, Siege Machine orders, Mystery Blueprints, 12 Sets and 36 Set Items",
+  
+      "All 72 Steam achievements with an interactive checklist, Merchant Offer milestones, Direct Control, Hidden Riches, Full Deck and A True Master",
+    ],
+  
+    image:
+      "/images/blacksmith-master/blacksmith-master-first-mace-merchant-offer.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 88,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Blacksmith Master Beginner Guide: Best Start & First Upgrades",
+        href: "/blacksmith-master",
+        type: "Guide Hub",
+  
+        description:
+          "Hire your first Blacksmith, complete the Mace order, manage wages and Merchant Offers, open the Store, adjust prices, and keep workers happy.",
+  
+        image:
+          "/images/blacksmith-master/blacksmith-master-first-mace-merchant-offer.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "First Mace, 80 Gold, Carpentry, worker traits, Merchant Offers, wages, Store Racks, pricing, customer bonuses and Happiness",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Blacksmith Master Mastery Tree: Best Unlock Order & Progression",
+        href: "/blacksmith-master/mastery-tree",
+        type: "Systems",
+  
+        description:
+          "Choose Mastery unlocks, meet crafting tier requirements, open Forests and Mines, research Blueprints, and establish Trade Routes.",
+  
+        date: "Updated recently",
+  
+        home: {
+          latest: true,
+          latestOrder: 561,
+          spotlightMeta:
+            "Mastery Tree, Carpentry, Assistants, Construction, Oak Forest, Iron Mine, Blueprint Research, Design Points and Trade Routes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Blacksmith Master Best Workshop Layout: Fix Production Bottlenecks",
+        href: "/blacksmith-master/workshop-layout",
+        type: "Systems",
+  
+        description:
+          "Fix Furnace queues, Ore and Ingot shortages, Assistant assignments, Store Rack restocking, and production delays across multiple floors.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/blacksmith-master/blacksmith-master-copper-ore-restock.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 562,
+          spotlightMeta:
+            "Furnace queues, Smelters, Copper Ore, Ingot Storage, Assistant jobs, combined-item crafting, Rack delivery and multi-floor workshops",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Blacksmith Master Master Workers: All 6 Unlocks & Siege Machines",
+        href: "/blacksmith-master/master-workers",
+        type: "Systems",
+  
+        description:
+          "Unlock all six Master Workers, compare their abilities, complete Siege Machine orders, claim Mystery Blueprints, and collect all 12 Sets.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/blacksmith-master/blacksmith-master-six-master-workers.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 563,
+          spotlightMeta:
+            "Master Blacksmith, Assistant, Scholar, Miner, Lumberjack, Cashier, Tier 3 Smelters, Siege Machines, Mystery Blueprints and 36 Set Items",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Blacksmith Master Achievements: All 72 & 100% Checklist",
+        href: "/blacksmith-master/achievements",
+        type: "Achievements",
+  
+        description:
+          "Track all 72 Steam achievements, complete Merchant Offer and crafting milestones, unlock Hidden Riches, Full Deck and A True Master.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/blacksmith-master/blacksmith-master-full-deck-last-blueprint.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 564,
+          spotlightMeta:
+            "72 achievements, saved checklist, 250 Merchant Offers, 10000 crafted items, timed offers, Hidden Riches, Full Deck and A True Master",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+    
 {
   title: "Deep Rock Galactic: Survivor — Knockout",
   game: "Deep Rock Galactic: Survivor",

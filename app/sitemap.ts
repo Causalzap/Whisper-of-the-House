@@ -1271,6 +1271,12 @@ const paths = [
      'deep-rock-galactic-survivor/brawler-build',
      'deep-rock-galactic-survivor/brood-harvest',
      'deep-rock-galactic-survivor/hazard-6-ultraclock',
+
+     'blacksmith-master',
+     'blacksmith-master/mastery-tree',
+     'blacksmith-master/workshop-layout',
+     'blacksmith-master/master-workers',
+     'blacksmith-master/achievements',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1278,6 +1284,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'blacksmith-master': '2026-11-20',
+  'blacksmith-master/mastery-tree': '2026-11-20',
+  'blacksmith-master/workshop-layout': '2026-11-20',
+  'blacksmith-master/master-workers': '2026-11-20',
+  'blacksmith-master/achievements': '2026-11-20',
+
   'deep-rock-galactic-survivor': '2026-11-19',
   'deep-rock-galactic-survivor/brawler-build': '2026-11-19',
   'deep-rock-galactic-survivor/brood-harvest': '2026-11-19',
