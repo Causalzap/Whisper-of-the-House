@@ -1,0 +1,693 @@
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import Image from "next/image";
+import GuideTable from "@/components/GuideTable";
+
+export const superalloyRateColumns = [
+  { key: "stage", label: "Production Stage" },
+  { key: "rate", label: "Example Rate" },
+];
+
+export const superalloyRateRows = [
+  {
+    stage: "One ore enrichment line",
+    rate: "40 enriched ore/min",
+  },
+  {
+    stage: "One Superalloy production chamber",
+    rate: "15 Superalloy/min",
+  },
+  {
+    stage: "Two Superalloy production chambers",
+    rate: "30 Superalloy/min",
+  },
+];
+
+export const factoryTroubleshootingColumns = [
+  { key: "symptom", label: "What You See" },
+  { key: "check", label: "What to Inspect First" },
+];
+
+export const factoryTroubleshootingRows = [
+  {
+    symptom: "Several machines stop together",
+    check: "Station power and fuel supply",
+  },
+  {
+    symptom: "One machine has no ingredients",
+    check: "Input Conveyor, selected recipe, Storage supply",
+  },
+  {
+    symptom: "Wrong items appear on a belt",
+    check: "Nearby enabled ports and belt connections",
+  },
+  {
+    symptom: "First machines work but last machines are empty",
+    check: "Shared Conveyor supply and input distribution",
+  },
+  {
+    symptom: "Ingredients are present but output is blocked",
+    check: "Machine output port and destination Storage",
+  },
+  {
+    symptom: "Advanced production repeatedly pauses",
+    check: "Upstream Basic Circuits, Superalloy, or Coolant",
+  },
+  {
+    symptom: "A resource stockpile keeps falling",
+    check: "Total consumption versus production",
+  },
+  {
+    symptom: "Material is missing from another station",
+    check: "Incoming supply and cargo delivery",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+A Main Sequence factory needs enough power, a continuous supply of each ingredient, and a clear destination for finished items. Feed ore into Refineries, route their output to the Assemblers that need it, and use Containers to manage reserves or distribute shared materials. If production stops, inspect the first machine with an empty input, incorrect item, blocked output, or missing power before adding more capacity.
+</GuideQuickAnswer>
+
+A working **Main Sequence factory** needs more than a row of Refineries. Titanium, Nickel, Silica, and later Cobalt must reach the right machines, while intermediate components need to keep moving toward production and research.
+
+The most common slowdown is not a lack of machines. A Refinery may be waiting for ore, an Assembler may be receiving the wrong item, or a full Container may be blocking its output. A factory can also shut down completely when Water Ice stops reaching its fuel production line.
+
+Start with a reliable material flow, then expand the lines that are actually limiting production. The same approach works when your station grows into a multi-floor factory producing Superalloy, Coolant, Advanced Circuits, and other late-game materials.
+
+<section id="factory-layout" className="scroll-mt-24">
+
+## How Should You Lay Out an Expandable Factory?
+
+**Build your Main Sequence factory in production sections, with space to extend the machines and Conveyors in each section.** Avoid filling every available floor tile before you know where the next material needs to go.
+
+A practical early layout separates the main production jobs:
+
+- **Titanium:** Ore refining, Titanium Plates, Hull Plates, Lightweight Frames, and related components.
+- **Nickel:** Nickel Plates and the components that depend on them, including Magnetic Coils.
+- **Silica:** Silicon Wafers for electronic production.
+- **Water Ice:** Fuel production and the station's power supply.
+- **Assembly:** Components made from several materials, with access to each required input.
+
+Cobalt, Graphite, Enrichment Chambers, and advanced production can be added as their materials and equipment become available.
+
+### Leave Room for More Refineries
+
+A large factory does not need to begin with a large number of active machines.
+
+Place the first Refineries in a row, but keep enough space to extend that row when material demand increases. The same applies to the Assemblers receiving their output.
+
+For example, Titanium Plates can feed several different products. If you place every downstream Assembler directly against the Refinery output, adding another Refinery later may require rebuilding the entire connection.
+
+A more flexible arrangement is:
+
+1. Bring Titanium Ore into a refining area.
+2. Connect the Refineries to an accessible output line or Container.
+3. Distribute Titanium Plates to the Assemblers that need them.
+4. Keep a clear direction for adding more Refineries and Assemblers.
+5. Leave room for Underground Conveyors where other material lines must cross.
+
+The early goal is to make expansion possible without dismantling machines that already work.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-expandable-factory-layout.webp"
+    alt="Rows of production machines with open floor space for expanding a Main Sequence factory"
+    width={1275}
+    height={547}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Keep space beside the existing machines for more Refineries,
+    Assemblers, and Conveyor connections as production expands.
+  </figcaption>
+</figure>
+
+### Keep Inputs and Outputs Accessible
+
+Before placing a machine, inspect where its inputs and outputs will connect.
+
+This becomes particularly important with Assemblers that accept several ingredients. A machine might need materials from opposite sides of the factory, while its finished product must travel toward another production area.
+
+Place the machine where those connections can be made without crossing occupied ports or blocking a corridor.
+
+Underground Conveyors are useful for carrying materials past another production line. They also help when a factory expands upward and materials must be routed toward an Elevator.
+
+When building a multi-floor station, keep enough room around Elevators for both the arriving materials and the outgoing belts. An Elevator solves the vertical movement problem, but the materials still need correct connections at each end.
+
+</section>
+
+<section id="ore-production" className="scroll-mt-24">
+
+## How Do You Automate Titanium, Nickel, and Basic Components?
+
+The first useful factory milestone is continuous production of the materials needed for construction, machinery, and further research.
+
+**Start with one working material chain before building several unfinished chains.**
+
+### Why Are Your Hull Plate and Lightweight Frame Lines Running Short?
+
+Titanium Plates may be feeding several Assemblers at once. When Hull Plates, Lightweight Frames, and other components share the same refining output, one busy production line can drain the material needed by another.
+
+Watch the Titanium Plate supply while all intended consumers are operating. If the output is continually empty, increase plate production or reduce competing demand. If plates are accumulating but an Assembler remains idle, inspect that machine's input connection instead.
+
+Another Assembler will not solve a Titanium Plate shortage. The missing capacity is upstream.
+
+### Nickel Plates, Capacitors, and Magnetic Coils
+
+Nickel production introduces more shared material dependencies.
+
+Nickel Plates must supply components used by other production lines. If the Magnetic Coil line consumes most of the available Nickel Plates, other machines may receive too little.
+
+Separate the branches where necessary and inspect the rate at which each machine consumes its ingredients.
+
+For example, a factory can appear to have plenty of Nickel Ore while its Magnetic Coil production remains slow. The missing capacity may be in the Refineries making Nickel Plates, not the mining equipment.
+
+Increase the upstream production only after identifying that shortage.
+
+### Silicon Wafers and Basic Circuits
+
+Silica is another important ingredient as production becomes more complex.
+
+Refine Silica into Silicon Wafers and bring those wafers into the electronics production area. Keep the other required components arriving continuously rather than relying on material that was placed into Storage earlier.
+
+A Basic Circuits line may stop even when the Silicon Wafers are available, because another ingredient is missing.
+
+Trace the stalled Assembler's inputs backward. Check the relevant production of Capacitors and Magnetic Coils before adding more circuit Assemblers.
+
+Later, when Basic Circuits are consumed by multiple advanced machines, consider expanding their production rather than allowing one new machine to drain the existing supply.
+
+</section>
+
+<section id="power-and-fuel" className="scroll-mt-24">
+
+## Why Does Your Main Sequence Station Lose Power?
+
+**If your station shuts down, check the Reactor's fuel supply and the Water Ice production chain first.**
+
+A factory can run normally until its stored fuel is exhausted. Once power is lost, the machines making replacement fuel may also stop.
+
+That creates a difficult situation: the factory needs fuel to restart, but the machines producing fuel cannot run without power.
+
+### How to Restart a Station That Has Run Out of Fuel
+
+1. Check the Reactor and available stored fuel.
+2. If the station has exhausted its reserves, collect additional Water Ice manually or bring it from another operating location.
+3. Produce Hydrogen Fuel using an available working crafting setup.
+4. Supply enough fuel to restart the Reactor.
+5. Confirm that power has returned and the station's machines can operate.
+6. Inspect the Water Ice input, fuel Refinery, Storage, and Reactor feed so production continues without another manual delivery.
+
+The final step matters most. Restoring power once does not solve the problem if the station is still relying on the same temporary fuel supply.
+
+### Automate Water Ice Before Expanding Power Demand
+
+A reliable basic fuel line follows this path:
+
+**Water Ice → Refinery → Hydrogen Fuel → Reactor**
+
+Use Mining Drones to collect nearby Water Ice where a suitable source is available. If the source is farther away, bring Water Ice into the station through the appropriate supply system.
+
+Connect the Water Ice supply to the fuel Refineries, then make sure their output reaches fuel Storage and the Reactor.
+
+Check the selected recipe and belt direction at every connection.
+
+A Container holding Water Ice does not help if the fuel Refinery cannot receive it. Likewise, a full box of Hydrogen Fuel cannot power the station if the Reactor is not receiving fuel.
+
+If your station has already stopped, restore power before expecting the automated line to restart itself.
+
+### Add Solar Panels to Reduce Fuel Consumption
+
+Solar Panels can supplement your station's power production.
+
+They are especially helpful when your factory is continuously running Refineries, Assemblers, Mining Drones, and other equipment.
+
+Check the **Power Overview** after installing them. Compare the current power supply and consumption rather than assuming the new panels are enough for every future machine.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-station-power-overview.webp"
+    alt="Main Sequence Power Overview displaying Reactor generation capacity and station electricity consumption"
+    width={745}
+    height={537}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Power Overview separates current production, maximum generation
+    capacity, and consumption. Compare these values before adding
+    more powered machines.
+  </figcaption>
+</figure>
+
+Solar generation reduces pressure on fuel-based power, but it does not replace the need for a working fuel supply when the station consumes more power than its panels can provide.
+
+### When Should You Add Another Reactor?
+
+Add power capacity when the existing supply is approaching its limit or cannot support the machines you need to run.
+
+Before adding another Reactor, check whether your fuel production can support the additional demand.
+
+More Reactors will not fix a station that has no reliable Water Ice supply or has broken fuel Conveyors.
+
+</section>
+
+<section id="conveyors-and-ports" className="scroll-mt-24">
+
+## Why Are Your Conveyor Belts Sending Items to the Wrong Machines?
+
+One of the easiest mistakes in a Main Sequence factory is leaving an unwanted machine or Storage port enabled.
+
+You may connect a belt to the correct Assembler, then discover that an unrelated item has entered the line from a nearby Container.
+
+The machine will not produce the intended item while it is missing the correct ingredients.
+
+### Check the Ports Before Rebuilding the Belt
+
+When incorrect items appear:
+
+1. Stop following the line at the machine that is failing.
+2. Identify the item that should be entering that machine.
+3. Follow the Conveyor backward to its source.
+4. Inspect nearby machine and Storage ports.
+5. Disable any unwanted connection that can put another item onto the belt.
+6. Remove incorrectly routed items where necessary.
+7. Restart the intended material flow and verify that the machine receives the correct ingredients.
+
+A working connection is not proof that the connection is correct.
+
+The Conveyor may be moving items successfully while delivering them to the wrong destination.
+
+### Why Does a Conveyor Connect in the Wrong Direction?
+
+A belt can snap into a nearby connection you did not intend to use, especially in a crowded production room.
+
+Before extending a long belt, test its first connection and confirm its direction.
+
+If the belt repeatedly chooses the wrong connection, change the starting position or route it through an Underground Conveyor.
+
+It can be easier to remove a short incorrect segment and reconnect the machines than to keep adding pieces around an existing mistake.
+
+### Why Is the Last Machine in a Row Not Receiving Items?
+
+If the first Assemblers are receiving materials but the last one stays empty, inspect the Conveyor and input port at the end of the line.
+
+Check whether the belt reaches the intended input, whether that port is enabled, and whether an earlier connection is taking material onto another route.
+
+Then compare the incoming supply with the combined consumption of the machines.
+
+If the upstream Refineries cannot produce enough material for every Assembler, extending the Conveyor will not fix the shortage. Increase the missing component's production or reduce its consumption before adding another machine.
+
+If the incoming supply is sufficient, inspect the final Conveyor segments and Storage connections for an incorrect route.
+
+</section>
+
+<section id="storage-buffer-limit" className="scroll-mt-24">
+
+## How Do Buffer and Limit Work in Main Sequence?
+
+Containers can do more than hold excess materials. Their logistics filters can help control how much material stays in Storage or is allowed to leave.
+
+Two particularly useful settings are **Buffer** and **Limit**.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-storage-buffer-limit.webp"
+    alt="Container Logistics Filters menu showing Buffer and Limit options in Main Sequence"
+    width={1263}
+    height={567}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Open a Container's Logistics Filters to choose Buffer or Limit.
+    The selected quantity controls how the stored material is handled.
+  </figcaption>
+</figure>
+
+### Buffer: Keep a Reserve
+
+A Buffer establishes a quantity to retain before material is allowed to flow out.
+
+Use it when you want to protect a stock of important construction or production materials instead of allowing downstream machines to consume everything.
+
+For example, a factory producing advanced components might also need Reinforced Plates for future station expansion.
+
+If every plate is automatically sent into the next production chain, you may find that none remain when you need to build another module.
+
+Keeping a reserve helps avoid that situation.
+
+### Limit: Prevent Unnecessary Storage Buildup
+
+A Limit controls the amount of an item that the Container is allowed to hold.
+
+This is useful when a component accumulates faster than you need it or when a Container handles several different items.
+
+Instead of filling available Storage with one item, use a suitable limit and check how the remaining material flow behaves.
+
+### Should You Put Storage Before or After Assemblers?
+
+It depends on what the Container needs to accomplish.
+
+A box between a production line and its consumers can provide a supply buffer, but the production line must still be able to reach the intended downstream machines.
+
+If you need to keep a reserve while continuing production, inspect the Buffer setting rather than assuming everything should always leave Storage immediately.
+
+If you want the machine to supply its consumers first and store surplus production, arrange the connections accordingly.
+
+Check the actual item movement after changing the layout. Storage can hide a short-term production shortage because downstream machines continue consuming the remaining stock even after upstream production stops.
+
+</section>
+
+<section id="superalloy-production" className="scroll-mt-24">
+
+## How Do You Automate Superalloy Production?
+
+Superalloy production requires three enriched ores:
+
+- **Enriched Titanium Ore**
+- **Enriched Nickel Ore**
+- **Enriched Cobalt Ore**
+
+Each enriched material is produced using an Enrichment Chamber. The three outputs then feed another Enrichment Chamber configured to make Superalloy.
+
+### Build the Three Ore Enrichment Lines
+
+Start by providing separate supplies of Titanium Ore, Nickel Ore, and Cobalt Ore.
+
+Configure the corresponding Enrichment Chambers to produce their enriched forms, then route their outputs toward the Superalloy production area.
+
+An effective arrangement keeps the enriched ores accessible without forcing their Conveyors to cross several unrelated production lines.
+
+Once all three are running, connect them to the Enrichment Chamber making Superalloy.
+
+Check that it receives the correct enriched material on every required input.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-superalloy-enrichment-layout.webp"
+    alt="Enrichment Chamber configured to craft Superalloy with connected Conveyor Belts"
+    width={1267}
+    height={573}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This Enrichment Chamber is configured to produce Superalloy.
+    Check that all three enriched ores reach its input connections.
+  </figcaption>
+</figure>
+
+### How Many Enrichment Chambers Do You Need?
+
+In an Early Access production setup, a standard ore enrichment recipe produced **40 enriched ore per minute** from **60 raw ore per minute**.
+
+A Superalloy Enrichment Chamber produced **15 Superalloy per minute**, consuming the three enriched ores at matching rates.
+
+That gives a useful starting comparison:
+
+<GuideTable
+  columns={superalloyRateColumns}
+  rows={superalloyRateRows}
+/>
+
+These are production figures for the observed recipes, not a requirement to build this exact number of machines. Check the recipes shown in your current game before committing to a larger layout.
+
+One enrichment line for each of the three ores can support an initial Superalloy setup, provided the raw materials are arriving consistently.
+
+A second Superalloy chamber may make use of spare enriched-ore production, but only if all three enriched materials are reaching it.
+
+### Why Is Superalloy Production Too Slow?
+
+Inspect all three enriched-ore inputs.
+
+A Superalloy chamber cannot maintain production when one ingredient runs out, even if the other two are overflowing into Storage.
+
+If only one enriched ore is running low, expand or repair that material's supply instead of building another Superalloy chamber.
+
+This becomes more important later because Superalloy feeds additional construction and advanced manufacturing chains.
+
+</section>
+
+<section id="coolant-production" className="scroll-mt-24">
+
+## How Do You Produce Coolant From Nitrogen Gas?
+
+**Coolant is produced from Nitrogen Gas using an Enrichment Chamber.**
+
+You will need a working Nitrogen supply before expanding into production chains that consume Coolant, including Superconductor Coils and Advanced Circuits.
+
+### Set Up the Nitrogen Processing Line
+
+Once Nitrogen Gas is available at your factory:
+
+1. Identify where it enters the station.
+2. Route it to an Enrichment Chamber.
+3. Select the Coolant recipe.
+4. Connect the Coolant output to Storage or the next production area.
+5. Confirm that the machine continues receiving Nitrogen after its initial input is consumed.
+
+If Nitrogen Gas comes from another outpost, confirm that the [cargo ship unloads it at the receiving Dock](/main-sequence/ship-logistics) before changing the Enrichment Chamber recipe. An empty input after a missed delivery is a supply problem, not a Coolant recipe problem.
+
+### Where Should the Coolant Line Go?
+
+Place the Coolant-producing equipment where its output can reach the machines that consume it.
+
+A separate Coolant storage area is useful when the same material feeds multiple advanced production lines.
+
+Check the actual demand before adding more Enrichment Chambers.
+
+A single production line may initially supply several consumers, but the available Coolant can fall rapidly as Advanced Circuits and Superconductor Coil production expand.
+
+### Why Are Superconductor Coils Not Being Produced?
+
+The Superconductor Coil production chain requires **Maglev Couplings, Containment Coils, and Coolant**.
+
+Check each ingredient separately.
+
+A factory may have stockpiles of Maglev Couplings and Containment Coils while the Coolant input remains empty. In that case, adding another Assembler will not help.
+
+Inspect the Coolant-producing Enrichment Chamber, its Nitrogen supply, and the Conveyor delivering Coolant to the production machine.
+
+Once the missing material begins arriving, check the output to confirm that Superconductor Coil production has resumed.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-superconductor-coils-production.webp"
+    alt="Assembler crafting Superconductor Coils at five per minute with three material input slots"
+    width={1267}
+    height={567}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Superconductor Coil production runs at 5 per minute in this
+    Assembler. All three required ingredients must remain available.
+  </figcaption>
+</figure>
+
+</section>
+
+<section id="advanced-production" className="scroll-mt-24">
+
+## How Do You Expand Into Advanced Circuits and Superalloy Frames?
+
+Advanced production introduces larger machines and more complex ingredient requirements.
+
+The main challenge is keeping existing production running while diverting some of its output to new machinery.
+
+### Advanced Assembler vs Regular Assembler
+
+The Advanced Assembler becomes necessary when you move into products such as Superalloy Frames and Advanced Circuits. Its advantage is access to the required recipes, not a guaranteed increase in output from the rest of your factory.
+
+Before adding one, check whether the existing lines can supply its ingredients. An Advanced Circuits machine waiting for Basic Circuits or Coolant will remain idle regardless of how much room you leave for additional Assemblers.
+
+Do not assume that a larger machine automatically fixes your shortage. If it consumes an ingredient faster than the rest of your factory can produce it, the new machine will still spend time waiting.
+
+### Automate Superalloy Frames
+
+Superalloy Frames depend on a continuous Superalloy supply.
+
+Connect the Superalloy line to an Advanced Assembler using the appropriate recipe, then send the frames to Storage.
+
+Check whether the Superalloy line is also supplying other important components.
+
+If another production chain suddenly slows after you start making frames, inspect whether the new Assembler is consuming material that the older line previously relied on.
+
+### Automate Advanced Circuits
+
+Advanced Circuits bring together several intermediate components, including:
+
+- Detector Arrays
+- Basic Circuits
+- Superalloy
+- Coolant
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-advanced-assembler-circuits.webp"
+    alt="Advanced Circuits recipe in the Advanced Assembler requiring Detector Arrays, Basic Circuits, Superalloy, and Coolant"
+    width={1263}
+    height={627}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Advanced Circuits require three Detector Arrays, three Basic
+    Circuits, one Superalloy, and five Coolant per crafting cycle.
+    Supply all four ingredients before expanding this production line.
+  </figcaption>
+</figure>
+
+Place the Advanced Assembler where these ingredients can be supplied without blocking the existing production paths.
+
+If the Basic Circuits supply is on a lower floor, use an Elevator and Conveyors to deliver it to the new production room. Underground Conveyors can help route the other ingredients around existing machinery.
+
+Check each input before increasing the number of Advanced Assemblers.
+
+**Basic Circuits are a particularly important bottleneck.** They are already used elsewhere, and adding advanced production creates additional demand.
+
+If Advanced Circuits production becomes intermittent, check the Basic Circuits line rather than assuming the new Assembler itself is too slow.
+
+### Keep Advanced Material Production Independent Where Possible
+
+As the factory expands, reserve separate areas for components that consume several different materials.
+
+Superalloy Frames, Advanced Circuits, and other late-game products may share inputs but have different production rates and demands.
+
+Separate storage and clearly routed inputs make it easier to identify which material is running short.
+
+This does not require a dedicated room for every product. The useful separation is between production chains whose input shortages need to be diagnosed independently.
+
+</section>
+
+<section id="relic-synthesis" className="scroll-mt-24">
+
+## Can You Make Silica Without Mining It?
+
+Yes. Once you have the required Relic technology and production equipment, **Protomatter can be converted into Silica using an Enrichment Chamber**.
+
+This offers a different solution when a factory is far from a convenient Silica source.
+
+### Relic Synthesizer to Protomatter to Silica
+
+The production path is:
+
+**Relic Synthesizer → Protomatter → Enrichment Chamber → Silica**
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-protomatter-silica-production.webp"
+    alt="Enrichment Chamber crafting Silica from one Protomatter at 30 per minute"
+    width={1270}
+    height={574}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Enrichment Chamber converts Protomatter into Silica at
+    30 per minute in this setup, providing another source for
+    Silicon Wafer production.
+  </figcaption>
+</figure>
+
+Configure the Relic Synthesizer to produce Protomatter, then connect its output to an Enrichment Chamber using the Silica recipe.
+
+Silica can then enter your existing Silicon Wafer production line.
+
+The result is useful for a remote factory that needs electronic components but does not have a nearby Silica mining operation.
+
+The production chain still requires the appropriate machines, construction materials, and power. It does not mean every resource becomes freely available at the beginning of the game.
+
+### Can Protomatter Produce Other Resources?
+
+The same Enrichment Chamber system also supports producing certain basic resources from Protomatter, including Titanium Ore, Nickel Ore, and Water Ice.
+
+This gives you another option for supplying a production line when the required natural resource is inconvenient to collect locally.
+
+Before replacing mining with synthesis, inspect the Protomatter production rate and the consumption rate of the selected Enrichment recipe.
+
+A single Relic Synthesizer may supply multiple Enrichment Chambers, but the appropriate ratio depends on the rates displayed by your current machines.
+
+Do not remove a working resource supply until the replacement has produced enough material to keep its downstream machines running.
+
+### When Is Relic Synthesis Worth Using?
+
+It becomes attractive when a remote factory needs a continuous supply of a particular resource and transporting or mining that resource would require more infrastructure.
+
+For example, producing Silica locally can keep Silicon Wafers and Basic Circuits running without adding another mining route.
+
+If you have not unlocked the required Relic equipment, continue using conventional mining and transport. Check the [research progression guide](/main-sequence/research-progression) for the technology needed to expand into advanced production.
+
+</section>
+
+<section id="production-bottlenecks" className="scroll-mt-24">
+
+## Why Has Your Main Sequence Factory Stopped Producing?
+
+When a factory stops, diagnose the first machine that is no longer receiving or producing what it should.
+
+Adding more machinery before identifying the failure can make the shortage worse.
+
+<GuideTable
+  columns={factoryTroubleshootingColumns}
+  rows={factoryTroubleshootingRows}
+/>
+
+### Find the First Failed Step
+
+Start at the machine that has stopped producing. Check its power, selected recipe, input materials, and output connection.
+
+If an ingredient is missing, follow that material's Conveyor backward until you reach the first empty Storage, interrupted belt, disabled port, or machine that has stopped supplying it.
+
+If the inputs are available but finished items cannot leave, inspect the output port and destination Storage. A blocked output can stop production even when every required ingredient is present.
+
+When several nearby machines stop together, check the station's power supply before rebuilding individual production lines.
+
+After correcting the problem, watch the machine complete a production cycle and confirm that its output reaches the next destination.
+
+### Why Does Production Stop After You Add More Machines?
+
+Adding a new Assembler increases material consumption immediately.
+
+If the upstream Refineries are already operating close to their available output, the new machine may consume material that was previously supporting another line.
+
+Watch the stock levels over time.
+
+If several machines take turns working while their shared ingredient Storage gradually empties, the factory needs more production of that ingredient.
+
+If the stockpile remains full but machines cannot receive it, investigate distribution instead.
+
+The distinction prevents unnecessary expansion.
+
+</section>
+
+<section id="factory-expansion" className="scroll-mt-24">
+
+## What Should You Upgrade Before Building a Bigger Factory?
+
+Expand the part of the factory that is restricting your next production goal.
+
+Use this order when deciding what to build:
+
+1. **Power:** Can the station support the additional machines without exhausting its fuel supply?
+2. **Raw materials:** Are Mining Drones and incoming supplies delivering enough resources?
+3. **Refining:** Are enough plates, wafers, or enriched ores being produced?
+4. **Component assembly:** Are intermediate parts accumulating or being consumed immediately?
+5. **Distribution:** Can the existing Conveyors, Storage, and Elevators move the required materials?
+6. **Advanced production:** Will the new machine receive every ingredient it needs?
+
+This is a capacity check, not a requirement to upgrade every system in that order.
+
+If your factory already has surplus Titanium Plates but lacks Basic Circuits, expand the relevant electronics production instead of adding more Titanium Refineries.
+
+If your next machine is still locked, check the [research guide](/main-sequence/research-progression) rather than building unused production capacity in advance.
+
+### Is Stored Material Hiding a Production Shortage?
+
+After adding a new machine, watch the Container supplying its most heavily used ingredient. If the stored quantity keeps falling while the Assemblers continue operating, the factory may be consuming an old reserve faster than it can replace it.
+
+A stable production line replenishes enough material to support its consumers over repeated cycles. If the stockpile keeps shrinking, increase the missing ingredient's output before extending the factory again.
+
+If storage recovers normally until an incoming shipment is delayed, investigate the [cargo pickup and delivery conditions](/main-sequence/ship-logistics#shipping-throughput) instead of building more Refineries.
+
+</section>

@@ -130,6 +130,203 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Main Sequence",
+  game: "Main Sequence",
+  href: "/main-sequence",
+  slug: "main-sequence",
+  kind: "game",
+  status: "active",
+  accent: "cyan",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label:
+    "Beginner, Factory Automation, Research, Ship Design & Logistics",
+
+  eyebrow:
+    "Space Factory Simulation, Ship Building & Automation",
+
+  hubStatus:
+    "Early Access + Starter Station + Mining Drones + Factory Automation + Science Research + Shipyard + Cargo Autopilot + Interstellar Travel",
+
+  description:
+    "Start Main Sequence, build your first station, automate Titanium and advanced materials, unlock new Science types, design mining and combat ships, and establish cargo routes between stations.",
+
+  coverage: [
+    "First mining trip, Titanium, Nickel, Water Ice, Starter Station placement, Hydrogen Fuel, Logistics I, Mining Drones and the first automated factory",
+
+    "Factory power, Conveyor connections, Refinery and Assembler production, Container Buffers, Superalloy, Coolant, Advanced Circuits and Protomatter",
+
+    "Research progression through Material, Computation, Electromagnetic, Quantum, Astronomic and Xenobiologic Science, including the Relic Destroyer and interstellar unlocks",
+
+    "Shipyard construction, ship mass limits, Thruster comparisons, mining ships, cargo ships, combat equipment, Warp Drives, repairs and Fighter Hangars",
+
+    "Cargo Autopilot, Dock Logistics Filters, Wait for Items, loading and unloading, automatic refueling, Coolant deliveries and interstellar shipping",
+  ],
+
+  image:
+    "/images/main-sequence/main-sequence-starter-station-placement.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 89,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Main Sequence Beginner Guide: First Station & Progression",
+      href: "/main-sequence",
+      type: "Guide Hub",
+
+      description:
+        "Mine Titanium, Nickel and Water Ice, build a Starter Station, fuel its Reactor, unlock Logistics I and Mining Drones, and automate your first materials.",
+
+      image:
+        "/images/main-sequence/main-sequence-starter-station-placement.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "First mining trip, Starter Station, Titanium Ore, Hydrogen Fuel, Material Science, Logistics I, Mining Drones and Silica",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Main Sequence Factory Automation: Power, Belts & Production",
+      href: "/main-sequence/factory-automation",
+      type: "Systems",
+
+      description:
+        "Fix power and Conveyor problems, manage Container Buffers, automate Hull Plates and Superalloy, and supply Coolant, Advanced Circuits and Protomatter.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/main-sequence/main-sequence-superalloy-enrichment-layout.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 565,
+        spotlightMeta:
+          "Reactor fuel, Conveyor ports, Refineries, Assemblers, Logistics Filters, Superalloy, Superconductor Coils, Advanced Circuits and Protomatter",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Main Sequence Research Guide: What to Unlock Next",
+      href: "/main-sequence/research-progression",
+      type: "Systems",
+
+      description:
+        "Choose your next Science unlock, progress through Quantum research, prepare for interstellar travel, and produce Encoded Simulation Matrices for Astronomic Science.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/main-sequence/main-sequence-quantum-science-unlocks.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 567,
+        spotlightMeta:
+          "Logistics I, Computation Science, Electromagnetic Science, Superconductor Coil, Quantum Science, Relic Destroyer, Stellar Survey Data and Astronomic Science",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Main Sequence Ship Design: Shipyard, Modules & Upgrades",
+      href: "/main-sequence/ship-design",
+      type: "Systems",
+
+      description:
+        "Build a Shipyard, compare ship mass and Thrusters, upgrade mining and cargo ships, prepare combat equipment, install Warp Drives, and manage fighters.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/main-sequence/main-sequence-wyvern-combat-ship-modules.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 568,
+        spotlightMeta:
+          "Shipyard Core, 100t and 400t limits, Prosperity, Medium Thrusters, Small Relic Thrusters, Wyvern, Interstellar Warp Drive, Damage Report and Fighter Hangar",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title:
+        "Main Sequence Ship Logistics: Autopilot, Docks & Cargo Routes",
+      href: "/main-sequence/ship-logistics",
+      type: "Systems",
+
+      description:
+        "Configure cargo Autopilot, select loading and unloading Docks, set Wait for Items, fix stalled deliveries, and arrange refueling and interstellar routes.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/main-sequence/main-sequence-autopilot-wait-for-items.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 566,
+        spotlightMeta:
+          "Cargo Autopilot, Silica delivery, Dock Filters, Wait for Items, Unload, Hydrogen Fuel, Warp Fuel, Coolant shipping and Strange Matter",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+  ],
+},
 
   {
     title: "Blacksmith Master",

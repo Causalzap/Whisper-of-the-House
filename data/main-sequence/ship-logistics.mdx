@@ -1,0 +1,727 @@
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+export const shippingRouteColumns = [
+  { key: "stop", label: "Route Stop" },
+  { key: "action", label: "Autopilot Action" },
+  { key: "result", label: "Expected Result" },
+];
+
+export const shippingRouteRows = [
+  {
+    stop: "Silica 1 | Station Dock",
+    action: "Wait for Items >= 400 Silica",
+    result: "Continue once the selected Silica amount is aboard",
+  },
+  {
+    stop: "Starter Station | Station Dock 1",
+    action: "Unload Silica",
+    result: "Transfer the cargo into the receiving station",
+  },
+  {
+    stop: "Starter Station | Station 1 Refuel",
+    action: "Wait for Items >= 20 Hydrogen Fuel",
+    result: "Continue when the selected fuel condition is satisfied",
+  },
+];
+
+
+export const shippingTroubleshootingColumns = [
+  { key: "problem", label: "What You See" },
+  { key: "check", label: "What to Check" },
+];
+
+export const shippingTroubleshootingRows = [
+  {
+    problem: "Ship stays docked at the pickup station",
+    check: "Wait for Items threshold, selected cargo item, and available stock",
+  },
+  {
+    problem: "Ship reaches a station but does not unload",
+    check: "Selected destination, unload order, dock ports, and receiving path",
+  },
+  {
+    problem: "Ship loads the wrong resource",
+    check: "Dock filters and nearby Conveyor connections",
+  },
+  {
+    problem: "Ship leaves before collecting enough cargo",
+    check: "Loading command, Wait for Items condition, and ship inventory",
+  },
+  {
+    problem: "Ship remains at the fuel dock",
+    check: "Fuel type, cargo inventory, and the refueling wait condition",
+  },
+  {
+    problem: "Ship has fuel but its cargo condition is not satisfied",
+    check: "Fuel stored in the reactor versus fuel stored as cargo",
+  },
+  {
+    problem: "Ship repeatedly fails to dock",
+    check: "Target dock, station layout, nearby obstructions, and manual docking",
+  },
+  {
+    problem: "Factory receives less cargo than expected",
+    check: "Actual unloaded amount, dock output, and downstream consumption",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To automate shipping in Main Sequence, prepare a powered outpost and a receiving station, connect their Docks to the correct cargo lines, and configure a ship's Autopilot. Add a pickup destination with a Load order and Wait for Items condition, then a destination that unloads the cargo. Add a refueling stop when needed, enable Autopilot, and check that the ship docks, transfers its cargo, and leaves for the next destination.
+</GuideQuickAnswer>
+
+**Main Sequence ship logistics** lets you move resources between stations without repeatedly flying back to collect them yourself. Once a cargo route works, Mining Outposts can keep supplying the main factory while you build ships, expand production, or explore another part of the system.
+
+The important part is not simply turning on Autopilot. A transport ship needs the correct destinations, loading and unloading instructions, cargo conditions, and access to enough fuel for its journey.
+
+A ship that remains at a Dock may be waiting for the exact amount of material you requested. A ship that arrives without delivering anything may have the wrong unload order or a blocked receiving connection. Those problems require different fixes.
+
+<section id="first-shipping-route" className="scroll-mt-24">
+
+## How Do You Set Up Your First Automated Shipping Route?
+
+Start with a simple route between two stations. A Silica Outpost sending resources to your main factory is a useful first example because you can easily check whether the delivered material reaches your Silicon Wafer production.
+
+The complete route has three jobs:
+
+1. Collect Silica from the mining outpost.
+2. Deliver it to the main station.
+3. Refill the ship's fuel before another journey, if necessary.
+
+You do not need an elaborate fleet to make this work. One properly configured ship can establish the first supply connection.
+
+### Prepare the Mining Outpost and Receiving Station
+
+Before opening Autopilot, make sure both ends of the route can perform their jobs.
+
+**At the mining outpost:**
+
+- The station must have enough power to operate its equipment.
+- Mining Drones must be collecting the intended resource.
+- The collected material needs a connected path toward the loading Dock.
+- The Dock must be able to transfer that material into the ship.
+
+**At the receiving station:**
+
+- Choose the Dock where the cargo ship should unload.
+- Connect the incoming cargo to a Container or the appropriate production line.
+- Check the dock ports and selected item filters.
+- Leave enough receiving capacity for the incoming delivery.
+
+Do not assume a Dock automatically transfers resources to every machine at the station. The receiving connection still determines where the unloaded cargo goes.
+
+Give the Docks recognizable names. Names such as **Silica Pickup**, **Silica Drop**, and **Fuel Pickup** make Autopilot configuration much easier when several stations and Docks appear in the destination list.
+
+### Configure Pickup and Unloading Orders
+
+Open the Ships interface, select the cargo ship, and open its Autopilot configuration.
+
+For the demonstrated Silica route:
+
+1. Add **Silica 1 | Station Dock** as the first destination.
+2. Make sure that the Dock can supply Silica to the ship.
+3. Set **Wait for Items >= 400 Silica** at the pickup stop.
+4. Add **Starter Station | Station Dock 1** as the next destination.
+5. Configure **Unload Silica** at the receiving stop.
+6. Add **Starter Station | Station 1 Refuel** and set the appropriate Hydrogen Fuel condition.
+7. Check the destination order, enable Autopilot, and monitor the first delivery.
+
+**Load** and **Wait for Items** are separate controls. Load specifies a cargo-loading action, while Wait for Items determines whether the selected cargo condition has been satisfied. The waiting condition does not produce or deliver the missing items; the Dock must still be supplying the ship.
+
+An early automated Silica route used a **400-Silica waiting condition** and a separate Hydrogen Fuel stop. That was a working route configuration, not a required quantity for every ship.
+
+Use an amount appropriate to your actual mining and factory demand.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-autopilot-first-shipping-route.webp"
+    alt="Initial Main Sequence Autopilot configuration showing Silica 1 as the pickup destination, a Load 400 order, and Starter Station as the next destination"
+    width={1263}
+    height={584}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    An early Silica route setup uses a Load 400 action and adds
+    Starter Station as the next destination. The unloading and
+    refueling conditions still need to be configured.
+  </figcaption>
+</figure>
+
+<GuideTable
+  columns={shippingRouteColumns}
+  rows={shippingRouteRows}
+/>
+
+A named destination helps avoid selecting the wrong Dock. If a station has several Docks, confirm the specific one you intend to use rather than choosing the first destination with a familiar station name.
+
+### How Do You Know the First Delivery Succeeded?
+
+Follow the ship from Silica 1 to Starter Station. Its cargo quantity should rise at the pickup Dock until the selected Wait for Items condition is satisfied. After arrival at Starter Station, the Silica quantity aboard should fall as the receiving Dock accepts the delivery.
+
+The important confirmation is at the destination: Silica must leave the ship and enter the receiving station. Reaching the Dock without transferring cargo is not a completed delivery.
+
+After unloading, watch which Autopilot destination becomes active. The ship should move toward its next scheduled stop rather than remaining at the receiving Dock indefinitely.
+
+</section>
+
+<section id="docks-and-filters" className="scroll-mt-24">
+
+## How Do Station Docks Load and Unload Cargo?
+
+A Dock connects a ship to a station, but its cargo connections still need to be configured for the direction in which items should move.
+
+At a loading station, items must reach the Dock and enter the ship.
+
+At an unloading station, items must leave the ship and reach the station's connected equipment.
+
+### Configure the Pickup Dock
+
+Identify the resource you want to export and connect its supply to the Dock.
+
+For a mining outpost, that generally means bringing the mined material from its collection and storage area toward the loading connection.
+
+Check the selected item filter on the dock ports.
+
+If a Dock is connected to several different production or storage lines, the wrong filter can allow an unintended material into the cargo flow or prevent the required item from being transferred.
+
+Before scheduling a large shipment, verify that the correct resource is available at the Dock.
+
+### Configure the Unloading Dock
+
+At the destination, inspect the Dock's outgoing connections.
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-dock-water-ice-filter.webp"
+    alt="Ice Drop Dock in Main Sequence showing Water Ice selected across its Logistics Filters"
+    width={701}
+    height={447}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Ice Drop Dock uses Logistics Filters to control which
+    materials its connections accept. Check these filters
+    before expecting incoming Water Ice to reach the station.
+  </figcaption>
+</figure>
+
+A receiving Dock should move the delivered item into the intended Container or factory input.
+
+For example, a station importing Water Ice for power generation should send that Water Ice into the receiving system rather than an unrelated fuel export connection.
+
+If the incoming cargo shares an area with the station's existing fuel production, take particular care with filters. An incorrectly configured connection can move material in an unwanted direction.
+
+Watch the first unloading operation to verify that the delivered resource reaches the correct destination.
+
+### Should You Use Separate Cargo and Refueling Docks?
+
+Separate Docks are useful when one station handles different jobs.
+
+A station can have a Dock for incoming ore, another for fuel, and another for personal visits or different cargo routes.
+
+This makes it easier to identify each destination and keep its connections separate.
+
+It also reduces the chance that a manually operated ship interferes with a cargo route already using the same Dock.
+
+You do not need a separate Dock for every resource from the beginning. Add them when the number of routes, cargo types, or loading conditions makes a shared arrangement difficult to manage.
+
+</section>
+
+<section id="wait-for-items" className="scroll-mt-24">
+
+## Why Is Your Cargo Ship Waiting at a Station?
+
+**Check the Wait for Items condition before assuming your Autopilot is broken.**
+
+A cargo ship may be parked correctly and receiving items, but it will not continue to the next destination until its configured waiting condition is satisfied.
+
+That is expected behavior when the ship has been instructed to wait for a specific cargo quantity.
+
+### How Does Wait for Items Affect Departure?
+
+Consider a transport ship configured to collect 400 Silica.
+
+The ship reaches the mining outpost and begins loading. If only 250 Silica has entered its cargo storage, the requested condition has not been reached.
+
+The ship continues waiting while the outpost produces and loads more material.
+
+When the configured condition is met, it can advance to the next Autopilot destination.
+
+Check the actual ship inventory, the selected item, and the comparison used in the condition. A **greater than or equal to** requirement needs the chosen item quantity to reach at least the configured value.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-autopilot-wait-for-items.webp"
+    alt="Main Sequence Autopilot orders showing Wait for Items of at least 400 Silica, an Unload destination, and a 20 Hydrogen Fuel condition"
+    width={1267}
+    height={635}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The ship waits for at least 400 Silica at the pickup Dock,
+    unloads at Starter Station, and checks for 20 Hydrogen Fuel
+    before continuing.
+  </figcaption>
+</figure>
+
+Do not confuse an item waiting condition with a command that creates or supplies the items. The outpost and Dock still need to load the cargo.
+
+### Why Does the Ship Wait Even Though the Factory Has Materials?
+
+Check the location of those materials.
+
+A Container may have a large stockpile while the Dock receives nothing because the connection or filter is incorrect.
+
+Similarly, a ship may contain one resource while its waiting condition refers to another.
+
+Work through these checks:
+
+1. Open the ship's Autopilot orders and identify the active destination.
+2. Read the selected item and required quantity.
+3. Check how much of that item is actually aboard.
+4. Inspect the loading Dock and its filters.
+5. Confirm that the station is supplying that Dock.
+6. Watch whether the ship's relevant cargo quantity increases.
+
+If it is increasing, the route may only need more time to reach its departure quantity.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-autopilot-waiting-for-titanium.webp"
+    alt="Main Sequence ship status showing Rich Titanium 2 waiting for 871 Titanium Ore"
+    width={579}
+    height={431}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rich Titanium 2 is waiting for Titanium Ore. Check the
+    active waiting condition and cargo inventory before
+    changing the route.
+  </figcaption>
+</figure>
+
+If it is not increasing, the problem is probably in the loading setup or available supply rather than the number in the waiting condition alone.
+
+### Should You Lower the Required Cargo Amount?
+
+A smaller pickup quantity can reduce how long a ship waits at a slow-producing outpost.
+
+For example, a shipment condition of 120 Basic Circuits may leave the ship waiting while production continues. Reducing the required shipment to 90 can make each delivery easier to complete.
+
+That does not automatically make the route more efficient.
+
+A lower quantity means less cargo per trip, potentially increasing how often the ship travels, docks, and consumes fuel.
+
+Choose a quantity based on the resource's production speed and how urgently the receiving factory needs it.
+
+For a resource with slow production and immediate demand, smaller deliveries may be useful. For a resource accumulating rapidly, larger shipments may reduce unnecessary journeys.
+
+**Neither 90 nor 120 is a universal recommended cargo setting.**
+
+</section>
+
+<section id="automatic-refueling" className="scroll-mt-24">
+
+## How Do You Automatically Refuel Cargo Ships?
+
+A cargo route also needs a way to keep the ship supplied with fuel.
+
+You can add a destination dedicated to refueling instead of manually boarding the ship every time its fuel reserves begin to fall.
+
+The fuel stop must have the correct fuel available and a Dock connection that can transfer it to the ship.
+
+### Set Up a Hydrogen Fuel Stop
+
+A basic refueling arrangement is:
+
+**Fuel-producing station → Fuel Pickup Dock → Cargo Ship**
+
+Make sure the Dock can access Hydrogen Fuel and is configured for the intended loading direction.
+
+Give the Dock a recognizable name so it is easy to select in the Autopilot destination list.
+
+Then add it after the cargo delivery destination or at another suitable point in the route.
+
+A simple route can visit:
+
+- The mining outpost to collect resources.
+- The main station to unload those resources.
+- A refueling Dock to replenish Hydrogen Fuel.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-autopilot-cargo-refueling-route.webp"
+    alt="Main Sequence Titanium Ore Autopilot route with pickup, unloading, and a separate refueling destination"
+    width={437}
+    height={432}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This Titanium Ore route collects cargo, unloads at
+    Rich Station, and visits a separate Refuel Dock
+    with its own waiting condition.
+  </figcaption>
+</figure>
+
+If the ship has sufficient fuel already, it may move through the refueling stage quickly. Watch the ship's actual condition to determine whether fuel is being added or whether the stop is being skipped because the requirement is already met.
+
+If the refueling Dock runs out of Hydrogen Fuel, [trace its Water Ice supply and Refinery output](/main-sequence/factory-automation#power-and-fuel).
+
+### Why Is Your Ship Waiting for Fuel It Already Has?
+
+**Fuel stored in the ship's Reactor and fuel stored as cargo are not necessarily counted the same way.**
+
+A ship may already have Hydrogen Fuel in its Reactor while an Autopilot condition checks the amount remaining in cargo storage.
+
+For example, one early transport configuration used a waiting amount of 20 Hydrogen Fuel after the Reactor's own fuel capacity was filled.
+
+If the Reactor is supplied but the cargo amount remains below the waiting threshold, the ship can continue waiting.
+
+Check both locations before changing the entire route.
+
+This matters especially when a refueling Dock automatically supplies the ship's Reactor before leaving additional fuel in cargo storage.
+
+### How Do You Prevent a Fuel Stop From Holding the Ship Too Long?
+
+Avoid treating a refueling condition as a reason to fill every available cargo slot with fuel.
+
+Use the selected fuel type and a practical departure condition.
+
+In a later Water Ice transport route, a small waiting amount was used at a Deuterium Fuel pickup stop so the ship could continue without remaining there for an excessive amount of time.
+
+The setting should be tested with the actual ship inventory.
+
+**A Wait for Items condition is not the same thing as a hard maximum cargo limit.** It determines when a stage can advance; loading behavior and available storage still need to be observed.
+
+Check the fuel in the Reactor and cargo after the ship finishes its first refueling visit.
+
+### Can a Route Include Hydrogen Fuel and Warp Fuel Stops?
+
+Yes. A longer route can visit more than one refueling destination.
+
+A Coolant delivery route can include separate stops for ordinary fuel and Warp Fuel after unloading its cargo.
+
+In one configuration, **Refuel 1** uses `Wait for Items >= 10`, while **Warp Fuel Load** uses `Wait for Items < 10`. The second condition checks for fewer than 10 of the selected item; it is not an instruction to collect at least 10 Warp Fuel.
+
+Check the selected fuel item, comparison operator, and actual ship inventory at each stop. If your goal is to replenish fuel, verify that the ship receives the intended fuel before relying on the condition for repeated trips.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-coolant-shipping-fuel-stops.webp"
+    alt="Main Sequence Coolant route with Unload, Refuel 1, and Warp Fuel Load destinations showing different waiting conditions"
+    width={432}
+    height={427}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After unloading Coolant, the route visits Refuel 1
+    and Warp Fuel Load. Notice that the two waiting
+    conditions use different comparison operators.
+  </figcaption>
+</figure>
+
+If the ship cannot carry the planned shipment or struggles with a heavier load, [check its Containers, Thrusters, and total mass](/main-sequence/ship-design#cargo-ship) before increasing its cargo capacity.
+
+</section>
+
+<section id="coolant-shipping" className="scroll-mt-24">
+
+## How Do You Automate Coolant Deliveries Between Stations?
+
+Coolant is a good example of why automated shipping becomes important as your factories grow.
+
+The main factory may need Coolant for Superconductor Coils or Advanced Circuits while the Nitrogen supply and Coolant production are located at another outpost.
+
+Instead of repeatedly transporting Coolant manually, assign a ship to deliver it.
+
+### How Much Coolant Should the Ship Collect?
+
+At the Coolant-producing outpost, choose the loading Dock and set Coolant as the cargo item. One working transport configuration waited for 500 Coolant before departing for the receiving station.
+
+That quantity makes sense only when the outpost can produce it and the ship has enough available storage. If the cargo ship spends too long waiting while the main factory runs short, compare the pickup threshold with the actual Coolant production rate.
+
+Keep the receiving Dock's Unload order and the necessary refueling destinations in the route. The shipment quantity controls how long the ship may wait at pickup; it does not determine whether Coolant can move through the receiving station's Conveyors.
+
+### How Do You Know Coolant Has Reached the Factory?
+
+Check the receiving station's cargo flow.
+
+You should see Coolant enter the Dock, move into the connected Container or Conveyor, and eventually arrive at the machinery that consumes it.
+
+If a Superconductor Coil Assembler is waiting for Coolant, inspect its input after the delivery.
+
+The correct result is not merely that the ship arrived. The missing material must reach the production line.
+
+If the Coolant reaches the station but production remains stopped, inspect the receiving Conveyor and other ingredients using the [factory automation instructions](/main-sequence/factory-automation#coolant-production).
+
+### Can You Copy Autopilot Orders to Another Ship?
+
+Autopilot settings can be copied from an existing ship and pasted onto another one.
+
+This is useful when creating similar routes or when adding a replacement cargo ship.
+
+A practical approach is:
+
+1. Open a ship with working Autopilot orders.
+2. Copy its current configuration.
+3. Select the new cargo ship.
+4. Paste the saved configuration.
+5. Change the pickup Dock, destination Dock, cargo item, and waiting quantities as needed.
+6. Review every refueling stop before enabling the new route.
+
+Do not assume the copied settings are already correct.
+
+An old route may refer to the wrong outpost, an unsuitable cargo quantity, or a fuel stop the new ship does not need.
+
+Copying saves time on repetitive orders, but each new ship still needs a final check.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-autopilot-copy-paste-orders.webp"
+    alt="Main Sequence Autopilot panel showing the Copy button above an existing Titanium Ore transport route"
+    width={429}
+    height={433}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Copy the orders from an existing transport ship,
+    then paste them onto another ship and update its
+    cargo item, Docks, and waiting conditions.
+  </figcaption>
+</figure>
+
+</section>
+
+<section id="water-ice-shipping" className="scroll-mt-24">
+
+## How Do You Keep a Remote Station Supplied With Water Ice?
+
+Water Ice delivery can become important when a station uses fuel production but does not have a convenient nearby Ice source.
+
+Set up a mining outpost to collect Water Ice and a receiving Dock at the main station.
+
+The transport task is straightforward:
+
+**Ice Pickup → Ice Drop → Fuel Pickup**
+
+### Configure the Ice Pickup and Drop Docks
+
+At the mining station, direct the collected Water Ice toward the loading Dock.
+
+At the destination, filter the receiving connection for Water Ice.
+
+If fuel production shares the same area, be careful that a Dock connection intended to receive Water Ice does not move fuel into the wrong cargo line.
+
+Once the destination Dock is ready, configure the cargo ship to collect Water Ice at the outpost and unload it at the main station.
+
+Add the fuel stop as a separate destination.
+
+### Why Is the Water Ice Delivery Not Feeding Fuel Production?
+
+Watch the receiving Dock after the cargo ship arrives. Water Ice should leave the ship through the connection filtered for that item. If unloading occurs but the fuel Refinery still receives nothing, inspect the Dock's outgoing port and the first Conveyor segment.
+
+In one Water Ice route, loading took noticeably longer than unloading. A slow pickup does not necessarily indicate a docking problem; the outpost may simply be supplying Ice more slowly than the receiving station can accept it.
+
+Once the delivery reaches the station, check whether the ship continues to its fuel stop. If it remains there, inspect that stop's waiting condition instead of changing the Ice pickup orders.
+
+</section>
+
+<section id="interstellar-shipping" className="scroll-mt-24">
+
+## Can You Automate Cargo Transport Between Star Systems?
+
+Yes. Later in Main Sequence, automated shipping can extend beyond the original solar system.
+
+The main difference is preparation. A ship traveling between star systems needs the appropriate travel capability, fuel supply, and destinations.
+
+Before attempting a long-distance route, make sure the required technologies and ship equipment are available. Before scheduling an interstellar shipment, [check the Interstellar Warp Drive requirements](/main-sequence/research-progression#interstellar-progression) and confirm that the ship has enough fuel.
+
+### Connect the Remote Outpost to the Main Factory
+
+A later cargo route transported **Strange Matter Crystals** from a remote station back to a factory using them for advanced fuel production.
+
+At the remote outpost, connect Strange Matter Crystal production to the loading Dock. Set the crystal quantity that must be aboard before departure, then select the receiving station and its unloading Dock.
+
+This route also needs access to Warp Fuel for interstellar travel. Check the ship's fuel before enabling repeated deliveries, especially if the return journey crosses another star system.
+
+An earlier configuration used **Wait for Items >= 1,000 Strange Matter Crystals** at pickup. The shipment target was later increased to **1,500** for the cargo ship being used.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-strange-matter-shipping-route.webp"
+    alt="Main Sequence interstellar Autopilot route showing a 1,000 Strange Matter pickup condition, unloading destination, and Warp Fuel stop"
+    width={428}
+    height={434}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This earlier interstellar route waits for 1,000
+    Strange Matter at the pickup outpost, then travels
+    to the receiving station and a Warp Fuel stop.
+  </figcaption>
+</figure>
+
+These quantities reflect the cargo ship's particular setup, not a universal requirement for interstellar deliveries.
+
+### What Should You Check on a Long-Distance Route?
+
+Long-distance transport introduces additional costs when something goes wrong.
+
+If the ship remains at the pickup Dock, check whether its required quantity has been reached.
+
+If it never arrives, check the selected destination, current Autopilot stage, fuel availability, and whether it has left its previous Dock.
+
+If it arrives but does not unload, inspect the receiving cargo connection.
+
+A remote ship can successfully reach the main factory while still failing to supply the machines that need its cargo.
+
+Confirm the final result by watching the unloaded material reach its intended production area.
+
+In the Strange Matter Crystal example, the incoming deliveries supported the factory's advanced Warp Fuel production.
+
+</section>
+
+<section id="ship-logistics-troubleshooting" className="scroll-mt-24">
+
+## Why Won't Your Main Sequence Cargo Ship Dock, Load, or Unload?
+
+Start by identifying the last action the ship completed successfully.
+
+A ship that is loading slowly is different from a ship that cannot approach its Dock. A ship that docks but keeps its cargo needs a different check from one that never collected the material.
+
+<GuideTable
+  columns={shippingTroubleshootingColumns}
+  rows={shippingTroubleshootingRows}
+/>
+
+### Ship Arrives but Does Not Unload
+
+Check the selected destination and unloading order first.
+
+Then inspect the Dock's cargo ports and receiving connections.
+
+A ship can reach the correct station while the cargo still has no usable path into a Container or production line.
+
+Check whether the receiving destination is full or whether another item is occupying the available storage.
+
+If several resources share a Dock, verify each relevant item filter rather than assuming the Dock can only handle a fixed number of cargo types.
+
+After making a change, confirm that the missing item actually moves into the station.
+
+### Ship Is Carrying the Wrong Items
+
+Inspect the loading Dock.
+
+Look for a Conveyor connected to an unintended resource line or a port that accepts the wrong item.
+
+Correct the filter or connection and remove unwanted cargo when necessary.
+
+Then observe the next loading operation.
+
+Do not change every Autopilot destination if the problem begins with the wrong material entering the ship at the first stop.
+
+### Autopilot Ship Repeatedly Fails to Dock
+
+First separate a navigation problem from a cargo-transfer problem.
+
+If the ship does not complete docking, check that the Autopilot destination refers to the intended Dock and inspect its surroundings.
+
+Look for nearby station modules or other obstructions that may interfere with the approach.
+
+If possible, compare the behavior when docking manually at the same location.
+
+If the ship docks successfully when controlled manually but fails under Autopilot, check the selected destination and identify the exact step where its movement stops.
+
+Do not rebuild the entire station before confirming whether the problem involves the Dock's location, the assigned destination, or the ship's approach.
+
+After making one change, test the same destination again to see whether docking succeeds.
+
+### Ship Refuels but Does Not Continue
+
+Review the fuel stop's current waiting condition.
+
+Check whether the selected fuel is stored inside the Reactor or in cargo inventory.
+
+A condition waiting for additional cargo fuel may not be satisfied merely because the Reactor itself is full.
+
+Also verify that the fuel available at the Dock is the type required by the active condition.
+
+If the ship is taking on fuel normally but remains below the required cargo quantity, reconsider whether that quantity is necessary.
+
+</section>
+
+<section id="shipping-throughput" className="scroll-mt-24">
+
+## How Do You Improve Cargo Delivery Without Adding Unnecessary Ships?
+
+Before building another transport ship, identify why the existing route cannot meet demand.
+
+There are three different constraints:
+
+**Supply:** The mining or production outpost may not be producing enough material.
+
+**Transport:** The ship may spend too much time loading, traveling, refueling, or waiting for a large departure quantity.
+
+**Receiving:** The destination may not unload or consume cargo quickly enough.
+
+Adding another ship only helps when the bottleneck is actually transport capacity or route frequency.
+
+### Match Pickup Quantity to Production
+
+If a resource is produced slowly, a large Wait for Items target may create long gaps between deliveries.
+
+If the resource accumulates rapidly, increasing shipment size may reduce the number of journeys needed.
+
+Check the amount available after each loading cycle and compare it with the receiving factory's demand.
+
+Do not increase the shipment size beyond what the ship can usefully transport just because the cargo field accepts a higher value.
+
+### Keep Dock Responsibilities Clear
+
+As your factory grows, name each Dock by its function.
+
+A system with separate **Ore Pickup**, **Coolant Drop**, and **Fuel Pickup** destinations is easier to inspect than one where every Dock has a generic station name.
+
+When several cargo routes visit the same area, monitor how long each ship occupies its destination.
+
+A ship waiting for additional fuel or cargo can keep a Dock occupied longer than expected.
+
+Where space and construction resources allow, separating busy cargo routes can reduce interference.
+
+### Check Whether the Factory Is Consuming Deliveries
+
+The final test is at the receiving station.
+
+If incoming cargo fills a Container faster than machines consume it, additional delivery capacity may not help.
+
+If the receiving Container remains empty while the ship returns with less than the required cargo, inspect the loading and transportation stages.
+
+If a delivered resource disappears immediately and production still runs short, compare the producing outpost's output with the factory's demand.
+
+If cargo arrives but an Assembler still lacks materials, [trace the receiving factory's inputs and outputs](/main-sequence/factory-automation#production-bottlenecks).
+
+</section>
+
+<section id="reliable-shipping-checklist" className="scroll-mt-24">
+
+## How Do You Confirm the Cargo Ship Repeats Its Route?
+
+The first delivery can succeed even when the next pickup fails. After the ship finishes unloading and refueling, follow its return to the original loading Dock.
+
+On the second visit, confirm that the source has produced another shipment, the active Wait for Items condition can be satisfied, and the ship leaves for the receiving station again. If the outpost has no new cargo, the route may remain paused even though every Autopilot destination is correct.
+
+If the second shipment arrives but is smaller or later than expected, compare the time spent loading with the time spent traveling. Increase ship capacity only when transport is limiting delivery; if the pickup station is still producing too slowly, another cargo ship will not create more material.
+
+For changes to the ship's Containers or propulsion, [inspect the ship's mass and module choices](/main-sequence/ship-design#mass-and-thrusters).
+
+</section>

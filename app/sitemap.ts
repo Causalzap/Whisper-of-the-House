@@ -1277,6 +1277,13 @@ const paths = [
      'blacksmith-master/workshop-layout',
      'blacksmith-master/master-workers',
      'blacksmith-master/achievements',
+
+     'main-sequence',
+     'main-sequence/factory-automation',
+     'main-sequence/research-progression',
+     'main-sequence/ship-design',
+     'main-sequence/ship-logistics',
+     
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1284,6 +1291,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'main-sequence': '2026-11-21',
+  'main-sequence/factory-automation': '2026-11-21',
+  'main-sequence/research-progression': '2026-11-21',
+  'main-sequence/ship-design': '2026-11-21',
+  'main-sequence/ship-logistics': '2026-11-21',
+
   'blacksmith-master': '2026-11-20',
   'blacksmith-master/mastery-tree': '2026-11-20',
   'blacksmith-master/workshop-layout': '2026-11-20',

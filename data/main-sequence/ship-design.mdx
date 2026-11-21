@@ -1,0 +1,973 @@
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import Image from "next/image";
+
+
+export const thrusterComparisonColumns = [
+  { key: "configuration", label: "Configuration" },
+  { key: "thrust", label: "Thrust" },
+  { key: "mass", label: "Mass" },
+  { key: "power", label: "Power" },
+];
+
+export const thrusterComparisonRows = [
+  {
+    configuration: "1 Medium Thruster",
+    thrust: "120 kN",
+    mass: "10 t",
+    power: "12 MW",
+  },
+  {
+    configuration: "2 Small Relic Thrusters",
+    thrust: "120 kN",
+    mass: "6 t",
+    power: "18 MW",
+  },
+];
+
+export const shipRoleColumns = [
+  { key: "role", label: "Ship Role" },
+  { key: "modules", label: "Prioritize These Modules" },
+  { key: "tradeoff", label: "Main Tradeoff" },
+];
+
+export const shipRoleRows = [
+  {
+    role: "Mining and Exploration",
+    modules: "Mining Laser, Tractor Beam, Thrusters, cargo storage",
+    tradeoff: "Mining capability versus mass and mobility",
+  },
+  {
+    role: "Automated Cargo",
+    modules: "Containers, Thrusters, Reactor, Docking Collar",
+    tradeoff: "Cargo capacity versus travel performance",
+  },
+  {
+    role: "Combat",
+    modules: "Weapons, Shields, Point Defence, Thrusters",
+    tradeoff: "Firepower and protection versus mass",
+  },
+  {
+    role: "Interstellar Exploration",
+    modules: "Interstellar Warp Drive, fuel, cargo space, defensive weapons",
+    tradeoff: "Travel capability versus room for other equipment",
+  },
+  {
+    role: "Fighter Carrier",
+    modules: "Ship Hangar, fighter support, Reactor, defensive equipment",
+    tradeoff: "Hangar mass and space versus combat support",
+  },
+];
+
+export const shipyardColumns = [
+  { key: "shipyard", label: "Shipyard" },
+  { key: "mass", label: "Base Mass Limit" },
+  { key: "upgrade", label: "Prosperity Bonus" },
+];
+
+export const shipyardRows = [
+  {
+    shipyard: "Shipyard Core",
+    mass: "100 t",
+    upgrade: "+10 t per level",
+  },
+  {
+    shipyard: "Shipyard Core Mk. 2",
+    mass: "400 t",
+    upgrade: "+40 t per level",
+  },
+];
+
+export const shipProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "check", label: "What to Check" },
+];
+
+export const shipProblemRows = [
+  {
+    problem: "Ship is over the mass limit",
+    check: "Current Shipyard capacity, Prosperity upgrades, module mass",
+  },
+  {
+    problem: "Cannot remove a ship module",
+    check: "Items or fuel still stored inside the module",
+  },
+  {
+    problem: "Missing building materials",
+    check: "Module requirements and materials available for construction",
+  },
+  {
+    problem: "Cannot install another Warp Drive",
+    check: "Whether the ship already has a Warp Drive or Interstellar Warp Drive",
+  },
+  {
+    problem: "Ship is slower after upgrades",
+    check: "Total mass and available Thruster output",
+  },
+  {
+    problem: "Slipstream Drive cannot be used",
+    check: "Installed drive, Warp Fuel, and intended destination",
+  },
+  {
+    problem: "Ship has no usable power",
+    check: "Reactor, available fuel, and required powered modules",
+  },
+  {
+    problem: "Fighters do not return to the carrier",
+    check: "Fighter Autopilot orders and Ship Hangar destination",
+  },
+  {
+    problem: "Combat ship takes too much damage",
+    check: "Hull, Shields, weapon coverage, enemy pressure, and Damage Report",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To build or upgrade a ship in Main Sequence, construct a Shipyard Core, dock the ship there, and open the Ship Designer. Keep a piloting module and Docking Collar, then add the equipment needed for the ship's job. Mining ships benefit from Mining Lasers and a Tractor Beam, cargo ships need Containers and sufficient Thrusters, and combat ships need weapons, protection, and reliable power. Check the Shipyard mass limit and required construction materials before applying changes. A Shipyard Core starts at 100 t, while the Mk. 2 supports larger ships.
+</GuideQuickAnswer>
+
+A ship can fit within the Shipyard's mass limit and still perform poorly. Heavy Containers reduce the mass available for propulsion, additional weapons require construction materials and power, and a larger Warp Drive can force you to rearrange the hull.
+
+The Ship Designer makes these tradeoffs visible before construction. Compare the finished mass, thrust, power demand, and available module space rather than judging a design only by how many blocks it contains.
+
+A compact mining vessel and a heavily armed interstellar ship place very different demands on the same construction system.
+
+<section id="shipyard" className="scroll-mt-24">
+
+## How Do You Build a Shipyard in Main Sequence?
+
+**A Shipyard Core allows you to construct new ships and modify existing ones.**
+
+Unlike editing a space station, modifying a ship requires access to the Shipyard and its Ship Designer.
+
+### Build the Shipyard Core
+
+Once the Shipyard technology is available, open the Station Designer and find the Shipyard Core.
+
+Attach the module to your station in a location with enough space for the ship you intend to modify.
+
+The Shipyard Core is the functional part of the structure. It allows ships to be constructed and edited.
+
+You can extend the physical Shipyard area with Shipyard Side modules.
+
+These extensions provide additional space, but adding a Side module is not the same as unlocking a higher ship mass limit.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-shipyard-core-side-modules.webp"
+    alt="Station Blueprint Designer showing Shipyard Core and Shipyard Side modules with a Shipyard Core placement preview"
+    width={991}
+    height={685}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Select Shipyard Core in the Station Designer to add
+    ship construction facilities. Shipyard Side is a
+    separate extension module.
+  </figcaption>
+</figure>
+
+### Dock Your Ship at the Shipyard
+
+To modify an existing ship:
+
+1. Enter the ship and navigate to the Shipyard.
+2. Select the appropriate Shipyard Dock.
+3. Complete docking.
+4. Open the Shipyard interface.
+5. Select **Ship Designer**.
+6. Open the docked ship's design.
+
+Make sure you are using the Shipyard rather than an ordinary Station Dock.
+
+A regular Dock allows a ship to visit a station, but it does not provide the same construction functions.
+
+### Should You Modify Your Ship or Construct a New One?
+
+Modifying your current ship is useful when you only need a few additional modules.
+
+For example, adding a Mining Laser, moving a Reactor, or making room for a Warp Drive may be possible without building a second ship.
+
+Constructing a new ship becomes more attractive when the existing design has little room left for its new role.
+
+A compact mining ship does not necessarily need to become your heavy combat ship. Keeping separate vessels can prevent one design from accumulating equipment that is unnecessary for most journeys.
+
+Choose a new ship when the changes would require rebuilding most of the original structure or sacrificing important equipment.
+
+</section>
+
+<section id="ship-designer" className="scroll-mt-24">
+
+## How Do You Upgrade an Existing Ship in the Ship Designer?
+
+The Ship Designer lets you remove, replace, and add modules.
+
+You can change the hull layout, adjust where modules are mounted, and reserve room for future equipment.
+
+Before making a large change, check the ship's existing components.
+
+### Identify the Essential Ship Modules
+
+A functional ship needs a piloting module and a Docking Collar.
+
+Depending on its role, it also needs suitable power, propulsion, and any equipment required to carry out its tasks.
+
+Common modules include:
+
+- **Cockpit or Bridge:** Provides a piloting position.
+- **Docking Collar:** Allows the ship to connect to stations.
+- **Small Reactor:** Supplies ship power.
+- **Thrusters:** Provide propulsion.
+- **Habitat and structural blocks:** Connect parts of the ship and provide its interior layout.
+- **Workstation:** Supports crafting and other operations aboard the ship.
+- **Container:** Adds storage.
+- **Mining Laser, weapons, and Shields:** Provide task-specific capabilities.
+- **Warp Drive:** Enables faster travel within the solar system.
+
+<figure className="my-7 mx-auto max-w-2xl">
+  <Image
+    src="/images/main-sequence/main-sequence-ship-designer-existing-ship.webp"
+    alt="Ship Blueprint Designer showing an existing compact ship, available modules, and its mass and thrust values"
+    width={950}
+    height={699}
+    sizes="(max-width: 768px) 100vw, 672px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Ship Designer lets you inspect the current hull,
+    add equipment, and compare mass and thrust before
+    applying changes.
+  </figcaption>
+</figure>
+
+Avoid removing essential modules merely to make room for decorations.
+
+If you move the Cockpit or Docking Collar, check that the new layout remains valid before applying changes.
+
+### How Do You Move or Replace Modules?
+
+One approach is to remove a module and place the replacement in its intended position.
+
+For example, moving a Reactor toward the rear of the ship may create room for a larger module near the middle.
+
+After making the change:
+
+1. Inspect the newly opened attachment points.
+2. Place the replacement module.
+3. Check its orientation.
+4. Confirm that the ship still has its essential equipment.
+5. Review the required building materials.
+6. Select **Apply Changes** when the layout is ready.
+
+You can exit the designer to collect missing supplies and return to the ship without necessarily losing your unfinished layout.
+
+Check the design again before applying the final changes.
+
+### Why Can't You Remove a Module?
+
+If the designer says that a module **must be empty**, check its inventory.
+
+A Container, Reactor, or other module may still hold items or fuel.
+
+Exit the designer, access the relevant module, and remove its contents.
+
+Then return to the Ship Designer and try removing it again.
+
+Do this before spending time rearranging other components. The problem may be stored items rather than an invalid module position.
+
+### Check That You Can Access the Interior
+
+A design can look good from outside while leaving important equipment difficult to reach.
+
+Before finishing a large ship, check whether you can move from its docking entrance to the Cockpit, Reactor, Workstation, and other equipment you intend to operate manually.
+
+Ladders, Habitats, and Ship Elevators can help connect different parts of the interior.
+
+This matters especially when adding large devices such as an Astronomic Scanner or Interstellar Warp Drive.
+
+Reserve usable interior access instead of assuming that every module can be operated conveniently from the outside.
+
+</section>
+
+<section id="mass-and-thrusters" className="scroll-mt-24">
+
+## How Do Ship Mass and Thrusters Affect Your Design?
+
+**Adding more modules increases your ship's mass, while Thrusters determine how much propulsion it has.**
+
+The important comparison is not simply the number of Thrusters installed. It is whether the available thrust is appropriate for the finished ship's mass.
+
+### What Is the Shipyard Mass Limit?
+
+Your Shipyard determines the maximum mass it can construct or modify.
+
+<GuideTable
+  columns={shipyardColumns}
+  rows={shipyardRows}
+/>
+
+These are the base values. Prosperity upgrades can increase the available limit.
+
+For example, upgrading the original Shipyard's mass capacity can raise the limit from 100 t to 110 t.
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-shipyard-mass-limit.webp"
+    alt="Main Sequence Ship Designer showing a compact ship weighing 43 of the available 100 tonnes"
+    width={641}
+    height={564}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The initial Shipyard allows up to 100 tonnes in this
+    setup. Check the Mass indicator before adding more
+    modules to the design.
+  </figcaption>
+</figure>
+
+A larger Shipyard Core Mk. 2 starts at 400 t before its Prosperity bonuses.
+
+An upgraded Shipyard can display a higher current limit. For example, one Shipyard Core Mk. 2 setup shows a capacity of 480 tonnes after upgrades, rather than its 400-tonne base value.
+
+Always use the current mass limit displayed in your Ship Designer when planning additional modules.
+
+Do not assume that adding more Shipyard Side modules automatically raises the limit.
+
+### When Do You Need a Larger Shipyard?
+
+A smaller Shipyard is enough for compact mining ships and simple cargo vessels.
+
+The limitation becomes obvious when you begin adding several heavy systems:
+
+- Multiple weapon mounts
+- Larger Thrusters
+- Additional Containers
+- Shield Generators
+- An Interstellar Warp Drive
+- A Ship Hangar
+
+If you repeatedly remove essential equipment just to stay within the mass limit, a larger Shipyard may be more useful than another minor redesign.
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-shipyard-mk2-capacity.webp"
+    alt="Upgraded Shipyard's Blueprint Designer showing an available construction mass limit of 480 tonnes"
+    width={868}
+    height={684}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This upgraded Shipyard shows a 480-tonne construction
+    limit, allowing substantially larger ship designs
+    than the original 100-tonne Shipyard.
+  </figcaption>
+</figure>
+
+Check the requirements for Shipyard Core Mk. 2 in the [research progression guide](/main-sequence/research-progression).
+
+### Small, Medium, Large, and Relic Thrusters
+
+Different Thrusters provide different amounts of thrust while consuming ship mass, mounting space, and power.
+
+For example, the Ship Designer shows the following values:
+
+<GuideTable
+  columns={thrusterComparisonColumns}
+  rows={thrusterComparisonRows}
+/>
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-medium-thruster-stats.webp"
+    alt="Medium Thruster module showing 120 kN thrust, 10 tonnes mass, and 12 MW power consumption"
+    width={431}
+    height={335}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    One Medium Thruster provides 120 kN of thrust,
+    weighs 10 tonnes, and consumes 12 MW.
+  </figcaption>
+</figure>
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-small-relic-thruster-stats.webp"
+    alt="Small Relic Thruster showing 60 kN thrust, 3 tonnes mass, and 9 MW power consumption"
+    width={884}
+    height={593}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Each Small Relic Thruster provides 60 kN of thrust
+    at 3 tonnes and 9 MW. Two provide the same thrust
+    as one Medium Thruster while using less mass.
+  </figcaption>
+</figure>
+
+Two Small Relic Thrusters provide the same combined thrust as one Medium Thruster while saving 4 tonnes of mass. However, they consume 6 MW more power.
+
+The Relic option is useful when mass is the limiting factor and your Reactor has enough spare power. The Medium Thruster is more attractive when available power is the tighter constraint.
+
+Check your ship's completed mass and power requirements before replacing one configuration with another.
+
+### Why Is Your Ship Slower After Adding Storage or Weapons?
+
+Check total mass first.
+
+Additional Containers, weapons, armour, and other modules can increase the load without increasing thrust.
+
+If the ship becomes too slow for its intended purpose, compare three possible changes:
+
+1. Add or upgrade Thrusters.
+2. Remove modules that are not needed for the ship's role.
+3. Move the design to a larger Shipyard if the mass limit prevents further propulsion upgrades.
+
+Do not assume that increasing the Reactor's fuel supply will automatically make the ship faster.
+
+Power and propulsion are different constraints.
+
+</section>
+
+<section id="mining-ship" className="scroll-mt-24">
+
+## How Do You Upgrade a Mining Ship?
+
+A practical mining ship needs to damage resource asteroids and collect the resulting materials.
+
+The two important tools are the **Mining Laser** and **Tractor Beam**.
+
+Start by improving those capabilities before filling the ship with unrelated equipment.
+
+### Add a Mining Laser
+
+Dock your ship at the Shipyard and open the Ship Designer.
+
+Locate the Mining Laser module and choose a position where it can be mounted.
+
+Check its construction requirements before applying the changes.
+
+If the designer reports missing materials, collect the required components and return.
+
+After building the modified ship, leave the Shipyard and test the Mining Laser on a suitable asteroid.
+
+A Mining Laser upgrade can noticeably improve the ship's ability to collect resources during manual exploration.
+
+### Do You Need an Additional Tractor Beam?
+
+Some piloting modules already provide Tractor Beam capability.
+
+Before adding another Tractor Beam, inspect your current ship's equipment.
+
+A starter Cockpit may already allow you to pull nearby floating items into the ship.
+
+An additional Tractor Beam should therefore be considered for a specific need rather than installed automatically.
+
+Test whether the existing collection capability is sufficient before spending mass and materials on another module.
+
+### Mining Ship vs Station Mining Drones
+
+Use a mining ship for exploration and manual resource collection; use station Mining Drones for repeated resource gathering at an established outpost.
+
+For stationary mining and the connected production system, see the [factory automation guide](/main-sequence/factory-automation).
+
+### A Practical Early Mining Upgrade
+
+For a small working ship, prioritize:
+
+- A functional Cockpit and Docking Collar
+- A Reactor with fuel
+- Enough Thrusters for comfortable movement
+- A Mining Laser
+- Available cargo space
+- Existing or additional Tractor Beam capability as needed
+
+Test the result before installing more equipment.
+
+If the mining upgrade works and the ship still handles comfortably, you can leave more complex weapons and defensive systems for a dedicated exploration or combat vessel.
+
+</section>
+
+<section id="cargo-ship" className="scroll-mt-24">
+
+## How Do You Build a Cargo Ship for Automated Transport?
+
+**A cargo ship needs enough storage to move useful quantities of materials without becoming unnecessarily heavy.**
+
+The best balance depends on what the ship is carrying and how often it needs to travel.
+
+For a route between nearby stations, you may not need a large, heavily armed ship.
+
+### Prioritize Containers and Propulsion
+
+Start with a basic hull containing its essential piloting, docking, power, and propulsion modules.
+
+Then add the cargo storage needed for the intended route.
+
+As the design grows, watch the mass limit.
+
+A ship with more Containers can carry larger shipments, but the additional mass may reduce its travel performance if the Thrusters remain unchanged.
+
+If you need another Container, check whether the ship still has enough thrust for the longer or heavier journey.
+
+### Cargo Mk III Example
+
+A later cargo design used two Containers and Small Relic Thrusters.
+
+The purpose was to create a relatively compact, high-volume transport ship.
+
+In that configuration:
+
+- Two Containers provided the main cargo capacity.
+- Small Relic Thrusters reduced the space used for propulsion.
+- The designer compared their combined thrust and mass against a Medium Thruster.
+- Other equipment was kept limited to what the transport ship needed.
+
+This is a useful example of a ship designed around one job instead of carrying unnecessary combat equipment.
+
+The specific layout is not a universal best design.
+
+### What Should You Remove From a Cargo Ship?
+
+Before removing equipment, consider the actual route.
+
+A cargo ship that travels through safe areas may not need the same number of weapons as a ship entering dangerous sectors.
+
+However, removing every defensive option is not automatically safe if the route crosses hostile space.
+
+Also consider whether the vessel needs its own Warp Drive or is only operating within a local area.
+
+Reserve capacity for the modules the route genuinely requires.
+
+### What Does a Cargo Ship Need Before Autopilot?
+
+Before assigning a route, confirm that the ship has a functioning Docking Collar, enough Containers for the intended shipment, and sufficient propulsion and fuel for the journey.
+
+The ship's design determines what it can carry and how it travels. To make deliveries repeat automatically, [set the loading Dock, unloading destination, and Wait for Items conditions](/main-sequence/ship-logistics#first-shipping-route).
+
+Test the ship with its intended cargo load. A vessel that handles comfortably when empty may perform differently after its Containers are filled.
+
+</section>
+
+<section id="combat-ship" className="scroll-mt-24">
+
+## How Do You Build a Combat Ship in Main Sequence?
+
+A combat ship needs enough firepower to destroy hostile targets while retaining the power, protection, and mobility needed to survive.
+
+Adding weapons without considering the rest of the ship can create an expensive design that performs poorly in a real fight.
+
+### Choose Weapons for the Targets You Expect
+
+Available ship weapons include:
+
+- **Plasma Cannon**
+- **Plasma Lance**
+- **Missile Launcher**
+- **Point Defence Laser**
+- **Relic weapons**, once their technologies become available
+
+These weapons do not all serve the same role.
+
+Plasma Cannons provide direct offensive firepower. Plasma Lances are larger weapon modules and require more room in the ship design.
+
+Point Defence Lasers are useful defensive equipment when you expect incoming threats such as missiles.
+
+If you are building a ship primarily to clear enemy installations, prioritize effective offensive weapons while retaining enough defensive capability to survive the approach.
+
+### What Does a Larger Combat Ship Look Like?
+
+One large combat ship, the **Wyvern**, was constructed after upgrading to a larger Shipyard.
+
+The design combined:
+
+- Several Medium Thrusters
+- Plasma Cannons
+- Plasma Lances
+- A Shield Generator
+- A Reactor and Warp Drive
+- A Mining Laser and Tractor Beam
+- Additional hull and armour sections
+
+The important lesson is that a larger Shipyard made room for equipment that would have been difficult to fit on a small vessel.
+
+That does not make the Wyvern a proven optimal build.
+
+It was a multipurpose combat and exploration ship prepared for dangerous resource sectors.
+
+<figure className="my-7 mx-auto max-w-3xl">
+  <Image
+    src="/images/main-sequence/main-sequence-wyvern-combat-ship-modules.webp"
+    alt="Large combat ship blueprint showing weapon mounts, Plasma Cannons, defensive modules, and construction requirements"
+    width={1266}
+    height={621}
+    sizes="(max-width: 768px) 100vw, 768px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This larger ship design leaves room for multiple
+    weapons and defensive modules. Check the total
+    construction cost before applying a combat upgrade.
+  </figcaption>
+</figure>
+
+### Shields, Hull, and Point Defence
+
+**Shields are useful, but they do not make a ship invulnerable.**
+
+A ship may still suffer Hull damage in a fight, especially against multiple hostile targets.
+
+Watch the ship's condition rather than relying entirely on the number of weapons or Shield Generators installed.
+
+Point Defence becomes particularly relevant when a target can launch missiles.
+
+For an enemy installation protected by several fighters, your ship also needs enough offensive coverage to deal with threats that approach from different directions.
+
+### How Should You Test a New Combat Ship?
+
+Do not use the strongest enemy in the system as the first test of a completely new design.
+
+Instead:
+
+1. Finish construction and check the Reactor's fuel.
+2. Confirm that all intended weapons appear in the ship's combat interface.
+3. Verify the ship's movement and turning response.
+4. Test its weapons against a smaller hostile target.
+5. Check whether Shields and Hull behave as expected.
+6. Inspect the Damage Report after the encounter.
+7. Repair damage and make targeted adjustments before facing a stronger installation.
+
+Testing the ship against ordinary enemies helps reveal practical problems without immediately risking a vessel that consumed large quantities of advanced materials.
+
+</section>
+
+<section id="relic-destroyer-combat" className="scroll-mt-24">
+
+## Why Can a Heavily Armed Ship Still Lose to the Relic Destroyer?
+
+The Relic Destroyer is a much more demanding encounter than an isolated hostile ship.
+
+A heavily equipped vessel can still be overwhelmed by the number of enemies involved.
+
+In one attempt, a large ship equipped with numerous Plasma Cannons, Plasma Lances, defensive weapons, and Shields attacked the Destroyer but was eventually destroyed.
+
+The encounter included missiles, smaller hostile ships, and additional enemies attacking during the battle.
+
+### Watch the Supporting Enemies
+
+The main target is not the only source of incoming damage.
+
+If several smaller enemies are attacking while you focus on the Destroyer, your Hull can fall rapidly even while your weapons are damaging the main target.
+
+Watch for threats approaching from other directions.
+
+If the incoming damage becomes too high, do not assume that simply adding another Plasma Cannon will solve the entire problem.
+
+Check whether the ship also needs better protection, more defensive coverage, or a different approach.
+
+### What Should You Upgrade After a Failed Attempt?
+
+Use the failure to identify which part of the build was insufficient.
+
+**If the Hull falls too quickly:** Improve protection and review how much damage is reaching the ship.
+
+**If weapons struggle to damage the main target:** Review the offensive configuration and available firing coverage.
+
+**If the ship cannot move effectively:** Compare total mass with Thruster performance.
+
+**If smaller enemies overwhelm the ship:** Consider Point Defence and fighter support instead of focusing entirely on the largest weapons.
+
+Do not replace every module without checking what actually happened.
+
+### Should You Save Before Fighting?
+
+A large ship represents a significant investment in construction materials and equipment.
+
+Saving before a high-risk encounter is sensible when you want to test a new design.
+
+One unsuccessful Destroyer attempt resulted in the player returning to an earlier save rather than continuing after losing the ship.
+
+That makes a difficult battle less costly while you determine whether the design is ready.
+
+For the Relic Destroyer's mission and progression requirements, follow the [research progression guide](/main-sequence/research-progression#relic-destroyer).
+
+</section>
+
+<section id="ship-power-and-repairs" className="scroll-mt-24">
+
+## How Do You Power and Repair Your Ship?
+
+Ship modules require power, and the Reactor must have an appropriate fuel supply.
+
+A powerful design is not ready to depart until its fuel and equipment have been checked.
+
+### Reactor Fuel vs Warp Fuel
+
+Your ship's Reactor and Warp Drive perform different jobs.
+
+The Reactor powers the ship's equipment.
+
+The Warp Drive uses Warp Fuel for travel.
+
+Do not confuse a full Reactor with a fueled Warp Drive.
+
+Before a long journey, inspect both modules separately and confirm that the required fuel is available.
+
+In one ship upgrade, switching the Reactor from Hydrogen Fuel to Deuterium Fuel significantly increased its available energy.
+
+That provided more energy for the journey, but it was not a direct increase to the ship's Thruster output.
+
+### How Do You Repair Hull Damage?
+
+After a fight, inspect your ship's condition.
+
+Open the ship interface and locate the **Damage Report**.
+
+Check the damage and the available Repair Packs.
+
+In a combat encounter, the player opened the interface with Tab, viewed the Damage Report, and used Repair Packs to restore the ship.
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-ship-damage-report-repair.webp"
+    alt="Damage Report showing 84 percent Hull integrity, 16 Minor Damage, and the Repair button"
+    width={663}
+    height={522}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Damage Report shows 405/485 Hull and
+    16 Minor Damage. Inspect the required repairs
+    before using Repair Packs.
+  </figcaption>
+</figure>
+
+Before another difficult fight:
+
+1. Inspect the Hull condition.
+2. Check whether Repair Packs are available.
+3. Repair existing damage.
+4. Confirm that your important ship modules remain operational.
+5. Restock the supplies needed for the next encounter.
+
+Do not leave the Shipyard with an already damaged combat ship if a full repair is available.
+
+### What Should You Carry Into Dangerous Sectors?
+
+Reserve room for the materials you actually need.
+
+Useful supplies can include:
+
+- Reactor fuel
+- Warp Fuel
+- Repair Packs
+- Materials for a small outpost
+- Empty cargo space for recovered resources
+
+Do not fill every inventory slot with construction supplies before a combat mission.
+
+You may need room for Relic materials or other items collected afterward.
+
+</section>
+
+<section id="warp-drive-installation" className="scroll-mt-24">
+
+## How Do You Install the Slipstream and Interstellar Warp Drives?
+
+The **Warp Drive** used for Slipstream travel and the **Interstellar Warp Drive** are different modules.
+
+Both require the appropriate research to be unlocked before they can be built.
+
+Once the necessary technology is available, installation takes place in the Ship Designer.
+
+### Install the Warp Drive for Slipstream Travel
+
+To upgrade an existing ship:
+
+1. Dock it at the Shipyard.
+2. Open the Ship Designer.
+3. Find the Warp Drive module.
+4. Choose a suitable attachment location.
+5. Check the materials required for construction.
+6. Apply the changes.
+7. Access the installed drive and supply Warp Fuel.
+
+One early ship upgrade reserved an empty position for the Warp Drive before the technology was finished.
+
+This avoided rebuilding the entire ship when the module became available.
+
+If your ship is already near its mass limit, make room for the drive before attempting the upgrade.
+
+### Why Won't the Slipstream Drive Accept Hydrogen Fuel?
+
+The Warp Drive requires **Warp Fuel**.
+
+Hydrogen Fuel is used for ordinary power generation, not as a substitute for the drive's Warp Fuel requirement.
+
+If the drive is installed but cannot be used, check that Warp Fuel has been placed in the correct module.
+
+Also confirm that the ship is undocked and that you are attempting travel supported by the installed drive.
+
+### Can You Install Both Warp Drives?
+
+**A ship cannot carry both the smaller Warp Drive and the Interstellar Warp Drive at the same time.**
+
+The larger Interstellar Warp Drive replaces the smaller module's travel function.
+
+In a later ship design, adding the Interstellar Warp Drive prevented the smaller Warp Drive from being installed alongside it.
+
+If the designer rejects the second drive, inspect which Warp Drive is already present.
+
+Do not remove other essential modules in an attempt to bypass this restriction.
+
+### Prepare an Interstellar Ship
+
+The Interstellar Warp Drive is substantially larger than the early Warp Drive.
+
+Plan for its dimensions, mass, and interior access before surrounding it with weapons or Storage.
+
+In a large interstellar ship, the drive occupied a central section of the hull, while Reactors, weapon mounts, and Containers were arranged around it.
+
+<figure className="my-7 mx-auto max-w-xl">
+  <Image
+    src="/images/main-sequence/main-sequence-interstellar-ship-design.webp"
+    alt="Large ship blueprint showing the central Interstellar Warp Drive, surrounding ship modules, and required construction materials"
+    width={698}
+    height={678}
+    sizes="(max-width: 768px) 100vw, 576px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Interstellar Warp Drive occupies a large
+    central area of this ship. Plan its position
+    before adding more weapons and storage.
+  </figcaption>
+</figure>
+
+Before leaving the starting system, inspect the drive's Warp Fuel storage and prepare enough fuel for the intended journey.
+
+If Interstellar Warp Drive remains locked in the Ship Designer, [check its Science requirements and preceding technologies](/main-sequence/research-progression#interstellar-progression) before gathering more ship-building materials.
+
+</section>
+
+<section id="fighters-and-hangar" className="scroll-mt-24">
+
+## How Do You Use Fighters and a Ship Hangar?
+
+A **Ship Hangar** allows smaller craft to dock with a larger ship.
+
+This creates another option for supporting a larger exploration or combat vessel.
+
+Fighter management uses its own Autopilot behavior, rather than the cargo-loading orders used by transport ships.
+
+### Build a Ship With a Hangar
+
+The Ship Hangar is a large module.
+
+Before installing one, check its mass and the available space in your current Shipyard.
+
+You may need a larger ship to fit a Hangar while keeping enough room for Thrusters, weapons, power, and the other modules you want.
+
+Position the Hangar where its supported craft can be managed without requiring you to remove essential parts of the ship.
+
+### How Do You Make Fighters Operate Automatically?
+
+In the Ships interface, select a fighter and inspect its Autopilot options.
+
+Fighter orders can include combat behavior and a return destination associated with the Ship Hangar.
+
+<figure className="my-7 mx-auto max-w-md">
+  <Image
+    src="/images/main-sequence/main-sequence-fighter-autopilot-hangar.webp"
+    alt="Main Sequence fighter Autopilot interface showing Fighter and Ship Hangar orders"
+    width={422}
+    height={434}
+    sizes="(max-width: 768px) 100vw, 448px"
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fighter Autopilot includes separate Fighter and Ship Hangar
+    orders. Use the Hangar order when you need the fighter
+    to return to its carrier.
+  </figcaption>
+</figure>
+
+In one working setup, enabling the fighter's Autopilot allowed it to operate around the larger ship and participate in attacks against a hostile installation.
+
+Test the behavior before relying on the fighter during a difficult encounter.
+
+### How Do You Return Fighters to the Hangar?
+
+Before a long interstellar trip, check whether the fighters have returned.
+
+If they are still flying nearby:
+
+1. Select the fighter in the Ships interface.
+2. Check its current Autopilot order.
+3. Select the Ship Hangar return destination when needed.
+4. Allow the fighter to complete its return.
+5. Confirm that it is inside the Hangar.
+6. Check the other fighters before departure.
+
+In one exploration setup, the player had to wait for two fighters to return before traveling to another system.
+
+A fighter can appear to be moving away temporarily during the docking sequence.
+
+Confirm that it has actually arrived instead of assuming the maneuver has failed.
+
+### Are Fighters Worth Using Against the Relic Destroyer?
+
+Fighter support can contribute to combat, but the observed results do not establish that fighters alone can defeat the Relic Destroyer.
+
+An earlier attempt with fighter support still failed.
+
+Later tests showed that fighter Autopilot could assist in attacks against smaller hostile installations.
+
+Treat fighters as additional support, not a replacement for the larger ship's protection and firepower.
+
+</section>
+
+<section id="ship-design-troubleshooting" className="scroll-mt-24">
+
+## Why Can't You Build or Upgrade Your Ship?
+
+If the Ship Designer refuses a change, identify which requirement is preventing construction.
+
+The problem may involve the Shipyard limit, a missing material, an occupied module, or a restriction on combining equipment.
+
+<GuideTable
+  columns={shipProblemColumns}
+  rows={shipProblemRows}
+/>
+
+Read the exact warning before changing the layout. Missing construction materials, a module that must be emptied, and a design exceeding the Shipyard mass limit require different solutions.
+
+If the design can be applied successfully but the ship handles poorly, test propulsion and power under its intended load before replacing unrelated modules.
+
+</section>
+
+<section id="choose-ship-design" className="scroll-mt-24">
+
+## Which Ship Design Should You Build Next?
+
+Choose a design around the next job you need to complete.
+
+<GuideTable
+  columns={shipRoleColumns}
+  rows={shipRoleRows}
+/>
+
+The ship's intended job determines which compromise is acceptable. A cargo vessel can sacrifice some weapon capacity for Containers, while a combat ship must retain enough propulsion and protection to survive an encounter. An interstellar design also needs room for its larger Warp Drive.
+
+Before applying changes, compare the completed design with the Shipyard limit and available Reactor power. Two Small Relic Thrusters can save mass compared with one Medium Thruster, but they consume more power for the same combined thrust. A lighter ship is not automatically the more efficient choice.
+
+Once the ship has been built, test it in the conditions it was designed for. Load cargo before judging a transport vessel's performance, check the Damage Report after combat, and confirm that fighters can return to the Ship Hangar before leaving the system.
+
+</section>
