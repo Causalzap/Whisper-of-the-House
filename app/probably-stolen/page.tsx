@@ -8,48 +8,54 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import ProbablyStolenContent from "@/data/probably-stolen/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const hubUrl = `${siteUrl}/probably-stolen`;
-const pageUrl = hubUrl;
+const pageUrl = `${siteUrl}/probably-stolen`;
 
 const metadataTitle =
-  "Probably Stolen Beginner Guide: Starts, Rent & Shop Tips";
+  "Probably Stolen Walkthrough & Guides Hub";
 
 const metadataDescription =
-  "Probably Stolen beginner guide: compare 9 starting scenarios, survive rent, use Starting Perks, manage customers and Security, and buy the store.";
+  "Probably Stolen walkthrough and guides for all 9 starting scenarios, Day 1, rent, shop progression, Hydroponics, Aquaculture, and Store Buyout.";
+
+const articleTitle =
+  "Probably Stolen Walkthrough & Guides Hub: Start to Store Buyout";
 
 const articleDescription =
-  "Choose a starting scenario, prepare for the first customer, use the Display Case, and protect rent money. Compare Starting Perks, Hoarder cleanup tradeoffs, Security risks, overnight scavenging, and purchasing the store Deed in Probably Stolen.";
+  "Start and progress in Probably Stolen. Choose a scenario, survive rent, trade with customers, expand your shop, and find guides for farming, crafting, Security, achievements, and buying the Store Deed.";
+
+const publishedDate = "2026-10-26";
+const modifiedDate = "2026-11-22";
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description:
-      "Learn which Probably Stolen start to choose, how to attract customers, manage rent, inspect goods, and keep your shop running.",
+    description: metadataDescription,
     siteName: "Whisper of the House",
   },
+
   twitter: {
     card: "summary",
     title: metadataTitle,
-    description:
-      "Start your shop, choose a scenario, attract buyers, and avoid rent and trading mistakes in Probably Stolen.",
+    description: metadataDescription,
   },
 };
 
 const toc = [
   {
     id: "starting-scenarios",
-    label: "Which Starting Scenario?",
+    label: "Best Starting Scenarios",
   },
   {
     id: "first-day",
-    label: "What to Do on Day 1",
+    label: "Day 1 & Trading Walkthrough",
   },
   {
     id: "display-case",
@@ -57,7 +63,7 @@ const toc = [
   },
   {
     id: "rent",
-    label: "Rent & Hard Mode",
+    label: "Rent & Difficulty Settings",
   },
   {
     id: "perks",
@@ -65,7 +71,7 @@ const toc = [
   },
   {
     id: "appraisal",
-    label: "Counterfeit Goods",
+    label: "Appraisal & Counterfeit Goods",
   },
   {
     id: "security",
@@ -73,35 +79,72 @@ const toc = [
   },
   {
     id: "after-closing",
-    label: "After Closing the Shop",
+    label: "What to Do After Closing",
+  },
+  {
+    id: "next-business",
+    label: "Shop Progression & Upgrades",
   },
   {
     id: "shop-buyout",
-    label: "Buying the Shop",
+    label: "Store Deed, Buyout & Mortgage",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/probably-stolen/water-merchant-guide",
-    label: "Water Merchant: Starting Route & Shop Progression",
+    label: "Water Merchant: Starting Route & Progression",
   },
   {
     href: "/probably-stolen/water-purification",
-    label: "How to Make Pure Water",
+    label: "Water Purification: How to Make Pure Water",
+  },
+  {
+    href: "/probably-stolen/hydroponics",
+    label: "Hydroponics: Huge Nutrifruit & Gene Editing",
+  },
+  {
+    href: "/probably-stolen/aquaculture",
+    label: "Aquaculture: Fish Breeding, RAS & Caviar",
+  },
+  {
+    href: "/probably-stolen/chemist",
+    label: "Chemist: Dream Dust & Chemistry Recipes",
+  },
+  {
+    href: "/probably-stolen/gunsmith",
+    label: "Gunsmith: Custom Gun Orders & Modifications",
   },
   {
     href: "/probably-stolen/rat-breeding",
-    label: "Rat Breeding: Growth, Genetics & Farming",
+    label: "Rat Breeding: Food, Growth & Genetics",
   },
   {
     href: "/probably-stolen/money-making",
-    label: "Money-Making Planner & Profit Calculator",
+    label: "Money Making: Profit & Cash-Flow Planner",
+  },
+  {
+    href: "/probably-stolen/security-investigation",
+    label: "Security Investigations & Evidence",
+  },
+  {
+    href: "/probably-stolen/factions",
+    label: "Factions & Reputation Rewards",
+  },
+  {
+    href: "/probably-stolen/keycards",
+    label: "Keycards & Supply Crates",
+  },
+  {
+    href: "/probably-stolen/achievements",
+    label: "Achievements & 100% Checklist",
   },
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
+
   "@graph": [
     {
       "@type": "BreadcrumbList",
@@ -121,19 +164,54 @@ const jsonLd = {
         },
       ],
     },
+
+    {
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#guide-collection`,
+
+      url: pageUrl,
+      name: metadataTitle,
+      description: metadataDescription,
+      inLanguage: "en",
+
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+
+      mainEntity: {
+        "@id": `${pageUrl}#article`,
+      },
+
+      hasPart: relatedLinks.map((link) => ({
+        "@type": "WebPage",
+        name: link.label,
+        url: `${siteUrl}${link.href}`,
+      })),
+
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+    },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+
       mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": pageUrl,
+        "@id": `${pageUrl}#guide-collection`,
       },
-      headline:
-        "Probably Stolen Beginner Guide: What to Do First",
+
+      headline: articleTitle,
       description: articleDescription,
+
       inLanguage: "en",
-      datePublished: "2026-10-26",
-      dateModified: "2026-10-29",
+
+      datePublished: publishedDate,
+      dateModified: modifiedDate,
+
       about: [
         {
           "@type": "VideoGame",
@@ -141,23 +219,35 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Starting Scenarios and Starting Perks",
+          name: "Probably Stolen walkthrough",
         },
         {
           "@type": "Thing",
-          name: "Shop trading and customer negotiation",
+          name: "Starting scenarios and beginner progression",
         },
         {
           "@type": "Thing",
-          name: "Display Case and customer attraction",
+          name: "Day 1 shop trading and customer negotiation",
         },
         {
           "@type": "Thing",
-          name: "Rent and Hard Mode",
+          name: "Display Case and attracting buyers",
         },
         {
           "@type": "Thing",
-          name: "Counterfeit merchandise inspection",
+          name: "Rent and difficulty settings",
+        },
+        {
+          "@type": "Thing",
+          name: "Starting Perks",
+        },
+        {
+          "@type": "Thing",
+          name: "Shop progression and upgrades",
+        },
+        {
+          "@type": "Thing",
+          name: "Counterfeit goods and appraisal",
         },
         {
           "@type": "Thing",
@@ -165,21 +255,17 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Shop buyout",
+          name: "Store Deed, buyout and mortgage",
         },
       ],
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
+
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
@@ -196,18 +282,21 @@ export default function Page() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(jsonLd).replace(
+              /</g,
+              "\\u003c"
+            ),
           }}
         />
 
         <GuideArticlePage
-          title="Probably Stolen Beginner Guide: What to Do First"
-          description="Choose a starting scenario, prepare the shop for its first customers, protect your rent money, and know what to inspect before trading."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Probably Stolen"
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 29, 2026"
+          updatedAt="November 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -12,13 +12,16 @@ const hubUrl = `${siteUrl}/probably-stolen`;
 const pageUrl = `${hubUrl}/water-purification`;
 
 const metadataTitle =
-  "How to Make Pure Water in Probably Stolen";
+  "How to Make Pure Water in Probably Stolen (99.9% Guide)";
 
 const metadataDescription =
-  "Make 99.9% Pure Water in Probably Stolen with Water Purifier Quality modules. Fix worn filters, water mixing, low Max Purity, and mismatched labels.";
+  "Make 99.9% Pure Water in Probably Stolen. Fix the Water Purifier's 99.01% limit, upgrade Quality modules, and use a Moisture Farm or Hydroreed.";
+
+const articleTitle =
+  "How Do You Make Pure Water in Probably Stolen?";
 
 const articleDescription =
-  "Make Pure Water in Probably Stolen by checking AquaScan purity, using water treatments and Quality modules, and upgrading a Water Purifier to 99.9% Max Purity. Troubleshoot depleted filters, mix nearly clean water to cross 99%, and correct outdated container labels with Match Label.";
+  "Reach 99.9% Pure Water with Water Purifier Quality modules or a Moisture Farm, remove contaminants, fix purity limits and worn filters, and choose between a Water Purifier and Hydroreed for different water volumes.";
 
 const imageUrls = [
   `${siteUrl}/images/probably-stolen/water-scanner-contaminants.webp`,
@@ -27,34 +30,41 @@ const imageUrls = [
   `${siteUrl}/images/probably-stolen/water-purifier-module-stats.webp`,
   `${siteUrl}/images/probably-stolen/water-filter-durability.webp`,
   `${siteUrl}/images/probably-stolen/pure-water-scanner-result.webp`,
+  `${siteUrl}/images/probably-stolen/water-purifier-9901-purity.webp`,
+  `${siteUrl}/images/probably-stolen/water-purifier-quality-modules.webp`,
+  `${siteUrl}/images/probably-stolen/water-purifier-pure-water-result.webp`,
 ];
+
+const heroImage =
+  `${siteUrl}/images/probably-stolen/water-purifier-pure-water-result.webp`;
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
-    description:
-      "Produce Pure Water with Moisture Farm and Water Purifier upgrades, troubleshoot filters, and fix incorrect water labels.",
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[5],
-        alt: "Probably Stolen Water Scanner showing 99.97% Pure Water with an outdated High-Quality Water label",
+        url: heroImage,
+        alt: "Probably Stolen Water Purifier producing tested 99.90% Pure Water with 99.9% Max Purity",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
-    description:
-      "Use Water Purifier Quality modules to reach 99.9% purity, troubleshoot filters, and correct water labels.",
-    images: [imageUrls[5]],
+    description: metadataDescription,
+    images: [heroImage],
   },
 };
 
@@ -65,19 +75,19 @@ const toc = [
   },
   {
     id: "manual-filtering",
-    label: "Manual Filtering",
+    label: "Filters, UV Lamp & Tablets",
   },
   {
     id: "water-purifier",
-    label: "Water Purifier Setup",
+    label: "Water Purifier & Hydroreed",
   },
   {
     id: "quality-troubleshooting",
-    label: "Why Water Isn't Pure",
+    label: "Fix Water Purity Problems",
   },
   {
     id: "finished-water",
-    label: "Storing Pure Water",
+    label: "When Pure Water Isn't Needed",
   },
 ];
 
@@ -88,11 +98,11 @@ const relatedLinks = [
   },
   {
     href: "/probably-stolen/water-merchant-guide",
-    label: "Water Merchant: From Starting Stock to Late Game",
+    label: "Water Merchant: Start to Late Game",
   },
   {
     href: "/probably-stolen/money-making",
-    label: "Compare Water Production Costs & Profits",
+    label: "Compare Production Costs & Profits",
   },
 ];
 
@@ -130,13 +140,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "How to Make Pure Water in Probably Stolen",
+      headline: articleTitle,
       description: articleDescription,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-10-26",
-      dateModified: "2026-10-29",
+      dateModified: "2026-11-22",
       about: [
         {
           "@type": "VideoGame",
@@ -148,7 +157,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Water Scanner and water purity",
+          name: "Water Purifier Quality modules",
+        },
+        {
+          "@type": "Thing",
+          name: "Water Purifier Max Purity",
+        },
+        {
+          "@type": "Thing",
+          name: "99.01% High-Quality Water",
+        },
+        {
+          "@type": "Thing",
+          name: "99.9% Pure Water",
         },
         {
           "@type": "Thing",
@@ -156,19 +177,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Water Filters, Water Purification Tablets, and UV Lamp",
+          name: "Hydroreed water purification",
         },
         {
           "@type": "Thing",
-          name: "Water Purifier",
+          name: "Water Filters and UV Lamp",
         },
         {
           "@type": "Thing",
-          name: "Filter durability and contaminants",
+          name: "Water Purification Tablets",
         },
         {
           "@type": "Thing",
-          name: "Water labels and Match Label",
+          name: "Filter durability",
+        },
+        {
+          "@type": "Thing",
+          name: "Water mixing and contamination",
+        },
+        {
+          "@type": "Thing",
+          name: "AquaScan and Match Label",
         },
       ],
       isPartOf: {
@@ -204,13 +233,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How to Make Pure Water in Probably Stolen"
-          description="Turn High-Quality Water into Pure Water with the right filters and purifier settings, then check why a finished batch may still show the wrong grade or label."
+          title={articleTitle}
+          description={articleDescription}
           gameTitle="Probably Stolen"
           gameHref="/probably-stolen"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="October 29, 2026"
+          updatedAt="November 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
