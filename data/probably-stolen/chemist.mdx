@@ -9,22 +9,68 @@ export const chemistPurityColumns = [
 ];
 
 export const chemistPurityRows = [
-  { grade: "Pure Grade", purity: "99%+", value: "+135%" },
-  { grade: "Pharma Grade", purity: "90%–99%", value: "+85%" },
-  { grade: "Near Pharma", purity: "80%–90%", value: "+40%" },
-  { grade: "Street Standard", purity: "60%–80%", value: "No modifier" },
-  { grade: "Cut Product", purity: "45%–60%", value: "-45%" },
-  { grade: "Junk Grade", purity: "30%–45%", value: "-75%" },
+  { grade: "Lab Pure", purity: "99%+", value: "+135%" },
+  { grade: "Pharma Grade", purity: "90%–<99%", value: "+85%" },
+  { grade: "Near Pharma", purity: "80%–<90%", value: "+40%" },
+  { grade: "Street Standard", purity: "60%–<80%", value: "No modifier" },
+  { grade: "Cut Product", purity: "45%–<60%", value: "-45%" },
+  { grade: "Junk Grade", purity: "30%–<45%", value: "-75%" },
   { grade: "Starch Grade", purity: "Below 30%", value: "-95%" },
 ];
 
+export const chemistRecipeColumns = [
+  { key: "product", label: "Chem Finisher Product" },
+  { key: "ingredient", label: "Required Active Ingredient" },
+  { key: "amount", label: "Mixture Used per Item" },
+];
+
+export const chemistRecipeRows = [
+  { product: 'Vial of "Dream Dust"', ingredient: "Dream Cap Extract", amount: "2 mL" },
+  { product: 'Vial of "Nightmare Dust"', ingredient: "Nightmare Extract", amount: "4 mL" },
+  { product: "Caffeine Pill", ingredient: "Caffeine", amount: "5 mL" },
+  { product: "Phanta Pill", ingredient: "Phanta", amount: "0.5 mL" },
+  { product: "Zyanide Pill", ingredient: "Zyanide", amount: "0.6 mL" },
+  { product: "Birth Control Pill", ingredient: "Contraceptive Hormones", amount: "0.1 mL" },
+  { product: "Nomore Injector", ingredient: "Nomore", amount: "4 mL" },
+];
+
+export const chemistCleaningColumns = [
+  { key: "problem", label: "What the Scanner Shows" },
+  { key: "action", label: "What to Use" },
+  { key: "check", label: "What to Check Next" },
+];
+
+export const chemistCleaningRows = [
+  { problem: "Plant Matter / Debris", action: "Kotton Fabric", check: "Filter before the finer Water Filter" },
+  { problem: "Physical Contaminants", action: "Water Filter", check: "Repeat the filtration if physical residue remains" },
+  { problem: "Microbes", action: "UV Lamp", check: "Rescan; filtering alone does not remove microbes" },
+  { problem: "Chemical Contaminants", action: "Water Purification Tablet + water", check: "Let the tablet react; remove water afterward" },
+  { problem: "Heavy Metals in Reagents", action: "Gutter Tilapia in an Aquaculture System", check: "Keep enough water and inspect after each night" },
+{ problem: "Remaining Water / Alcohol / Lipobond Agent", action: "Evaporator", check: "Check that combined evaporative residue is no more than 100 µL before finishing" },
+  { problem: "Protein", action: "Carefully measured Acid or Base", check: "Filter the resulting debris; avoid excess reagent" },
+  { problem: "Fat", action: "Lipobond Agent", check: "Monitor the remaining fat with the scanner" },
+];
+
+export const chemistModuleColumns = [
+  { key: "modules", label: "Chem Finisher Modules" },
+  { key: "loss", label: "Contamination Added" },
+];
+
+export const chemistModuleRows = [
+  { modules: "0", loss: "12%" },
+  { modules: "1", loss: "6%" },
+  { modules: "2", loss: "3%" },
+  { modules: "3", loss: "1%" },
+  { modules: "4 or more", loss: "0%" },
+];
+
 <GuideQuickAnswer title="Quick Answer">
-Blend **Dream Caps** into mush, add **Alcohol** and heat the mixture to **40–60°C**, then filter it and dry it in a powered **Evaporator**. Put the dry extract into the **Chem Finisher**, select **Vial of Dream Dust**, and press **Output**.
+For the first Cartel order, make **10 Dream Dust** and check that the **average purity of the delivered vials** reaches the handler's 40% target. Blend Dream Caps, extract with Alcohol while controlling the temperature, filter the mixture, evaporate water and Alcohol, and finish the dry batch. For higher grades, inspect contaminants in every reagent and upgrade the Chem Finisher.
 </GuideQuickAnswer>
 
-A batch that looks finished can still be useless to the Cartel. The Chem Finisher may refuse a wet ingredient, the Heating Plate can destroy the extract, and a full row of Dream Dust vials will not satisfy the handler if their purity is below the required minimum.
+A batch that looks finished can still be useless to the Cartel. The Chem Finisher may refuse a wet ingredient, the Heating Plate can destroy the extract, and a full row of Dream Dust vials can still fail the handler's average-purity check.
 
-The opening Chemist assignment is **10 Dream Dust at 40% purity or higher** by the first weekly collection. Meeting that number is your immediate production target. Afterward, the handler increases the next order to **15 Dream Dust at 45% purity**, so the first successful batch is only the beginning of the business.
+The next weekly order increases to **15 Dream Dust at 45% average purity**, so production capacity soon becomes as important as completing the first batch. Preserve enough Dream Caps, Alcohol, Energy, and Evaporator time for the next deadline.
 
 <section id="chemist-start">
 
@@ -69,6 +115,22 @@ Keep working containers and finished products separate so that an unprocessed mi
 
 </section>
 
+<section id="chemistry-recipes">
+
+## What Are the Chem Finisher Recipes in Probably Stolen?
+
+The **Chem Finisher** offers seven finished products. Its requirement is the **total volume of dry mixture consumed per item**, not necessarily that entire volume of pure active ingredient. A product's grade depends on the share of the matching active chemical in that mixture, after the Finisher adds any contamination.
+
+<GuideTable columns={chemistRecipeColumns} rows={chemistRecipeRows} />
+
+![The Chem Finisher recipe list showing the required volumes and restrictions for Dream Dust, Nightmare Dust, and other chemical products.](/images/probably-stolen/chemist-finisher-recipe-requirements.webp)
+
+Dream Dust, Nightmare Dust, Caffeine Pills, and Phanta Pills have different ways to obtain their active ingredient, explained below. The other Finisher entries still need the matching reagent: selecting **Zyanide Pill**, **Birth Control Pill**, or **Nomore Injector** does not create that chemical from unrelated ingredients. Nomore is also tied to a character storyline; do not treat the Finisher list as a universal synthesis manual.
+
+If the Finisher reports **Wet Ingredient Detected**, dry the batch. If it reports **Not Enough Reagent**, check the remaining total mixture volume against the selected recipe's per-item requirement. Check the active ingredient separately when evaluating the finished product's purity. A bottle's maximum capacity is not the amount of mixture currently inside it.
+
+</section>
+
 <section id="dream-dust-recipe">
 
 ## How Do You Make Dream Dust Step by Step?
@@ -95,7 +157,7 @@ The exact yield depends on how much material is processed and the Blender's extr
 
 Do not use every remaining Dream Cap on a small experimental batch when your next Cartel collection still needs more finished vials.
 
-### Step 2: Add Alcohol and extract at 40–60°C
+### Step 2: Add Alcohol and control the extraction temperature
 
 Transfer the container of Dream Cap Mush to the **Heating Plate**.
 
@@ -105,21 +167,11 @@ For example, if the container holds 100 mL of mush, that corresponds to 300–60
 
 Use the actual liquid contents of the solvent rather than assuming that a bottle's total capacity is entirely Alcohol.
 
-Heat the mixture until it reaches the extraction range:
-
-**40°C to 60°C**
-
-The purpose is to transform Dream Cap Mush into Dream Cap Extract. Going substantially above the intended range can destroy the valuable ingredient.
+The Chemistry 101 manual gives a **40–60°C** extraction range, but staying around **40–49°C** helps preserve usable material. Unconverted Dream Cap Mush begins degrading **above 50°C**, while Dream Cap Extract begins degrading **above 60°C**. Watch the actual temperature and the Composition Spectrometer, then stop heating once the desired extract has formed.
 
 ![The Heating Plate shows an actual temperature of 52°C with heating switched off, while its target temperature remains set to 99°C.](/images/probably-stolen/chemist-dream-cap-heating-temperature.webp)
 
-The starting Heating Plate can display a target temperature as high as **99°C**. That is the machine's available target, not the temperature you should use for Dream Dust.
-
-Watch the actual temperature and use the heating controls to avoid passing 60°C. In one production attempt, the mixture became too hot and the player had to stop heating immediately.
-
-A later attempt was held around **53–55°C**, comfortably inside the intended range.
-
-The important distinction is between a machine being capable of reaching a temperature and the chemical reaction requiring that temperature.
+In the screenshot, the **target** is 99°C but the **actual temperature** is 52°C with the heater switched off. Do not confuse the target setting with the current reaction temperature; adjust or turn off the heater before the mixture overheats.
 
 ### Step 3: Filter the extract and evaporate the liquid
 
@@ -156,8 +208,6 @@ The Chem Finisher requires **2.00 mL of processed material per Dream Dust vial**
 
 For example, a 56.50% Dream Dust vial contains **1.13 mL of Dream Cap Extract** within its 2.00 mL total volume. The remaining material includes physical contaminants, minerals, and protein. Improving the share of Dream Cap Extract increases actual purity.
 
-![The Chem Finisher recipe list showing the required volumes and restrictions for Dream Dust, Nightmare Dust, and other chemical products.](/images/probably-stolen/chemist-finisher-recipe-requirements.webp)
-
 Once the recipe is ready, press **Output** to produce the vials. Repeat while sufficient processed material remains.
 
 The Chem Finisher can also package other chemical products, so confirm the selected recipe before pressing Output. Choosing Caffeine Pill while trying to package Dream Dust will not produce the item required by the Cartel.
@@ -182,14 +232,14 @@ The fastest way to waste Dream Caps is to confuse the quantity of finished produ
 
 A larger batch can produce more vials without improving their grade. A correctly selected Chem Finisher recipe can still produce weak merchandise when the earlier extraction or filtering stages introduced too many impurities.
 
-The Chemistry 101 manual uses the following chemical grades:
+The following purity grades apply to finished chemical products:
 
 <GuideTable
   columns={chemistPurityColumns}
   rows={chemistPurityRows}
 />
 
-A **46.95%** batch falls into **Cut Product**, which receives a substantial reduction in base value.
+A **46.95%** batch falls into **Cut Product**, so its base value receives the listed reduction. Purity and sale price are related but different: the buyer, market, and trading terms can further change what you receive.
 
 The same starting equipment later produced **56.5% Dream Dust**, still within Cut Product but with a stronger actual purity result.
 
@@ -197,11 +247,11 @@ The same starting equipment later produced **56.5% Dream Dust**, still within Cu
 
 This improvement matters for deliveries with higher minimum purity requirements. It does not automatically guarantee that the product has reached Street Standard or Pharma Grade.
 
-### Which production stages affect purity?
+### Which Production Stages Affect Purity?
 
 **Blender extraction loss:** The starting machine loses part of the material being processed. Improving its extraction performance can help recover more useful product.
 
-**Heating:** Dream Cap Extract forms in the 40–60°C window. Excess heat can degrade the extract rather than improve it.
+**Heating:** Excessive heat reduces usable extract yield. Follow the temperature and Composition Spectrometer checks in the Dream Dust extraction steps above.
 
 **Filtering:** Removing large contaminants before evaporation reduces unwanted material entering the final processing stage.
 
@@ -209,7 +259,7 @@ This improvement matters for deliveries with higher minimum purity requirements.
 
 The Composition Spectrometer is useful at more than one point. Examine the heated mixture before committing it to overnight evaporation, then inspect the finished vials before deciding whether to deliver or sell them.
 
-### Why does relabeling Dream Dust not improve it?
+### Why Does Relabeling Dream Dust Not Improve It?
 
 A Labeler changes the displayed product label. It does not raise the product's actual purity.
 
@@ -221,64 +271,105 @@ This also matters for the **Say My Name** achievement. The achievement requires 
 
 </section>
 
+<section id="lab-pure-chemistry">
+
+## How Do You Get Lab Pure Chemicals and Remove Contaminants?
+
+**Lab Pure starts at 99% purity.** An almost perfect extraction can still miss it if the Acid, Base, Lipobond, or Alcohol in the batch carries impurities. Inspect the ingredients **before** adding them, not just the finished pill or vial.
+
+![A Composition Spectrometer reading of Lipobond Agent showing Heavy Metals, Microbes, Chemical Contaminants, and Physical Contaminants before purification.](/images/probably-stolen/chemist-lipobond-reagent-contaminants.webp)
+
+<GuideTable columns={chemistCleaningColumns} rows={chemistCleaningRows} />
+
+Do not send an extract through a **Water Purifier** just because its quality is low. That machine processes water and can destroy the chemical you are trying to preserve. Reagent cleaning and water production use different tools.
+
+### How Do You Remove Heavy Metals with Gutter Tilapia?
+
+Heavy Metals cannot be removed with a normal Water Filter or UV Lamp. A Gutter Tilapia can clean them out of **liquid reagents** inside an Aquaculture System:
+
+![An adult Gutter Tilapia in an Aquaculture System, showing its contaminant-cleaning ability and 750 mL tank-water requirement.](/images/probably-stolen/chemist-gutter-tilapia-reagent-cleaning.webp)
+
+1. Check the reagent using the Composition Spectrometer. If it contains Physical Contaminants or Microbes, clean those with a Water Filter or UV Lamp first.
+2. Place a Gutter Tilapia in an Aquaculture System, then add the reagent mixture **with some water**. Fish require water to activate the cleaning effect, and the total liquid must meet the fish's current size requirement.
+3. Provide food and allow the tank to run overnight. The fish reduces Heavy Metals and some other contaminants each night.
+4. Check the tank and fish after each day. As the fish grows, its required liquid volume increases, so a tank that worked yesterday may show **Low Water** tomorrow.
+5. When contamination is sufficiently low, remove the reagent and evaporate the added water. Scan it again before using it in a recipe.
+
+An adult Gutter Tilapia can need around **750 mL** of tank liquid, increasing to around **1,000 mL** at the next growth stage. Those are size-specific observations, not a fixed amount for every fish. Cleaning is gradual, and the residual contamination depends on the actual water and reagent mixture.
+
+![An Aquaculture System after reagent cleaning, showing 193 µL Heavy Metal and 1.59 mL Chemical Contaminant remaining in the tank mixture.](/images/probably-stolen/chemist-gutter-tilapia-after-cleaning.webp)
+
+### Which Chemical Equipment Modules Improve Purity?
+
+The **Chem Finisher** adds contamination while packaging a dry product. Its Chemical Equipment Modules reduce that extra loss:
+
+<GuideTable columns={chemistModuleColumns} rows={chemistModuleRows} />
+
+![An unupgraded Chem Finisher showing 12% Contaminant Introduced, before Chemical Equipment Modules reduce the packaging contamination.](/images/probably-stolen/chemist-finisher-base-contamination.webp)
+
+With no modules, even a perfectly pure input is capped around **88%** after packaging. Four modules eliminate the Finisher's additional contamination, giving the best margin for reaching Lab Pure. The final grade still depends on the input composition: upgrading the Finisher does **not** remove Heavy Metals or excess Acid already inside the bottle.
+
+Upgrade the machine that matches the bottleneck. Blender modules reduce input loss; Heating Plate modules improve control; Evaporator modules address time and solvent recovery. Use the scanner to distinguish a bad extraction from a clean mixture spoiled during finishing.
+
+</section>
+
 <section id="chemist-errors">
 
 ## Why Does the Chem Finisher Say Wet Ingredient Detected?
 
-**Wet Ingredient Detected** means the current input has not satisfied the Chem Finisher's requirement for a dry chemical ingredient.
+**Wet Ingredient Detected** means the input still contains too much volatile material. The Chem Finisher checks the **combined remaining Water, Alcohol, and Lipobond Agent**; in the documented game data, a combined total of **100 µL or less** passes its dryness check. Use the Composition Spectrometer to inspect the actual mixture, rather than assuming that only Water causes the warning.
 
 This frequently happens when a container has spent one night in the Evaporator and the player assumes that processing is complete.
 
 A Caffeine Pill attempt produced exactly this error after the first evaporation cycle.
 
-![The Chem Finisher refusing a Caffeine Pill batch with the Wet Ingredient Detected warning.](/images/probably-stolen/chemist-wet-ingredient-detected.webp)
-
 Changing the recipe or moving the mixture between containers did not immediately solve the problem.
 
-The remaining water and alcohol needed more time to evaporate.
+Before trying the Chem Finisher again, inspect the combined Water, Alcohol, and Lipobond Agent residue. If it exceeds the dryness limit, continue evaporation and rescan the mixture.
 
-### How to fix Wet Ingredient Detected
+### How Do You Fix Wet Ingredient Detected?
 
 Return the mixture to the Evaporator and inspect the following:
 
 - **Power:** The Energy Cell must supply enough energy for overnight operation.
 - **Container:** The mixture must be placed inside the machine's processing slot.
-- **Remaining liquid:** Water or Alcohol may still be present even after a successful overnight cycle.
+- **Remaining volatile material:** Check Water, Alcohol, and Lipobond Agent. A mixture can fail the dryness check even when it looks mostly processed.
 - **Batch size:** A larger volume can take longer to dry with the starting Evaporator.
 
 Run another night when necessary, then check the composition again before returning to the Chem Finisher.
 
 One reaction can be chemically successful but still too wet to package. That is why repeating the Blender and Heating Plate stages immediately is usually the wrong response to this particular warning.
 
-### What does Not Enough Reagent mean?
+### What Does Not Enough Reagent Mean?
 
-**Not Enough Reagent** is a different warning.
+**Not Enough Reagent** usually means the Chem Finisher does not have enough remaining mixture to package another item using the selected recipe.
 
-The selected product requires a minimum amount of its active chemical ingredient. The machine cannot complete that recipe when insufficient usable material remains.
+Check the required volume:
 
-Check which recipe is selected and the available amount of the corresponding chemical.
+- Dream Dust needs **2 mL** per vial.
+- Nightmare Dust needs **4 mL** per vial.
+- Caffeine Pills need **5 mL** per pill.
+- Phanta Pills need **0.5 mL** per pill.
 
-For Dream Dust, the relevant ingredient is Dream Cap Extract. For Caffeine Pills, it is Caffeine.
+Use the Composition Spectrometer to check the amount of mixture remaining in the container. Do not confuse the container's maximum capacity with the actual volume inside it.
 
-Do not assume that a large container volume guarantees enough active reagent. Most of that volume may be solvent, water, or other unwanted material.
+The Chem Finisher can package a mixture that contains unwanted material, but this does not mean the resulting product will have good purity.
 
-A batch can also have more than one problem. During a failed Caffeine Pill attempt, both **Wet Ingredient Detected** and **Not Enough Reagent** appeared while the player was troubleshooting.
+If the machine also shows **Wet Ingredient Detected**, remove the remaining volatile liquid before trying again. These warnings refer to different problems.
 
-Resolve the wetness first, then confirm that the remaining active ingredient actually meets the selected recipe's requirement.
-
-### Why did heating produce weak or unusable extract?
+### Why Did Heating Produce Weak or Unusable Extract?
 
 The Heating Plate is another common source of failed batches.
 
-Dream Cap extraction requires a controlled 40–60°C reaction. Raising the temperature above the permitted range can destroy valuable material before it ever reaches the Evaporator.
+If the expected extract is missing after heating, check whether the mixture became too hot before the reaction completed. Additional evaporation cannot recover extract that was already destroyed.
 
 A failed attempt was followed by the discovery that the player had heated the mixture too aggressively and skipped the recommended filtration.
 
 The resulting low-quality product was discarded rather than reserved for the Cartel.
 
-Check the temperature before turning the heater on and monitor the composition afterward. Additional evaporation cannot recover extract that was already destroyed during heating.
+Check the temperature before turning the heater on and monitor the composition afterward. Stop heating when the expected extract has formed, then inspect the remaining composition before moving the mixture to the filters.
 
-### Why does a batch finish but still have poor purity?
+### Why Does a Finished Batch Still Have Poor Purity?
 
 That is not necessarily a machine malfunction.
 
@@ -296,32 +387,46 @@ A Composition Spectrometer reading taken before evaporation can help distinguish
 
 </section>
 
+<section id="nightmare-dust">
+
+## How Do You Make Nightmare Dust Without Destroying the Extract?
+
+**Nightmare Dust uses Nightmare Cap Mush and produces Nightmare Extract, not Dream Cap Extract.** It follows the familiar Blender → Heating Plate → filters → Evaporator → Chem Finisher sequence, but the temperature margin is unforgiving.
+
+1. Blend **Nightmare Caps** and transfer the mush into a container with enough Alcohol for extraction. Scan the actual Alcohol and mush volumes rather than guessing from bottle size.
+2. Heat the mixture while watching its composition. Extraction begins near **40°C**; keeping it around **40–49°C** avoids the degradation that begins at 50°C for Nightmare Extract. Stop when the mush is converted.
+3. Remove leftover Protein with a measured Acid or Base addition, checking the scanner between doses. Dilute the reagent first if a full drop would leave excess Acid or Base behind.
+4. Filter large debris with **Kotton Fabric**, then use a **Water Filter** for finer contamination.
+5. Evaporate the Alcohol and Water, then scan the dry **Nightmare Extract**.
+6. Configure the **Chem Finisher** for **Vial of "Nightmare Dust"**. Each vial consumes **4 mL of dry mixture**. Check the grade on an actual finished vial before packaging the rest.
+
+One high-purity run showed **99.63% Nightmare Extract** before finishing. That figure describes the extract **before** any extra Finisher contamination; the finished vial's grade still depends on modules and the other contents of the bottle.
+
+![A finished Vial of Nightmare Dust in the Chem Finisher, with four Chemical Equipment Modules installed. The Lab Pure text is an item label rather than a tested purity result.](/images/probably-stolen/chemist-nightmare-dust-finished.webp)
+
+### Is Nightmare Dust Better to Sell than Dream Dust?
+
+Nightmare Dust is a different, more restricted product. A strong per-item price does not automatically make it the best routine business: buyers, stocking the rarer caps, and the risk of overheating all affect real returns. **Never replace the Cartel's required Dream Dust with Nightmare Dust**; they are separate Finisher products.
+
+</section>
+
 <section id="caffeine-pills">
 
 ## How Do You Make Caffeine Pills With Chemist Equipment?
 
-Caffeine Pills use the same main machines, but their reaction temperature is different.
+Caffeine Pills start with **Coffee Beans**, but there are **two extraction routes**. Do not apply the hot-water temperature to the Alcohol route:
 
-Start with **Coffee Beans** rather than Dream Caps.
+1. Blend Coffee Beans into mush and scan the result. Remove excess Fat with carefully measured **Lipobond Agent** before heating.
+2. For the **Alcohol route**, add Alcohol and extract from about **50°C**, keeping below the point where Alcohol boils off (around 78°C). Watch the scanner until Coffee Bean Mush is gone.
+3. Alternatively, a **hot-water extraction** begins around **80°C**. This is a different method with different yield, not a reason to heat an Alcohol batch to 80°C.
+4. Remove remaining Protein with measured Acid or Base, then use Kotton Fabric and a Water Filter as needed.
+5. Evaporate Water and Alcohol, and select **Caffeine Pill** in the Chem Finisher. Each pill consumes **5 mL of dry mixture**.
 
-The process follows this sequence:
-
-1. Blend Coffee Beans into mush using the Blender and an attached liquid container.
-2. Move the mixture to the Heating Plate.
-3. Add a suitable solvent; the manual recommends a volume **3–6 times** the Coffee Bean Mush.
-4. Heat the mixture to **at least 80°C**.
-5. Filter when needed, then evaporate the remaining water and alcohol.
-6. Select **Caffeine Pill** in the Chem Finisher and package the dry Caffeine.
-
-The Chem Finisher lists a **5.00 mL required volume** for a Caffeine Pill. The material must also satisfy the recipe's restriction against wet ingredients before it can be packaged.
-
-Do not use the Dream Dust temperature limit for this reaction. Caffeine is more heat-resistant, and the manual gives it a higher extraction temperature.
-
-However, the requirement to remove water and alcohol before packaging still applies.
+The Alcohol route is generally more useful for preserving Caffeine yield. Whichever route you choose, inspect the actual ingredient and the batch's dryness before finishing.
 
 During one attempt, the player finished the heating and evaporation stages, selected Caffeine Pill, and immediately encountered the Wet Ingredient warning. The remaining solvent was the first issue to address.
 
-A further warning about insufficient reagent means the available Caffeine must also be checked before producing another pill.
+If the Chem Finisher also reports **Not Enough Reagent**, check whether at least **5 mL of usable dry mixture** remains for another Caffeine Pill. This warning does not, by itself, prove that the Caffeine concentration is too low.
 
 ### Should you produce Caffeine Pills before the first Cartel delivery?
 
@@ -335,6 +440,45 @@ Keeping the two recipes separate prevents a valuable production night from being
 
 </section>
 
+<section id="phanta-pills">
+
+## How Do You Make Phanta Pills and Avoid Failed Reactions?
+
+Phanta uses **N-Methylol Base** and **Reducing Agent** from **Chemical Supplies (Restricted)**. It is not a mushroom or coffee extraction, and the Heating Plate needs an upgrade that can reach its reaction temperature.
+
+1. Move N-Methylol Base into a container with enough space. Add **Acid** gradually to remove the **Stabilizing Agent** that blocks the reaction. Dilute the last drop if needed; extra Acid also lowers purity.
+2. Filter the resulting debris, then neutralize leftover Acid with a carefully measured amount of Base.
+3. Add **Reducing Agent** equal to approximately **75% of the remaining N-Methylol Base**. Use the Composition Spectrometer for the final adjustment rather than relying on rounded bottle volumes.
+4. Set the Heating Plate to around **125°C** as a practical target. The Phanta reaction can occur from **110°C up to, but not including, 130°C**. Watch the actual temperature and the remaining N-Methylol Base with the Composition Spectrometer. Stop heating when the reaction finishes; Phanta begins degrading at 130°C.
+5. Add some Water and use a **Water Purification Tablet** to reduce Chemical Contaminants. Allow its reaction to finish, then evaporate the Water and Alcohol.
+6. Configure the **Chem Finisher** for **Phanta Pill**. Each pill consumes **0.5 mL of dry mixture**. Scan the first finished pill before producing the rest.
+
+Check the reagent ratio before heating. In this example, the scanner shows approximately **120.67 mL N-Methylol Base** and **86.96 mL Reducing Agent**—about **72%**, slightly below the intended 75% starting ratio.
+
+![A Phanta preparation mixture showing N-Methylol Base and Reducing Agent quantities before heating; the displayed ratio is slightly below 75%.](/images/probably-stolen/chemist-phanta-reducing-agent.webp)
+
+The Heating Plate screenshot shows a **125°C target**, while the **actual temperature is still 32°C**. It documents the setup, not an already completed reaction.
+
+![An upgraded Heating Plate set to a 125°C target for Phanta preparation, with the actual temperature still at 32°C.](/images/probably-stolen/chemist-phanta-heating.webp)
+
+The reaction also works below 120°C, but progresses more slowly; a target near 125°C gives faster synthesis without reaching the 130°C degradation threshold.
+
+In one production run, the prepared Phanta extract reached **90.5% purity** before packaging. The Chem Finisher then produced **24 Phanta Pills**. A tested finished pill showed **89.60% purity (Near Pharma)**, with Heavy Metals and residual reagents still present. This is a successful production result, but not a Lab Pure batch.
+
+Always scan the finished pill rather than assuming its purity matches the extract placed into the Chem Finisher.
+
+![A finished Phanta Pill tested at 89.60% Near Pharma purity, with Heavy Metals, residual reagents, and Toxic toxicity shown in the Composition Spectrometer.](/images/probably-stolen/chemist-phanta-finished-pills.webp)
+
+### Why Can High-Purity Phanta Cause Customer Complaints?
+
+A higher purity grade does not automatically make Phanta safer to sell. In one tested batch, an **89.60% Near Pharma Phanta Pill** was explicitly marked **Toxicity: Toxic**.
+
+High-potency Phanta can cause serious customer reactions, complaints, and compensation demands. Check the actual toxicity shown on the finished item before selling it, especially when preparing multiple pills from the same concentrated batch.
+
+Do not assume that reaching Pharma or Lab Pure makes Phanta a better routine retail product.
+
+</section>
+
 <section id="cartel-first-delivery">
 
 ## How Do You Complete the First Cartel Dream Dust Delivery?
@@ -344,7 +488,7 @@ On **Day 1**, the **Cartel Handler** visits the Chemist shop and assigns the fir
 His requirements are:
 
 - **10 Dream Dust**
-- **At least 40% purity**
+- **At least 40% average purity across the delivered vials**
 - **Collection the following week**
 
 The handler supplies starting materials and warns that the quota must be completed.
@@ -353,7 +497,7 @@ The collection is not a normal customer purchase. The products must be handed ov
 
 ### What should you reserve for the first collection?
 
-Keep **10 finished, qualifying vials** available before selling surplus narcotics to ordinary customers.
+Keep **at least 10 finished Dream Dust vials** available before selling surplus to ordinary customers. The handler checks the **average purity of the handover**, not whether each vial individually crosses the target. Do not use this as an excuse to deliver an extremely diluted batch: the purity still affects the outcome and Cartel reputation.
 
 This matters because Dream Dust can attract buyers before the handler returns. Selling a few vials may bring immediate Credits, but that does not help if the same vials were needed to fulfill the quota.
 
@@ -361,19 +505,19 @@ One early batch yielded nine finished vials. Although those products were usable
 
 The correct next task was to finish another qualifying batch, not to sell the existing stock and hope that the handler would accept a smaller delivery.
 
-Check purity separately from quantity. Ten low-grade vials will not meet a 40% minimum simply because their labels all say Dream Dust.
+Check **count and average purity separately**. Put only the vials intended for the delivery on the counter, because the handler takes every Dream Dust vial there. A mislabeled item has not become more pure.
 
 ### What Happens When You Deliver All 10?
 
-Handing over **10 qualifying Dream Dust vials** completed the first collection and improved Cartel reputation. The handler then raised the following week's requirement to **15 Dream Dust at 45% purity or higher**.
+In one Chemist run, handing over 10 Dream Dust completed the first collection and improved Cartel reputation. The next quota became **15 Dream Dust at 45% average purity**. Later weekly demands keep increasing in quantity, while the target purity eventually stops rising at **70%**.
 
-The earlier **46.95% purity** product could still meet the new quality threshold, but the previous production quantity was no longer sufficient. Preparing five additional vials would be necessary even if the original ten were all eligible for the next quota.
+A vial at **46.95% purity** can contribute to that next average, but the shop still needs 15 total vials. Individual purity above the target does not replace missing items.
 
 ### Why Did the Second Delivery Fail With 13 Dream Dust?
 
-At the next collection, the handler received only **13 of the required 15 vials**. He took the available Dream Dust, rejected the incomplete delivery, and the shop lost Cartel reputation.
+At the next collection in that run, the handler received only **13 of the required 15 vials**. He took the offered Dust and the shop lost Cartel reputation for the shortfall.
 
-The lost materials and production time could not be recovered through that collection. Reserve all 15 qualifying vials before selling any remaining Dream Dust to ordinary customers, especially when your next batch still needs overnight evaporation.
+That failure was a **quantity problem**, not proof that every vial needed to meet 45% on its own. Hold enough stock for the next count, then calculate the batch's average purity before committing the handover.
 
 [Cartel reputation penalties](/probably-stolen/factions) become increasingly dangerous after repeated failed deliveries.
 
@@ -385,7 +529,7 @@ The lost materials and production time could not be recovered through that colle
 
 The first bottleneck is usually **usable ingredients and complete drying**, not the number of machines in the shop.
 
-A starting workshop can already produce qualifying Dream Dust. Spending heavily on production upgrades before learning the extraction and evaporation sequence can leave the business with expensive equipment but too little cash to purchase Dream Caps or Alcohol.
+A starting workshop can already produce Dream Dust that satisfies the initial average-purity target. Spending heavily on production upgrades before learning the extraction and evaporation sequence can leave the business with expensive equipment but too little cash to purchase Dream Caps or Alcohol.
 
 ### Priority 1: Dream Caps and liquid Alcohol
 
@@ -411,7 +555,7 @@ Once ingredient supplies and rent are stable, upgrades become more attractive.
 
 The **Blender** benefits from improvements to extraction yield. The **Heating Plate** can be upgraded for better temperature control and heating performance.
 
-The **Chem Finisher** benefits from modules that reduce impurities introduced during final processing.
+The **Chem Finisher** benefits from modules that reduce impurities introduced during final processing; use the module table above to see how each upgrade changes the loss.
 
 Most of these chemistry machines use special **Chemical Equipment Modules**, rather than the ordinary upgrades used by general-purpose equipment.
 
@@ -438,7 +582,7 @@ Neither upgrade should take priority over an imminent rent payment or a shortage
 
 During one Thin Margins run, an expanded chemical storage option was considered at **400 Credits**. That was a meaningful commitment for a shop that also needed supplies and had a weekly collection approaching.
 
-The practical goal is to increase the number of qualifying vials you can consistently finish, not simply the number of machines you own.
+The practical goal is to produce enough Dream Dust at a reliable average purity, not simply to own more machines.
 
 </section>
 
@@ -446,7 +590,7 @@ The practical goal is to increase the number of qualifying vials you can consist
 
 ## Should You Sell Dream Dust or Save It for the Cartel?
 
-The decision depends on the next collection date and how many qualifying vials are already reserved.
+The decision depends on the next collection date, how many Dream Dust vials are reserved, and their average purity.
 
 Dream Dust is a **Contraband** product. Some customers are willing to buy it, but ordinary traders may reject it, and buyers with chemical scanners can identify mislabeled purity.
 
@@ -456,15 +600,15 @@ That can make low-quality sales much less profitable than expected, particularly
 
 ### When is selling surplus reasonable?
 
-Once the full upcoming Cartel quota is covered, surplus vials can be considered for sale.
+Once the upcoming Cartel quantity and expected **average purity** are covered, surplus vials can be considered for sale.
 
 Check three things before accepting the offer:
 
 1. The buyer actually accepts the product's category and grade.
 2. The price is worthwhile after the purity modifier and any discount.
-3. The remaining qualifying inventory still meets the next Cartel collection.
+3. The remaining Dream Dust still meets the next Cartel **quantity and average-purity** requirement.
 
-Do not rely on a large stock of low-grade Dream Dust to replace a smaller number of vials that meet the handler's required purity.
+A mixed-purity batch can meet the average target, but delivering a low overall average can still cost reputation or end the run. Avoid unnecessary dilution when you cannot confirm the result.
 
 The shop also needs ordinary cash flow for rent, tools, batteries, and replacement supplies. A legal trading activity can help cover those costs without using the stock reserved for Cartel deliveries.
 
@@ -482,29 +626,39 @@ That is why a Chemist should treat inventory concealment, rent, and chemical sup
 
 </section>
 
+<section id="chemist-profit">
+
+## Which Chemistry Product Should You Make After Dream Dust?
+
+Once your next Cartel delivery is secure, choose another product based on the materials you can obtain, the equipment you have upgraded, and whether a suitable buyer will accept it.
+
+- **Dream Dust:** A reliable choice when Dream Caps are available and you can maintain enough qualifying vials for the Cartel.
+- **Nightmare Dust:** Requires Nightmare Caps and tighter temperature control. Its Poison and Contraband classifications limit where it can be sold.
+- **Caffeine Pills:** Useful when you have Coffee Beans and spare production capacity, without consuming Dream Caps reserved for the Cartel.
+- **Phanta Pills:** Require Restricted Chemical Supplies, an upgraded Heating Plate, and careful reagent preparation. Higher purity also creates a significant toxicity risk.
+
+A higher-priced finished product is not always the better business. Failed batches, restricted buyers, slower production, and ingredient shortages can erase an apparent price advantage.
+
+For a calculation using your current purchase prices, production costs, expected sales, and rent deadline, use the [Money-Making Planner](/probably-stolen/money-making).
+
+</section>
+
 <section id="chemist-next-week">
 
-## What Should You Do After Your First Successful Delivery?
+## How Do You Keep Up With Later Cartel Quotas?
 
-The first completed Cartel collection proves that your equipment can produce qualifying Dream Dust. It does not prove that the workshop can keep pace with larger weekly requirements.
+The Cartel keeps increasing its weekly delivery requirements. After the first two collections, the targets continue rising:
 
-After the handler raises the order to **15 vials at 45% purity**, inspect your production capacity before selling anything.
+- **Day 22:** 20 Dream Dust at 50% average purity.
+- **Day 29:** 25 Dream Dust at 55% average purity.
+- **Day 36:** 30 Dream Dust at 60% average purity.
+- **Day 43:** 35 Dream Dust at 65% average purity.
+- **Day 50:** 40 Dream Dust at 70% average purity.
 
-A workable preparation sequence is:
+The required purity stops increasing at 70%, but the number of vials continues to grow.
 
-1. Count the finished vials that already meet 45% purity.
-2. Calculate how many additional vials are needed to reach 15.
-3. Reserve enough Dream Caps and Alcohol for the missing production.
-4. Keep the Evaporator operating overnight whenever a batch still contains solvent.
-5. Check each finished batch's purity before moving it into the Cartel reserve.
-6. Use only the remaining surplus for ordinary sales.
+Plan backward from the next collection. If your Evaporator can finish only one container overnight, adding more ingredients to the Blender will not solve that bottleneck. Increase drying capacity when prepared extracts repeatedly wait for an available machine.
 
-The second weekly requirement is where poor preparation becomes expensive. A shop can survive the first deadline with a small amount of equipment and still fall behind as the handler demands more.
-
-Another production failure makes the situation worse: an overheated mixture may consume scarce Dream Caps without giving you useful extract, while an unfinished wet mixture occupies a valuable processing container.
-
-I would prioritize dependable batches over chasing the highest possible grade while the next collection remains incomplete. A repeatable 50%-plus result is more useful for a 45% quota than an ambitious premium batch that consumes the entire week's supplies and fails.
-
-Once the quota is secure, higher purity, additional machines, and more profitable sales become reasonable investments.
+Reserve enough qualifying Dream Dust for the next handover before using the remaining stock for customers. Once production is stable, spend your additional capacity on better grades, alternative chemicals, or more profitable sales.
 
 </section>
