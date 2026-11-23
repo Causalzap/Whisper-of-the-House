@@ -1286,7 +1286,11 @@ const paths = [
      'main-sequence/research-progression',
      'main-sequence/ship-design',
      'main-sequence/ship-logistics',
-
+     
+     'workers-and-resources-space-program',
+     'workers-and-resources-space-program/rocket-assembly',
+     'workers-and-resources-space-program/rocket-launch',
+     'workers-and-resources-space-program/baikonur-campaign',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1294,6 +1298,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'workers-and-resources-space-program': '2026-11-23',
+  'workers-and-resources-space-program/rocket-assembly': '2026-11-23',
+  'workers-and-resources-space-program/rocket-launch': '2026-11-23',
+  'workers-and-resources-space-program/baikonur-campaign': '2026-11-23',
+
   'main-sequence': '2026-11-21',
   'main-sequence/factory-automation': '2026-11-21',
   'main-sequence/research-progression': '2026-11-21',

@@ -130,7 +130,172 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+
+  {
+    title: "Workers & Resources: Soviet Republic — Space Program",
+    game: "Workers & Resources: Soviet Republic",
+    href: "/workers-and-resources-space-program",
+    slug: "workers-and-resources-space-program",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
   
+    label:
+      "Beginner, Research, Rocket Assembly, Launch & Baikonur Campaign",
+  
+    eyebrow:
+      "City Building, Space Industry, Rocket Manufacturing & Orbital Missions",
+  
+    hubStatus:
+      "Space Program DLC + Baikonur Campaign + R7 Rockets + Rocket Engine Testing + Mission Control + Sputnik + Vostok + Soyuz + Orbital Rendezvous",
+  
+    description:
+      "Start the Space Program DLC, choose rocket research, manufacture and test R7 components, launch satellites, complete Baikonur missions, and progress toward orbital operations.",
+  
+    coverage: [
+      "Baikonur versus sandbox starts, Space University, early research priorities, rocket industry planning, Kerosene, Liquid Oxygen and advanced space technology",
+  
+      "Rocket Parts Manufacturing Hall, R7 RD108 cores, RD107 boosters, fairings, Rocket Engine Testing, Assembly Hall staffing, Rocket Flatbed transport and railway delivery",
+  
+      "Launch Site preparation, fuel Distribution Office, Mission Control, orbit selection, Expected Failure Rate, failed launches and successful satellite deployment",
+  
+      "Baikonur Campaign missions from the first Test Rocket through Sputnik, Vostok safe reentry, the first Soyuz flight and the final two-spacecraft Orbital Rendezvous",
+    ],
+  
+    image:
+      "/images/workers-and-resources-space-program/space-program-assembled-rocket-on-train.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 90,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Workers & Resources Space Program Guide: Research & Progression",
+        href: "/workers-and-resources-space-program",
+        type: "Guide Hub",
+  
+        description:
+          "Start in Baikonur or your own republic, choose space research, build a rocket production chain, prepare your first launch, and progress toward orbital missions.",
+  
+        image:
+          "/images/workers-and-resources-space-program/space-program-assembled-rocket-on-train.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Baikonur, Space University, Research, R7 Rockets, Rocket Manufacturing, Kerosene, Liquid Oxygen, Sputnik, Soyuz and Space Stations",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Workers & Resources Space Program: Rocket Assembly & Transport",
+        href: "/workers-and-resources-space-program/rocket-assembly",
+        type: "Systems",
+  
+        description:
+          "Manufacture R7 cores, boosters and fairings, test rocket engines, fix missing components, and transport assembled rockets to the Launch Site.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/workers-and-resources-space-program/space-program-assembled-rocket-on-train.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 569,
+          spotlightMeta:
+            "RD108 Core, RD107 Boosters, R7 Fairing, Rocket Engine Testing, Expected Failure, Assembly Hall, Rocket Flatbed, Railway Transport and Missing Parts",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Workers & Resources Space Program: Rocket Launch & Failures",
+        href: "/workers-and-resources-space-program/rocket-launch",
+        type: "Systems",
+  
+        description:
+          "Fuel R7 rockets with Kerosene and Liquid Oxygen, configure Mission Control, choose a reachable orbit, check failure risk, and fix unsuccessful launches.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/workers-and-resources-space-program/space-program-rocket-expected-failure-rate.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 570,
+          spotlightMeta:
+            "Launch Site, Kerosene, Liquid Oxygen, Distribution Office, Mission Control, Circular Orbit, Expected Failure Rate, Guidance Failure and Sputnik",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Workers & Resources Space Program Baikonur Campaign Walkthrough",
+        href: "/workers-and-resources-space-program/baikonur-campaign",
+        type: "Walkthrough",
+  
+        description:
+          "Complete the Baikonur Campaign from the first R7 Test Rocket and Sputnik through Vostok reentry, Soyuz safe return, and the final Orbital Rendezvous.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/workers-and-resources-space-program/baikonur-test-rocket-success.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 571,
+          spotlightMeta:
+            "Preparation for Space, R7 Test Rocket, Sputnik, First Human in Space, Vostok Reentry, Soyuz, Two-Spacecraft Rendezvous and Campaign Completed",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
+    
 {
   title: "Main Sequence",
   game: "Main Sequence",
