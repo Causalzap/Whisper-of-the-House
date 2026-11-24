@@ -1,0 +1,755 @@
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const furnaceInputColumns = [
+  { key: "input", label: "Metal Input" },
+  { key: "output", label: "Output" },
+  { key: "purity", label: "Starting Purity" },
+  { key: "use", label: "Best Use" },
+];
+
+export const furnaceInputRows = [
+  {
+    input: "2 Scrap Metal",
+    output: "1 Metal Ingot",
+    purity: "Low",
+    use: "Early smelting with scavenged materials",
+  },
+  {
+    input: "1 Scrap Metal + 1 Metal Ore",
+    output: "1 Metal Ingot",
+    purity: "Fair",
+    use: "Making use of mixed metal supplies",
+  },
+  {
+    input: "2 Metal Ore",
+    output: "1 Metal Ingot",
+    purity: "High",
+    use: "Higher-value ingots and Perfect Purity production",
+  },
+];
+
+export const furnacePurityColumns = [
+  { key: "purity", label: "Purity Grade" },
+  { key: "position", label: "Relative Quality" },
+  { key: "example", label: "How You Can Reach It" },
+];
+
+export const furnacePurityRows = [
+  {
+    purity: "Very Low",
+    position: "Below Low",
+    example: "Scrap Metal with Blast and no compensating Quality",
+  },
+  {
+    purity: "Low",
+    position: "Below Fair",
+    example: "2 Scrap Metal in a basic Furnace",
+  },
+  {
+    purity: "Fair",
+    position: "Baseline",
+    example: "1 Scrap + 1 Ore, or 3 Ore with Blast",
+  },
+  {
+    purity: "High",
+    position: "Above Fair",
+    example: "2 Metal Ore in a basic Furnace",
+  },
+  {
+    purity: "Very High",
+    position: "One step below Perfect",
+    example: "2 Ore with +100% Quality",
+  },
+  {
+    purity: "Perfect",
+    position: "Highest",
+    example: "2 Ore with at least +200% Quality",
+  },
+];
+
+export const furnaceQualityColumns = [
+  { key: "input", label: "Input & Module Setup" },
+  { key: "quality", label: "Quality Needed" },
+  { key: "result", label: "Expected Perfect Output" },
+  { key: "status", label: "Important Detail" },
+];
+
+
+export const furnaceQualityRows = [
+  {
+    input: "2 Metal Ore",
+    quality: "+200%",
+    result: "1 Perfect Ingot",
+    status: "Simplest Perfect Purity setup without Blast",
+  },
+  {
+    input: "1 Scrap + 1 Metal Ore",
+    quality: "+300%",
+    result: "1 Perfect Ingot",
+    status: "Needs three purity upgrades from Fair",
+  },
+  {
+    input: "2 Scrap Metal",
+    quality: "+400%",
+    result: "1 Perfect Ingot",
+    status: "Needs four purity upgrades from Low",
+  },
+  {
+    input: "3 Metal Ore + Blast",
+    quality: "+300%",
+    result: "2 Perfect Ingots",
+    status: "Requires Blast, more modules, and sufficient Energy",
+  },
+];
+
+
+export const furnaceProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "check", label: "What to Check" },
+  { key: "fix", label: "What to Do" },
+];
+
+export const furnaceProblemRows = [
+  {
+    problem: "Furnace produces nothing overnight",
+    check: "Energy, metal inputs, and Output space",
+    fix: "Supply enough Energy, load the required metal, and clear Output",
+  },
+  {
+    problem: "Only one Ingot appears",
+    check: "Blast Module and input count",
+    fix: "Use the Blast Module with three metal inputs for two Ingots",
+  },
+  {
+    problem: "Quality does not improve",
+    check: "Whether Quality crosses the next 100% threshold",
+    fix: "Raise total Quality to the next complete threshold",
+  },
+  {
+    problem: "Blast produces Very High instead of Perfect",
+    check: "Total Quality with Blast installed",
+    fix: "Use three Metal Ore and reach at least +300% Quality",
+  },
+  {
+    problem: "Flux cannot produce Perfect",
+    check: "Flux purity limits",
+    fix: "Use a sufficient Quality setup instead of relying on Flux",
+  },
+  {
+    problem: "Energy Cell empties too quickly",
+    check: "Required Energy/Day after modules",
+    fix: "Improve Efficiency or provide a stronger power supply",
+  },
+  {
+    problem: "Junk is not becoming Scrap Metal",
+    check: "Junk Processing Module and active smelting",
+    fix: "Provide sufficient Junk and allow an idle powered cycle",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+Buy a **Furnace** from **Dr. Jackson**, insert a charged Energy Cell, and load two Metal Ore or Scrap Metal items. It smelts overnight into one Metal Ingot.
+
+For **Perfect Purity Ingots**, the simplest reliable setup is **2 Metal Ore + at least +200% Quality**.
+
+If you want **2 Perfect Ingots per night**, install a **Furnace Module (Blast)**, use **3 Metal Ore**, and raise Quality to at least **+300%**. Blast increases production but lowers the starting purity by one grade.
+
+**Flux Smelting Agent** can help Metal Ore reach Very High Purity, including with Blast, but Flux alone does not produce Perfect Ingots.
+</GuideQuickAnswer>
+
+A Furnace can turn two Metal Ore into one High Purity Ingot, yet adding a Blast Module to the same production line can leave you with two lower-grade Ingots instead.
+
+That is not a malfunction. Blast changes both the quantity and purity of the result.
+
+The important decisions are how much metal to use, which purity grade you need, and whether your modules can reach the next Quality threshold without exhausting your Energy supply.
+
+<section id="furnace-start">
+
+## How Do You Get and Use a Furnace in Probably Stolen?
+
+**Dr. Jackson** sells Furnaces and other production equipment.
+
+He can offer a Furnace early in a run, often around his first visit near Day 6, although you should check his actual inventory rather than depend on a fixed arrival day.
+
+A basic Furnace has a displayed purchase price of **210 Credits** and requires **8 Energy per working day** before module effects.
+
+![A basic Furnace showing its 210-Credit purchase price, 8 Energy per day, and empty module, input, and output slots.](/images/probably-stolen/furnace-base-energy.webp)
+
+### How do you smelt your first Metal Ingot?
+
+1. **Buy and place the Furnace.** Make sure there is room to access its inventory.
+2. **Insert a charged Energy Cell.** Check that the battery can cover the Furnace's displayed Energy requirement.
+3. **Add two metal ingredients.** Use Scrap Metal, Metal Ore, or one of each.
+4. **Leave the Output area available.** Finished Ingots need somewhere to go.
+5. **Complete the overnight cycle.** A basic Furnace makes one Metal Ingot from two metal inputs.
+6. **Collect the finished Ingot.** Inspect its tooltip to see the actual purity and value.
+
+You do not need a Performance Module to begin smelting.
+
+The basic machine already performs one normal smelting batch overnight, provided its inputs and Energy requirements are met.
+
+![The in-game Furnace instructions showing that two pieces of Scrap Metal or Metal Ore produce one Metal Ingot, with Efficiency affecting power consumption and Quality affecting purity.](/images/probably-stolen/furnace-operation-guide.webp)
+
+### What should you smelt first?
+
+If you only have Scrap Metal from scavenging, use it to learn the machine and obtain basic Ingots.
+
+If you have Metal Ore, save it for batches where the additional purity matters.
+
+Two Metal Ore begin at High Purity, making them the easiest ordinary ingredients to upgrade into Perfect Ingots later.
+
+Do not spend all your Credits on Quality Modules before confirming that you can consistently obtain enough metal and keep the Furnace powered.
+
+</section>
+
+<section id="furnace-inputs">
+
+## Scrap Metal vs Metal Ore: Which Makes Better Ingots?
+
+The purity of a newly smelted Metal Ingot depends on which metal ingredients you use.
+
+Without Quality upgrades, Flux, or Blast, the three basic combinations are:
+
+<GuideTable columns={furnaceInputColumns} rows={furnaceInputRows} />
+
+### What happens when you smelt two Scrap Metal?
+
+Two Scrap Metal produce **one Low Purity Metal Ingot**.
+
+This is a practical early-game recipe when scavenging gives you more Scrap Metal than Metal Ore.
+
+A Low Purity Ingot can still be useful as a material, but its displayed value is lower than that of higher-purity versions.
+
+![A Low Purity Metal Ingot showing an estimated value of 42 Credits and a base value of 50.](/images/probably-stolen/furnace-low-purity-ingot.webp)
+
+Do not assume every crafting task needs Perfect Purity.
+
+If a downstream machine only requires a Metal Ingot as material, check its actual input requirements before spending additional Energy and expensive modules on purity.
+
+### What happens when you mix Scrap Metal and Metal Ore?
+
+One Scrap Metal plus one Metal Ore starts at **Fair Purity**.
+
+This is a useful middle option when your inventory contains both materials but not enough Ore for a pure Ore batch.
+
+Fair is also the reference grade for the Ingot's base value.
+
+However, mixed batches need more Quality upgrades to reach Perfect than batches made from two Ore.
+
+### Why is Metal Ore better for Perfect Purity?
+
+Two Metal Ore begin at **High Purity**.
+
+That puts the resulting Ingot two purity steps below Perfect.
+
+With +100% Quality, the result can become Very High.
+
+With +200% Quality, it can become Perfect.
+
+This is why Metal Ore is the preferred ingredient when you want high-value Ingots without filling the Furnace with an unusually large number of Quality Modules.
+
+</section>
+
+<section id="ingot-purity">
+
+## What Are All Six Metal Ingot Purity Grades?
+
+Metal Ingots have six purity grades, from Very Low to Perfect.
+
+<GuideTable columns={furnacePurityColumns} rows={furnacePurityRows} />
+
+Purity affects the finished Ingot's value.
+
+A Fair Purity Metal Ingot uses the ordinary **50-Credit base value**.
+
+A Low Purity example shows approximately **42 Credits**, while a Perfect Purity Ingot has a displayed value of **150 Credits**.
+
+These are item values, not guaranteed customer payments. A buyer's offer can differ from the amount displayed on the Ingot.
+
+### How do you move to a higher purity grade?
+
+There are three main influences:
+
+- **Metal inputs** determine the starting purity.
+- **Quality Modules** increase purity when their combined effect reaches another complete +100%.
+- **Blast Module** lowers purity by one grade in exchange for greater output.
+
+Flux is another way to improve the result, but its behavior differs from the regular Quality progression.
+
+Most importantly, Flux cannot replace the Quality requirements needed to produce Perfect Ingots.
+
+</section>
+
+<section id="furnace-quality">
+
+## How Do Quality Modules Affect Furnace Purity?
+
+The important Quality thresholds are **+100%, +200%, +300%, and +400%**.
+
+Each complete +100% raises the resulting purity by one grade.
+
+A smaller increase that does not cross the next threshold will not necessarily change the finished Ingot's purity.
+
+For example, starting with two Metal Ore:
+
+| Total Quality | Expected Purity |
+|---|---|
+| Below +100% | High |
+| +100% to below +200% | Very High |
+| +200% or higher | Perfect |
+
+Adding more Quality after reaching Perfect cannot create a seventh purity grade.
+
+### Does +220% Quality work for Perfect Ingots?
+
+Yes.
+
+A Furnace configured with approximately **+220% Quality** successfully produced Perfect Ingots from two Metal Ore.
+
+The setup used Quality Modules and supporting module connections to reach the required threshold.
+
+![A Furnace with Quality modules showing +220% Quality, +254% Performance, and a displayed Energy requirement of 22 per day.](/images/probably-stolen/furnace-quality-modules.webp)
+
+The important value is **Quality +220%**, not the displayed Performance increase.
+
+The in-game Furnace instructions describe:
+
+- **Quality:** Maximum Purity.
+- **Efficiency:** Power Consumption.
+- **Performance:** No Effect.
+
+Therefore, do not buy Performance Modules solely to increase Furnace output.
+
+A Furnace's normal production quantity is determined by its smelting rules, while Blast changes the number of Ingots produced per batch.
+
+### Should you install Efficiency Modules?
+
+Yes, when Energy is becoming a limitation.
+
+The basic Furnace shows **8 Energy/Day**, but upgraded configurations can require substantially more.
+
+For example, the +220% Quality setup above required **22 Energy/Day**. Another heavily modified Furnace with +314% Quality displayed **39 Energy/Day**.
+
+These are individual machine configurations, not universal costs for those Quality thresholds.
+
+Check the actual Energy requirement after every module change.
+
+If your Furnace cannot complete its nightly cycle, reducing Energy consumption may be more useful than adding another Quality Module that does not cross a new purity threshold.
+
+</section>
+
+<section id="perfect-ingots">
+
+## How Do You Make Perfect Purity Metal Ingots?
+
+**The most straightforward Perfect Ingot recipe is two Metal Ore with at least +200% Quality.**
+
+This avoids the purity penalty of Blast and requires fewer Quality upgrades than a Scrap Metal recipe.
+
+### Method 1: One Perfect Ingot per night
+
+1. Open the Furnace.
+2. Remove the Blast Module if one is installed.
+3. Arrange Quality Modules until the machine shows **+200% Quality or higher**.
+4. Insert two Metal Ore.
+5. Make sure the Energy Cell can cover the displayed requirement.
+6. Complete the overnight cycle.
+7. Inspect the output.
+
+A +220% Quality configuration produced a **Perfect Purity Metal Ingot** with a displayed value of **150 Credits**.
+
+![A Furnace output containing a Perfect Purity Metal Ingot, with an estimated value of 150 Credits.](/images/probably-stolen/furnace-perfect-ingot.webp)
+
+This is a useful target for a shop that has reliable Metal Ore supply but does not yet have enough module space for an upgraded Blast configuration.
+
+### Can mixed Ore and Scrap produce Perfect?
+
+The starting grades imply higher Quality requirements for less-pure metal combinations.
+
+<GuideTable columns={furnaceQualityColumns} rows={furnaceQualityRows} />
+
+Two Metal Ore are the simplest demonstrated method.
+
+The +300% requirement for one Scrap plus one Ore, and +400% for two Scrap Metal, follow the same one-grade-per-100% rule.
+
+If you attempt either of those more demanding combinations, check the finished Ingot before committing a large batch of resources.
+
+### Why did +220% Quality stop producing Perfect after adding Blast?
+
+Because Blast lowers purity by one grade.
+
+Without Blast:
+
+**2 Metal Ore → High → +200% Quality → Perfect**
+
+With Blast:
+
+**3 Metal Ore → Fair → +200% Quality → Very High**
+
+The same Quality value does not produce the same final purity when Blast is installed.
+
+To recover Perfect while keeping Blast, you need another full purity step.
+
+</section>
+
+<section id="blast-module">
+
+## How Does the Blast Furnace Module Work?
+
+The **Furnace Module (Blast)** changes the Furnace from ordinary one-Ingot production into a higher-output machine.
+
+Its tooltip lists:
+
+- Increased Input Used.
+- Increased Output per Night.
+- Decreased Purity.
+- Efficiency -100%.
+- Does not stack.
+
+The normal Furnace uses **two metal ingredients to make one Ingot**.
+
+Blast uses **three metal ingredients to make two Ingots**.
+
+![The Furnace Module (Blast) tooltip showing increased metal input and output, decreased purity, and an Efficiency penalty.](/images/probably-stolen/furnace-blast-module.webp)
+
+### Why does Blast lower the purity?
+
+Blast sacrifices one purity grade for additional output.
+
+Three Metal Ore that would normally begin at High Purity instead produce Fair Purity Ingots without compensating Quality or Flux.
+
+Three Scrap Metal likewise begin one grade below their ordinary Low Purity result.
+
+This tradeoff can still be worthwhile.
+
+### Example: Six Metal Ore with or without Blast
+
+Suppose you have **six Metal Ore** and a basic Furnace without additional Quality.
+
+**Without Blast:**
+
+- Use two Ore each night.
+- Complete three overnight cycles.
+- Receive three High Purity Ingots.
+- At approximately 62 Credits each, their total displayed value is about 186 Credits.
+
+**With Blast:**
+
+- Use three Ore each night.
+- Complete two overnight cycles.
+- Receive four Fair Purity Ingots.
+- At 50 Credits each, their total displayed value is 200 Credits.
+
+Blast produces one additional Ingot while saving one overnight production cycle.
+
+However, these figures compare finished item values only. They do not include the cost of Blast, Energy, purchased Ore, or any downstream crafting requirements.
+
+### How do you make two Perfect Ingots with Blast?
+
+Use this setup:
+
+1. Install the **Furnace Module (Blast)**.
+2. Expand module space if the existing slots cannot hold enough Quality upgrades.
+3. Raise the displayed Quality to **at least +300%**.
+4. Add **three Metal Ore**.
+5. Supply enough Energy for the upgraded Furnace.
+6. Complete the overnight cycle.
+7. Inspect both finished Ingots.
+
+A Furnace expanded to approximately +300% Quality successfully produced **two Perfect Purity Ingots** from three Metal Ore.
+
+The calculation is:
+
+**High starting purity − 1 Blast grade + 3 Quality grades = Perfect**
+
+The Module Expansion Kit is useful because a compact Furnace may not have enough space for Blast and all the Quality components required to reach +300%.
+
+### Is Blast always better?
+
+No.
+
+Blast is a strong choice when you want more Ingots per night and have the Ore, Energy, and modules needed to support it.
+
+A normal Furnace is easier to configure for a single Perfect Ingot.
+
+If your supply of Metal Ore is limited, your batteries are almost empty, or you do not need two finished Ingots at once, ordinary smelting may be the more practical option.
+
+The goal is not to install Blast as early as possible. It is to produce the quantity and purity your next sale or crafting job actually needs.
+
+</section>
+
+<section id="flux-smelting">
+
+## How Does Flux Smelting Agent Work?
+
+Flux Smelting Agent improves the effective purity of a Furnace batch when the installed Quality bonus is too low to achieve the same result.
+
+For Metal Ore, Flux can produce **Very High Purity** even when Blast is installed. However, Flux does not simply add another +100% Quality on top of every module bonus.
+
+If your Furnace already has enough Quality to produce Perfect Ingots, Flux does not prevent that higher result. The important distinction is that Flux alone cannot replace the +200% Quality needed for ordinary Perfect Ore Ingots or the +300% needed with Blast.
+
+### Can Flux make Very High Ingots without Quality Modules?
+
+Yes.
+
+For a normal Ore batch:
+
+- **2 Metal Ore without Flux:** High Purity.
+- **2 Metal Ore with Flux:** Very High Purity.
+
+With Blast:
+
+- **3 Metal Ore + Blast:** Fair Purity.
+- **3 Metal Ore + Blast + Flux:** Very High Purity.
+
+Flux also works with Scrap Metal, but the resulting grade is lower:
+
+- **2 Scrap Metal + Flux:** Fair Purity.
+- **3 Scrap Metal + Blast + Flux:** Fair Purity.
+
+The starting metal still matters. Flux does not turn Scrap Metal into Very High Purity simply because it can produce that result with Metal Ore.
+
+### Can Flux produce Perfect Ingots?
+
+**Flux alone cannot make Perfect Purity Ingots.**
+
+Its demonstrated Ore result stops at Very High.
+
+Adding Flux to a Blast batch does not automatically remove the need for sufficient Quality.
+
+If you specifically need Perfect, use the Quality thresholds described above rather than relying on Flux as a substitute.
+
+### Is Flux Smelting Agent reusable?
+
+Check which Flux item you have.
+
+The **Flux Smelting Agent (Advanced)** tooltip explicitly says that it is **Reusable**.
+
+![The Advanced Flux Smelting Agent tooltip showing its 300-Credit purchase price, Metal Ore purity improvement, and reusable property.](/images/probably-stolen/furnace-flux-agent.webp)
+
+The **Basic Flux Smelting Agent** is consumed when it actually improves the resulting purity. If the installed Quality bonus already provides an equal or better result, Basic Flux does not need to be consumed.
+
+The **Advanced Flux Smelting Agent** is reusable, making it more useful for repeated smelting batches.
+
+Advanced Flux also has a displayed purchase price of **300 Credits**.
+
+That upfront cost makes it more attractive for repeated production than for a single low-value batch.
+
+Before purchasing it, consider whether you need a reusable way to make Very High Ore Ingots or whether your existing Quality setup can already reach the target grade.
+
+</section>
+
+<section id="junk-processing">
+
+## How Does the Junk Processing Module Work?
+
+The **Junk Processing Module** gives the Furnace an additional way to use scavenged materials.
+
+When the Furnace is not performing a normal Ingot-smelting cycle, the module can convert:
+
+**6 Junk → 4 Scrap Metal**
+
+This is useful when you have excess Junk but not enough Metal Ore or Scrap Metal for future production.
+
+### When does Junk Processing run?
+
+Junk Processing is associated with idle smelting cycles.
+
+A Furnace that is actively processing a regular metal batch is not simultaneously performing the same idle conversion.
+
+To use the module:
+
+1. Install the Junk Processing Module.
+2. Keep enough Junk available for its conversion requirement.
+3. Make sure the Furnace has the Energy required to operate.
+4. Allow a night without a normal metal-smelting job.
+5. Check the resulting Scrap Metal.
+
+You can then use the recovered Scrap Metal in regular Furnace batches or other crafting systems.
+
+### Should you convert every Junk item into Scrap Metal?
+
+Not necessarily.
+
+Some equipment and Starting Perks also use Junk.
+
+For example, a Makeshift Micro Nuclear Reactor can be repaired using Junk or Scrap Metal.
+
+If you depend on that Reactor, reserve enough maintenance materials before converting or selling everything.
+
+The advantage of Junk Processing is that it gives otherwise unused materials another purpose. It does not mean every piece of Junk should automatically become Scrap Metal.
+
+</section>
+
+<section id="furnace-power">
+
+## How Do You Keep a Furnace Powered?
+
+A basic Furnace requires **8 Energy per working day**.
+
+Quality, Efficiency, Blast, and other module effects can change that requirement.
+
+Always use the value displayed on your actual Furnace rather than assuming the original Energy cost still applies.
+
+### Use charged Energy Cells for the first Furnace
+
+A charged Energy Cell is enough for a basic setup when it contains sufficient Energy for the next overnight job.
+
+Before closing:
+
+1. Check the Furnace's **Required Energy/Day**.
+2. Check the Energy Cell's remaining charge.
+3. Confirm that no other planned equipment operation depends on the same limited Energy supply.
+4. Replace or recharge batteries if the Furnace cannot meet its requirement.
+
+If a Furnace repeatedly runs out of power, adding another Quality Module may make the problem worse.
+
+### When should you add Efficiency Modules?
+
+Efficiency is worth considering when the energy cost of the desired purity configuration becomes difficult to support.
+
+For example, reaching +200% Quality may be useful, but the machine still needs enough Energy to complete the cycle.
+
+An Efficiency Module can help reduce power consumption without requiring you to abandon the desired purity target.
+
+Check the total Quality again after rearranging modules. Removing a Quality component to make room for Efficiency could drop the configuration below the next 100% threshold.
+
+### Can a Makeshift Reactor power Furnaces?
+
+Yes. If you have the **Makeshift Micro Nuclear Reactor** Starting Perk, its adjacent charging effect can support nearby Furnaces and rechargeable Energy Cells.
+
+A fully upgraded Reactor in one run provided **4 Energy per night** to adjacent batteries and machines. That can reduce battery replacement work, but it may not cover the full Energy requirement of a heavily upgraded Furnace.
+
+![A fully upgraded Makeshift Micro Nuclear Reactor showing 18 of 18 upgrades and an adjacent charging effect of 4 per night.](/images/probably-stolen/furnace-reactor-power.webp)
+
+Check the Reactor's Integrity before relying on it. Junk, Scrap Metal, and Electronic Parts may be needed for maintenance, so do not consume all of those supplies in your Furnace.
+
+A normal charged Energy Cell is sufficient for ordinary Furnace production. The Reactor is an optional power solution, not a requirement for Perfect Ingots.
+
+</section>
+
+<section id="furnace-troubleshooting">
+
+## Why Is Your Furnace Not Working or Producing the Wrong Purity?
+
+Start with the current machine configuration instead of replacing the Furnace immediately.
+
+<GuideTable columns={furnaceProblemColumns} rows={furnaceProblemRows} />
+
+### The Furnace has ingredients but produces nothing
+
+Check these in order:
+
+1. **Energy:** Does the installed battery cover the full displayed daily requirement?
+2. **Input:** Are there two valid metal ingredients for ordinary smelting, or three for Blast?
+3. **Output:** Is there room for the finished Ingots?
+4. **Timing:** Has the required overnight processing cycle actually completed?
+
+The Furnace normally performs its work overnight.
+
+Putting Metal Ore into the input slots during the day does not immediately create an Ingot.
+
+### The Furnace makes Very High instead of Perfect
+
+First check whether Blast is installed.
+
+For a normal two-Ore recipe, +200% Quality can reach Perfect.
+
+With Blast, the same amount produces Very High because of the one-grade purity penalty.
+
+Raise Quality to +300% if you want to keep Blast and use three Ore to produce two Perfect Ingots.
+
+If you do not have enough module space or Energy, remove Blast and return to the simpler two-Ore recipe.
+
+### More modules are installed but purity has not changed
+
+Look at the displayed **Quality percentage**.
+
+For example, raising Quality from +120% to +180% does not cross the next full +100% threshold.
+
+The result may remain at the same purity grade.
+
+Rearrange the modules or add an appropriate Quality connection until you pass the next threshold.
+
+Do not confuse a large Performance bonus with a large Quality bonus. Performance does not directly improve the Furnace's smelting result.
+
+### The Junk Processing Module is not producing Scrap Metal
+
+Check that the module is installed and that enough Junk is available.
+
+Also check whether the Furnace has been occupied by an ordinary metal-smelting job.
+
+Junk Processing operates during suitable non-smelting cycles, so a Furnace continuously loaded with regular metal inputs may not perform the idle conversion you expected.
+
+</section>
+
+<section id="furnace-best-setup">
+
+## What Is the Best Furnace Setup for Your Stage of the Game?
+
+There is no single configuration that is best for every shop.
+
+Choose the setup according to the metal you can obtain, the purity your next job needs, and how much Energy is available.
+
+### Early game: basic Furnace with available Scrap
+
+**Recommended goal: produce usable Ingots without heavy module spending.**
+
+Start with two Scrap Metal when that is your most reliable material.
+
+If Metal Ore becomes available, use two Ore for higher-purity batches.
+
+Before buying expensive upgrades, confirm that you can regularly complete overnight cycles and use or sell the output.
+
+### Mid game: two Ore with +200% Quality
+
+**Recommended goal: produce one Perfect Ingot reliably.**
+
+This is a strong target when you have enough Quality Modules but limited room, Energy, or Ore supply.
+
+The +200% threshold is easier to achieve than the upgraded Blast requirement.
+
+It also avoids Blast's increased ingredient demand.
+
+If your Furnace already reaches Perfect with a comfortable Energy supply, prioritize reliable production over further Quality increases that do not improve the result.
+
+### Advanced production: Blast with +300% Quality
+
+**Recommended goal: produce two Perfect Ingots in one night.**
+
+This requires:
+
+- The Blast Module.
+- Three Metal Ore per batch.
+- At least +300% Quality.
+- Enough module space.
+- Sufficient Energy for the full machine configuration.
+
+This setup becomes more attractive when you have a steady Ore supply and repeated demand for high-purity Ingots.
+
+However, if your shop cannot acquire three Ore for every planned cycle, the extra production capacity may remain unused.
+
+### When is Flux + Blast a better choice?
+
+Use Flux + Blast when **Very High Purity is sufficient** and you want more Ingots per night without assembling the complete +300% Perfect configuration.
+
+This can be a practical middle ground between the basic Furnace and an expensive Perfect-production setup.
+
+Advanced reusable Flux is particularly attractive for repeated Ore batches, provided you can justify its purchase cost.
+
+### Should you sell Ingots or use them for crafting?
+
+A Perfect Purity Metal Ingot has a higher displayed value than a Low or Fair Ingot, but selling it is not always the best use of your metal supply.
+
+Before selling, check whether you need Ingots for another machine. Gunsmith production can use them to print firearm frames and Gun Parts.
+
+Higher-purity Ingots can improve certain printed outputs, but that does not mean every crafting recipe requires Perfect Purity.
+
+For the specific recipes, printing modules, and Gun Parts output by Ingot grade, see the [Gunsmith Guide](/probably-stolen/gunsmith).
+
+To compare the value of selling an Ingot against using it in production, include its materials and Energy costs in the [Money-Making Planner](/probably-stolen/money-making).
+
+</section>
+

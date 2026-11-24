@@ -93,6 +93,14 @@ const toc = [
 
 const relatedLinks = [
   {
+    href: "/probably-stolen/furnace",
+    label: "Furnace: Perfect Ingots, Quality & Blast Module",
+  },
+  {
+    href: "/probably-stolen/wine-making",
+    label: "Wine Making: Master Vintage, Recipes & Aging",
+  },
+  {
     href: "/probably-stolen/water-merchant-guide",
     label: "Water Merchant: Starting Route & Progression",
   },

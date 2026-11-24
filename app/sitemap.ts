@@ -1162,6 +1162,10 @@ const paths = [
     'probably-stolen/keycards',
     'probably-stolen/aquaculture',
     'probably-stolen/hydroponics',
+    'probably-stolen/wine-making',
+    'probably-stolen/furnace',
+
+    
 
     'crack',
     'crack/walkthrough',
@@ -1442,6 +1446,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'probably-stolen/keycards': '2026-11-22',
   'probably-stolen/aquaculture': '2026-11-22',
   'probably-stolen/hydroponics': '2026-11-22',
+  'probably-stolen/wine-making': '2026-11-23',
+  'probably-stolen/furnace': '2026-11-23',
   
   '/dont-starve-together': '2026-10-25',
   '/dont-starve-together/sanctum-walkthrough': '2026-10-25',
