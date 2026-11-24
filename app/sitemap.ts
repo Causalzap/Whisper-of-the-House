@@ -1295,6 +1295,11 @@ const paths = [
      'workers-and-resources-space-program/rocket-assembly',
      'workers-and-resources-space-program/rocket-launch',
      'workers-and-resources-space-program/baikonur-campaign',
+
+     'stellaris-willpower',
+     'stellaris-willpower/ideologies',
+     'stellaris-willpower/tenets',
+     'stellaris-willpower/force-of-will',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1302,6 +1307,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'stellaris-willpower': '2026-11-24',
+  'stellaris-willpower/ideologies': '2026-11-24',
+  'stellaris-willpower/tenets': '2026-11-24',
+  'stellaris-willpower/force-of-will': '2026-11-24',
+
   'workers-and-resources-space-program': '2026-11-23',
   'workers-and-resources-space-program/rocket-assembly': '2026-11-23',
   'workers-and-resources-space-program/rocket-launch': '2026-11-23',

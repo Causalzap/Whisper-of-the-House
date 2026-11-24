@@ -130,6 +130,173 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  
+{
+  title: "Stellaris: Willpower",
+  game: "Stellaris",
+  href: "/stellaris-willpower",
+  slug: "stellaris-willpower",
+  kind: "game",
+  status: "active",
+  accent: "purple",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+
+  label:
+    "Origins, Fanatic Civics, Ideologies, Tenets & Force of Will",
+
+  eyebrow:
+    "Grand Strategy, Space Empire Simulation, Diplomacy & Ideological Expansion",
+
+  hubStatus:
+    "Willpower DLC + Stellaris 4.6 + Three Origins + Five Fanatic Civics + Ideologies + 95 Tenets + Galactic Halls + Force of Will + Utopia Victory",
+
+  description:
+    "Explore Stellaris Willpower, compare Origins and Fanatic Civics, establish an Ideology, manage Strength and Momentum, unlock Tenets and Galactic Halls, and pursue Force of Will victory.",
+
+  coverage: [
+    "Willpower DLC versus free Stellaris 4.6, Golden Generation, Lost Makers, Great Mosaic, Fanatic Civics, early decisions and campaign progression",
+
+    "Fanatic Factions, Advocate Faction, Ideological Reach, Strength, Momentum, Ideological Authority, diplomatic adoption, Espionage and Galactic Halls",
+
+    "All 95 Tenets, Intensity I–III, Ethic-specific effects, Origin and Civic requirements, Reformulate, Amend, Gestalt and Nomadic alternatives",
+
+    "Force of Will Ascension Perk, five Ambition stages, Willpower sources, Absolute Ethics, Doctrinal Proxies, Cultural Envoys and enemy fleet conversion",
+
+    "Utopia victory requirements, galactic population conversion, Fallen Empire opposition, stalled Ideology growth and Ambition progression problems",
+  ],
+
+  image:
+    "/images/stellaris-willpower/willpower-galactic-hall.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 91,
+    footerFeatured: true,
+  },
+
+  pages: [
+    {
+      title:
+        "Stellaris Willpower Guide: Ideologies, Origins & Civics",
+      href: "/stellaris-willpower",
+      type: "Guide Hub",
+
+      description:
+        "Compare three Origins and five Fanatic Civics, establish your Ideology, plan early progression, unlock new systems, and choose your next objective.",
+
+      image:
+        "/images/stellaris-willpower/willpower-galactic-hall.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        spotlightMeta:
+          "Willpower DLC, Stellaris 4.6, Golden Generation, Lost Makers, Great Mosaic, Fanatic Civics, Ideologies, Galactic Halls and Force of Will",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title:
+        "Stellaris Willpower Ideologies Guide: Reach, Strength & Adoption",
+      href: "/stellaris-willpower/ideologies",
+      type: "Systems",
+
+      description:
+        "Create an Ideology, increase Reach and Strength, manage Momentum, secure Authority, influence other empires, and unlock Galactic Halls.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/stellaris-willpower/willpower-ideological-reach.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 572,
+        spotlightMeta:
+          "Advocate Faction, Ideological Reach, Strength, Momentum, Ideological Authority, Adoption, Galactic Halls, Espionage and Absolute Ethics",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title:
+        "Stellaris Willpower Tenets Guide: All 95, Intensities & Rerolls",
+      href: "/stellaris-willpower/tenets",
+      type: "Systems",
+
+      description:
+        "Compare all 95 Tenets, unlock Intensity I–III, examine special Ethic and Origin effects, and manage Reformulate and Amend costs.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/stellaris-willpower/willpower-tenet-selection.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestOrder: 573,
+        spotlightMeta:
+          "95 Tenets, 250/500/750 Strength, Intensity I–III, Ethic Bonuses, Golden Generation, Lost Makers, Reformulate, Amend and Gestalt Tenets",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title:
+        "Stellaris Force of Will Guide: Stages, Willpower & Utopia Victory",
+      href: "/stellaris-willpower/force-of-will",
+      type: "Walkthrough",
+
+      description:
+        "Unlock Force of Will, earn Willpower, complete five Ambition stages, convert foreign Pops with Cultural Envoys, and satisfy Utopia victory conditions.",
+
+      date: "Updated recently",
+
+      image:
+        "/images/stellaris-willpower/willpower-force-of-will-victory.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: false,
+
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 574,
+        spotlightMeta:
+          "Force of Will, Seeds of Unity, Growing Consensus, Rising Movement, Galactic Mandate, Utopia, Willpower, Cultural Envoys, Fallen Empires and 50% Galactic Pops",
+      },
+
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+  ],
+},
 
   {
     title: "Workers & Resources: Soviet Republic — Space Program",

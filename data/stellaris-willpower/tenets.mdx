@@ -1,0 +1,1310 @@
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const tenetColumns = [
+  { key: "name", label: "Tenet" },
+  { key: "effect", label: "Main Effects" },
+  { key: "requirement", label: "Availability" },
+];
+
+export const tenetUnlockColumns = [
+  { key: "strength", label: "Ideological Strength" },
+  { key: "slot", label: "Unlocked Slot" },
+  { key: "intensity", label: "Intensity" },
+];
+
+export const tenetUnlockRows = [
+  { strength: "250", slot: "First Tenet", intensity: "I" },
+  { strength: "500", slot: "Second Tenet", intensity: "II" },
+  { strength: "750", slot: "Third Tenet", intensity: "III" },
+  { strength: "Force of Will progression", slot: "Fourth Tenet", intensity: "No Intensity IV; uses an existing intensity" },
+];
+
+export const tenetChangeColumns = [
+  { key: "action", label: "Action" },
+  { key: "cost", label: "Base Cost" },
+  { key: "restriction", label: "What Happens" },
+];
+
+export const tenetChangeRows = [
+  {
+    action: "Reformulate Tenets",
+    cost: "100 Influence initially",
+    restriction: "Refreshes the three available offers; 180-day cooldown. Repeated rerolls can cost more.",
+  },
+  {
+    action: "Amend Intensity I",
+    cost: "100 Influence",
+    restriction: "Replaces an existing selected Tenet; 10-year cooldown.",
+  },
+  {
+    action: "Amend Intensity II",
+    cost: "200 Influence",
+    restriction: "Replaces an existing selected Tenet; 10-year cooldown.",
+  },
+  {
+    action: "Amend Intensity III",
+    cost: "300 Influence",
+    restriction: "Replaces an existing selected Tenet; 10-year cooldown.",
+  },
+  {
+    action: "Tenet Upkeep",
+    cost: "0.25 Influence/month per Tenet",
+    restriction: "Added to the Ideology's other upkeep costs.",
+  },
+];
+
+export const tenetGoalColumns = [
+  { key: "goal", label: "Empire Goal" },
+  { key: "candidates", label: "Tenets to Consider" },
+  { key: "decision", label: "Why They Matter" },
+];
+
+export const tenetGoalRows = [
+  {
+    goal: "Unity and Traditions",
+    candidates: "Unity, Unism, Sacred Rituals",
+    decision: "Direct Unity income or faster access to Council Agenda benefits.",
+  },
+  {
+    goal: "Research",
+    candidates: "Curiosity, Observation, Physicality, Crucible Principle",
+    decision: "Research from existing jobs, stations, or industrial production.",
+  },
+  {
+    goal: "Alloy Economy",
+    candidates: "Readiness, Crucible Principle, Militia Conscription",
+    decision: "Stronger Metallurgists or extra value from defensive military jobs.",
+  },
+  {
+    goal: "Large Empire",
+    candidates: "Civility, Pluralism, Moral Pacifism",
+    decision: "Reduces different sources of Empire Size pressure.",
+  },
+  {
+    goal: "Influence",
+    candidates: "Networking, Spectacle of Authority, Peacekeeping",
+    decision: "Provides additional Influence for expansion, diplomacy, or other commitments.",
+  },
+  {
+    goal: "Trade Economy",
+    candidates: "Open Sourcing, Networking, Consumerism",
+    decision: "Improves Trade generation or unlocks a different use for Trade.",
+  },
+  {
+    goal: "Leaders and Council",
+    candidates: "Chain of Command, Rationality, Sacred Counsel, Birthright",
+    decision: "Increases starting skills or Council effectiveness.",
+  },
+  {
+    goal: "Diplomacy",
+    candidates: "Mutualism, Concordance, Integration",
+    decision: "Supports Diplomatic Weight, Trust, recruitment, or population attraction.",
+  },
+  {
+    goal: "Peaceful Development",
+    candidates: "Peaceful Prosperity, Life Reverence, Moral Pacifism",
+    decision: "Improves growth or development while changing military and expansion tradeoffs.",
+  },
+  {
+  goal: "Fleet Upkeep",
+  candidates: "War Bonds",
+  decision: "Reduces Ship Upkeep when maintaining an expensive fleet.",
+},
+{
+  goal: "Starbase Defense and Expansion",
+  candidates: "Security, Sovereignty",
+  decision: "Strengthens defensive installations or reduces Starbase-related costs.",
+},
+];
+
+export const generalTenetRows = [
+  {
+    name: "Stability",
+    effect: "Stability +3 / +6 / +9 at Intensity I / II / III.",
+    requirement: "Any Ideology",
+  },
+  {
+    name: "Unity",
+    effect: "Monthly Unity +5% / +10% / +20%. Gestalt variants include Cohesion and Synchronicity.",
+    requirement: "Any Ideology",
+  },
+  {
+    name: "Civility",
+    effect: "Empire Size from Pops -2.5% / -5% / -10%; Crime -10 / -20 / -40. Gestalt versions replace Crime with Deviancy.",
+    requirement: "Any Ideology",
+  },
+];
+
+export const authoritarianTenetRows = [
+  {
+    name: "Spectacle of Authority",
+    effect: "Monthly Influence +0.5 / +1 / +2; additional benefits from Entertainers and Edict Fund.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Juvenile Employment",
+    effect: "Job Efficiency for Slaves +10% / +20% / +40%; Job Efficiency for Workers and Menial Drones +10% / +20% / +40%.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Idolism",
+    effect: "Improves Enforcer efficiency through a modifier associated with Politicians.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Surveillance",
+    effect: "Elite Job Efficiency +5% / +10% / +20%; Energy Upkeep per 100 Enforcers +0.25 / +0.5 / +1; Pop Upkeep per 100 Enforcers -1% / -2% / -4%. Gestalt versions use Hunter-Seeker Drones.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Administrative Enforcement",
+    effect: "Politician Upkeep -10% / -20% / -30%; unlocks Authority of Cevantian Despotism, a Decision adding 200 Politicians to the capital building. Gestalt variant Centrality uses different bonuses.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Birthright",
+    effect: "Effective Councilor Skill +1 / +2 / +3; removes the cost of electing candidates in ruler elections. Gestalt variant Cognition grants +2 / +3 / +4 Effective Councilor Skill.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Authoritarian Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves the Preserve the Order Agenda.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Authoritarian Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Authoritarian Broadcasting and improves Advocate Strength.",
+    requirement: "Authoritarian Ideology",
+  },
+  {
+    name: "Ordered Sanitation",
+    effect: "Pop Growth or Assembly Speed +10%; enacting a Population Control Decision gives affected Pops +30% Job Efficiency. Single-intensity Precursor Tenet.",
+    requirement: "Lost Makers — Irassian Precursor",
+  },
+];
+
+export const egalitarianTenetRows = [
+  {
+    name: "Participation",
+    effect: "Faction Resource Output +10% / +20% / +40%; unlocks the United Effort Living Standard. Gestalt variant Resonancy instead increases Resources from Jobs and reduces Pop Upkeep.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Laterality",
+    effect: "Specialist output gains a scaling benefit from other population jobs.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Personal Accountability",
+    effect: "Crime -7 / -15 / -30; doubles the positive contribution of Stability to Job Output.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Free Passage",
+    effect: "Automatic Resettlement Chance +40% / +80% / +120%, with additional mobility bonuses.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Epistocracy",
+    effect: "Council Agenda Early Launch Cost -10% / -20% / -30%, plus Agenda-related bonuses.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Efficient Legislature",
+    effect: "Bureaucrat upkeep -10% / -20% / -30%; unlocks Constitutional Improvement.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Harmonicism",
+    effect: "Increases Harmonicism resolution effectiveness by +150% / +200% / +250%, with other diplomatic benefits.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Egalitarian Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves Give and Take.",
+    requirement: "Egalitarian Ideology",
+  },
+  {
+    name: "Egalitarian Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Egalitarian Broadcasting.",
+    requirement: "Egalitarian Ideology",
+  },
+];
+
+export const militaristTenetRows = [
+  {
+    name: "Readiness",
+    effect: "Metallurgist Output +7% / +15% / +30%; also grants Naval Capacity from Soldiers.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "Militia Conscription",
+    effect: "Defense Armies per 100 Civilians +1; Alloys from Defense Armies +0.1 / +0.2 / +0.3; cheaper armies and upkeep.",
+    requirement: "Militarist Ideology; special Nomad version",
+  },
+  {
+    name: "Crucible Principle",
+    effect: "Engineering, Physics, and Society Research from Metallurgists, scaling with Intensity; additional research and ship-related bonuses.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "Force Projection",
+    effect: "Unity from used Naval Capacity +0.2 / +0.4 / +0.8; unlocks Show of Force.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "War Bonds",
+    effect: "Ship Upkeep -5% / -10% / -15%; improves market-related expenses.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "Militarist Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; Cooldown -5% / -10% / -20%; improves Display of Power.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "Militarist Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; Advocate Strength +10% / +20% / +30%; unlocks Militarist Broadcasting.",
+    requirement: "Militarist Ideology",
+  },
+  {
+    name: "Chain of Command",
+    effect: "Commander Starting Skill +1 / +2 / +3; additional Naval Capacity.",
+    requirement: "Militarist Ideology + Galactic Paragons",
+  },
+  {
+    name: "Battle Intelligence",
+    effect: "Codebreaking +3; Maximum Infiltration Level against war opponents +20; Infiltration Speed against war opponents +100%.",
+    requirement: "Lost Makers — Vultaum Precursor",
+  },
+  {
+    name: "Shock Doctrine",
+    effect: "War Exhaustion dealt +25%, Army XP Gain +50%, Army Damage +50%, and Sublight Speed +15%.",
+    requirement: "Lost Makers — First League Precursor",
+  },
+  {
+    name: "Eradication Doctrine",
+    effect: "Tomb World Habitability +50%; unlocks the Scorched Earth Decision, which transforms a colony into a Tomb World and grants the Optimized Environment modifier.",
+    requirement: "Lost Makers — Baol Precursor",
+  },
+];
+
+export const pacifistTenetRows = [
+  {
+    name: "Peaceful Prosperity",
+    effect: "Megastructure Build Cost -15% / -25% / -35%; unlocks a related Edict.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Autonomy",
+    effect: "Unlocks Research buildings in Rural Districts. Resources per 100 Farmers: Food +0.5 / +1 / +1.5; per 100 Miners: Minerals +0.25 / +0.5 / +0.75; per 100 Technicians: Energy +0.5 / +1 / +1.5. Gestalt and Nomad variants use different Jobs.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Moral Pacifism",
+    effect: "Border Friction -10% / -20% / -30%; also reduces Empire Size effects.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Peacekeeping",
+    effect: "Monthly Influence +0.35 / +0.75 / +1.5; unlocks Peacekeeping policy.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Disarmament",
+    effect: "Accumulating Stability during years of peace; unlocks Disarmament Agenda.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Life Reverence",
+    effect: "Regular empires: Pop Growth Speed +5% / +10% / +20%, Medical Worker Efficiency bonuses, and Army Damage/Naval Capacity penalties. Hives use stronger growth and Spawning Drone bonuses; Machine Intelligences receive Sentientism with Mechanical Assembly and Maintenance Drone bonuses.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Pacifist Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves We Come in Peace.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Pacifist Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Pacifist Broadcasting and improves Advocate Strength.",
+    requirement: "Pacifist Ideology",
+  },
+  {
+    name: "Nonaggression",
+    effect: "Trust Cap +25 toward eligible empires; Ship Upkeep -15%.",
+    requirement: "Lost Makers — Cybrex Precursor",
+  },
+];
+
+export const xenophileTenetRows = [
+  {
+    name: "Pluralism",
+    effect: "Empire Size from Pops -7% / -15% / -30%; Diplomatic Agreement Influence Upkeep -10% / -20% / -30%; Refugee Attraction +20% / +40% / +60%; Edict Fund per Galactic Strength +1 / +1.5 / +2.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Networking",
+    effect: "Monthly Influence +0.25 / +0.5 / +0.75; extra Trade from Jobs for active Envoys.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Concordance",
+    effect: "Official Starting Skill +1 / +2 / +3; Trust Cap +1 per 100 Bureaucrats at all Intensities. Gestalt empires use Synapse Drones instead.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Integration",
+    effect: "Refugee Attraction +10% / +20% / +30%; External Leader Starting Skill +1 / +2 / +3; Trade per 100 Entertainers +1 / +2 / +4; Pop Growth or Assembly Speed +5% per different species on a colony. Gestalt effects differ.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Diaspora",
+    effect: "Requires an active Migration Treaty. Commercial Pact Effectiveness +10% / +20% / +40%; Research Sharing +10% / +20% / +40%; monthly Envoy Favor chance +0.5% / +1% / +2%; Opinion +0.05 / +0.1 / +0.2; Trust Cap per Migration Treaty +25 / +50 / +75.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Mutualism",
+    effect: "Diplomatic Weight +10% / +20% / +30%; monthly Envoy Favor chance +0.5% / +1% / +2%; Refugee Attraction +10% / +20% / +30%; Trade per 100 Pops per Embassy +6 / +9 / +12.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Xenophile Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves Open Arms.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Xenophile Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Xenophile Broadcasting.",
+    requirement: "Xenophile Ideology",
+  },
+  {
+    name: "Sensuality",
+    effect: "Trust Cap with organic empires +30 and Organic Subject Loyalty +2.",
+    requirement: "Lost Makers — Inetian Precursor",
+  },
+];
+
+export const xenophobeTenetRows = [
+  {
+    name: "Security",
+    effect: "Encryption +2; improves Defense Armies and defensive Starbase combat modifiers.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Sovereignty",
+    effect: "Outpost Construction Cost -5% / -10% / -20%, with other Starbase benefits.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Self-Sufficiency",
+    effect: "Only functions outside the Galactic Community. Civilian Job Efficiency +10% / +20% / +30%; additional Trade per 100 Traders.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Homogeneity",
+    effect: "Society Research from Culture Workers and additional Pop Growth.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Assertion",
+    effect: "Rivalry Influence Gain +30% / +60% / +120%, plus diplomatic and claim-related modifiers.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Seclusionism",
+    effect: "Crime -5% / -10% / -20%, additional Stability and reduced Amenities Usage.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Xenophobe Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves Strong on Our Own.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Xenophobe Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Xenophobe Broadcasting.",
+    requirement: "Xenophobe Ideology",
+  },
+  {
+    name: "Cultivation",
+    effect: "Terraforming Cost -50%; Terraforming Speed +50%; grants the Ecological Adaptation research option. Terraformed planets gain Repurposed Yuht Nursery: Max Districts +1 and Pop Growth or Assembly Speed +15%.",
+    requirement: "Lost Makers — Yuht Precursor",
+  },
+];
+
+export const materialistTenetRows = [
+  {
+    name: "Curiosity",
+    effect: "Physics, Society, and Engineering Research per 100 Civilians: +0.25 / +0.5 / +0.75 each; additional Upkeep per 100 Civilians: +0.1 / +0.2 / +0.3. Gestalt versions use Maintenance Drones.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Consumerism",
+    effect: "Trade per 100 Artisans +2 / +3 / +4; Gestalt equivalent is Abundance.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Open Sourcing",
+    effect: "Trade from Jobs +5% / +7.5% / +10%; unlocks Knowledge Exchange Trade Policy, converting part of collected Trade into Research and Energy. Gestalt versions instead grant Trade and Research per 100 Maintenance Drones, with additional Food Upkeep.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Observation",
+    effect: "Research Station Output +20% / +40% / +60%, plus Society Research from Jobs.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Physicality",
+    effect: "Megastructure Unity Cost -15% / -30% / -45%, with Physics Research bonuses.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Engineering",
+    effect: "Megastructure Upkeep -10% / -20% / -30%, with Engineering Research bonuses.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Techno-Synergy",
+    effect: "Artisan Job Efficiency scales with Researchers. Hive Minds instead improve Mining Drones through Brain Drones; Nomad Hives improve Harvesting output; Machine Intelligences improve Tech-Drones through Calculators.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Materialist Strategism",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves Progressive Growth.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Materialist Propagandism",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Materialist Broadcasting.",
+    requirement: "Materialist Ideology",
+  },
+  {
+    name: "Rationality",
+    effect: "Effective Scientist Skill +1 / +2 / +3; allows Materialist Scientists to occupy eligible non-enclave Council Positions.",
+    requirement: "Materialist Ideology + Galactic Paragons",
+  },
+  {
+    name: "Dimensionality",
+    effect: "Physics Research Speed +25% and additional anomaly research benefits.",
+    requirement: "Lost Makers — Zroni Precursor",
+  },
+  {
+    name: "Subjectivity",
+    effect: "Leader Upkeep -40%, extra recruitable leaders and related bonuses.",
+    requirement: "Lost Makers — adAkkarian Precursor",
+  },
+];
+
+export const spiritualistTenetRows = [
+  {
+    name: "Unism",
+    effect: "Monthly Unity +10% / +15% / +20%; Stability +3 / +5 / +7.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Higher Law",
+    effect: "Additional Edict Fund, Council Agenda Speed and reduced Bureaucrat upkeep.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Sacred Union",
+    effect: "Pop Growth bonuses with additional Bureaucrat-related upkeep. Gestalt equivalent is Proliferation.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Humility",
+    effect: "Happiness +10% / +15% / +20%; Pop Housing Usage -10% / -20% / -30%; unlocks Humility Living Standard.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Jubilation",
+    effect: "Trade produced per 100 Priests +1 / +2 / +4; unlocks the Jubilee Council Agenda.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Sacred Rituals",
+    effect: "Council Agenda Speed +10% / +20% / +40%; improves A Higher Purpose.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Proselytization",
+    effect: "Edict Fund +25 / +50 / +100; unlocks Spiritualist Broadcasting.",
+    requirement: "Spiritualist Ideology",
+  },
+  {
+    name: "Sacred Counsel",
+    effect: "Councilor Skill +1 / +2 / +3 and Governing Ethics Attraction.",
+    requirement: "Spiritualist Ideology + Galactic Paragons",
+  },
+];
+
+export const specialTenetRows = [
+  {
+    name: "Pillars of Leadership",
+    effect: "Leader Capacity +1 at all Intensities; Leader Upkeep -10% / -20% / -40%.",
+    requirement: "Golden Generation",
+  },
+  {
+    name: "Excellence Doctrine",
+    effect: "Leader Experience Gain +15% / +30% / +60%; Leader Lifespan +10 / +20 / +40 years.",
+    requirement: "Golden Generation",
+  },
+  {
+    name: "High Command",
+    effect: "Effective Leader Skill Level +1 at all Intensities; Governing Ethics Attraction +10% / +20% / +40%.",
+    requirement: "Golden Generation",
+  },
+  {
+    name: "Favoritist Leadership",
+    effect: "Reduces the maximum number of negative Leader Traits.",
+    requirement: "Golden Generation event choice",
+  },
+  {
+    name: "Equitable Leadership",
+    effect: "Leader XP Gain +5% / +10% / +20% and fewer negative Leader Traits.",
+    requirement: "Golden Generation event choice",
+  },
+  {
+    name: "Hedonism",
+    effect: "Additional Unity and Pop Growth contributions from Civilians.",
+    requirement: "Pleasure Seekers Civic",
+  },
+  {
+    name: "Supreme Will",
+    effect: "Reduces Job Upkeep based on Ruler Skill and improves Ruler XP Gain.",
+    requirement: "Under One Rule Origin or Imperial Cult Civic",
+  },
+  {
+    name: "Sacrifism",
+    effect: "Improves Sacrifice-related bonuses and reduces Amenities Usage.",
+    requirement: "Death Cult Civic",
+  },
+  {
+    name: "Environmentalism",
+    effect: "Pop Consumer Goods Upkeep -10% / -20% / -30%, with Habitability benefits.",
+    requirement: "Environmentalists Civic",
+  },
+  {
+    name: "Dimensionalism",
+    effect: "Improves Unity from Dimensional Shrines and supports related construction.",
+    requirement: "Dimensional Worship Civic",
+  },
+  {
+    name: "Cult of the Composer",
+    effect: "Pop Growth Speed +10% / +20% / +30%, plus Mechanical Assembly and Influence bonuses.",
+    requirement: "Chosen Civic — Composer of Strands",
+  },
+  {
+    name: "Cult of the Cradle",
+    effect: "Diplomatic Weight +5% / +10% / +15%, plus Trust Growth.",
+    requirement: "Chosen Civic — Cradle of Souls",
+  },
+  {
+    name: "Cult of the Eater",
+    effect: "Army Damage +15% / +30% / +45%, plus Ship Fire Rate.",
+    requirement: "Chosen Civic — Eater of Worlds",
+  },
+  {
+    name: "Cult of the Instrument",
+    effect: "Job Efficiency +5% / +10% / +15%.",
+    requirement: "Chosen Civic — Instrument of Desire",
+  },
+  {
+    name: "Galactic Purification",
+    effect: "Unity and Society Research from Purging, with additional policy access.",
+    requirement: "Eligible genocidal or Scorched World Civic",
+  },
+  {
+    name: "Secrecy",
+    effect: "Encryption +1 / +2 / +3, with additional Influence.",
+    requirement: "Secret Societies Civic",
+  },
+];
+
+export const gestaltDifferenceColumns = [
+  { key: "tenet", label: "Tenet / Variant" },
+  { key: "regular", label: "Regular Empire" },
+  { key: "gestalt", label: "Gestalt Empire" },
+];
+
+export const gestaltDifferenceRows = [
+  {
+    tenet: "Civility / Conformity",
+    regular: "Empire Size from Pops reduction; Crime -10 / -20 / -40.",
+    gestalt: "Empire Size reduction remains; Deviancy -10 / -20 / -40 replaces Crime.",
+  },
+  {
+    tenet: "Humility",
+    regular: "Happiness +10% / +15% / +20%, Housing Usage -10% / -20% / -30%.",
+    gestalt: "Stability +3 / +5 / +7, Pop Upkeep -20% / -30% / -40%, Housing Usage -10% / -20% / -30%.",
+  },
+  {
+    tenet: "Strategism / Instinctivism",
+    regular: "Agenda Speed and Cooldown; improves an Ethic-specific Agenda.",
+    gestalt: "Agenda modifiers remain, but launch effectiveness applies to Finding the Voice.",
+  },
+  {
+    tenet: "Militia Conscription",
+    regular: "Defense Armies, Alloys from Defense Armies, Army Cost and Army Upkeep.",
+    gestalt: "Uses the applicable Gestalt replacement effects; Nomads have a separate Arkship variant.",
+  },
+  {
+  tenet: "Participation / Resonancy",
+  regular: "Faction Resource Output +10% / +20% / +40%; unlocks United Effort Living Standard.",
+  gestalt: "Resonancy grants Resources from Jobs +5% / +7.5% / +10% and Pop Upkeep -10% / -20% / -30%.",
+},
+{
+  tenet: "Life Reverence / Sentientism",
+  regular: "Pop Growth, Medical Worker Efficiency, and military penalties.",
+  gestalt: "Hives gain Spawning Drone bonuses; Machine Intelligences receive Sentientism with Mechanical Assembly and Maintenance Drone bonuses.",
+},
+{
+  tenet: "Techno-Synergy",
+  regular: "Artisan Job Efficiency scales with Researchers.",
+  gestalt: "Hive, Nomad Hive, and Machine Intelligence versions use different Jobs and production effects.",
+},
+{
+  tenet: "Autonomy",
+  regular: "Food, Minerals, and Energy from Farmers, Miners, and Technicians; Research buildings in Rural Districts.",
+  gestalt: "Replaces regular Jobs with Drone-specific effects; Nomad variants also modify the available output and Amenities bonuses.",
+},
+{
+  tenet: "Integration",
+  regular: "Refugee Attraction, External Leader Skill, Trade from Entertainers, and species-based growth.",
+  gestalt: "Pop Growth or Assembly Speed per Embassy +2% / +3% / +4%; Trade per 100 Logistic Drones +1 / +2 / +4.",
+},
+];
+
+export const militaristPropagandismColumns = [
+  { key: "effect", label: "Effect" },
+  { key: "i", label: "Intensity I" },
+  { key: "ii", label: "Intensity II" },
+  { key: "iii", label: "Intensity III" },
+];
+
+export const militaristPropagandismRows = [
+  { effect: "Edict Fund", i: "+25", ii: "+50", iii: "+100" },
+  { effect: "Strength from Advocate", i: "+10%", ii: "+20%", iii: "+30%" },
+  { effect: "Unlock Militarist Broadcasting", i: "Yes", ii: "Yes", iii: "Yes" },
+];
+
+export const tenetMistakeColumns = [
+  { key: "mistake", label: "Problem" },
+  { key: "reason", label: "Why It Happens" },
+  { key: "fix", label: "What to Do" },
+];
+
+export const tenetMistakeRows = [
+  {
+    mistake: "Cannot select a higher Intensity",
+    reason: "The corresponding Strength threshold has not been reached.",
+    fix: "Check your Ideological Strength and available slots.",
+  },
+  {
+    mistake: "Desired Tenet is missing",
+    reason: "Random offers or an unmet Ethic, Civic, Origin, or DLC condition.",
+    fix: "Check eligibility before paying for another reroll.",
+  },
+  {
+    mistake: "Cannot pick the same Tenet again",
+    reason: "An active Tenet cannot occupy two slots.",
+    fix: "Amend the existing selection if a higher Intensity is more valuable.",
+  },
+  {
+    mistake: "Reformulate is unavailable",
+    reason: "The reroll cooldown or another restriction is active.",
+    fix: "Check the action tooltip and wait for eligibility.",
+  },
+  {
+    mistake: "Cannot change another empire's Ideology",
+    reason: "Your empire is not the Ideological Authority.",
+    fix: "Check Authority before planning Tenet changes.",
+  },
+  {
+    mistake: "Tenet does not provide expected benefits",
+    reason: "An extra requirement, special variant, or conditional modifier applies.",
+    fix: "Check the complete effect tooltip for your empire type.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Stellaris: Willpower**, Tenets unlock at **250, 500, and 750 Ideological Strength**, giving Intensity I, II, and III choices. Pick effects that support your empire's actual economy or strategy rather than automatically choosing the largest bonus. If the three offered Tenets are unsuitable, use **Reformulate Tenets** to reroll them for Influence. Changing an already selected Tenet is a separate action with a longer cooldown.
+</GuideQuickAnswer>
+
+Tenets turn an Ideology into a set of empire-wide bonuses. Two empires following the same Ideology share its Tenets, but only the **Ideological Authority** controls which ones are codified.
+
+The first available Tenet may strengthen your economy immediately. Later Intensities can make the same choice much more powerful, so selecting a modest bonus early can prevent you from taking its strongest version later without making an amendment.
+
+The available choices also depend on your Ideology's Ethic and any eligible Origin, Civic, Gestalt, or DLC conditions.
+
+<section id="tenet-unlocks">
+
+## How Do You Unlock Tenets in Stellaris Willpower?
+
+Tenets become available as your Ideological Strength increases.
+
+<GuideTable
+  caption="Tenet slot unlock requirements in Stellaris Willpower."
+  columns={tenetUnlockColumns}
+  rows={tenetUnlockRows}
+/>
+
+The first three slots correspond to increasing Intensities.
+
+**Intensity I** is the initial version of a Tenet. **Intensity II** offers stronger bonuses, and **Intensity III** often produces the largest numerical effect.
+
+For example, the generic Stability Tenet provides +3 Stability at Intensity I, +6 at Intensity II, and +9 at Intensity III.
+
+A different Tenet can occupy each unlocked slot.
+
+![The Ideologies interface showing three Tenet slots, their Intensity levels, and the Ideological Strength progress bar.](/images/stellaris-willpower/willpower-tenet-selection.webp)
+
+### Does the Fourth Tenet Have Intensity IV?
+
+No. Force of Will can provide an additional Tenet slot, but the available effects still use the existing Intensity system. There is no Intensity IV.
+
+The unlock is part of [Force of Will progression](/stellaris-willpower/force-of-will).
+
+### How do you gain enough Strength for another slot?
+
+Strength comes from the support and spread of your Ideology, including its followers, faction approval, ideological infrastructure, and relevant leadership bonuses.
+
+Empire Size and competing Ideologies can reduce your net gains.
+
+If you are stuck below 500 or 750 Strength, inspect the Strength tooltip before attempting further expansion. The [Ideologies Guide](/stellaris-willpower/ideologies) explains how to identify and correct the relevant penalties.
+
+</section>
+
+<section id="tenet-selection">
+
+## How Do You Choose a Tenet?
+
+When a new slot becomes available, open the Ideologies interface and select the empty Tenet slot.
+
+The game offers **three candidates** drawn from your eligible pool.
+
+Your possible offers include general Tenets, Tenets associated with the Ideology's Ethic, and special Tenets unlocked by your empire's Origin or Civics.
+
+A Tenet that does not match your eligibility conditions will not normally be offered, regardless of how much Influence you spend rerolling.
+
+### How should you compare three offers?
+
+Before choosing, check:
+
+1. **Immediate value:** Does the bonus improve something your empire already uses?
+2. **Scaling:** Will the effect become much more valuable with additional Pops, Jobs, Leaders, or territory?
+3. **Intensity:** Would this Tenet be more useful at Intensity II or III?
+4. **Special unlocks:** Does it give access to a new Edict, Agenda, Living Standard, or policy?
+5. **Conditions:** Does it require a particular Origin, Civic, empire type, or additional DLC?
+
+A flat economic bonus can be stronger than a complex modifier when your empire cannot reliably activate the complex effect.
+
+For instance, a Tenet that improves Metallurgists is useful when your existing economy produces substantial Alloys. A military bonus built around Soldiers or Defense Armies may contribute less if you barely employ either.
+
+The available options should fit the empire you have built, not an entirely different build you might pursue later.
+
+</section>
+
+<section id="reformulate-tenets">
+
+## How Do You Reformulate or Change Tenets?
+
+**Reformulate Tenets** and **Amend Tenet** serve different purposes.
+
+Reformulating changes the offered choices. Amending replaces a Tenet you have already selected.
+
+<GuideTable
+  caption="Tenet reroll, amendment, and upkeep costs in Stellaris 4.6."
+  columns={tenetChangeColumns}
+  rows={tenetChangeRows}
+/>
+
+The values above are base costs. Active modifiers and repeated reformulations can alter the cost shown by the game.
+
+### How do you reroll the three candidates?
+
+1. Open **Government → Ideologies**.
+2. Select an available Tenet slot.
+3. Inspect the three offered Tenets.
+4. Click **Reformulate Tenets** if none is suitable.
+5. Confirm the current Influence cost.
+6. Examine the replacement offers before selecting one.
+
+![Select a Tenet menu showing Militia Conscription, Crucible Principle, Force Projection, and the Reformulate Tenets button.](/images/stellaris-willpower/willpower-tenet-reroll.webp)
+
+The initial reformulation cost is 100 Influence, with a 180-day cooldown.
+
+You cannot repeatedly reroll without restriction. Check the active tooltip before spending your available Influence.
+
+### Can you move an existing Tenet to a higher Intensity?
+
+You cannot simply select the same Tenet in a second slot while keeping the original.
+
+For example, if you already use a Tenet at Intensity I, the game prevents you from also choosing the same Tenet at Intensity III.
+
+To change its placement, you need to modify the existing selection.
+
+This matters for Tenets with especially strong third-tier effects, such as Pluralism, Readiness, or certain leader-related bonuses.
+
+### When is an amendment worth paying for?
+
+An amendment is useful when the expected benefits justify replacing a permanent choice and accepting the cooldown.
+
+Before making the change, compare the value of the existing bonus with the new one.
+
+Do not spend Influence merely because a higher-Intensity slot has become available. A different Tenet may provide a greater immediate improvement without requiring you to rebuild your existing selection.
+
+</section>
+
+<section id="all-tenets">
+
+## All 95 Stellaris Willpower Tenets by Ethic
+
+Stellaris 4.6 has **95 Tenet entries**, but an empire cannot receive every option in a single campaign. Your available choices depend on the Ideology's Ethic and, for special Tenets, the required Origin, Civic, Precursor, or DLC.
+
+Some effects scale differently between Intensity I, II, and III, while others unlock an additional Edict, Agenda, Living Standard, or decision. Inspect the full Tenet tooltip before committing Influence, especially when a secondary effect is central to your plan.
+
+### General Tenets
+
+These three options can be offered to any Ideology.
+
+<GuideTable
+  caption="General Tenets available to all Ideologies."
+  columns={tenetColumns}
+  rows={generalTenetRows}
+/>
+
+Choose **Stability** for an immediate colony Stability problem, **Unity** to accelerate Tradition progress, or **Civility** when population-driven Empire Size is becoming a significant constraint. These general options are useful when your three offers lack a stronger bonus for your current economy.
+
+### Authoritarian Tenets
+
+Authoritarian choices emphasize Influence, political control, elites, Council effectiveness, and economic productivity.
+
+<GuideTable
+  caption="Authoritarian Tenets and their main effects."
+  columns={tenetColumns}
+  rows={authoritarianTenetRows}
+/>
+
+**Spectacle of Authority** is an appealing choice when Influence income limits expansion or political actions.
+
+At Intensity III, its additional monthly Influence can substantially offset Ideology-related upkeep.
+
+**Juvenile Employment** has a different purpose. It strengthens an economy built around Workers or Slaves and can be useful much earlier.
+
+For empires with strong Council positions, **Birthright** is another candidate. Its value depends on how much those extra Councilor levels improve the jobs and bonuses already important to your empire.
+
+### Egalitarian Tenets
+
+Egalitarian choices reward Faction output, specialist-focused economies, mobility, and administrative efficiency.
+
+<GuideTable
+  caption="Egalitarian Tenets and their main effects."
+  columns={tenetColumns}
+  rows={egalitarianTenetRows}
+/>
+
+**Participation** is most useful when your factions provide valuable resources and maintain sufficient approval.
+
+**Personal Accountability** can give substantial additional job output when Stability is already high.
+
+That distinction matters: reducing Crime does not automatically generate the maximum benefit. The extra value comes from maintaining the conditions that support strong Stability-based output.
+
+**Efficient Legislature** offers a different style of progression through Constitutional Improvement. Consider it when your political economy already supports frequent Agenda use.
+
+### Militarist Tenets
+
+Militarist options support Alloys, fleets, armies, leadership, and wartime production.
+
+<GuideTable
+  caption="Militarist Tenets and their main effects."
+  columns={tenetColumns}
+  rows={militaristTenetRows}
+/>
+
+Two combinations deserve attention.
+
+**Readiness + Crucible Principle**
+
+Readiness improves Metallurgist output, while Crucible Principle adds Research associated with Metallurgists.
+
+A large industrial economy could benefit from both effects, but the final value depends on the actual Metallurgist count and additional modifiers.
+
+**Militia Conscription**
+
+This can provide economic value from Defense Armies instead of treating defensive military Jobs only as a cost.
+
+Its alternative Nomad effects make it particularly important to inspect the tooltip for your own empire type.
+
+For fleets already consuming a large amount of Energy or other upkeep, **War Bonds** may offer more immediate value than a bonus requiring extensive changes to your economy.
+
+### Pacifist Tenets
+
+Pacifist options can improve peaceful growth, infrastructure, Influence, and development efficiency.
+
+<GuideTable
+  caption="Pacifist Tenets and their main effects."
+  columns={tenetColumns}
+  rows={pacifistTenetRows}
+/>
+
+**Peaceful Prosperity** is attractive when your next major investments include expensive megastructures.
+
+**Moral Pacifism** supports development through lower Empire Size effects and reduced diplomatic friction.
+
+**Life Reverence** rewards population growth but comes with military tradeoffs. It fits an empire prepared to invest in long-term development rather than relying on maximum army and naval performance.
+
+**Disarmament** is more conditional because its Stability benefit rewards sustained peace.
+
+Choose based on whether your actual diplomatic situation can support the intended playstyle.
+
+### Xenophile Tenets
+
+Xenophile bonuses favor diplomacy, Trade, population movement, Leaders, and interaction with other empires.
+
+<GuideTable
+  caption="Xenophile Tenets and their main effects."
+  columns={tenetColumns}
+  rows={xenophileTenetRows}
+/>
+
+**Pluralism** can be especially useful for a populous empire because it reduces Empire Size from Pops.
+
+**Networking** provides a more direct economic and diplomatic incentive, including monthly Influence.
+
+**Mutualism** is useful when Diplomatic Weight matters, such as during Galactic Community decisions or competition for Ideological Authority.
+
+Concordance and Integration are worth comparing for leader-focused diplomatic economies.
+
+### Xenophobe Tenets
+
+Xenophobe bonuses emphasize borders, autonomy, defensive infrastructure, internal development, and rivalry.
+
+<GuideTable
+  caption="Xenophobe Tenets and their main effects."
+  columns={tenetColumns}
+  rows={xenophobeTenetRows}
+/>
+
+**Sovereignty** reduces expansion infrastructure costs and supports Starbase development.
+
+**Assertion** becomes more useful when your empire maintains several rivalries and can benefit from increased Influence gains.
+
+**Self-Sufficiency** has a particularly important condition: its primary economic benefit depends on remaining outside the Galactic Community.
+
+Do not choose Self-Sufficiency if you intend to join the Galactic Community and keep its bonuses active. The Tenet's effects are disabled while your empire is a member.
+
+### Materialist Tenets
+
+Materialist Tenets provide several ways to turn existing economic activity into more Research or improve production efficiency.
+
+<GuideTable
+  caption="Materialist Tenets and their main effects."
+  columns={tenetColumns}
+  rows={materialistTenetRows}
+/>
+
+**Open Sourcing** deserves attention in Trade-centered empires because it unlocks Knowledge Exchange, creating a different use for Trade.
+
+That does not automatically mean a Trade economy will outperform every conventional Research economy. The result depends on the actual Trade generated and the opportunity cost of the conversion policy.
+
+**Physicality** and **Engineering** offer different benefits for empires investing heavily in megastructures.
+
+**Techno-Synergy** is a more specialized economic choice, particularly when a large Research workforce can improve another part of the empire's production.
+
+**Rationality** is useful for Scientist-focused progression, especially when earlier access to higher-skill Scientists matters.
+
+### Spiritualist Tenets
+
+Spiritualist choices emphasize Unity, population development, Council activity, and Living Standards.
+
+<GuideTable
+  caption="Spiritualist Tenets and their main effects."
+  columns={tenetColumns}
+  rows={spiritualistTenetRows}
+/>
+
+**Unism** is one of the more direct Unity choices.
+
+**Humility** combines Happiness and Housing benefits with an additional Living Standard, making it more than a simple Happiness modifier.
+
+**Sacred Union** can be useful for growth-focused empires, although its extra upkeep must be considered.
+
+For Priest and Council-oriented playstyles, **Sacred Counsel** and **Sacred Rituals** may be more relevant than a general-purpose Unity bonus.
+
+</section>
+
+<section id="special-tenets">
+
+## Which Tenets Are Locked Behind Origins or Civics?
+
+Some Tenets are not part of the regular Ethic candidate pool.
+
+Special Tenets can depend on your Origin, Civic, Precursor, or the events that occur during your campaign.
+
+### Golden Generation and Civic-Specific Tenets
+
+<GuideTable
+  caption="Special Tenets associated with Golden Generation, Civics, and patron choices."
+  columns={tenetColumns}
+  rows={specialTenetRows}
+/>
+
+### Which Special Tenets Can Golden Generation Unlock?
+
+Golden Academy decisions affect the leadership Tenets that can enter your selection pool. **Favoritist Leadership** and **Equitable Leadership**, for example, are associated with different event outcomes.
+
+Check which outcome your empire received before spending Influence trying to obtain a particular Tenet. Reformulation cannot make an option eligible when its event requirement is missing.
+
+### How Does Lost Makers Determine Its Precursor Tenet?
+
+Lost Makers can obtain a Precursor-specific Tenet determined by the Precursor associated with the campaign.
+
+These options have a single Intensity rather than three progressively stronger versions. Their effects and eligibility differ, so the Precursor selected for your campaign matters more than the usual Intensity comparison.
+
+Do not spend Influence attempting to obtain a Precursor Tenet tied to a different Lost Makers outcome.
+
+</section>
+
+<section id="gestalt-tenets">
+
+## How Are Gestalt Tenets Different?
+
+Gestalt Consciousness empires do not always receive the same effects as regular empires.
+
+Some Tenets change their names, substitute different Jobs, or replace Happiness and Crime with modifiers more appropriate to a Hive Mind or Machine Intelligence.
+
+<GuideTable
+  caption="Examples of regular and Gestalt Tenet effect differences."
+  columns={gestaltDifferenceColumns}
+  rows={gestaltDifferenceRows}
+/>
+
+### Humility: Regular Empire vs Gestalt
+
+For a regular empire, Humility offers Happiness and Housing benefits while unlocking the **Humility Living Standard**. That Living Standard changes Pop Upkeep and Political Power across different population strata, so the decision involves more than the empire-wide Happiness modifier.
+
+Gestalt empires receive Stability, Pop Upkeep, and Housing benefits instead. They do not evaluate Humility through the same individual political strata and Living Standard effects.
+
+The important distinction is what each empire actually gains: a regular empire must evaluate the Living Standard's economic and political tradeoffs, while a Gestalt empire can compare the direct stability and maintenance benefits.
+
+### Why do some Gestalt Tenets have different names?
+
+Effects tied to independent political factions, Ethics attraction, or individual Pop strata do not always translate directly to Gestalt play.
+
+For example, Strategism may use **Instinctivism** or **Directivism**, with bonuses linked to the **Finding the Voice** Agenda.
+
+The Council Agenda Speed and Cooldown improvements remain relevant, but the associated launch-effect bonus changes.
+
+Do not interpret these as separate Tenets available simultaneously. They are conditional variants.
+
+</section>
+
+<section id="nomad-tenets">
+
+## How Do Tenets Work for Nomadic Empires?
+
+Nomadic empires may receive alternative bonuses when a standard Tenet references settled planetary systems or population Jobs.
+
+**Militia Conscription** is one example.
+
+For regular empires, it can provide additional Defense Armies, Alloys from those armies, and reduced Army expenses.
+
+For Nomads, the replacement can provide **Arkship Hull Points per 100 Civilians** and reduced Soldier Upkeep, while retaining military cost reductions.
+
+This changes the purpose of the Tenet.
+
+Instead of improving a defensive planetary army economy, the Nomad variant supports Arkship durability and its military workforce.
+
+When selecting a Tenet as a Nomad, inspect its actual version rather than relying on the bonuses shown for settled empires.
+
+</section>
+
+<section id="propagandism">
+
+## Is Propagandism Worth Choosing?
+
+Most Ideology Ethics have a Propagandism-style Tenet.
+
+These Tenets generally improve Edict Fund, increase the contribution of an Advocate where applicable, and unlock an Ethic-specific Broadcasting Edict.
+
+The main decision is whether you need the additional Edict capacity and ideological broadcasting effects more than another economic or military bonus.
+
+### Militarist Propagandism Effects
+
+<GuideTable
+  caption="Militarist Propagandism bonuses at all three Intensities."
+  columns={militaristPropagandismColumns}
+  rows={militaristPropagandismRows}
+/>
+
+![Militarist Propagandism showing all three Intensity levels and the Militarist Broadcasting Edict.](/images/stellaris-willpower/willpower-militarist-propagandism-broadcasting.webp)
+
+The **Militarist Broadcasting** Edict provides additional ideological effects, including:
+
+- Foreign Ideological Push +10%.
+- Colony Ideological Reach +10%.
+- Happiness +10% for Pops following a Militarist Ideology.
+
+The Edict remains active until cancelled.
+
+Militarist Broadcasting becomes more valuable when you need additional ideological pressure in contested foreign systems. Its Push and Reach modifiers support that goal, while the Happiness bonus benefits Pops already following the relevant Ideology.
+
+Use the [Ideologies interface](/stellaris-willpower/ideologies) to determine whether the additional pressure is producing more followers or whether the target government still requires a separate diplomatic action.
+
+</section>
+
+<section id="strategism">
+
+## When Should You Choose Strategism?
+
+Strategism improves Council Agenda activity.
+
+For Militarist Strategism, the confirmed modifiers are:
+
+- Agenda Speed +10% / +20% / +40%.
+- Agenda Cooldown -5% / -10% / -20%.
+- Display of Power Launch Effectiveness +10% / +20% / +40%.
+
+Other Ethics use related versions, with the launch-effectiveness bonus attached to their appropriate Agenda.
+
+For Gestalt variants, the relevant Agenda can be Finding the Voice.
+
+### Is Strategism better than a direct economy bonus?
+
+That depends on how often you launch an Agenda and how valuable its effects are.
+
+A Council-focused empire may benefit substantially from increased Agenda Speed and reduced cooldowns.
+
+An empire that rarely uses the associated Agenda could receive more immediate value from Stability, Unity, or production bonuses.
+
+Before choosing Strategism, open your Council interface and inspect the actual Agenda you intend to improve.
+
+Compare its launch effect with the bonuses you would receive from another Tenet.
+
+</section>
+
+<section id="best-tenets">
+
+## Which Tenets Are Best for Your Empire?
+
+There is no single Tenet that provides the greatest benefit in every campaign.
+
+A large industrial economy values different bonuses from a diplomatic federation, a leader-focused empire, or a Nomadic fleet.
+
+Start by identifying the resource or system currently limiting your progress.
+
+<GuideTable
+  caption="Tenet choices organized by empire strategy and immediate needs."
+  columns={tenetGoalColumns}
+  rows={tenetGoalRows}
+/>
+
+### What Makes an Intensity I Tenet Worth Taking?
+
+The value of an early Tenet depends on how soon its bonus changes your empire's output or survival prospects.
+
+Compare two situations. An empire with several productive Metallurgist Jobs can benefit immediately from Readiness, while an empire with low colony Stability may gain more from correcting that problem first.
+
+The same comparison applies to Unity, Influence, and leader bonuses. A large percentage attached to a Job or activity you barely use may contribute less than a smaller bonus affecting most of your existing economy.
+
+Before rerolling, inspect the three offers against your current resource shortages and the time needed to reach the next Strength threshold. A useful Intensity I effect can generate value for many years before the higher slots are available.
+
+### Which Tenets benefit most from Intensity III?
+
+Higher Intensity can greatly amplify bonuses that affect the entire empire.
+
+Examples include:
+
+**Pluralism:** A large reduction to Empire Size from Pops is especially valuable once population growth becomes a major source of Empire Size.
+
+**Readiness:** Stronger Metallurgist output becomes more important when a large number of industrial Jobs benefit.
+
+**Physicality:** A greater reduction to Megastructure Unity costs becomes useful when planning multiple expensive projects.
+
+**Participation:** Higher Faction Resource Output matters when faction income is already significant.
+
+**Chain of Command:** Additional Commander Starting Skill can support specialized military leadership.
+
+These are examples of valuable scaling, not a universal ranking.
+
+The same Tenet may be much weaker in an empire that lacks the associated economy or strategy.
+
+### Should you always save your favorite Tenet for Intensity III?
+
+No.
+
+Sometimes the benefit of taking an important Tenet early outweighs the stronger effect you could obtain later.
+
+A developing empire may need lower upkeep or additional income immediately to survive and expand.
+
+Waiting until 750 Strength to obtain that bonus can sacrifice decades of useful output.
+
+Consider the following question:
+
+**Will the early benefit change what my empire can accomplish before the next Tenet slot unlocks?**
+
+If the answer is yes, taking the useful Tenet early can be justified even if its maximum Intensity would be stronger.
+
+</section>
+
+<section id="tenet-mistakes">
+
+## Why Can't You Select or Change a Tenet?
+
+Tenet selection problems usually come from eligibility, slot progression, duplicate restrictions, or the difference between Reformulate and Amend.
+
+<GuideTable
+  caption="Common Tenet selection and reformulation problems."
+  columns={tenetMistakeColumns}
+  rows={tenetMistakeRows}
+/>
+
+### Why does a special Tenet never appear?
+
+First confirm that you satisfy its requirements.
+
+A Lost Makers Precursor Tenet cannot appear merely because you share the associated Ethic.
+
+Likewise, a Tenet requiring Galactic Paragons does not become available simply by adopting the correct Ideology.
+
+If a Tenet depends on a Golden Generation event choice, you also need the applicable outcome.
+
+Rerolling cannot replace a missing prerequisite.
+
+### Why is Reformulate Tenets unavailable?
+
+Check the current action tooltip.
+
+The 180-day cooldown may still be active, the Influence cost may be unaffordable, or another selection restriction may apply.
+
+If you have already codified a Tenet, you may need to use the amendment system instead of refreshing an open selection.
+
+### Can another empire change your Tenets?
+
+When several empires follow the same Ideology, control belongs to its Ideological Authority.
+
+If your empire follows an Ideology created by another government, you cannot automatically choose or amend the Tenets yourself.
+
+You must first gain the Authority role.
+
+For the Authority requirements, see the [Ideologies Guide](/stellaris-willpower/ideologies).
+
+</section>
+
+<section id="next-step">
+
+## How Do You Tell Whether Your New Tenet Is Working?
+
+Check the game value that the Tenet actually changes. A Metallurgist bonus should be evaluated through the relevant Jobs and Alloy production, while a Council Agenda modifier will appear through Agenda performance rather than ordinary resource income.
+
+For conditional Tenets, confirm that the requirement is active. A bonus tied to a specific Job, diplomatic agreement, or empire type may produce little value even when the Tenet itself is selected correctly.
+
+If your next slot remains locked because Ideological Strength is falling, examine the [Strength and Momentum modifiers](/stellaris-willpower/ideologies).
+
+If Force of Will provides another Tenet slot, use the [Ambition progression](/stellaris-willpower/force-of-will) to determine when it becomes available.
+
+</section>
