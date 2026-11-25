@@ -130,7 +130,179 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters: GuideCluster[] = [
+  {
+    title: "No Asteroids",
+    game: "No Asteroids",
+    href: "/no-asteroids",
+    slug: "no-asteroids",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
   
+    label:
+      "Walkthrough, Best Upgrades, Ship Guns & 65 Achievements",
+  
+    eyebrow:
+      "Space Mining, Incremental Progression & Asteroid Demolition",
+  
+    hubStatus:
+      "90-Day Rescue Mission + 6 Mining Tools + 8 Minerals + 4 Drone Types + 9 Ship Guns + 36 Museum Finds + 65 Achievements",
+  
+    description:
+      "Destroy the asteroid before impact, improve mining equipment, unlock the Engine Room, configure automatic ship weapons, clear the final remaining rocks, and complete all 65 achievements.",
+  
+    coverage: [
+      "90-day rescue mission, first mining shift, mineral scanner, Engine Room unlock, landing sites, Hop, solar flares, daily destruction targets, final 1% cleanup and new asteroid contracts",
+  
+      "All six mining tools from Pickaxe to Missile Swarm, shared tool upgrades, Cargo Hold, Air Tanks, eight mineral types, Refining, Buyers and Daily Orders",
+  
+      "Suit upgrades, Mineral Scanner, Jetpack, Tether, Digger, Prospector, Oxygen Drone, Sapper, Charges and Mining Rigs",
+  
+      "All nine ship guns, weapon prices, Tractor Beam, Air Generator, mounting slots, duplicate weapon costs, shared Engineering upgrades, Laser Beam and Collapsar loadouts",
+  
+      "All 65 Steam achievements with an interactive checklist, 36 Museum Finds, seven collections, Wide awake, optional ship interactions, Earth saved and Overtime",
+    ],
+  
+    image:
+      "/images/no-asteroids/no-asteroids-90-day-contract.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 92,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "No Asteroids Walkthrough & Guide: How to Win in 90 Days",
+  
+        href: "/no-asteroids",
+        type: "Guide Hub",
+  
+        description:
+          "Complete your first mining shifts, unlock the Engine Room, calculate your required daily destruction, clear the final 1%, and take new asteroid contracts.",
+  
+        image:
+          "/images/no-asteroids/no-asteroids-90-day-contract.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "90-day rescue mission, 5,000,000 m³ asteroid, first mining shift, Engine Room, Landing Navigator, Hop, Solar Flares, final 1% and Next Contract",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "No Asteroids Best Upgrades: Tools, Money & Upgrade Order",
+  
+        href: "/no-asteroids/upgrades",
+        type: "Systems",
+  
+        description:
+          "Compare all six mining tools, improve cargo and oxygen capacity, earn more money from minerals, and choose useful drone and equipment upgrades.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/no-asteroids/no-asteroids-shared-tool-upgrades.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 575,
+  
+          spotlightMeta:
+            "Pickaxe, Sledgehammer, Drill, Laser, Plasma Cutter, Missile Swarm, eight minerals, Refining, Buyers, Cargo Hold, Air Tanks, Drones and Charges",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "No Asteroids Best Ship Guns: All Weapons & Upgrade Priority",
+  
+        href: "/no-asteroids/ship-guns",
+        type: "Systems",
+  
+        description:
+          "Compare all nine ship guns, recover ore with the Tractor Beam, unlock mounting slots, improve shared weapon attributes, and configure effective demolition loadouts.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/no-asteroids/no-asteroids-ship-weapon-comparison.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 576,
+  
+          spotlightMeta:
+            "Turret, Autocannon, Seismic Cannon, Railgun, Mass Driver, Rockets, Laser Beam, Orbital Strike, Collapsar, Tractor Beam and Air Generator",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "No Asteroids Achievements Guide: All 65 Achievements",
+  
+        href: "/no-asteroids/achievements",
+        type: "Achievements",
+  
+        description:
+          "Track all 65 achievements, complete 36 Museum Finds, unlock optional ship interactions, wash the Lander to 100%, and plan blackout-free and ending-related achievements.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/no-asteroids/no-asteroids-lost-in-orbit-camera.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 577,
+  
+          spotlightMeta:
+            "65 achievements, interactive checklist, 36 Museum Finds, seven collections, Full museum, Wide awake, Mineralogist, A million by hand, Earth saved and Overtime",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
 {
   title: "Stellaris: Willpower",
   game: "Stellaris",
