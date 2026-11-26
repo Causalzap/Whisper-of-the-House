@@ -131,6 +131,181 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Company of Heroes 3: Operation Torch",
+    game: "Company of Heroes 3",
+    href: "/company-of-heroes-3-operation-torch",
+    slug: "company-of-heroes-3-operation-torch",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label:
+      "Walkthrough, Campaign Upgrades, Longstop Infiltration & 30 Achievements",
+  
+    eyebrow:
+      "World War II Real-Time Strategy, Tactical Combat & Single-Player Campaign",
+  
+    hubStatus:
+      "Operation Torch DLC + 15 Campaign Missions + 4 Difficulty Levels + 30 Early Campaign Perks + Torch Objectives + 30 Achievements",
+  
+    description:
+      "Start Operation Torch, explore all 15 campaign missions, complete early battlefield objectives, choose permanent campaign perks, finish Longstop Infiltration, and track all 30 achievements.",
+  
+    coverage: [
+      "Campaign setup, four difficulty levels, Tactical Pause, all 15 mission names, Operation Flagpole, Charlie Beach and early campaign progression",
+  
+      "Medjez El Bab Whizbang artillery, Engineer rescue, enemy outposts, three-bridge defense, Iron Rain, Chouigui and Stuart tanks",
+  
+      "Hornet's Nest reconnaissance, British artillery, Sened Station railway junction, supply trucks, retreating soldiers and Faid opening objectives",
+  
+      "15 campaign upgrade choices, 30 early campaign perks, Torch Objectives, Bonus Upgrades, Infantry, Halftracks, Stuarts, Commandos and support weapons",
+  
+      "Longstop Infiltration, 4-second camouflage, detection radius, sniper objectives, Demo Charges, German Captain optional objective, checkpoint recovery and extraction",
+  
+      "All 30 Operation Torch achievements with an interactive checklist, 15 Any Difficulty achievements, 15 Expert achievements and campaign completion planning",
+    ],
+  
+    image:
+      "/images/company-of-heroes-3-operation-torch/operation-torch-charlie-beach-objectives.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 93,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Company of Heroes 3 Operation Torch Walkthrough & Guide",
+  
+        href: "/company-of-heroes-3-operation-torch",
+        type: "Guide Hub",
+  
+        description:
+          "Explore all 15 campaign missions, choose your difficulty, follow early mission walkthroughs, defend Medjez El Bab, and progress through Sened Station.",
+  
+        image:
+          "/images/company-of-heroes-3-operation-torch/operation-torch-charlie-beach-objectives.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "15 campaign missions, four difficulty levels, Tactical Pause, Operation Flagpole, Charlie Beach, Medjez El Bab, Iron Rain, Chouigui, Hornet's Nest, Sened Station and Faid",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Company of Heroes 3 Operation Torch Campaign Upgrades & Best Perks",
+  
+        href: "/company-of-heroes-3-operation-torch/campaign-upgrades",
+        type: "Systems",
+  
+        description:
+          "Compare 30 early campaign perks, unlock Bonus Upgrades through Torch Objectives, reduce Manpower costs, and improve infantry, vehicles and support units.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/company-of-heroes-3-operation-torch/operation-torch-campaign-perk-selection.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 578,
+  
+          spotlightMeta:
+            "15 upgrade choices, 30 early campaign perks, Torch Objectives, Bonus Upgrade, Standoff, Prepared Repair Kits, Veteran Trainers, Triage, Attacking Spirit and Hold the Line",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "CoH3 Operation Torch Longstop Infiltration Walkthrough",
+  
+        href: "/company-of-heroes-3-operation-torch/longstop-infiltration",
+        type: "Walkthrough",
+  
+        description:
+          "Maintain camouflage, avoid detection, eliminate four snipers, plant Demo Charges, sabotage the German Captain's car, and reach the extraction point.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/company-of-heroes-3-operation-torch/operation-torch-longstop-detection.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 579,
+  
+          spotlightMeta:
+            "Commando, Concealment, 4-second camouflage, detection radius, four snipers, Demo Charges, German Captain, second charge interruption, checkpoints and extraction",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Company of Heroes 3 Operation Torch Achievements: All 30",
+  
+        href: "/company-of-heroes-3-operation-torch/achievements",
+        type: "Achievements",
+  
+        description:
+          "Track all 30 Operation Torch achievements with an interactive checklist, check hidden achievement requirements, and plan Expert difficulty mission completion.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/company-of-heroes-3-operation-torch/operation-torch-campaign-difficulty.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 580,
+  
+          spotlightMeta:
+            "30 Steam achievements, interactive checklist, 15 Any Difficulty achievements, 15 Expert achievements, Sand Castle, This Is Fine, Graduation and Redemption",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
+  {
     title: "No Asteroids",
     game: "No Asteroids",
     href: "/no-asteroids",

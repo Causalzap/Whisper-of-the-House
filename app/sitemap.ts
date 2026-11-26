@@ -1305,6 +1305,12 @@ const paths = [
      'no-asteroids/upgrades',
      'no-asteroids/ship-guns',
      'no-asteroids/achievements',
+
+     'company-of-heroes-3-operation-torch',
+     'company-of-heroes-3-operation-torch/achievements',
+     'company-of-heroes-3-operation-torch/campaign-upgrades',
+     'company-of-heroes-3-operation-torch/longstop-infiltration',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -1312,6 +1318,11 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  'company-of-heroes-3-operation-torch': '2026-11-26',
+  'company-of-heroes-3-operation-torch/achievements': '2026-11-26',
+  'company-of-heroes-3-operation-torch/campaign-upgrades': '2026-11-26',
+  'company-of-heroes-3-operation-torch/longstop-infiltration': '2026-11-26',
+
   'no-asteroids': '2026-11-25',
   'no-asteroids/upgrades': '2026-11-25',
   'no-asteroids/ship-guns': '2026-11-25',
