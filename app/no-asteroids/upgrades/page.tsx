@@ -11,10 +11,10 @@ const hubUrl = `${siteUrl}/no-asteroids`;
 const pageUrl = `${hubUrl}/upgrades`;
 
 const metadataTitle =
-  "No Asteroids Best Upgrades: Tools, Money & Upgrade Order";
+  "No Asteroids Best Upgrades: What to Buy First & Upgrade Order";
 
 const metadataDescription =
-  "Find the best No Asteroids upgrades, compare all six mining tools, earn money from eight minerals, improve cargo and oxygen capacity, and invest in drones and Charges.";
+  "Find the best upgrades in No Asteroids, what to buy first, all eight mining tools, Lance and Slicer unlocks, cargo upgrades, and money-making tips.";
 
 const articleTitle =
   "What Are the Best Upgrades to Buy First in No Asteroids?";

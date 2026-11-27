@@ -379,6 +379,7 @@ export type CampaignPerk = {
         },
       ],
     },
+
   ];
   
   // Flattened collection for future tools, lookups, and filters.

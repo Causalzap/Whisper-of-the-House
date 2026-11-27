@@ -14,13 +14,13 @@ const metadataTitle =
   "No Asteroids Walkthrough & Guide: How to Win in 90 Days";
 
 const metadataDescription =
-  "Follow the No Asteroids walkthrough, unlock the Engine Room, improve mining progression, destroy the asteroid before impact, clear the final 1%, and take new contracts.";
+  "Follow the No Asteroids walkthrough, unlock the Engine Room, destroy the asteroid in 90 days, clear the final 1%, and explore No Rush Mode and New Game+.";
 
 const articleTitle =
   "No Asteroids Walkthrough & Guide: How Do You Destroy the Asteroid in 90 Days?";
 
 const articleDescription =
-  "Complete your first mining shifts, unlock ship weapons, accelerate asteroid destruction, find the final remaining rocks, and continue into new asteroid contracts.";
+  "Progress from your first mining shift to complete asteroid destruction, unlock ship weapons, clear the final 1%, adjust difficulty settings, and continue into New Game+.";
 
 const imageUrls = [
   `${siteUrl}/images/no-asteroids/no-asteroids-90-day-contract.webp`,
@@ -82,11 +82,15 @@ const toc = [
   },
   {
     id: "next-contracts",
-    label: "New Asteroid Contracts",
+    label: "New Game+ & Contracts",
   },
   {
     id: "common-problems",
     label: "Common Progression Problems",
+  },
+  {
+    id: "difficulty-options",
+    label: "Cheats & Difficulty Options",
   },
 ];
 
@@ -187,7 +191,7 @@ const jsonLd = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      dateModified: "2026-11-25",
+      dateModified: "2026-11-27",
       image: imageUrls,
     },
   ],
@@ -213,7 +217,7 @@ export default function NoAsteroidsPage() {
           gameHref="/no-asteroids"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 25, 2026"
+          updatedAt="November 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
