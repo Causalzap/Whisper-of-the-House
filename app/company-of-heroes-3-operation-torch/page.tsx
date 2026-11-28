@@ -14,13 +14,16 @@ const metadataTitle =
   "Company of Heroes 3 Operation Torch Walkthrough & Guide";
 
 const metadataDescription =
-  "Explore all 15 Operation Torch missions, choose your difficulty, complete early campaign objectives, defend Medjez El Bab, and progress through Sened Station.";
+  "Complete all 15 Operation Torch missions, from Operation Flagpole to Hill 604, with mission objectives, battlefield tactics, and solutions to difficult encounters.";
 
 const articleTitle =
-  "Company of Heroes 3 Operation Torch Guide: How Do You Progress Through the Campaign?";
+  "Company of Heroes 3 Operation Torch Walkthrough: All 15 Missions";
 
 const articleDescription =
-  "Start Operation Torch, choose your difficulty, follow mission walkthroughs through Sened Station, prepare for counterattacks, and track your campaign progress.";
+  "Progress through all 15 Operation Torch missions, from the initial landings to the final assault on Hill 604. Complete objectives, survive counterattacks, and overcome difficult battles.";
+
+const jsonLdDescription =
+  "Complete all 15 missions in Company of Heroes 3 Operation Torch, including Faid Pass, Sbeitla, Kasserine, Fondouk Gap, Return to Longstop, Hill 609, and Hill 604.";
 
 const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-campaign-difficulty.webp`,
@@ -29,6 +32,14 @@ const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-whizbang-barrage.webp`,
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-bonus-objective-icon.webp`,
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-medjez-el-bab-defend-point.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-faid-mortar-recovery.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-faid-repair-at-guns.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-sbeitla-logistics-truck.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-kasserine-at-gun-airdrop.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-fondouk-tunnel-hideout.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-return-to-longstop-fuel-sites.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-hill-609-secondary-hills.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-hill-604-village-route.webp`,
 ];
 
 const heroImage = imageUrls[2];
@@ -84,7 +95,31 @@ const toc = [
   },
   {
     id: "faid",
-    label: "Faid Opening Objectives",
+    label: "Faid Pass Walkthrough",
+  },
+  {
+    id: "sbeitla",
+    label: "Sbeitla Walkthrough",
+  },
+  {
+    id: "kasserine",
+    label: "Kasserine Walkthrough",
+  },
+  {
+    id: "fondouk",
+    label: "Fondouk Gap Walkthrough",
+  },
+  {
+    id: "return-to-longstop",
+    label: "Return to Longstop Walkthrough",
+  },
+  {
+    id: "hill-609",
+    label: "Hill 609 Walkthrough",
+  },
+  {
+    id: "hill-604",
+    label: "Hill 604 Walkthrough",
   },
   {
     id: "campaign-upgrades",
@@ -107,11 +142,11 @@ const relatedLinks = [
   },
   {
     href: "/company-of-heroes-3-operation-torch/campaign-upgrades",
-    label: "Campaign Upgrades: Best Perks & Torch Objectives",
+    label: "Campaign Upgrades: 56 Perks & Best Choices",
   },
   {
     href: "/company-of-heroes-3-operation-torch/longstop-infiltration",
-    label: "Longstop Infiltration: Commando Mission Walkthrough",
+    label: "Longstop Infiltration: Concealment & Mission Walkthrough",
   },
 ];
 
@@ -130,6 +165,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
+        alt: "Company of Heroes 3 Operation Torch Charlie Beach mission",
       },
     ],
   },
@@ -180,7 +216,7 @@ const jsonLd = {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
       headline: articleTitle,
-      description: articleDescription,
+      description: jsonLdDescription,
       inLanguage: "en",
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -195,7 +231,7 @@ const jsonLd = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      dateModified: "2026-11-26",
+      dateModified: "2026-11-28",
       image: imageUrls,
     },
   ],
@@ -221,7 +257,7 @@ export default function OperationTorchPage() {
           gameHref="/company-of-heroes-3-operation-torch"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 26, 2026"
+          updatedAt="November 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

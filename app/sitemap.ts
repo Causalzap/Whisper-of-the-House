@@ -1327,10 +1327,10 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   'am-i-nima/endings': '2026-11-28',
   'am-i-nima/achievements': '2026-11-28',
 
-  'company-of-heroes-3-operation-torch': '2026-11-26',
-  'company-of-heroes-3-operation-torch/achievements': '2026-11-26',
-  'company-of-heroes-3-operation-torch/campaign-upgrades': '2026-11-26',
-  'company-of-heroes-3-operation-torch/longstop-infiltration': '2026-11-26',
+  'company-of-heroes-3-operation-torch': '2026-11-28',
+  'company-of-heroes-3-operation-torch/achievements': '2026-11-28',
+  'company-of-heroes-3-operation-torch/campaign-upgrades': '2026-11-28',
+  'company-of-heroes-3-operation-torch/longstop-infiltration': '2026-11-28',
 
   'no-asteroids': '2026-11-25',
   'no-asteroids/upgrades': '2026-11-25',

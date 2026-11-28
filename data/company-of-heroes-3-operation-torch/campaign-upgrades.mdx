@@ -2,9 +2,24 @@ import Link from "next/link";
 import GuideImage from "@/components/guides/GuideImage";
 import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
 import GuideTable from "@/components/GuideTable";
-import { operationTorchUpgradeChoices } from "@/data/company-of-heroes-3-operation-torch/upgrades";
+
+import {
+  operationTorchUpgradeChoices,
+  operationTorchCampaignPerks,
+} from "@/data/company-of-heroes-3-operation-torch/upgrades";
+
+import {
+  getOperationTorchMission,
+} from "@/data/company-of-heroes-3-operation-torch/missions";
+
+export const campaignUpgradeChoiceCount =
+  operationTorchUpgradeChoices.length;
+
+export const campaignPerkCount =
+  operationTorchCampaignPerks.length;
 
 export const campaignPerkColumns = [
+  { key: "mission", label: "Mission" },
   { key: "category", label: "Upgrade Category" },
   { key: "unlock", label: "Unlock Requirement" },
   { key: "optionA", label: "First Option" },
@@ -13,12 +28,20 @@ export const campaignPerkColumns = [
 
 export const campaignPerkRows = operationTorchUpgradeChoices.map(
   (choice) => ({
-    category: choice.options[0].unitCategory,
+    mission:
+      getOperationTorchMission(choice.missionId)?.name ??
+      choice.missionId,
+    category: Array.from(
+      new Set(
+        choice.options.map((perk) => perk.unitCategory)
+      )
+    ).join(" / "),
     unlock: choice.unlockCondition,
     optionA: `${choice.options[0].name}: ${choice.options[0].effect}`,
     optionB: `${choice.options[1].name}: ${choice.options[1].effect}`,
   })
 );
+
 export const upgradePriorityColumns = [
   { key: "problem", label: "Your Main Problem" },
   { key: "priority", label: "Upgrade Priority" },
@@ -28,46 +51,58 @@ export const upgradePriorityColumns = [
 export const upgradePriorityRows = [
   {
     problem: "Infantry take too many losses",
-    priority: "Riflemen protection and reinforcement",
+    priority: "Standoff, Hold the Line, Grenade Sumps",
     reason:
-      "Helps preserve squads and replace casualties between engagements.",
+      "Improves infantry protection under the required cover or territory conditions.",
   },
   {
     problem: "Manpower runs out too quickly",
-    priority: "Barracks cost reduction and cheaper reinforcement",
+    priority: "Bureau of Personnel, Triage",
     reason:
-      "Reduces the cost of training units and replacing lost soldiers.",
+      "Reduces separate recruitment and reinforcement expenses across multiple missions.",
   },
   {
     problem: "Damaged vehicles spend too long away from combat",
-    priority: "Engineer repair speed",
+    priority: "Prepared Repair Kits, Field Repairs",
     reason:
-      "Reduces the time needed to return damaged vehicles to combat.",
+      "Improves vehicle recovery through faster Engineer repairs and an additional repair ability.",
   },
   {
     problem: "Enemy positions are difficult to approach",
-    priority: "Reconnaissance and grenade range",
+    priority: "Grenade Range, Grasshopper Recon Run, Light HE Rounds",
     reason:
-      "Helps identify threats and use abilities without moving as close.",
+      "Improves reconnaissance and the reach of selected infantry or support abilities.",
   },
   {
-    problem: "Defensive positions cannot withstand repeated attacks",
-    priority: "Engineer construction and HMG upgrades",
+    problem: "Infantry spend too long returning to base",
+    priority: "Benzedrine, Frontline Medical Station",
     reason:
-      "Improves preparation and the effectiveness of defensive units.",
+      "Improves reinforcement speed and provides another frontline recovery location.",
   },
   {
-  problem: "Enemy armor repeatedly stops your advance",
-  priority: "Dual P-47 Rocket Strike",
-  reason:
-    "Provides additional air support designed to be effective against vehicles.",
-},
+    problem: "Enemy armor repeatedly stops your advance",
+    priority: "Dual P-47 Rocket Strike, Tungsten Rounds, HVAP-T Rounds",
+    reason:
+      "Adds anti-vehicle support or improves penetration for the affected vehicle types.",
+  },
+  {
+    problem: "Support abilities consume too much Munitions",
+    priority: "Fire Direction Center",
+    reason:
+      "Reduces the Munitions cost of support abilities by 50%.",
+  },
+  {
+    problem: "New tanks lack combat experience",
+    priority: "Elite Trainers",
+    reason:
+      "Tank Depot units begin at Veterancy 3 after selecting this late-campaign reward.",
+  },
 ];
 
 <section id="quick-answer" className="scroll-mt-24">
 
 <GuideQuickAnswer title="Which Campaign Upgrades Should You Choose in Operation Torch?">
-  Complete Torch Objectives whenever practical to earn additional campaign perk choices. Prioritize upgrades that solve recurring problems across multiple missions: infantry survivability, Manpower costs, Engineer repair speed, and reconnaissance. Choose specialized vehicle or support perks when those units form an important part of your army.
+  Operation Torch offers {campaignPerkCount} perk options across {campaignUpgradeChoiceCount} upgrade choices. Prepared Repair Kits, Bureau of Personnel, and Triage are useful early investments for repairs and Manpower efficiency. Later rewards such as Field Repairs, Tungsten Rounds, Fire Direction Center, and Elite Trainers address more specialized problems. Complete Torch Objectives to unlock additional choices, and consider how many missions remain before selecting a late-campaign perk.
 </GuideQuickAnswer>
 
 </section>
@@ -166,24 +201,16 @@ Missing this objective means losing the opportunity to select either Barracks pe
 
 ## Operation Torch Campaign Perks and Upgrade Choices
 
-The table below compares 15 campaign upgrade choices containing 30 perk options encountered from Operation Flagpole through Sened Station.
+There are {campaignPerkCount} perk options across {campaignUpgradeChoiceCount} mutually exclusive upgrade choices, earned from Operation Flagpole through Hill 609.
 
-Use the unlock requirements to distinguish standard mission rewards from additional Torch Objective rewards.
+Each mission reward offers two alternatives. Completing a Torch Objective unlocks an additional pair, allowing you to select one standard perk and one bonus perk when both rewards are available.
 
 <GuideTable
   columns={campaignPerkColumns}
   rows={campaignPerkRows}
 />
 
-The listed effects follow the in-game perk descriptions. This table does not include the upgrade choices from later campaign missions.
-
-When deciding between two options, consider three questions:
-
-- How frequently do you use the affected unit?
-- Does the upgrade solve a problem that repeatedly causes losses?
-- Will the benefit remain useful when the next mission changes your available army?
-
-An upgrade that affects a frequently used unit or reduces a recurring expense may provide more practical value than a powerful bonus for a unit you rarely deploy.
+Timing matters as much as the size of a bonus. A recruitment discount earned after Medjez El Bab can save Manpower across many battles, while a Tank Depot perk earned after Hill 609 has only the final mission to prove its value.
 
 </section>
 
@@ -191,9 +218,7 @@ An upgrade that affects a frequently used unit or reduces a recurring expense ma
 
 ## Which Infantry Campaign Perks Should You Choose?
 
-Infantry upgrades are worth considering early because Riflemen, Engineers, and other infantry squads contribute to many different mission types.
-
-Improving infantry performance can help both offensive missions and defensive engagements.
+Infantry losses create two separate problems: depleted combat strength and rising reinforcement costs. Early Riflemen, Barracks, and Engineer rewards can address these problems before the campaign introduces more specialized units.
 
 ### Captain: Lead from the Front or Offensive Focus?
 
@@ -231,7 +256,7 @@ Prepared Stacked Mines is more specialized. The increased mine damage is valuabl
 
 A recruitment shortage favors Bureau of Personnel, which reduces the Manpower cost of Barracks units by 10%.
 
-Veteran Trainers improves newly recruited units by giving them Veterancy 1. Its value depends on being able to afford those units in the first place, so consider your recruitment economy before selecting the additional combat experience.
+Veteran Trainers gives newly trained Barracks units Veterancy 1. Choose it when your recruitment budget is sufficient and you want those units to enter combat with additional experience.
 
 ### Reinforcement: Triage or Benzedrine?
 
@@ -243,23 +268,41 @@ Combining Triage with Bureau of Personnel reduces two separate sources of Manpow
 
 ### Attacking Spirit or Hold the Line?
 
-The location of your infantry determines which of these perks is more useful.
+Territory ownership determines the value of these perks. Attacking Spirit restores nearby infantry and team weapon crews when friendly squads decapture territory. Recovery continues outside combat, and another qualifying decapture refreshes its duration.
 
-Attacking Spirit restores nearby infantry and team weapon crews when friendly squads decapture territory. Its recovery continues outside combat, and another qualifying decapture refreshes the effect.
+Hold the Line reduces infantry damage received by 20% inside friendly territory. It suits an army defending controlled sectors, whereas Attacking Spirit has more opportunities to activate during repeated advances into enemy-held territory.
 
-Hold the Line instead reduces infantry damage received by 20% inside friendly territory. It is useful when you spend more time defending controlled positions than advancing into enemy-held sectors.
+### Snipers: M1E7 Prototype Rifle or SSB Sniper?
 
-An army that remains in friendly territory will have fewer opportunities to trigger Attacking Spirit. Conversely, Hold the Line provides no protection outside its required territory.
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-sbeitla-perk-choices.webp"
+  alt="Sbeitla campaign rewards featuring M1E7 Prototype Rifle, SSB Sniper, Grenade Sumps, and Offensive Grenades"
+  width={1105}
+  height={510}
+  caption="Sbeitla offers Sniper upgrades alongside two infantry bonus options."
+/>
+
+A Sniper equipped with the M1E7 Prototype Rifle can suppress enemy infantry and gains +100% attack speed. SSB Sniper changes the unit's role instead, upgrading all Snipers into teams capable of calling artillery barrages.
+
+Favor the rifle upgrade when direct infantry engagements are your main problem. Take SSB Sniper when you need additional artillery against defended positions.
+
+### Grenade Sumps or Offensive Grenades?
+
+Grenade Sumps reduces incoming infantry damage while in cover. It complements an army that already relies on protected Riflemen and established defensive positions.
+
+Offensive Grenades equips Riflemen with cooked M2 Frag Grenades that explode quickly. Consider it when your infantry frequently needs to dislodge enemy squads during an advance.
+
+Earlier investments such as Standoff or Grenade Range can help determine which of these later rewards better suits your infantry.
 
 </section>
 
 <section id="vehicle-upgrades" className="scroll-mt-24">
 
-## Which Vehicle Campaign Upgrades Are Worth Taking?
+## Which Vehicle and Anti-Tank Campaign Upgrades Are Worth Taking?
 
-Vehicle perks become more relevant as the campaign introduces missions built around Halftracks, light tanks, and supporting infantry.
+Halftrack and Stuart upgrades become available relatively early, while Motor Pool, Hellcat, and Tank Depot rewards arrive during the later battles.
 
-Choose them according to how you expect to use your vehicles rather than taking every vehicle-related bonus automatically.
+Consider which vehicles you regularly deploy and whether their main limitation is survivability, armor penetration, mobility, or the cost of replacing them.
 
 ### Halftracks: Exchangeable Parts or Assault Carriers?
 
@@ -293,6 +336,66 @@ Lessons of Chouigui removes the need to obtain the Survival Package and Tank Com
 
 No Governors doubles their movement speed. That benefit matters most when repositioning or withdrawing light vehicles is a recurring problem. Neither perk replaces the need for supporting units when stronger enemy armor is present.
 
+### Anti-Tank Guns: Pre-positioned AP Ammo or Maneuver Drills?
+
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-kasserine-perk-choices.webp"
+  alt="Kasserine campaign rewards for anti-tank guns and Motor Pool units"
+  width={1095}
+  height={509}
+  caption="Kasserine introduces anti-tank gun improvements and Motor Pool bonuses."
+/>
+
+Pre-positioned AP Ammo removes the Munitions cost of Armor Piercing Rounds. This is useful when frequent use of the ability competes with grenades, artillery, and other support abilities for Munitions.
+
+Maneuver Drills addresses the time needed to set up and reposition AT Guns. Consider it when your anti-tank teams regularly need to change their firing positions.
+
+Both rewards become available after Kasserine, so neither is required to defeat the Tiger during that mission.
+
+### Motor Pool: Reinforced Armor or Tungsten Rounds?
+
+Are your Motor Pool vehicles dying too quickly, or are their attacks failing to penetrate enemy armor? Reinforced Armor addresses survivability with +33% health; Tungsten Rounds addresses penetration with a +50% bonus.
+
+Neither reward applies universally to every tank in your army. Check which production building supplies your vehicles before making the selection.
+
+### Hellcats: HVAP-T Rounds or Pintle Mount M2?
+
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-return-to-longstop-perk-choices.webp"
+  alt="Return to Longstop Hellcat and support ability campaign upgrades"
+  width={1089}
+  height={488}
+  caption="Return to Longstop offers improvements to Hellcat weapon performance and support abilities."
+/>
+
+With reliable infantry support, the Hellcat can concentrate on enemy armor. HVAP-T Rounds reinforces that role by increasing weapon penetration by 50%.
+
+Pintle Mount M2 changes the vehicle's available firepower by adding a heavy machine gun. Its anti-infantry benefit matters more when your Hellcats frequently operate without adequate infantry support.
+
+### Shermans: Stabilizer Calibration or Easy Eight Production?
+
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-hill-609-perk-choices.webp"
+  alt="Hill 609 Sherman and Tank Depot campaign upgrade choices"
+  width={1098}
+  height={469}
+  caption="Hill 609 rewards improve Sherman mobility protection, unlock Easy Eight production, or strengthen Tank Depot recruitment."
+/>
+
+Stabilizer Calibration makes Shermans 20% harder to hit while moving. It benefits existing Sherman units without requiring you to produce a different tank model.
+
+Unlock M4A3E8 Sherman Easy Eight Production adds the Easy Eight to the Tank Depot's available production options.
+
+Choose the production unlock if you intend to field Easy Eights in the remaining battle. Stabilizer Calibration is more relevant when you expect to continue using your existing Sherman force.
+
+### Tank Depot: Crew Rotations or Elite Trainers?
+
+Crew Rotations reduces the Manpower cost of training Tank Depot units by 10%. Elite Trainers gives units trained at the Tank Depot Veterancy 3 immediately.
+
+Unlike Bureau of Personnel and Veteran Trainers, these rewards arrive just before the final mission. Their value depends heavily on how many new vehicles you intend to produce.
+
+Elite Trainers favors immediate combat effectiveness, while Crew Rotations helps when Manpower limits the size of your armored force.
+
 </section>
 
 <section id="support-upgrades" className="scroll-mt-24">
@@ -303,9 +406,7 @@ Support upgrades become particularly valuable when your army struggles to identi
 
 ### Scouts: Pathfinders or Artillery Observers?
 
-Both upgrades improve your existing Scouts by increasing their health and adding another soldier to the squad.
-
-Pathfinders provide an upgraded scouting unit, while Artillery Observers introduce the ability to deploy camouflaged artillery beacons.
+Both Scout upgrades increase squad health and add another soldier.
 
 <GuideImage
   src="/images/company-of-heroes-3-operation-torch/operation-torch-scout-perk-choices.webp"
@@ -315,7 +416,7 @@ Pathfinders provide an upgraded scouting unit, while Artillery Observers introdu
   caption="Hornet's Nest introduces Scout upgrades alongside an infantry support reward for completing its Torch Objective."
 />
 
-Both options provide the basic squad improvements. The additional beacon ability is what distinguishes Artillery Observers when you want your reconnaissance units to contribute artillery support rather than concentrate on scouting.
+Choose Artillery Observers if you regularly use reconnaissance units to direct artillery through camouflaged beacons. Pathfinders remain an alternative when scouting is your primary concern.
 
 ### Grasshopper Recon Run or Smoke Screen?
 
@@ -330,8 +431,6 @@ Stationary defenses favor the wide blast radius of 155mm Rapid Artillery Barrage
 If your army already has reliable anti-vehicle weapons, the artillery barrage adds another way to deal with fortified positions. Repeated difficulty against enemy armor makes the rocket strike worth considering.
 
 ### Commandos: Cross-Trained or Grenades Pouches?
-
-After completing Longstop Infiltration, Cross-Trained improves Commando damage and accuracy when leaving stealth, while Grenades Pouches unlocks Willy Pete smoke grenades.
 
 <GuideImage
   src="/images/company-of-heroes-3-operation-torch/operation-torch-commando-perk-choices.webp"
@@ -355,21 +454,75 @@ The vision increase does not directly extend weapon range. Concealment Training 
 
 ### HMGs: Link Belts or Gun Shields?
 
-The HMG upgrade after Sened Station offers a choice between firing continuity and defensive protection.
-
-Link Belts is described as removing the need for HMGs to reload, with a displayed modifier of +100% reload speed.
-
-Gun Shields doubles the effects of the Defensive Set-up passive and makes HMGs an additional 20% harder to hit while set up.
+Link Belts is described as removing the need for HMGs to reload, with a displayed modifier of +100% reload speed. Gun Shields instead doubles the effects of Defensive Set-up and makes HMGs an additional 20% harder to hit while set up.
 
 <GuideImage
   src="/images/company-of-heroes-3-operation-torch/operation-torch-hmg-perk-choices.webp"
-  alt="Operation Torch Link Belts and Gun Shields heavy machine gun upgrade choices"
-  width={1040}
-  height={902}
-  caption="Link Belts improves firing continuity, while Gun Shields strengthens HMG protection during defensive setup."
+  alt="Sened Station rewards for HMGs, casualty recovery, and vehicle salvage"
+  width={1123}
+  height={573}
+  caption="Sened Station offers HMG improvements and an additional choice between casualty recovery and vehicle salvage."
 />
 
-Link Belts addresses interruptions in firing, while Gun Shields improves the protection of an established defensive position. The latter is less useful when your HMG spends much of the battle moving between positions, since its additional protection depends on being set up.
+Choose Link Belts when interruptions in sustained fire are a problem. Gun Shields is better suited to HMG teams that spend most of their time defending established positions.
+
+### No Man Left Behind or Salvage Crew?
+
+No Man Left Behind gives infantry squads another way to recover from casualties. It can also generate Manpower when the recovering squad is already at full strength.
+
+Salvage Crew lets Engineers recover resources from vehicle wrecks, returning part of the original Manpower and Fuel costs.
+
+The decision depends on whether infantry casualties or vehicle replacement costs place greater pressure on your economy. Salvage Crew also requires accessible wrecks and surviving Engineers to make use of its benefits.
+
+### Mortars: Heavy HE Rounds or Light HE Rounds?
+
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-faid-perk-choices.webp"
+  alt="Faid campaign rewards for Mortars, Field Repairs, and Frontline Medical Station"
+  width={1109}
+  height={506}
+  caption="Faid rewards improve Mortar performance and provide additional frontline recovery options."
+/>
+
+Heavy HE Rounds changes the size of the impact area, increasing its radius by 30%. Light HE Rounds changes how far your Mortars can fire, extending their range by 20%.
+
+Take Heavy HE Rounds for wider blast coverage or Light HE Rounds when enemy positions are difficult to reach from your current firing locations. Neither upgrade directly increases the listed damage of an individual explosion.
+
+### Field Repairs or Frontline Medical Station?
+
+Field Repairs restores 20 health per second to a designated friendly vehicle for up to 20 seconds. The repair effect is disabled during combat, so the vehicle still needs an opportunity to disengage.
+
+Frontline Medical Station provides healing, casualty collection, reinforcement, and an additional retreat point in friendly territory.
+
+Field Repairs helps an armored force recover without depending entirely on conventional Engineer repairs. Frontline Medical Station is more useful when infantry repeatedly spends too much time traveling back to base for recovery.
+
+### Resistance Fighter Infiltration or Tunnel Networks?
+
+<GuideImage
+  src="/images/company-of-heroes-3-operation-torch/operation-torch-fondouk-perk-choices.webp"
+  alt="Fondouk campaign rewards for Forward Headquarters, Tunnel Networks, and Fighting Positions"
+  width={1108}
+  height={512}
+  caption="Fondouk rewards unlock additional options for frontline infrastructure and Fighting Positions."
+/>
+
+Resistance Fighter Infiltration turns suitable garrisoned buildings into Forward Headquarters, providing infantry and team weapon production, reinforcement, and increased infantry rate of fire. Tunnel Networks instead allows you to establish an HQ-sector network and additional Tunnel Hideouts.
+
+The choice is between expanding your frontline infrastructure and improving movement across the battlefield. You can use the tunnel abilities provided during Fondouk without selecting Tunnel Networks afterward; the reward determines your permanent campaign access to the ability.
+
+### Anchor Points or Dig Any Time You Stop?
+
+Anchor Points gives nearby infantry and team weapons a 25% accuracy bonus through Fighting Positions.
+
+Dig Any Time You Stop instead allows Fighting Positions to be constructed in neutral territory.
+
+The first perk improves units around established positions. The second removes a territorial construction restriction, offering greater flexibility before an area has been secured.
+
+### Fire Direction Center or Pre-Registration?
+
+Fire Direction Center halves the Munitions cost of support abilities, allowing more frequent calls within the same resource budget. Pre-Registration offers +100% weapon scatter accuracy instead.
+
+If Munitions shortages prevent you from calling support when needed, prioritize the cost reduction. Neither perk improves the accuracy of every weapon in your army.
 
 </section>
 
@@ -377,40 +530,50 @@ Link Belts addresses interruptions in firing, while Gun Shields improves the pro
 
 ## How Should You Choose the Best Campaign Upgrades for Your Army?
 
-There is no single perk combination that addresses every mission equally well.
-
-Use your recurring battlefield problems to determine which upgrades deserve priority.
+An upgrade's value depends on the problem it solves, the units it affects, and when you receive it.
 
 <GuideTable
   columns={upgradePriorityColumns}
   rows={upgradePriorityRows}
 />
 
-### Infantry-Focused Upgrade Priorities
+These recommendations address different battlefield problems. If two recommended perks belong to the same reward group, you must choose between them.
 
-For an infantry-heavy army, consider combining Bureau of Personnel with Triage to reduce both recruitment and reinforcement expenses.
+### Which Early Campaign Perks Provide Long-Term Value?
 
-Standoff adds protection for Riflemen fighting from cover, while Grenade Range helps infantry approach difficult enemy positions.
+Prepared Repair Kits becomes available after Medjez El Bab and improves both construction and vehicle repair. Bureau of Personnel and Triage can reduce recurring Manpower expenses from recruitment and reinforcement.
 
-If you frequently advance into enemy territory, Attacking Spirit offers additional recovery opportunities between engagements.
+These rewards arrive early enough to influence many subsequent battles. They remain useful even when the campaign changes the composition of your army.
 
-### Vehicle-Focused Upgrade Priorities
+### Infantry-Focused Upgrade Combination
 
-Prepared Repair Kits is a flexible starting point for an army that relies on multiple vehicle types.
+An infantry-heavy army can combine Standoff, Bureau of Personnel, Triage, and Hold the Line for protection and lower operating costs.
 
-Exchangeable Parts becomes attractive when you regularly change the support role of your Halftracks. Lessons of Chouigui provides automatically equipped Stuart upgrade packages, while No Governors favors mobility.
+No Man Left Behind and Grenade Sumps offer additional recovery and protection later in the campaign. Frontline Medical Station is another option when infantry recovery becomes the main limitation.
 
-Dual P-47 Rocket Strike can supplement your army when enemy vehicles remain a recurring problem.
+An offensive infantry force may prefer Attacking Spirit and Offensive Grenades instead of their defensive alternatives.
 
-### Defensive and Support Upgrade Priorities
+### Vehicle-Focused Upgrade Combination
 
-Standoff, Hold the Line, Concealment Training, and Gun Shields form a protection-focused combination worth considering when your army frequently holds prepared positions.
+Start with Prepared Repair Kits and select the Halftrack and Stuart options that match the vehicles you regularly deploy.
 
-Their conditions differ: Standoff requires cover, Hold the Line requires friendly territory, and Gun Shields requires defensive setup.
+Later, Salvage Crew can recover resources from wrecks, while Field Repairs provides another way to restore damaged vehicles.
 
-If limited vision is a greater problem than casualties, consider Spotters instead of Concealment Training.
+Tungsten Rounds strengthens Motor Pool penetration, and HVAP-T Rounds improves the Hellcat's anti-armor performance. These bonuses have different unit restrictions.
 
-These are conditional upgrade combinations rather than fixed builds. Your available units, completed Torch Objectives, and recurring battlefield problems should determine which alternatives you select.
+### Artillery and Defensive Upgrade Combination
+
+155mm Rapid Artillery Barrage, Artillery Observers, Heavy HE Rounds, and Fire Direction Center offer different improvements to battlefield support.
+
+For an army built around established defensive positions, Hold the Line, Gun Shields, and Anchor Points offer protection or accuracy under their respective activation conditions.
+
+Choose between additional protection, reduced support costs, and improved firepower according to the limitations of your current force.
+
+### Are Hill 609 Upgrades Worth Taking?
+
+Only Hill 604 remains after these rewards become available. If you intend to recruit new Tank Depot units, Elite Trainers provides immediate Veterancy 3, while Easy Eight Production opens another Sherman production option.
+
+Base your choice on the force you expect to field in the final battle, not the long-term savings that would matter earlier in the campaign.
 
 </section>
 
@@ -434,9 +597,27 @@ An upgrade may offer little immediate benefit during a mission that does not pro
 
 ### Your Perk Is Not Reducing the Expected Cost
 
-Bureau of Personnel reduces Barracks recruitment costs. Triage reduces reinforcement costs.
+Bureau of Personnel affects Barracks recruitment, Triage affects reinforcement, and Crew Rotations affects Tank Depot recruitment.
 
-If the expense you are checking belongs to a different action, the selected perk may not apply to it.
+Additional Requisition reduces grenade ability costs by a fixed 10 Munitions, while Fire Direction Center reduces support ability Munitions costs by 50%.
+
+Check the specific building, unit, or ability involved before expecting a discount.
+
+### Your Vehicle Upgrade Is Not Applying
+
+Reinforced Armor and Tungsten Rounds affect Motor Pool units. HVAP-T Rounds affects Hellcats, while Stabilizer Calibration affects moving Shermans.
+
+A vehicle-related perk does not necessarily apply to every vehicle available to your army.
+
+### Field Repairs Stops Working During Combat
+
+Field Repairs is disabled during combat. Withdraw the affected vehicle from the engagement so it can recover outside combat.
+
+### Your New Unit Does Not Have the Expected Veterancy
+
+Veteran Trainers applies to units trained at the Barracks. Elite Trainers applies to units trained at the Tank Depot.
+
+Neither perk automatically grants Veterancy 3 to every existing unit in your army.
 
 </section>
 

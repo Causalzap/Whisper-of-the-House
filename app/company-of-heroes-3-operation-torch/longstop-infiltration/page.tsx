@@ -14,13 +14,16 @@ const metadataTitle =
   "CoH3 Operation Torch Longstop Infiltration Walkthrough";
 
 const metadataDescription =
-  "Complete Longstop Infiltration in Company of Heroes 3 Operation Torch, avoid detection, eliminate snipers, plant Demo Charges, sabotage the Captain's car, and reach extraction.";
+  "Complete Longstop Infiltration, avoid enemy and bunker detection, eliminate four snipers, plant Demo Charges, and sabotage the Captain's car.";
 
 const articleTitle =
   "Operation Torch Longstop Infiltration: How Do You Complete the Commando Mission?";
 
 const articleDescription =
-  "Use the Commando's 4-second camouflage duration, complete sniper and demolition objectives, resolve the second charge interruption, and escape Longstop Hill.";
+  "Use Concealment to avoid detection, eliminate the four required snipers, resolve the second Demo Charge interruption, complete the optional Captain objective, and withdraw safely.";
+
+const jsonLdDescription =
+  "Complete Longstop Infiltration in Company of Heroes 3 Operation Torch using the Commando's camouflage, which lasts for 4 seconds after leaving cover. Avoid enemy and bunker detection, complete sniper and demolition objectives, recover from checkpoints, and reach extraction.";
 
 const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-longstop-concealment.webp`,
@@ -41,7 +44,7 @@ const toc = [
   },
   {
     id: "concealment",
-    label: "Concealment & Detection Radius",
+    label: "Concealment & Bunker Detection",
   },
   {
     id: "sniper-objectives",
@@ -73,7 +76,7 @@ const toc = [
   },
   {
     id: "mission-achievements",
-    label: "Longstop Infiltration Achievements",
+    label: "Does the Captain Objective Affect Achievements?",
   },
   {
     id: "next-mission",
@@ -84,15 +87,15 @@ const toc = [
 const relatedLinks = [
   {
     href: "/company-of-heroes-3-operation-torch",
-    label: "Walkthrough & Guide: Missions and Campaign Progression",
+    label: "Walkthrough & Guide: All 15 Campaign Missions",
   },
   {
     href: "/company-of-heroes-3-operation-torch/campaign-upgrades",
-    label: "Campaign Upgrades: Commando & Support Perks",
+    label: "Campaign Upgrades: 56 Perks & Best Choices",
   },
   {
     href: "/company-of-heroes-3-operation-torch/achievements",
-    label: "Achievements: All 30 & Expert Difficulty",
+    label: "Achievements: All 30 & Interactive Checklist",
   },
 ];
 
@@ -111,6 +114,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
+        alt: "Operation Torch Longstop Infiltration Commando camouflage indicator and blue detection circle",
       },
     ],
   },
@@ -167,7 +171,7 @@ const jsonLd = {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
       headline: articleTitle,
-      description: articleDescription,
+      description: jsonLdDescription,
       inLanguage: "en",
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -182,7 +186,7 @@ const jsonLd = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      dateModified: "2026-11-26",
+      dateModified: "2026-11-28",
       image: imageUrls,
     },
   ],
@@ -208,7 +212,7 @@ export default function OperationTorchLongstopInfiltrationPage() {
           gameHref="/company-of-heroes-3-operation-torch"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 26, 2026"
+          updatedAt="November 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

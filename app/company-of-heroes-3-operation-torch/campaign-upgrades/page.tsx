@@ -6,21 +6,32 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import OperationTorchCampaignUpgradesContent from "@/data/company-of-heroes-3-operation-torch/campaign-upgrades.mdx";
 
+import {
+  operationTorchUpgradeChoices,
+  operationTorchCampaignPerks,
+} from "@/data/company-of-heroes-3-operation-torch/upgrades";
+
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/company-of-heroes-3-operation-torch`;
 const pageUrl = `${hubUrl}/campaign-upgrades`;
 
+const campaignPerkCount = operationTorchCampaignPerks.length;
+const campaignUpgradeChoiceCount = operationTorchUpgradeChoices.length;
+
 const metadataTitle =
-  "Company of Heroes 3 Operation Torch Campaign Upgrades & Best Perks";
+  `CoH3 Operation Torch Campaign Upgrades: ${campaignPerkCount} Perks & Best Choices`;
 
 const metadataDescription =
-  "Compare 30 Operation Torch campaign perks, unlock Bonus Upgrades through Torch Objectives, and choose the best infantry, vehicle, reconnaissance, and support upgrades.";
+  `Compare ${campaignPerkCount} Operation Torch campaign perks across ${campaignUpgradeChoiceCount} upgrade choices, unlock Torch Objective rewards, and choose the best upgrades for your army.`;
 
 const articleTitle =
   "Operation Torch Campaign Upgrades: Which Perks Should You Choose?";
 
 const articleDescription =
-  "Compare 15 campaign upgrade choices, earn extra rewards through Torch Objectives, reduce Manpower costs, preserve infantry, and improve your vehicles and support units.";
+  `Compare ${campaignPerkCount} campaign perk options, earn Bonus Upgrades through Torch Objectives, and improve infantry, vehicles, anti-tank guns, and battlefield support throughout the campaign.`;
+
+const jsonLdDescription =
+  `Compare ${campaignPerkCount} campaign perks across ${campaignUpgradeChoiceCount} upgrade choices in Company of Heroes 3 Operation Torch, including unlock requirements, unit effects, and recommended combinations from Operation Flagpole through Hill 609.`;
 
 const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-campaign-perk-selection.webp`,
@@ -32,6 +43,12 @@ const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-scout-perk-choices.webp`,
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-commando-perk-choices.webp`,
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-hmg-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-faid-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-sbeitla-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-kasserine-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-fondouk-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-return-to-longstop-perk-choices.webp`,
+  `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-hill-609-perk-choices.webp`,
 ];
 
 const heroImage = imageUrls[0];
@@ -47,7 +64,7 @@ const toc = [
   },
   {
     id: "upgrade-choices",
-    label: "30 Campaign Perk Options",
+    label: `${campaignPerkCount} Campaign Perk Options`,
   },
   {
     id: "infantry-upgrades",
@@ -55,7 +72,7 @@ const toc = [
   },
   {
     id: "vehicle-upgrades",
-    label: "Halftrack & Stuart Upgrades",
+    label: "Vehicle & Anti-Tank Upgrades",
   },
   {
     id: "support-upgrades",
@@ -74,15 +91,15 @@ const toc = [
 const relatedLinks = [
   {
     href: "/company-of-heroes-3-operation-torch",
-    label: "Walkthrough & Guide: Missions and Campaign Progression",
+    label: "Walkthrough & Guide: All 15 Campaign Missions",
   },
   {
     href: "/company-of-heroes-3-operation-torch/achievements",
-    label: "Achievements: All 30 & Expert Difficulty",
+    label: "Achievements: All 30 & Interactive Checklist",
   },
   {
     href: "/company-of-heroes-3-operation-torch/longstop-infiltration",
-    label: "Longstop Infiltration: Commando Mission Walkthrough",
+    label: "Longstop Infiltration: Concealment & Mission Walkthrough",
   },
 ];
 
@@ -101,6 +118,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
+        alt: "Company of Heroes 3 Operation Torch After Action screen showing standard and bonus campaign upgrade choices",
       },
     ],
   },
@@ -157,7 +175,7 @@ const jsonLd = {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
       headline: articleTitle,
-      description: articleDescription,
+      description: jsonLdDescription,
       inLanguage: "en",
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -172,7 +190,7 @@ const jsonLd = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      dateModified: "2026-11-26",
+      dateModified: "2026-11-28",
       image: imageUrls,
     },
   ],
@@ -198,7 +216,7 @@ export default function OperationTorchCampaignUpgradesPage() {
           gameHref="/company-of-heroes-3-operation-torch"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 26, 2026"
+          updatedAt="November 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

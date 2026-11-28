@@ -14,13 +14,16 @@ const metadataTitle =
   "Company of Heroes 3 Operation Torch Achievements: All 30";
 
 const metadataDescription =
-  "Track all 30 Operation Torch achievements with an interactive checklist, check hidden achievement requirements, and plan Expert difficulty mission completion.";
+  "Unlock all 30 Operation Torch achievements with an interactive checklist, hidden achievement requirements, Expert difficulty objectives, and completion tips.";
 
 const articleTitle =
   "Company of Heroes 3 Operation Torch Achievements: How Do You Unlock All 30?";
 
 const articleDescription =
-  "Track all 30 campaign achievements, identify their mission and difficulty requirements, and plan your Expert campaign without unnecessary additional playthroughs.";
+  "Track all 30 achievements across 15 campaign missions, check their difficulty requirements, and avoid unnecessary playthroughs or self-imposed combat restrictions.";
+
+const jsonLdDescription =
+  "Track all 30 Company of Heroes 3 Operation Torch achievements, including mission completion requirements, Expert difficulty achievements, hidden achievements, and Longstop Infiltration requirements.";
 
 const imageUrls = [
   `${siteUrl}/images/company-of-heroes-3-operation-torch/operation-torch-campaign-difficulty.webp`,
@@ -51,22 +54,22 @@ const toc = [
   },
   {
     id: "longstop-infiltration",
-    label: "Longstop Infiltration Achievements",
+    label: "Longstop Deathless Requirement",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/company-of-heroes-3-operation-torch",
-    label: "Walkthrough & Guide: Missions and Campaign Progression",
+    label: "Walkthrough & Guide: All 15 Campaign Missions",
   },
   {
     href: "/company-of-heroes-3-operation-torch/campaign-upgrades",
-    label: "Campaign Upgrades: Best Perks & Torch Objectives",
+    label: "Campaign Upgrades: 56 Perks & Best Choices",
   },
   {
     href: "/company-of-heroes-3-operation-torch/longstop-infiltration",
-    label: "Longstop Infiltration: Commando Mission Walkthrough",
+    label: "Longstop Infiltration: Concealment & Mission Walkthrough",
   },
 ];
 
@@ -85,6 +88,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: heroImage,
+        alt: "Company of Heroes 3 Operation Torch campaign difficulty selection including Expert difficulty",
       },
     ],
   },
@@ -141,7 +145,7 @@ const jsonLd = {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
       headline: articleTitle,
-      description: articleDescription,
+      description: jsonLdDescription,
       inLanguage: "en",
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -156,7 +160,7 @@ const jsonLd = {
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
-      dateModified: "2026-11-26",
+      dateModified: "2026-11-28",
       image: imageUrls,
     },
   ],
@@ -182,7 +186,7 @@ export default function OperationTorchAchievementsPage() {
           gameHref="/company-of-heroes-3-operation-torch"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="November 26, 2026"
+          updatedAt="November 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
