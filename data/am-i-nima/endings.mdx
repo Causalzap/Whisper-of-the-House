@@ -1,0 +1,595 @@
+import Link from "next/link";
+import GuideImage from "@/components/guides/GuideImage";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+import {
+  amINimaEndings,
+  amINimaEndingSceneLabels,
+  amINimaEndingChoiceViews,
+  amINimaFinalVerdictEndings,
+} from "@/data/am-i-nima/endings";
+
+export const endingOverviewColumns = [
+  { key: "ending", label: "Ending" },
+  { key: "scene", label: "Story Checkpoint" },
+  { key: "word", label: "Input Word" },
+  { key: "choice", label: "Dialogue Choice" },
+  { key: "outcome", label: "What Happens" },
+];
+
+export const endingOverviewRows = amINimaEndings.map(
+  (ending) => ({
+    ending: ending.name,
+    scene:
+      amINimaEndingSceneLabels[ending.keyChoice.scene],
+    word: ending.keyChoice.inputWord,
+    choice: ending.keyChoice.dialogueOption,
+    outcome: ending.outcome,
+  })
+);
+
+export const loyaltyChoiceColumns = [
+  { key: "stage", label: "Story Stage" },
+  { key: "word", label: "Word" },
+  { key: "choice", label: "Dialogue Choice" },
+  { key: "role", label: "Role in the Route" },
+];
+
+export const loyaltyChoiceRows =
+  amINimaEndingChoiceViews
+    .filter((choice) => choice.endingId === "loyalty")
+    .map((choice) => ({
+      stage: choice.sceneLabel,
+      word: choice.inputWord,
+      choice: choice.dialogueOption,
+      role: choice.isKeyChoice
+        ? "Key confrontation response"
+        : "Earlier associated option",
+    }));
+
+export const finalVerdictColumns = [
+  { key: "word", label: "Word" },
+  { key: "choice", label: "Final Choice" },
+  { key: "outcome", label: "Outcome" },
+];
+
+export const finalVerdictRows =
+  amINimaFinalVerdictEndings.map((ending) => ({
+    word: ending.keyChoice.inputWord,
+    choice: ending.keyChoice.dialogueOption,
+    outcome: ending.outcome,
+  }));
+
+export const endingProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "check", label: "What to Check" },
+  { key: "action", label: "What to Do" },
+];
+
+export const endingProblemRows = [
+  {
+  problem: "A word for the dialogue choice is missing",
+  check: "Your current word library.",
+  action:
+    "Check known recipes and object interactions for ways to obtain the missing word.",
+},
+  {
+    problem: "You have the word but cannot get the choice",
+    check: "Your current question and story state.",
+    action:
+      "Continue the conversation until the relevant decision becomes available.",
+  },
+  {
+    problem: "Fear produces a different response",
+    check: "Whether you are in the mirror conversation or another scene.",
+    action:
+      "Check the actual dialogue option rather than relying on the word alone.",
+  },
+  {
+  problem: "The Final Verdict does not appear",
+  check: "Whether Mom has explained what happened to Nima.",
+  action:
+    "Continue the identity discussion if available. Earlier choices may affect whether you reach the verdict.",
+},
+  {
+    problem: "The story returns to the basement",
+    check: "Whether you have reached another loop.",
+    action:
+      "Continue the new loop and use the returning words to explore other choices.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Get Different Endings in Am I Nima?">
+  Look for major decisions during the fish test, mirror
+  conversations, the confrontation with Mom, and the Final
+  Verdict. Match the question on screen with the corresponding
+  word and response. Am I Nima has 11 endings, but possessing
+  an ending-related word does not guarantee that its dialogue
+  option will be available.
+</GuideQuickAnswer>
+
+</section>
+
+An answer that pleases Mom can lead somewhere very different from the outcome you intended. Some decisions occur surprisingly early, including responses during the fish test.
+
+Check the exact dialogue option before committing to a choice, especially when revisiting a conversation from an earlier loop.
+
+**Spoiler warning:** Major story revelations and ending outcomes follow.
+<section id="ending-list" className="scroll-mt-24">
+
+## How Many Endings Are in Am I Nima?
+
+Am I Nima has {amINimaEndings.length} endings. The table pairs each ending with an associated dialogue choice and its subsequent story outcome.
+
+These choices are not complete routes from a fresh save. Earlier decisions may change which options appear, and some ending names still need confirmation against the actual achievement unlocks.
+
+<GuideTable
+  columns={endingOverviewColumns}
+  rows={endingOverviewRows}
+/>
+
+### Why Does Repression Produce Different Ending Choices?
+
+Repression can generate three different responses:
+
+- **Swallow your hate.** during the fish test.
+- **I am Nima.** during the mirror identity scene.
+- **It's me, Mom.** during the confrontation.
+
+These responses are associated with Assimilation, Fissure, and Loyalty, respectively.
+
+Check the question and surrounding scene before using the word. If you have not reached the relevant decision yet, continue through the <Link href="/am-i-nima">Am I Nima walkthrough</Link>.
+
+</section>
+
+<section id="loyalty-ending" className="scroll-mt-24">
+
+## How Do You Get the Loyalty Ending in Am I Nima?
+
+Loyalty follows a route in which you try to satisfy Mom's expectations, insist that you are Nima, and eventually leave your fate in her hands.
+
+The route has been reached during the first loop.
+
+Three useful dialogue choices are associated with Pretend, Family, and Repression.
+
+<GuideTable
+  columns={loyaltyChoiceColumns}
+  rows={loyaltyChoiceRows}
+/>
+
+These choices describe the known late-game route rather than a complete set of mandatory answers for every earlier test.
+
+### Step 1: Decide to Trick Mom
+
+During the mirror conversation, place **Pretend** into your head to reveal the response:
+
+**I'm going to trick her.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-loyalty-mirror-choice.webp"
+  alt="Pretend word revealing the I'm going to trick her dialogue choice in Am I Nima"
+  width={1039}
+  height={701}
+  caption="Pretend reveals an alternative to confronting Mom directly."
+/>
+
+The plan is to make Mom believe that her tests are working. By gaining her trust, you hope to create an opportunity to escape.
+
+Choosing this approach does not end the game. Continue to the next tests and conversations.
+
+### Step 2: Answer the Identity Test
+
+Mom eventually asks what it means to be Nima.
+
+One available response is generated by placing **Family** into your head.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-loyalty-family-choice.webp"
+  alt="Family word revealing the To love you dialogue option during the Am I Nima identity test"
+  width={1047}
+  height={689}
+  caption="Family produces the To love you. response during the identity discussion."
+/>
+
+The resulting choice is **To love you.**
+
+This approach emphasizes Mom's importance in Nima's life.
+
+However, this is not the only identity response associated with reaching Loyalty. The route has also been completed after choosing **Nima is happy.**
+
+You do not need to treat Family as an established mandatory condition for this ending.
+
+If you are missing Family, Nima + Mom is one of its known combinations. Other recipes and acquisition methods are available in the <Link href="/am-i-nima/word-combinations">word combinations guide</Link>.
+
+### Step 3: Continue to Insist That You Are Nima
+
+The later confrontation becomes increasingly difficult as Mom questions whether you are really her daughter.
+
+Place **Repression** into your head when the corresponding identity response becomes available.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-loyalty-repression-choice.webp"
+  alt="Repression word revealing the It's me, Mom dialogue choice near the Loyalty ending"
+  width={1053}
+  height={709}
+  caption="Repression reveals the response It's me, Mom. during the confrontation."
+/>
+
+Choose **It's me, Mom.** to continue presenting yourself as her daughter.
+
+The conversation centers on returning to your former life and persuading Mom to accept you.
+
+If you have not discovered Repression, search for it using the <Link href="/am-i-nima/word-combinations#recipe-finder">word combination finder</Link>.
+
+### Step 4: Continue Through the Final Confrontation
+
+Mom remains unwilling to accept your identity despite your attempts to satisfy her.
+
+The conversation eventually reaches the point where you tell Mom that if she does not trust you, she should kill you.
+
+This line occurs within the final confrontation. It is not a separate known word combination or an additional established input requirement.
+
+You leave your fate in her hands, and the confrontation ends with your death.
+
+The story subsequently returns to the opening basement scene.
+
+### Are All Loyalty Dialogue Options Required?
+
+No fixed list of mandatory earlier answers has been established.
+
+During the confrontation, you can also encounter responses involving apologies, fear, and your friends.
+
+These options are not established requirements for Loyalty. Use the identity responses above to identify the relevant branch instead of treating every available dialogue option as a required step.
+
+### What Happens After the Loyalty Ending?
+
+The story returns to its opening scene and begins another loop.
+
+Previously discovered words return at the start of each day, allowing you to explore alternative responses as you progress.
+
+See the <Link href="/am-i-nima#second-loop">next-loop guide</Link> for how word recovery works.
+
+Loyalty is also associated with an ending-related achievement. Use the <Link href="/am-i-nima/achievements#ending-achievements">ending achievement checklist</Link> to track your completed outcomes.
+
+</section>
+
+<section id="duplicity-ending" className="scroll-mt-24">
+
+## Duplicity Ending: Insist That You Are Nima
+
+Two conversations are worth distinguishing here. During the earlier fish test, James Pond can produce **It's James.** when Mom asks you to take a bite. Whether that answer is required for Duplicity remains unclear.
+
+The later confrontation is the important identity decision. Use **Nima** to bring up **Of course I'm Nima.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-duplicity-ending-choice.webp"
+  alt="Nima word revealing the Of course I'm Nima dialogue choice during the confrontation"
+  width={1023}
+  height={531}
+  caption="Use Nima during the confrontation to reveal the identity response."
+/>
+
+You continue identifying yourself as Nima Lee and eventually accompany Mom upstairs. Despite your attempts to convince her, she remains suspicious. The sequence ends with your death and a return to the repeated tests.
+
+</section>
+
+<section id="monster-ending" className="scroll-mt-24">
+
+## How Do You Get the Monster Ending?
+
+Listen for Mom's question, **Why couldn't you just be Nima?**
+
+Instead of continuing to defend your identity, use **Monster** to reveal **I'm a monster.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-monster-ending-choice.webp"
+  alt="Monster word revealing the I'm a monster dialogue option in Am I Nima"
+  width={1083}
+  height={706}
+  caption="Monster reveals the response accepting your monstrous identity."
+/>
+
+The conversation shifts toward accepting what you have become, and the confrontation ultimately ends with your death.
+
+Do not confuse this answer with Hive's You made me a monster. response, which belongs to the <Link href="#symbiosis-ending">Symbiosis branch</Link>.
+
+</section>
+
+<section id="martyr-ending" className="scroll-mt-24">
+
+## Martyr Ending: Accept That You Are Dead
+
+At the basement confrontation, try **Death** when the discussion turns toward your existence. The response to look for is **I'm dead.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-martyr-ending-choice.webp"
+  alt="Death word revealing the I'm dead dialogue choice associated with the Martyr branch"
+  width={1057}
+  height={703}
+  caption="Death reveals a response acknowledging the truth about your existence."
+/>
+
+The following conversation describes a dead girl kept alive by her grieving mother. You ask Mom to release you, but she refuses, and the confrontation ends with your death.
+
+The request to let you go occurs later in the conversation. It is not a separate known word-input step.
+
+</section>
+
+<section id="stasis-ending" className="scroll-mt-24">
+
+## Stasis Ending: Which Fish Test Answer Should You Choose?
+
+Look for this branch before the final confrontation. When Mom presents the fish and says Go ahead. Take a bite., **Responsibility** can produce **If you say so.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-stasis-ending-choice.webp"
+  alt="Responsibility word revealing the If you say so response during the fish test"
+  width={1054}
+  height={705}
+  caption="Responsibility reveals the compliant response during the fish test."
+/>
+
+Continued obedience changes the relationship between you and the voice in the mirror. The voice disappears, but your apparent success does not result in freedom: the story ends with you being sealed behind a brick wall.
+
+</section>
+
+<section id="assimilation-ending" className="scroll-mt-24">
+
+## Assimilation Ending: Hide Your Resentment
+
+At the fish test, try **Repression** instead of Responsibility if it reveals **Swallow your hate.**
+
+The prompt is the same one associated with Stasis: Go ahead. Take a bite.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-assimilation-ending-choice.webp"
+  alt="Repression word revealing the Swallow your hate option during the fish test"
+  width={1055}
+  height={708}
+  caption="Repression reveals a different fish-test response from Responsibility."
+/>
+
+Unlike the compliant outcome of Stasis, this sequence involves suppressing your hatred and later pursuing revenge against Mom. The closing narration describes her final moments.
+
+</section>
+
+<section id="fissure-ending" className="scroll-mt-24">
+
+## Fissure Ending: What If You Reject the Mirror's Claim?
+
+Wait for the mirror-related identity scene where the narration tells you that Nima is dead.
+
+**Repression** produces **I am Nima.** here, rather than the responses it generates during the fish test or the confrontation with Mom.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-fissure-ending-choice.webp"
+  alt="Repression word revealing the I am Nima response when the narration says Nima is dead"
+  width={1042}
+  height={701}
+  caption="Use Repression during this identity scene to reveal I am Nima."
+/>
+
+The entity relinquishes its control over your mind, but freedom comes at a cost. Your body begins to fail, and the sequence presents death as the price of regaining control.
+
+</section>
+
+<section id="symbiosis-ending" className="scroll-mt-24">
+
+## How Do You Reach the Symbiosis Ending?
+
+Look for **Hive** during the basement confrontation. Its response, **You made me a monster.**, shifts responsibility for your condition toward Mom.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-symbiosis-ending-choice.webp"
+  alt="Hive word revealing the You made me a monster dialogue choice associated with Symbiosis"
+  width={1051}
+  height={707}
+  caption="Hive reveals a response confronting Mom about your origins."
+/>
+
+The story moves beyond the confrontation into a secret area beneath the basement, where Mom's research and your origins become central to the conversation. You eventually leave both Mom and the bunker behind and return toward the ancient pool.
+
+### Do You Need the Bunker Code for Symbiosis?
+
+The bunker appears during this sequence, but it is unclear whether you need to open its keypad door beforehand.
+
+If you are investigating the underground area separately, see the <Link href="/am-i-nima#bunker">hidden passage and keypad locations</Link>.
+
+</section>
+
+<section id="carnage-ending" className="scroll-mt-24">
+
+## How Do You Reach the Carnage Ending Branch?
+
+A much more aggressive branch becomes available during a later mirror conversation.
+
+The known decision occurs in a scene where CRUCIBLE is displayed and Fear is available in the word library.
+
+At this point, the conversation includes the statement that the woman is your mother.
+
+### Which Word Reveals KILL MOM?
+
+Place **Fear** into your head.
+
+The resulting dialogue option is:
+
+**KILL MOM!**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-carnage-ending-choice.webp"
+  alt="Fear word revealing the KILL MOM dialogue choice during the CRUCIBLE mirror conversation"
+  width={1270}
+  height={856}
+  caption="Use Fear during the CRUCIBLE mirror conversation to reveal KILL MOM!"
+/>
+
+Selecting this branch leads to an attack on Mom and a violent conclusion followed by the credits.
+
+This is the known branch associated with Carnage, although its formal ending name and complete prerequisites remain uncertain.
+
+### Why Does Fear Give You a Different Answer?
+
+Fear does not always produce the same dialogue option.
+
+During other conversations, placing Fear into your head can instead reveal an expression of distress such as You're scaring me!
+
+The response depends on the scene you have reached.
+
+If KILL MOM! does not appear, possessing Fear alone is not enough. You need to reach the relevant mirror conversation.
+
+The earlier decisions required to make this particular branch available are not yet fully known.
+
+</section>
+
+<section id="final-verdict" className="scroll-mt-24">
+
+## How Do You Reach the Final Verdict in Am I Nima?
+
+Judgement and Acceptance share the same late-game discussion about what happened to Nima.
+
+Watch for CRUCIBLE during the later mirror conversation, followed by TRANSCENDENCE and Mom's explanation of her actions.
+
+These scenes help you recognize the path toward the Final Verdict, although the choices required to enter it from an earlier loop remain unclear.
+
+### What Does METEMPSYCHOSIS Do?
+
+During the question **How are you going to explain yourself?**, placing METEMPSYCHOSIS into your head can reveal:
+
+**You sacrificed Nima.**
+
+This response leads into a discussion of Nima's identity and what happened when you first arrived.
+
+METEMPSYCHOSIS is relevant to this late-game conversation, but the complete method for obtaining it and its necessity for reaching the Final Verdict are not yet established.
+
+The route eventually reaches a more direct question:
+
+**What is your verdict?**
+
+At this stage, Judgement and Acceptance are available as separate words.
+
+### What Is the Difference Between Judgement and Acceptance?
+
+Both choices address how you respond to Mom after confronting what she has done.
+
+They differ in whether you choose to leave her behind or forgive her.
+
+<GuideTable
+  columns={finalVerdictColumns}
+  rows={finalVerdictRows}
+/>
+
+These are two distinct outcomes of the Final Verdict. Reaching the verdict itself is a separate part of the story.
+
+The full sequence needed to make this decision available from a new game remains uncertain.
+
+</section>
+
+<section id="judgement-ending" className="scroll-mt-24">
+
+## Judgement Ending: What Happens If You Move On?
+
+When the game asks for your verdict, place **Judgement** into your head.
+
+This reveals the option **Move on.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-judgement-ending-choice.webp"
+  alt="Judgement word revealing the Move on dialogue option at the Final Verdict"
+  width={1271}
+  height={854}
+  caption="Judgement gives you the option to move on without forgiving Mom."
+/>
+
+This branch leads to a scene in which the door opens onto a valley.
+
+Mom remains behind as you leave. The narration makes it clear that you will not see her again.
+
+The important distinction is that you continue forward without reconciling with her.
+
+This is the known Judgement branch. Its formal ending attribution and any additional conditions needed to unlock the associated achievement remain uncertain.
+
+</section>
+
+<section id="acceptance-ending" className="scroll-mt-24">
+
+## Acceptance Ending: What Happens If You Forgive Her?
+
+At the same Final Verdict decision, use **Acceptance** instead of Judgement.
+
+The resulting response is **Forgive her.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-acceptance-ending-choice.webp"
+  alt="Acceptance word revealing the Forgive her dialogue choice at the Final Verdict"
+  width={1285}
+  height={858}
+  caption="Acceptance reveals the forgiveness branch of the Final Verdict."
+/>
+
+This outcome also leads to the valley, but the final conversation takes a different direction.
+
+Rather than leaving through the judgement response, you choose forgiveness and express a desire to continue living.
+
+The story concludes with a final step forward, followed by the credits.
+
+This is the known Acceptance branch, although its formal ending attribution and complete unlock conditions have not yet been established.
+
+### Is Acceptance the True Ending?
+
+Acceptance resolves the final conversation through forgiveness, while Judgement resolves it by moving on.
+
+Both are late-game outcomes reached after exploring Nima's identity.
+
+There is not enough information to establish that Acceptance is the game's sole true ending or that one particular set of earlier decisions is mandatory for reaching it.
+
+Choose between the two responses according to the outcome you want to explore.
+
+</section>
+
+<section id="ending-conditions" className="scroll-mt-24">
+
+## Why Are Some Ending Choices Missing?
+
+Having a word in your library does not guarantee that its associated ending choice will appear.
+
+Before attempting another route, distinguish between missing vocabulary and a story decision you have not reached.
+
+<GuideTable
+  columns={endingProblemColumns}
+  rows={endingProblemRows}
+/>
+
+### Do You Need Every Memory to Unlock the Endings?
+
+Memories can introduce additional concepts and reveal responses during certain conversations.
+
+However, there is no established requirement to collect every Memory before reaching every ending.
+
+Some Memory combinations can be discovered before the second loop.
+
+If you want to explore additional memories, start with the known combinations for OBSESSION and CONSUMPTION in the <Link href="/am-i-nima/word-combinations#memory-combinations">Memory combinations guide</Link>.
+
+Do not assume that collecting either Memory automatically unlocks a particular ending.
+
+### Can You Get Every Ending in One Loop?
+
+Some of the major decisions lead to different conclusions.
+
+At the Final Verdict, Move on. and Forgive her. represent separate branches rather than consecutive steps toward the same result.
+
+You may need to revisit earlier story decisions to explore an alternative outcome.
+
+The exact rules for returning to a previous decision, and whether every branch requires another full loop, are not yet established.
+
+### Does a Green Choice Guarantee the Ending You Want?
+
+No. A green option may advance the conversation without producing the ending you intended. Compare its exact wording with your intended branch before selecting it.
+
+### Which Endings Have You Already Completed?
+
+Check your unlocked ending achievements before attempting another branch. Use the <Link href="/am-i-nima/achievements#achievement-checklist">achievement tracker</Link> to mark completed outcomes.
+
+</section>

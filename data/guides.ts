@@ -131,6 +131,181 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Am I Nima",
+    game: "Am I Nima",
+    href: "/am-i-nima",
+    slug: "am-i-nima",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "Story, endings, horror & route locks",
+  
+    label:
+      "Walkthrough, Word Combinations, 11 Endings & 18 Achievements",
+  
+    eyebrow:
+      "Psychological Horror, Narrative Mystery & Word Puzzles",
+  
+    hubStatus:
+      "Day 1–5 Progression + Word Recipe Finder + Collection Tracker + Hidden Puzzles + 11 Endings + 18 Achievements",
+  
+    description:
+      "Progress through Mom's tests, combine words, recover memories, solve the POND locker puzzle, explore hidden areas, investigate all 11 ending branches, and track all 18 achievements.",
+  
+    coverage: [
+      "Day 1–5 walkthrough, opening questions, Congee Test, Shark Plush, Fossil, Swimming Goggles, drawing discussions, Vancouver and identity tests",
+  
+      "Word combinations, interactive recipe finder, reverse recipe search, available ingredients, Word History, word locations and collection tracking",
+  
+      "OBSESSION, CONSUMPTION, Tomato Boy recipes, Tomato Pop, Pear Boy, Pomegranate Prince and missing word discoveries",
+  
+      "POND bedroom locker code, bathroom hidden passage, basement hatch, underground keypad, room exploration, dialogue choices and second-loop word recovery",
+  
+      "All 11 ending branches, Loyalty, Duplicity, Monster, Martyr, Stasis, Assimilation, Fissure, Symbiosis, Carnage, Judgement and Acceptance",
+  
+      "All 18 achievements with an interactive checklist, Nima 101, Human Dictionary, Memories, Tomato Kingdom, Free Whiskers, Bunker and first-loop completion",
+    ],
+  
+    image:
+      "/images/am-i-nima/am-i-nima-loop-word-carryover.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 94,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Am I Nima Walkthrough & Guide: Days, Puzzles, Endings & Words",
+  
+        href: "/am-i-nima",
+        type: "Guide Hub",
+  
+        description:
+          "Progress through Days 1–5, answer Mom's tests, solve the POND locker puzzle, explore hidden passages, and learn how words return in later loops.",
+  
+        image:
+          "/images/am-i-nima/am-i-nima-loop-word-carryover.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Days 1–5, Congee Test, Shark Plush, Fossil, Swimming Goggles, Vancouver, Boiler Room, POND locker code, hidden passages and second loop",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Am I Nima Word Combinations Guide: Recipe Finder & Word List",
+  
+        href: "/am-i-nima/word-combinations",
+        type: "Systems",
+  
+        description:
+          "Search word combinations, find missing ingredients, track discoveries, recover OBSESSION and CONSUMPTION, and unlock more Tomato Boy characters.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/am-i-nima/am-i-nima-word-history-recipes.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 581,
+  
+          spotlightMeta:
+            "Interactive Recipe Finder, Word Collection Tracker, reverse recipe search, Word History, word locations, OBSESSION, CONSUMPTION, Tomato Boy and character discoveries",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Am I Nima Endings Guide: All 11 Endings & Dialogue Choices",
+  
+        href: "/am-i-nima/endings",
+        type: "Endings",
+  
+        description:
+          "Compare dialogue choices associated with all 11 endings, identify the correct story scene, explore alternative outcomes, and understand the Final Verdict.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/am-i-nima/am-i-nima-loyalty-mirror-choice.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 582,
+  
+          spotlightMeta:
+            "11 endings, Loyalty, Duplicity, Monster, Martyr, Stasis, Assimilation, Fissure, Symbiosis, Carnage, Repression, Final Verdict, Judgement and Acceptance",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Am I Nima Achievements Guide: All 18 & Interactive Checklist",
+  
+        href: "/am-i-nima/achievements",
+        type: "Achievements",
+  
+        description:
+          "Track all 18 achievements, rescue Whiskers, recover lost memories, explore hidden endings, and work toward Human Dictionary and Tomato Kingdom.",
+  
+        date: "Updated recently",
+  
+        image:
+          "/images/am-i-nima/am-i-nima-whiskers-surgery-choice.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 583,
+  
+          spotlightMeta:
+            "18 achievements, 14 hidden achievements, interactive checklist, Nima 101, 224 words, 200 Tomato Boy characters, Free Whiskers, Freedom, Surgery, Bunker and first loop",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+    ],
+  },
+  {
     title: "Company of Heroes 3: Operation Torch",
     game: "Company of Heroes 3",
     href: "/company-of-heroes-3-operation-torch",

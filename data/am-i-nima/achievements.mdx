@@ -1,0 +1,394 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import GuideImage from "@/components/guides/GuideImage";
+import ProgressChecklist from "@/components/tools/ProgressChecklist";
+import {
+  amINimaRecipeViews,
+} from "@/data/am-i-nima/word-combinations";
+
+import {
+  amINimaAchievements,
+  amINimaAchievementCount,
+  amINimaHiddenAchievementCount,
+  amINimaEndingAchievements,
+  amINimaAchievementChecklistItems,
+  amINimaCollectionTargets,
+} from "@/data/am-i-nima/achievements";
+
+export const memoryAchievementRecipes =
+  amINimaRecipeViews.filter(
+    (recipe) => recipe.kind === "memory"
+  );
+
+export const achievementCategoryColumns = [
+  { key: "category", label: "Achievement Type" },
+  { key: "count", label: "Achievements" },
+  { key: "goal", label: "What to Focus On" },
+];
+
+export const achievementCategoryGoals = {
+  "Word Collection":
+    "Discover ordinary words through exploration and combinations.",
+  "Memories":
+    "Recover a lost memory.",
+  "Character Collection":
+    "Discover different Tomato Boy characters.",
+  "Exploration":
+    "Find a way into Annabelle's secret lab.",
+  "Special Actions":
+    "Save Whiskers during the Boiler Room sequence.",
+  "Loop Progression":
+    "Complete your first loop.",
+  "Endings":
+    "Explore different story branches and their outcomes.",
+};
+
+export const achievementCategories = Array.from(
+  new Set(
+    amINimaAchievements.map(
+      (achievement) => achievement.category
+    )
+  )
+);
+
+export const achievementCategoryRows =
+  achievementCategories.map((category) => ({
+    category,
+    count: String(
+      amINimaAchievements.filter(
+        (achievement) => achievement.category === category
+      ).length
+    ),
+    goal: achievementCategoryGoals[category],
+  }));
+
+export const achievementProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "check", label: "What to Check" },
+  { key: "action", label: "What to Do" },
+];
+
+export const achievementProblemRows = [
+  {
+    problem: "Missing words for Human Dictionary",
+    check: "Undiscovered ordinary words and missing ingredients.",
+    action:
+      "Use the word collection tracker and search for alternative recipes.",
+  },
+  {
+    problem: "Tomato Kingdom is still locked",
+    check: "Whether you have discovered enough different characters.",
+    action:
+      "Continue trying Tomato Boy combinations rather than repeating known discoveries.",
+  },
+  {
+    problem: "An ending achievement is still locked",
+    check: "The actual story outcome and your Steam achievements.",
+    action:
+      "Check the corresponding ending route and whether you completed its conclusion.",
+  },
+  {
+    problem: "Bunker is still locked",
+    check: "Whether you entered Annabelle's secret lab.",
+    action:
+      "Continue investigating the hidden area. Finding the keypad door alone is not the achievement objective.",
+  },
+  {
+    problem: "Checklist progress differs from Steam",
+    check: "Whether you marked the achievement manually.",
+    action:
+      "Compare the checklist with your Steam achievement list and update it accordingly.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Unlock Achievements in Am I Nima?">
+  Am I Nima has {amINimaAchievementCount} achievements,
+  including {amINimaEndingAchievements.length} ending achievements.
+  The collection goals require 101 words, 224 words, and
+  200 Tomato Boy characters. Other objectives include
+  remembering a lost memory, saving Whiskers, entering
+  Annabelle's secret lab, and completing your first loop.
+  Mark each achievement in the checklist after it unlocks.
+</GuideQuickAnswer>
+
+</section>
+
+Pay particular attention to Free Whiskers during your first loop. Word and character collections can continue across later exploration, but the rescue opportunity occurs during a specific Boiler Room sequence.
+
+**Spoiler warning:** Hidden achievement requirements and story outcomes follow.
+
+<section id="achievement-checklist" className="scroll-mt-24">
+
+## Am I Nima Achievement Checklist
+
+Use the interactive checklist to keep track of all {amINimaAchievementCount} achievements, including hidden achievements.
+
+Mark an achievement after it unlocks in your game. Use the category filters to separate ending achievements from collection and exploration goals.
+
+<ProgressChecklist
+  storageKey="am-i-nima-achievements-v1"
+  title="Am I Nima Achievement Tracker"
+  description={`Track all ${amINimaAchievementCount} achievements, including hidden endings, word discoveries, memories, Whiskers, and Tomato Kingdom.`}
+  items={amINimaAchievementChecklistItems}
+  shareUrl="https://www.whisperofthehouse.com/am-i-nima/achievements"
+  maxVisibleRows={12}
+/>
+
+Your checklist progress is stored in your current browser. It does not connect to Steam or automatically read your game save.
+
+### How Many Achievements Are Hidden?
+
+There are {amINimaHiddenAchievementCount} hidden achievements.
+
+Many of them involve story outcomes, including the different endings and the completion of your first loop. Others involve special exploration and actions that you may miss while concentrating on Mom's tests.
+
+<GuideTable
+  columns={achievementCategoryColumns}
+  rows={achievementCategoryRows}
+/>
+
+### Which Achievements Should You Work on First?
+
+You can work toward Nima 101 while completing the ordinary story progression.
+
+Inspect unfamiliar objects, combine newly discovered words, and attempt a Memory combination when its ingredients become available.
+
+During the Boiler Room sequence, pay attention to what happens to Whiskers. This is a separate achievement opportunity rather than just another test.
+
+After completing your first loop, check which ending you reached before pursuing a different outcome.
+
+For the main story progression, see the <Link href="/am-i-nima">Am I Nima walkthrough</Link>.
+
+</section>
+
+<section id="word-collection" className="scroll-mt-24">
+
+## How Do You Unlock Nima 101 and Human Dictionary?
+
+Nima 101 requires discovering {amINimaCollectionTargets.nima101} words.
+
+Human Dictionary requires discovering all {amINimaCollectionTargets.humanDictionary} words.
+
+These achievements involve expanding your vocabulary throughout the game rather than giving a specific answer during one of Mom's tests.
+
+### Getting Your First 101 Words
+
+Early discoveries provide ingredients for many additional combinations. Mark the words you possess in the <Link href="/am-i-nima/word-combinations#recipe-finder">recipe finder</Link>, then enable Available recipes only and Uncollected results only.
+
+Work through the missing results before moving on to another set of ingredients.
+
+### Finding the Last Missing Words for Human Dictionary
+
+As you approach the larger collection goal, repeated discoveries become less useful. Search directly for missing results and check the object locations of words that have no known recipe.
+
+Some vocabulary comes from story conversations, so a missing word may require more than another combination.
+
+Remember that completing the <Link href="/am-i-nima/word-combinations#word-list">word collection tracker</Link> is not the same as completing Human Dictionary. Its percentage measures the entries listed in the tool, not your entire in-game vocabulary.
+
+</section>
+
+<section id="memories-achievement" className="scroll-mt-24">
+
+## How Do You Unlock the Memories Achievement?
+
+Remembering one lost memory satisfies the stated achievement requirement. You can attempt either of these combinations:
+
+<ul>
+  {memoryAchievementRecipes.map((recipe) => (
+    <li key={recipe.id}>
+      <strong>
+        {recipe.inputs.join(" + ")}
+        {" → "}
+        {recipe.outputs.join(", ")}
+      </strong>
+    </li>
+  ))}
+</ul>
+
+Finish the resulting memory sequence and check your Steam achievement list.
+
+Missing an ingredient? Find its acquisition method in the <Link href="/am-i-nima/word-combinations#memory-combinations">Memory combinations guide</Link>.
+
+</section>
+
+<section id="tomato-kingdom" className="scroll-mt-24">
+
+## How Do You Unlock Tomato Kingdom in Am I Nima?
+
+Discover {amINimaCollectionTargets.tomatoKingdom} Tomato Boy characters to meet the achievement requirement.
+
+Start by combining Friend + Plush to obtain Tomato Boy. Use it with other ingredients to discover different characters, such as Tomato Pop from Tomato Boy + Dad.
+
+The <Link href="/am-i-nima/word-combinations#tomato-boy-combinations">Tomato Boy combinations</Link> can help you expand your collection, but the available recipes do not cover all {amINimaCollectionTargets.tomatoKingdom} characters.
+
+### Does Pomegranate Prince Count Toward Tomato Kingdom?
+
+Pomegranate Prince is a character discovery, but whether it contributes to the Tomato Kingdom achievement remains unclear.
+
+Keep other character cards separate from your Tomato Boy discoveries when tracking progress.
+
+</section>
+
+<section id="free-whiskers" className="scroll-mt-24">
+
+## How Do You Get the Free Whiskers Achievement?
+
+Free Whiskers requires saving Whiskers during the Boiler Room experiment. Releasing him is not enough if the rat trap catches him afterward.
+
+The rescue sequence uses two important words: **Freedom** and **Surgery**.
+
+### Step 1: Find Whiskers and the Wall Hole
+
+Find the small opening behind the boiler machinery while holding Whiskers. The gap is too small for you, but he can enter it.
+
+Place **Freedom** into your head and select **Let Whiskers go.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-whiskers-wall-hole.webp"
+  alt="Freedom word revealing the Let Whiskers go option behind the boiler in Am I Nima"
+  width={1116}
+  height={652}
+  caption="Use Freedom to reveal the option to release Whiskers through the small wall opening."
+/>
+
+### Step 2: Retrieve Whiskers After the Trap Snaps
+
+Whiskers does not immediately escape. When you hear the trap snap, return to the area behind the boiler and retrieve him. He is injured but still alive.
+
+### Step 3: Use Surgery to Save Whiskers
+
+When the voice suggests letting Whiskers die, place **Surgery** into your head.
+
+This reveals the green dialogue option:
+
+**You can save him.**
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-whiskers-surgery-choice.webp"
+  alt="Surgery word revealing the You can save him dialogue option during the Whiskers rescue"
+  width={965}
+  height={583}
+  caption="Use Surgery to reveal the rescue response instead of abandoning Whiskers."
+/>
+
+Select this response and continue through the game's treatment sequence.
+
+The acquisition methods for Freedom and Surgery are still unclear. Check your available words and continue exploring combinations if either is missing.
+
+### Step 4: Release Whiskers
+
+After the treatment sequence, the story describes you putting Whiskers down.
+
+He moves toward the hole in the wall before Mom returns.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-whiskers-rescue-result.webp"
+  alt="Am I Nima dialogue confirming that Whiskers moves toward the wall hole after being rescued"
+  width={1011}
+  height={428}
+  caption="Whiskers moves toward the wall opening after the rescue sequence."
+/>
+
+This is the important rescue outcome to look for: you have helped Whiskers escape instead of sacrificing him for your own escape.
+
+The subsequent conversation with Mom addresses what happened and your willingness to help him.
+
+Check whether Free Whiskers has unlocked before continuing to the next test.
+
+### Does Releasing Whiskers Complete the Achievement?
+
+Not necessarily. In the trap-and-rescue sequence, you still need to retrieve Whiskers and help him after the trap catches him.
+
+Other rescue methods may exist, but check for the achievement unlock before leaving the experiment.
+
+</section>
+
+<section id="bunker-achievement" className="scroll-mt-24">
+
+## How Do You Unlock the Bunker Achievement?
+
+The achievement requires entering Annabelle's secret lab.
+
+Finding the hidden passage or reaching the numeric keypad door does not necessarily satisfy that objective. The <Link href="/am-i-nima#bunker">bunker exploration walkthrough</Link> explains how to locate the hidden underground area, although the door code remains unknown.
+
+### Does Symbiosis Unlock Bunker?
+
+The <Link href="/am-i-nima/endings#symbiosis-ending">Symbiosis ending</Link> includes the bunker in its story sequence.
+
+Whether entering it through that sequence unlocks the exploration achievement remains unclear. Check your Steam achievements after reaching the area.
+
+</section>
+
+<section id="ending-achievements" className="scroll-mt-24">
+
+## Which Achievements Require Different Endings?
+
+There are {amINimaEndingAchievements.length} ending-related achievements.
+
+Each requires reaching its corresponding ending, rather than simply discovering a particular word or revealing a dialogue option.
+
+Different branches can become available during the fish test, mirror conversations, the confrontation with Mom, or the Final Verdict.
+
+### Which Ending Achievement Should You Attempt Next?
+
+Filter the achievement checklist by Endings and Incomplete to identify the outcomes you still need.
+
+Compare those missing endings with the story checkpoints in the <Link href="/am-i-nima/endings#ending-list">ending choices table</Link>.
+
+Choose a branch that differs from the outcome you have already completed. Pay attention to the required dialogue context rather than simply collecting its associated input word.
+
+Earlier story decisions may still affect which options become available.
+
+### Why Is an Ending Achievement Still Locked?
+
+Seeing the relevant dialogue button does not mean that you have completed its associated ending.
+
+Continue through the resulting story sequence and check which outcome you actually reached.
+
+Some endings return you to the opening scene, while others lead into a different conclusion or the credits.
+
+There is not yet a complete set of established starting conditions for every ending. If your story develops differently from the expected branch, review the scene and earlier choices before attempting the same response again.
+
+</section>
+
+<section id="first-loop" className="scroll-mt-24">
+
+## How Do You Complete Your First Loop?
+
+**Dark, cold, endless, and utterly serene.** unlocks for completing your first loop.
+
+Loyalty is one ending that returns you to the opening basement scene. When the familiar introduction begins again, check whether the first-loop achievement has unlocked.
+
+The déjà vu message is part of the new loop, not a separately listed achievement.
+
+See <Link href="/am-i-nima#second-loop">how words return in the next loop</Link> before continuing your collection.
+
+</section>
+
+<section id="achievement-problems" className="scroll-mt-24">
+
+## Why Are Your Am I Nima Achievements Still Locked?
+
+If an achievement remains incomplete, check whether you have met its actual objective rather than only reached a related scene.
+
+This is particularly important for ending achievements, the Bunker objective, and the larger collection goals.
+
+<GuideTable
+  columns={achievementProblemColumns}
+  rows={achievementProblemRows}
+/>
+
+### Can You Finish Every Achievement in One Playthrough?
+
+A single story outcome cannot cover all the different ending achievements.
+
+You will need to explore alternative branches, continue expanding your collections, and revisit decisions that produce different results.
+
+The exact number of loops required to complete every achievement is not yet established.
+
+Do not restart a successful collection route simply because you have reached an ending. Check which words return during the next loop and continue working toward missing discoveries.
+
+</section>

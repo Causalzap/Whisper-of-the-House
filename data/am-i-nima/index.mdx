@@ -1,0 +1,750 @@
+import Link from "next/link";
+import GuideImage from "@/components/guides/GuideImage";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
+
+import { amINimaWords } from "@/data/am-i-nima/words";
+import { amINimaRecipeViews } from "@/data/am-i-nima/word-combinations";
+import { amINimaEndings } from "@/data/am-i-nima/endings";
+import {
+  amINimaAchievementCount,
+  amINimaCollectionTargets,
+} from "@/data/am-i-nima/achievements";
+
+export const firstLoopColumns = [
+  { key: "day", label: "Progression Stage" },
+  { key: "checkpoint", label: "Story Checkpoint" },
+  { key: "priority", label: "What to Focus On" },
+  { key: "next", label: "What to Do Next" },
+];
+
+export const firstLoopRows = [
+  {
+    day: "Day 1",
+    checkpoint: "Opening questions and congee test",
+    priority:
+      "Learn word combinations and dialogue responses.",
+    next:
+      "Complete the conversation and explore the bedroom when available.",
+  },
+  {
+    day: "Day 2",
+    checkpoint: "Bathroom access and object tests",
+    priority:
+      "Connect the shark plush, fossil, and swimming goggles to personal memories.",
+    next:
+      "Investigate the available rooms and continue Mom's tests.",
+  },
+  {
+    day: "Day 3",
+    checkpoint: "Drawing and personal memories",
+    priority:
+      "Recall places, friends, and details about Nima's life.",
+    next:
+      "Explore personal associations and investigate unusual objects.",
+  },
+  {
+    day: "Day 4",
+    checkpoint: "Whiskers and Boiler Room",
+    priority:
+      "Decide how to respond to Mom's experiment.",
+    next:
+      "Complete the room sequence and prepare for later conversations.",
+  },
+  {
+    day: "Day 5",
+    checkpoint: "Mirror discussion and identity confrontation",
+    priority:
+      "Decide how to respond to Mom and the voice.",
+    next:
+      "Follow the available story branch toward its conclusion.",
+  },
+];
+
+export const explorationColumns = [
+  { key: "area", label: "Area" },
+  { key: "inspect", label: "What to Inspect" },
+  { key: "purpose", label: "Why It Matters" },
+];
+
+export const explorationRows = [
+  {
+    area: "Basement testing area",
+    inspect:
+      "Mom, presented objects, and the current dialogue prompt",
+    purpose:
+      "Advance tests and investigate Nima's identity.",
+  },
+  {
+    area: "Bedroom",
+    inspect:
+      "Bookshelves, aquarium, photographs, drawers, and locked cabinet",
+    purpose:
+      "Discover words, personal clues, and hidden belongings.",
+  },
+  {
+    area: "Bathroom",
+    inspect:
+      "Mirror, paintings, laundry basket, and other interactable objects",
+    purpose:
+      "Explore identity-related conversations and unusual features.",
+  },
+  {
+    area: "Boiler Room",
+    inspect:
+      "Whiskers, cage, door, machinery, and small wall opening",
+    purpose:
+      "Complete the experiment and investigate the rescue opportunity.",
+  },
+  {
+    area: "Hidden area",
+    inspect:
+      "Concealed passage, metal hatch, ladder, and keypad door",
+    purpose:
+      "Investigate the secret area beneath the basement.",
+  },
+];
+
+export const puzzleColumns = [
+  { key: "problem", label: "Puzzle or Obstacle" },
+  { key: "solution", label: "What to Do" },
+  { key: "result", label: "Result" },
+];
+
+export const puzzleRows = [
+  {
+    problem: "Bedroom locker",
+    solution: "Enter POND.",
+    result:
+      "Access the diary, photograph, and Pomegranate Prince figurine.",
+  },
+  {
+    problem: "Locked bathroom",
+    solution:
+      "Continue the early conversations with Mom until she unlocks it.",
+    result:
+      "The bathroom becomes available for exploration.",
+  },
+  {
+    problem: "Disturbed bathroom painting",
+    solution:
+      "Inspect the painting and remove it from the wall when the interaction becomes available.",
+    result:
+      "Reveal a concealed opening.",
+  },
+  {
+    problem: "Metal floor hatch",
+    solution:
+      "Lift the hatch and descend the ladder when accessible.",
+    result:
+      "Reach the area containing a heavy keypad door.",
+  },
+  {
+    problem: "Bunker keypad",
+    solution:
+      "The entrance code is not yet known.",
+    result:
+      "Finding the door does not establish successful lab entry.",
+  },
+  {
+    problem: "Boiler Room experiment",
+    solution:
+      "Investigate the room and decide how to respond to the Whiskers test.",
+    result:
+      "Different responses can change the outcome of the experiment.",
+  },
+];
+
+export const progressionProblemColumns = [
+  { key: "problem", label: "If You Are Stuck" },
+  { key: "check", label: "What to Check" },
+  { key: "action", label: "Next Action" },
+];
+
+export const progressionProblemRows = [
+  {
+    problem: "No useful dialogue option appears",
+    check:
+      "The current question and the word placed in your head.",
+    action:
+      "Try another available conversation word related to the question.",
+  },
+  {
+    problem: "Mom rejects your answer",
+    check:
+      "Whether the response describes the object or recalls a personal event.",
+    action:
+      "Look for words associated with Nima's relationships and memories.",
+  },
+  {
+  problem: "White dialogue options do not advance the test",
+  check:
+    "Whether another available word reveals a relevant green response.",
+  action:
+    "Try an answer that addresses Mom's current question. White responses can also affect the story, so read their wording carefully.",
+},
+  {
+    problem: "A room remains locked",
+    check:
+      "Whether the current test or conversation has finished.",
+    action:
+      "Continue the available story interaction instead of assuming every locked door has a password.",
+  },
+  {
+    problem: "You cannot find a missing word",
+    check:
+      "Unexplored objects, available combinations, and current story state.",
+    action:
+      "Use the recipe finder to investigate the missing word or its ingredients.",
+  },
+  {
+    problem: "POND does not open a door",
+    check:
+      "Whether you are interacting with the bedroom locker or a different lock.",
+    action:
+      "Use POND only for the bedroom locker. The bunker keypad is a separate obstacle.",
+  },
+  {
+    problem: "Previously collected words are missing",
+    check:
+      "Whether you have started another loop and reached the relevant day.",
+    action:
+      "Continue progressing and check for returning words at the start of each day.",
+  },
+  {
+    problem: "The opening scene repeats",
+    check:
+      "Whether your previous story branch has concluded.",
+    action:
+      "Continue the next loop and investigate different available responses.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Progress in Am I Nima?">
+  Explore the available rooms, combine discovered words,
+  and place relevant words into your head to generate
+  dialogue options. Progress through Mom's tests by
+  investigating Nima's memories and personal relationships.
+  Use POND to open the bedroom locker, investigate the
+  bathroom for a hidden passage, and pay attention to
+  Whiskers during the Boiler Room experiment. Different
+  responses can lead to different endings, and previously
+  discovered words return during later loops.
+</GuideQuickAnswer>
+
+</section>
+
+Mom's questions in **Am I Nima** are not always simple tests of factual knowledge. Recognizing a fossil or a pair of swimming goggles may not be enough. She often wants to know what those objects mean to Nima.
+
+When a reasonable answer fails to advance the conversation, look for a personal association instead of another description of the object.
+
+**Spoiler warning:** The following tests and exploration steps reveal parts of Nima's story.
+
+<section id="guide-overview" className="scroll-mt-24">
+
+## Which Am I Nima Guide Do You Need?
+
+**<Link href="/am-i-nima/word-combinations">Word Combinations, Recipe Finder & Collection Tracker</Link>**
+
+Search {amINimaRecipeViews.length} known combinations, track {amINimaWords.length} ordinary word entries, and find Memory or Tomato Boy recipes.
+
+**<Link href="/am-i-nima/endings">Endings Guide: Choices, Routes & Outcomes</Link>**
+
+Compare dialogue choices and outcomes associated with {amINimaEndings.length} endings.
+
+**<Link href="/am-i-nima/achievements">Achievements Guide & Interactive Checklist</Link>**
+
+Track all {amINimaAchievementCount} achievements, save Whiskers, and work toward the word and character collection goals.
+
+</section>
+
+<section id="getting-started" className="scroll-mt-24">
+
+## How Do You Start Playing Am I Nima?
+
+You begin in a basement with a limited understanding of your identity.
+
+Mom expects you to answer her questions, but your vocabulary initially contains only a small number of words.
+
+The first task is to use those words to create additional concepts and communicate with her.
+
+### How Do You Answer Mom's Questions?
+
+Combine Nima + Stranger to obtain Mom, then drag a relevant word into your head to generate a dialogue option.
+
+Dragging words together creates new discoveries. Dragging a word into your head instead lets you respond to the current conversation.
+
+Missing a word needed for the test? Search its ingredients in the <Link href="/am-i-nima/word-combinations#recipe-finder">word combination finder</Link>.
+
+### What Do Green Words and Green Dialogue Options Mean?
+
+A green-highlighted word can be used in conversation. This is different from the color of the dialogue button that appears after you drag the word into your head.
+
+Green buttons often advance the current discussion, while white buttons may reveal additional questions, observations, or reactions. White answers can still have consequences and sometimes move the story forward.
+
+Read the actual response before choosing it. A green button is not a guarantee that Mom will accept your answer or that you will reach the ending you want.
+
+### How Do You Review Previous Words and Conversations?
+
+The game provides both **Word History** and **Dialogue History**.
+
+Use Word History when you have forgotten how a previous combination was made.
+
+Use Dialogue History when you need to review an earlier conversation, a personal detail, or a clue that Mom mentioned.
+
+This is especially useful when an object appears again during a later test and you cannot remember why it was important.
+
+</section>
+
+<section id="first-loop-walkthrough" className="scroll-mt-24">
+
+## Am I Nima Walkthrough: How Do You Progress Through Days 1–5?
+
+The first loop gradually introduces more difficult questions about your identity, relationships, memories, and behavior.
+
+Use the following Day 1–5 outline as a reference for progressing through your first loop.
+
+The day numbers are approximate progression markers rather than fixed unlock requirements. Earlier decisions can affect when particular conversations, rooms, and story branches become available.
+
+If your current scene differs from the listed day, follow the matching story checkpoint instead.
+
+<GuideTable
+  columns={firstLoopColumns}
+  rows={firstLoopRows}
+/>
+
+Several important events, including the discovery of hidden areas, can depend on when you investigate the available rooms.
+
+The later days also introduce decisions that can lead toward different story outcomes.
+
+</section>
+
+<section id="day-1" className="scroll-mt-24">
+
+## Day 1 Walkthrough: Opening Questions and the Bedroom
+
+### What Should You Do During the Congee Test?
+
+Combine Hungry + Congee to obtain **Disgust** when both words become available.
+
+Food-related responses can lead to tasting the congee and discussing Mom's cooking. Read her reaction and continue through the available dialogue until she moves on from the food test.
+
+Disgust is a useful discovery during this conversation, not a required answer for every route.
+
+### What Should You Inspect in the Bedroom?
+
+When you gain access to the bedroom, investigate the objects around you before concentrating on the next test.
+
+The bedroom contains several useful sources of personal information:
+
+- Photographs and belongings connected to Nima's family.
+- An aquarium and objects related to fish.
+- Books connected to paleobiology and Mom's work.
+- Drawings, personal items, and the locked cabinet.
+
+These objects introduce subjects that may become important when Mom presents related items during later conversations.
+
+The locked cabinet is also worth investigating. Its four-letter solution is covered in the <Link href="#locker-code">bedroom locker puzzle</Link> below.
+
+</section>
+
+<section id="day-2" className="scroll-mt-24">
+
+## Day 2 Walkthrough: Bathroom Access and Object Tests
+
+The next stage introduces additional room access and tests involving objects from Nima's life.
+
+### How Do You Unlock the Bathroom?
+
+If the bathroom door is locked, continue the available conversation with Mom.
+
+During an early interaction, she notices that you have not cleaned yourself up. The conversation establishes that the bathroom was locked, and she subsequently unlocks it.
+
+This is a story-controlled room-access event rather than a known password puzzle.
+
+Return to the bathroom when it becomes accessible.
+
+### How Do You Answer the Shark Plush Test?
+
+Think of Dad when Mom presents the shark plush. The toy was a gift from him and is connected to memories of visiting the aquarium together.
+
+A response associated with Dad can bring up those memories. Simply describing the shark or giving facts about the animal may not satisfy her.
+
+### How Do You Answer the Fossil Test?
+
+Try **River** when Mom presents the fossil. This association leads to the memory of finding it in the Kicking Horse River and giving it to her.
+
+The fossil is connected to Mom's research, but the location and circumstances of its discovery are more relevant to this question than identifying the rock itself.
+
+Search the <Link href="/am-i-nima/word-combinations#recipe-finder">recipe finder</Link> if River is missing.
+
+### How Do You Answer the Swimming Goggles Test?
+
+If a general Swimming response disappoints Mom, try using **CONSUMPTION** instead. This memory recalls the swimming competition, the accident involving Nima, Tiffany, and Mom's reaction.
+
+Combine Pride + Guilt if you have not recovered the memory. The <Link href="/am-i-nima/word-combinations#memory-combinations">Memory combinations guide</Link> can help with missing ingredients.
+
+This is one possible approach to the goggles discussion, not a mandatory answer for every route.
+
+</section>
+
+<section id="day-3" className="scroll-mt-24">
+
+## Day 3 Walkthrough: Drawings, Friends and Personal Memories
+
+The drawing-related tests shift the conversation from identifying physical objects toward recalling Nima's life.
+
+Mom asks about places and people connected to her past.
+
+### How Do You Remember Vancouver?
+
+During the drawing discussion, look for the reflection about a kingdom by the sea. The recollection describes a coastal home, frequent rain, and nearby rainforest.
+
+Following this conversation can unlock **Vancouver**, giving you a more specific place-related word for the drawing test.
+
+### What Should You Explore Before the Next Test?
+
+Revisit rooms that have become accessible.
+
+The bathroom is particularly worth investigating when its objects or surroundings appear to have changed.
+
+An unusual painting can conceal an opening behind the wall. The hidden passage is explained in the <Link href="#bunker">hidden passage and bunker section</Link>.
+
+Do not assume that completing a conversation means that every nearby object has already been explored.
+
+</section>
+
+<section id="day-4" className="scroll-mt-24">
+
+## Day 4 Walkthrough: How Do You Complete the Boiler Room Test?
+
+The Whiskers experiment presents a different kind of test.
+
+Instead of simply recalling facts, you must decide how to respond to a situation involving another living creature.
+
+### How Do You Enter the Boiler Room?
+
+Mom instructs you to pick up Whiskers' cage and follow her.
+
+She leads you into the Boiler Room, where the machinery produces intense heat and the door is locked behind you.
+
+The test presents a conflict between obeying Mom and protecting Whiskers.
+
+Examine the available objects before committing to a response.
+
+### Can You Save Whiskers?
+
+Yes. Saving Whiskers is one way to resolve the Boiler Room sequence.
+
+Look for the small wall opening behind the boiler machinery. Freedom and Surgery are useful words during the rescue route.
+
+Follow the <Link href="/am-i-nima/achievements#free-whiskers">Whiskers rescue steps</Link> for the corresponding dialogue choices and what to do when the initial release goes wrong.
+
+Completing Mom's experiment and successfully rescuing Whiskers are not necessarily the same outcome.
+
+### What Happens After the Boiler Room Test?
+
+The story can return you to Mom's testing area after the room sequence concludes.
+
+Continue the conversation and pay attention to what she says about the purpose of the experiment.
+
+Your responses during this stage can reveal more about how she evaluates Nima's behavior.
+
+When you regain access to the bedroom, investigate available interactions and prepare for the later identity-related conversations.
+
+</section>
+
+<section id="day-5" className="scroll-mt-24">
+
+## Day 5 Walkthrough: Mirror Conversations and Identity Decisions
+
+The later stages increasingly focus on whether you are Nima and how you intend to respond to Mom.
+
+These conversations can introduce decisions that lead toward different story branches.
+
+### What Should You Do During the Mirror Conversation?
+
+If you want to gain Mom's trust, Pretend can reveal **I'm going to trick her.**
+
+Other responses take the story in different directions. Check the wording before choosing, especially if you are trying to reach a particular ending.
+
+### How Do You Answer the Final Identity Test?
+
+When Mom asks what it means to be Nima, consider responses connected to her relationship with her daughter.
+
+Family can reveal To love you., while later confrontations introduce different identity-related choices.
+
+Match the actual question with the response you want in the <Link href="/am-i-nima/endings#ending-list">ending choices table</Link>.
+
+### What Should You Do When Your First Ending Finishes?
+
+If the opening basement scene appears again, continue with the <Link href="#second-loop">second-loop walkthrough</Link>.
+
+If you want to investigate a different conclusion, use the <Link href="/am-i-nima/endings">endings guide</Link> to identify the story checkpoint you need to revisit.
+
+</section>
+
+<section id="room-exploration" className="scroll-mt-24">
+
+## Where Should You Explore in Am I Nima?
+
+Different rooms serve different purposes.
+
+The testing area advances conversations with Mom, while the bedroom and bathroom contain personal belongings and hidden clues.
+
+The Boiler Room introduces a separate experiment. Hidden areas beneath the basement provide additional exploration opportunities.
+
+<GuideTable
+  columns={explorationColumns}
+  rows={explorationRows}
+/>
+
+### When Should You Revisit a Room?
+
+Revisit an accessible room when the story introduces a new subject or when you obtain a word connected to an object you examined earlier.
+
+A photograph, book, or personal belonging that seemed unimportant during the opening can become more meaningful after a later conversation.
+
+Room exploration also helps when you cannot find a useful response during a test.
+
+The <Link href="/am-i-nima/word-combinations#word-locations">word locations and unlocks guide</Link> covers specific objects that provide known word discoveries.
+
+</section>
+
+<section id="puzzle-solutions" className="scroll-mt-24">
+
+## What Are the Am I Nima Puzzle Solutions?
+
+Not every locked room or obstacle uses the same kind of solution.
+
+Some require a password, while others become accessible through story progression or interaction with nearby objects.
+
+<GuideTable
+  columns={puzzleColumns}
+  rows={puzzleRows}
+/>
+
+The bedroom locker and the heavy metal keypad door are separate puzzles.
+
+A solution that works on one should not be assumed to work on the other.
+
+</section>
+
+<section id="locker-code" className="scroll-mt-24">
+
+## What Is the Locker Code in Am I Nima?
+
+The bedroom locker code is **POND**.
+
+Enter these four letters when interacting with the locked cabinet in the bedroom.
+
+### Where Does the POND Password Come From?
+
+The password is connected to **James Pond**, a name associated with the fish-related belongings in Nima's room.
+
+Investigate the bedroom's photographs, drawings, and aquarium-related objects if you want to understand the clue before opening the cabinet.
+
+You do not need to substitute Nima's own name for the password.
+
+### How Do You Open the Bedroom Locker?
+
+1. Explore the bedroom until you locate the locked cabinet.
+2. Interact with its four-letter lock.
+3. Enter **POND**.
+4. Open the cabinet and inspect the belongings inside.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-locker-code-pond.webp"
+  alt="Am I Nima bedroom locker with the four-letter POND password entered"
+  width={611}
+  height={511}
+  caption="Set the four letter wheels to POND and use the arrow to submit the password."
+/>
+
+### What Is Inside the Locker?
+
+The cabinet contains several personal items worth examining.
+
+These include a diary, a photograph, and the Pomegranate Prince figurine.
+
+The diary provides additional information about Nima's situation, while the figurine introduces another character discovery.
+
+For the figurine and other character discoveries, see the <Link href="/am-i-nima/word-combinations#tomato-boy-combinations">Tomato Boy and character combinations section</Link>.
+
+### Why Is the POND Code Not Working?
+
+Check that you are interacting with the locked bedroom cabinet.
+
+POND is the known four-letter password for this particular container.
+
+It is not an established solution for every locked object in the house, and it does not provide a known answer to the bunker keypad.
+
+</section>
+
+<section id="bunker" className="scroll-mt-24">
+
+## How Do You Find the Bunker in Am I Nima?
+
+Start by investigating the hidden areas behind the bathroom painting and beneath the basement.
+
+You can discover a concealed opening, a metal floor hatch, and a heavy door with a numeric keypad.
+
+Start by locating the hidden openings and the underground corridor. The final door into the secret lab remains unsolved.
+
+### Where Is the Hidden Passage?
+
+Investigate the bathroom when it becomes available.
+
+Look for a painting that appears to have been disturbed.
+
+During the relevant interaction, you can remove the painting from the wall. This reveals a dark opening behind it.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-bathroom-hidden-passage.webp"
+  alt="Bathroom painting that conceals a hidden passage in Am I Nima"
+  width={766}
+  height={652}
+  caption="Inspect the disturbed painting and remove it from the wall to reveal the concealed opening."
+/>
+
+Investigate the opening when the game allows you to proceed.
+
+If you cannot interact with the painting in this way yet, continue the available story events and return later. The exact unlock conditions for this interaction remain unknown.
+
+### How Do You Find the Keypad Door?
+
+Further exploration of the hidden areas can lead to a metal floor hatch.
+
+When you can access it:
+
+1. Examine the hatch and its handle.
+2. Lift the hatch.
+3. Descend the metal ladder.
+4. Investigate the corridor beneath the basement.
+5. Examine the heavy metal door with the digital keypad.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-basement-hidden-hatch.webp"
+  alt="Metal ladder leading beneath the basement in Am I Nima"
+  width={771}
+  height={669}
+  caption="Descend the metal ladder through the hatch to investigate the area beneath the basement."
+/>
+
+If the hatch is not accessible, continue the story before returning. The exact connection between the bathroom opening and the hatch remains unclear.
+
+### What Is the Bunker Code?
+
+The code for the numeric keypad beneath the basement is not yet known. A successful entry into the secret lab has not been established through this door.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-bunker-keypad-door.webp"
+  alt="Numeric keypad on the heavy door beneath the basement in Am I Nima"
+  width={732}
+  height={467}
+  caption="The heavy door uses a numeric keypad rather than the bedroom locker's four-letter password."
+/>
+
+Do not confuse this door with the bedroom's four-letter locker.
+
+**POND is the four-letter bedroom locker code, not a known solution to this numeric keypad.**
+
+If you have reached the keypad door, you have located the hidden underground area, but you have not necessarily entered Annabelle's secret lab.
+
+### Do You Need to Open the Bunker Door for Symbiosis?
+
+The <Link href="/am-i-nima/endings#symbiosis-ending">Symbiosis ending</Link> includes the bunker, but opening the keypad door beforehand is not a confirmed requirement.
+
+If you are pursuing the separate <Link href="/am-i-nima/achievements#bunker-achievement">Bunker achievement</Link>, reaching the keypad alone is not enough to establish completion.
+
+</section>
+
+<section id="second-loop" className="scroll-mt-24">
+
+## What Happens When You Start the Second Loop in Am I Nima?
+
+Returning to the opening basement scene after an ending can mark the beginning of another loop. Look for the déjà vu message and the tutorial explaining word recovery.
+
+### Do Your Words Carry Over Between Loops?
+
+Yes. The next-loop tutorial explains that you remember words from the previous loop at the start of every day.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-loop-word-carryover.webp"
+  alt="Am I Nima tutorial explaining that previous-loop words return at the start of each day"
+  width={1265}
+  height={653}
+  caption="Previously discovered words are remembered at the start of each day in another loop."
+/>
+
+Words return at the start of each day, so a missing discovery at the beginning of the loop does not necessarily mean it has been lost. Continue to the relevant day and check your library again.
+
+### Can You Skip Dialogue in the Second Loop?
+
+Use SKIP when it is available to move past familiar dialogue. Do not assume every conversation can be skipped.
+
+Read the available responses before skipping a scene where you intend to make a different decision.
+
+### Should You Start a New Game or Continue the Loop?
+
+Continue the available loop if you want to make use of previously discovered words. Before starting a new game, check whether the returning vocabulary gives you access to responses you missed during your first playthrough.
+
+</section>
+
+<section id="progression-problems" className="scroll-mt-24">
+
+## Why Are You Stuck in Am I Nima?
+
+When progress stops, identify whether the obstacle is caused by a missing word, the current conversation, an inaccessible room, or an unresolved puzzle.
+
+These situations require different actions.
+
+<GuideTable
+  columns={progressionProblemColumns}
+  rows={progressionProblemRows}
+/>
+
+### What If You Have the Right Word but the Wrong Answer Appears?
+
+The response generated by a word depends on the current scene.
+
+A word associated with one ending or test may produce a completely different option somewhere else.
+
+Check what Mom or the voice is currently asking.
+
+If the response does not match the decision you are looking for, you may need to continue the story or investigate a different available interaction.
+
+### Do You Need Every Word to Progress?
+
+There is no established requirement to discover every word before completing your first loop.
+
+You can concentrate on the concepts relevant to the current test and investigate the larger collection goals during later exploration.
+
+The Human Dictionary achievement requires {amINimaCollectionTargets.humanDictionary} words, but this collection objective is separate from simply advancing the story.
+
+If a missing word is preventing you from answering a question, search for that particular word rather than attempting to complete the entire collection first.
+
+</section>
+
+<section id="after-first-ending" className="scroll-mt-24">
+
+## What Should You Do After Your First Ending?
+
+Your next loop is an opportunity to pursue something you missed.
+
+- **Explore another ending:** Identify a different checkpoint in the <Link href="/am-i-nima/endings#ending-list">ending choices table</Link>.
+- **Expand your vocabulary:** Use returning words to find missing discoveries in the <Link href="/am-i-nima/word-combinations#recipe-finder">word combination finder</Link>.
+- **Complete missed objectives:** Check the <Link href="/am-i-nima/achievements#achievement-checklist">achievement tracker</Link> for unfinished collection, exploration, and rescue goals.
+
+You can also return to the bedroom locker and hidden passages if you missed those areas during your first loop.
+
+</section>
+
+<GameDiscoveryCta
+  gameTitle="Am I Nima"
+  heading="Looking for another game after Am I Nima?"
+  description="Use the quick recommender to discover more psychological horror, narrative-driven mysteries, and puzzle games that fit your preferences, or build a broader Gaming DNA profile from nine games you already love."
+/>

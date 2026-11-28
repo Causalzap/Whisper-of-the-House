@@ -1,0 +1,507 @@
+import Link from "next/link";
+import GuideImage from "@/components/guides/GuideImage";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AmINimaWordExplorer from "@/components/tools/AmINimaWordExplorer";
+
+import { amINimaWords } from "@/data/am-i-nima/words";
+import { amINimaRecipeViews } from "@/data/am-i-nima/word-combinations";
+import { amINimaWordLocationViews } from "@/data/am-i-nima/word-locations";
+
+export const ordinaryRecipes = amINimaRecipeViews.filter(
+  (recipe) => recipe.kind === "ordinary"
+);
+
+export const memoryRecipes = amINimaRecipeViews.filter(
+  (recipe) => recipe.kind === "memory"
+);
+
+export const tomatoRecipes = amINimaRecipeViews.filter(
+  (recipe) =>
+    recipe.kind === "tomato_seed" ||
+    recipe.kind === "tomato_character"
+);
+
+export const wordCombinationColumns = [
+  { key: "firstWord", label: "First Word" },
+  { key: "secondWord", label: "Second Word" },
+  { key: "result", label: "Result" },
+];
+
+export const wordCombinationRows = ordinaryRecipes
+  .map((recipe) => ({
+    firstWord: recipe.inputs[0],
+    secondWord: recipe.inputs[1],
+    result: recipe.outputs.join(", "),
+  }))
+  .sort((a, b) =>
+    a.result.localeCompare(b.result)
+  );
+
+export const wordLocationColumns = [
+  { key: "word", label: "Word" },
+  { key: "method", label: "How to Obtain It" },
+];
+
+export const wordLocationRows = amINimaWordLocationViews
+  .filter((location) => location.kind === "ordinary")
+  .map((location) => ({
+    word: location.word,
+    method: location.method,
+  }))
+  .sort((a, b) =>
+    a.word.localeCompare(b.word)
+  );
+
+export const memoryCombinationColumns = [
+  { key: "firstWord", label: "First Word" },
+  { key: "secondWord", label: "Second Word" },
+  { key: "memory", label: "Memory" },
+];
+
+export const memoryCombinationRows = memoryRecipes.map(
+  (recipe) => ({
+    firstWord: recipe.inputs[0],
+    secondWord: recipe.inputs[1],
+    memory: recipe.outputs.join(", "),
+  })
+);
+
+export const tomatoCombinationColumns = [
+  { key: "firstWord", label: "First Word" },
+  { key: "secondWord", label: "Second Word" },
+  { key: "result", label: "Result" },
+];
+
+export const tomatoCombinationRows = tomatoRecipes.map(
+  (recipe) => ({
+    firstWord: recipe.inputs[0],
+    secondWord: recipe.inputs[1],
+    result: recipe.outputs.join(", "),
+  })
+);
+
+export const combinationProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "check", label: "What to Check" },
+  { key: "action", label: "What to Do" },
+];
+
+export const combinationProblemRows = [
+  {
+    problem: "A required word is missing",
+    check: "The word is not in your current library.",
+    action:
+      "Search for another recipe that produces it or inspect nearby objects.",
+  },
+  {
+    problem: "Two words produce nothing",
+    check: "The selected pair may not form a valid combination.",
+    action:
+      "Try a different pair instead of repeatedly attempting the same combination.",
+  },
+  {
+    problem: "The result is already collected",
+    check: "The combination may produce a word you already know.",
+    action:
+      "Search for recipes that lead to missing words.",
+  },
+  {
+    problem: "A word cannot be used in dialogue",
+    check: "The current question may not accept that word.",
+    action:
+      "Keep the word for another conversation and try an alternative response.",
+  },
+  {
+    problem: "A word is missing after starting another loop",
+    check: "Previous words are remembered at the beginning of each day.",
+    action:
+      "Continue into the relevant day and check your word library again.",
+  },
+  {
+    problem: "A combination starts a memory",
+    check: "Some combinations trigger a memory instead of an ordinary word.",
+    action:
+      "Finish the memory sequence and continue exploring its possible uses.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+
+<GuideQuickAnswer title="How Do You Find Word Combinations in Am I Nima?">
+  Combine two words in your brain to discover new words, memories,
+  and Tomato Boy characters. Start with Nima + Stranger to obtain
+  Mom, then combine Nima + Mom to discover Love, Fear, and Family.
+  Use the recipe finder below to search for a missing word or find
+  combinations using words you already have.
+</GuideQuickAnswer>
+
+</section>
+
+Looking for a particular word in **Am I Nima**? Search its name in the finder, check which ingredients are missing, and work backward until you reach a combination you can make.
+
+The finder contains {amINimaRecipeViews.length} known combinations, with {amINimaWords.length} ordinary word entries available to track. Some discoveries still have no known recipe or object location.
+
+<section id="recipe-finder" className="scroll-mt-24">
+
+## Am I Nima Word Combination Finder
+
+<AmINimaWordExplorer />
+
+### How to Find a Specific Word
+
+Select **Result only** and enter the word you want to obtain.
+
+For example, searching for Mom displays its alternative recipes, while searching for Pride helps you prepare the ingredients for CONSUMPTION.
+
+If a required ingredient is missing, search for that word next. You can also find a word in the Collection Tracker and select its recipe count to see combinations that produce it.
+
+### How to Find Combinations Using Your Current Words
+
+1. Select **Mark starting words** if you are beginning a new game.
+2. Mark any additional words you have already discovered.
+3. Enable **Available recipes only** to find combinations using your marked ingredients.
+4. Enable **Uncollected results only** to focus on missing discoveries.
+
+After completing a combination in the game, mark the individual results you actually obtained.
+
+Both ingredients must be marked for a recipe to appear as available. Make sure those ingredients are also accessible during your current day or loop.
+
+</section>
+
+<section id="how-to-combine-words" className="scroll-mt-24">
+
+## How Do You Combine Words in Am I Nima?
+
+Click a discovered word to bring it into your brain. Drag two words together to combine their meanings.
+
+When a combination succeeds, its result becomes available as another word or special discovery.
+
+For the opening sequence:
+
+1. Combine **Nima** and **Stranger** to obtain Mom.
+2. Combine **Nima** and **Mom** to discover Love, Fear, and Family.
+3. Continue combining the words that relate to your current situation.
+4. Check the newly discovered results before moving on to the next conversation.
+
+Creating a word and using a word in dialogue are separate actions. Combining words expands your vocabulary, whereas dragging a word into your head can generate a response to the current question.
+
+If you are unsure how to continue the opening conversation, follow the <Link href="/am-i-nima">Am I Nima walkthrough</Link>.
+
+### Why Can the Same Combination Have Multiple Results?
+
+**Nima + Mom** can produce Love, Fear, and Family. Nima + Remnant has three possible results: Mind, Body, and Ghost.
+
+Check your library after combining either pair. You may discover its results separately, so mark only the words you actually receive.
+
+### Alternative Recipes for Missing Words
+
+Missing Stranger? You can also obtain Mom through Nima + Isolation or Lonely + Love.
+
+Choose the recipe whose ingredients are already available during your current loop. Having an alternative recipe is particularly useful when the other ingredients have not returned to your library yet.
+
+### Can You Combine a Word With Itself?
+
+Some combinations use the same word twice.
+
+For example, **Water + Water** produces River.
+
+A combination can also return a word you already know. Nima + Disgust produces Nima rather than a completely new concept.
+
+Do not assume that every successful combination will increase your collection count.
+
+### How Do You Check Previous Word Combinations?
+
+Open **Word History** to review combinations you have already discovered.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-word-history-recipes.webp"
+  alt="Am I Nima Word History showing previously discovered word combinations and their results"
+  width={1920}
+  height={1080}
+  caption="Word History records the input words and their resulting discoveries."
+/>
+
+Word History is particularly helpful when several combinations produce new words in quick succession.
+
+Use it to recover a recipe you have forgotten or identify which combination produced a word you now need.
+
+</section>
+
+<section id="word-combinations" className="scroll-mt-24">
+
+## Am I Nima Word Combinations List
+
+The following table contains {ordinaryRecipes.length} known combinations that produce ordinary words.
+
+Search the recipe finder above if you need a specific ingredient or result. Memory and Tomato Boy combinations are listed separately later on this page.
+
+<GuideTable
+  columns={wordCombinationColumns}
+  rows={wordCombinationRows}
+/>
+
+### Which Word Combinations Should You Try First?
+
+After discovering Mom and Love, combine **Love + Mom** to obtain Work.
+
+If you have also discovered Lonely, you can expand your vocabulary through the following combinations:
+
+1. Combine **Mom + Lonely** to obtain Dad.
+2. Combine **Love + Dad** to obtain Water.
+3. Combine **Water + Water** to obtain River.
+
+Another useful branch starts with Lonely + Dad, which produces Grief. Combining Grief with Work then produces Science.
+
+Prioritize missing results that give you new ingredients for further combinations. Skip a recipe if you already have its result and want to expand your collection.
+
+### How Do You Find More Word Combinations?
+
+When you discover a new word, consider whether it relates to:
+
+- A person or family member.
+- An object you recently examined.
+- An emotion associated with a conversation.
+- A place mentioned during a memory.
+- Another concept with a similar or opposing meaning.
+
+For example, Heart and Trophy lead to Pride, while Fossil and Science can lead to Present and Pride.
+
+These are useful starting points for experimentation, but not every logically related pair has a valid recipe.
+
+</section>
+
+<section id="word-locations" className="scroll-mt-24">
+
+## Where Do You Find New Words in Am I Nima?
+
+Word combinations are only one way to expand your vocabulary. Examining objects can introduce concepts that are difficult to discover through combinations alone.
+
+Whenever you gain access to another room, inspect unfamiliar objects before returning to the next test.
+
+<GuideTable
+  columns={wordLocationColumns}
+  rows={wordLocationRows}
+/>
+
+Some objects provide more than one word. Examining a dying plant, for example, can introduce both Plant and Neglect.
+
+### How Do You Get Fossil?
+
+Inspect the paleobiology book on the upper shelf in the bedroom.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-fossil-book-location.webp"
+  alt="Bedroom paleobiology book that provides the Fossil word in Am I Nima"
+  width={1920}
+  height={1080}
+  caption="Inspect the paleobiology book on the bedroom shelf to discover Fossil."
+/>
+
+Fossil is useful beyond the initial object inspection because it participates in several known combinations, including a Memory recipe.
+
+Once you also have Life, try combining the two.
+
+### How Do You Get Trapped?
+
+Inspect the aquarium on the bedroom shelf.
+
+The description of the fish living inside an artificial environment introduces Trapped.
+
+Keep this word available for future combinations rather than assuming its only purpose is to describe the aquarium.
+
+### How Do You Get James Pond?
+
+Combine **Fish + Dad** to obtain James Pond.
+
+This word is particularly useful if you are investigating the locked cabinet in the bedroom.
+
+For the cabinet password and the surrounding exploration steps, see the <Link href="/am-i-nima#locker-code">bedroom locker solution</Link>.
+
+### Can Conversations Unlock New Words?
+
+Yes. Certain dialogue responses and story events can introduce words.
+
+Vancouver, for example, can become available during the drawing discussion when you consider the home described as a kingdom by the sea.
+
+If you are missing a word with no known object location or recipe, continue exploring the available conversations and inspect your library after the discussion.
+
+</section>
+
+<section id="word-list" className="scroll-mt-24">
+
+## Am I Nima Word List & Collection Tracker
+
+The word library currently contains {amINimaWords.length} known ordinary word entries.
+
+Open the **Collection Tracker** tab in the <Link href="#recipe-finder">word explorer</Link> and mark the words you have discovered. Use the Uncollected filter to identify missing entries.
+
+Ordinary words, memories, Tomato Boy discoveries, and other character cards have separate collection categories.
+
+Your marked discoveries are saved in this browser. You can return later to continue checking missing words without starting the list again.
+
+The tracker does not read your game save, so update your collection manually as you discover new words.
+
+### Does the Word Tracker Include Every Word?
+
+No. The current list covers part of the game's vocabulary rather than every possible discovery.
+
+A missing entry does not mean that the word cannot be obtained in the game.
+
+Some words have known recipes, some come from object interactions, and others still have no known acquisition method in this list.
+
+### Do You Keep Words Between Loops?
+
+Words from the previous loop are remembered at the beginning of each day.
+
+If you start another loop and cannot immediately find a previously discovered word, continue progressing through the relevant day.
+
+See the <Link href="/am-i-nima#second-loop">next-loop guide</Link> for more information about restarting the story.
+
+### Does 100% in the Tracker Mean Human Dictionary Is Complete?
+
+No. The percentage measures how many entries you have marked in the tracker, not your full in-game vocabulary.
+
+You can finish the available list while still missing words required for Human Dictionary. Check the <Link href="/am-i-nima/achievements#word-collection">collection achievement requirements</Link> and your Steam achievement progress.
+
+</section>
+
+<section id="memory-combinations" className="scroll-mt-24">
+
+## How Do You Unlock Memories in Am I Nima?
+
+Certain word combinations trigger memories rather than simply producing another ordinary word.
+
+These sequences reveal parts of Nima's past and can introduce special concepts that become relevant during later conversations.
+
+The following Memory combinations are currently known.
+
+<GuideTable
+  columns={memoryCombinationColumns}
+  rows={memoryCombinationRows}
+/>
+
+### How Do You Unlock OBSESSION?
+
+Combine **Life + Fossil**.
+
+OBSESSION reveals a memory involving Pearl visiting Nima during a period of intense heat and isolation.
+
+If you are missing Fossil, inspect the paleobiology book on the bedroom shelf. Search your word library for Life before attempting the combination.
+
+### How Do You Unlock CONSUMPTION?
+
+Combine **Pride + Guilt**.
+
+CONSUMPTION reveals a memory connected to swimming, competition, and Tiffany.
+
+If Pride is missing, try either of these combinations:
+
+- Heart + Trophy.
+- Fossil + Science.
+
+Use the recipe finder to check your remaining ingredients before attempting the Memory combination.
+
+### Can You Combine Memories With Other Words?
+
+Some memories can also serve as ingredients for further word combinations.
+
+For example, combine **OBSESSION + God** to obtain Power.
+
+This gives memories another use beyond revealing past events. Check the recipe finder for combinations involving a memory after you unlock it.
+
+### Can You Use Memories in Conversations?
+
+Some memories can generate additional responses during particular conversations.
+
+If a memory does not produce an option for the current question, keep it for a later opportunity. Its usefulness depends on the conversation you are having.
+
+Memories can become relevant to later story decisions, but obtaining a particular memory does not by itself guarantee a specific ending.
+
+See the <Link href="/am-i-nima/endings">Am I Nima endings guide</Link> for choices that become available during later story branches.
+
+</section>
+
+<section id="tomato-boy-combinations" className="scroll-mt-24">
+
+## How Do You Get Tomato Boy Characters in Am I Nima?
+
+Tomato Boy combinations introduce a separate group of character discoveries.
+
+Instead of combining two ordinary concepts to expand your vocabulary, you can use Tomato Boy as an ingredient to create different characters.
+
+### How Do You Unlock Tomato Boy?
+
+Combine **Friend + Plush** to obtain Tomato Boy.
+
+Once you have Tomato Boy, try combining it with other words from your library.
+
+<GuideTable
+  columns={tomatoCombinationColumns}
+  rows={tomatoCombinationRows}
+/>
+
+Dad produces Tomato Pop, while Work produces Pear Boy.
+
+These are useful starting combinations if you have just discovered Tomato Boy and want to begin collecting characters.
+
+### How Do You Get Pomegranate Prince?
+
+Pomegranate Prince is a character discovery obtained through exploration rather than a word combination.
+
+1. Find the locked cabinet in the bedroom.
+2. Enter **POND**.
+3. Open the cabinet and inspect the Pomegranate Prince figurine.
+
+<GuideImage
+  src="/images/am-i-nima/am-i-nima-pomegranate-prince.webp"
+  alt="Pomegranate Prince figurine and character card in Am I Nima"
+  width={1920}
+  height={1080}
+  caption="Inspect the Pomegranate Prince figurine after opening the bedroom cabinet."
+/>
+
+You can mark Pomegranate Prince under **Other character cards** in the Collection Tracker.
+
+The cabinet also contains other items worth examining. Follow the <Link href="/am-i-nima#locker-code">bedroom locker solution</Link> if you have not unlocked it yet.
+
+### How Do You Find More Tomato Boy Characters?
+
+Keep Tomato Boy available when you discover new ordinary words.
+
+Try combinations involving people, occupations, objects, or other concepts that could form a character.
+
+Do not treat character discoveries as ordinary vocabulary progress. Tomato Boy character collection and ordinary word collection are separate goals.
+
+The <Link href="/am-i-nima/achievements#tomato-kingdom">Tomato Kingdom achievement</Link> provides a longer-term reason to continue exploring these combinations.
+
+The current character recipes are not a complete list of every Tomato Boy character.
+
+</section>
+
+<section id="combination-problems" className="scroll-mt-24">
+
+## Why Are Your Word Combinations Not Working?
+
+When a combination fails, check whether the problem is a missing ingredient, an invalid pair, or a word that cannot currently be used in dialogue.
+
+<GuideTable
+  columns={combinationProblemColumns}
+  rows={combinationProblemRows}
+/>
+
+### Why Does a Word Have No Recipe in the Finder?
+
+Not every word has a known combination. Some discoveries come directly from inspecting objects or progressing through conversations.
+
+Check the word's entry in the Collection Tracker for an acquisition method. If neither a recipe nor a location is listed, try exploring objects and conversations you have not completed.
+
+A missing recipe in the finder does not mean that the word cannot be obtained in the game.
+
+### What If a Word Does Not Produce the Dialogue You Need?
+
+A successful combination does not automatically advance Mom's tests. Drag the resulting word into your head and check the response it generates.
+
+If none of your available words addresses the question, identify your current test in the <Link href="/am-i-nima#first-loop-walkthrough">first-loop walkthrough</Link>.
+
+</section>
